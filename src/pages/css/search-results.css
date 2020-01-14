@@ -1,0 +1,34 @@
+body{
+	--results-header-height: 73px;
+}
+
+#search-results-header{
+	height: var(--results-header-height);
+	margin-top: 59px;
+	padding: 10px 16px;
+	background-color: #ccc;
+}
+
+@media screen and (min-width: 991px){
+	.search-form-input {
+		width: 480px;
+	}
+}
+
+.search-form-container {
+	max-width: 840px;
+}
+
+.map-body {
+	min-height: calc(100vh - 59px - var(--results-header-height));
+}
+
+@media screen and (max-width: 990px) {
+	.map-body {
+		display: none;
+	}
+
+	#search-results-header {
+		height: auto;
+	}
+}
