@@ -2,9 +2,11 @@ import React, {Component} from "react";
 import SiteFooter from "../components/site-footer";
 import "./css/login-register.css";
 import {Link, withRouter} from "react-router-dom";
+import {GoogleLogin} from 'react-google-login';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {registerUser} from "../actions/auth-actions";
+import {registerUser, registerGoogleUser} from "../actions/auth-actions";
+import config from "../auth-config";
 
 class RegisterPopup extends Component{
 	constructor(props){
@@ -48,6 +50,33 @@ class RegisterPopup extends Component{
 			password2: this.state.password2
 		};
 		this.props.registerUser(newUser, this.props.history);
+	};
+
+	onFailure = (error) => {
+		console.log(error);
+	};
+
+	/**
+	 * get social token from google developer server
+	 * @param response
+	 */
+	googleResponse = response => {
+		//const tokenBlob = new Blob(
+		//	[JSON.stringify({access_token: response.accessToken}, null, 2)],
+		//	{type: 'application/json'}
+		//);
+
+		console.log(response);
+
+		const userData = {
+			social_token: response.accessToken,
+			google_id: response.googleId,
+			fname: response.w3.ofa,
+			lname: response.w3.wea,
+			email: response.w3.U3,
+		};
+
+		this.props.registerGoogleUser(userData, this.props.history);
 	};
 
 	render(){
@@ -149,13 +178,11 @@ class RegisterPopup extends Component{
 								</div>
 								<div className="container-subdiv">
 									<div className="sdk-div">
-										<div id="w-node-48ce76d7e9cb-19e2d768" className="sdkbutton-div">
-											<img src="img/5de1806bd41434fe85d92a9e_5a951939c4ffc33e8c148af2.png"
-												 alt="" className="button-icon"/>
-											<Link to="#" className="button google w-button-sign">
-												Sign up with Google
-											</Link>
-										</div>
+										<GoogleLogin
+											clientId={config.GOOGLE_CLIENT_ID}
+											buttonText="Sign up with Google"
+											onSuccess={this.googleResponse}
+											onFailure={this.onFailure}/>
 										<div className="sdkbutton-div">
 											<img src="img/5de18075d41434839dd92aed_FB-Icon.png"
 												 srcSet="img/5de18075d41434839dd92aed_FB-Icon-p-500.png 500w, img/5de18075d41434839dd92aed_FB-Icon.png 768w"
@@ -182,6 +209,7 @@ class RegisterPopup extends Component{
 
 RegisterPopup.propTypes = {
 	registerUser: PropTypes.func.isRequired,
+	registerGoogleUser: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired
 };
@@ -191,5 +219,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
 	mapStateToProps,
-	{registerUser}
+	{registerUser, registerGoogleUser}
 )(withRouter(RegisterPopup));

@@ -21,6 +21,27 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 /**
+ * register with google account
+ *
+ * @param userData
+ * @param history
+ * @returns {function(...[*]=)}
+ */
+export const registerGoogleUser = (userData, history) => dispatch => {
+	axios
+		.post("/api/users/googleregister", userData)
+		.then(res => history.push("/login-popup")) // re-direct to login on successful register
+		.catch(err => {
+				console.log(err);
+				dispatch({
+					type: GET_ERRORS,
+					payload: err.response ? err.response.data : {error: "success"}
+				})
+			}
+		);
+};
+
+/**
  * send user information (email & password), and get a token
  * @param userData
  * @returns {function(...[*]=)}

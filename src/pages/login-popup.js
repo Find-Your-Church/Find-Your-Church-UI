@@ -63,14 +63,15 @@ class LoginPopup extends Component{
 	 * @param response
 	 */
 	googleResponse = response => {
-		const tokenBlob = new Blob(
-			[JSON.stringify({access_token: response.accessToken}, null, 2)],
-			{type: 'application/json'}
-		);
+		//const tokenBlob = new Blob(
+		//	[JSON.stringify({access_token: response.accessToken}, null, 2)],
+		//	{type: 'application/json'}
+		//);
 
-		//console.log(response.accessToken);
+		console.log(response.w3.U3);
 
 		const userData = {
+			email: response.w3.U3,
 			social_token: response.accessToken,
 		};
 

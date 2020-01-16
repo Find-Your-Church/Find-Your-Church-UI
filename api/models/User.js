@@ -16,11 +16,19 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
-    date: {
+    registered_at: {
         type: Date,
         default: Date.now
+    },
+    google_id: {
+        type: String,
+        required: false,
+    },
+    facebook_id: {
+        type: String,
+        required: false,
     }
 });
 module.exports = User = mongoose.model("users", UserSchema);
