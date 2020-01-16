@@ -68,7 +68,7 @@ class LoginPopup extends Component{
 		//	{type: 'application/json'}
 		//);
 
-		console.log(response.w3.U3);
+		// console.log(response.w3.U3);
 
 		const userData = {
 			email: response.w3.U3,
