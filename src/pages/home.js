@@ -1,8 +1,11 @@
 import React, {Component} from "react";
 import './css/home.css';
 import SearchBar from "../components/search-bar";
-import {Link} from "react-router-dom";
+import SiteFooter from "../components/site-footer";
 
+/**
+ *
+ */
 class Home extends Component{
 	render(){
 		return (
@@ -28,26 +31,7 @@ class Home extends Component{
 				<div className="block-52 teal">
 
 				</div>
-				<div className="footer-div">
-					<Link to="#" className="footer-link">
-						©FindYourChurch.org 2019. All rights reserved.
-					</Link>
-					<Link to="#" className="footer-link">
-						Privacy Policy
-					</Link>
-					<Link to="#" className="footer-link">
-						Terms and Conditions
-					</Link>
-					<Link to="#" className="footer-link">
-						Support
-					</Link>
-					<Link to="#" className="footer-link">
-						Get in Touch
-					</Link>
-					<Link to="#" className="footer-link">
-						Make a Suggestion
-					</Link>
-				</div>
+				<SiteFooter/>
 			</main>
 		);
 	}

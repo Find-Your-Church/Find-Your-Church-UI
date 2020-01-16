@@ -1,8 +1,29 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Project structure
 
-In the project directory, you can run:
+In the project directory, you can see:
+```
++<project_root>
+|-api - simple api server for authentication & data store
+|-public - public html assets
++-src - main source tree root
+  |-actions - redux actions
+  |-components - react ui components
+  |-img - images
+  |-pages - react ui pages that include components
+  |-reducers - redux reducers
+  |-store - redux storage of states
+  |-utils
+    +-setAuthToken.js - auth token manager
+  |-App.css - main app component's style sheet
+  |-App.js - main app componenet with url routes
+  |-auth-config.js - social auth IDs
+  |-index.js - project start point
+  +-logo.svg - site logo image
+```
+
+## Front-end framework
 
 ### `yarn start`
 
@@ -37,32 +58,32 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Back-end API
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1st of all, get changed a file:
+``In a file: <project folder>/package.json``
+```
+...
+"proxy": "http://127.0.0.1:5000",
+...
+```
+This configuration is just for the running of back-end.
+### Install mongodb on the server.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Run the back-end api application:
+```
+> cd api
+> npm install
+> npm start
+```
 
-### Code Splitting
+## Social authentication
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+For social (Google and Facebook) authentications, see a file: `<project folde>/src/auth-config.json`
+```
+{
+  "GOOGLE_CLIENT_ID": "123456789",
+  "FACEBOOK_APP_ID": "123456789"
+}
+```
+Before testing, got to write valid IDs here.

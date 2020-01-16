@@ -17,7 +17,14 @@ class SearchResults extends Component{
 							  containerElement={<div className="map-body w3-col m12 l6"/>}
 							  mapElement={<div className="map-body"/>}
 				/>
-				<div className="w3-col m12 l6">
+				<div className="communities-container cream w3-col m12 l6">
+					<div className="resultssort-div">
+						<h3 className="listings-header">
+							Youth Group's near 315 1st Ave. NE Minneapolis, MN 55413</h3>
+						<h4 className="results-text">
+							Results (16)
+						</h4>
+					</div>
 					<ListCommunities/>
 				</div>
 			</main>

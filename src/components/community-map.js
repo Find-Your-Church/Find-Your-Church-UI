@@ -4,8 +4,7 @@ import React from 'react';
 import {withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps"
 
 const CommunityMap = withScriptjs(withGoogleMap((props) =>
-	<GoogleMap defaultZoom={8} defaultCenter={{lat: -34.397, lng: 150.644}}>
-		{props.isMarkerShown && <Marker position={{lat: -34.397, lng: 150.644}}/>}
+	<GoogleMap defaultZoom={12} defaultCenter={{lat: 51.511221, lng: -0.119873}}>
+		{props.isMarkerShown && <Marker position={{lat: 51.511221, lng: -0.119873}}/>}
 	</GoogleMap>));
-
 export default CommunityMap;

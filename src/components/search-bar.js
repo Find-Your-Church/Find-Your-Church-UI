@@ -25,13 +25,13 @@ class SearchBar extends Component {
 						   maxLength="256" name="field-3" data-name="Field 3"
 						   placeholder="315 1st Avenue SE, Minneapolis, MN 55413" id="field-3"
 						   required=""/>
-					<Link id="w-node-5cf6ee0e50f4-ddb46e0f" to="/search-result"
+					<Link id="w-node-5cf6ee0e50f4-ddb46e0f" to="/search-results"
 						  className="search-form-button w-button">{this.props.buttonTitle}</Link>
 				</form>
-				<div className="w-form-done">
+				<div className="w-form-done" style={{display: "none"}}>
 					<div>Thank you! Your submission has been received!</div>
 				</div>
-				<div className="w-form-fail">
+				<div className="w-form-fail" style={{display: "none"}}>
 					<div>Oops! Something went wrong while submitting the form.</div>
 				</div>
 			</div>
