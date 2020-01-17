@@ -16,6 +16,9 @@ import store from "./reducers/store"
 import {logoutUser, setCurrentUser} from "./actions/auth-actions";
 import CommunityStep1 from "./pages/dashboard/community-step1";
 import CommunityStep2 from "./pages/dashboard/community-step2";
+import ForgotPassword from "./pages/forgot-password";
+import ResetPassword from "./pages/reset-password";
+import Notfound from "./pages/notfound";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -44,16 +47,20 @@ class App extends Component{
 			<Provider store={store}>
 				<Router>
 					<SiteHeader/>
-					<Route exact path="/" component={Home}/>
-					<Route exact path="/search-results" component={SearchResults}/>
-					<Route exact path="/login-popup" component={LoginPopup}/>
-					<Route exact path="/register-popup" component={RegisterPopup}/>
-
-					<Route exact path="/create-new-community" component={CommunityStep1}/>
-					<Route exact path="/create-new-community-2" component={CommunityStep2}/>
-
 					<Switch>
+						<Route exact path="/" component={Home}/>
+						<Route exact path="/search-results" component={SearchResults}/>
+
+						<Route exact path="/login-popup" component={LoginPopup}/>
+						<Route exact path="/register-popup" component={RegisterPopup}/>
+						<Route exact path="/forgot-password" component={ForgotPassword}/>
+						<Route path="/reset/:id?" component={ResetPassword}/>
+
+						<Route exact path="/create-new-community" component={CommunityStep1}/>
+						<Route exact path="/create-new-community-2" component={CommunityStep2}/>
+
 						<PrivateRoute path="/dashboard" component={Dashboard}/>
+						<Route component={Notfound} />
 					</Switch>
 				</Router>
 			</Provider>

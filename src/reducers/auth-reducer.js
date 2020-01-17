@@ -1,4 +1,5 @@
 import {
+	RESET_PASSWORD,
 	SET_CURRENT_USER,
 	USER_LOADING
 } from "../actions/action-types";
@@ -22,6 +23,10 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				loading: true
+			};
+		case RESET_PASSWORD:
+			return {
+				...state
 			};
 		default:
 			return state;
