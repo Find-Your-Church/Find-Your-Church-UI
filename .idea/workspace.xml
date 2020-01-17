@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="18a7657f-8b29-4ca3-ad3b-556a28878c8b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/config/config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/config/passport.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/models/Community.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/models/ResetPending.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/models/User.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/routes/api/communities.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/routes/api/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/utils/fyc-mailer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/utils/random-string.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/validation/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/validation/register.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/3dot-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/5de1806bd41434fe85d92a9e_5a951939c4ffc33e8c148af2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/5de18075d41434839dd92aed_FB-Icon-p-500.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/5de18075d41434839dd92aed_FB-Icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo-1080.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo-1600.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo-2000.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo-2600.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo-800.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/tooltip-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploaded/profiles/5de01ae35abe8a57c55b9c2b_Five-tips-for-studying-with-friends.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/uploaded/profiles/5de7326365d48a7932daf64f_Headshot-p-500.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/actions/action-types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/actions/auth-actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/actions/community-actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/auth-config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/community-map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/dashboard-header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/list-communities.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/private-route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/profile-container.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/search-bar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/site-footer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/site-header.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/5de18075d41434839dd92aed_FB-Icon-p-500.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/5deaebc9cd1730904c902c41_Large-church-service.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/5e15418817a0cf6347d61500_nyc_from_above_super_wide-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/bg-header.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/img/bg-world-map.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/account.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/admin.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/community-steps.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/dashboard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/font-awesome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/login-register.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/css/search-results.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/dashboard/account.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/dashboard/admin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/dashboard/community-step1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/dashboard/community-step2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/dashboard/dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/forgot-password.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/home.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/login-popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/notfound.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/page-template" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/register-popup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/reset-password.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/search-results.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/auth-reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/community-reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/error-reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/setAuthToken.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/renthouse_fe.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/findchurch_ui.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1WLR5nef9Icl000f1TrNkPYy5H6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/api/models" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="$USER_HOME$/AppData/Roaming/npm/node_modules/npm" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Projects2020\20200113_apartments\findchurch_fe\api\models" />
+      <recent name="E:\Projects2020\20200113_apartments\findchurch_fe\src\pages" />
+      <recent name="E:\Projects2020\20200113_apartments\findchurch_fe\src\img" />
+      <recent name="E:\Projects2020\20200113_apartments\findchurch_fe\src\pages\dashboard" />
+      <recent name="E:\Projects2020\20200113_apartments\renthouse_fe\src\reducers" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Projects2020\20200113_apartments\renthouse_fe\src" />
+      <recent name="E:\Projects2020\20200113_apartments\renthouse_fe\src\actions" />
+      <recent name="E:\Projects2020\20200113_apartments\renthouse_fe\src\pages\dashboard" />
+      <recent name="E:\Projects2020\20200113_apartments\renthouse_fe\src\pages" />
+      <recent name="E:\Projects2020\20200113_apartments\renthouse_fe\src\img" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.Debug Application">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="https://localhost:8000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Debug Application" />
+      <item itemvalue="npm.npm start" />
+    </list>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="18a7657f-8b29-4ca3-ad3b-556a28878c8b" name="Default Changelist" comment="" />
+      <created>1578926707544</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578926707544</updated>
+      <workItem from="1578926709462" duration="30615000" />
+      <workItem from="1579013864063" duration="52658000" />
+      <workItem from="1579073011777" duration="39125000" />
+      <workItem from="1579138460484" duration="7285000" />
+      <workItem from="1579165175568" duration="9099000" />
+      <workItem from="1579191633716" duration="3186000" />
+      <workItem from="1579199379362" duration="3000" />
+      <workItem from="1579199409989" duration="41801000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1486" y="214" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579136925309">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1486" y="214" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579136925309" />
+    <state x="-1255" y="317" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579033732231">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1255" y="317" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579033732231" />
+    <state x="639" y="238" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579260296192">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="639" y="238" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579260296192" />
+    <state x="639" y="238" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1578952904113" />
+    <state x="921" y="298" key="FileChooserDialogImpl" timestamp="1579125390205">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-999" y="298" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579062269178" />
+    <state x="921" y="298" key="FileChooserDialogImpl/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579125390205" />
+    <state width="1622" height="116" key="GridCell.Tab.0.bottom" timestamp="1579137039748">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1622" height="116" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579137039748" />
+    <state width="1512" height="116" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579069788797" />
+    <state width="1713" height="170" key="GridCell.Tab.0.bottom/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1579010547792" />
+    <state width="1622" height="116" key="GridCell.Tab.0.center" timestamp="1579137039748">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1622" height="116" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579137039748" />
+    <state width="1512" height="116" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579069788796" />
+    <state width="1713" height="170" key="GridCell.Tab.0.center/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1579010547792" />
+    <state width="1622" height="116" key="GridCell.Tab.0.left" timestamp="1579137039748">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1622" height="116" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579137039748" />
+    <state width="1512" height="116" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579069788796" />
+    <state width="1713" height="170" key="GridCell.Tab.0.left/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1579010547792" />
+    <state width="1622" height="116" key="GridCell.Tab.0.right" timestamp="1579137039748">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1622" height="116" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579137039748" />
+    <state width="1512" height="116" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579069788797" />
+    <state width="1713" height="170" key="GridCell.Tab.0.right/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1579010547792" />
+    <state x="187" y="194" key="SettingsEditor" timestamp="1579229660201">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1477" y="205" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579099133630" />
+    <state x="187" y="194" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579229660201" />
+    <state x="480" y="176" key="SettingsEditor/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1578950108787" />
+    <state x="96" y="91" width="1098" height="790" key="dock-window-1" timestamp="1579100619505">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="96" y="91" width="1098" height="790" key="dock-window-1/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579100619505" />
+    <state x="-1298" y="49" width="1098" height="861" key="dock-window-1/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579071562235" />
+    <state x="626" y="64" width="790" height="934" key="dock-window-2" timestamp="1579115356883">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="626" y="64" width="790" height="934" key="dock-window-2/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579115356883" />
+    <state x="676" y="139" width="607" height="789" key="find.popup" timestamp="1579261023344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1244" y="139" width="607" height="789" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579144179807" />
+    <state x="676" y="139" width="607" height="789" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579261023344" />
+    <state x="676" y="139" width="607" height="789" key="find.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1578953916078" />
+    <state x="661" y="233" width="672" height="677" key="run.anything.popup" timestamp="1579205987887">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="661" y="233" width="672" height="677" key="run.anything.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579205987887" />
+    <state x="661" y="233" width="672" height="677" key="run.anything.popup/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1578934261304" />
+  </component>
+</project>
