@@ -20,7 +20,7 @@ class SearchBar extends Component {
 						<option value="3">within 3 miles of</option>
 						<option value="5">within 5 miles of</option>
 					</select>
-					<input type="text"
+					<input type="search"
 						   className="search-form-input w-node-5cf6ee0e50f3-ddb46e0f w-input"
 						   maxLength="256" name="field-3" data-name="Field 3"
 						   placeholder="315 1st Avenue SE, Minneapolis, MN 55413" id="field-3"

@@ -3,7 +3,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import {
 	GET_ERRORS,
-	SET_CURRENT_USER,
+	SET_CURRENT_USER, UPDATE_USER_INFO,
 	USER_LOADING
 } from "./action-types";
 
@@ -21,7 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,
-				payload: err.response.data
+				payload: err.response ? err.response.data : {error: ""}
 			})
 		);
 };
@@ -60,17 +60,20 @@ export const loginUser = userData => dispatch => {
 			// Set token to localStorage
 			const {token} = res.data;
 			localStorage.setItem("jwtToken", token);
+
 			// Set token to Auth header
 			setAuthToken(token);
+
 			// Decode token to get user data
 			const decoded = jwt_decode(token);
+
 			// Set current user
 			dispatch(setCurrentUser(decoded));
 		})
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,
-				payload: err.response.data
+				payload: err.response ? err.response.data : {error: ""}
 			})
 		);
 };
@@ -85,7 +88,6 @@ export const loginGoogleUser = userData => dispatch => {
 	axios
 		.post("/api/users/googlelogin", userData)
 		.then(res => {
-			console.log(res.data);
 			// Save to localStorage
 			// Set token to localStorage
 			const {token} = res.data;
@@ -100,7 +102,7 @@ export const loginGoogleUser = userData => dispatch => {
 		.catch(err =>
 			dispatch({
 				type: GET_ERRORS,
-				payload: err.response.data
+				payload: err.response ? err.response.data : {error: ""}
 			})
 		);
 };
@@ -177,6 +179,30 @@ export const doResetPassword = (userData, history) => dispatch => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response ? err.response.data : {error: ""}
+			})
+		);
+};
+
+export const updateUserInfo = (userData, history) => dispatch => {
+	axios
+		.post("/api/users/update", userData)
+		.then(
+			/*res => history.push("/dashboard/account")*/
+			res => {
+				dispatch({
+					type: GET_ERRORS,
+					payload: res.data
+				});
+				dispatch({
+					type: UPDATE_USER_INFO,
+					payload: userData
+				});
+			}
+		)
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
 };

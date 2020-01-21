@@ -1,5 +1,5 @@
 .account-body {
-	min-height: calc(100vh - 166px);
+	min-height: calc(100vh - 167px);
 	background-color: #ffffff;
 }
 
@@ -193,6 +193,28 @@
 	line-height: 15px;
 	font-weight: 400;
 	text-align: left;
+}
+
+.table-item input {
+	margin: -2px 0 -3px 0;
+	border: none;
+	border-bottom: 1px solid #666;
+	background-color: transparent;
+	height: 20px;
+	color: #1b0033;
+}
+
+.table-item .error-item {
+	margin-top: 4px;
+	font-size: .8em;
+	color: #de0004;
+}
+
+.table-item .error-item:before {
+	content: "\00BB";
+	color: #ff8888;
+	font-size: 1.2em;
+	margin: 0 4px;
 }
 
 #w-node-cb8d7881b96d-27fc25a8 {

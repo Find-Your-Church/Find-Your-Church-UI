@@ -1,6 +1,7 @@
 import {
 	RESET_PASSWORD,
 	SET_CURRENT_USER,
+	UPDATE_USER_INFO,
 	USER_LOADING
 } from "../actions/action-types";
 
@@ -18,6 +19,14 @@ export default function(state = initialState, action){
 				...state,
 				isAuthenticated: !isEmpty(action.payload),
 				user: action.payload
+			};
+		case UPDATE_USER_INFO:
+			return {
+				...state,
+				user: {
+					...state.user,
+					...action.payload,
+				}
 			};
 		case USER_LOADING:
 			return {

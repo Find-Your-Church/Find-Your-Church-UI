@@ -58,7 +58,7 @@ class ForgotPassword extends Component{
 			<main>
 				<div className="w3-modal" style={{display: this.sending && !this.is_error ? "block" : "none"}}>
 					<div className="w3-display-middle w3-text-white w3-xlarge" style={{textShadow: "0 0 4px #000, 0 0 2px #000"}}>
-						Please wait while sending an mail...
+						Please wait while sending a mail...
 					</div>
 				</div>
 				<div className="sign-body">

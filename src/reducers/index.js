@@ -6,5 +6,5 @@ import communityReducer from "./community-reducer";
 export default combineReducers({
 	auth: authReducer,
 	errors: errorReducer,
-	communities: communityReducer
+	communities: communityReducer,
 });

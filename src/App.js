@@ -9,7 +9,6 @@ import Home from "./pages/home";
 import SearchResults from "./pages/search-results";
 import LoginPopup from "./pages/login-popup";
 import RegisterPopup from "./pages/register-popup";
-import Dashboard from "./pages/dashboard/dashboard";
 import PrivateRoute from "./components/private-route";
 import setAuthToken from "./utils/setAuthToken";
 import store from "./reducers/store"
@@ -19,6 +18,8 @@ import CommunityStep2 from "./pages/dashboard/community-step2";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
 import Notfound from "./pages/notfound";
+import Admin from "./pages/dashboard/admin";
+import Account from "./pages/dashboard/account";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -56,10 +57,12 @@ class App extends Component{
 						<Route exact path="/forgot-password" component={ForgotPassword}/>
 						<Route path="/reset/:id?" component={ResetPassword}/>
 
-						<Route exact path="/create-new-community" component={CommunityStep1}/>
-						<Route exact path="/create-new-community-2" component={CommunityStep2}/>
+						<PrivateRoute exact path="/create-new-community" component={CommunityStep1}/>
+						<PrivateRoute exact path="/create-new-community-2" component={CommunityStep2}/>
 
-						<PrivateRoute path="/dashboard" component={Dashboard}/>
+						<PrivateRoute exact path="/dashboard" component={Account}/>
+						<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
+						<PrivateRoute exact path="/dashboard/account" component={Account}/>
 						<Route component={Notfound} />
 					</Switch>
 				</Router>

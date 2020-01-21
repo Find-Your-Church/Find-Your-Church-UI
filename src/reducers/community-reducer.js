@@ -1,18 +1,45 @@
-import {CREATE_COMMUNITY, SET_SEARCH_FILTER} from "../actions/action-types";
+import {CREATE_COMMUNITY_STEP1, GET_MY_COMMUNITIES} from "../actions/action-types";
 
 const initialState = {
+	info_1: {}, // used for temporary.
+	my_communities: {
+		active: [],
+		inactive: [],
+	},
+	search_results: [],
 	members: [],
-	communities: []
 };
 
 export default function(state = initialState, action){
 	switch(action.type){
-		case CREATE_COMMUNITY:
-			return Object.assign({}, state, {
-				communities: state.communities.concat(action.payload)
-			});
-		case SET_SEARCH_FILTER:
-			break;
+		case CREATE_COMMUNITY_STEP1:
+			return {
+				...state,
+				info_1: action.payload,
+			};
+		case GET_MY_COMMUNITIES:
+			if(action.payload.activated){
+				return {
+					...state,
+					my_communities: {
+						...state.my_communities,
+						active: [
+							...action.payload.results,
+						]
+					}
+				};
+			}
+			else{
+				return {
+					...state,
+					my_communities: {
+						...state.my_communities,
+						inactive: [
+							...action.payload.results,
+						]
+					}
+				};
+			}
 		default:
 			return state;
 	}

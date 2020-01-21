@@ -1,6 +1,10 @@
 import React, {Component} from "react";
 import "../css/community-steps.css";
 import {Link, Redirect} from "react-router-dom";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import FileBase from 'react-file-base64';
+import {createCommunityStep1} from "../../actions/community-actions";
 
 class CommunityStep1 extends Component{
 	constructor(props){
@@ -8,30 +12,72 @@ class CommunityStep1 extends Component{
 
 		this.state = {
 			isNext: false,
+			errors: {},
+
+			community_name: "",
+			category: "",
+			address: "",
+			picture: "", // base64-encoded string represent image.
+			community_contact: "",
+			phone: "",
+			email: "",
+			facebook: "",
+			instagram: "",
+			vimeo: "",
+			youtube: "",
+			about: "",
 		};
 
 		this.clickNext = this.clickNext.bind(this);
 	}
 
+	onChange = e => {
+		this.setState({[e.target.id]: e.target.value});
+	};
+
+	getBaseFile(files){
+		this.setState({
+			// baseImage: files.base64,
+			picture: files.base64.toString()
+		});
+	}
+
 	clickNext(e){
 		e.preventDefault();
 
-		// save the inputted information
-		console.log("saved the information into local storage to be submitted on to server.");
+		// saved the information into local storage to be submitted on to server.
+		const info_1 = {
+			community_name: this.state.community_name,
+			category: this.state.category,
+			address: this.state.address,
+			picture: this.state.picture,
+			community_contact: this.state.community_contact,
+			phone: this.state.phone,
+			email: this.state.email,
+			facebook: this.state.facebook,
+			instagram: this.state.instagram,
+			vimeo: this.state.vimeo,
+			youtube: this.state.youtube,
+			about: this.state.about,
+		};
+
+		// invoke the action - createCommunityStep1
+		this.props.createCommunityStep1(info_1, this.props.history);
 
 		// then, redirect to next page
 		this.setState({
-			isNext: true
+			isNext: true,
 		});
 	}
 
 	renderRedirect = () => {
-		if (this.state.isNext) {
-			return <Redirect to='/create-new-community-2' />
+		if(this.state.isNext){
+			return <Redirect to='/create-new-community-2'/>
 		}
 	};
 
 	render(){
+		console.log(this.state.picture);
 		return (
 			<div>
 				{this.renderRedirect()}
@@ -48,89 +94,99 @@ class CommunityStep1 extends Component{
 								</div>
 								<div className="namecategory-div">
 									<input type="text" className="form-input communityname w-input" maxLength="256"
-										   name="Community-name"
-										   data-name="Community name"
+										   onChange={this.onChange}
 										   placeholder="Community name"
-										   id="Community-name"
+										   id="community_name"
+										   value={this.state.community_name}
 										   required=""/>
 									<select className="form-select category w-select"
-											id="Category"
-											name="Category"
-											data-name="Category"
+											onChange={this.onChange}
+											id="category"
 											required="">
 										<option value="">Category...</option>
-										<option value="First">Church</option>
-										<option value="Second">Young Adult Group</option>
-										<option value="Third">Youth Group</option>
+										<option value="Church">Church</option>
+										<option value="Young Adult Group">Young Adult Group</option>
+										<option value="Youth Group">Youth Group</option>
 									</select>
 								</div>
 								<div className="input-div">
 									<input type="text" className="form-input w-input" maxLength="256"
-										   name="Address"
-										   data-name="Address"
+										   onChange={this.onChange}
 										   placeholder="Address or City"
-										   id="Address"
+										   id="address"
+										   value={this.state.address}
 										   required=""/>
 								</div>
-								<Link to="#" className="upload-button w-button">Upload a Profile Picture</Link>
+								<img className={"community-picture" + (this.state.picture ? "" : " w3-opacity-max")} alt="Community" src={
+									this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
+								<FileBase type="file" className="upload-button w-button"
+										  multiple={false} onDone={this.getBaseFile.bind(this)} height="38"/>
+								{false ? (
+									<Link to="#" className="upload-button w-button">
+										Upload a Profile Picture
+									</Link>
+								) : null}
 								<div className="flexdiv-left labels">
 									<h4 className="form-header">Contact Info</h4>
 									<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
 								</div>
 								<div className="input-div">
 									<input type="text" className="form-input w-input" maxLength="256"
-										   name="Community-contact"
-										   data-name="Community contact"
+										   onChange={this.onChange}
 										   placeholder="Community contact"
-										   id="Community-contact"
+										   id="community_contact"
+										   value={this.state.community_contact}
 										   required=""/></div>
 								<div className="input-div">
 									<input type="tel" className="form-input w-input" maxLength="256"
-										   name="Phone"
-										   data-name="Phone"
+										   onChange={this.onChange}
 										   placeholder="Phone"
-										   id="Phone"/>
+										   value={this.state.phone}
+										   id="phone"/>
 									<input type="email" className="form-input w-input" maxLength="256"
-										   name="Email"
-										   data-name="Email"
+										   onChange={this.onChange}
 										   placeholder="Email"
-										   id="Email"/>
+										   value={this.state.email}
+										   id="email"/>
 								</div>
 								<div className="flexdiv-left labels">
 									<h4 className="form-header">Links and Resources</h4>
 									<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
 								</div>
 								<div className="input-div">
-									<input type="text" className="form-input w-input" maxLength="256"
-										   name="Facebook"
-										   data-name="Facebook"
+									<input type="url" className="form-input w-input" maxLength="256"
+										   onChange={this.onChange}
 										   placeholder="Facebook link"
-										   id="Facebook"/>
-									<input type="text" className="form-input w-input" maxLength="256"
-										   name="Instagram"
-										   data-name="Instagram"
+										   value={this.state.facebook}
+										   id="facebook"/>
+									<input type="url" className="form-input w-input" maxLength="256"
+										   onChange={this.onChange}
 										   placeholder="Instagram link"
-										   id="Instagram"/>
+										   value={this.state.instagram}
+										   id="instagram"/>
 								</div>
 								<div className="input-div">
-									<input type="text" className="form-input w-input" maxLength="256"
-										   name="Vimeo"
-										   data-name="Vimeo"
+									<input type="url" className="form-input w-input" maxLength="256"
+										   onChange={this.onChange}
 										   placeholder="Vimeo link"
-										   id="Vimeo"/>
-									<input type="text" className="form-input w-input" maxLength="256"
-										   name="YouTube"
-										   data-name="YouTube"
+										   value={this.state.vimeo}
+										   id="vimeo"/>
+									<input type="url" className="form-input w-input" maxLength="256"
+										   onChange={this.onChange}
 										   placeholder="YouTube link"
-										   id="YouTube"/>
+										   value={this.state.youtube}
+										   id="youtube"/>
 								</div>
 								<div className="flexdiv-left labels">
 									<h4 className="form-header">About</h4>
 									<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
 								</div>
 								<textarea
+									onChange={this.onChange}
 									placeholder="Tell visitors more about your community such as who you are, when you meet, what to expect, or anything else you'd like them to know!"
-									maxLength="5000" id="About" name="About" data-name="About" required=""
+									maxLength="5000"
+									id="about" required=""
+									value={this.state.about}
 									className="textarea w-input">
 								</textarea>
 								<input type="submit" className="form-submit w-button" value="Next"
@@ -151,4 +207,16 @@ class CommunityStep1 extends Component{
 	}
 }
 
-export default CommunityStep1;
+CommunityStep1.propTypes = {
+	errors: PropTypes.object.isRequired,
+	createCommunityStep1: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+	errors: state.errors,
+});
+
+export default connect(
+	mapStateToProps,
+	{createCommunityStep1}
+)(CommunityStep1);
