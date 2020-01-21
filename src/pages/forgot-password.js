@@ -98,15 +98,15 @@ class ForgotPassword extends Component{
 											{err_msg}
 										</div>
 									</div>
-									<div className="div-block-58" style={{paddingBottom: "0"}}>
-										<p className="fineprint" style={{paddingTop: "2px"}}>
-											<Link to="/login-popup">
-												<span className="form-link termsofuse">Back to Sign In</span>
-											</Link>
-										</p>
-									</div>
 								</div>
 							</div>
+						</div>
+						<div className="div-block-46">
+							<h1 className="heading-11">
+								<Link to="/login-popup" className="link-5">
+									Back to Sign In
+								</Link>
+							</h1>
 						</div>
 					</div>
 				</div>

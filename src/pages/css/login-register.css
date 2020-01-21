@@ -1,6 +1,17 @@
 .sign-body {
+	--footer-height: 46px;
+}
+
+@media screen and (max-width: 990px) {
+	.sign-body {
+		--footer-height: 64px;
+	}
+}
+
+.sign-body {
 	padding: 59px 0 0 0;
-	min-height: calc(100vh - 46px);
+	min-height: calc(100vh - var(--footer-height));
+	max-height: calc(100vh - var(--footer-height));
 	background-color: #e6e6e6;
 	background-image: none;
 	display: -webkit-box;
@@ -115,7 +126,6 @@
 }
 
 .form-block1 {
-	display: block;
 	width: auto;
 	max-width: none;
 	margin-bottom: 0;
@@ -141,30 +151,35 @@
 }
 
 .form-row {
-	padding-bottom: 10px;
-}
-
-.input-div {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	margin-bottom: 0;
-	padding-top: 0;
 	padding-bottom: 0;
-	-webkit-box-pack: start;
-	-webkit-justify-content: flex-start;
-	-ms-flex-pack: start;
-	justify-content: flex-start;
 }
 
 .input-div.gradient {
-	padding-bottom: 1px;
-	background-image: -webkit-gradient(linear, left top, right top, from(#8900fe), color-stop(50%, #2e89fe), to(#00e8fe));
-	background-image: linear-gradient(90deg, #8900fe, #2e89fe 50%, #00e8fe);
+	padding-bottom: 0;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	border-bottom: 1px none #ccc;
+	background-image: none;
 }
 
-.w-input-sign{
+@media (max-width: 991px){
+	.input-div {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		border-bottom-style: none;
+	}
+}
+
+.sign-body .w-input, .sign-body .w-select {
 	display: block;
 	width: 100%;
 	height: 38px;
@@ -178,26 +193,54 @@
 	border: 1px solid #cccccc;
 }
 
+.form-input.center:hover {
+	border-bottom-color: #8900fe;
+}
+
 .form-input {
 	margin-bottom: 0;
-	padding-right: 10px;
-	padding-left: 10px;
-	border-style: none none solid;
+	padding: 10px;
+	border-style: none;
 	border-width: 1px;
 	border-color: #000 #000 #ccc;
 	border-radius: 0;
 	background-color: transparent;
-	font-family: Montserrat, sans-serif;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+	background-image: linear-gradient(180deg, #fff, #fff);
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #1b0033;
 	text-align: left;
 }
 
 .form-input.center {
-	border-style: none;
-	border-color: #000;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-style: none none solid;
+	border-color: #000 #000 #ccc;
 	background-color: #fff;
+	font-family: 'Source Sans Pro', sans-serif;
 	color: #1b0033;
+	font-size: 16px;
 	text-align: center;
+}
+
+.form-input.center.w3-half{
+	width: 50%!important;
+}
+
+@media (max-width: 991px) {
+	.form-input {
+		border-bottom-style: solid;
+		font-size: 20px;
+		/* line-height: 20px; */
+	}
+}
+
+@media (max-width: 480px) {
+	.form-input.center.w3-half {
+		width: 100%!important;
+	}
 }
 
 .form-submit.round {
@@ -215,18 +258,19 @@
 	cursor: pointer;
 	border-radius: 0;
 }
+
 .form-submit {
 	width: 100%;
-	margin-top: 0;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	margin-top: 20px;
+	padding-top: 7px;
+	padding-bottom: 7px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #ccc;
 	border-radius: 3px;
 	background-color: #fff;
 	background-image: -webkit-gradient(linear, left top, right top, from(#8900fe), color-stop(50%, #2e89fe), to(#00e8fe));
-	background-image: linear-gradient(315deg, #8900fe, #2e89fe 50%, #00e8fe);
+	background-image: linear-gradient(90deg, #8900fe, #2e89fe 50%, #00e8fe);
 	color: #fff;
 	font-size: 14px;
 	font-weight: 600;
@@ -373,13 +417,13 @@ input.w-button {
 	grid-template-rows: auto;
 }
 
-@media screen and (max-width: 990px){
-	.sdk-div{
+@media screen and (max-width: 990px) {
+	.sdk-div {
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
 	}
 
-	.kep-login-facebook.metro{
+	.kep-login-facebook.metro {
 		margin-top: 16px;
 	}
 }
@@ -431,17 +475,17 @@ input.w-button {
 	height: 39px;
 }
 
-.sdk-div button div{
-	padding-top: 0!important;
-	padding-bottom: 0!important;
+.sdk-div button div {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
 }
 
-.sdk-div button span{
+.sdk-div button span {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.kep-login-facebook.metro{
+.kep-login-facebook.metro {
 	padding: 8px 8px 12px;
 	width: 100%;
 	font-family: Montserrat, sans-serif;

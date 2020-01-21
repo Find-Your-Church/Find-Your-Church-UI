@@ -94,7 +94,7 @@ class RegisterPopup extends Component{
 					<div className="div-block-63">
 						<div className="div-block-38">
 							<div className="header1-div gradient shadow">
-								<h3 className="header3 center">Create a free account!</h3>
+								<h3 className="header3 center">Create a free account to access your dashboard.</h3>
 							</div>
 							<div>
 								<div className="form-div1">
@@ -102,9 +102,9 @@ class RegisterPopup extends Component{
 										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration" name="wf-form-Registration"
 											  data-name="Registration" className="form1">
 											<div className="form-row">
-												<div className="input-div gradient">
+												<div className="input-div gradient w3-row">
 													<input type="text"
-														   className="form-input center  w-input-sign"
+														   className="form-input center  w-input-sign w3-half"
 														   maxLength="256"
 														   onChange={this.onChange}
 														   value={this.state.fname}
@@ -112,7 +112,7 @@ class RegisterPopup extends Component{
 														   placeholder="First name"
 														   required=""/>
 													<input type="text"
-														   className="form-input center  w-input-sign"
+														   className="form-input center  w-input-sign w3-half"
 														   maxLength="256"
 														   onChange={this.onChange}
 														   value={this.state.lname}
@@ -136,7 +136,7 @@ class RegisterPopup extends Component{
 											<div className="form-row">
 												<div className="input-div gradient">
 													<input type="password"
-														   className="form-input center  w-input-sign"
+														   className="form-input center  w-input-sign w3-half"
 														   maxLength="256"
 														   onChange={this.onChange}
 														   value={this.state.password}
@@ -144,7 +144,7 @@ class RegisterPopup extends Component{
 														   placeholder="Password"
 														   required=""/>
 													<input type="password"
-														   className="form-input center  w-input-sign"
+														   className="form-input center  w-input-sign w3-half"
 														   maxLength="256"
 														   onChange={this.onChange}
 														   value={this.state.password2}

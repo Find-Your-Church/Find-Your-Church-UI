@@ -101,7 +101,7 @@ button:focus {
 }
 
 .search-form-dropdown {
-	display: inline-block;
+	display: inline;
 	width: auto;
 	max-height: 40px;
 	min-height: 40px;
@@ -115,10 +115,6 @@ button:focus {
 	line-height: 18px;
 	font-weight: 500;
 	text-align: left;
-}
-
-#field.w-node-5cf6ee0e50f1-ddb46e0f {
-	align-self: center;
 }
 
 .search-form-input {
@@ -203,10 +199,7 @@ button:focus {
 	}
 
 	.search-form {
-		display: -webkit-box;
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
+		display: block;
 		height: auto;
 		-webkit-box-orient: vertical;
 		-webkit-box-direction: normal;
@@ -231,25 +224,14 @@ button:focus {
 	}
 
 	.search-form-dropdown {
-		display: -webkit-box;
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
-		width: 100%;
+		display: inline-block;
+		width: 49.999%;
 		max-height: 40px;
 		min-height: 40px;
 		margin-top: 0;
 		margin-bottom: 20px;
 		margin-left: 0;
 		padding-left: 5px;
-		-webkit-box-pack: center;
-		-webkit-justify-content: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-		-webkit-box-flex: 0;
-		-webkit-flex: 0 auto;
-		-ms-flex: 0 auto;
-		flex: 0 auto;
 	}
 
 	.search-form-input {
@@ -310,20 +292,40 @@ button:focus {
 		border-style: none;
 		background-color: transparent;
 	}
+
 	.search-form {
 		padding-right: 0;
 		padding-left: 0;
 	}
+
+	.div-block-84 {
+		flex-direction: column;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
+
+	.div-block-85 {
+		margin-bottom: 20px;
+		max-width: 75% !important;
+	}
 }
 
 .block-50 {
-	min-height: 500px;
+	--width: 100vw;
+	width: var(--width);
+	height: calc((var(--width) - 120px) * 9 / 16 + 120px);
 	background-color: hsla(0, 0%, 90.2%, 0.95);
 	box-shadow: none;
 }
 
 .block-60 {
-	min-height: 500px;
+	padding: 60px;
+	height: 100%;
+}
+
+.block-60:after {
 	background-image: url("../../img/5e15418817a0cf6347d61500_nyc_from_above_super_wide-1.jpg");
 	background-position: 0 0;
 	background-size: cover;
@@ -331,11 +333,84 @@ button:focus {
 	opacity: 0.09;
 }
 
+.block-60 .embedly-embed {
+	width: 100%;
+	height: 100%;
+}
+
 .block-51 {
-	min-height: 500px;
-	background-color: hsla(0, 0%, 100%, 0.95);
-	box-shadow: none;
+	height: auto;
 	color: hsla(0, 0%, 80%, 0.9);
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 140px 40px;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	border: 1px none #000;
+	background-color: transparent;
+	background-image: none;
+	box-shadow: 1px 1px 3px 0 grey;
+	text-align: center;
+}
+
+.div-block-84 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 0;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 auto;
+	-ms-flex: 0 auto;
+	flex: 0 auto;
+}
+
+.div-block-85 {
+	max-width: 300px;
+	margin-right: 20px;
+	margin-left: 20px;
+	padding: 3px;
+	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
+	box-shadow: 1px 1px 3px 0 grey;
+}
+
+.div-block-86 {
+	padding: 20px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
+	background-image: linear-gradient(180deg, #fff, #fff);
+}
+
+.div-20top h2 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 20px;
+	line-height: 20px;
+	font-weight: 700;
+	color: #000;
+}
+
+.div-20top h4 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	line-height: 16px;
+	font-weight: 400;
+	color: #000;
 }
 
 .block-52 {
@@ -353,7 +428,7 @@ button:focus {
 }
 
 .block-52.teal {
-	min-height: 95vh;
+	min-height: 500px;
 	background-color: transparent;
 	background-image: linear-gradient(45deg, rgba(137, 0, 254, 0.95), rgba(46, 137, 254, 0.95) 50%, rgba(0, 232, 254, 0.95));
 }

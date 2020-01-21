@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-class SearchBar extends Component {
+class SearchBar extends Component{
 	render(){
 		return (
 			<div className="search-form-container w-form">

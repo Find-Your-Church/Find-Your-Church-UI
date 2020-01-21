@@ -97,15 +97,15 @@ class LoginPopup extends Component{
 					<div className="div-block-63">
 						<div className="div-block-38">
 							<div className="header1-div gradient shadow">
-								<h3 className="header3 center">Welcome back!</h3>
+								<h3 className="header3 center">Welcome back! Sign in to tour dashboard.</h3>
 							</div>
 							<div>
 								<div className="form-div1">
 									<div className="form-block1 w-form">
 										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 											  name="wf-form-Registration"
-											  data-name="Registration" className="form1">
-											<div className="form-row">
+											  data-name="Registration" className="form1 w3-row">
+											<div className="form-row w3-half">
 												<div className="input-div gradient">
 													<input type="email"
 														   className="form-input center w-input-sign"
@@ -117,7 +117,7 @@ class LoginPopup extends Component{
 														   required=""/>
 												</div>
 											</div>
-											<div className="form-row">
+											<div className="form-row w3-half">
 												<div className="input-div gradient">
 													<input type="password"
 														   className="form-input center w-input-sign"

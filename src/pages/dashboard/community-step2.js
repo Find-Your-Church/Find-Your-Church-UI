@@ -115,7 +115,7 @@ class CommunityStep2 extends Component{
 	};
 
 	render(){
-		console.log(this.state.errors.msg_community);
+		// console.log(this.state.errors.msg_community);
 		return (
 			<div>
 				<main className="steps-body">

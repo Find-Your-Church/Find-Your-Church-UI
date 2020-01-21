@@ -32,8 +32,8 @@ class SiteHeader extends Component{
 
 	render(){
 		return (
-			<header className="site-header" onClick={this.hideAdminMenu}>
-				<div className="header-body w3-bar">
+			<div>
+				<header className="site-header w3-bar" onClick={this.hideAdminMenu}>
 					<Link to="/">
 						<img className="site-logo"
 							 src="../img/logo.png"
@@ -56,14 +56,14 @@ class SiteHeader extends Component{
 
 					{!this.props.auth.isAuthenticated ?
 						<Link to="/register-popup"
-							  className="w3-bar-item w3-right w3-hover-text-white">Sign Up</Link>
+							  className="sign-up-link w3-bar-item w3-right w3-text-white">Create an Account</Link>
 						: null}
 					{!this.props.auth.isAuthenticated ?
 						< Link to="/login-popup"
 							   className="w3-bar-item w3-right w3-hover-text-white">Sign In</Link>
 						: null}
 					<Link to="/" className="w3-bar-item w3-right w3-hover-text-white">Home</Link>
-				</div>
+				</header>
 				<div className="admin-menu w3-animate-right" onClick={this.toggleAdminMenu}
 					 style={{display: this.state.showedAdminMenu ? "block" : "none"}}>
 					<nav role="navigation" className="global-navcontainer w-nav-menu w--nav-menu-open"
@@ -89,13 +89,13 @@ class SiteHeader extends Component{
 						<Link to="/update-subscription" className="header-navlink w-nav-link w--nav-link-open">
 							Update Subscription</Link>
 						<Link to="/dashboard-super-admin"
-						   className="header-navlink w-nav-link w--nav-link-open">
+							  className="header-navlink w-nav-link w--nav-link-open">
 							Account</Link>
 						<Link to="/search-results" className="header-navlink w-nav-link w--nav-link-open">
 							Search Results</Link>
 					</nav>
 				</div>
-			</header>
+			</div>
 		);
 	}
 }

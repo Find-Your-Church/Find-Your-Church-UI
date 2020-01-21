@@ -5,7 +5,6 @@ import '../css/account.css';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {updateUserInfo} from "../../actions/auth-actions";
-import DashboardHeader from "../../components/dashboard-header";
 import SiteFooter from "../../components/site-footer";
 
 class Account extends Component{
@@ -137,7 +136,6 @@ class Account extends Component{
 	render(){
 		return (
 			<div>
-				<DashboardHeader/>
 				<main className="account-body">
 					<div className="div-20top _1080">
 						<div className="div-20bottom">

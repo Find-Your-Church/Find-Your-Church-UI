@@ -28,7 +28,7 @@ class ProfileContainer extends Component{
 		this.setState({collapsedResources: !this.state.collapsedResources});
 	}
 
-	render() {
+	render(){
 		return (
 			<div className="profile-container">
 				<div className="div-block-55">
@@ -41,62 +41,58 @@ class ProfileContainer extends Component{
 						</div>
 					</div>
 				</div>
-				<div className="div-block-56">
-					<div className="profile-info">
-						<div data-collapse="all" data-animation="default" data-duration="400"
-							 className="listing-navbar w-nav">
-							<h3 className="community-name">Justin Wheelock</h3>
-							<nav role="navigation" className="listing-navmenu w-nav-menu">
-								<Link to="#" className="listing-navlink w-nav-link">Edit</Link>
-							</nav>
-							<div className="menu-button w-nav-button">
-								<img
-									src="/img/3dot-icon.png"
-									alt="" className="threedoticon"/></div>
-							<div className="w-nav-overlay" data-wf-ignore="">
+				<div className="profile-info">
+					<div data-collapse="all" data-animation="default" data-duration="400"
+						 className="listing-navbar w-nav">
+						<h3 className="community-name">Justin Wheelock</h3>
+						<nav role="navigation" className="listing-navmenu w-nav-menu">
+							<Link to="#" className="listing-navlink w-nav-link">Edit</Link>
+						</nav>
+						<div className="menu-button w-nav-button">
+							<img
+								src="/img/3dot-icon.png"
+								alt="" className="threedoticon"/></div>
+						<div className="w-nav-overlay" data-wf-ignore="">
 
+						</div>
+					</div>
+					<div className="accordion-item">
+						<div className="trigger-div" onClick={this.toggleBio}>
+							<div className="div-block-20">
+								<h4 className="accordion-label">Bio</h4>
+							</div>
+							<div className="accordion-content"
+								 style={{height: this.state.collapsedBio ? "0" : "auto"}}>
+								<div className="div-block-19">
+									<p className="content-text">Users response to question.</p>
+								</div>
 							</div>
 						</div>
-						<div className="accordion-section">
-							<div className="accordion-item">
-								<div className="trigger-div" onClick={this.toggleBio}>
-									<div className="div-block-20">
-										<h4 className="accordion-label">Bio</h4>
-									</div>
-									<div className="accordion-content"
-										 style={{height: this.state.collapsedBio ? "0" : "auto"}}>
-										<div className="div-block-19">
-											<p className="content-text">Users response to question.</p>
-										</div>
-									</div>
+					</div>
+					<div className="accordion-item">
+						<div className="trigger-div" onClick={this.toggleContact}>
+							<div className="div-block-20">
+								<h4 className="accordion-label">Contact</h4>
+							</div>
+							<div className="accordion-content"
+								 style={{height: this.state.collapsedContact ? "0" : "auto"}}>
+								<div className="div-block-19">
+									<p className="content-text">Users response to question.</p>
 								</div>
 							</div>
-							<div className="accordion-item">
-								<div className="trigger-div" onClick={this.toggleContact}>
-									<div className="div-block-20">
-										<h4 className="accordion-label">Contact</h4>
-									</div>
-									<div className="accordion-content"
-										 style={{height: this.state.collapsedContact ? "0" : "auto"}}>
-										<div className="div-block-19">
-											<p className="content-text">Users response to question.</p>
-										</div>
-									</div>
-								</div>
+						</div>
+					</div>
+					<div className="accordion-item">
+						<div className="trigger-div" onClick={this.toggleResources}>
+							<div className="div-block-20">
+								<h4 className="accordion-label">Links and Resources</h4>
 							</div>
-							<div className="accordion-item">
-								<div className="trigger-div" onClick={this.toggleResources}>
-									<div className="div-block-20">
-										<h4 className="accordion-label">Links and Resources</h4>
-									</div>
-									<div className="accordion-content"
-										 style={{height: this.state.collapsedResources ? "0" : "auto"}}>
-										<div className="div-block-19">
-											<p className="content-text">
-												Users response to question.
-											</p>
-										</div>
-									</div>
+							<div className="accordion-content"
+								 style={{height: this.state.collapsedResources ? "0" : "auto"}}>
+								<div className="div-block-19">
+									<p className="content-text">
+										Users response to question.
+									</p>
 								</div>
 							</div>
 						</div>
