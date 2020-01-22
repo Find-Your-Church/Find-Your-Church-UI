@@ -39,36 +39,37 @@ class CommunityStep1 extends Component{
 			support_type: ["Contemporary", "Traditional", "Both - Separate", "Both - Combined"]
 		};
 
+		const p_obj = this.props.location.state;
 		this.state = {
 			errors: {},
 
-			community_name: "",
-			category: "",
-			address: "",
-			pictures: [], // array of base64-encoded strings, which each represents image.
-			community_contact: "",
-			phone: "",
-			email: "",
-			facebook: "",
-			instagram: "",
-			vimeo: "",
-			youtube: "",
-			podcast: "",
-			twitter: "",
-			about: "",
+			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
+			category: p_obj === undefined ? "" : p_obj.obj.category,
+			address: p_obj === undefined ? "" : p_obj.obj.address,
+			pictures: p_obj === undefined ? [] : p_obj.obj.pictures,
+			community_contact: p_obj === undefined ? "" : p_obj.obj.community_contact,
+			phone: p_obj === undefined ? "" : p_obj.obj.phone,
+			email: p_obj === undefined ? "" : p_obj.obj.email,
+			facebook: p_obj === undefined ? "" : p_obj.obj.facebook,
+			instagram: p_obj === undefined ? "" : p_obj.obj.instagram,
+			vimeo: p_obj === undefined ? "" : p_obj.obj.vimeo,
+			youtube: p_obj === undefined ? "" : p_obj.obj.youtube,
+			podcast: p_obj === undefined ? "" : p_obj.obj.podcast,
+			twitter: p_obj === undefined ? "" : p_obj.obj.twitter,
+			about: p_obj === undefined ? "" : p_obj.obj.about,
 
-			days: "0".repeat(this.filter_items.days.length),
-			times: "0".repeat(this.filter_items.times.length),
-			frequency: "0".repeat(this.filter_items.frequency.length),
-			ages: "0".repeat(this.filter_items.ages.length),
-			gender: "0".repeat(this.filter_items.gender.length),
-			parking: "0".repeat(this.filter_items.parking.length),
-			ministries: "0".repeat(this.filter_items.ministries.length),
-			other_services: "0".repeat(this.filter_items.other_services.length),
-			average_attendance: 0,
-			ambiance: "0".repeat(this.filter_items.ambiance.length),
-			event_type: "0".repeat(this.filter_items.event_type.length),
-			support_type: "0".repeat(this.filter_items.support_type.length)
+			days: p_obj === undefined ? "0".repeat(this.filter_items.days.length) : p_obj.obj.days,
+			times: p_obj === undefined ? "0".repeat(this.filter_items.times.length) : p_obj.obj.times,
+			frequency: p_obj === undefined ? "0".repeat(this.filter_items.frequency.length) : p_obj.obj.frequency,
+			ages: p_obj === undefined ? "0".repeat(this.filter_items.ages.length) : p_obj.obj.ages,
+			gender: p_obj === undefined ? "0".repeat(this.filter_items.gender.length) : p_obj.obj.gender,
+			parking: p_obj === undefined ? "0".repeat(this.filter_items.parking.length) : p_obj.obj.parking,
+			ministries: p_obj === undefined ? "0".repeat(this.filter_items.ministries.length) : p_obj.obj.ministries,
+			other_services: p_obj === undefined ? "0".repeat(this.filter_items.other_services.length) : p_obj.obj.other_services,
+			average_attendance: p_obj === undefined ? 0 : p_obj.obj.average_attendance,
+			ambiance: p_obj === undefined ? "0".repeat(this.filter_items.ambiance.length) : p_obj.obj.ambiance,
+			event_type: p_obj === undefined ? "0".repeat(this.filter_items.event_type.length) : p_obj.obj.event_type,
+			support_type: p_obj === undefined ? "0".repeat(this.filter_items.support_type.length) : p_obj.obj.support_type
 		};
 
 		this.clickSubmit = this.clickSubmit.bind(this);
@@ -169,7 +170,7 @@ class CommunityStep1 extends Component{
 			support_type: this.state.support_type
 		};
 
-		this.props.createCommunityStep2(this.props.auth.user.email, info_1, info_2, this.props.history);
+		this.props.createCommunityStep2(this.props.location.state === undefined, this.props.auth.user.email, info_1, info_2, this.props.history);
 	};
 
 	onPrevSlide(){
@@ -210,7 +211,12 @@ class CommunityStep1 extends Component{
 							<span className="w3-col s12 m4 l2">
 								<Link to="/dashboard" className="w3-button cancel">Cancel</Link>
 							</span>
-							<span className="w3-col s12 m4 l8 w3-center title">New Community</span>
+							<span className="w3-col s12 m4 l8 w3-center title">
+								{this.props.location.state === undefined ?
+									"New Community" : "Edit: " + this.props.location.state.obj.community_name
+								}
+
+							</span>
 							<span className="w3-col s12 m4 l2">
 								<Link to="#" className="w3-button w3-right save" onClick={this.onSubmitCommunity}>Save and Close</Link>
 							</span>
@@ -255,27 +261,32 @@ class CommunityStep1 extends Component{
 											Upload a Profile Picture
 										</Link>
 									) : null}
-									<div className="basic-info">
+									<div className="basic-info"
+										 title={this.props.location.state !== undefined ? "These infos cannot be modified." : ""}>
 										<input type="text" className="form-input communityname w-input" maxLength="256"
 											   onChange={this.onChange}
 											   placeholder="Community name"
 											   id="community_name"
 											   value={this.state.community_name}
+											   disabled={this.props.location.state !== undefined}
 											   required=""/>
 										<select className="form-select category w-select"
 												onChange={this.onChange}
 												id="category"
+												defaultValue={this.state.category}
+												disabled={this.props.location.state !== undefined}
 												required="">
 											<option value="">Category...</option>
-											<option value="Church">Church</option>
-											<option value="Young Adult Group">Young Adult Group</option>
-											<option value="Youth Group">Youth Group</option>
+											<option value="Church"> Church</option>
+											<option value="Young Adult Group"> Young Adult Group</option>
+											<option value="Youth Group"> Youth Group</option>
 										</select>
 										<input type="text" className="form-input w-input" maxLength="256"
 											   onChange={this.onChange}
 											   placeholder="Address or City"
 											   id="address"
 											   value={this.state.address}
+											   disabled={this.props.location.state !== undefined}
 											   required=""/>
 									</div>
 								</div>
@@ -356,27 +367,37 @@ class CommunityStep1 extends Component{
 									</div>
 									<h4 className="form-header">More Info</h4>
 									<div className="input-div">
-										<FilterItemCheck filterTitle="Day(s)" filterName="days" send={this.getDaysInfo}
+										<FilterItemCheck filterTitle="Day(s)" filterName="days"
+														 send={this.getDaysInfo}
+														 value={this.state.days}
 														 items={this.filter_items.days}/>
 										<FilterItemCheck filterTitle="Time(s)" filterName="times"
 														 send={this.getTimesInfo}
+														 value={this.state.times}
 														 items={this.filter_items.times}/>
 										<FilterItemRadio filterTitle="Frequency" filterName="frequency"
 														 send={this.getFrequencyInfo}
+														 value={this.state.frequency}
 														 items={this.filter_items.frequency}/>
-										<FilterItemCheck filterTitle="Age(s)" filterName="ages" send={this.getAgesInfo}
+										<FilterItemCheck filterTitle="Age(s)" filterName="ages"
+														 send={this.getAgesInfo}
+														 value={this.state.ages}
 														 items={this.filter_items.ages}/>
 										<FilterItemRadio filterTitle="Gender" filterName="gender"
 														 send={this.getGenderInfo}
+														 value={this.state.gender}
 														 items={this.filter_items.gender}/>
 										<FilterItemCheck filterTitle="Parking" filterName="parking"
 														 send={this.getParkingInfo}
+														 value={this.state.parking}
 														 items={this.filter_items.parking}/>
 										<FilterItemCheck filterTitle="Ministries" filterName="ministries"
 														 send={this.getMinistriesInfo}
+														 value={this.state.ministries}
 														 items={this.filter_items.ministries}/>
 										<FilterItemCheck filterTitle="Other Services" filterName="other_services"
 														 send={this.getOtherServicesInfo}
+														 value={this.state.other_services}
 														 items={this.filter_items.other_services}/>
 										<div className="attendance-div">
 											<div className="flexdiv-left labels">
@@ -391,12 +412,15 @@ class CommunityStep1 extends Component{
 										</div>
 										<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
 														 send={this.getAmbianceInfo}
+														 value={this.state.ambiance}
 														 items={this.filter_items.ambiance}/>
 										<FilterItemRadio filterTitle="Event Type" filterName="event_type"
 														 send={this.getEventTypeInfo}
+														 value={this.state.event_type}
 														 items={this.filter_items.event_type}/>
 										<FilterItemRadio filterTitle="Support Type" filterName="support_type"
 														 send={this.getSupportTypeInfo}
+														 value={this.state.support_type}
 														 items={this.filter_items.support_type}/>
 									</div>
 									<input type="submit" value="Create" data-wait="Please wait..."

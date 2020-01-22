@@ -4,19 +4,16 @@ class FilterItemCheck extends Component{
 	constructor(props){
 		super(props);
 
-		this.checks = "0".repeat(props.items.length);
+		this.checks = this.props.value.split("");
 	}
 
 	onCheck = e => {
-		// console.log(e.target.value, e.target.checked);
-		let checks = this.checks.split("");
-		checks[e.target.value] = e.target.checked ? '1' : '0';
-		this.checks = checks.join("");
-		this.props.send(this.checks);
+		this.checks[e.target.value] = e.target.checked ? '1' : '0';
+		this.props.send(this.checks.join(""));
 	};
 
 	render(){
-		// console.log(this.props.filterName, this.checks);
+		// console.log(this.props.filterName, this.props.value);
 		return (
 			<div className="filter-div">
 				<div className="flexdiv-left labels">
@@ -29,7 +26,10 @@ class FilterItemCheck extends Component{
 					this.props.items.map((item, index) => {
 						return (
 							<label className="filter-option" key={this.props.filterName + index}>{item}
-								<input type="checkbox" id={this.props.filterName + "[" + index + "]"} value={index} onClick={this.onCheck}/>
+								<input type="checkbox" id={this.props.filterName + "[" + index + "]"}
+									   value={index} onClick={this.onCheck}
+									   checked={this.checks[index] === '1'}
+								/>
 								<span className="filter-checkmark"> </span>
 							</label>
 						)

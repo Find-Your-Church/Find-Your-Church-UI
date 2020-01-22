@@ -10,6 +10,12 @@ class MyCommunities extends Component{
 	constructor(props){
 		super(props);
 
+		this.refresh = this.refresh.bind(this);
+
+		this.refresh();
+	}
+
+	refresh(){
 		this.props.getMyCommunities(this.props.auth.user.email, this.props.status === "active");
 	}
 
@@ -23,18 +29,21 @@ class MyCommunities extends Component{
 							<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
 						</div>
 						{this.props.status === 'inactive' ?
-							<Link to="/create-new-community" className="newcommunity-button w-button">+ New Community</Link>
+							<Link to="/create-new-community" className="newcommunity-button w-button">+ New
+								Community</Link>
 							: null}
-
 					</div>
 					<div className="div-20top">
-						<div className="listing-grid dashboard">
-							{this.props.communities[this.props.status].map((community, index) => {
-								return (
-									<Thumbnail key={this.props.status + index} value={community}/>
-								)
-							})}
-						</div>
+						{this.props.communities[this.props.status].length > 0 ? (
+								<div className="listing-grid dashboard">
+									{this.props.communities[this.props.status].map((community, index) => {
+										return (
+											<Thumbnail key={this.props.status + index} value={community}/>
+										)
+									})}
+								</div>)
+							: `You are not the Admin for any ${this.props.status} communities.`
+						}
 					</div>
 				</div>
 			</div>

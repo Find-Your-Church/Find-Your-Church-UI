@@ -25,6 +25,20 @@
 	padding: 20px 20px 20px 0;
 }
 
+@media screen and (max-width: 990px) {
+	.admin-left {
+		width: 100%;
+	}
+
+	.admin-left .profile-container {
+		width: 100%;
+	}
+
+	.admin-right {
+		padding: 20px;
+	}
+}
+
 /*
  * Profile container
  */
@@ -36,7 +50,8 @@
 }
 
 .profile-container .div-block-55 {
-	background-image: url("../../img/bg-world-map.png");
+	/* background-image: url("../../img/bg-world-map.png"); */
+	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 	background-position: 50% 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -135,10 +150,6 @@
 	font-weight: 700;
 }
 
-.w-nav[data-collapse="all"] .w-nav-menu {
-	display: none;
-}
-
 .w-nav-menu {
 	position: relative;
 	float: right;
@@ -192,10 +203,6 @@
 	-webkit-box-ordinal-group: 2;
 	-ms-flex-order: 1;
 	order: 1;
-}
-
-.w-nav[data-collapse="all"] .w-nav-button {
-	display: block;
 }
 
 .threedoticon {
@@ -265,13 +272,18 @@
 }
 
 .profile-info .accordion-content {
-	overflow: scroll;
+	overflow: auto;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
 .profile-info .div-block-19 {
 	padding: 0 10px 10px;
+}
+
+.profile-info .personal-info {
+	padding-left: 2px;
+	font-size: 13px;
 }
 
 .profile-info .content-text {

@@ -4,12 +4,13 @@ class FilterItemRadio extends Component{
 	constructor(props){
 		super(props);
 
-		this.checks = "0".repeat(props.items.length);
+		this.checks = this.props.value.split("");
 	}
 
 	onCheck = e => {
-		this.checks = "0".repeat(e.target.value) + '1' + "0".repeat(this.props.items.length - e.target.value - 1);
-		this.props.send(this.checks);
+		const new_value = "0".repeat(e.target.value) + '1' + "0".repeat(this.props.items.length - e.target.value - 1);
+		this.checks = new_value.split("");
+		this.props.send(new_value);
 	};
 
 	render(){
@@ -26,7 +27,10 @@ class FilterItemRadio extends Component{
 					this.props.items.map((item, index) => {
 						return (
 							<label className="filter-option" key={this.props.filterName + index}>{item}
-								<input type="radio" id={this.props.filterName + "[" + index + "]"} name={this.props.filterName} value={index} onClick={this.onCheck}/>
+								<input type="radio" id={this.props.filterName + "[" + index + "]"}
+									   name={this.props.filterName} value={index} onClick={this.onCheck}
+									   checked={this.checks[index] === '1'}
+								/>
 								<span className="filter-radiomark"> </span>
 							</label>
 						)

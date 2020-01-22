@@ -86,6 +86,18 @@
 	margin: auto;
 }
 
+.steps-body .slide-container .nav{
+	opacity: 0.2;
+}
+
+.steps-body .slide-container .nav:hover{
+	opacity: 0.6;
+}
+
+.steps-body .slide-container .indicators{
+	margin-top: 8px;
+}
+
 .steps-body .slide-container h3 {
 	text-align: center;
 }

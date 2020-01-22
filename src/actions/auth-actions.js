@@ -6,6 +6,7 @@ import {
 	SET_CURRENT_USER, UPDATE_USER_INFO,
 	USER_LOADING
 } from "./action-types";
+import app_config from "../conf/config";
 
 /**
  * Register new user.
@@ -16,7 +17,7 @@ import {
  */
 export const registerUser = (userData, history) => dispatch => {
 	axios
-		.post("/api/users/register", userData)
+		.post(app_config.FYC_API_URL + "/api/users/register", userData)
 		.then(res => history.push("/login-popup")) // re-direct to login on successful register
 		.catch(err =>
 			dispatch({
@@ -35,7 +36,7 @@ export const registerUser = (userData, history) => dispatch => {
  */
 export const registerGoogleUser = (userData, history) => dispatch => {
 	axios
-		.post("/api/users/googleregister", userData)
+		.post(app_config.FYC_API_URL + "/api/users/googleregister", userData)
 		.then(res => history.push("/login-popup")) // re-direct to login on successful register
 		.catch(err => {
 				dispatch({
@@ -54,7 +55,7 @@ export const registerGoogleUser = (userData, history) => dispatch => {
  */
 export const loginUser = userData => dispatch => {
 	axios
-		.post("/api/users/login", userData)
+		.post(app_config.FYC_API_URL + "/api/users/login", userData)
 		.then(res => {
 			// Save to localStorage
 			// Set token to localStorage
@@ -86,7 +87,7 @@ export const loginUser = userData => dispatch => {
  */
 export const loginGoogleUser = userData => dispatch => {
 	axios
-		.post("/api/users/googlelogin", userData)
+		.post(app_config.FYC_API_URL + "/api/users/googlelogin", userData)
 		.then(res => {
 			// Save to localStorage
 			// Set token to localStorage
@@ -154,7 +155,7 @@ export const logoutUser = () => dispatch => {
  */
 export const resetPassword = (userData, history) => dispatch => {
 	axios
-		.post("/api/users/resetpassword", userData)
+		.post(app_config.FYC_API_URL + "/api/users/resetpassword", userData)
 		.then(res => history.push("/login-popup"))
 		.catch(err =>
 			dispatch({
@@ -173,7 +174,7 @@ export const resetPassword = (userData, history) => dispatch => {
  */
 export const doResetPassword = (userData, history) => dispatch => {
 	axios
-		.post("/api/users/doresetpassword", userData)
+		.post(app_config.FYC_API_URL + "/api/users/doresetpassword", userData)
 		.then(res => history.push("/reset"))
 		.catch(err =>
 			dispatch({
@@ -185,7 +186,7 @@ export const doResetPassword = (userData, history) => dispatch => {
 
 export const updateUserInfo = (userData, history) => dispatch => {
 	axios
-		.post("/api/users/update", userData)
+		.post(app_config.FYC_API_URL + "/api/users/update", userData)
 		.then(
 			/*res => history.push("/dashboard/account")*/
 			res => {

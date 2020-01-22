@@ -60,6 +60,8 @@ class App extends Component{
 						<PrivateRoute exact path="/create-new-community" component={CommunityStep1}/>
 						<PrivateRoute exact path="/create-new-community-2" component={CommunityStep2}/>
 
+						<PrivateRoute exact path="/view" component={CommunityStep1}/>
+
 						<PrivateRoute exact path="/dashboard" component={Admin}/>
 						<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
 						<PrivateRoute exact path="/dashboard/account" component={Account}/>

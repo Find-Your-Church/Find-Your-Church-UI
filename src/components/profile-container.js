@@ -6,9 +6,9 @@ class ProfileContainer extends Component{
 		super(props);
 
 		this.state = {
-			collapsedBio: true,
-			collapsedContact: true,
-			collapsedResources: true,
+			collapsedBio: false,
+			collapsedContact: false,
+			collapsedResources: false,
 		};
 
 		this.toggleBio = this.toggleBio.bind(this);
@@ -55,6 +55,10 @@ class ProfileContainer extends Component{
 						<div className="w-nav-overlay" data-wf-ignore="">
 
 						</div>
+					</div>
+					<div className="personal-info">
+						<div>Age category</div>
+						<div>City, State</div>
 					</div>
 					<div className="accordion-item">
 						<div className="trigger-div" onClick={this.toggleBio}>
