@@ -53,11 +53,11 @@
 	margin-top: 18px;
 }
 
-.info-body .left-part{
+.info-body .left-part {
 	padding-right: 20px;
 }
 
-.info-body .left-part div{
+.info-body .left-part div {
 	background-color: #fff;
 }
 
@@ -72,13 +72,32 @@
 	margin: 0 8px 8px;
 }
 
-.left-part .basic-info{
+.left-part .basic-info {
 	padding: 10px;
 }
 
-.left-part .basic-info input, .left-part .basic-info select{
-	width: 100%!important;
-	border-bottom: 1px solid #ccc!important;
+.left-part .basic-info input, .left-part .basic-info select {
+	width: 100% !important;
+	border-bottom: 1px solid #ccc !important;
+}
+
+.steps-body .slide-container {
+	width: 100%;
+	margin: auto;
+}
+
+.steps-body .slide-container h3 {
+	text-align: center;
+}
+
+.steps-body .each-slide > div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 300px;
 }
 
 .steps-body .flexdiv-left {
@@ -148,7 +167,7 @@
 	border-bottom: 1px solid #ccc;
 }
 
-.steps-body .input-div{
+.steps-body .input-div {
 	padding: 0 10px 10px 10px;
 	background-color: #fff;
 }
@@ -321,11 +340,15 @@
 	padding-left: 20px;
 	margin-right: 12px;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 13px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.steps-body .filter-option:hover {
+	color: #666;
 }
 
 .steps-body .filter-option input {
@@ -343,7 +366,8 @@
 	height: 12px;
 	width: 12px;
 	border-radius: 2px;
-	background-color: #eee;
+	border: solid 1px #000;
+	background-color: #fff;
 }
 
 .steps-body .filter-radiomark {
@@ -353,17 +377,20 @@
 	height: 12px;
 	width: 12px;
 	border-radius: 50%;
-	background-color: #eee;
+	border: solid 1px #000;
+	background-color: #fff;
 }
 
 .steps-body .filter-option:hover input ~ .filter-checkmark,
 .steps-body .filter-option:hover input ~ .filter-radiomark {
-	background-color: #ccc;
-	box-shadow: 0 0 4px #3898ec;
+	border: solid 1px #fff;
+	background-color: #eee;
+	box-shadow: 0 0 2px #3898ec;
 }
 
 .steps-body .filter-option input:checked ~ .filter-checkmark,
 .steps-body .filter-option input:checked ~ .filter-radiomark {
+	border: none;
 	background-color: #3898ec;
 }
 

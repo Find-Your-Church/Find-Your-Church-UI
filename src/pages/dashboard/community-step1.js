@@ -1,16 +1,28 @@
 import React, {Component} from "react";
+import {Slide} from 'react-slideshow-image';
 import "../css/community-steps.css";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import FileBase from 'react-file-base64';
-import {createCommunityStep1, createCommunityStep2} from "../../actions/community-actions";
+import {createCommunityStep2} from "../../actions/community-actions";
 import FilterItemCheck from "../../components/filter-item-check";
 import FilterItemRadio from "../../components/filter-item-radio";
 
 class CommunityStep1 extends Component{
 	constructor(props){
 		super(props);
+
+		this.slide_options = {
+			duration: 4000,
+			transitionDuration: 500,
+			infinite: true,
+			indicators: true,
+			arrows: true,
+			onChange: (oldIndex, newIndex) => {
+				//console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+			}
+		};
 
 		this.filter_items = {
 			days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -33,7 +45,7 @@ class CommunityStep1 extends Component{
 			community_name: "",
 			category: "",
 			address: "",
-			picture: "", // base64-encoded string represent image.
+			pictures: [], // array of base64-encoded strings, which each represents image.
 			community_contact: "",
 			phone: "",
 			email: "",
@@ -111,8 +123,10 @@ class CommunityStep1 extends Component{
 
 	getBaseFile(files){
 		this.setState({
-			// baseImage: files.base64,
-			picture: files.base64.toString()
+			pictures: [
+				...this.state.pictures,
+				files.base64.toString()
+			],
 		});
 	}
 
@@ -127,7 +141,7 @@ class CommunityStep1 extends Component{
 			community_name: this.state.community_name,
 			category: this.state.category,
 			address: this.state.address,
-			picture: this.state.picture,
+			pictures: this.state.pictures,
 			community_contact: this.state.community_contact,
 			phone: this.state.phone,
 			email: this.state.email,
@@ -158,6 +172,34 @@ class CommunityStep1 extends Component{
 		this.props.createCommunityStep2(this.props.auth.user.email, info_1, info_2, this.props.history);
 	};
 
+	onPrevSlide(){
+		this.showDivs(this.slideIndex -= 1);
+	}
+
+	onNextSlide(){
+		this.showDivs(this.slideIndex += 1);
+	}
+
+	plusDivs(n){
+		this.showDivs(this.slideIndex += n);
+	}
+
+	currentDiv(e){
+		this.showDivs(this.slideIndex = e.target.key);
+	}
+
+	showDivs(n){
+		const len = this.state.pictures.length;
+		if(n > len){
+			this.slideIndex = 1
+		}
+		if(n < 1){
+			this.slideIndex = len;
+		}
+
+		this.setState({slideIndex: this.slideIndex});
+	}
+
 	render(){
 		// console.log(this.state.picture);
 		return (
@@ -176,15 +218,36 @@ class CommunityStep1 extends Component{
 						<div className="w-form-done">
 							<div>Thank you! Your submission has been received!</div>
 						</div>
-						<div className="w-form-fail" style={{display: this.state.errors.msg_community !== undefined ? "block" : "none"}}>
+						<div className="w-form-fail"
+							 style={{display: this.state.errors.msg_community !== undefined ? "block" : "none"}}>
 							{this.state.errors.msg_community}
 						</div>
 						<div className="info-body w3-row">
 							<div className="left-part w3-half">
 								<div>
-									<img className={"community-picture" + (this.state.picture ? "" : " w3-opacity-max")}
-										 alt="Community" src={
-										this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
+									{
+										this.state.pictures.length > 0 ? (
+												<div className="slide-container">
+													<Slide {...this.slide_options}>
+														{this.state.pictures.map((pic, index) => {
+															return (
+																<div className="each-slide" key={index}>
+																	<div style={{backgroundImage: `url(${pic})`}}>
+
+																	</div>
+																</div>
+															);
+														})}
+													</Slide>
+												</div>
+											)
+											: (
+												<img
+													className={"community-picture" + (this.state.pictures.length > 0 ? "" : " w3-opacity-max")}
+													alt="Community" title="Community pictures"
+													src={this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
+											)
+									}
 									<FileBase type="file" className="upload-button w-button"
 											  multiple={false} onDone={this.getBaseFile.bind(this)} height="38"/>
 									{false ? (
@@ -351,7 +414,7 @@ class CommunityStep1 extends Component{
 CommunityStep1.propTypes = {
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
-	createCommunityStep1: PropTypes.func.isRequired,
+//	createCommunityStep1: PropTypes.func.isRequired,
 	createCommunityStep2: PropTypes.func.isRequired,
 };
 
@@ -363,7 +426,7 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{
-		createCommunityStep1,
+//		createCommunityStep1,
 		createCommunityStep2
 	}
 )(CommunityStep1);

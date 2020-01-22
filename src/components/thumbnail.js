@@ -5,12 +5,10 @@ class Thumbnail extends Component{
 	render(){
 		return (
 			<div className="listing-container1">
-				<div className="listingprofilepic-div">
-					<img
-						src={
-							this.props.value.picture ? this.props.value.picture
-								: "/img/community-default.jpg"}
-						alt="" className={"image" + (this.props.value.picture ? "" : " w3-opacity-max")}/>
+				<div className={"listingprofilepic-div" + (this.props.value.pictures.length > 0 ? "" : " w3-opacity-max")} style={{
+					backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
+						: "/img/community-default.jpg"}')`
+				}}>
 				</div>
 				<div className="listinginfo-div">
 					<div className="listingrow">

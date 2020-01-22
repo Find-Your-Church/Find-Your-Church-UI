@@ -11,7 +11,6 @@
 .admin-body {
 	margin-top: 68px;
 	min-height: calc(100vh - var(--footer-height) - 68px);
-	max-height: calc(100vh - var(--footer-height) - 68px);
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#e6e6e6), to(#e6e6e6));
 	background-image: linear-gradient(180deg, #e6e6e6, #e6e6e6);
 }
@@ -30,8 +29,10 @@
  * Profile container
  */
 .profile-container {
+	width: 350px;
+	min-width: 350px;
 	background-color: #fff;
-	box-shadow: 0 1px 3px 0 rgba(80, 80, 80, 0.89);
+	border: solid 1px #ccc;
 }
 
 .profile-container .div-block-55 {
@@ -69,9 +70,6 @@
 	padding-top: 0;
 	border: 3px solid #fff;
 	border-radius: 50%;
-	/*
-	background-image: url("../../img/5deaebc9cd1730904c902c41_Large-church-service.jpg");
-	 */
 	background-position: 0% 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
