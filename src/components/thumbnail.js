@@ -9,11 +9,13 @@ class Thumbnail extends Component{
 		super(props);
 
 		this.state = {
-			is_detailing: false,
+			is_editing: false,
+			is_viewing: false,
 			is_show_menu: false,
 		};
 
-		this.goDetail = this.goDetail.bind(this);
+		this.goEdit = this.goEdit.bind(this);
+		this.goView = this.goView.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
 		this.onActivate = this.onActivate.bind(this);
@@ -21,11 +23,18 @@ class Thumbnail extends Component{
 		this.onDelete = this.onDelete.bind(this);
 	}
 
-	goDetail(e){
+	goEdit(e){
 		// redirect to community-step1 with this.props.value (community object with full info).
 		// console.log(this.props.value);
 
-		this.setState({is_detailing: true});
+		this.setState({is_editing: true});
+	}
+
+	goView(e){
+		// redirect to community-step1 with this.props.value (community object with full info).
+		// console.log(this.props.value);
+
+		this.setState({is_viewing: true});
 	}
 
 	toggleMenu(e){
@@ -65,49 +74,58 @@ class Thumbnail extends Component{
 
 	render(){
 		return (
-			this.state.is_detailing ? (
+			this.state.is_viewing ? (
 				<Redirect to={{pathname: '/view', state: {obj: this.props.value}}}/>
 			) : (
-				<div className="listing-container1" onMouseLeave={this.hideMenu}>
-					<div
-						className={"listingprofilepic-div" + (this.props.value.pictures.length > 0 ? "" : " w3-opacity-max")}
-						style={{
-							backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
-								: "/img/community-default.jpg"}')`
-						}}
-						onClick={this.goDetail}>
-					</div>
-					<div className="listinginfo-div">
-						<div className="listingrow">
-							<div data-collapse="all" data-animation="default" data-duration="400"
-								 className="listing-nav w-nav">
-								<Link to="#" className="communityname" onClick={this.goDetail}>
-									{this.props.value.community_name}
-								</Link>
-								<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
-									<img src="/img/3dot-icon.png" alt="" className="threedoticon"/>
-								</div>
-								<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
-									 style={{display: this.state.is_show_menu ? "block" : "none"}}>
-									<Link to="#" className="listing-navlink w-nav-link"
-										  onClick={this.props.value.activated ? this.onDeactivate : this.onActivate}>
-										{this.props.value.activated ? "Deactivate" : "Activate"}
+				this.state.is_editing ? (
+					<Redirect to={{pathname: '/edit', state: {obj: this.props.value}}}/>
+				) : (
+
+					<div className="listing-container1" onMouseLeave={this.hideMenu}>
+						<div
+							className={"listingprofilepic-div" + (this.props.value.pictures.length > 0 ? "" : " w3-opacity-max")}
+							style={{
+								backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
+									: "/img/community-default.jpg"}')`
+							}}
+							onClick={this.goView}>
+						</div>
+						<div className="listinginfo-div">
+							<div className="listingrow">
+								<div data-collapse="all" data-animation="default" data-duration="400"
+									 className="listing-nav w-nav">
+									<Link to="#" className="communityname" onClick={this.goView}>
+										{this.props.value.community_name}
 									</Link>
-									<Link to="#" className="listing-navlink w-nav-link"
-										  onClick={this.onDelete}>Delete</Link>
-								</nav>
-								<div className="w-nav-overlay" data-wf-ignore="">
+									<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
+										<img src="/img/3dot-icon.png" alt="" className="threedoticon"/>
+									</div>
+									<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
+										 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+										<Link to="#" className="listing-navlink w-nav-link" onClick={this.goEdit}>
+											Edit
+										</Link>
+										<Link to="#" className="listing-navlink w-nav-link"
+											  onClick={this.props.value.activated ? this.onDeactivate : this.onActivate}>
+											{this.props.value.activated ? "Deactivate" : "Activate"}
+										</Link>
+										<Link to="#" className="listing-navlink w-nav-link" onClick={this.onDelete}>
+											Delete
+										</Link>
+									</nav>
+									<div className="w-nav-overlay" data-wf-ignore="">
+									</div>
 								</div>
 							</div>
-						</div>
-						<div className="listingrow">
-							<h5 className="communitycategory">{this.props.value.category}</h5>
-						</div>
-						<div className="listingrow">
-							<h5 className="communityaddress">{this.props.value.address}</h5>
+							<div className="listingrow">
+								<h5 className="communitycategory">{this.props.value.category}</h5>
+							</div>
+							<div className="listingrow">
+								<h5 className="communityaddress">{this.props.value.address}</h5>
+							</div>
 						</div>
 					</div>
-				</div>
+				)
 			)
 		);
 	}

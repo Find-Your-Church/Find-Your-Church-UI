@@ -22,7 +22,10 @@
 }
 
 .admin-right {
+	margin: 0;
 	padding: 20px 20px 20px 0;
+	height: calc(100vh - var(--footer-height) - 68px);
+	overflow-y: scroll;
 }
 
 @media screen and (max-width: 990px) {
@@ -36,6 +39,8 @@
 
 	.admin-right {
 		padding: 20px;
+		height: auto;
+		overflow-y: auto;
 	}
 }
 

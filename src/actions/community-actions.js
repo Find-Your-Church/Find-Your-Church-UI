@@ -43,6 +43,9 @@ export const createCommunityStep2 = (is_new, owner_email, info_1, info_2, histor
 			...info_2,
 		}
 	};
+
+	console.log(info);
+
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/create", info)
 		.then(res => {

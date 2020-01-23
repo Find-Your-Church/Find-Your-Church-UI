@@ -29,7 +29,7 @@ class FilterItemRadio extends Component{
 							<label className="filter-option" key={this.props.filterName + index}>{item}
 								<input type="radio" id={this.props.filterName + "[" + index + "]"}
 									   name={this.props.filterName} value={index} onClick={this.onCheck}
-									   checked={this.checks[index] === '1'}
+									   defaultChecked={this.checks[index] === '1'}
 								/>
 								<span className="filter-radiomark"> </span>
 							</label>

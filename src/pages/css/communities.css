@@ -4,6 +4,10 @@
 	align-self: stretch;
 }
 
+.communities-body:last-child {
+	margin-bottom: 0;
+}
+
 .communities-body .dashboard-container {
 	margin-right: auto;
 	margin-left: auto;

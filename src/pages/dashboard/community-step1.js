@@ -76,12 +76,12 @@ class CommunityStep1 extends Component{
 		this.onSubmitCommunity = this.onSubmitCommunity.bind(this);
 	}
 
-	componentWillReceiveProps(nextProps){
+	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
-			this.setState({
-				errors: nextProps.errors
-			});
+			return {errors: nextProps.errors};
 		}
+		else
+			return null;
 	}
 
 	getDaysInfo = (checks) => {
@@ -173,34 +173,6 @@ class CommunityStep1 extends Component{
 		this.props.createCommunityStep2(this.props.location.state === undefined, this.props.auth.user.email, info_1, info_2, this.props.history);
 	};
 
-	onPrevSlide(){
-		this.showDivs(this.slideIndex -= 1);
-	}
-
-	onNextSlide(){
-		this.showDivs(this.slideIndex += 1);
-	}
-
-	plusDivs(n){
-		this.showDivs(this.slideIndex += n);
-	}
-
-	currentDiv(e){
-		this.showDivs(this.slideIndex = e.target.key);
-	}
-
-	showDivs(n){
-		const len = this.state.pictures.length;
-		if(n > len){
-			this.slideIndex = 1
-		}
-		if(n < 1){
-			this.slideIndex = len;
-		}
-
-		this.setState({slideIndex: this.slideIndex});
-	}
-
 	render(){
 		// console.log(this.state.picture);
 		return (
@@ -281,7 +253,8 @@ class CommunityStep1 extends Component{
 											<option value="Young Adult Group"> Young Adult Group</option>
 											<option value="Youth Group"> Youth Group</option>
 										</select>
-										<input type="text" className="form-input w-input" maxLength="256"
+										<input type="text" className="form-input w-input social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/icon/icon-address.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Address or City"
 											   id="address"
@@ -291,7 +264,7 @@ class CommunityStep1 extends Component{
 									</div>
 								</div>
 							</div>
-							<div className="w3-half">
+							<div className="right-part w3-half">
 								<form onSubmit={this.clickNext}
 									  id="wf-form-New-Community" name="wf-form-New-Community"
 									  data-name="New Community" className="form1">
@@ -312,32 +285,38 @@ class CommunityStep1 extends Component{
 										<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
 									</div>
 									<div className="input-div w3-row">
-										<input type="url" className="form-input w-input w3-half" maxLength="256"
+										<input type="url" className="form-input w-input w3-half social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/social/icon-facebook.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Facebook page link"
 											   value={this.state.facebook}
 											   id="facebook"/>
-										<input type="url" className="form-input w-input w3-half" maxLength="256"
+										<input type="url" className="form-input w-input w3-half social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/social/icon-instagram.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Instagram username"
 											   value={this.state.instagram}
 											   id="instagram"/>
-										<input type="url" className="form-input w-input w3-half" maxLength="256"
+										<input type="url" className="form-input w-input w3-half social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/social/icon-vimeo.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Vimeo link"
 											   value={this.state.vimeo}
 											   id="vimeo"/>
-										<input type="url" className="form-input w-input w3-half" maxLength="256"
+										<input type="url" className="form-input w-input w3-half social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/social/icon-youtube.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Youtube link"
 											   value={this.state.youtube}
 											   id="youtube"/>
-										<input type="url" className="form-input w-input w3-half" maxLength="256"
+										<input type="url" className="form-input w-input w3-half social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/social/icon-podcast.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Podcast link"
 											   value={this.state.podcast}
 											   id="podcast"/>
-										<input type="url" className="form-input w-input w3-half" maxLength="256"
+										<input type="url" className="form-input w-input w3-half social-input" maxLength="256"
+											   style={{backgroundImage: "url('/img/social/icon-twitter.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Twitter handle"
 											   value={this.state.twitter}
@@ -348,18 +327,21 @@ class CommunityStep1 extends Component{
 										<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
 									</div>
 									<div className="input-div w3-row">
-										<input type="text" className="form-input w-input w3-col l12" maxLength="256"
+										<input type="text" className="form-input w-input social-input w3-col l12" maxLength="256"
+											   style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}
 											   onChange={this.onChange}
-											   placeholder="Community contact"
+											   placeholder="Contact name"
 											   id="community_contact"
 											   value={this.state.community_contact}
 											   required=""/>
-										<input type="tel" className="form-input w-input w3-half" maxLength="256"
+										<input type="tel" className="form-input w-input social-input w3-half" maxLength="256"
+											   style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Phone"
 											   value={this.state.phone}
 											   id="phone"/>
-										<input type="email" className="form-input w-input w3-half" maxLength="256"
+										<input type="email" className="form-input w-input social-input w3-half" maxLength="256"
+											   style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}
 											   onChange={this.onChange}
 											   placeholder="Email"
 											   value={this.state.email}
@@ -407,6 +389,7 @@ class CommunityStep1 extends Component{
 											<input type="number" className="attendance-input w-input"
 												   id="average_attendance"
 												   onChange={this.onChange}
+												   min={"0"}
 												   value={this.state.average_attendance}
 												   placeholder="0"/>
 										</div>

@@ -28,7 +28,7 @@ class FilterItemCheck extends Component{
 							<label className="filter-option" key={this.props.filterName + index}>{item}
 								<input type="checkbox" id={this.props.filterName + "[" + index + "]"}
 									   value={index} onClick={this.onCheck}
-									   checked={this.checks[index] === '1'}
+									   defaultChecked={this.checks[index] === '1'}
 								/>
 								<span className="filter-checkmark"> </span>
 							</label>

@@ -20,6 +20,7 @@ import ResetPassword from "./pages/reset-password";
 import Notfound from "./pages/notfound";
 import Admin from "./pages/dashboard/admin";
 import Account from "./pages/dashboard/account";
+import ViewCommunity from "./pages/dashboard/view-community";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -60,7 +61,8 @@ class App extends Component{
 						<PrivateRoute exact path="/create-new-community" component={CommunityStep1}/>
 						<PrivateRoute exact path="/create-new-community-2" component={CommunityStep2}/>
 
-						<PrivateRoute exact path="/view" component={CommunityStep1}/>
+						<PrivateRoute exact path="/view" component={ViewCommunity}/>
+						<PrivateRoute exact path="/edit" component={CommunityStep1}/>
 
 						<PrivateRoute exact path="/dashboard" component={Admin}/>
 						<PrivateRoute exact path="/dashboard/admin" component={Admin}/>

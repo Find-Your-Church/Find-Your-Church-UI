@@ -23,7 +23,7 @@ class Home extends Component{
 						<iframe className="embedly-embed"
 								src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F8rwsuXHA7RA%3Ffeature%3Doembed&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D8rwsuXHA7RA&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F8rwsuXHA7RA%2Fhqdefault.jpg&amp;key=96f1f04c5f4143bcb0f2e68c87d65feb&amp;type=text%2Fhtml&amp;schema=youtube"
 								scrolling="no" frameBorder="0" allow="autoplay; fullscreen"
-								allowFullScreen="true" title="site main video"></iframe>
+								allowFullScreen={true} title="site main video"></iframe>
 					</div>
 				</div>
 				<div className="block-51">

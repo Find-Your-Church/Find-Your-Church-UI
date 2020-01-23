@@ -50,6 +50,10 @@ class SiteHeader extends Component{
 							  className="w3-bar-item w3-right w3-hover-text-white">Sign Out</Link>
 						: null}
 					{this.props.auth.isAuthenticated ?
+						<Link to="/dashboard/account"
+							  className="w3-bar-item w3-right w3-hover-text-white">Profile</Link>
+						: null}
+					{this.props.auth.isAuthenticated ?
 						<Link to="/dashboard"
 							  className="w3-bar-item w3-right w3-hover-text-white">Dashboard</Link>
 						: null}

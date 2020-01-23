@@ -1,4 +1,14 @@
 .steps-body {
+	--footer-height: 46px;
+}
+
+@media screen and (max-width: 990px) {
+	.steps-body {
+		--footer-height: 64px;
+	}
+}
+
+.steps-body {
 	margin-top: 59px;
 	min-height: calc(100vh - 59px);
 	padding: 20px;
@@ -81,20 +91,46 @@
 	border-bottom: 1px solid #ccc !important;
 }
 
-.steps-body .slide-container {
-	width: 100%;
-	margin: auto;
+.info-body .right-part {
+	height: calc(100vh - var(--footer-height) - 129px);
+	overflow-y: scroll;
 }
 
-.steps-body .slide-container .nav{
+.info-body .right-part.view {
+	height: calc(100vh - var(--footer-height) - 80px);
+	overflow-y: scroll;
+}
+
+@media screen and (max-width: 990px) {
+	.info-body .left-part {
+		padding-right: 0;
+		width: 100%;
+	}
+
+	.info-body .right-part {
+		width: 100%;
+	}
+
+	.info-body .right-part {
+		height: auto;
+		overflow-y: auto;
+	}
+}
+
+.steps-body .slide-container {
+	width: 100%;
+	margin: 0;
+}
+
+.steps-body .slide-container .nav {
 	opacity: 0.2;
 }
 
-.steps-body .slide-container .nav:hover{
+.steps-body .slide-container .nav:hover {
 	opacity: 0.6;
 }
 
-.steps-body .slide-container .indicators{
+.steps-body .slide-container .indicators {
 	margin-top: 8px;
 }
 
@@ -103,13 +139,26 @@
 }
 
 .steps-body .each-slide > div {
+	padding-top: 56.25%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-size: contain;
-	background-position: center center;
+	background-size: cover;
+	background-position: center top;
 	background-repeat: no-repeat;
-	height: 300px;
+}
+
+.steps-body .left-part input[type="file"] {
+	width: calc(100% - 40px);
+	margin-left: 20px;
+	color: #dddddd;
+	background-color: #f3f3f3;
+	opacity: 0.4;
+	cursor: pointer;
+}
+
+.steps-body .left-part input[type="file"]:hover {
+	opacity: 1.0;
 }
 
 .steps-body .flexdiv-left {
@@ -188,6 +237,21 @@
 	margin-bottom: 0;
 	padding-left: 10px;
 	border-bottom-style: none;
+}
+
+.steps-body .social-input {
+	background-position: 0 50%;
+	background-repeat: no-repeat;
+	text-indent: 20px;
+}
+
+.right-part .social-link-group {
+	padding: 8px 16px;
+	background-color: #fff;
+}
+
+.right-part .social-link:not(:first-child) {
+	margin-left: 16px;
 }
 
 .steps-body .w-input, .steps-body .w-select {

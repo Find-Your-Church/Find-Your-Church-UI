@@ -23,12 +23,12 @@ class ResetPassword extends Component{
 		this.props.doResetPassword(userData, this.props.history);
 	};
 
-	componentWillReceiveProps(nextProps){
+	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
-			this.setState({
-				errors: nextProps.errors
-			});
+			return {errors: nextProps.errors};
 		}
+		else
+			return null;
 	}
 
 	render(){
