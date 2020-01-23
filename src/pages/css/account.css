@@ -245,6 +245,11 @@
 	text-decoration: none;
 }
 
+.verified-mark{
+	margin-left: 6px;
+	width: 15px;
+}
+
 #w-node-cb8d7881b980-27fc25a8 {
 	-ms-grid-row-align: center;
 	align-self: center;
