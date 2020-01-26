@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "../pages/css/communities.css"
+import "../css/communities.css"
 import Thumbnail from "./thumbnail";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
@@ -26,7 +26,7 @@ class MyCommunities extends Component{
 					<div className="containerheader-div underline">
 						<div className="flexdiv-left">
 							<h5 className="container-header">{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities</h5>
-							<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+							<img src={"/img/tooltip-icon.png"} alt="" className="tooltip-icon"/>
 						</div>
 						{this.props.status === 'inactive' ?
 							<Link to="/create-new-community" className="newcommunity-button w-button">+ New
@@ -38,7 +38,7 @@ class MyCommunities extends Component{
 								<div className="listing-grid dashboard">
 									{this.props.communities[this.props.status].map((community, index) => {
 										return (
-											<Thumbnail key={this.props.status + index} value={community}/>
+											<Thumbnail key={this.props.status + index} value={community} handleShowSubDlg={this.props.handleShowSubDlg}/>
 										)
 									})}
 								</div>)

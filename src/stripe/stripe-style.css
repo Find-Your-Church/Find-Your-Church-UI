@@ -1,0 +1,25 @@
+/**
+* Shows how you can use CSS to style your Element's container.
+*/
+.CardInfoStyle {
+	margin: -7px 0;
+	width: 100%;
+	height: auto;
+	padding: 7px 8px 6px;
+	color: #32325d;
+	background-color: #f8f8f8;
+	border-radius: 4px;
+}
+
+.CardInfoStyle--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+	outline: solid 1px #2e89fe;
+}
+
+.CardInfoStyle--invalid {
+	border-color: #fa755a;
+}
+
+.CardInfoStyle--webkit-autofill {
+	background-color: #fefde5 !important;
+}

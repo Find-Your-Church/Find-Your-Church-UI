@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import '../css/dashboard.css';
-import '../css/account.css';
+import '../../css/dashboard.css';
+import '../../css/account.css';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {updateUserInfo} from "../../actions/auth-actions";
 import SiteFooter from "../../components/site-footer";
+import BillingCardInfo from "../../stripe/billing-card-info";
+import {Elements} from "react-stripe-elements";
 
 class Account extends Component{
 	constructor(props){
@@ -129,10 +131,6 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingBillingZipCode: !this.state.editingBillingZipCode});
-	}
-
-	componentDidUpdate(prevProps, prevState, snapshot){
-		//console.log("After updated: ", this.props.auth.user);
 	}
 
 	render(){
@@ -383,6 +381,12 @@ class Account extends Component{
 											<Link to="#" className="table-link" onClick={this.changeBillingCard}>
 												{this.state.editingBillingCard ? "Save" : "Update"}
 											</Link>
+										</div>
+										<div className="table-row">
+											<h4 className="table-header">Card Information</h4>
+											<Elements>
+												<BillingCardInfo/>
+											</Elements>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Billing Zip Code</h4>

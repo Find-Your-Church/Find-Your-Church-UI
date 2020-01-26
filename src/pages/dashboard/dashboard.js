@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {logoutUser} from "../../actions/auth-actions";
-import '../css/dashboard.css';
+import '../../css/dashboard.css';
 import SiteFooter from "../../components/site-footer";
 import DashboardHeader from "../../components/dashboard-header";
 import Admin from "./admin";

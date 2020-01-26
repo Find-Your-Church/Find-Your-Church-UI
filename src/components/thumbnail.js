@@ -24,14 +24,14 @@ class Thumbnail extends Component{
 	}
 
 	goEdit(e){
-		// redirect to community-step1 with this.props.value (community object with full info).
+		// redirect to community-step with this.props.value (community object with full info).
 		// console.log(this.props.value);
 
 		this.setState({is_editing: true});
 	}
 
 	goView(e){
-		// redirect to community-step1 with this.props.value (community object with full info).
+		// redirect to community-step with this.props.value (community object with full info).
 		// console.log(this.props.value);
 
 		this.setState({is_viewing: true});
@@ -46,6 +46,8 @@ class Thumbnail extends Component{
 	}
 
 	onActivate(e){
+		this.props.handleShowSubDlg();
+
 		const info = {
 			community_id: this.props.value._id,
 		};

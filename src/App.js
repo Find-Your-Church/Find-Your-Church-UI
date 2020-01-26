@@ -13,14 +13,15 @@ import PrivateRoute from "./components/private-route";
 import setAuthToken from "./utils/setAuthToken";
 import store from "./reducers/store"
 import {logoutUser, setCurrentUser} from "./actions/auth-actions";
-import CommunityStep1 from "./pages/dashboard/community-step1";
-import CommunityStep2 from "./pages/dashboard/community-step2";
+import CommunityStep from "./pages/dashboard/community-step";
 import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
 import Notfound from "./pages/notfound";
 import Admin from "./pages/dashboard/admin";
 import Account from "./pages/dashboard/account";
 import ViewCommunity from "./pages/dashboard/view-community";
+import {StripeProvider} from "react-stripe-elements";
+import app_config from "./conf/config";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -44,32 +45,53 @@ if(localStorage.jwtToken){
  * Main component including router.
  */
 class App extends Component{
+	constructor(props){
+		super(props);
+
+		this.state = {
+			stripe: null,
+		}
+	}
+
+	componentDidMount(){
+		if(window.Stripe){
+			this.setState({stripe: window.Stripe(app_config.STRIPE_PK)});
+		}
+		else{
+			document.querySelector("#stripe-js").addEventListener("load", () => {
+				// Creat Stripe instance once Stripe.js loads
+				this.setState(({stripe: window.Stripe(app_config.STRIPE_PK)}));
+			});
+		}
+	}
+
 	render(){
 		return (
 			<Provider store={store}>
-				<Router>
-					<SiteHeader/>
-					<Switch>
-						<Route exact path="/" component={Home}/>
-						<Route exact path="/search-results" component={SearchResults}/>
+				<StripeProvider stripe={this.state.stripe}>
+					<Router>
+						<SiteHeader/>
+						<Switch>
+							<Route exact path="/" component={Home}/>
+							<Route exact path="/search-results" component={SearchResults}/>
 
-						<Route exact path="/login-popup" component={LoginPopup}/>
-						<Route exact path="/register-popup" component={RegisterPopup}/>
-						<Route exact path="/forgot-password" component={ForgotPassword}/>
-						<Route path="/reset/:id?" component={ResetPassword}/>
+							<Route exact path="/login-popup" component={LoginPopup}/>
+							<Route exact path="/register-popup" component={RegisterPopup}/>
+							<Route exact path="/forgot-password" component={ForgotPassword}/>
+							<Route path="/reset/:id?" component={ResetPassword}/>
 
-						<PrivateRoute exact path="/create-new-community" component={CommunityStep1}/>
-						<PrivateRoute exact path="/create-new-community-2" component={CommunityStep2}/>
+							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
-						<PrivateRoute exact path="/view" component={ViewCommunity}/>
-						<PrivateRoute exact path="/edit" component={CommunityStep1}/>
+							<PrivateRoute exact path="/view" component={ViewCommunity}/>
+							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
-						<PrivateRoute exact path="/dashboard" component={Admin}/>
-						<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
-						<PrivateRoute exact path="/dashboard/account" component={Account}/>
-						<Route component={Notfound} />
-					</Switch>
-				</Router>
+							<PrivateRoute exact path="/dashboard" component={Admin}/>
+							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
+							<PrivateRoute exact path="/dashboard/account" component={Account}/>
+							<Route component={Notfound}/>
+						</Switch>
+					</Router>
+				</StripeProvider>
 			</Provider>
 		);
 	}

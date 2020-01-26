@@ -2,6 +2,7 @@
  * general errors handle
  */
 export const GET_ERRORS = "GET_ERRORS";
+export const RESET_ERRORS = "RESET_ERRORS";
 
 /**
  * authentication handles
@@ -16,7 +17,6 @@ export const RESET_PASSWORD = "RESET_PASSWORD";
  * community handles
  * @type {string}
  */
-export const CREATE_COMMUNITY_STEP1 = "CREATE_COMMUNITY_STEP1";
 export const GET_MY_COMMUNITIES = "GET_MY_COMMUNITIES";
 export const ACTIVATE_COMMUNITY = "ACTIVATE_COMMUNITY";
 export const DEACTIVATE_COMMUNITY = "DEACTIVATE_COMMUNITY";
