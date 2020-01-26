@@ -1,7 +1,7 @@
 
 #root {
 	background-color: #fff;
-	background-image: url("../../img/5d852598739a99e1ffdf7874_Collage copy.png");
+	background-image: url("../img/main-bg.jpg");
 	background-position: 50% 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -25,7 +25,7 @@
 	max-width: 840px;
 	padding: 20px 40px;
 	background-color: rgba(80, 80, 80, 0.5);
-	background-image: url("../../img/Search-background.jpg");
+	background-image: url("../img/Search-background.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
@@ -326,10 +326,6 @@ button:focus {
 }
 
 .block-60:after {
-	background-image: url("../../img/5e15418817a0cf6347d61500_nyc_from_above_super_wide-1.jpg");
-	background-position: 0 0;
-	background-size: cover;
-	background-attachment: fixed;
 	opacity: 0.09;
 }
 
@@ -416,15 +412,6 @@ button:focus {
 .block-52 {
 	min-height: 500px;
 	background-color: hsla(0, 0%, 90.2%, 0.95);
-}
-
-.block-61 {
-	min-height: 500px;
-	background-image: url("../../img/bg-world-map.png");
-	background-position: 50% 0;
-	background-size: cover;
-	background-attachment: fixed;
-	opacity: 0.2;
 }
 
 .block-52.teal {

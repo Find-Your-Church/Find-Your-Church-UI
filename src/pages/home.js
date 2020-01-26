@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './css/home.css';
+import '../css/home.css';
 import SearchBar from "../components/search-bar";
 import SiteFooter from "../components/site-footer";
 

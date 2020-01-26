@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import SiteFooter from "../components/site-footer";
-import "./css/login-register.css";
+import "../css/login-register.css";
 import {Link, withRouter} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 import PropTypes from "prop-types";
@@ -184,8 +184,8 @@ class RegisterPopup extends Component{
 											onSuccess={this.googleResponse}
 											onFailure={this.onFailure}/>
 										<div className="sdkbutton-div">
-											<img src="img/5de18075d41434839dd92aed_FB-Icon.png"
-												 srcSet="img/5de18075d41434839dd92aed_FB-Icon-p-500.png 500w, img/5de18075d41434839dd92aed_FB-Icon.png 768w"
+											<img src="img/icon-facebook.svg"
+												 srcSet="img/icon-facebook.svg 500w, img/icon-facebook.svg 768w"
 												 sizes="20px" alt="" className="button-icon"/>
 											<Link to="#" className="button google w-button-sign">
 												Sign up with Facebook

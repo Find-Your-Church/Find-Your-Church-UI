@@ -1,5 +1,4 @@
 import {
-	CREATE_COMMUNITY_STEP1,
 	GET_MY_COMMUNITIES,
 	ACTIVATE_COMMUNITY,
 	DEACTIVATE_COMMUNITY,
@@ -18,11 +17,6 @@ const initialState = {
 
 export default function(state = initialState, action){
 	switch(action.type){
-		case CREATE_COMMUNITY_STEP1:
-			return {
-				...state,
-				info_1: action.payload,
-			};
 		case GET_MY_COMMUNITIES:
 			if(action.payload.activated){
 				return {

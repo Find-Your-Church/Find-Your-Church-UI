@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import '../css/dashboard.css';
-import '../css/account.css';
+import '../../css/dashboard.css';
+import '../../css/account.css';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {updateUserInfo} from "../../actions/auth-actions";
 import SiteFooter from "../../components/site-footer";
+import BillingCardInfo from "../../stripe/billing-card-info";
+import {Elements} from "react-stripe-elements";
 
 class Account extends Component{
 	constructor(props){
@@ -23,6 +25,8 @@ class Account extends Component{
 			errors: {},
 
 			user_email: user.email,
+			user_email_verified: user.email_verified,
+			user_email_verified_at: user.email_verified_at,
 			user_fname: user.fname,
 			user_lname: user.lname,
 			user_registered_at: user.registered_at,
@@ -129,10 +133,6 @@ class Account extends Component{
 		this.setState({editingBillingZipCode: !this.state.editingBillingZipCode});
 	}
 
-	componentDidUpdate(prevProps, prevState, snapshot){
-		//console.log("After updated: ", this.props.auth.user);
-	}
-
 	render(){
 		return (
 			<div>
@@ -177,8 +177,15 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Email</h4>
-											<h4 className="table-item" title="The email address cannot be changed.">
+											<h4 className="table-item" title={
+												this.state.user_email_verified ? "This email was verified." : ""
+											}>
 												{this.state.user_email}
+												{this.state.user_email_verified ? (
+													<img src={"/img/icon/icon-verified.svg"} className={"verified-mark"}
+														 alt={"verified mark"}
+														 title={"Verified at: " + new Date(this.state.user_email_verified_at).toString()}/>
+												) : null}
 												{this.state.errors.msg_email !== undefined ?
 													<div className="error-item">
 														{this.state.errors.msg_email}
@@ -374,6 +381,12 @@ class Account extends Component{
 											<Link to="#" className="table-link" onClick={this.changeBillingCard}>
 												{this.state.editingBillingCard ? "Save" : "Update"}
 											</Link>
+										</div>
+										<div className="table-row">
+											<h4 className="table-header">Card Information</h4>
+											<Elements>
+												<BillingCardInfo/>
+											</Elements>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Billing Zip Code</h4>

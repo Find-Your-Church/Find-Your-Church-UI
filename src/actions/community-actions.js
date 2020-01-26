@@ -1,27 +1,13 @@
 import {
-	CREATE_COMMUNITY_STEP1,
 	ACTIVATE_COMMUNITY,
 	DEACTIVATE_COMMUNITY,
 	DELETE_COMMUNITY,
 	GET_ERRORS,
-	GET_MY_COMMUNITIES
+	RESET_ERRORS,
+	GET_MY_COMMUNITIES,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
-
-/**
- * Save 1st step info into global state.
- *
- * @param info community info on 1st form.
- * @param history
- * @returns {function(...[*]=)}
- */
-export const createCommunityStep1 = (info, history) => dispatch => {
-	dispatch({
-		type: CREATE_COMMUNITY_STEP1,
-		payload: info,
-	});
-};
 
 /**
  * Send 2nd step info with 1st step info to BE via axios.
@@ -34,7 +20,7 @@ export const createCommunityStep1 = (info, history) => dispatch => {
  * @param history
  * @returns {function(...[*]=)}
  */
-export const createCommunityStep2 = (is_new, owner_email, info_1, info_2, history) => dispatch => {
+export const createCommunityStep = (is_new, owner_email, info_1, info_2, history) => dispatch => {
 	const info = {
 		is_new: is_new,
 		data: {
@@ -50,6 +36,10 @@ export const createCommunityStep2 = (is_new, owner_email, info_1, info_2, histor
 		.post(app_config.FYC_API_URL + "/api/communities/create", info)
 		.then(res => {
 			//if(is_new)
+			dispatch({
+				type: RESET_ERRORS,
+				payload: null
+			});
 			return history.push("/dashboard/admin");
 		})
 		.catch(err =>
@@ -76,6 +66,10 @@ export const getMyCommunities = (owner_email, activated = true) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/mine", info)
 		.then((res) => {
+			dispatch({
+				type: RESET_ERRORS,
+				payload: null
+			});
 			return dispatch({
 				type: GET_MY_COMMUNITIES,
 				payload: res.data,

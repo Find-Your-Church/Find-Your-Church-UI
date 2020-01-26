@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import CommunityMap from "../components/community-map";
 import ListCommunities from "../components/list-communities";
-import './css/search-results.css';
+import '../css/search-results.css';
 import SearchBar from "../components/search-bar";
+import app_config from "../conf/config";
 
 class SearchResults extends Component{
 	render(){
@@ -12,7 +13,7 @@ class SearchResults extends Component{
 					<SearchBar buttonTitle="Update"/>
 				</div>
 				<CommunityMap isMarkerShown
-							  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c"
+							  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
 							  loadingElement={<div className="w3-col m12 l6"/>}
 							  containerElement={<div className="map-body w3-col m12 l6"/>}
 							  mapElement={<div className="map-body"/>}
