@@ -299,7 +299,6 @@ class StripeSubscription extends Component{
 									<div className="subscribe-container inputs">
 										<div className="form-row">
 											<div className={"pay-info-row"}>
-												Card holder:&nbsp;
 												<span className={"w3-text-dark-grey"}>
 													{this.props.auth.user.fname} {this.props.auth.user.lname}
 												</span>
