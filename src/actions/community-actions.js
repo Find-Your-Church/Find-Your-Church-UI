@@ -5,6 +5,12 @@ import {
 	GET_ERRORS,
 	RESET_ERRORS,
 	GET_MY_COMMUNITIES,
+	SET_BILLING_INFO,
+	SET_STT_READY,
+	SET_STT_HIDE,
+	SET_STT_SENDING,
+	PICK_COMMUNITY,
+	CLEAR_BILLING_INFO, SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -86,10 +92,75 @@ export const getMyCommunities = (owner_email, activated = true) => dispatch => {
 /**
  *
  * @param info
- * @param history
  * @returns {function(...[*]=)}
  */
-export const activateCommunity = (info, history) => dispatch => {
+export const registerCard = (info) => dispatch => {
+	console.log(info);
+
+	dispatch({
+		type: SET_STT_SET_CARD,
+		payload: true,
+	});
+	axios
+		.post(app_config.FYC_API_URL + "/api/communities/setcard", info)
+		.then(res => {
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			dispatch({
+				type: SET_STT_SET_CARD,
+				payload: false,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
+			});
+			dispatch({
+				type: SET_STT_SET_CARD,
+				payload: false,
+			});
+		});
+};
+
+export const pickCommunity = (info) => dispatch => {
+	dispatch({
+		type: PICK_COMMUNITY,
+		payload: info.community_id,
+	});
+};
+
+export const clearLastInvoice = () => dispatch => {
+	dispatch({
+		type: CLEAR_LAST_INVOICE,
+		payload: {},
+	});
+};
+
+/**
+ *
+ * @param info
+ * @returns {function(...[*]=)}
+ */
+export const activateCommunity = (info) => dispatch => {
+	dispatch({
+		type: SET_DIALOG_TITLE,
+		payload: "Activating...",
+	});
+	dispatch({
+		type: SET_STT_SENDING,
+		payload: {},
+	});
+	dispatch({
+		type: CLEAR_BILLING_INFO,
+		payload: {},
+	});
+	dispatch({
+		type: CLEAR_LAST_INVOICE,
+		payload: {},
+	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/activate", info)
 		.then(res => {
@@ -97,22 +168,49 @@ export const activateCommunity = (info, history) => dispatch => {
 				type: ACTIVATE_COMMUNITY,
 				payload: info.community_id,
 			});
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			dispatch({
+				type: SET_STT_SENDING,
+				payload: {},
+			});
+			dispatch({
+				type: SET_DIALOG_TITLE,
+				payload: "Your community was activated.",
+			});
 		})
-		.catch(err =>
+		.catch(err => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
-			})
-		);
+			});
+			dispatch({
+				type: SET_STT_HIDE,
+				payload: {},
+			});
+		});
 };
 
 /**
  *
  * @param info
- * @param history
  * @returns {function(...[*]=)}
  */
-export const deactivateCommunity = (info, history) => dispatch => {
+export const deactivateCommunity = (info) => dispatch => {
+	dispatch({
+		type: SET_DIALOG_TITLE,
+		payload: "Deactivating...",
+	});
+	dispatch({
+		type: SET_STT_SENDING,
+		payload: {},
+	});
+	dispatch({
+		type: CLEAR_BILLING_INFO,
+		payload: {},
+	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/deactivate", info)
 		.then(res => {
@@ -120,13 +218,29 @@ export const deactivateCommunity = (info, history) => dispatch => {
 				type: DEACTIVATE_COMMUNITY,
 				payload: info.community_id,
 			});
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			dispatch({
+				type: SET_DIALOG_TITLE,
+				payload: "Your community was deactivated.",
+			});
+			dispatch({
+				type: SET_STT_HIDE,
+				payload: {},
+			});
 		})
-		.catch(err =>
+		.catch(err => {
 			dispatch({
 				type: GET_ERRORS,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
-			})
-		);
+			});
+			dispatch({
+				type: SET_STT_HIDE,
+				payload: {},
+			});
+		});
 };
 
 /**
@@ -150,4 +264,44 @@ export const deleteCommunity = (info, history) => dispatch => {
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
+};
+
+export const getBillingStatus = (info, history) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/stripe/getstatus", info)
+		.then(res => {
+			//console.log(JSON.stringify(res.data, null, 4));
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+		})
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
+			})
+		);
+};
+
+/**
+ *
+ * @returns {function(...[*]=)}
+ */
+export const showActivateDlg = () => dispatch => {
+	dispatch({
+		type: SET_STT_READY,
+		payload: {},
+	});
+};
+
+export const hideActivateDlg = () => dispatch => {
+	dispatch({
+		type: SET_STT_HIDE,
+		payload: {},
+	});
+	dispatch({
+		type: SET_DIALOG_TITLE,
+		payload: "Activate Your Community",
+	});
 };

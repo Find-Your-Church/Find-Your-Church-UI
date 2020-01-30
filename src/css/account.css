@@ -152,15 +152,6 @@
 	font-weight: 600;
 }
 
-.tooltip-icon {
-	max-height: 12px;
-	padding-left: 10px;
-	-webkit-align-self: center;
-	-ms-grid-row-align: center;
-	align-self: center;
-	color: #ccc;
-}
-
 .table-row {
 	display: -ms-grid;
 	display: grid;
@@ -269,7 +260,7 @@
 	padding-left: 20px;
 }
 
-.invoice-row {
+.account-body .invoice-row {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;

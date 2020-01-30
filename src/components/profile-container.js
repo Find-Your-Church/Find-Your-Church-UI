@@ -34,10 +34,8 @@ class ProfileContainer extends Component{
 				<div className="div-block-55">
 					<div className="profpic-container">
 						<div className="profpic-div">
-							<img
-								src="/uploaded/profiles/5de7326365d48a7932daf64f_Headshot-p-500.jpg"
-								srcSet="/uploaded/profiles/5de7326365d48a7932daf64f_Headshot-p-500.jpg 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5de7326365d48a7932daf64f_Headshot-p-800.jpeg 800w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5de7326365d48a7932daf64f_Headshot.JPG 1080w"
-								sizes="94px" alt="" className="image-4"/>
+							<img src={"/uploaded/profiles/5de7326365d48a7932daf64f.jpg"}
+								 width={"100"} height={"100"} alt="" className="image-4"/>
 						</div>
 					</div>
 				</div>
@@ -49,9 +47,8 @@ class ProfileContainer extends Component{
 							<Link to="#" className="listing-navlink w-nav-link">Edit</Link>
 						</nav>
 						<div className="menu-button w-nav-button">
-							<img
-								src="/img/3dot-icon.png"
-								alt="" className="threedoticon"/></div>
+							<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+						</div>
 						<div className="w-nav-overlay" data-wf-ignore="">
 
 						</div>

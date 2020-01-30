@@ -2,12 +2,11 @@
 * Shows how you can use CSS to style your Element's container.
 */
 .CardInfoStyle {
-	margin: -7px 0;
+	margin: 0;
 	width: 100%;
 	height: auto;
-	padding: 7px 8px 6px;
+	padding: 10px 0;
 	color: #32325d;
-	background-color: #f8f8f8;
 	border-radius: 4px;
 }
 

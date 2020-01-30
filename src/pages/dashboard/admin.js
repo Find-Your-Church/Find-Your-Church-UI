@@ -5,34 +5,61 @@ import ProfileContainer from "../../components/profile-container";
 import MyCommunities from "../../components/my-communites";
 import SiteFooter from "../../components/site-footer";
 import StripeSubscription from "../../components/stripe-subscription";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getBillingStatus, clearLastInvoice, showActivateDlg} from "../../actions/community-actions";
+import {Elements} from "react-stripe-elements";
 
 class Admin extends Component{
 	constructor(props){
 		super(props);
 
 		this.state = {
-			showing_subscription: false,
+			errors: {},
 		};
 
+		const customer_info = {
+			email: this.props.auth.user.email,
+		};
+
+		this.props.getBillingStatus(customer_info, this.props.history);
+
 		this.showSubDlg = this.showSubDlg.bind(this);
-		this.hideSubDlg = this.hideSubDlg.bind(this);
 	}
 
-	showSubDlg(community){
-		console.log(community);
-		this.setState({showing_subscription: true});
+	static getDerivedStateFromProps(nextProps, prevState){
+		if(nextProps.errors){
+			return {errors: nextProps.errors};
+		}
+		else
+			return null;
 	}
 
-	hideSubDlg(){
-		this.setState({showing_subscription: false});
+	showSubDlg(){
+		this.props.clearLastInvoice();
+		this.props.showActivateDlg();
 	}
 
 	render(){
+		/**
+		 * TODO: replace:
+		 * style={{display: this.props.community.is_showing ? "block" : "block"}}
+		 * to
+		 * style={{display: this.props.community.is_showing ? "block" : "none"}}
+		 */
 		return (
 			<div>
 				<div id={"stripe-modal"} className={"w3-modal"}
-					 style={{display: this.state.showing_subscription ? "block" : "none"}}>
-					<StripeSubscription handleHideSubDlg={this.hideSubDlg}/>
+					 style={{display: this.props.community.is_showing ? "block" : "none"}}>
+					{this.props.community.dlg_title === "Deactivating..." ? (
+						<div className="w3-display-middle w3-text-white w3-jumbo">
+							<i className="fas fa-spinner fa-spin"> </i>
+						</div>
+					) : (
+						<Elements>
+							<StripeSubscription/>
+						</Elements>
+					)}
 				</div>
 				<main className="admin-body w3-row">
 					<div className="admin-left w3-col">
@@ -49,4 +76,22 @@ class Admin extends Component{
 	}
 }
 
-export default Admin;
+Admin.propTypes = {
+	auth: PropTypes.object.isRequired,
+	community: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+	getBillingStatus: PropTypes.func.isRequired,
+	clearLastInvoice: PropTypes.func.isRequired,
+	showActivateDlg: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+	auth: state.auth,
+	community: state.communities,
+	errors: state.errors,
+});
+
+export default connect(
+	mapStateToProps,
+	{getBillingStatus, clearLastInvoice, showActivateDlg}
+)(Admin);

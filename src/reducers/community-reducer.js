@@ -2,17 +2,38 @@ import {
 	GET_MY_COMMUNITIES,
 	ACTIVATE_COMMUNITY,
 	DEACTIVATE_COMMUNITY,
-	DELETE_COMMUNITY
+	DELETE_COMMUNITY,
+	SET_BILLING_INFO,
+	SET_STT_SENDING,
+	SET_STT_READY,
+	SET_STT_HIDE,
+	PICK_COMMUNITY,
+	CLEAR_BILLING_INFO,
+	SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE
 } from "../actions/action-types";
 
 const initialState = {
-	info_1: {}, // used for temporary.
+	// community
 	my_communities: {
 		active: [],
 		inactive: [],
 	},
 	search_results: [],
 	members: [],
+
+	// for stripe
+	community_activated: null,
+	is_setting_card: false,
+	is_showing: false,
+	is_sending: false,
+	is_activate: true, // false means deactivate
+	success: false,
+	customer: null,
+	subscription: null,
+	last_invoice: null,
+	upcoming_invoice: null,
+	msg: {},
+	dlg_title: "Activate Your Community",
 };
 
 export default function(state = initialState, action){
@@ -84,6 +105,58 @@ export default function(state = initialState, action){
 					active: new_actives,
 					inactive: new_inactives,
 				}
+			};
+		case PICK_COMMUNITY:
+			return {
+				...state,
+				community_activated: action.payload,
+			};
+		case SET_BILLING_INFO:
+			return {
+				...state,
+				...action.payload,
+			};
+		case CLEAR_BILLING_INFO:
+			return {
+				...state,
+				success: false,
+				customer: null,
+				subscription: null,
+				upcoming_invoice: null,
+				msg: {},
+			};
+		case SET_STT_SET_CARD:
+			return {
+				...state,
+				is_setting_card: action.payload,
+			};
+		case CLEAR_LAST_INVOICE:
+			return {
+				...state,
+				last_invoice: null,
+			};
+		case SET_STT_SENDING:
+			return {
+				...state,
+				is_showing: true,
+				is_sending: true,
+			};
+		case SET_STT_READY:
+			return {
+				...state,
+				is_showing: true,
+				is_sending: false,
+			};
+		case SET_STT_HIDE:
+			return {
+				...state,
+				is_showing: false,
+				is_sending: false,
+			};
+		case SET_DIALOG_TITLE:
+			return {
+				...state,
+				dlg_title: action.payload,
 			};
 		default:
 			return state;

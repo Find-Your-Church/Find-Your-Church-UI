@@ -1,19 +1,7 @@
 .subscriptioncontainer-div {
-	display: block;
-	width: auto;
-	max-width: none;
-	margin-right: auto;
-	margin-left: auto;
 	padding: 30px;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: column;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	-ms-grid-row-align: auto;
-	align-self: auto;
-	-webkit-box-flex: 0;
-	-webkit-flex: 0 auto;
+	width: 100vw;
+	max-width: 1200px;
 	-ms-flex: 0 auto;
 	flex: 0 auto;
 	grid-auto-columns: 1fr;
@@ -24,13 +12,9 @@
 	-ms-grid-rows: auto auto;
 	grid-template-rows: auto auto;
 	border: 1px solid #fff;
-	border-radius: 0;
-	background-color: transparent;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#e6e6e6), to(#e6e6e6));
-	background-image: linear-gradient(180deg, #e6e6e6, #e6e6e6);
+	background-color: #e6e6e6;
 	box-shadow: none;
 	text-align: left;
-	cursor: default;
 }
 
 .header1-div.gradient.shadow {
@@ -140,21 +124,8 @@ h3 {
 	font-weight: 600;
 }
 
-.tooltip-icon {
-	max-height: 15px;
-	max-width: none;
-	padding-left: 10px;
-	-webkit-align-self: center;
-	-ms-flex-item-align: center;
-	-ms-grid-row-align: center;
-	align-self: center;
-	color: #ccc;
-}
-
 .subscribe-container {
-	padding-top: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding: 10px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #e6e6e6;
@@ -163,8 +134,7 @@ h3 {
 }
 
 .invoice-row {
-	display: block;
-	padding-bottom: 10px;
+	padding: 6px 0;
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: row;
@@ -174,7 +144,7 @@ h3 {
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
-	border-bottom: 1px none #eaeaea;
+	border-bottom: 1px solid #eaeaea;
 }
 
 .invoice-div {
@@ -182,7 +152,7 @@ h3 {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	padding-bottom: 10px;
+	padding: 4px 0;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
@@ -191,7 +161,14 @@ h3 {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	border-bottom: 1px solid #e6e6e6;
+}
+
+.subscriptioncontainer-div h4.value {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .filtersheader-div {
@@ -199,20 +176,7 @@ h3 {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	padding: 0 0 5px;
-	-webkit-box-pack: start;
-	-webkit-justify-content: flex-start;
-	-ms-flex-pack: start;
-	justify-content: flex-start;
-	justify-items: start;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
-	align-self: auto;
-	-webkit-box-flex: 0;
-	-webkit-flex: 0 auto;
-	-ms-flex: 0 auto;
+	padding: 2px 0;
 	flex: 0 auto;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 10px;
@@ -224,7 +188,11 @@ h3 {
 	line-height: 14px;
 }
 
-.table-header {
+.strikethrough {
+	text-decoration: line-through;
+}
+
+.subscriptioncontainer-div .table-header {
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 0;
@@ -376,8 +344,12 @@ h4 {
 	align-items: flex-start;
 }
 
-.div10-bottom {
+.div10-bottom:not(:last-child) {
 	padding-bottom: 10px;
+}
+
+.div10-bottom.right{
+	text-align: right;
 }
 
 .div-block-147.payiinfo {
@@ -396,6 +368,10 @@ h4 {
 	padding-bottom: 10px;
 }
 
+.form-row {
+	border-bottom: solid 1px #eaeaea;
+}
+
 .form-input {
 	margin-bottom: 0;
 	padding: 10px;
@@ -407,8 +383,6 @@ h4 {
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #333;
 	text-align: left;
-	border-bottom
-	: 1px solid #cccccc;
 }
 
 .inputwithicon {
@@ -423,26 +397,9 @@ h4 {
 	font-weight: 400;
 }
 
-.card-icon {
-	max-height: 20px;
-	max-width: none;
-	margin-right: 10px;
-}
-
-.form-input.exp-date {
-	display: inline-block;
-	width: 33%;
-}
-
-.form-input.csv {
-	display: inline-block;
-	width: 33%;
-}
-
-.form-input.zip-code {
-	display: inline-block;
-	width: 33%;
-	padding-right: 10px;
+.pay-info-row {
+	padding: 12px 0;
+	color: #aaaaaa;
 }
 
 .submit-row {
@@ -467,6 +424,7 @@ h4 {
 	color: #fff;
 	font-weight: 600;
 	text-align: center;
+	cursor: pointer;
 }
 
 .form1-submit.round {
@@ -509,4 +467,24 @@ h4 {
 
 .italic-text {
 	color: #2e89fe;
+}
+
+.card-detail {
+	margin: 8px 20px;
+	display: block;
+}
+
+.card-detail-item {
+	padding: 4px 0;
+	height: auto;
+	font-size: 12px;
+	border-bottom: solid 1px #eaeaea;
+}
+
+.card-detail-item .w3-col.l4 {
+	color: #aaaaaa;
+}
+
+.card-detail-item .w3-col.l8 {
+	color: #888888;
 }

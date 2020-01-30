@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {activateCommunity, deactivateCommunity, deleteCommunity} from "../actions/community-actions";
+import {activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity} from "../actions/community-actions";
 
 class Thumbnail extends Component{
 	constructor(props){
@@ -46,32 +46,36 @@ class Thumbnail extends Component{
 	}
 
 	onActivate(e){
+		// pick the community to be activated
+		this.props.pickCommunity({
+			community_id: this.props.value._id,
+		});
+
+		// show modal dialog
 		this.props.handleShowSubDlg();
 
-		const info = {
-			community_id: this.props.value._id,
-		};
-
-		this.props.activateCommunity(info, this.props.history);
+		// hide thumbnail menu
 		this.setState({is_show_menu: false});
 	}
 
 	onDeactivate(e){
-		const info = {
+		// do deactivate the community.
+		this.props.deactivateCommunity({
+			email: this.props.auth.user.email,
 			community_id: this.props.value._id,
-		};
+		});
 
-		this.props.deactivateCommunity(info, this.props.history);
+		// hide thumbnail menu
 		this.setState({is_show_menu: false});
 	}
 
 	onDelete(e){
-		const info = {
-			community_id: this.props.value._id,
-		};
-
-		this.props.deleteCommunity(info, this.props.history);
-		this.setState({is_show_menu: false});
+		if(true === window.confirm(`Delete the community "${this.props.value.community_name}"?`)){
+			this.props.deleteCommunity({
+				community_id: this.props.value._id,
+			}, this.props.history);
+			this.setState({is_show_menu: false});
+		}
 	}
 
 	render(){
@@ -100,7 +104,7 @@ class Thumbnail extends Component{
 										{this.props.value.community_name}
 									</Link>
 									<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
-										<img src="/img/3dot-icon.png" alt="" className="threedoticon"/>
+										<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 									</div>
 									<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 										 style={{display: this.state.is_show_menu ? "block" : "none"}}>
@@ -111,9 +115,11 @@ class Thumbnail extends Component{
 											  onClick={this.props.value.activated ? this.onDeactivate : this.onActivate}>
 											{this.props.value.activated ? "Deactivate" : "Activate"}
 										</Link>
-										<Link to="#" className="listing-navlink w-nav-link" onClick={this.onDelete}>
-											Delete
-										</Link>
+										{this.props.status === "inactive" ? (
+											<Link to="#" className="listing-navlink w-nav-link" onClick={this.onDelete}>
+												Delete
+											</Link>
+										) : null}
 									</nav>
 									<div className="w-nav-overlay" data-wf-ignore="">
 									</div>
@@ -139,6 +145,7 @@ Thumbnail.propTypes = {
 	activateCommunity: PropTypes.func.isRequired,
 	deactivateCommunity: PropTypes.func.isRequired,
 	deleteCommunity: PropTypes.func.isRequired,
+	pickCommunity: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -148,5 +155,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{activateCommunity, deactivateCommunity, deleteCommunity}
+	{activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity}
 )(Thumbnail);

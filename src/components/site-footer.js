@@ -22,7 +22,7 @@ class SiteFooter extends Component{
 						Privacy Policy
 					</Link>
 					<Link to="#" className="w3-bar-item footer-link footer-logo">
-						&copy;FindYourChurch.org 2019. All rights reserved.
+						&copy; FindYourChurch.org {new Date().getFullYear()}. All rights reserved.
 					</Link>
 				</div>
 			</footer>

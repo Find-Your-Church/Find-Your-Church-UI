@@ -26,7 +26,7 @@ class MyCommunities extends Component{
 					<div className="containerheader-div underline">
 						<div className="flexdiv-left">
 							<h5 className="container-header">{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities</h5>
-							<img src={"/img/tooltip-icon.png"} alt="" className="tooltip-icon"/>
+							<i className={"fas fa-question-circle tooltip-icon"}> </i>
 						</div>
 						{this.props.status === 'inactive' ?
 							<Link to="/create-new-community" className="newcommunity-button w-button">+ New
@@ -38,7 +38,7 @@ class MyCommunities extends Component{
 								<div className="listing-grid dashboard">
 									{this.props.communities[this.props.status].map((community, index) => {
 										return (
-											<Thumbnail key={this.props.status + index} value={community} handleShowSubDlg={this.props.handleShowSubDlg}/>
+											<Thumbnail key={this.props.status + index} status={this.props.status} value={community} handleShowSubDlg={this.props.handleShowSubDlg}/>
 										)
 									})}
 								</div>)

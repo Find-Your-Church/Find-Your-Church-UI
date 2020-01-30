@@ -207,22 +207,22 @@ class CommunityStep extends Component{
 			<div>
 				<main className="steps-body">
 					<div className="container-inline">
-						<h3 className="header3 w3-row">
-							<span className="w3-col s12 m4 l2">
+						<h3 className="header3 w3-bar">
+							<div className="create-menu w3-bar-item w3-left">
 								<Link to="/dashboard" className="w3-button cancel">Back</Link>
-							</span>
-							<span className="w3-col s12 m4 l8 w3-center w3-xlarge title">
+							</div>
+							<div className="create-menu w3-bar-item w3-center">
 								{this.props.location.state === undefined ?
 									"Create a New Community"
 									: (<><span style={{color: "#888"}}>Editing</span>&nbsp;
 										{this.props.location.state.obj.community_name}</>)
 								}
 
-							</span>
-							<span className="w3-col s12 m4 l2">
+							</div>
+							<div className="create-menu w3-bar-item w3-right">
 								<Link to="#" className="w3-button w3-right save"
 									  onClick={this.onSubmitCommunity}>Save</Link>
-							</span>
+							</div>
 						</h3>
 						<div className="w-form-done">
 							<div>Thank you! Your submission has been received!</div>
@@ -341,7 +341,7 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">About</h4>
-													<img src={"/img/tooltip-icon.png"} alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<textarea
 													onChange={this.onChange}
@@ -355,7 +355,7 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">Community Contact</h4>
-													<img src={"/img/tooltip-icon.png"} alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div className="input-div w3-row">
 													<input type="text"
@@ -388,7 +388,7 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">Links and Resources</h4>
-													<img src={"/img/tooltip-icon.png"} alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div className="input-div w3-row">
 													{community_config.SOCIALS.map(item => {
@@ -425,7 +425,7 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph edit"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">More Info</h4>
-													<img src={"/img/tooltip-icon.png"} alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div className="input-div">
 													<FilterItemCheck filterTitle="Day(s)" filterName="days"

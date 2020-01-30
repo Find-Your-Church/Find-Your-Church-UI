@@ -16,8 +16,20 @@
 }
 
 .steps-body .container-inline {
-	margin-left: auto;
-	margin-right: auto;
+	position: relative;
+}
+
+.steps-body .container-inline .create-menu{
+	padding: 0;
+}
+
+.steps-body .container-inline .create-menu.w3-center{
+	float: none;
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	overflow: hidden;
 }
 
 .steps-body .header3 {
@@ -273,15 +285,6 @@
 	font-size: 16px;
 	line-height: 32px;
 	font-weight: 600;
-}
-
-.steps-body .tooltip-icon {
-	max-height: 12px;
-	padding-left: 10px;
-	-webkit-align-self: center;
-	-ms-grid-row-align: center;
-	align-self: center;
-	color: #ccc;
 }
 
 .steps-body .form-block1 {

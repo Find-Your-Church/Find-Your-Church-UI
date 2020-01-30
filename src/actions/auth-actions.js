@@ -3,7 +3,8 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import {
 	GET_ERRORS,
-	SET_CURRENT_USER, UPDATE_USER_INFO,
+	SET_CURRENT_USER,
+	UPDATE_USER_INFO,
 	USER_LOADING
 } from "./action-types";
 import app_config from "../conf/config";
@@ -165,6 +166,18 @@ export const resetPassword = (userData, history) => dispatch => {
 		);
 };
 
+export const changePassword = (userData, history) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/changepassword", userData)
+		.then(res => history.push("/login-popup"))
+		.catch(err =>
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response ? err.response.data : {error: ""}
+			})
+		);
+};
+
 /**
  * DO reset the password really.
  *
@@ -181,6 +194,15 @@ export const doResetPassword = (userData, history) => dispatch => {
 				type: GET_ERRORS,
 				payload: err.response ? err.response.data : {error: ""}
 			})
+		);
+};
+
+export const doChangePassword = (userData, history) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/dochangepassword", userData)
+		.then(res => history.push("/login-popup"))
+		.catch(err =>
+			history.push("/login-popup")
 		);
 };
 

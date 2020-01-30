@@ -22,6 +22,7 @@ import Account from "./pages/dashboard/account";
 import ViewCommunity from "./pages/dashboard/view-community";
 import {StripeProvider} from "react-stripe-elements";
 import app_config from "./conf/config";
+import ChangePassword from "./pages/change-password";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -79,6 +80,7 @@ class App extends Component{
 							<Route exact path="/register-popup" component={RegisterPopup}/>
 							<Route exact path="/forgot-password" component={ForgotPassword}/>
 							<Route path="/reset/:id?" component={ResetPassword}/>
+							<Route path="/changepassword/:id?" component={ChangePassword}/>
 
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 

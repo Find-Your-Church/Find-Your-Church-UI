@@ -1,13 +1,11 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import '../../css/dashboard.css';
-import '../../css/account.css';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import {updateUserInfo} from "../../actions/auth-actions";
 import SiteFooter from "../../components/site-footer";
-import BillingCardInfo from "../../stripe/billing-card-info";
-import {Elements} from "react-stripe-elements";
+import '../../css/dashboard.css';
+import '../../css/account.css';
 
 class Account extends Component{
 	constructor(props){
@@ -143,8 +141,7 @@ class Account extends Component{
 								<div className="flexdiv-leftright underline">
 									<div className="flexdiv-left">
 										<h5 className="container-header">User Information</h5>
-										<img src="/img/tooltip-icon.png"
-											 alt="" className="tooltip-icon"/>
+										<i className={"fas fa-question-circle tooltip-icon"}> </i>
 									</div>
 								</div>
 								<div>
@@ -222,8 +219,7 @@ class Account extends Component{
 										<div className="table-row">
 											<div id="w-node-cb8d7881b980-27fc25a8" className="flexdiv-left">
 												<h4 className="table-header">Referral Code</h4>
-												<img src="/img/tooltip-icon.png"
-													 alt="" className="tooltip-icon"/>
+												<i className={"fas fa-question-circle tooltip-icon"}> </i>
 											</div>
 											<h4 className="table-item">
 												{this.state.editingRefCode ?
@@ -265,21 +261,21 @@ class Account extends Component{
 								<div className="flexdiv-leftright underline">
 									<div className="flexdiv-left">
 										<h5 className="container-header">Plan Summary</h5>
-										<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+										<i className={"fas fa-question-circle tooltip-icon"}> </i>
 									</div>
 								</div>
 								<div>
 									<div className="table-row">
 										<div id="w-node-0b93d4360cca-27fc25a8" className="flexdiv-left">
 											<h4 className="table-header">Published Profiles</h4>
-											<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+											<i className={"fas fa-question-circle tooltip-icon"}> </i>
 										</div>
 										<h4 className="table-item">05</h4>
 									</div>
 									<div className="table-row">
 										<div id="w-node-0b93d4360cd1-27fc25a8" className="flexdiv-left">
 											<h4 className="table-header">Next Payment</h4>
-											<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+											<i className={"fas fa-question-circle tooltip-icon"}> </i>
 										</div>
 										<h4 className="table-item">$46.54 on 01/05/2020</h4>
 										<Link
@@ -303,40 +299,35 @@ class Account extends Component{
 												<div className="invoice-row">
 													<div className="flexdiv-left">
 														<h4 className="table-header">Active Communities</h4>
-														<img src="/img/tooltip-icon.png" alt=""
-															 className="tooltip-icon"/>
+														<i className={"fas fa-question-circle tooltip-icon"}> </i>
 													</div>
 													<h4 className="invoice-item">05</h4>
 												</div>
 												<div className="invoice-row">
 													<div className="flexdiv-left">
 														<h4 className="table-header">Price Per Community</h4>
-														<img src="/img/tooltip-icon.png" alt=""
-															 className="tooltip-icon"/>
+														<i className={"fas fa-question-circle tooltip-icon"}> </i>
 													</div>
 													<h4 className="invoice-item">$8.98</h4>
 												</div>
 												<div className="invoice-row">
 													<div className="flexdiv-left">
 														<h4 className="table-header">Subtotal</h4>
-														<img src="/img/tooltip-icon.png" alt=""
-															 className="tooltip-icon"/>
+														<i className={"fas fa-question-circle tooltip-icon"}> </i>
 													</div>
 													<h4 className="invoice-item">$44.90</h4>
 												</div>
 												<div className="invoice-row">
 													<div className="flexdiv-left">
 														<h4 className="table-header">Taxes and Fees</h4>
-														<img src="/img/tooltip-icon.png" alt=""
-															 className="tooltip-icon"/>
+														<i className={"fas fa-question-circle tooltip-icon"}> </i>
 													</div>
 													<h4 className="invoice-item">$1.64</h4>
 												</div>
 												<div className="invoice-row">
 													<div className="flexdiv-left">
 														<h4 className="table-header">Total due on 01/05/2020</h4>
-														<img src="/img/tooltip-icon.png" alt=""
-															 className="tooltip-icon"/>
+														<i className={"fas fa-question-circle tooltip-icon"}> </i>
 													</div>
 													<h4 className="invoice-item">$46.54</h4>
 												</div>
@@ -351,7 +342,7 @@ class Account extends Component{
 								<div className="flexdiv-leftright underline">
 									<div className="flexdiv-left">
 										<h5 className="container-header">Billing Information</h5>
-										<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+										<i className={"fas fa-question-circle tooltip-icon"}> </i>
 									</div>
 								</div>
 								<div>
@@ -384,9 +375,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Card Information</h4>
-											<Elements>
-												<BillingCardInfo/>
-											</Elements>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Billing Zip Code</h4>

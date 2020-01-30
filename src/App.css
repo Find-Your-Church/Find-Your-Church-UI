@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("css/fonts/fonts.css");
 
 * {
 	font-family: Montserrat, sans-serif;
@@ -27,8 +28,8 @@ a {
 }
 
 .site-logo {
-	margin: 4px;
-	max-height: 30px;
+	margin: 5px 0 4px 3px;
+	max-height: 29px;
 }
 
 .site-header a {
@@ -46,10 +47,10 @@ a {
 }
 
 .sign-up-link {
-	padding: 7px 11px!important;
+	padding: 7px 11px !important;
 	margin-left: 10px;
 	height: 38px;
-	font-size: 14px!important;
+	font-size: 14px !important;
 	border: 1px solid #fff !important;
 	border-radius: 3px;
 	background-color: #00e8fe;
@@ -63,12 +64,61 @@ a {
 	background-image: linear-gradient(225deg, #8900fe, #2e89fe 50%, #00e8fe);
 }
 
+.headerprofpic-div {
+	overflow: hidden;
+	margin: -8px -4px 0 8px;
+	width: 100%;
+	height: auto;
+	max-height: 40px;
+	max-width: 40px;
+	min-height: auto;
+	min-width: auto;
+	padding-top: 0px;
+	-webkit-box-flex: 0;
+	-webkit-flex: 0 auto;
+	-ms-flex: 0 auto;
+	flex: 0 auto;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #e6e6e6;
+	border-radius: 100%;
+	box-shadow: none;
+}
+
+.headerprofpic-div .image-4 {
+	width: 38px;
+	height: 38px;
+}
+
 .admin-menu {
 	position: absolute;
 	top: 68px;
-	width: 100vw;
+	right: 0;
+	width: 33.33vw;
 	height: auto;
-	z-index: 1000;
+	z-index: 999;
+}
+
+.headerprofpic-welcome:before{
+	content: "Welcome, "
+}
+
+@media screen and (max-width: 768px) {
+	.headerprofpic-welcome:before{
+		content: "Hi, "
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.headerprofpic-div {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 990px) {
+	.admin-menu {
+		width: 100vw;
+	}
 }
 
 .admin-menu .w--nav-menu-open {
@@ -84,9 +134,8 @@ a {
 }
 
 .admin-menu .global-navcontainer {
-	z-index: 1000;
-	padding-right: 20px;
-	padding-left: 20px;
+	z-index: 999;
+	padding: 0;
 	-webkit-box-ordinal-group: 1;
 	-ms-flex-order: 0;
 	order: 0;
@@ -102,11 +151,16 @@ a {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #e6e6e6;
-	background-color: #fff;
-	font-family: Montserrat, sans-serif;
-	color: #1b0033;
-	font-weight: 600;
+	color: #ffffff;
+	background-color: #c8c8c8;
+	font-family: "Source Sans Pro", sans-serif;
+	font-weight: 400;
 	text-align: center;
+}
+
+.admin-menu .header-navlink:hover {
+	color: #606060;
+	background-color: #eeeeee;
 }
 
 .footer-div {
@@ -129,21 +183,31 @@ a {
 	text-decoration: none;
 }
 
-@media screen and (max-width: 990px){
+@media screen and (max-width: 990px) {
 	.footer-div {
 		padding-top: 10px;
 		min-height: 64px;
 	}
 
-	.footer-link{
-		display: inline!important;
-		float: none!important;
-		padding: 2px 16px!important;
+	.footer-link {
+		display: inline !important;
+		float: none !important;
+		padding: 2px 16px !important;
 		line-height: 22px;
 	}
 
-	.footer-logo{
+	.footer-logo {
 		text-align: center;
-		display: block!important;
+		display: block !important;
 	}
+}
+
+.tooltip-icon {
+	max-height: 14px;
+	font-size: 14px;
+	padding-left: 10px;
+	-webkit-align-self: center;
+	-ms-grid-row-align: center;
+	align-self: center;
+	color: #999999;
 }

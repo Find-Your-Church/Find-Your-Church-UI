@@ -38,7 +38,7 @@ class ListCommunities extends Component{
 									<Link to="#" className="listing-navlink w-nav-link">Report</Link>
 								</nav>
 								<div className="menu-button w-nav-button">
-									<img src="/img/3dot-icon.png" alt="" className="threedoticon"/>
+									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 								</div>
 								<div className="w-nav-overlay" data-wf-ignore="">
 

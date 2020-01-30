@@ -20,7 +20,6 @@ In the project directory, you can see:
   |-App.js - main app componenet with url routes
   |-auth-config.js - social auth IDs
   |-index.js - project start point
-  +-logo.svg - site logo image
 ```
 
 ## Front-end framework

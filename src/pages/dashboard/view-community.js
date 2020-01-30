@@ -134,14 +134,14 @@ class ViewCommunity extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">About</h4>
-													<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div>{this.state.about || "..."}</div>
 											</div>
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">Community Contact</h4>
-													<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div className="input-div w3-row">
 													<div className="view-item w3-col l12"
@@ -162,7 +162,7 @@ class ViewCommunity extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">Links and Resources</h4>
-													<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div className={"social-link-group"}>
 													{community_config.SOCIALS.map(item => {
@@ -181,7 +181,7 @@ class ViewCommunity extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">More Info</h4>
-													<img src="/img/tooltip-icon.png" alt="" className="tooltip-icon"/>
+													<i className={"fas fa-question-circle tooltip-icon"}> </i>
 												</div>
 												<div className="input-div">
 													<FilterItemCheck filterTitle="Day(s)" filterName="days"

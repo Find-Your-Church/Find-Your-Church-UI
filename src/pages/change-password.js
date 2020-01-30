@@ -3,17 +3,19 @@ import SiteFooter from "../components/site-footer";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {resetPassword, changePassword} from "../actions/auth-actions";
+import {doChangePassword} from "../actions/auth-actions";
 
-class ForgotPassword extends Component{
+class ChangePassword extends Component{
 	constructor(props){
 		super(props);
 		this.sending = false;
 		this.is_error = false;
+		this.key = props.location.pathname.substr(16); // 16 - length of "/changepassword/", which is URL prefix for reset.
 		this.state = {
-			sending: false,
 			email: "",
 			errors: {},
+			password: '',
+			password2: '',
 		};
 	}
 
@@ -39,34 +41,42 @@ class ForgotPassword extends Component{
 	 */
 	onSubmit = e => {
 		e.preventDefault();
-		this.sending = true;
-		this.setState({sending: true, errors: {}});
-		const userData = {
-			email: this.state.email,
-		};
-		// since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
-		//this.props.resetPassword(userData, this.props.history);
-		this.props.changePassword(userData, this.props.history);
+
+		if(this.state.password !== this.state.password2){
+			window.alert("Password mismatch!");
+		}
+		else{
+			this.sending = true;
+			this.setState({sending: true, errors: {}});
+
+			const userData = {
+				key: this.key,
+				password: this.state.password,
+			};
+			// since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+			this.props.doChangePassword(userData, this.props.history);
+		}
+		this.sending = false;
 	};
 
 	render(){
 		const {errors} = this.state;
 		const err_msg = ""
-			+ (errors.email !== undefined ? errors.email + ". " : "");
+			+ (errors.error !== undefined ? errors.error + ". " : "");
 		this.is_error = err_msg.length > 0;
 
 		return (
 			<main>
 				<div className="w3-modal" style={{display: this.sending && !this.is_error ? "block" : "none"}}>
 					<div className="w3-display-middle w3-text-white w3-xlarge" style={{textShadow: "0 0 4px #000, 0 0 2px #000"}}>
-						Please wait while sending a mail...
+						<i className="fas fa-spinner fa-spin"> </i>
 					</div>
 				</div>
 				<div className="sign-body">
 					<div className="div-block-63">
 						<div className="div-block-38">
 							<div className="header1-div gradient shadow">
-								<h3 className="header3 center">We'll send you an email to reset your password!</h3>
+								<h3 className="header3 center">Create a new password for your account.</h3>
 							</div>
 							<div>
 								<div className="form-div1">
@@ -75,19 +85,27 @@ class ForgotPassword extends Component{
 											  name="wf-form-Registration"
 											  data-name="Registration" className="form1">
 											<div className="form-row">
-												<div className="input-div gradient">
-													<input type="email"
-														   className="form-input center w-input-sign"
+												<div className="input-div gradient w3-row">
+													<input type="password"
+														   className="form-input center w-input-sign w3-half"
 														   maxLength="256"
 														   onChange={this.onChange}
-														   value={this.state.email}
-														   id="email"
-														   placeholder="Email"
+														   value={this.state.password}
+														   id="password"
+														   placeholder="New password"
+														   required=""/>
+													<input type="password"
+														   className="form-input center w-input-sign w3-half"
+														   maxLength="256"
+														   onChange={this.onChange}
+														   value={this.state.password2}
+														   id="password2"
+														   placeholder="Confirm password"
 														   required=""/>
 												</div>
 											</div>
 											<div className="submit-row" style={{marginTop: "11px"}}>
-												<input type="submit" value="Send Email"
+												<input type="submit" value="Save"
 													   data-wait="Please wait..."
 													   className="form-submit round w-button-sign"/>
 											</div>
@@ -117,10 +135,10 @@ class ForgotPassword extends Component{
 	}
 }
 
-ForgotPassword.propTypes = {
+ChangePassword.propTypes = {
 	resetPassword: PropTypes.func.isRequired,
-	changePassword: PropTypes.func.isRequired,
-	errors: PropTypes.object.isRequired
+	errors: PropTypes.object.isRequired,
+	doChangePassword: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -129,5 +147,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{resetPassword, changePassword}
-)(ForgotPassword);
+	{doChangePassword}
+)(ChangePassword);
