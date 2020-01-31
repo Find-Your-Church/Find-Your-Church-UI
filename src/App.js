@@ -18,11 +18,12 @@ import ForgotPassword from "./pages/forgot-password";
 import ResetPassword from "./pages/reset-password";
 import Notfound from "./pages/notfound";
 import Admin from "./pages/dashboard/admin";
-import Account from "./pages/dashboard/account";
 import ViewCommunity from "./pages/dashboard/view-community";
 import {StripeProvider} from "react-stripe-elements";
 import app_config from "./conf/config";
 import ChangePassword from "./pages/change-password";
+import AccountWrapper from "./pages/dashboard/account-wrapper";
+import VerifyEmail from "./pages/verify-email";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -81,6 +82,7 @@ class App extends Component{
 							<Route exact path="/forgot-password" component={ForgotPassword}/>
 							<Route path="/reset/:id?" component={ResetPassword}/>
 							<Route path="/changepassword/:id?" component={ChangePassword}/>
+							<Route path="/verifyemail/:id?" component={VerifyEmail}/>
 
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
@@ -89,7 +91,7 @@ class App extends Component{
 
 							<PrivateRoute exact path="/dashboard" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
-							<PrivateRoute exact path="/dashboard/account" component={Account}/>
+							<PrivateRoute exact path="/dashboard/account" component={AccountWrapper}/>
 							<Route component={Notfound}/>
 						</Switch>
 					</Router>

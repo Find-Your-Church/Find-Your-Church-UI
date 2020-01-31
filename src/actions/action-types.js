@@ -1,7 +1,7 @@
 /**
  * general errors handle
  */
-export const GET_ERRORS = "GET_ERRORS";
+export const GET_SRV_MSG = "GET_SRV_MSG";
 export const RESET_ERRORS = "RESET_ERRORS";
 
 /**
@@ -12,6 +12,7 @@ export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 export const RESET_PASSWORD = "RESET_PASSWORD";
+export const SET_SENDING_STATUS = "SET_SENDING_STATUS";
 
 /**
  * community handles

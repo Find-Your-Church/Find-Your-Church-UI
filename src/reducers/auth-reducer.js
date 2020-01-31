@@ -2,7 +2,8 @@ import {
 	RESET_PASSWORD,
 	SET_CURRENT_USER,
 	UPDATE_USER_INFO,
-	USER_LOADING
+	USER_LOADING,
+	SET_SENDING_STATUS,
 } from "../actions/action-types";
 
 const isEmpty = require("is-empty");
@@ -10,6 +11,7 @@ const initialState = {
 	isAuthenticated: false,
 	user: {},
 	loading: false,
+	is_sending: false, // if is requesting the password reset?
 };
 
 export default function(state = initialState, action){
@@ -36,6 +38,11 @@ export default function(state = initialState, action){
 		case RESET_PASSWORD:
 			return {
 				...state
+			};
+		case SET_SENDING_STATUS:
+			return {
+				...state,
+				is_sending: action.payload,
 			};
 		default:
 			return state;

@@ -147,7 +147,7 @@
 }
 
 .w-form {
-	margin: 0 0 15px;
+	margin: 0;
 }
 
 .form-row {
@@ -259,9 +259,9 @@
 	border-radius: 0;
 }
 
-.form-submit {
+.sign-body .form-submit {
 	width: 100%;
-	margin-top: 20px;
+	margin-top: 10px;
 	padding-top: 7px;
 	padding-bottom: 7px;
 	border-style: solid;

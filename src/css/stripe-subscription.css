@@ -398,8 +398,14 @@ h4 {
 }
 
 .pay-info-row {
+	width: 100%;
 	padding: 12px 0;
 	color: #aaaaaa;
+}
+
+.pay-info-row input{
+	border: none;
+	border-bottom: solid #cccccc 1px;
 }
 
 .submit-row {
@@ -433,6 +439,18 @@ h4 {
 	box-shadow: 1px 1px 3px 0 grey;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
+}
+
+.form1-submit.round.disabled {
+	background-image: none;
+	background-color: #999999;
+	cursor: not-allowed;
+}
+
+.form1-submit.round.disabled:hover {
+	-webkit-transform: none;
+	-ms-transform: none;
+	transform: none;
 }
 
 .form1-submit:hover {
@@ -481,10 +499,6 @@ h4 {
 	border-bottom: solid 1px #eaeaea;
 }
 
-.card-detail-item .w3-col.l4 {
-	color: #aaaaaa;
-}
-
-.card-detail-item .w3-col.l8 {
-	color: #888888;
+.card-detail-item .w3-col:not(:first-child){
+	margin-top: 5px;
 }

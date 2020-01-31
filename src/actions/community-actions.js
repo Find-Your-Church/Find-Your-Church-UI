@@ -2,7 +2,7 @@ import {
 	ACTIVATE_COMMUNITY,
 	DEACTIVATE_COMMUNITY,
 	DELETE_COMMUNITY,
-	GET_ERRORS,
+	GET_SRV_MSG,
 	RESET_ERRORS,
 	GET_MY_COMMUNITIES,
 	SET_BILLING_INFO,
@@ -20,17 +20,17 @@ import app_config from "../conf/config";
  * When succeed, remove 1st step info in global state.
  *
  * @param is_new new or edit?
- * @param owner_email email of user who create new community.
+ * @param owner_id email of user who create new community.
  * @param info_1 base information on 1st form.
  * @param info_2 filters specified on 2nd form.
  * @param history
  * @returns {function(...[*]=)}
  */
-export const createCommunityStep = (is_new, owner_email, info_1, info_2, history) => dispatch => {
+export const createCommunityStep = (is_new, owner_id, info_1, info_2, history) => dispatch => {
 	const info = {
 		is_new: is_new,
 		data: {
-			owner_email: owner_email,
+			owner_id: owner_id,
 			...info_1,
 			...info_2,
 		}
@@ -50,7 +50,7 @@ export const createCommunityStep = (is_new, owner_email, info_1, info_2, history
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
@@ -58,14 +58,14 @@ export const createCommunityStep = (is_new, owner_email, info_1, info_2, history
 
 /**
  *
- * @param owner_email
+ * @param owner_id
  * @param activated
  * @returns {function(...[*]=)}
  */
-export const getMyCommunities = (owner_email, activated = true) => dispatch => {
+export const getMyCommunities = (owner_id, activated = true) => dispatch => {
 	// get communities list via axios.
 	const info = {
-		owner_email: owner_email,
+		owner_id: owner_id,
 		activated: activated,
 	};
 
@@ -83,8 +83,8 @@ export const getMyCommunities = (owner_email, activated = true) => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
-				payload: err.response !== undefined ? err.response.data : {errors: ""}
+				type: GET_SRV_MSG,
+				payload: err.response !== undefined ? err.response.data : {msg_community: "Unknown error"},
 			})
 		);
 };
@@ -115,7 +115,7 @@ export const registerCard = (info) => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			});
 			dispatch({
@@ -183,7 +183,7 @@ export const activateCommunity = (info) => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			});
 			dispatch({
@@ -233,7 +233,7 @@ export const deactivateCommunity = (info) => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			});
 			dispatch({
@@ -260,7 +260,7 @@ export const deleteCommunity = (info, history) => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
@@ -278,7 +278,7 @@ export const getBillingStatus = (info, history) => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);

@@ -34,6 +34,7 @@ class CommunityStep extends Component{
 		this.state = {
 			errors: {},
 			showedMembers: false,
+			passable: false,
 
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
 			category: p_obj === undefined ? "" : p_obj.obj.category,
@@ -123,15 +124,16 @@ class CommunityStep extends Component{
 	};
 
 	onChangeAddress = val => {
-		this.setState({address: val});
+		this.setState({address: val, passable: false});
 	};
 
 	handleSelect = address => {
 		const self = this;
+		self.setState({address: address});
 		geocodeByAddress(address)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
-				self.setState({address: address, coordinate: latLng});
+				self.setState({coordinate: latLng, passable: true});
 			})
 			.catch(error => console.error('Error', error));
 	};
@@ -194,7 +196,7 @@ class CommunityStep extends Component{
 			support_type: this.state.support_type
 		};
 
-		this.props.createCommunityStep(this.props.location.state === undefined, this.props.auth.user.email, info_1, info_2, this.props.history);
+		this.props.createCommunityStep(this.props.location.state === undefined, this.props.auth.user.id, info_1, info_2, this.props.history);
 	};
 
 	removeSlide(index){
@@ -221,7 +223,7 @@ class CommunityStep extends Component{
 							</div>
 							<div className="create-menu w3-bar-item w3-right">
 								<Link to="#" className="w3-button w3-right save"
-									  onClick={this.onSubmitCommunity}>Save</Link>
+									  onClick={this.state.passable ? this.onSubmitCommunity : null}>Save</Link>
 							</div>
 						</h3>
 						<div className="w-form-done">
