@@ -7,6 +7,7 @@ import SiteFooter from "../../components/site-footer";
 import StripeSubscription from "../../components/stripe-subscription";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+import {getUserInfo} from "../../actions/auth-actions";
 import {getBillingStatus, clearLastInvoice, showActivateDlg} from "../../actions/community-actions";
 import {Elements} from "react-stripe-elements";
 
@@ -19,9 +20,12 @@ class Admin extends Component{
 		};
 
 		const customer_info = {
-			email: this.props.auth.user.email,
+			user_id: this.props.auth.user.id,
 		};
 
+		this.props.getUserInfo({
+			user_id: this.props.auth.user.id,
+		});
 		this.props.getBillingStatus(customer_info, this.props.history);
 
 		this.showSubDlg = this.showSubDlg.bind(this);
@@ -80,6 +84,7 @@ Admin.propTypes = {
 	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
+	getUserInfo: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 	clearLastInvoice: PropTypes.func.isRequired,
 	showActivateDlg: PropTypes.func.isRequired,
@@ -93,5 +98,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{getBillingStatus, clearLastInvoice, showActivateDlg}
+	{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
 )(Admin);

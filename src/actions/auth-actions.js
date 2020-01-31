@@ -2,10 +2,9 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import {
-	GET_ERRORS,
-	SET_CURRENT_USER,
+	GET_SRV_MSG, RESET_ERRORS,
+	SET_CURRENT_USER, SET_SENDING_STATUS,
 	UPDATE_USER_INFO,
-	USER_LOADING
 } from "./action-types";
 import app_config from "../conf/config";
 
@@ -22,7 +21,7 @@ export const registerUser = (userData, history) => dispatch => {
 		.then(res => history.push("/login-popup")) // re-direct to login on successful register
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response ? err.response.data : {error: ""}
 			})
 		);
@@ -41,7 +40,7 @@ export const registerGoogleUser = (userData, history) => dispatch => {
 		.then(res => history.push("/login-popup")) // re-direct to login on successful register
 		.catch(err => {
 				dispatch({
-					type: GET_ERRORS,
+					type: GET_SRV_MSG,
 					payload: err.response ? err.response.data : {error: "success"}
 				})
 			}
@@ -52,9 +51,18 @@ export const registerGoogleUser = (userData, history) => dispatch => {
  * send user information (email & password), and get a token
  *
  * @param userData
+ * @param history
  * @returns {function(...[*]=)}
  */
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
+	dispatch({
+		type: RESET_ERRORS,
+		payload: null,
+	});
+	dispatch({
+		type: SET_SENDING_STATUS,
+		payload: true,
+	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/login", userData)
 		.then(res => {
@@ -69,15 +77,42 @@ export const loginUser = userData => dispatch => {
 			// Decode token to get user data
 			const decoded = jwt_decode(token);
 
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: res.data,
+			});
+
 			// Set current user
 			dispatch(setCurrentUser(decoded));
 		})
-		.catch(err =>
+		.catch(err => {
 			dispatch({
-				type: GET_ERRORS,
-				payload: err.response ? err.response.data : {error: ""}
-			})
-		);
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			return dispatch({
+				type: GET_SRV_MSG,
+				payload: err.response ? err.response.data : {msg: ""},
+			});
+		});
+};
+
+export const getUserInfo = (user_id) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/userinfo", user_id)
+		.then(res => {
+			return dispatch({
+				type: UPDATE_USER_INFO,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+
+		});
 };
 
 /**
@@ -90,20 +125,22 @@ export const loginGoogleUser = userData => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/googlelogin", userData)
 		.then(res => {
-			// Save to localStorage
-			// Set token to localStorage
+			// Save token to localStorage
 			const {token} = res.data;
 			localStorage.setItem("jwtToken", token);
+
 			// Set token to Auth header
 			setAuthToken(token);
+
 			// Decode token to get user data
 			const decoded = jwt_decode(token);
+
 			// Set current user
 			dispatch(setCurrentUser(decoded));
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
+				type: GET_SRV_MSG,
 				payload: err.response ? err.response.data : {error: ""}
 			})
 		);
@@ -119,17 +156,6 @@ export const setCurrentUser = decoded => {
 	return {
 		type: SET_CURRENT_USER,
 		payload: decoded
-	};
-};
-
-/**
- * Loading user information
- *
- * @returns {{type: string}}
- */
-export const setUserLoading = () => {
-	return {
-		type: USER_LOADING
 	};
 };
 
@@ -160,22 +186,77 @@ export const resetPassword = (userData, history) => dispatch => {
 		.then(res => history.push("/login-popup"))
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
-				payload: err.response ? err.response.data : {error: ""}
+				type: GET_SRV_MSG,
+				payload: err.response.data,
 			})
 		);
 };
 
-export const changePassword = (userData, history) => dispatch => {
+export const changePassword = (userData) => dispatch => {
+	dispatch({
+		type: RESET_ERRORS,
+		payload: null,
+	});
+	dispatch({
+		type: SET_SENDING_STATUS,
+		payload: true,
+	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/changepassword", userData)
-		.then(res => history.push("/login-popup"))
-		.catch(err =>
+		.then(res => {
 			dispatch({
-				type: GET_ERRORS,
-				payload: err.response ? err.response.data : {error: ""}
-			})
-		);
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			return dispatch({
+				type: GET_SRV_MSG,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			return dispatch({
+				type: GET_SRV_MSG,
+				payload: err.response.data,
+			});
+		});
+};
+
+export const verifyEmail = (userData) => dispatch => {
+	dispatch({
+		type: RESET_ERRORS,
+		payload: null,
+	});
+	dispatch({
+		type: SET_SENDING_STATUS,
+		payload: true,
+	});
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/verifyemail", userData)
+		.then(res => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: res.data,
+			});
+			getUserInfo(userData.id);
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			return dispatch({
+				type: GET_SRV_MSG,
+				payload: err.response.data,
+			});
+		});
 };
 
 /**
@@ -191,41 +272,100 @@ export const doResetPassword = (userData, history) => dispatch => {
 		.then(res => history.push("/reset"))
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
-				payload: err.response ? err.response.data : {error: ""}
+				type: GET_SRV_MSG,
+				payload: err.response.data,
 			})
 		);
 };
 
 export const doChangePassword = (userData, history) => dispatch => {
+	dispatch({
+		type: RESET_ERRORS,
+		payload: null,
+	});
+	dispatch({
+		type: SET_SENDING_STATUS,
+		payload: true,
+	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/dochangepassword", userData)
-		.then(res => history.push("/login-popup"))
-		.catch(err =>
-			history.push("/login-popup")
-		);
+		.then(res => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: res.data,
+			});
+			history.push("/login-popup");
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: err.response.data,
+			})
+		});
 };
 
-export const updateUserInfo = (userData, history) => dispatch => {
+export const doVerifyEmail = (userData, history) => dispatch => {
+	dispatch({
+		type: RESET_ERRORS,
+		payload: null,
+	});
+	dispatch({
+		type: SET_SENDING_STATUS,
+		payload: true,
+	});
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/doverifyemail", userData)
+		.then(res => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: res.data,
+			});
+			history.push("/dashboard/account");
+		})
+		.catch(err => {
+			dispatch({
+				type: SET_SENDING_STATUS,
+				payload: false,
+			});
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: err.response.data,
+			})
+		});
+};
+
+export const updateUserInfo = (userData) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/update", userData)
 		.then(
 			/*res => history.push("/dashboard/account")*/
 			res => {
 				dispatch({
-					type: GET_ERRORS,
-					payload: res.data
-				});
-				dispatch({
 					type: UPDATE_USER_INFO,
 					payload: userData
+				});
+				dispatch({
+					type: GET_SRV_MSG,
+					payload: res.data
 				});
 			}
 		)
 		.catch(err =>
 			dispatch({
-				type: GET_ERRORS,
-				payload: err.response !== undefined ? err.response.data : {errors: ""}
+				type: GET_SRV_MSG,
+				payload: err.response ? err.response.data : {},
 			})
 		);
 };

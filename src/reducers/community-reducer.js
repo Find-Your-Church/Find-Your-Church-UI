@@ -28,6 +28,7 @@ const initialState = {
 	is_sending: false,
 	is_activate: true, // false means deactivate
 	success: false,
+	tickets: 0,
 	customer: null,
 	subscription: null,
 	last_invoice: null,
@@ -120,7 +121,6 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				success: false,
-				customer: null,
 				subscription: null,
 				upcoming_invoice: null,
 				msg: {},

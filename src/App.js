@@ -23,6 +23,7 @@ import {StripeProvider} from "react-stripe-elements";
 import app_config from "./conf/config";
 import ChangePassword from "./pages/change-password";
 import AccountWrapper from "./pages/dashboard/account-wrapper";
+import VerifyEmail from "./pages/verify-email";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -81,6 +82,7 @@ class App extends Component{
 							<Route exact path="/forgot-password" component={ForgotPassword}/>
 							<Route path="/reset/:id?" component={ResetPassword}/>
 							<Route path="/changepassword/:id?" component={ChangePassword}/>
+							<Route path="/verifyemail/:id?" component={VerifyEmail}/>
 
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 

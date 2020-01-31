@@ -8,12 +8,11 @@ import {doChangePassword} from "../actions/auth-actions";
 class ChangePassword extends Component{
 	constructor(props){
 		super(props);
-		this.sending = false;
-		this.is_error = false;
+
 		this.key = props.location.pathname.substr(16); // 16 - length of "/changepassword/", which is URL prefix for reset.
+
 		this.state = {
 			email: "",
-			errors: {},
 			password: '',
 			password2: '',
 		};
@@ -23,18 +22,6 @@ class ChangePassword extends Component{
 		this.setState({[e.target.id]: e.target.value});
 	};
 
-	static getDerivedStateFromProps(nextProps, prevState){
-		if(nextProps.errors){
-			return {errors: nextProps.errors};
-		}
-		else
-			return null;
-	}
-
-	componentDidMount(){
-		this.sending = false;
-	}
-
 	/**
 	 * when click the login button, call axios with email and password.
 	 * @param e
@@ -42,33 +29,18 @@ class ChangePassword extends Component{
 	onSubmit = e => {
 		e.preventDefault();
 
-		if(this.state.password !== this.state.password2){
-			window.alert("Password mismatch!");
-		}
-		else{
-			this.sending = true;
-			this.setState({sending: true, errors: {}});
-
-			const userData = {
-				key: this.key,
-				password: this.state.password,
-			};
-			// since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
-			this.props.doChangePassword(userData, this.props.history);
-		}
-		this.sending = false;
+		this.props.doChangePassword({
+			key: this.key,
+			password: this.state.password,
+			password2: this.state.password2,
+		}, this.props.history);
 	};
 
 	render(){
-		const {errors} = this.state;
-		const err_msg = ""
-			+ (errors.error !== undefined ? errors.error + ". " : "");
-		this.is_error = err_msg.length > 0;
-
 		return (
 			<main>
-				<div className="w3-modal" style={{display: this.sending && !this.is_error ? "block" : "none"}}>
-					<div className="w3-display-middle w3-text-white w3-xlarge" style={{textShadow: "0 0 4px #000, 0 0 2px #000"}}>
+				<div className="w3-modal" style={{display: this.props.is_sending ? "block" : "none"}}>
+					<div className="w3-display-middle w3-text-white w3-jumbo">
 						<i className="fas fa-spinner fa-spin"> </i>
 					</div>
 				</div>
@@ -113,8 +85,9 @@ class ChangePassword extends Component{
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
 										</div>
-										<div className="w-form-fail" style={{display: this.is_error ? "block" : "none"}}>
-											{err_msg}
+										<div className="w-form-fail"
+											 style={{display: this.props.errors.msg ? "block" : "none"}}>
+											{this.props.errors.msg}
 										</div>
 									</div>
 								</div>
@@ -136,13 +109,14 @@ class ChangePassword extends Component{
 }
 
 ChangePassword.propTypes = {
-	resetPassword: PropTypes.func.isRequired,
+	is_sending: PropTypes.bool.isRequired,
 	errors: PropTypes.object.isRequired,
 	doChangePassword: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-	errors: state.errors
+	is_sending: state.auth.is_sending,
+	errors: state.errors,
 });
 
 export default connect(

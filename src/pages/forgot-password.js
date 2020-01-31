@@ -8,12 +8,9 @@ import {resetPassword, changePassword} from "../actions/auth-actions";
 class ForgotPassword extends Component{
 	constructor(props){
 		super(props);
-		this.sending = false;
-		this.is_error = false;
+
 		this.state = {
-			sending: false,
 			email: "",
-			errors: {},
 		};
 	}
 
@@ -21,45 +18,24 @@ class ForgotPassword extends Component{
 		this.setState({[e.target.id]: e.target.value});
 	};
 
-	static getDerivedStateFromProps(nextProps, prevState){
-		if(nextProps.errors){
-			return {errors: nextProps.errors};
-		}
-		else
-			return null;
-	}
-
-	componentDidMount(){
-		this.sending = false;
-	}
-
 	/**
-	 * when click the login button, call axios with email and password.
+	 * when click the button, call axios.
 	 * @param e
 	 */
 	onSubmit = e => {
 		e.preventDefault();
-		this.sending = true;
-		this.setState({sending: true, errors: {}});
-		const userData = {
+
+		this.props.changePassword({
 			email: this.state.email,
-		};
-		// since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
-		//this.props.resetPassword(userData, this.props.history);
-		this.props.changePassword(userData, this.props.history);
+		}, this.props.history);
 	};
 
 	render(){
-		const {errors} = this.state;
-		const err_msg = ""
-			+ (errors.email !== undefined ? errors.email + ". " : "");
-		this.is_error = err_msg.length > 0;
-
 		return (
 			<main>
-				<div className="w3-modal" style={{display: this.sending && !this.is_error ? "block" : "none"}}>
-					<div className="w3-display-middle w3-text-white w3-xlarge" style={{textShadow: "0 0 4px #000, 0 0 2px #000"}}>
-						Please wait while sending a mail...
+				<div className="w3-modal" style={{display: this.props.is_sending ? "block" : "none"}}>
+					<div className="w3-display-middle w3-text-white w3-jumbo">
+						<i className={"fas fa-spinner fa-spin"}> </i>
 					</div>
 				</div>
 				<div className="sign-body">
@@ -70,7 +46,7 @@ class ForgotPassword extends Component{
 							</div>
 							<div>
 								<div className="form-div1">
-									<div className="form-block1 w-form">
+									<div className="form-block1">
 										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 											  name="wf-form-Registration"
 											  data-name="Registration" className="form1">
@@ -86,7 +62,7 @@ class ForgotPassword extends Component{
 														   required=""/>
 												</div>
 											</div>
-											<div className="submit-row" style={{marginTop: "11px"}}>
+											<div className="submit-row">
 												<input type="submit" value="Send Email"
 													   data-wait="Please wait..."
 													   className="form-submit round w-button-sign"/>
@@ -95,8 +71,8 @@ class ForgotPassword extends Component{
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
 										</div>
-										<div className="w-form-fail" style={{display: this.is_error ? "block" : "none"}}>
-											{err_msg}
+										<div className="w-form-fail" style={{display: this.props.errors.msg ? "block" : "none"}}>
+											{this.props.errors.msg}
 										</div>
 									</div>
 								</div>
@@ -118,13 +94,15 @@ class ForgotPassword extends Component{
 }
 
 ForgotPassword.propTypes = {
+	is_sending: PropTypes.bool.isRequired,
+	errors: PropTypes.object.isRequired,
 	resetPassword: PropTypes.func.isRequired,
 	changePassword: PropTypes.func.isRequired,
-	errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-	errors: state.errors
+	is_sending: state.auth.is_sending,
+	errors: state.errors,
 });
 
 export default connect(

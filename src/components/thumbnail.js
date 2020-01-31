@@ -61,7 +61,7 @@ class Thumbnail extends Component{
 	onDeactivate(e){
 		// do deactivate the community.
 		this.props.deactivateCommunity({
-			email: this.props.auth.user.email,
+			id: this.props.auth.user.id,
 			community_id: this.props.value._id,
 		});
 

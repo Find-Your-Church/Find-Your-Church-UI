@@ -16,7 +16,7 @@ class MyCommunities extends Component{
 	}
 
 	refresh(){
-		this.props.getMyCommunities(this.props.auth.user.email, this.props.status === "active");
+		this.props.getMyCommunities(this.props.auth.user.id, this.props.status === "active");
 	}
 
 	render(){

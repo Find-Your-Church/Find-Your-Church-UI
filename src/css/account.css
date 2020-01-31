@@ -161,7 +161,7 @@
 	font-weight: 600;
 }
 
-.table-row {
+.account-body .table-row {
 	display: -ms-grid;
 	display: grid;
 	padding-top: 10px;
@@ -174,7 +174,7 @@
 	grid-column-gap: 16px;
 	grid-row-gap: 16px;
 	-ms-grid-columns: 1fr 1fr 100px;
-	grid-template-columns: 1fr 1fr 100px;
+	grid-template-columns: 1fr 1.4fr 32px;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
 	border-bottom: 1px solid #e6e6e6;
@@ -221,7 +221,7 @@
 	color: #1b0033;
 	font-family: "Source Sans Pro", sans-serif;
 	font-size: 15px;
-	line-height: 15px;
+	line-height: 24px;
 	font-weight: 400;
 	text-align: left;
 }
@@ -267,6 +267,16 @@
 	font-weight: 400;
 	text-align: right;
 	text-decoration: none;
+}
+
+.table-link .fas.fa-save{
+	font-size: 1.2em;
+	padding: 0 2px 2px;
+}
+
+.table-link .fas.fa-pen{
+	border-bottom: solid 3px;
+	padding: 0 2px 1px;
 }
 
 .verified-mark{
@@ -316,4 +326,17 @@
 	line-height: 14px;
 	font-weight: 400;
 	text-decoration: none;
+}
+
+.email-verify-part{
+	margin-top: 8px!important;
+}
+
+.email-verify-part * {
+	color: #999!important;
+	line-height: 22px!important;
+}
+
+.email-verify-part .link {
+	color: #8900fe!important;
 }

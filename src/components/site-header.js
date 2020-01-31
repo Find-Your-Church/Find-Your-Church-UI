@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {logoutUser} from "../actions/auth-actions";
+import {getUserInfo, logoutUser} from "../actions/auth-actions";
 
 class SiteHeader extends Component{
 	constructor(props){
@@ -10,6 +10,8 @@ class SiteHeader extends Component{
 		this.state = {
 			showedAdminMenu: false,
 		};
+
+		// this.props.getUserInfo({user_id: this.props.auth.user.id,});
 
 		this.toggleAdminMenu = this.toggleAdminMenu.bind(this);
 		this.hideAdminMenu = this.hideAdminMenu.bind(this);
@@ -45,17 +47,15 @@ class SiteHeader extends Component{
 						</Link>
 						: null}
 					{this.props.auth.isAuthenticated ? (
-							<>
-								<Link to="/dashboard/account" className="w3-bar-item w3-right w3-hover-text-white">
-									<span className={"headerprofpic-welcome"}>
-										<span className={"w3-text-white"}>{this.props.auth.user.fname}</span>
-									</span>
-									<div className="headerprofpic-div w3-right">
-										<img src={"/uploaded/profiles/5de7326365d48a7932daf64f.jpg"}
-											 alt={this.props.auth.user.fname} className="image-4"/>
-									</div>
-								</Link>
-							</>
+							<Link to="/dashboard/account" className="w3-bar-item w3-right">
+								<span className={"headerprofpic-welcome"}>
+									<span className={"w3-hover-text-white"}>{this.props.auth.user.fname}</span>
+								</span>
+								<div className="headerprofpic-div w3-right">
+									<img src={"/uploaded/profiles/5de7326365d48a7932daf64f.jpg"}
+										 alt={this.props.auth.user.fname} className="image-4"/>
+								</div>
+							</Link>
 						)
 						: null}
 
@@ -97,13 +97,14 @@ class SiteHeader extends Component{
 }
 
 SiteHeader.propTypes = {
+	auth: PropTypes.object.isRequired,
+	getUserInfo: PropTypes.func.isRequired,
 	logoutUser: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth
 });
 export default connect(
 	mapStateToProps,
-	{logoutUser}
+	{getUserInfo, logoutUser}
 )(SiteHeader);

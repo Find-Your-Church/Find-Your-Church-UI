@@ -1,9 +1,9 @@
-import {GET_ERRORS, RESET_ERRORS} from "../actions/action-types";
+import {GET_SRV_MSG, RESET_ERRORS} from "../actions/action-types";
 
 const initialState = {};
 export default function(state = initialState, action){
 	switch(action.type){
-		case GET_ERRORS:
+		case GET_SRV_MSG:
 			return action.payload;
 		case RESET_ERRORS:
 			return {};

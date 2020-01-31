@@ -3,9 +3,17 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {CardElement, injectStripe} from "react-stripe-elements";
-import {registerCard, clearLastInvoice, activateCommunity, hideActivateDlg} from "../actions/community-actions";
+import {
+	getBillingStatus,
+	registerCard,
+	clearLastInvoice,
+	activateCommunity,
+	hideActivateDlg
+} from "../actions/community-actions";
+import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
 import "../css/stripe-style.css";
+import formatNumber from "../utils/formatNumber";
 
 const cardStyle = {
 	base: {
@@ -24,10 +32,17 @@ class StripeSubscription extends Component{
 	constructor(props){
 		super(props);
 
+		this.props.getBillingStatus({
+			user_id: this.props.auth.user.id,
+		}, this.props.history);
+
+		const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
 		this.state = {
 			errors: {},
 
 			editing_card: false,
+			fname_on_card: name_on_card[0],
+			lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
 		};
 
 		this.clickEditCard = this.clickEditCard.bind(this);
@@ -53,16 +68,9 @@ class StripeSubscription extends Component{
 		this.props.hideActivateDlg();
 	}
 
-	getNextMonth(current, delta){
-		const num_days = new Date(current.getFullYear(), current.getMonth() + delta + 1, 0).getDate();
-		return new Date(
-			current.getFullYear(), current.getMonth() + delta, current.getDate() > num_days ? num_days : current.getDate(),
-			current.getHours(), current.getMinutes(), current.getSeconds(), current.getMilliseconds());
-	}
-
 	async clickEditCard(){
 		if(this.state.editing_card){
-			const full_name = `${this.props.auth.user.fname} ${this.props.auth.user.lname}`;
+			const full_name = `${this.state.fname_on_card} ${this.state.lname_on_card}`;
 			const {token} = await this.props.stripe.createToken({name: full_name,});
 
 			/**
@@ -73,9 +81,16 @@ class StripeSubscription extends Component{
 					source: token.id,
 					email: this.props.auth.user.email,
 					name: full_name,
-					description: 'Name: ' + full_name,
+					description: 'Holder: ' + full_name,
 				});
 			}
+		}
+		else{
+			const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
+			this.setState({
+				fname_on_card: name_on_card[0],
+				lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
+			});
 		}
 
 		this.setState({editing_card: !this.state.editing_card});
@@ -89,7 +104,7 @@ class StripeSubscription extends Component{
 			this.props.activateCommunity({
 				community_id: this.props.community.community_activated,
 				source: null,
-				email: this.props.auth.user.email,
+				id: this.props.auth.user.id,
 			});
 		}
 		else{
@@ -98,19 +113,29 @@ class StripeSubscription extends Component{
 	}
 
 	render(){
-		const next_month0 = new Date(
-			this.props.community.upcoming_invoice ?
-				1000 * parseInt(this.props.community.upcoming_invoice.next_payment_attempt)
-				: 0
-		);
-		const next_month1 = this.getNextMonth(next_month0, 1);
-		const next_month2 = this.getNextMonth(next_month0, 2);
+		let next_due_date = "", next_month1 = "", next_month2 = "";
+		if(this.props.community.subscription){
+			const init_date = new Date(this.props.community.subscription.created * 1000);
+			const to_date = new Date();
+			let prev_due_date = init_date;
+			next_due_date = getNextMonth(init_date, 1);
+			let i = 2;
+			while(next_due_date.getTime() < to_date.getTime()){
+				prev_due_date = next_due_date;
+				next_due_date = getNextMonth(init_date, i).date;
+				i++;
+			}
+			next_month1 = getNextMonth(init_date, i);
+			next_month2 = getNextMonth(init_date, i + 1);
+		}
 
 		return (
 			<div className="subscriptioncontainer-div w3-modal-content w3-card-4 w3-animate-zoom">
 				<div className="header1-div gradient shadow">
 					<h3 className="header3 center">
-						{this.props.community.dlg_title}
+						{this.props.community.subscription ?
+							"Add More Activations"
+							: "Activate Your Community"}
 					</h3>
 				</div>
 				<div className="container-div1">
@@ -129,15 +154,14 @@ class StripeSubscription extends Component{
 												<i className={"fas fa-question-circle tooltip-icon"}> </i>
 											</div>
 											<div>
-												<h4 className={"value"}>
+												<h4 className={"value"} title={"Communities activated / Paid activations"}>
+													{formatNumber(this.props.community.my_communities.active.length)}
+													&nbsp;/&nbsp;
 													{this.props.community.subscription ?
-														this.props.community.subscription.quantity
+														formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
 														: (this.props.community.is_sending ?
 															<i className="fas fa-spinner fa-spin"> </i>
 															: "-")}
-													&nbsp;/&nbsp;
-													{this.props.community.my_communities.active.length
-													+ this.props.community.my_communities.inactive.length}
 												</h4>
 											</div>
 										</div>
@@ -179,7 +203,7 @@ class StripeSubscription extends Component{
 												<div>
 													<h4 className={"value"}>
 														{this.props.community.subscription ?
-															this.showAmount(this.props.community.subscription.plan.amount)
+															this.showAmount(this.props.community.subscription.quantity * this.props.community.subscription.plan.amount)
 															: (this.props.community.is_sending ?
 																<i className="fas fa-spinner fa-spin"> </i>
 																: "-")}
@@ -187,20 +211,22 @@ class StripeSubscription extends Component{
 												</div>
 											</div>
 										</div>
-										<div className="invoice-row">
-											<div className="invoice-div">
-												<div className="filtersheader-div">
-													<h4 className="table-header">Taxes and Fees</h4>
-												</div>
-												<div>
-													<h4 className={"value"}>
-														{this.props.community.last_invoice ?
-															this.showAmount(this.props.community.last_invoice.tax)
-															: "-"}
-													</h4>
+										{this.props.community.subscription !== "1" ? null :
+											<div className="invoice-row">
+												<div className="invoice-div">
+													<div className="filtersheader-div">
+														<h4 className="table-header">Taxes and Fees</h4>
+													</div>
+													<div>
+														<h4 className={"value"}>
+															{this.props.community.last_invoice ?
+																this.showAmount(this.props.community.last_invoice.tax)
+																: "-"}
+														</h4>
+													</div>
 												</div>
 											</div>
-										</div>
+										}
 										<div className="invoice-row">
 											<div className="invoice-div top">
 												<div className="filtersheader-div">
@@ -210,16 +236,16 @@ class StripeSubscription extends Component{
 													<div className="div10-bottom right">
 														<h4 className="value strikethrough">
 															{this.props.community.subscription ?
-																this.showAmount(this.props.community.subscription.plan.amount
-																	+ (this.props.community.last_invoice ?
-																		this.props.community.last_invoice.tax / 100 : 0))
+																this.showAmount(this.props.community.my_communities.active.length *
+																	this.props.community.subscription.plan.amount)
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
 														</h4>
 														<h4 className="value w3-text-green right">
 															{this.props.community.last_invoice ?
-																this.showAmount(this.props.community.last_invoice.subtotal)
+																this.showAmount(this.props.community.my_communities.active.length *
+																	this.props.community.subscription.plan.amount)
 																: "-"}
 														</h4>
 													</div>
@@ -242,8 +268,8 @@ class StripeSubscription extends Component{
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
 															&nbsp;on&nbsp;
-															{this.props.community.upcoming_invoice ?
-																next_month0.toLocaleDateString()
+															{this.props.community.subscription ?
+																next_due_date.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
@@ -257,8 +283,8 @@ class StripeSubscription extends Component{
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
 															&nbsp;on&nbsp;
-															{this.props.community.upcoming_invoice ?
-																next_month1.toLocaleDateString()
+															{this.props.community.subscription ?
+																next_month1.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
@@ -272,8 +298,8 @@ class StripeSubscription extends Component{
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
 															&nbsp;on&nbsp;
-															{this.props.community.upcoming_invoice ?
-																next_month2.toLocaleDateString()
+															{this.props.community.subscription ?
+																next_month2.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "-")}
@@ -290,63 +316,69 @@ class StripeSubscription extends Component{
 							<div className="div-block-147 payiinfo">
 								<div className="accordionheader-div">
 									<h3>Payment Information</h3>
-									<Link to="#" className={"w3-text-indigo w3-hover-text-blue"}
-										  onClick={this.clickEditCard}>
-										{this.state.editing_card ? "Save" : "Edit"}
-									</Link>
+									{this.props.community.subscription ? (
+										<Link to="#" className={"table-link"}
+											  onClick={this.clickEditCard}>
+											{this.state.editing_card ? (
+												<i className={"fas fa-save"}> </i>
+											) : (
+												<i className={"fas fa-pen"}> </i>
+											)}
+										</Link>
+									) : null}
 								</div>
 								<div className="form-block w-form">
 									<div className="subscribe-container inputs">
 										<div className="form-row">
 											<div className={"pay-info-row"}>
-												<span className={"w3-text-dark-grey"}>
-													{this.props.auth.user.fname} {this.props.auth.user.lname}
-												</span>
+												{this.state.editing_card ? (
+													<div className="w3-row">
+														<input type="text" className="w3-half"
+															   title="First name" placeholder="First name"
+															   id="fname_on_card" onChange={this.onChange}
+															   value={this.state.fname_on_card} autoFocus/>
+														<input type="text" className="w3-half"
+															   title="Last name" placeholder="Last name"
+															   id="lname_on_card" onChange={this.onChange}
+															   value={this.state.lname_on_card}/>
+													</div>
+												) : (
+													<span className={"w3-text-dark-grey w3-center"}>
+														{this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "No information"}
+													</span>
+												)}
 											</div>
 										</div>
-										{this.state.editing_card ?
-											<div className="form-row">
-												<CardElement className="CardInfoStyle" style={cardStyle}/>
-											</div>
-											: null}
+										<div className="form-row">
+											<CardElement className="CardInfoStyle" style={cardStyle}
+														 disabled={!this.state.editing_card}/>
+										</div>
 										{this.props.community.is_setting_card ? (
 											<div className={"w3-container w3-center w3-margin-top"}>
 												<i className="fas fa-spinner fa-spin"> </i>
 											</div>
 										) : (
-											this.props.community.customer ? (
+											this.props.auth.user.billing_info ? (
 												<div className={"card-detail"}>
-													<div className={"card-detail-item w3-row"}>
-														<div className={"w3-col l4"}>
-															Card number
+													<div className={"card-detail-item w3-row w3-text-grey"}>
+														<div className={"w3-col l1"}>
+															<img alt={"Card image"}
+																src={`/img/card/icon-${this.props.auth.user.billing_info.sources.data[0].brand.toLowerCase()}.svg`}/>
 														</div>
-														<div className={"w3-col l8"}>
+														<div className={"w3-col l4"} title={"Card number"}>
 															**** **** ****&nbsp;
-															{this.props.community.customer.sources.data[0].last4}
+															{this.props.auth.user.billing_info.sources.data[0].last4}
 														</div>
-													</div>
-													<div className={"card-detail-item w3-row"}>
-														<div className={"w3-col l4"}>
-															Expiry
+														<div className={"w3-col l3"} title={"Expiration"}>
+															{this.props.auth.user.billing_info.sources.data[0].exp_month}/{this.props.auth.user.billing_info.sources.data[0].exp_year}
 														</div>
-														<div className={"w3-col l8"}>
-															{this.props.community.customer.sources.data[0].exp_month}/{this.props.community.customer.sources.data[0].exp_year}
+														<div className={"w3-col l2"}
+															 title={this.props.auth.user.billing_info.sources.data[0].cvc_check}>
+															***
 														</div>
-													</div>
-													<div className={"card-detail-item w3-row"}>
-														<div className={"w3-col l4"}>
-															CVC
-														</div>
-														<div className={"w3-col l8"}>
-															{this.props.community.customer.sources.data[0].cvc_check}
-														</div>
-													</div>
-													<div className={"card-detail-item w3-row"}>
-														<div className={"w3-col l4"}>
-															Zip Code
-														</div>
-														<div className={"w3-col l8"}>
-															{this.props.community.customer.sources.data[0].address_zip}
+														<div className={"w3-col l2"}
+															 title={`Zip code: ${this.props.auth.user.billing_info.sources.data[0].address_zip_check}`}>
+															{this.props.auth.user.billing_info.sources.data[0].address_zip}
 														</div>
 													</div>
 												</div>
@@ -369,9 +401,12 @@ class StripeSubscription extends Component{
 										) : null
 									) : (
 										<div className="submit-row">
-											<button onClick={this.handleActivateCommunity}
-													className="form1-submit round w-button">
-												Activate Community
+											<button
+												onClick={this.state.editing_card ? null : this.handleActivateCommunity}
+												className={"form1-submit round w-button" + (this.state.editing_card ? " disabled" : "")}>
+												{this.props.community.subscription ?
+													"Approve Activation"
+													: "Activate Community"}
 											</button>
 										</div>
 									)}
@@ -399,6 +434,7 @@ StripeSubscription.propTypes = {
 	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
+	getBillingStatus: PropTypes.func.isRequired,
 	registerCard: PropTypes.func.isRequired,
 	clearLastInvoice: PropTypes.func.isRequired,
 	activateCommunity: PropTypes.func.isRequired,
@@ -413,5 +449,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{registerCard, clearLastInvoice, activateCommunity, hideActivateDlg}
+	{getBillingStatus, registerCard, clearLastInvoice, activateCommunity, hideActivateDlg}
 )(injectStripe(StripeSubscription));
