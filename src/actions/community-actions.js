@@ -10,7 +10,7 @@ import {
 	SET_STT_HIDE,
 	SET_STT_SENDING,
 	PICK_COMMUNITY,
-	CLEAR_BILLING_INFO, SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION,
+	CLEAR_BILLING_INFO, SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION, COUPON_VERIFIED,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -303,6 +303,31 @@ export const hideActivateDlg = () => dispatch => {
 		type: SET_DIALOG_TITLE,
 		payload: "Activate Your Community",
 	});
+};
+
+export const clearCouponVerified = (info) => dispatch => {
+	dispatch({
+		type: COUPON_VERIFIED,
+		payload: false,
+	});
+};
+
+// info = {code: 'coupon_id'}
+export const verifyCoupon = (info) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/stripe/verifycoupon", info)
+		.then(res => {
+			dispatch({
+				type: COUPON_VERIFIED,
+				payload: res.data.verified,
+			});
+		})
+		.catch(err =>
+			dispatch({
+				type: GET_SRV_MSG,
+				payload: false,
+			})
+		);
 };
 
 /**

@@ -8,7 +8,7 @@ import {
 	registerCard,
 	clearLastInvoice,
 	activateCommunity,
-	hideActivateDlg
+	hideActivateDlg, verifyCoupon, clearCouponVerified
 } from "../actions/community-actions";
 import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
@@ -41,14 +41,32 @@ class StripeSubscription extends Component{
 		this.state = {
 			errors: {},
 
+			coupon: '',
+
 			editing_card: false,
 			fname_on_card: name_on_card[0],
 			lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
 		};
 
+		this.verifyCoupon = this.verifyCoupon.bind(this);
 		this.clickEditCard = this.clickEditCard.bind(this);
 		this.hideActivationDialog = this.hideActivationDialog.bind(this);
 		this.handleActivateCommunity = this.handleActivateCommunity.bind(this);
+
+		console.log(this.props.community.subscription);
+	}
+
+	onChange = e => {
+		if(e.target.id === 'coupon'){
+			this.props.clearCouponVerified();
+		}
+		this.setState({[e.target.id]: e.target.value});
+	};
+
+	verifyCoupon() {
+		this.props.verifyCoupon({
+			code: this.state.coupon,
+		});
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -100,6 +118,7 @@ class StripeSubscription extends Component{
 					community_id: this.props.community.community_activated,
 					source: null,
 					id: this.props.auth.user.id,
+					coupon: this.props.community.coupon_verified ? this.state.coupon : null,
 				});
 			}
 			else{
@@ -132,8 +151,6 @@ class StripeSubscription extends Component{
 			next_month1 = getNextMonth(init_date, i);
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
-
-		console.log(this.props.community.subscription);
 
 		return (
 			<div className="subscriptioncontainer-div w3-modal-content w3-card-4 w3-animate-zoom">
@@ -190,6 +207,25 @@ class StripeSubscription extends Component{
 											</div>
 										</div>
 									</div>
+									{this.props.community.subscription || this.props.community.is_sending ? null :
+										<div className="invoice-row">
+											<div className="invoice-div">
+												<div className="filtersheader-div">
+													<h4 className="table-header">Discount code</h4>
+												</div>
+												<input type="text"
+													   className="w3-half w3-border-bottom w3-hover-border-blue w3-center w3-normal"
+													   style={{border: "none", backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : "none"}}
+													   title="Discount code" placeholder="Enter discount code here"
+													   id="coupon" onChange={this.onChange}
+													   value={this.state.coupon} autoFocus/>
+												<button onClick={this.verifyCoupon}
+														className={"w3-button w3-padding-small w3-teal"}>
+													Apply
+												</button>
+											</div>
+										</div>
+									}
 								</div>
 							</div>
 							<div className="div-20top">
@@ -447,6 +483,8 @@ StripeSubscription.propTypes = {
 	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
+	verifyCoupon: PropTypes.func.isRequired,
+	clearCouponVerified: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 	registerCard: PropTypes.func.isRequired,
 	clearLastInvoice: PropTypes.func.isRequired,
@@ -462,5 +500,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{getBillingStatus, registerCard, clearLastInvoice, activateCommunity, hideActivateDlg}
+	{verifyCoupon, clearCouponVerified, getBillingStatus, registerCard, clearLastInvoice, activateCommunity, hideActivateDlg}
 )(injectStripe(StripeSubscription));

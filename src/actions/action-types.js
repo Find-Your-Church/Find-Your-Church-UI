@@ -31,6 +31,8 @@ export const SET_STT_READY = "SET_STT_READY";
 export const SET_STT_HIDE = "SET_STT_HIDE";
 export const SET_DIALOG_TITLE = "SET_DIALOG_TITLE";
 
+export const COUPON_VERIFIED = "COUPON_VERIFIED";
+
 /**
  * search results
  */
