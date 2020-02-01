@@ -14,10 +14,27 @@ const CommunityMap = withScriptjs(
 */
 
 class CommunityMap extends Component{
+	constructor(props){
+		super(props);
+
+		this.state = {
+			lat: this.props.pos.lat,
+		};
+
+		this.moveUp = this.moveUp.bind(this);
+	}
+
+	moveUp(){
+		this.setState({lat: this.state.lat + 1});
+	}
+
 	render(){
-		return(
-			<GoogleMap defaultZoom={12} defaultCenter={{lat: this.props.pos.lat, lng: this.props.pos.lng}}>
-				{this.props.isMarkerShown && <Marker position={{lat: this.props.pos.lat, lng: this.props.pos.lng}}/>}
+		return (
+			<GoogleMap defaultZoom={12}
+					   enter={{lat: this.state.lat, lng: this.props.pos.lng}}
+					   defaultCenter={{lat: this.state.lat, lng: this.props.pos.lng}}>
+				{this.props.isMarkerShown &&
+				<Marker position={{lat: this.props.pos.lat, lng: this.props.pos.lng}}/>}
 			</GoogleMap>
 		);
 	}

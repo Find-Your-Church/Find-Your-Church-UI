@@ -109,20 +109,38 @@ class StripeSubscription extends Component{
 		this.setState({editing_card: !this.state.editing_card});
 	}
 
-	handleActivateCommunity(e){
+	async handleActivateCommunity(e){
 		if(this.props.stripe){
-			// check the customer information
-			if(this.props.auth.user.billing_info){
-				// activate this community as existed stripe customer.
-				this.props.activateCommunity({
-					community_id: this.props.community.community_activated,
-					source: null,
-					id: this.props.auth.user.id,
-					coupon: this.props.community.coupon_verified ? this.state.coupon : null,
-				});
+			if(!this.props.second){
+				const full_name = `${this.state.fname_on_card} ${this.state.lname_on_card}`;
+				const {token} = await this.props.stripe.createToken({name: full_name,});
+
+				/**
+				 * register new card.
+				 */
+				if(token !== undefined){
+					this.props.activateCommunity({
+						source: token.id,
+						email: this.props.auth.user.email,
+						name: full_name,
+						description: 'Holder: ' + full_name,
+						community_id: this.props.community.community_activated,
+						id: this.props.auth.user.id,
+						coupon: this.props.community.coupon_verified ? this.state.coupon : null,
+					});
+				}
 			}
 			else{
-				window.alert("It's needed to register the payment method first on the account page.");
+				// check the customer information
+				if(this.props.auth.user.billing_info){
+					// activate this community as existed stripe customer.
+					this.props.activateCommunity({
+						community_id: this.props.community.community_activated,
+						source: null,
+						id: this.props.auth.user.id,
+						coupon: this.props.community.coupon_verified ? this.state.coupon : null,
+					});
+				}
 			}
 		}
 		else{
@@ -156,7 +174,7 @@ class StripeSubscription extends Component{
 			<div className="subscriptioncontainer-div w3-modal-content w3-card-4 w3-animate-zoom">
 				<div className="header1-div gradient shadow">
 					<h3 className="header3 center">
-						{this.props.community.subscription ?
+						{this.props.second ?
 							"Add More Activations"
 							: "Activate Your Community"}
 					</h3>
@@ -207,7 +225,7 @@ class StripeSubscription extends Component{
 											</div>
 										</div>
 									</div>
-									{this.props.community.subscription || this.props.community.is_sending ? null :
+									{this.props.second || this.props.community.is_sending ? null :
 										<div className="invoice-row">
 											<div className="invoice-div">
 												<div className="filtersheader-div">
@@ -384,7 +402,7 @@ class StripeSubscription extends Component{
 									<div className="subscribe-container inputs">
 										<div className="form-row">
 											<div className={"pay-info-row"}>
-												{this.state.editing_card ? (
+												{!this.props.second || this.state.editing_card ? (
 													<div className="w3-row">
 														<input type="text" className="w3-half"
 															   title="First name" placeholder="First name"
@@ -404,7 +422,7 @@ class StripeSubscription extends Component{
 										</div>
 										<div className="form-row">
 											<CardElement className="CardInfoStyle" style={cardStyle}
-														 disabled={!this.state.editing_card}/>
+														 disabled={!this.state.editing_card && this.props.second}/>
 										</div>
 										{this.props.community.is_setting_card ? (
 											<div className={"w3-container w3-center w3-margin-top"}>
