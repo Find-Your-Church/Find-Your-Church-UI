@@ -1,5 +1,5 @@
 body{
-	--results-header-height: 73px;
+	--results-header-height: 80px;
 }
 
 #search-results-header{
@@ -15,7 +15,8 @@ body{
 	}
 }
 
-.search-form-container {
+#search-results-header .search-form-container {
+	margin: 8px 0;
 	max-width: 840px;
 }
 

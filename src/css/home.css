@@ -63,6 +63,7 @@
 }
 
 .search-form {
+	position: relative;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -118,6 +119,7 @@ button:focus {
 }
 
 .search-form-input {
+	position: relative;
 	display: inline-block;
 	width: 400px;
 	max-height: 40px;

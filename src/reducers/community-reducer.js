@@ -9,7 +9,7 @@ import {
 	SET_STT_HIDE,
 	PICK_COMMUNITY,
 	CLEAR_BILLING_INFO,
-	SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE
+	SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION
 } from "../actions/action-types";
 
 const initialState = {
@@ -33,8 +33,16 @@ const initialState = {
 	subscription: null,
 	last_invoice: null,
 	upcoming_invoice: null,
+	trialing: false,
 	msg: {},
 	dlg_title: "Activate Your Community",
+
+	// for search
+	my_position: {
+		address: "",
+		lat: 44.9899597,
+		lng: -93.25608609999999,
+	},
 };
 
 export default function(state = initialState, action){
@@ -157,6 +165,14 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				dlg_title: action.payload,
+			};
+		case SET_MY_POSITION:
+			return {
+				...state,
+				my_position: {
+					...state.my_position,
+					...action.payload,
+				}
 			};
 		default:
 			return state;

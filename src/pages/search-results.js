@@ -4,6 +4,8 @@ import ListCommunities from "../components/list-communities";
 import '../css/search-results.css';
 import SearchBar from "../components/search-bar";
 import app_config from "../conf/config";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
 class SearchResults extends Component{
 	render(){
@@ -12,7 +14,7 @@ class SearchResults extends Component{
 				<div id="search-results-header" className="w3-col s12">
 					<SearchBar buttonTitle="Update"/>
 				</div>
-				<CommunityMap isMarkerShown
+				<CommunityMap isMarkerShown pos={this.props.my_pos}
 							  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
 							  loadingElement={<div className="w3-col m12 l6"/>}
 							  containerElement={<div className="map-body w3-col m12 l6"/>}
@@ -33,4 +35,17 @@ class SearchResults extends Component{
 	}
 }
 
-export default SearchResults;
+SearchResults.propTypes = {
+	errors: PropTypes.object.isRequired,
+	my_pos: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+	errors: state.errors,
+	my_pos: state.communities.my_position,
+});
+
+export default connect(
+	mapStateToProps,
+	{}
+)(SearchResults);

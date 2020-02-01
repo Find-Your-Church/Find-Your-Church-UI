@@ -10,6 +10,7 @@ import getNextMonth from "../../utils/getNextMonth";
 import '../../css/account.css';
 import "../../css/stripe-style.css";
 import formatNumner from "../../utils/formatNumber";
+import showAmount from "../../utils/showAmount";
 
 const cardStyle = {
 	base: {
@@ -207,13 +208,6 @@ class Account extends Component{
 		}, this.props.history);
 	};
 
-
-	showAmount(cents){
-		return (cents / 100).toLocaleString('en-US', {
-			style: 'currency', currency: 'USD'
-		});
-	}
-
 	async clickEditCard(){
 		if(this.state.editing_card){
 			const full_name = `${this.state.fname_on_card} ${this.state.lname_on_card}`;
@@ -247,13 +241,11 @@ class Account extends Component{
 
 		let next_due_date = "", next_month1 = "", next_month2 = "";
 		if(this.props.community.subscription){
-			const init_date = new Date(this.props.community.subscription.created * 1000);
+			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
 			const to_date = new Date();
-			let prev_due_date = init_date;
 			next_due_date = getNextMonth(init_date, 1);
 			let i = 2;
 			while(next_due_date.getTime() < to_date.getTime()){
-				prev_due_date = next_due_date;
 				next_due_date = getNextMonth(init_date, i).date;
 				i++;
 			}
@@ -262,10 +254,10 @@ class Account extends Component{
 		}
 
 		const uc_amount = this.props.community.subscription ?
-			this.showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
+			showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
 			: (this.props.community.is_sending ?
 				<i className="fas fa-spinner fa-spin"> </i>
-				: "-");
+				: "$0.00");
 
 		return (
 			<div>
@@ -527,14 +519,14 @@ class Account extends Component{
 												<h4 className="table-header">Activations</h4>
 												<i className={"fas fa-question-circle tooltip-icon"}> </i>
 											</div>
-											<h4 className="table-item right" title={"Communities activated / Paid activations"}>
+											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")} title={"Communities activated / Paid activations"}>
 												{formatNumner(this.props.community.my_communities.active.length)}
 												&nbsp;/&nbsp;
 												{this.props.community.subscription ?
 													formatNumner(this.props.community.subscription.quantity + this.props.community.tickets)
 													: (this.props.community.is_sending ?
 														<i className="fas fa-spinner fa-spin"> </i>
-														: "-")}
+														: "00")}
 											</h4>
 										</div>
 										<div className="table-row-2">
@@ -542,43 +534,43 @@ class Account extends Component{
 												<h4 className="table-header">Price</h4>
 												<i className={"fas fa-question-circle tooltip-icon"}> </i>
 											</div>
-											<h4 className="table-item right">
+											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}>
 												{this.props.community.subscription ?
-													this.showAmount(this.props.community.subscription.plan.amount)
+													showAmount(this.props.community.subscription.plan.amount)
 													: (this.props.community.is_sending ?
 														<i className="fas fa-spinner fa-spin"> </i>
-														: "-")}
+														: "$0.00")}
 											</h4>
 										</div>
 										<div className="table-row-2">
 											<h4 className="table-header">Upcoming Payments</h4>
-											<h4 className="table-item right">
-												<div>
+											<h4 className={"table-item right"}>
+												<div className={(this.props.community.subscription ? "" : " grey")}>
 													{uc_amount}
 													&nbsp;on&nbsp;
 													{this.props.community.subscription ?
 														next_due_date.toLocaleDateString('en-US')
 														: (this.props.community.is_sending ?
 															<i className="fas fa-spinner fa-spin"> </i>
-															: "-")}
+															: "00/00/0000")}
 												</div>
-												<div>
+												<div className={(this.props.community.subscription ? "" : " grey")}>
 													{uc_amount}
 													&nbsp;on&nbsp;
 													{this.props.community.subscription ?
 														next_month1.toLocaleDateString('en-US')
 														: (this.props.community.is_sending ?
 															<i className="fas fa-spinner fa-spin"> </i>
-															: "-")}
+															: "00/00/0000")}
 												</div>
-												<div>
+												<div className={(this.props.community.subscription ? "" : " grey")}>
 													{uc_amount}
 													&nbsp;on&nbsp;
 													{this.props.community.subscription ?
 														next_month2.toLocaleDateString('en-US')
 														: (this.props.community.is_sending ?
 															<i className="fas fa-spinner fa-spin"> </i>
-															: "-")}
+															: "00/00/0000")}
 												</div>
 											</h4>
 										</div>
@@ -610,8 +602,8 @@ class Account extends Component{
 															   value={this.state.lname_on_card}/>
 													</div>
 												) : (
-													<span className={"w3-text-dark-grey w3-center"}>
-														{this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "No information"}
+													<span className={"w3-center grey"}>
+														{this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "(Card holder name)"}
 													</span>
 												)}
 											</div>
@@ -625,7 +617,7 @@ class Account extends Component{
 												<div className={"card-detail-item w3-row w3-text-grey"}
 													 style={{width: "100%"}}>
 													<div className={"w3-col l1"}>
-														<img alt={"Card image"}
+														<img alt={"Credit card"}
 															src={`/img/card/icon-${this.props.auth.user.billing_info.sources.data[0].brand.toLowerCase()}.svg`}/>
 													</div>
 													<div className={"w3-col l4"} title={"Card number"}>
