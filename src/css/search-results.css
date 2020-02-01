@@ -22,6 +22,7 @@ body{
 
 .map-body {
 	min-height: calc(100vh - 59px - var(--results-header-height));
+	width: calc(100vw - 480px);
 }
 
 @media screen and (max-width: 990px) {
@@ -32,4 +33,9 @@ body{
 	#search-results-header {
 		height: auto;
 	}
+}
+
+.communities-container{
+	width: 480px;
+	max-height: calc(100vh - 59px - var(--results-header-height));
 }

@@ -61,7 +61,7 @@ class Admin extends Component{
 						</div>
 					) : (
 						<Elements>
-							<StripeSubscription/>
+							<StripeSubscription second={!!this.props.community.subscription} />
 						</Elements>
 					)}
 				</div>

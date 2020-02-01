@@ -16,11 +16,11 @@ class SearchResults extends Component{
 				</div>
 				<CommunityMap isMarkerShown pos={this.props.my_pos}
 							  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
-							  loadingElement={<div className="w3-col m12 l6"/>}
-							  containerElement={<div className="map-body w3-col m12 l6"/>}
+							  loadingElement={<div/>}
+							  containerElement={<div className="map-body"/>}
 							  mapElement={<div className="map-body"/>}
 				/>
-				<div className="communities-container cream w3-col m12 l6">
+				<div className="communities-container cream">
 					<div className="resultssort-div">
 						<h3 className="listings-header">
 							Youth Group's near 315 1st Ave. NE Minneapolis, MN 55413</h3>
