@@ -163,6 +163,11 @@ h3 {
 	align-items: center;
 }
 
+.invoice-div #coupon {
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
 .subscriptioncontainer-div h4.value {
 	margin-top: 0;
 	margin-bottom: 0;
@@ -348,7 +353,7 @@ h4 {
 	padding-bottom: 10px;
 }
 
-.div10-bottom.right{
+.div10-bottom.right {
 	text-align: right;
 }
 
@@ -403,7 +408,7 @@ h4 {
 	color: #aaaaaa;
 }
 
-.pay-info-row input{
+.pay-info-row input {
 	border: none;
 	border-bottom: solid #cccccc 1px;
 }
@@ -484,7 +489,7 @@ h4 {
 }
 
 .grey {
-	color: #999999!important;
+	color: #999999 !important;
 }
 
 .italic-text {
@@ -503,6 +508,6 @@ h4 {
 	border-bottom: solid 1px #eaeaea;
 }
 
-.card-detail-item .w3-col:not(:first-child){
+.card-detail-item .w3-col:not(:first-child) {
 	margin-top: 5px;
 }

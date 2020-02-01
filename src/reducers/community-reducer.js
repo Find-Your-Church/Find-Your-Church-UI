@@ -9,7 +9,7 @@ import {
 	SET_STT_HIDE,
 	PICK_COMMUNITY,
 	CLEAR_BILLING_INFO,
-	SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION
+	SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION, COUPON_VERIFIED
 } from "../actions/action-types";
 
 const initialState = {
@@ -36,6 +36,7 @@ const initialState = {
 	trialing: false,
 	msg: {},
 	dlg_title: "Activate Your Community",
+	coupon_verified: false,
 
 	// for search
 	my_position: {
@@ -165,6 +166,11 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				dlg_title: action.payload,
+			};
+		case COUPON_VERIFIED:
+			return {
+				...state,
+				coupon_verified: action.payload, // true or false
 			};
 		case SET_MY_POSITION:
 			return {
