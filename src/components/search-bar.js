@@ -1,9 +1,12 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng
 } from "react-places-autocomplete";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {setMyPosition} from "../actions/community-actions";
 
 class SearchBar extends Component{
 	constructor(props){
@@ -16,6 +19,8 @@ class SearchBar extends Component{
 				lat: null,
 				lng: null,
 			},
+
+			ready2go: false,
 		};
 
 		this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -36,8 +41,20 @@ class SearchBar extends Component{
 			.catch(error => console.error('Error', error));
 	};
 
+	handleSearch = () => {
+		// -> /search-results
+		this.props.setMyPosition({
+			address: this.state.address,
+			lat: this.state.coordinate.lat,
+			lng: this.state.coordinate.lng,
+		});
+		this.setState({ready2go: true});
+	};
+
 	render(){
-		return (
+		return this.state.ready2go ? (
+			<Redirect to={"/search-results"}/>
+		) : (
 			<div className="search-form-container w-form">
 				<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
 					<select id="field" name="field" data-name="Field"
@@ -64,13 +81,16 @@ class SearchBar extends Component{
 							<>
 								<input className="search-form-input w-node-5cf6ee0e50f3-ddb46e0f w-input"
 									   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
-									   {...getInputProps({placeholder: "315 1st Avenue SE, Minneapolis, MN 55413\" id=\"field-3"})}
+									   {...getInputProps({
+										   placeholder: this.props.my_pos.address || "315 1st Avenue SE, Minneapolis, MN 55413\" id=\"field-3",
+									   })}
 									   required=""/>
 								<div className={"search-address-candidates"}>
 									{loading ?
-										<div className={"w3-container w3-white we-text-grey"}>...loading</div> : null}
+										<div className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
 									{suggestions.map((suggestion) => {
 										const style = {
+											color: suggestion.active ? "#ffffff" : "#254184",
 											backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
 											backgroundImage: "url('/img/icon/icon-address-fill.svg')",
 										};
@@ -87,7 +107,8 @@ class SearchBar extends Component{
 							</>
 						)}
 					</PlacesAutocomplete>
-					<Link id="w-node-5cf6ee0e50f4-ddb46e0f" to={this.state.searchable ? "/search-results" : "#"}
+					<Link to={"#"}
+						  onClick={this.state.searchable ? this.handleSearch : null}
 						  className={"search-form-button w-button" + (this.state.searchable ? "" : " w3-grey w3-text-light-grey")}
 						  style={{cursor: (this.state.searchable ? "pointer" : "not-allowed")}}
 					>
@@ -105,4 +126,18 @@ class SearchBar extends Component{
 	}
 }
 
-export default SearchBar;
+SearchBar.propTypes = {
+	errors: PropTypes.object.isRequired,
+	my_pos: PropTypes.object.isRequired,
+	setMyPosition: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+	errors: state.errors,
+	my_pos: state.communities.my_position,
+});
+
+export default connect(
+	mapStateToProps,
+	{setMyPosition}
+)(SearchBar);

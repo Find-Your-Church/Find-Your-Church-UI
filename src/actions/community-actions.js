@@ -10,7 +10,7 @@ import {
 	SET_STT_HIDE,
 	SET_STT_SENDING,
 	PICK_COMMUNITY,
-	CLEAR_BILLING_INFO, SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE,
+	CLEAR_BILLING_INFO, SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -270,7 +270,6 @@ export const getBillingStatus = (info, history) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/getstatus", info)
 		.then(res => {
-			//console.log(JSON.stringify(res.data, null, 4));
 			dispatch({
 				type: SET_BILLING_INFO,
 				payload: res.data,
@@ -303,5 +302,18 @@ export const hideActivateDlg = () => dispatch => {
 	dispatch({
 		type: SET_DIALOG_TITLE,
 		payload: "Activate Your Community",
+	});
+};
+
+/**
+ * set my position for searching the communities
+ *
+ * @param pos_info object{address: string, lat: number, lng: number}
+ * @returns {function(*): *}
+ */
+export const setMyPosition = (pos_info) => dispatch => {
+	return dispatch({
+		type: SET_MY_POSITION,
+		payload: pos_info,
 	});
 };

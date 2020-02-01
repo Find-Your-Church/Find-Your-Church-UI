@@ -214,10 +214,20 @@ a {
 
 .search-address-candidates{
 	position: absolute;
+	left: 0;
+	top: 50px;
+	z-index: 1000;
+}
+
+@media screen and (max-width: 990px){
+	.search-address-candidates {
+		left: 0;
+		top: 100px;
+	}
 }
 
 .search-address-candidates .address-item {
-	padding: 4px 8px;
+	padding: 4px 16px;
 	height: 48px;
 	line-height: 42px;
 	background-repeat: no-repeat;
