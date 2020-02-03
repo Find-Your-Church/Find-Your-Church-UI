@@ -8,14 +8,13 @@ import {
 	registerCard,
 	clearLastInvoice,
 	activateCommunity,
-	hideActivateDlg, verifyCoupon, clearCouponVerified, clearCouponFailed, clearActiveStatus
+	hideActivateDlg, verifyCoupon, clearCouponVerified
 } from "../actions/community-actions";
 import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
 import "../css/stripe-style.css";
 import formatNumber from "../utils/formatNumber";
 import showAmount from "../utils/showAmount";
-import Popup from "reactjs-popup";
 
 const cardStyle = {
 	base: {
@@ -33,6 +32,10 @@ const cardStyle = {
 class StripeSubscription extends Component{
 	constructor(props){
 		super(props);
+
+		this.props.getBillingStatus({
+			user_id: this.props.auth.user.id,
+		}, this.props.history);
 
 		const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
 		this.state = {
@@ -53,24 +56,14 @@ class StripeSubscription extends Component{
 		console.log(this.props.community.subscription);
 	}
 
-	componentDidMount(){
-		this.props.clearActiveStatus();
-		this.props.clearCouponVerified();
-		this.props.clearCouponFailed();
-		this.props.getBillingStatus({
-			user_id: this.props.auth.user.id,
-		}, this.props.history);
-	}
-
 	onChange = e => {
 		if(e.target.id === 'coupon'){
 			this.props.clearCouponVerified();
-			this.props.clearCouponFailed();
 		}
 		this.setState({[e.target.id]: e.target.value});
 	};
 
-	verifyCoupon(){
+	verifyCoupon() {
 		this.props.verifyCoupon({
 			code: this.state.coupon,
 		});
@@ -98,7 +91,6 @@ class StripeSubscription extends Component{
 			 */
 			if(token !== undefined){
 				this.props.registerCard({
-					id: this.props.auth.user.id,
 					source: token.id,
 					email: this.props.auth.user.email,
 					name: full_name,
@@ -107,8 +99,7 @@ class StripeSubscription extends Component{
 			}
 		}
 		else{
-			const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
-			const name_on_card = (customer ? customer.sources.data[0].name : "").split(" ");
+			const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
 			this.setState({
 				fname_on_card: name_on_card[0],
 				lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
@@ -179,8 +170,6 @@ class StripeSubscription extends Component{
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
 
-		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
-
 		return (
 			<div className="subscriptioncontainer-div w3-modal-content w3-card-4 w3-animate-zoom">
 				<div className="header1-div gradient shadow">
@@ -196,24 +185,14 @@ class StripeSubscription extends Component{
 							<div className="div-block-147">
 								<div className="accordionheader-div nounderline">
 									<h3>Account Summary</h3>
-									<Popup
-										trigger={<i style={{cursor: "pointer"}}
-													className={"fas fa-question-circle tooltip-icon"}> </i>}
-										position={"left top"}>
-										<div>Tell visitors more about your community...</div>
-									</Popup>
+									<i className={"fas fa-question-circle tooltip-icon"}> </i>
 								</div>
 								<div className="subscribe-container">
 									<div className="invoice-row">
 										<div className="invoice-div">
 											<div className="filtersheader-div">
 												<h4 className="table-header">Activations</h4>
-												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																className={"fas fa-question-circle tooltip-icon"}> </i>}
-													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
-												</Popup>
+												<i className={"fas fa-question-circle tooltip-icon"}> </i>
 											</div>
 											<div>
 												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}
@@ -233,12 +212,7 @@ class StripeSubscription extends Component{
 										<div className="invoice-div">
 											<div className="filtersheader-div">
 												<h4 className="table-header">Price</h4>
-												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																className={"fas fa-question-circle tooltip-icon"}> </i>}
-													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
-												</Popup>
+												<i className={"fas fa-question-circle tooltip-icon"}> </i>
 											</div>
 											<div>
 												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
@@ -259,14 +233,8 @@ class StripeSubscription extends Component{
 												</div>
 												<input type="text"
 													   className="w3-half w3-border-bottom w3-hover-border-blue w3-center w3-normal"
-													   style={{
-														   border: "none",
-														   backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : (
-															   this.props.community.coupon_failed ? "url(/img/icon/icon-warning.svg)" : "none"
-														   )
-													   }}
-													   title={this.props.community.coupon_verified ? "Discount code verified" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
-													   placeholder="Enter discount code here"
+													   style={{border: "none", backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : "none"}}
+													   title="Discount code" placeholder="Enter discount code here"
 													   id="coupon" onChange={this.onChange}
 													   value={this.state.coupon} autoFocus/>
 												<button onClick={this.verifyCoupon}
@@ -282,12 +250,7 @@ class StripeSubscription extends Component{
 								<div className="div-block-147">
 									<div className="accordionheader-div nounderline">
 										<h3>Billing Summary</h3>
-										<Popup
-											trigger={<i style={{cursor: "pointer"}}
-														className={"fas fa-question-circle tooltip-icon"}> </i>}
-											position={"left top"}>
-											<div>Tell visitors more about your community...</div>
-										</Popup>
+										<i className={"fas fa-question-circle tooltip-icon"}> </i>
 									</div>
 									<div className="subscribe-container">
 										<div className="invoice-row">
@@ -351,10 +314,10 @@ class StripeSubscription extends Component{
 															</h4>
 														)}
 														<h4 className="value w3-text-green right">
-															{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
+															{this.props.community.last_invoice ?
 																showAmount(this.props.community.my_communities.active.length *
 																	this.props.community.subscription.plan.amount)
-																: "$0.00")}
+																: "$0.00"}
 														</h4>
 													</div>
 												</div>
@@ -452,7 +415,7 @@ class StripeSubscription extends Component{
 													</div>
 												) : (
 													<span className={"w3-center grey"}>
-														{customer ? customer.sources.data[0].name : "(Card holder name)"}
+														{this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "(Card holder name)"}
 													</span>
 												)}
 											</div>
@@ -466,27 +429,27 @@ class StripeSubscription extends Component{
 												<i className="fas fa-spinner fa-spin"> </i>
 											</div>
 										) : (
-											customer ? (
+											this.props.auth.user.billing_info ? (
 												<div className={"card-detail"}>
 													<div className={"card-detail-item w3-row w3-text-grey"}>
 														<div className={"w3-col l1"}>
 															<img alt={"Card image"}
-																 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+																 src={`/img/card/icon-${this.props.auth.user.billing_info.sources.data[0].brand.toLowerCase()}.svg`}/>
 														</div>
 														<div className={"w3-col l4"} title={"Card number"}>
 															**** **** ****&nbsp;
-															{customer.sources.data[0].last4}
+															{this.props.auth.user.billing_info.sources.data[0].last4}
 														</div>
 														<div className={"w3-col l3"} title={"Expiration"}>
-															{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
+															{this.props.auth.user.billing_info.sources.data[0].exp_month}/{this.props.auth.user.billing_info.sources.data[0].exp_year}
 														</div>
 														<div className={"w3-col l2"}
-															 title={customer.sources.data[0].cvc_check}>
+															 title={this.props.auth.user.billing_info.sources.data[0].cvc_check}>
 															***
 														</div>
 														<div className={"w3-col l2"}
-															 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
-															{customer.sources.data[0].address_zip}
+															 title={`Zip code: ${this.props.auth.user.billing_info.sources.data[0].address_zip_check}`}>
+															{this.props.auth.user.billing_info.sources.data[0].address_zip}
 														</div>
 													</div>
 												</div>
@@ -499,12 +462,10 @@ class StripeSubscription extends Component{
 											<div>Oops! Something went wrong while submitting the form.</div>
 										</div>
 									</div>
-									{this.props.community.activating || this.props.community.active_status !== 0 ? (
-										this.props.community.active_status === 1 ? (
-											<div className={"w3-center w3-xlarge w3-text-blue"}>Success!</div>
-										) : (this.props.community.active_status === 2 ? (
-											<div className={"w3-center w3-xlarge w3-text-red"}>Failed!</div>
-										) : null)
+									{this.props.community.is_sending ? (
+										this.props.community.msg ? (
+											" " // this.props.community.msg
+										) : null
 									) : (
 										<div className="submit-row">
 											<button
@@ -541,9 +502,7 @@ StripeSubscription.propTypes = {
 	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
 	verifyCoupon: PropTypes.func.isRequired,
-	clearActiveStatus: PropTypes.func.isRequired,
 	clearCouponVerified: PropTypes.func.isRequired,
-	clearCouponFailed: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 	registerCard: PropTypes.func.isRequired,
 	clearLastInvoice: PropTypes.func.isRequired,
@@ -559,15 +518,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{
-		verifyCoupon,
-		clearActiveStatus,
-		clearCouponVerified,
-		clearCouponFailed,
-		getBillingStatus,
-		registerCard,
-		clearLastInvoice,
-		activateCommunity,
-		hideActivateDlg
-	}
+	{verifyCoupon, clearCouponVerified, getBillingStatus, registerCard, clearLastInvoice, activateCommunity, hideActivateDlg}
 )(injectStripe(StripeSubscription));

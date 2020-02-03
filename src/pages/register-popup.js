@@ -3,10 +3,11 @@ import SiteFooter from "../components/site-footer";
 import "../css/login-register.css";
 import {Link, withRouter} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {registerUser, registerGoogleUser} from "../actions/auth-actions";
-import config from "../auth-config";
+import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-actions";
+import config from "../conf/config";
 
 class RegisterPopup extends Component{
 	constructor(props){
@@ -21,13 +22,6 @@ class RegisterPopup extends Component{
 		};
 	}
 
-	componentDidMount(){
-		// If logged in and user navigates to Register page, should redirect them to dashboard
-		if(this.props.auth.isAuthenticated){
-			this.props.history.push("/dashboard");
-		}
-	}
-
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
 			return {errors: nextProps.errors};
@@ -36,12 +30,22 @@ class RegisterPopup extends Component{
 			return null;
 	}
 
+	componentDidMount(){
+		this.props.clearErrors();
+	}
+
 	onChange = e => {
 		this.setState({[e.target.id]: e.target.value});
 	};
 
+	/**
+	 * Request API to register
+	 *
+	 * @param e
+	 */
 	onSubmit = e => {
 		e.preventDefault();
+
 		const newUser = {
 			fname: this.state.fname,
 			lname: this.state.lname,
@@ -61,13 +65,6 @@ class RegisterPopup extends Component{
 	 * @param response
 	 */
 	googleResponse = response => {
-		//const tokenBlob = new Blob(
-		//	[JSON.stringify({access_token: response.accessToken}, null, 2)],
-		//	{type: 'application/json'}
-		//);
-
-		console.log(response);
-
 		const userData = {
 			social_token: response.accessToken,
 			google_id: response.googleId,
@@ -80,14 +77,6 @@ class RegisterPopup extends Component{
 	};
 
 	render(){
-		const {errors} = this.state;
-		const err_msg = ""
-			+ (errors.name !== undefined ? errors.name + ". " : "")
-			+ (errors.email !== undefined ? errors.email + ". " : "")
-			+ (errors.password !== undefined ? errors.password + ". " : "")
-			+ (errors.password2 !== undefined ? errors.password2 + ". " : "");
-		const is_error = err_msg.length > 0;
-
 		return (
 			<main>
 				<div className="sign-body">
@@ -99,7 +88,8 @@ class RegisterPopup extends Component{
 							<div>
 								<div className="form-div1">
 									<div className="form-block1 w-form">
-										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration" name="wf-form-Registration"
+										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
+											  name="wf-form-Registration"
 											  data-name="Registration" className="form1">
 											<div className="form-row">
 												<div className="input-div gradient w3-row">
@@ -162,14 +152,14 @@ class RegisterPopup extends Component{
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
 										</div>
-										<div className="w-form-fail" style={{display: is_error ? "block" : "none"}}>
-											{err_msg}
+										<div className="w-form-fail" style={{display: this.props.errors.msg_register ? "block" : "none"}}>
+											{this.props.errors.msg_register}
 										</div>
 									</div>
 								</div>
-								<div className="div-block-54">
+								<div className="terms-conditions">
 									<span className="fineprint">By registering you are agreeing to our</span>
-									<Link to="#" className="fineprint link">Terms and Conditions</Link>
+									<Link to="/terms-n-conditions" className="fineprint link">Terms and Conditions</Link>
 								</div>
 							</div>
 							<div>
@@ -183,22 +173,22 @@ class RegisterPopup extends Component{
 											buttonText="Sign up with Google"
 											onSuccess={this.googleResponse}
 											onFailure={this.onFailure}/>
-										<div className="sdkbutton-div">
-											<img src="img/icon-facebook.svg"
-												 srcSet="img/icon-facebook.svg 500w, img/icon-facebook.svg 768w"
-												 sizes="20px" alt="" className="button-icon"/>
-											<Link to="#" className="button google w-button-sign">
-												Sign up with Facebook
-											</Link>
-										</div>
+										<FacebookLogin
+											appId={config.FACEBOOK_APP_ID}
+											autoLoad={false}
+											fields="name,email,picture"
+											callback={this.facebookResponse}/>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className="div-block-46"><h1 className="heading-11">
-							<Link to="/login-popup"
-								  className="link-5">Already have an
-								account?&nbsp;Sign In</Link></h1></div>
+						<div className="div-block-46">
+							<h1 className="heading-11">
+								<Link to="/login-popup" className="link-5">
+									Already have an account?&nbsp;Sign In
+								</Link>
+							</h1>
+						</div>
 					</div>
 				</div>
 				<SiteFooter/>
@@ -208,10 +198,11 @@ class RegisterPopup extends Component{
 }
 
 RegisterPopup.propTypes = {
+	auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+	clearErrors: PropTypes.func.isRequired,
 	registerUser: PropTypes.func.isRequired,
 	registerGoogleUser: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
 	auth: state.auth,
@@ -219,5 +210,9 @@ const mapStateToProps = state => ({
 });
 export default connect(
 	mapStateToProps,
-	{registerUser, registerGoogleUser}
+	{
+		clearErrors,
+		registerUser,
+		registerGoogleUser,
+	}
 )(withRouter(RegisterPopup));

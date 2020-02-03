@@ -15,17 +15,23 @@
 	background-image: linear-gradient(180deg, #e6e6e6, #e6e6e6);
 }
 
+.admin-body .admin-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1366px;
+}
+
 .admin-left {
 	padding: 20px;
-	width: 390px;
-	min-width: 390px;
+	width: 290px;
+	min-width: 290px;
 }
 
 .admin-right {
 	margin: 0;
 	padding: 20px 20px 20px 0;
 	height: calc(100vh - var(--footer-height) - 68px);
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 @media screen and (max-width: 990px) {
@@ -48,14 +54,36 @@
  * Profile container
  */
 .profile-container {
-	width: 350px;
-	min-width: 350px;
-	background-color: #fff;
+	padding: 20px;
+	width: 250px;
+	min-width: 250px;
+	height: auto;
+	background-color: #f3f3f3;
 	border: solid 1px #ccc;
 }
 
+.profile-header-wrapper{
+	padding-bottom: 6px;
+	border-bottom: solid 1px #e6e6e6;
+}
+
+.profile-header {
+	display: inline-block;
+	margin: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #1b0033;
+	font-size: 18px;
+	line-height: 18px;
+	font-weight: 600;
+}
+
+.profile-header-wrapper i{
+	float: right;
+	margin-top: 4px;
+}
+
 .profile-container .div-block-55 {
-	/* background-image: url("../../img/bg-world-map.png"); */
+	margin-top: 20px;
 	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 	background-position: 50% 50%;
 	background-size: cover;
@@ -109,7 +137,8 @@
 }
 
 .profile-info {
-	padding: 10px;
+	padding: 0 10px 10px;
+	margin-bottom: 20px;
 	background-color: #fff;
 	box-shadow: none;
 }
@@ -298,6 +327,15 @@
 	padding-bottom: 0;
 	color: #1b0033;
 	line-height: 18px;
+}
+
+.personal-info .personal-info-item {
+	height: 32px;
+	line-height: 30px;
+	background-repeat: no-repeat;
+	background-position: 0 center;
+	background-size: 18px;
+	text-indent: 22px;
 }
 
 /*

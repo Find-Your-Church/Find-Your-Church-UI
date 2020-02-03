@@ -2,7 +2,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import {
-	GET_SRV_MSG, RESET_ERRORS,
+	MESSAGE_FROM_API, RESET_MESSAGES,
 	SET_CURRENT_USER, SET_SENDING_STATUS,
 	UPDATE_USER_INFO,
 } from "./action-types";
@@ -18,11 +18,11 @@ import app_config from "../conf/config";
 export const registerUser = (userData, history) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/register", userData)
-		.then(res => history.push("/login-popup")) // re-direct to login on successful register
+		.then(res => history.push("/welcome")) // re-direct to welcome page on successful register
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
-				payload: err.response ? err.response.data : {error: ""}
+				type: MESSAGE_FROM_API,
+				payload: err.response ? err.response.data : {error: "error"}
 			})
 		);
 };
@@ -37,13 +37,12 @@ export const registerUser = (userData, history) => dispatch => {
 export const registerGoogleUser = (userData, history) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/googleregister", userData)
-		.then(res => history.push("/login-popup")) // re-direct to login on successful register
-		.catch(err => {
-				dispatch({
-					type: GET_SRV_MSG,
-					payload: err.response ? err.response.data : {error: "success"}
-				})
-			}
+		.then(res => history.push("/welcome")) // re-direct to welcome page on successful register
+		.catch(err =>
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response ? err.response.data : {error: "error"}
+			})
 		);
 };
 
@@ -56,7 +55,7 @@ export const registerGoogleUser = (userData, history) => dispatch => {
  */
 export const loginUser = (userData, history) => dispatch => {
 	dispatch({
-		type: RESET_ERRORS,
+		type: RESET_MESSAGES,
 		payload: null,
 	});
 	dispatch({
@@ -77,17 +76,18 @@ export const loginUser = (userData, history) => dispatch => {
 			// Decode token to get user data
 			const decoded = jwt_decode(token);
 
+			// Set current user
+			dispatch({
+				type: SET_CURRENT_USER,
+				payload: decoded
+			});
+
 			dispatch({
 				type: SET_SENDING_STATUS,
 				payload: false,
 			});
-			dispatch({
-				type: GET_SRV_MSG,
-				payload: res.data,
-			});
 
-			// Set current user
-			dispatch(setCurrentUser(decoded));
+			history.push("/");
 		})
 		.catch(err => {
 			dispatch({
@@ -95,7 +95,7 @@ export const loginUser = (userData, history) => dispatch => {
 				payload: false,
 			});
 			return dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response ? err.response.data : {msg: ""},
 			});
 		});
@@ -140,7 +140,7 @@ export const loginGoogleUser = userData => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response ? err.response.data : {error: ""}
 			})
 		);
@@ -163,7 +163,7 @@ export const setCurrentUser = decoded => {
  * Do logout.
  * @returns {function(...[*]=)}
  */
-export const logoutUser = () => dispatch => {
+export const logoutUser = (history) => dispatch => {
 	// Remove token from local storage
 	localStorage.removeItem("jwtToken");
 
@@ -172,6 +172,8 @@ export const logoutUser = () => dispatch => {
 
 	// Set current user to empty object {} which will set isAuthenticated to false
 	dispatch(setCurrentUser({}));
+
+	history.push("/");
 };
 
 /**
@@ -186,7 +188,7 @@ export const resetPassword = (userData, history) => dispatch => {
 		.then(res => history.push("/login-popup"))
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response.data,
 			})
 		);
@@ -194,7 +196,7 @@ export const resetPassword = (userData, history) => dispatch => {
 
 export const changePassword = (userData) => dispatch => {
 	dispatch({
-		type: RESET_ERRORS,
+		type: RESET_MESSAGES,
 		payload: null,
 	});
 	dispatch({
@@ -209,7 +211,7 @@ export const changePassword = (userData) => dispatch => {
 				payload: false,
 			});
 			return dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: res.data,
 			});
 		})
@@ -219,7 +221,7 @@ export const changePassword = (userData) => dispatch => {
 				payload: false,
 			});
 			return dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response.data,
 			});
 		});
@@ -227,7 +229,7 @@ export const changePassword = (userData) => dispatch => {
 
 export const verifyEmail = (userData) => dispatch => {
 	dispatch({
-		type: RESET_ERRORS,
+		type: RESET_MESSAGES,
 		payload: null,
 	});
 	dispatch({
@@ -242,7 +244,7 @@ export const verifyEmail = (userData) => dispatch => {
 				payload: false,
 			});
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: res.data,
 			});
 			getUserInfo(userData.id);
@@ -253,7 +255,7 @@ export const verifyEmail = (userData) => dispatch => {
 				payload: false,
 			});
 			return dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response.data,
 			});
 		});
@@ -272,7 +274,7 @@ export const doResetPassword = (userData, history) => dispatch => {
 		.then(res => history.push("/reset"))
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response.data,
 			})
 		);
@@ -280,7 +282,7 @@ export const doResetPassword = (userData, history) => dispatch => {
 
 export const doChangePassword = (userData, history) => dispatch => {
 	dispatch({
-		type: RESET_ERRORS,
+		type: RESET_MESSAGES,
 		payload: null,
 	});
 	dispatch({
@@ -295,7 +297,7 @@ export const doChangePassword = (userData, history) => dispatch => {
 				payload: false,
 			});
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: res.data,
 			});
 			history.push("/login-popup");
@@ -306,41 +308,24 @@ export const doChangePassword = (userData, history) => dispatch => {
 				payload: false,
 			});
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response.data,
 			})
 		});
 };
 
 export const doVerifyEmail = (userData, history) => dispatch => {
-	dispatch({
-		type: RESET_ERRORS,
-		payload: null,
-	});
-	dispatch({
-		type: SET_SENDING_STATUS,
-		payload: true,
-	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/doverifyemail", userData)
 		.then(res => {
 			dispatch({
-				type: SET_SENDING_STATUS,
-				payload: false,
-			});
-			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: res.data,
-			});
-			history.push("/dashboard/account");
+			})
 		})
 		.catch(err => {
 			dispatch({
-				type: SET_SENDING_STATUS,
-				payload: false,
-			});
-			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response.data,
 			})
 		});
@@ -357,15 +342,22 @@ export const updateUserInfo = (userData) => dispatch => {
 					payload: userData
 				});
 				dispatch({
-					type: GET_SRV_MSG,
+					type: MESSAGE_FROM_API,
 					payload: res.data
 				});
 			}
 		)
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response ? err.response.data : {},
 			})
 		);
+};
+
+export const clearErrors = () => dispatch => {
+	return dispatch({
+		type: RESET_MESSAGES,
+		payload: null,
+	})
 };

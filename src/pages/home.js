@@ -2,14 +2,19 @@ import React, {Component} from "react";
 import '../css/home.css';
 import SearchBar from "../components/search-bar";
 import SiteFooter from "../components/site-footer";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getUserInfo} from "../actions/auth-actions";
 
 /**
  *
  */
 class Home extends Component{
-	render(){
-		console.log(process.env.FYC_API_URL);
+	componentDidMount(){
+		this.props.getUserInfo();
+	}
 
+	render(){
 		return (
 			<main className="home-main">
 				<div className="block-48 w3-display-container">
@@ -34,7 +39,7 @@ class Home extends Component{
 								<div>
 									<img
 										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"
+										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
 										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
 								</div>
 								<div className="div-20top center"><h2>Search</h2></div>
@@ -47,7 +52,7 @@ class Home extends Component{
 								<div>
 									<img
 										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"
+										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
 										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
 								</div>
 								<div className="div-20top center"><h2>Search</h2></div>
@@ -60,7 +65,7 @@ class Home extends Component{
 								<div>
 									<img
 										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"
+										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
 										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
 								</div>
 								<div className="div-20top center"><h2>Search</h2></div>
@@ -73,7 +78,7 @@ class Home extends Component{
 								<div>
 									<img
 										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"
+										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
 										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
 								</div>
 								<div className="div-20top center"><h2>Search</h2></div>
@@ -91,4 +96,14 @@ class Home extends Component{
 	}
 }
 
-export default Home;
+Home.propTypes = {
+	auth: PropTypes.object.isRequired,
+	getUserInfo: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+export default connect(
+	mapStateToProps,
+	{getUserInfo}
+)(Home);

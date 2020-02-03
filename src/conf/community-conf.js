@@ -1,5 +1,20 @@
 
 const community_config = {
+	SOCIALS: [
+		"Facebook", "Instagram", "Vimeo", "Youtube", "Podcast", "Twitter",
+	],
+
+	/**
+	 * must include at least 1 category.
+	 */
+	CATEGORIES: [
+		"Church", "Young Adult Group", "Youth Group",
+	],
+
+	SEARCH_RADIUS: [
+		1, 3, 5, 1000, 5000, // 1000 and 5000 are for testing
+	],
+
 	FILTERS: {
 		days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
 		times: ["Morning", "Afternoon", "Evening"],
@@ -14,10 +29,6 @@ const community_config = {
 		event_type: ["Social", "Worship", "Guest Speaker", "Concert", "Fundraiser", "Conference", "Community Outreach", "Recreational Sports"],
 		support_type: ["Divorce", "Addiction", "Death / Grief", "LGBTQ", "Marriage"]
 	},
-
-	SOCIALS: [
-		"Facebook", "Instagram", "Vimeo", "Youtube", "Podcast", "Twitter",
-	]
 };
 
 export default community_config;

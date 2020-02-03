@@ -1,8 +1,8 @@
 /**
  * general errors handle
  */
-export const GET_SRV_MSG = "GET_SRV_MSG";
-export const RESET_ERRORS = "RESET_ERRORS";
+export const MESSAGE_FROM_API = "MESSAGE_FROM_API";
+export const RESET_MESSAGES = "RESET_MESSAGES";
 
 /**
  * authentication handles
@@ -31,9 +31,20 @@ export const SET_STT_READY = "SET_STT_READY";
 export const SET_STT_HIDE = "SET_STT_HIDE";
 export const SET_DIALOG_TITLE = "SET_DIALOG_TITLE";
 
+export const SHOW_ACT_DLG = "SHOW_ACT_DLG";
+export const ACTIVATING = "ACTIVATING";
+export const ACTIVE_STATUS = "ACTIVE_STATUS";
+export const DEACTIVATING = "DEACTIVATING";
+
 export const COUPON_VERIFIED = "COUPON_VERIFIED";
+export const COUPON_FAILED = "COUPON_FAILED";
 
 /**
  * search results
  */
-export const SET_MY_POSITION = "SET_MY_POSITION";
+export const SEARCH_CRITERIA = "SEARCH_CRITERIA";
+export const SET_SEARCH_FILTER = "SET_SEARCH_FILTER";
+export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
+export const SORT_ORDER = "SORT_ORDER";
+export const SET_PICKING = "SET_PICKING";
+export const VIEW_COMMUNITY = "VIEW_COMMUNITY";

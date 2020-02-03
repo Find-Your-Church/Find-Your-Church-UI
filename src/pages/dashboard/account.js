@@ -11,6 +11,7 @@ import '../../css/account.css';
 import "../../css/stripe-style.css";
 import formatNumner from "../../utils/formatNumber";
 import showAmount from "../../utils/showAmount";
+import Popup from "reactjs-popup";
 
 const cardStyle = {
 	base: {
@@ -218,6 +219,7 @@ class Account extends Component{
 			 */
 			if(token !== undefined){
 				this.props.registerCard({
+					id: this.props.auth.user.id,
 					source: token.id,
 					email: this.props.auth.user.email,
 					name: full_name,
@@ -226,7 +228,8 @@ class Account extends Component{
 			}
 		}
 		else{
-			const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
+			const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
+			const name_on_card = (customer ? customer.sources.data[0].name : "").split(" ");
 			this.setState({
 				fname_on_card: name_on_card[0],
 				lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
@@ -259,6 +262,8 @@ class Account extends Component{
 				<i className="fas fa-spinner fa-spin"> </i>
 				: "$0.00");
 
+		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
+
 		return (
 			<div>
 				<div className="w3-modal"
@@ -278,7 +283,12 @@ class Account extends Component{
 									<div className={"sub-content"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Admin Info</h5>
-											<i className={"fas fa-question-circle tooltip-icon w3-right"}> </i>
+											<Popup
+												trigger={<i style={{cursor: "pointer"}}
+															className={"fas fa-question-circle tooltip-icon"}> </i>}
+												position={"left top"}>
+												<div>Tell visitors more about your community...</div>
+											</Popup>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Name</h4>
@@ -343,7 +353,7 @@ class Account extends Component{
 											<h4 className="table-item">
 												{this.state.editingPhone ?
 													<div className="w3-row">
-														<input type="phone" className="w3-col"
+														<input type="tel" className="w3-col"
 															   title="Phone" placeholder="Phone"
 															   id="user_phone" onChange={this.onChange}
 															   value={this.state.user_phone} autoFocus/>
@@ -370,7 +380,12 @@ class Account extends Component{
 									<div className={"sub-content"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">User Info</h5>
-											<i className={"fas fa-question-circle tooltip-icon w3-right"}> </i>
+											<Popup
+												trigger={<i style={{cursor: "pointer"}}
+															className={"fas fa-question-circle tooltip-icon"}> </i>}
+												position={"left top"}>
+												<div>Tell visitors more about your community...</div>
+											</Popup>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Email</h4>
@@ -462,7 +477,12 @@ class Account extends Component{
 										<div className="table-row">
 											<div id="w-node-cb8d7881b980-27fc25a8" className="flexdiv-left">
 												<h4 className="table-header">Referral Code</h4>
-												<i className={"fas fa-question-circle tooltip-icon"}> </i>
+												<Popup
+													trigger={<i style={{cursor: "pointer"}}
+																className={"fas fa-question-circle tooltip-icon"}> </i>}
+													position={"right center"}>
+													<div>Tell visitors more about your community...</div>
+												</Popup>
 											</div>
 											<h4 className="table-item">
 												{this.state.editingRefCode ?
@@ -512,12 +532,22 @@ class Account extends Component{
 									<div className={"sub-content"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Account Summary</h5>
-											<i className={"fas fa-question-circle tooltip-icon w3-right"}> </i>
+											<Popup
+												trigger={<i style={{cursor: "pointer"}}
+															className={"fas fa-question-circle tooltip-icon"}> </i>}
+												position={"left top"}>
+												<div>Tell visitors more about your community...</div>
+											</Popup>
 										</div>
 										<div className="table-row-2">
 											<div className="flexdiv-left">
 												<h4 className="table-header">Activations</h4>
-												<i className={"fas fa-question-circle tooltip-icon"}> </i>
+												<Popup
+													trigger={<i style={{cursor: "pointer"}}
+																className={"fas fa-question-circle tooltip-icon"}> </i>}
+													position={"right center"}>
+													<div>Tell visitors more about your community...</div>
+												</Popup>
 											</div>
 											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")} title={"Communities activated / Paid activations"}>
 												{formatNumner(this.props.community.my_communities.active.length)}
@@ -532,7 +562,12 @@ class Account extends Component{
 										<div className="table-row-2">
 											<div className="flexdiv-left">
 												<h4 className="table-header">Price</h4>
-												<i className={"fas fa-question-circle tooltip-icon"}> </i>
+												<Popup
+													trigger={<i style={{cursor: "pointer"}}
+																className={"fas fa-question-circle tooltip-icon"}> </i>}
+													position={"right center"}>
+													<div>Tell visitors more about your community...</div>
+												</Popup>
 											</div>
 											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}>
 												{this.props.community.subscription ?
@@ -603,7 +638,7 @@ class Account extends Component{
 													</div>
 												) : (
 													<span className={"w3-center grey"}>
-														{this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "(Card holder name)"}
+														{customer ? customer.sources.data[0].name : "(Card holder name)"}
 													</span>
 												)}
 											</div>
@@ -613,27 +648,27 @@ class Account extends Component{
 														 disabled={!this.state.editing_card}/>
 										</div>
 										<div className="form-row">
-											{this.props.auth.user.billing_info ? (
+											{customer ? (
 												<div className={"card-detail-item w3-row w3-text-grey"}
 													 style={{width: "100%"}}>
 													<div className={"w3-col l1"}>
 														<img alt={"Credit card"}
-															src={`/img/card/icon-${this.props.auth.user.billing_info.sources.data[0].brand.toLowerCase()}.svg`}/>
+															src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
 													</div>
 													<div className={"w3-col l4"} title={"Card number"}>
 														**** **** ****&nbsp;
-														{this.props.auth.user.billing_info.sources.data[0].last4}
+														{customer.sources.data[0].last4}
 													</div>
 													<div className={"w3-col l3"} title={"Expiration"}>
-														{this.props.auth.user.billing_info.sources.data[0].exp_month}/{this.props.auth.user.billing_info.sources.data[0].exp_year}
+														{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
 													</div>
 													<div className={"w3-col l2"}
-														 title={this.props.auth.user.billing_info.sources.data[0].cvc_check}>
+														 title={customer.sources.data[0].cvc_check}>
 														***
 													</div>
 													<div className={"w3-col l2"}
-														 title={`Zip code: ${this.props.auth.user.billing_info.sources.data[0].address_zip_check}`}>
-														{this.props.auth.user.billing_info.sources.data[0].address_zip}
+														 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
+														{customer.sources.data[0].address_zip}
 													</div>
 												</div>
 											) : null}

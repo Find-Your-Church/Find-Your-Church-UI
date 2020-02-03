@@ -1,11 +1,11 @@
-import {GET_SRV_MSG, RESET_ERRORS} from "../actions/action-types";
+import {MESSAGE_FROM_API, RESET_MESSAGES} from "../actions/action-types";
 
 const initialState = {};
 export default function(state = initialState, action){
 	switch(action.type){
-		case GET_SRV_MSG:
+		case MESSAGE_FROM_API:
 			return action.payload;
-		case RESET_ERRORS:
+		case RESET_MESSAGES:
 			return {};
 		default:
 			return state;
