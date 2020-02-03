@@ -38,6 +38,7 @@ export const DEACTIVATING = "DEACTIVATING";
 
 export const COUPON_VERIFIED = "COUPON_VERIFIED";
 export const COUPON_FAILED = "COUPON_FAILED";
+export const GET_PLAN = "GET_PLAN";
 
 /**
  * search results

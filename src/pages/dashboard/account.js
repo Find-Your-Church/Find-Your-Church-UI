@@ -549,7 +549,8 @@ class Account extends Component{
 													<div>Tell visitors more about your community...</div>
 												</Popup>
 											</div>
-											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")} title={"Communities activated / Paid activations"}>
+											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}
+												title={"Communities activated / Paid activations"}>
 												{formatNumner(this.props.community.my_communities.active.length)}
 												&nbsp;/&nbsp;
 												{this.props.community.subscription ?
@@ -643,36 +644,39 @@ class Account extends Component{
 												)}
 											</div>
 										</div>
-										<div className="form-row">
-											<CardElement className="CardInfoStyle" style={cardStyle}
-														 disabled={!this.state.editing_card}/>
-										</div>
-										<div className="form-row">
-											{customer ? (
-												<div className={"card-detail-item w3-row w3-text-grey"}
-													 style={{width: "100%"}}>
-													<div className={"w3-col l1"}>
-														<img alt={"Credit card"}
-															src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+										{this.state.editing_card ? (
+											<div className="form-row">
+												<CardElement className="CardInfoStyle" style={cardStyle}
+															 disabled={!this.state.editing_card}/>
+											</div>
+										) : (
+											<div className="form-row">
+												{customer ? (
+													<div className={"card-detail-item w3-row w3-text-grey"}
+														 style={{width: "100%"}}>
+														<div className={"w3-col l1"}>
+															<img alt={"Credit card"}
+																 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+														</div>
+														<div className={"w3-col l4"} title={"Card number"}>
+															**** **** ****&nbsp;
+															{customer.sources.data[0].last4}
+														</div>
+														<div className={"w3-col l3"} title={"Expiration"}>
+															{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
+														</div>
+														<div className={"w3-col l2"}
+															 title={customer.sources.data[0].cvc_check}>
+															***
+														</div>
+														<div className={"w3-col l2"}
+															 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
+															{customer.sources.data[0].address_zip}
+														</div>
 													</div>
-													<div className={"w3-col l4"} title={"Card number"}>
-														**** **** ****&nbsp;
-														{customer.sources.data[0].last4}
-													</div>
-													<div className={"w3-col l3"} title={"Expiration"}>
-														{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
-													</div>
-													<div className={"w3-col l2"}
-														 title={customer.sources.data[0].cvc_check}>
-														***
-													</div>
-													<div className={"w3-col l2"}
-														 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
-														{customer.sources.data[0].address_zip}
-													</div>
-												</div>
-											) : null}
-										</div>
+												) : null}
+											</div>
+										)}
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
 										</div>
