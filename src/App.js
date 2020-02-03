@@ -24,6 +24,12 @@ import app_config from "./conf/config";
 import ChangePassword from "./pages/change-password";
 import AccountWrapper from "./pages/dashboard/account-wrapper";
 import VerifyEmail from "./pages/verify-email";
+import WelcomePage from "./pages/welcome-page";
+import MakeSuggestionPage from "./pages/make-suggestion-page";
+import TermsNConditionsPage from "./pages/terms-n-conditions-page";
+import PrivacyPolicy from "./pages/privacy-policy";
+import PublicViewCommunity from "./pages/public-view-community";
+import InvitedViewCommunity from "./pages/invited-view-community";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -79,19 +85,26 @@ class App extends Component{
 
 							<Route exact path="/login-popup" component={LoginPopup}/>
 							<Route exact path="/register-popup" component={RegisterPopup}/>
+							<Route exact path="/welcome" component={WelcomePage}/>
 							<Route exact path="/forgot-password" component={ForgotPassword}/>
-							<Route path="/reset/:id?" component={ResetPassword}/>
-							<Route path="/changepassword/:id?" component={ChangePassword}/>
-							<Route path="/verifyemail/:id?" component={VerifyEmail}/>
+							<Route path="/reset-password/:id?" component={ResetPassword}/>
+							<Route path="/change-password/:id?" component={ChangePassword}/>
+							<Route path="/verify-email/:id?" component={VerifyEmail}/>
 
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
-							<PrivateRoute exact path="/view" component={ViewCommunity}/>
+							<Route exact path="/view" component={ViewCommunity}/>
+							<Route exact path="/public-view" component={PublicViewCommunity}/>
+							<Route path="/view-community/:id" component={InvitedViewCommunity}/>
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
 							<PrivateRoute exact path="/dashboard" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/account" component={AccountWrapper}/>
+							<Route exact path="/make-suggestion" component={MakeSuggestionPage}/>
+							<Route exact path="/terms-n-conditions" component={TermsNConditionsPage}/>
+							<Route exact path="/privacy-policy" component={PrivacyPolicy}/>
+
 							<Route component={Notfound}/>
 						</Switch>
 					</Router>

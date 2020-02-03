@@ -2,15 +2,28 @@ import {
 	ACTIVATE_COMMUNITY,
 	DEACTIVATE_COMMUNITY,
 	DELETE_COMMUNITY,
-	GET_SRV_MSG,
-	RESET_ERRORS,
+	MESSAGE_FROM_API,
+	RESET_MESSAGES,
 	GET_MY_COMMUNITIES,
 	SET_BILLING_INFO,
 	SET_STT_READY,
 	SET_STT_HIDE,
 	SET_STT_SENDING,
 	PICK_COMMUNITY,
-	CLEAR_BILLING_INFO, SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION, COUPON_VERIFIED,
+	CLEAR_BILLING_INFO,
+	SET_DIALOG_TITLE,
+	SET_STT_SET_CARD,
+	CLEAR_LAST_INVOICE,
+	SEARCH_CRITERIA,
+	COUPON_VERIFIED,
+	SET_SEARCH_FILTER,
+	SET_SEARCH_RESULTS,
+	DEACTIVATING,
+	ACTIVATING,
+	SHOW_ACT_DLG,
+	COUPON_FAILED,
+	ACTIVE_STATUS,
+	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -43,14 +56,14 @@ export const createCommunityStep = (is_new, owner_id, info_1, info_2, history) =
 		.then(res => {
 			//if(is_new)
 			dispatch({
-				type: RESET_ERRORS,
+				type: RESET_MESSAGES,
 				payload: null
 			});
 			return history.push("/dashboard/admin");
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
@@ -73,7 +86,7 @@ export const getMyCommunities = (owner_id, activated = true) => dispatch => {
 		.post(app_config.FYC_API_URL + "/api/communities/mine", info)
 		.then((res) => {
 			dispatch({
-				type: RESET_ERRORS,
+				type: RESET_MESSAGES,
 				payload: null
 			});
 			return dispatch({
@@ -83,7 +96,7 @@ export const getMyCommunities = (owner_id, activated = true) => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {msg_community: "Unknown error"},
 			})
 		);
@@ -95,8 +108,6 @@ export const getMyCommunities = (owner_id, activated = true) => dispatch => {
  * @returns {function(...[*]=)}
  */
 export const registerCard = (info) => dispatch => {
-	console.log(info);
-
 	dispatch({
 		type: SET_STT_SET_CARD,
 		payload: true,
@@ -104,6 +115,7 @@ export const registerCard = (info) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/setcard", info)
 		.then(res => {
+			console.log(res.data);
 			dispatch({
 				type: SET_BILLING_INFO,
 				payload: res.data,
@@ -115,7 +127,7 @@ export const registerCard = (info) => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			});
 			dispatch({
@@ -146,20 +158,12 @@ export const clearLastInvoice = () => dispatch => {
  */
 export const activateCommunity = (info) => dispatch => {
 	dispatch({
-		type: SET_DIALOG_TITLE,
-		payload: "Activating...",
+		type: ACTIVATING,
+		payload: true,
 	});
 	dispatch({
-		type: SET_STT_SENDING,
-		payload: {},
-	});
-	dispatch({
-		type: CLEAR_BILLING_INFO,
-		payload: {},
-	});
-	dispatch({
-		type: CLEAR_LAST_INVOICE,
-		payload: {},
+		type: ACTIVE_STATUS,
+		payload: 0,
 	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/activate", info)
@@ -172,25 +176,37 @@ export const activateCommunity = (info) => dispatch => {
 				type: SET_BILLING_INFO,
 				payload: res.data,
 			});
+			getBillingStatus({user_id: info.id});
 			dispatch({
-				type: SET_STT_SENDING,
-				payload: {},
+				type: ACTIVE_STATUS,
+				payload: 1,
 			});
 			dispatch({
-				type: SET_DIALOG_TITLE,
-				payload: "Your community was activated.",
+				type: ACTIVATING,
+				payload: false,
 			});
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			});
 			dispatch({
-				type: SET_STT_HIDE,
-				payload: {},
+				type: ACTIVE_STATUS,
+				payload: 2,
+			});
+			dispatch({
+				type: ACTIVATING,
+				payload: false,
 			});
 		});
+};
+
+export const clearActiveStatus = () => dispatch => {
+	dispatch({
+		type: ACTIVE_STATUS,
+		payload: 0,
+	});
 };
 
 /**
@@ -200,16 +216,8 @@ export const activateCommunity = (info) => dispatch => {
  */
 export const deactivateCommunity = (info) => dispatch => {
 	dispatch({
-		type: SET_DIALOG_TITLE,
-		payload: "Deactivating...",
-	});
-	dispatch({
-		type: SET_STT_SENDING,
-		payload: {},
-	});
-	dispatch({
-		type: CLEAR_BILLING_INFO,
-		payload: {},
+		type: DEACTIVATING,
+		payload: true,
 	});
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/deactivate", info)
@@ -222,18 +230,15 @@ export const deactivateCommunity = (info) => dispatch => {
 				type: SET_BILLING_INFO,
 				payload: res.data,
 			});
+			getBillingStatus({user_id: info.id});
 			dispatch({
-				type: SET_DIALOG_TITLE,
-				payload: "Your community was deactivated.",
-			});
-			dispatch({
-				type: SET_STT_HIDE,
-				payload: {},
+				type: DEACTIVATING,
+				payload: false,
 			});
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			});
 			dispatch({
@@ -260,13 +265,14 @@ export const deleteCommunity = (info, history) => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
 };
 
 export const getBillingStatus = (info, history) => dispatch => {
+	console.log(info);
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/getstatus", info)
 		.then(res => {
@@ -277,7 +283,7 @@ export const getBillingStatus = (info, history) => dispatch => {
 		})
 		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: MESSAGE_FROM_API,
 				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
 		);
@@ -289,19 +295,15 @@ export const getBillingStatus = (info, history) => dispatch => {
  */
 export const showActivateDlg = () => dispatch => {
 	dispatch({
-		type: SET_STT_READY,
-		payload: {},
+		type: SHOW_ACT_DLG,
+		payload: true,
 	});
 };
 
 export const hideActivateDlg = () => dispatch => {
 	dispatch({
-		type: SET_STT_HIDE,
-		payload: {},
-	});
-	dispatch({
-		type: SET_DIALOG_TITLE,
-		payload: "Activate Your Community",
+		type: SHOW_ACT_DLG,
+		payload: false,
 	});
 };
 
@@ -312,33 +314,150 @@ export const clearCouponVerified = (info) => dispatch => {
 	});
 };
 
+export const clearCouponFailed = () => dispatch => {
+	dispatch({
+		type: COUPON_FAILED,
+		payload: false,
+	});
+};
+
 // info = {code: 'coupon_id'}
 export const verifyCoupon = (info) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/verifycoupon", info)
 		.then(res => {
+			console.log(res.data);
 			dispatch({
 				type: COUPON_VERIFIED,
 				payload: res.data.verified,
 			});
-		})
-		.catch(err =>
 			dispatch({
-				type: GET_SRV_MSG,
+				type: COUPON_FAILED,
+				payload: !res.data.verified,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: COUPON_VERIFIED,
 				payload: false,
-			})
-		);
+			});
+			dispatch({
+				type: COUPON_FAILED,
+				payload: true,
+			});
+		});
 };
 
 /**
  * set my position for searching the communities
  *
- * @param pos_info object{address: string, lat: number, lng: number}
+ * @param info
  * @returns {function(*): *}
  */
-export const setMyPosition = (pos_info) => dispatch => {
+export const setSearchCriteria = (info) => dispatch => {
 	return dispatch({
-		type: SET_MY_POSITION,
-		payload: pos_info,
+		type: SEARCH_CRITERIA,
+		payload: info,
 	});
+};
+
+/**
+ *
+ * @param info Object{key: value}
+ * @returns {function(*): *}
+ */
+export const setSearchFilter = (info) => dispatch => {
+	return dispatch({
+		type: SET_SEARCH_FILTER,
+		payload: info,
+	});
+};
+
+export const doSearchCommunities = (criteria) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/communities/search", criteria)
+		.then(res => {
+			dispatch({
+				type: SET_SEARCH_RESULTS,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+				dispatch({
+					type: SET_SEARCH_RESULTS,
+					payload: [],
+				});
+				dispatch({
+					type: MESSAGE_FROM_API,
+					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
+				});
+			}
+		);
+};
+
+export const setSortOrder = (sorter) => dispatch => {
+	return dispatch({
+		type: SORT_ORDER,
+		payload: sorter,
+	});
+};
+
+export const setPicking = (index) => dispatch => {
+	return dispatch({
+		type: SET_PICKING,
+		payload: index,
+	});
+};
+
+export const clearPicking = () => dispatch => {
+	return dispatch({
+		type: SET_PICKING,
+		payload: -1,
+	});
+};
+
+export const shareCommunity = (info) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/sharecommunity", info)
+		.then(res => {
+		})
+		.catch(err => {
+				dispatch({
+					type: MESSAGE_FROM_API,
+					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
+				});
+			}
+		);
+};
+
+export const reportCommunity = (info) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/reportcommunity", info)
+		.then(res => {
+		})
+		.catch(err => {
+				dispatch({
+					type: MESSAGE_FROM_API,
+					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
+				});
+			}
+		);
+};
+
+export const viewCommunity = (info) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/communities/viewCommunity", info)
+		.then(res => {
+			dispatch({
+				type: VIEW_COMMUNITY,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+				dispatch({
+					type: MESSAGE_FROM_API,
+					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
+				});
+			}
+		);
 };

@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import {Slide} from 'react-slideshow-image';
-import "../../css/community-steps.css";
-import FilterItemCheck from "../../components/filter-item-check";
-import FilterItemRadio from "../../components/filter-item-radio";
+import "../css/community-steps.css";
+import FilterItemCheck from "../components/filter-item-check";
+import FilterItemRadio from "../components/filter-item-radio";
 import {Link} from "react-router-dom";
-import community_config from "../../conf/community-conf";
-import ListMembers from "../../components/list-members";
+import community_config from "../conf/community-conf";
+import ListMembers from "../components/list-members";
 
-class ViewCommunity extends Component{
+class PublicViewCommunity extends Component{
 	constructor(props){
 		super(props);
 
@@ -90,7 +90,7 @@ class ViewCommunity extends Component{
 							<div className="info-body w3-row">
 								<h3 className="header3 w3-bar w3-margin-bottom">
 									<div className="create-menu w3-bar-item w3-left">
-										<Link to="/dashboard" className="w3-button cancel">Back</Link>
+										<Link to="/search-results" className="w3-button cancel">Back</Link>
 									</div>
 									<div className="create-menu w3-bar-item w3-center">
 										{this.state.community_name}
@@ -256,4 +256,4 @@ class ViewCommunity extends Component{
 	}
 }
 
-export default ViewCommunity;
+export default PublicViewCommunity;

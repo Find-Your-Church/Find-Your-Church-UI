@@ -19,15 +19,6 @@ class Admin extends Component{
 			errors: {},
 		};
 
-		const customer_info = {
-			user_id: this.props.auth.user.id,
-		};
-
-		this.props.getUserInfo({
-			user_id: this.props.auth.user.id,
-		});
-		this.props.getBillingStatus(customer_info, this.props.history);
-
 		this.showSubDlg = this.showSubDlg.bind(this);
 	}
 
@@ -39,8 +30,18 @@ class Admin extends Component{
 			return null;
 	}
 
+	componentDidMount(){
+		const customer_info = {
+			user_id: this.props.auth.user.id,
+		};
+
+		this.props.getUserInfo({
+			user_id: this.props.auth.user.id,
+		});
+		this.props.getBillingStatus(customer_info, this.props.history);
+	}
+
 	showSubDlg(){
-		this.props.clearLastInvoice();
 		this.props.showActivateDlg();
 	}
 
@@ -54,24 +55,27 @@ class Admin extends Component{
 		return (
 			<div>
 				<div id={"stripe-modal"} className={"w3-modal"}
-					 style={{display: this.props.community.is_showing ? "block" : "none"}}>
-					{this.props.community.dlg_title === "Deactivating..." ? (
-						<div className="w3-display-middle w3-text-white w3-jumbo">
-							<i className="fas fa-spinner fa-spin"> </i>
-						</div>
-					) : (
-						<Elements>
-							<StripeSubscription second={!!this.props.community.subscription} />
-						</Elements>
+					 style={{display: this.props.community.showing ? "block" : "none"}}>
+					<Elements>
+						<StripeSubscription second={!!this.props.community.subscription}/>
+					</Elements>
 					)}
 				</div>
-				<main className="admin-body w3-row">
-					<div className="admin-left w3-col">
-						<ProfileContainer/>
+				<div id={"spinning-modal"} className={"w3-modal"}
+					 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
+					<div className="w3-display-middle w3-text-white w3-jumbo">
+						<i className="fas fa-spinner fa-spin"> </i>
 					</div>
-					<div className="admin-right w3-rest">
-						<MyCommunities status="active" handleShowSubDlg={this.showSubDlg}/>
-						<MyCommunities status="inactive" handleShowSubDlg={this.showSubDlg}/>
+				</div>
+				<main className="admin-body w3-row">
+					<div className={"admin-wrapper"}>
+						<div className="admin-left w3-col">
+							<ProfileContainer/>
+						</div>
+						<div className="admin-right w3-rest">
+							<MyCommunities status="active" handleShowSubDlg={this.showSubDlg}/>
+							<MyCommunities status="inactive" handleShowSubDlg={this.showSubDlg}/>
+						</div>
 					</div>
 				</main>
 				<SiteFooter/>

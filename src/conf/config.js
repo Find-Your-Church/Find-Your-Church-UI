@@ -7,10 +7,14 @@ const app_config = {
 	/**
 	 * Public key for Stripe payment.
 	 *
-	 * This is a just publishable key.
+	 * This is a test key.
 	 * Publishable key: pk_live_nPL4q6SyxeqSknHK2Hs3wHta
 	 */
 	STRIPE_PK: "pk_test_6qf5BlgEkll3m5hyijnz2oiq",
+
+	GOOGLE_CLIENT_ID: "227195592965-n46c6icevure2cjo07p1fcnad10bege6.apps.googleusercontent.com",
+
+	FACEBOOK_APP_ID: "123456789",
 
 	GOOGLEMAP_API_KEY: "AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c",
 };

@@ -3,8 +3,9 @@ import "../css/communities.css"
 import Thumbnail from "./thumbnail";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 import {getMyCommunities} from "../actions/community-actions";
+import formatNumber from "../utils/formatNumber";
+import Popup from "reactjs-popup";
 
 class MyCommunities extends Component{
 	constructor(props){
@@ -25,24 +26,43 @@ class MyCommunities extends Component{
 				<div className="dashboard-container">
 					<div className="containerheader-div underline">
 						<div className="flexdiv-left">
-							<h5 className="container-header">{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities</h5>
-							<i className={"fas fa-question-circle tooltip-icon"}> </i>
+							<h5 className="container-header">
+								{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities
+								{this.props.status === "active" ? (
+									<>&nbsp;&nbsp;<span className={"w3-small w3-text-grey w3-border-left"}>&nbsp;&nbsp;
+										{formatNumber(this.props.community.my_communities.active.length)}
+										&nbsp;/&nbsp;
+										{this.props.community.subscription ?
+											formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
+											: (this.props.community.is_sending ?
+												<i className="fas fa-spinner fa-spin"> </i>
+												: "00")}
+									</span></>
+								) : null}
+							</h5>
+							<Popup
+								trigger={<i style={{cursor: "pointer"}}
+											className={"fas fa-question-circle tooltip-icon"}> </i>}
+								position={"left top"}>
+								<div>Tell visitors more about your community...</div>
+							</Popup>
 						</div>
-						{this.props.status === 'inactive' ?
-							<Link to="/create-new-community" className="newcommunity-button w-button">+ New
-								Community</Link>
-							: null}
 					</div>
 					<div className="div-20top">
 						{this.props.communities[this.props.status].length > 0 ? (
 								<div className="listing-grid dashboard">
 									{this.props.communities[this.props.status].map((community, index) => {
 										return (
-											<Thumbnail key={this.props.status + index} status={this.props.status} value={community} handleShowSubDlg={this.props.handleShowSubDlg}/>
+											<Thumbnail key={this.props.status + index} status={this.props.status}
+													   value={community} handleShowSubDlg={this.props.handleShowSubDlg}/>
 										)
 									})}
 								</div>)
-							: `You are not the Admin for any ${this.props.status} communities.`
+							: (
+								<div className={"w3-small w3-text-grey"}>
+									You are not the Admin for any {this.props.status} communities.
+								</div>
+							)
 						}
 					</div>
 				</div>
@@ -53,6 +73,7 @@ class MyCommunities extends Component{
 
 MyCommunities.propTypes = {
 	auth: PropTypes.object.isRequired,
+	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
 	communities: PropTypes.object.isRequired,
 	getMyCommunities: PropTypes.func.isRequired,
@@ -60,6 +81,7 @@ MyCommunities.propTypes = {
 
 const mapStateToProps = state => ({
 	auth: state.auth,
+	community: state.communities,
 	errors: state.errors,
 	communities: state.communities.my_communities,
 });

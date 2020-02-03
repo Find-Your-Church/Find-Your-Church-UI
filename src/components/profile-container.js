@@ -1,36 +1,38 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import Popup from "reactjs-popup";
 
 class ProfileContainer extends Component{
 	constructor(props){
 		super(props);
 
 		this.state = {
-			collapsedBio: false,
-			collapsedContact: false,
-			collapsedResources: false,
+			is_show_menu: false,
 		};
 
-		this.toggleBio = this.toggleBio.bind(this);
-		this.toggleContact = this.toggleContact.bind(this);
-		this.toggleResources = this.toggleResources.bind(this);
+		this.toggleMenu = this.toggleMenu.bind(this);
 	}
 
-	toggleBio(){
-		this.setState({collapsedBio: !this.state.collapsedBio});
-	}
-
-	toggleContact(){
-		this.setState({collapsedContact: !this.state.collapsedContact});
-	}
-
-	toggleResources(){
-		this.setState({collapsedResources: !this.state.collapsedResources});
+	toggleMenu(){
+		this.setState({is_show_menu: !this.state.is_show_menu});
 	}
 
 	render(){
 		return (
 			<div className="profile-container">
+				<div className="containerheader-div underline">
+					<div className={"profile-header-wrapper"}>
+						<h5 className="profile-header">Admin Profile</h5>
+						<Popup
+							trigger={<i style={{cursor: "pointer"}}
+										className={"fas fa-question-circle tooltip-icon"}> </i>}
+							position={"right top"}>
+							<div>Tell visitors more about your community...</div>
+						</Popup>
+					</div>
+				</div>
 				<div className="div-block-55">
 					<div className="profpic-container">
 						<div className="profpic-div">
@@ -41,67 +43,43 @@ class ProfileContainer extends Component{
 				</div>
 				<div className="profile-info">
 					<div data-collapse="all" data-animation="default" data-duration="400"
-						 className="listing-navbar w-nav">
-						<h3 className="community-name">Justin Wheelock</h3>
-						<nav role="navigation" className="listing-navmenu w-nav-menu">
-							<Link to="#" className="listing-navlink w-nav-link">Edit</Link>
-						</nav>
-						<div className="menu-button w-nav-button">
+						 className="w-nav">
+						<h3 className="community-name">
+							{this.props.auth.user.fname} {this.props.auth.user.lname}
+						</h3>
+						<Link to="/dashboard/account" className={"w3-right"}>
 							<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
-						</div>
-						<div className="w-nav-overlay" data-wf-ignore="">
-
-						</div>
+						</Link>
 					</div>
 					<div className="personal-info">
-						<div>Age category</div>
-						<div>City, State</div>
-					</div>
-					<div className="accordion-item">
-						<div className="trigger-div" onClick={this.toggleBio}>
-							<div className="div-block-20">
-								<h4 className="accordion-label">Bio</h4>
-							</div>
-							<div className="accordion-content"
-								 style={{height: this.state.collapsedBio ? "0" : "auto"}}>
-								<div className="div-block-19">
-									<p className="content-text">Users response to question.</p>
-								</div>
-							</div>
+						<div className={"personal-info-item"} style={{backgroundImage: "url(/img/icon/icon-email.svg)"}}>
+							{this.props.auth.user.admin_email}
 						</div>
-					</div>
-					<div className="accordion-item">
-						<div className="trigger-div" onClick={this.toggleContact}>
-							<div className="div-block-20">
-								<h4 className="accordion-label">Contact</h4>
-							</div>
-							<div className="accordion-content"
-								 style={{height: this.state.collapsedContact ? "0" : "auto"}}>
-								<div className="div-block-19">
-									<p className="content-text">Users response to question.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="accordion-item">
-						<div className="trigger-div" onClick={this.toggleResources}>
-							<div className="div-block-20">
-								<h4 className="accordion-label">Links and Resources</h4>
-							</div>
-							<div className="accordion-content"
-								 style={{height: this.state.collapsedResources ? "0" : "auto"}}>
-								<div className="div-block-19">
-									<p className="content-text">
-										Users response to question.
-									</p>
-								</div>
-							</div>
+						<div className={"personal-info-item"} style={{backgroundImage: "url(/img/icon/icon-phone.svg)"}}>
+							{this.props.auth.user.phone}
 						</div>
 					</div>
 				</div>
+				<Link to="/create-new-community" className="newcommunity-button">
+					<img src={"/img/icon/icon-new.svg"} alt={"create new community"}/>
+					&nbsp;&nbsp;New Community
+				</Link>
 			</div>
 		);
 	}
 }
 
-export default ProfileContainer;
+ProfileContainer.propTypes = {
+	auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+	auth: state.auth,
+	errors: state.errors,
+});
+
+export default connect(
+	mapStateToProps,
+	{}
+)(ProfileContainer);

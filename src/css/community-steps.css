@@ -10,20 +10,26 @@
 
 .steps-body {
 	margin-top: 59px;
-	min-height: calc(100vh - 59px);
+	min-height: calc(100vh - 200px);
 	padding: 20px;
 	background-color: #e6e6e6;
+}
+
+.steps-body .view-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1366px;
 }
 
 .steps-body .container-inline {
 	position: relative;
 }
 
-.steps-body .container-inline .create-menu{
+.steps-body .container-inline .create-menu {
 	padding: 0;
 }
 
-.steps-body .container-inline .create-menu.w3-center{
+.steps-body .container-inline .create-menu.w3-center {
 	float: none;
 	position: absolute;
 	top: 10px;
@@ -114,7 +120,7 @@
 }
 
 .info-body .right-part.view {
-	height: calc(100vh - var(--footer-height) - 80px);
+	height: calc(100vh - var(--footer-height) - 146px);
 	overflow-y: scroll;
 }
 
@@ -520,7 +526,7 @@
 	align-content: space-around;
 }
 
-.steps-body .filter-label {
+.filter-label {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-bottom: 0;
@@ -531,19 +537,20 @@
 	cursor: pointer;
 }
 
-.steps-body .filter-label:before {
+/*
+ .filter-label:before {
 	content: "\25BE";
 }
 
-.steps-body .filter-label.collapsed:before {
+ .filter-label.collapsed:before {
 	content: "\25B8";
 }
-
-.steps-body .filter-label:hover {
+*/
+.filter-label:hover {
 	color: #888;
 }
 
-.steps-body .filter-option {
+.filter-option {
 	display: inline;
 	position: relative;
 	padding-left: 20px;
@@ -556,15 +563,23 @@
 	user-select: none;
 }
 
-.steps-body .filter-option:last-child {
+.filter-option.disabled{
+	color: #cccccc;
+}
+
+.filter-option:last-child {
 	margin-right: 0;
 }
 
-.steps-body .filter-option:hover {
+body .filter-option:hover {
 	color: #666;
 }
 
-.steps-body .filter-option input {
+body .filter-option.disabled:hover {
+	color: #cccccc;
+}
+
+.filter-option input {
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
@@ -572,7 +587,7 @@
 	width: 0;
 }
 
-.steps-body .filter-checkmark {
+.filter-checkmark {
 	position: absolute;
 	top: 3px;
 	left: 0;
@@ -583,7 +598,12 @@
 	background-color: #fff;
 }
 
-.steps-body .filter-radiomark {
+.filter-option.disabled .filter-checkmark,
+.filter-option.disabled .filter-radiomark {
+	border-color: #cccccc;
+}
+
+.filter-radiomark {
 	position: absolute;
 	top: 3px;
 	left: 0;
@@ -594,32 +614,39 @@
 	background-color: #fff;
 }
 
-.steps-body .filter-option:hover input ~ .filter-checkmark,
-.steps-body .filter-option:hover input ~ .filter-radiomark {
+.filter-option:hover input ~ .filter-checkmark,
+.filter-option:hover input ~ .filter-radiomark {
 	border: solid 1px #fff;
 	background-color: #eee;
 	box-shadow: 0 0 2px #3898ec;
 }
 
-.steps-body .filter-option input:checked ~ .filter-checkmark,
-.steps-body .filter-option input:checked ~ .filter-radiomark {
+.filter-option.disabled:hover input ~ .filter-checkmark,
+.filter-option.disabled:hover input ~ .filter-radiomark {
+	border: solid 1px #ccc;
+	background-color: #fff;
+	box-shadow: none;
+}
+
+.filter-option input:checked ~ .filter-checkmark,
+.filter-option input:checked ~ .filter-radiomark {
 	border: none;
 	background-color: #3898ec;
 }
 
-.steps-body .filter-checkmark:after,
-.steps-body .filter-radiomark:after {
+.filter-checkmark:after,
+.filter-radiomark:after {
 	content: "";
 	position: absolute;
 	display: none;
 }
 
-.steps-body .filter-option input:checked ~ .filter-checkmark:after,
-.steps-body .filter-option input:checked ~ .filter-radiomark:after {
+.filter-option input:checked ~ .filter-checkmark:after,
+.filter-option input:checked ~ .filter-radiomark:after {
 	display: block;
 }
 
-.steps-body .filter-option .filter-checkmark:after {
+.filter-option .filter-checkmark:after {
 	left: 4px;
 	top: 1px;
 	width: 4px;
@@ -631,7 +658,7 @@
 	transform: rotate(48deg);
 }
 
-.steps-body .filter-option .filter-radiomark:after {
+.filter-option .filter-radiomark:after {
 	top: 4px;
 	left: 4px;
 	width: 4px;

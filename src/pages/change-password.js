@@ -9,7 +9,7 @@ class ChangePassword extends Component{
 	constructor(props){
 		super(props);
 
-		this.key = props.location.pathname.substr(16); // 16 - length of "/changepassword/", which is URL prefix for reset.
+		this.key = props.location.pathname.substr(17); // 17 - length of "/change-password/", which is URL prefix for reset.
 
 		this.state = {
 			email: "",

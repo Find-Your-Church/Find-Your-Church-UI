@@ -14,6 +14,7 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng
 } from "react-places-autocomplete";
+import Popup from "reactjs-popup";
 
 class CommunityStep extends Component{
 	constructor(props){
@@ -32,9 +33,11 @@ class CommunityStep extends Component{
 
 		const p_obj = this.props.location.state;
 		this.state = {
+			data: p_obj === undefined ? {} : p_obj.obj,
 			errors: {},
+			is_editing: this.props.location.state !== undefined,
 			showedMembers: false,
-			passable: false,
+			passable: this.props.location.state !== undefined,
 
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
 			category: p_obj === undefined ? "" : p_obj.obj.category,
@@ -214,10 +217,10 @@ class CommunityStep extends Component{
 								<Link to="/dashboard" className="w3-button cancel">Back</Link>
 							</div>
 							<div className="create-menu w3-bar-item w3-center">
-								{this.props.location.state === undefined ?
-									"Create a New Community"
-									: (<><span style={{color: "#888"}}>Editing</span>&nbsp;
-										{this.props.location.state.obj.community_name}</>)
+								{this.state.is_editing ?
+									(<><span style={{color: "#888"}}>Editing</span>&nbsp;
+										{this.state.data.community_name}</>)
+									: "Create a New Community"
 								}
 
 							</div>
@@ -267,59 +270,77 @@ class CommunityStep extends Component{
 												  multiple={false} onDone={this.getBaseFile.bind(this)} height="38"/>
 									</label>
 									<div className="basic-info"
-										 title={this.props.location.state !== undefined ? "These infos cannot be modified." : ""}>
+										 title={this.state.is_editing ? "These infos cannot be modified." : ""}>
 										<input type="text" className="form-input communityname w-input" maxLength="50"
 											   onChange={this.onChange}
 											   placeholder="Community name"
 											   id="community_name"
 											   value={this.state.community_name}
-											   disabled={this.props.location.state !== undefined}
+											   disabled={this.state.is_editing}
 											   required=""/>
 										<select className="form-select category w-select"
 												onChange={this.onChange}
 												id="category"
 												defaultValue={this.state.category}
-												disabled={this.props.location.state !== undefined}
+												disabled={this.state.is_editing}
 												required="">
 											<option value="">Category...</option>
-											<option value="Church"> Church</option>
-											<option value="Young Adult Group"> Young Adult Group</option>
-											<option value="Youth Group"> Youth Group</option>
+											{
+												community_config.CATEGORIES.map(cat => {
+													return (
+														<option value={cat} key={cat}>{cat}</option>
+													);
+												})
+											}
 										</select>
-										<PlacesAutocomplete
-											value={this.state.address}
-											class={"w3-input social-input"}
-											onChange={this.onChangeAddress}
-											onSelect={this.handleSelect}
-										>
-											{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-												<>
-													<input className="form-input w-input social-input"
-														   style={{backgroundImage: "url('/img/icon/icon-address.svg')"}}
-														   disabled={this.props.location.state !== undefined}
-														   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
-														   {...getInputProps({placeholder: "Address or City"})}
-														   required=""/>
-													<div className={"address-candidates"}>
-														{loading ? <div>...loading</div> : null}
-														{suggestions.map((suggestion) => {
-															const style = {
-																backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
-																backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-															};
+										{this.state.is_editing ? (
+											<div style={{
+												paddingTop: "4px",
+												backgroundImage: "url('/img/icon/icon-address.svg')",
+												backgroundRepeat: "no-repeat",
+												backgroundPosition: "0 center",
+												height: "32px",
+												lineHeight: "24px",
+												textIndent: "28px",
+											}}>
+												{this.state.address}
+											</div>
+										) : (
+											<PlacesAutocomplete
+												value={this.state.address}
+												class={"w3-input social-input"}
+												onChange={this.onChangeAddress}
+												onSelect={this.handleSelect}
+											>
+												{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+													<>
+														<input className="form-input w-input social-input"
+															   style={{backgroundImage: "url('/img/icon/icon-address.svg')"}}
+															   disabled={this.state.is_editing}
+															   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
+															   {...getInputProps({placeholder: "Address or City"})}
+															   required=""/>
+														<div className={"address-candidates"}>
+															{loading ? <div>...loading</div> : null}
+															{suggestions.map((suggestion) => {
+																const style = {
+																	backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
+																	backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																};
 
-															return (
-																<div className={"address-item"}
-																	 onClick={() => alert(suggestion.terms)}
-																	 {...getSuggestionItemProps(suggestion, {style})}>
-																	{suggestion.description}
-																</div>
-															);
-														})}
-													</div>
-												</>
-											)}
-										</PlacesAutocomplete>
+																return (
+																	<div className={"address-item"}
+																		 onClick={() => alert(suggestion.terms)}
+																		 {...getSuggestionItemProps(suggestion, {style})}>
+																		{suggestion.description}
+																	</div>
+																);
+															})}
+														</div>
+													</>
+												)}
+											</PlacesAutocomplete>
+										)}
 									</div>
 								</div>
 							</div>
@@ -338,12 +359,17 @@ class CommunityStep extends Component{
 									)
 									: (
 										<form
-											  id="wf-form-New-Community" name="wf-form-New-Community"
-											  data-name="New Community" className="form1">
+											id="wf-form-New-Community" name="wf-form-New-Community"
+											data-name="New Community" className="form1">
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">About</h4>
-													<i className={"fas fa-question-circle tooltip-icon"}> </i>
+													<Popup
+														trigger={<i style={{cursor: "pointer"}}
+															className={"fas fa-question-circle tooltip-icon"}> </i>}
+														position={"left center"}>
+														<div>Tell visitors more about your community...</div>
+													</Popup>
 												</div>
 												<textarea
 													onChange={this.onChange}
@@ -357,7 +383,12 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">Community Contact</h4>
-													<i className={"fas fa-question-circle tooltip-icon"}> </i>
+													<Popup
+														trigger={<i style={{cursor: "pointer"}}
+																	className={"fas fa-question-circle tooltip-icon"}> </i>}
+														position={"left center"}>
+														<div>Tell visitors more about your community...</div>
+													</Popup>
 												</div>
 												<div className="input-div w3-row">
 													<input type="text"
@@ -390,7 +421,12 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">Links and Resources</h4>
-													<i className={"fas fa-question-circle tooltip-icon"}> </i>
+													<Popup
+														trigger={<i style={{cursor: "pointer"}}
+																	className={"fas fa-question-circle tooltip-icon"}> </i>}
+														position={"left center"}>
+														<div>Tell visitors more about your community...</div>
+													</Popup>
 												</div>
 												<div className="input-div w3-row">
 													{community_config.SOCIALS.map(item => {
@@ -427,7 +463,12 @@ class CommunityStep extends Component{
 											<div className={"view-paragraph edit"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">More Info</h4>
-													<i className={"fas fa-question-circle tooltip-icon"}> </i>
+													<Popup
+														trigger={<i style={{cursor: "pointer"}}
+																	className={"fas fa-question-circle tooltip-icon"}> </i>}
+														position={"left center"}>
+														<div>Tell visitors more about your community...</div>
+													</Popup>
 												</div>
 												<div className="input-div">
 													<FilterItemCheck filterTitle="Day(s)" filterName="days"

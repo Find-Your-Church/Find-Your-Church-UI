@@ -9,8 +9,24 @@ import {
 	SET_STT_HIDE,
 	PICK_COMMUNITY,
 	CLEAR_BILLING_INFO,
-	SET_DIALOG_TITLE, SET_STT_SET_CARD, CLEAR_LAST_INVOICE, SET_MY_POSITION, COUPON_VERIFIED
+	SET_DIALOG_TITLE,
+	SET_STT_SET_CARD,
+	CLEAR_LAST_INVOICE,
+	SEARCH_CRITERIA,
+	COUPON_VERIFIED,
+	SET_SEARCH_FILTER,
+	SET_SEARCH_RESULTS,
+	DEACTIVATING,
+	ACTIVATING,
+	SHOW_ACT_DLG,
+	COUPON_FAILED,
+	ACTIVE_STATUS,
+	SORT_ORDER,
+	SET_PICKING,
+	VIEW_COMMUNITY
 } from "../actions/action-types";
+import community_config from "../conf/community-conf";
+import sorters from "../actions/sorters";
 
 const initialState = {
 	// community
@@ -18,7 +34,6 @@ const initialState = {
 		active: [],
 		inactive: [],
 	},
-	search_results: [],
 	members: [],
 
 	// for stripe
@@ -36,14 +51,40 @@ const initialState = {
 	trialing: false,
 	msg: {},
 	dlg_title: "Activate Your Community",
+	showing: false,
+	activating: false,
+	active_status: 0, // 0 - init, 1 - success, 2 - failed
+	deactivating: false,
 	coupon_verified: false,
+	coupon_failed: false,
 
 	// for search
-	my_position: {
+	criteria: {
+		category: '',
+		radius: 5, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
 		address: "",
-		lat: 44.9899597,
-		lng: -93.25608609999999,
+		lat: 44.989999,
+		lng: -93.256088,
+		filter: {
+			days: "0".repeat(community_config.FILTERS.days.length),
+			times: "0".repeat(community_config.FILTERS.times.length),
+			frequency: "0".repeat(community_config.FILTERS.frequency.length),
+			ages: "0".repeat(community_config.FILTERS.ages.length),
+			gender: "0".repeat(community_config.FILTERS.gender.length),
+			parking: "0".repeat(community_config.FILTERS.parking.length),
+			ministries: "0".repeat(community_config.FILTERS.ministries.length),
+			other_services: "0".repeat(community_config.FILTERS.other_services.length),
+			ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
+			event_type: "0".repeat(community_config.FILTERS.event_type.length),
+			support_type: "0".repeat(community_config.FILTERS.support_type.length)
+		}
 	},
+
+	sort_order: sorters.SORT_NEWEST,
+	search_results: [],
+	counts: {},
+	picking: -1, // index og the results
+	view_community: null,
 };
 
 export default function(state = initialState, action){
@@ -167,18 +208,75 @@ export default function(state = initialState, action){
 				...state,
 				dlg_title: action.payload,
 			};
+		case SHOW_ACT_DLG:
+			return {
+				...state,
+				showing: action.payload,
+			};
+		case ACTIVATING:
+			return {
+				...state,
+				activating: action.payload,
+			};
+		case ACTIVE_STATUS:
+			return {
+				...state,
+				active_status: action.payload,
+			};
+		case DEACTIVATING:
+			return {
+				...state,
+				deactivating: action.payload,
+			};
 		case COUPON_VERIFIED:
 			return {
 				...state,
 				coupon_verified: action.payload, // true or false
 			};
-		case SET_MY_POSITION:
+		case COUPON_FAILED:
 			return {
 				...state,
-				my_position: {
-					...state.my_position,
+				coupon_failed: action.payload, // true or false
+			};
+		case SEARCH_CRITERIA:
+			return {
+				...state,
+				criteria: {
+					...state.criteria,
 					...action.payload,
 				}
+			};
+		case SET_SEARCH_FILTER:
+			return {
+				...state,
+				criteria: {
+					...state.criteria,
+					filter: {
+						...state.criteria.filter,
+						...action.payload,
+					}
+				}
+			};
+		case SET_SEARCH_RESULTS:
+			return {
+				...state,
+				search_results: action.payload.results,
+				counts: action.payload.counts,
+			};
+		case SORT_ORDER:
+			return {
+				...state,
+				sort_order: action.payload,
+			};
+		case SET_PICKING:
+			return {
+				...state,
+				picking: action.payload,
+			};
+		case VIEW_COMMUNITY:
+			return {
+				...state,
+				view_community: action.payload,
 			};
 		default:
 			return state;

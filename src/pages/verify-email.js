@@ -8,7 +8,7 @@ class VerifyEmail extends Component{
 	constructor(props){
 		super(props);
 
-		this.key = props.location.pathname.substr(13); // 13 - length of "/verifyemail/", which is URL prefix for reset.
+		this.key = props.location.pathname.substr(14); // 14 - length of "/verify-email/", which is URL prefix for reset.
 
 		this.state = {
 			errors: {}
@@ -36,7 +36,7 @@ class VerifyEmail extends Component{
 			<main>
 				<div className="sign-body">
 					<h4 className="w3-display-middle w3-text-grey">
-						{this.state.errors.error}
+						{this.state.errors.msg_verify}
 					</h4>
 				</div>
 				<SiteFooter/>
