@@ -2,7 +2,13 @@ import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity} from "../actions/community-actions";
+import {
+	activateCommunity,
+	clearActiveStatus,
+	deactivateCommunity,
+	deleteCommunity,
+	pickCommunity
+} from "../actions/community-actions";
 
 class Thumbnail extends Component{
 	constructor(props){
@@ -50,6 +56,8 @@ class Thumbnail extends Component{
 		this.props.pickCommunity({
 			community_id: this.props.value._id,
 		});
+
+		this.props.clearActiveStatus();
 
 		// show modal dialog
 		this.props.handleShowSubDlg();
@@ -146,6 +154,7 @@ Thumbnail.propTypes = {
 	deactivateCommunity: PropTypes.func.isRequired,
 	deleteCommunity: PropTypes.func.isRequired,
 	pickCommunity: PropTypes.func.isRequired,
+	clearActiveStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -155,5 +164,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity}
+	{activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity, clearActiveStatus}
 )(Thumbnail);
