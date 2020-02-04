@@ -2,9 +2,8 @@
 #root {
 	background-color: #fff;
 	background-image: url("../img/main-bg.jpg");
-	background-position: 50% 50%;
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-position: 100% 100%;
+	background-size: 1080px;
 	background-attachment: fixed;
 }
 

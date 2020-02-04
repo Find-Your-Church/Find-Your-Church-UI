@@ -2,7 +2,13 @@ import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity} from "../actions/community-actions";
+import {
+	activateCommunity, clearActiveStatus, clearCouponFailed, clearCouponVerified,
+	deactivateCommunity,
+	deleteCommunity,
+	getBillingStatus,
+	pickCommunity
+} from "../actions/community-actions";
 
 class Thumbnail extends Component{
 	constructor(props){
@@ -46,13 +52,31 @@ class Thumbnail extends Component{
 	}
 
 	onActivate(e){
-		// pick the community to be activated
-		this.props.pickCommunity({
-			community_id: this.props.value._id,
-		});
+		this.props.clearActiveStatus();
+		this.props.clearCouponVerified();
+		this.props.clearCouponFailed();
+		this.props.getBillingStatus({
+			user_id: this.props.auth.user.id,
+		}, this.props.history);
 
-		// show modal dialog
-		this.props.handleShowSubDlg();
+		// is available just move up?
+		if(this.props.community.my_communities.active.length < this.props.community.subscription.quantity + this.props.community.tickets){
+			this.props.activateCommunity({
+				id: this.props.auth.user.id,
+				community_id: this.props.value._id,
+				source: null,
+				coupon: null,
+			});
+		}
+		else{
+			// pick the community to be activated
+			this.props.pickCommunity({
+				community_id: this.props.value._id,
+			});
+
+			// show modal dialog
+			this.props.handleShowSubDlg();
+		}
 
 		// hide thumbnail menu
 		this.setState({is_show_menu: false});
@@ -141,19 +165,33 @@ class Thumbnail extends Component{
 
 Thumbnail.propTypes = {
 	auth: PropTypes.object.isRequired,
+	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
 	activateCommunity: PropTypes.func.isRequired,
 	deactivateCommunity: PropTypes.func.isRequired,
 	deleteCommunity: PropTypes.func.isRequired,
 	pickCommunity: PropTypes.func.isRequired,
+	clearActiveStatus: PropTypes.func.isRequired,
+	clearCouponVerified: PropTypes.func.isRequired,
+	clearCouponFailed: PropTypes.func.isRequired,
+	getBillingStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
 	auth: state.auth,
+	community: state.communities,
 	errors: state.errors,
 });
 
 export default connect(
 	mapStateToProps,
-	{activateCommunity, deactivateCommunity, deleteCommunity, pickCommunity}
+	{
+		activateCommunity,
+		deactivateCommunity,
+		deleteCommunity,
+		pickCommunity,
+		clearActiveStatus,
+		clearCouponVerified,
+		clearCouponFailed,
+		getBillingStatus}
 )(Thumbnail);

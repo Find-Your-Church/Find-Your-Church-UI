@@ -34,22 +34,22 @@ import app_config from "../conf/config";
  *
  * @param is_new new or edit?
  * @param owner_id email of user who create new community.
+ * @param community_id
  * @param info_1 base information on 1st form.
  * @param info_2 filters specified on 2nd form.
  * @param history
  * @returns {function(...[*]=)}
  */
-export const createCommunityStep = (is_new, owner_id, info_1, info_2, history) => dispatch => {
+export const createCommunityStep = (is_new, owner_id, community_id, info_1, info_2, history) => dispatch => {
 	const info = {
 		is_new: is_new,
+		community_id: community_id,
 		data: {
 			owner_id: owner_id,
 			...info_1,
 			...info_2,
 		}
 	};
-
-	console.log(info);
 
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/create", info)
