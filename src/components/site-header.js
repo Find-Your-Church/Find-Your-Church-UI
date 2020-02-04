@@ -54,7 +54,7 @@ class SiteHeader extends Component{
 									<span className={"w3-hover-text-white"}>{this.props.auth.user.fname}</span>
 								</span>
 									<div className="headerprofpic-div w3-right">
-										<img src={"/uploaded/profiles/5de7326365d48a7932daf64f.jpg"}
+										<img src={this.props.auth.user.pic}
 											 alt={this.props.auth.user.fname} className="image-4"/>
 									</div>
 								</Link>

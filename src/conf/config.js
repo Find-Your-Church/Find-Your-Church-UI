@@ -1,8 +1,8 @@
 
 const app_config = {
 //	FYC_API_URL: process.env.FYC_API_URL,
-//	FYC_API_URL: "https://api-dev.findyourchurch.org",
-	FYC_API_URL: "http://192.168.1.65:5000",
+	FYC_API_URL: "https://api-dev.findyourchurch.org",
+//	FYC_API_URL: "http://192.168.1.65:5000",
 
 	/**
 	 * Public key for Stripe payment.
