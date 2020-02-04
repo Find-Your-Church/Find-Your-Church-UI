@@ -12,6 +12,7 @@ import "../../css/stripe-style.css";
 import formatNumner from "../../utils/formatNumber";
 import showAmount from "../../utils/showAmount";
 import Popup from "reactjs-popup";
+import isEmpty from "../../utils/isEmpty";
 
 const cardStyle = {
 	base: {
@@ -290,6 +291,21 @@ class Account extends Component{
 												<div>Tell visitors more about your community...</div>
 											</Popup>
 										</div>
+										<div className="table-row pic">
+											<h4 className="table-header">Profile Picture</h4>
+											<h4 className="table-item">
+												<div className="w3-row">
+													<img className={"admin-pic"} src={
+														isEmpty(user.pic) ?
+															"/img/default-user.png"
+															: user.pic
+													} alt={`${user.fname}`}/>
+												</div>
+											</h4>
+											<Link to="#" className="table-link" onClick={this.changeAdminEmail}>
+												<i className={"fas fa-pen"}> </i>
+											</Link>
+										</div>
 										<div className="table-row">
 											<h4 className="table-header">Name</h4>
 											<h4 className="table-item">
@@ -549,7 +565,8 @@ class Account extends Component{
 													<div>Tell visitors more about your community...</div>
 												</Popup>
 											</div>
-											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")} title={"Communities activated / Paid activations"}>
+											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}
+												title={"Communities activated / Paid activations"}>
 												{formatNumner(this.props.community.my_communities.active.length)}
 												&nbsp;/&nbsp;
 												{this.props.community.subscription ?
@@ -653,7 +670,7 @@ class Account extends Component{
 													 style={{width: "100%"}}>
 													<div className={"w3-col l1"}>
 														<img alt={"Credit card"}
-															src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+															 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
 													</div>
 													<div className={"w3-col l4"} title={"Card number"}>
 														**** **** ****&nbsp;

@@ -180,6 +180,14 @@
 	border-bottom: 1px solid #e6e6e6;
 }
 
+.account-body .table-row.pic h4 {
+	line-height: 37px;
+}
+
+.account-body .table-row.pic .table-link {
+	margin-top: 10px;
+}
+
 .table-row-2 {
 	display: -ms-grid;
 	display: grid;
@@ -269,17 +277,17 @@
 	text-decoration: none;
 }
 
-.table-link .fas.fa-save{
+.table-link .fas.fa-save {
 	font-size: 1.2em;
 	padding: 0 2px 2px;
 }
 
-.table-link .fas.fa-pen{
+.table-link .fas.fa-pen {
 	border-bottom: solid 3px;
 	padding: 0 2px 1px;
 }
 
-.verified-mark{
+.verified-mark {
 	margin-left: 6px;
 	width: 15px;
 }
@@ -328,15 +336,21 @@
 	text-decoration: none;
 }
 
-.email-verify-part{
-	margin-top: 8px!important;
+.email-verify-part {
+	margin-top: 8px !important;
 }
 
 .email-verify-part * {
-	color: #999!important;
-	line-height: 22px!important;
+	color: #999 !important;
+	line-height: 22px !important;
 }
 
 .email-verify-part .link {
-	color: #8900fe!important;
+	color: #8900fe !important;
+}
+
+.account-body .admin-pic {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
