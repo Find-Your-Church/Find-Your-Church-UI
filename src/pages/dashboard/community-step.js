@@ -39,6 +39,7 @@ class CommunityStep extends Component{
 			showedMembers: false,
 			passable: this.props.location.state !== undefined,
 
+			community_id: p_obj === undefined ? -1 : p_obj.obj._id,
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
 			category: p_obj === undefined ? "" : p_obj.obj.category,
 			address: p_obj === undefined ? "" : p_obj.obj.address,
@@ -199,7 +200,7 @@ class CommunityStep extends Component{
 			support_type: this.state.support_type
 		};
 
-		this.props.createCommunityStep(this.props.location.state === undefined, this.props.auth.user.id, info_1, info_2, this.props.history);
+		this.props.createCommunityStep(this.props.location.state === undefined, this.props.auth.user.id, this.state.community_id, info_1, info_2, this.props.history);
 	};
 
 	removeSlide(index){
@@ -276,13 +277,11 @@ class CommunityStep extends Component{
 											   placeholder="Community name"
 											   id="community_name"
 											   value={this.state.community_name}
-											   disabled={this.state.is_editing}
 											   required=""/>
 										<select className="form-select category w-select"
 												onChange={this.onChange}
 												id="category"
 												defaultValue={this.state.category}
-												disabled={this.state.is_editing}
 												required="">
 											<option value="">Category...</option>
 											{
@@ -293,54 +292,40 @@ class CommunityStep extends Component{
 												})
 											}
 										</select>
-										{this.state.is_editing ? (
-											<div style={{
-												paddingTop: "4px",
-												backgroundImage: "url('/img/icon/icon-address.svg')",
-												backgroundRepeat: "no-repeat",
-												backgroundPosition: "0 center",
-												height: "32px",
-												lineHeight: "24px",
-												textIndent: "28px",
-											}}>
-												{this.state.address}
-											</div>
-										) : (
-											<PlacesAutocomplete
-												value={this.state.address}
-												class={"w3-input social-input"}
-												onChange={this.onChangeAddress}
-												onSelect={this.handleSelect}
-											>
-												{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-													<>
-														<input className="form-input w-input social-input"
-															   style={{backgroundImage: "url('/img/icon/icon-address.svg')"}}
-															   disabled={this.state.is_editing}
-															   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
-															   {...getInputProps({placeholder: "Address or City"})}
-															   required=""/>
-														<div className={"address-candidates"}>
-															{loading ? <div>...loading</div> : null}
-															{suggestions.map((suggestion) => {
-																const style = {
-																	backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
-																	backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-																};
+										<PlacesAutocomplete
+											value={this.state.address}
+											class={"w3-input social-input"}
+											onChange={this.onChangeAddress}
+											onSelect={this.handleSelect}
+										>
+											{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+												<>
+													<input className="form-input w-input social-input"
+														   style={{backgroundImage: "url('/img/icon/icon-address.svg')"}}
+														   disabled={this.state.is_editing}
+														   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
+														   {...getInputProps({placeholder: "Address or City"})}
+														   required=""/>
+													<div className={"address-candidates"}>
+														{loading ? <div>...loading</div> : null}
+														{suggestions.map((suggestion) => {
+															const style = {
+																backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
+																backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+															};
 
-																return (
-																	<div className={"address-item"}
-																		 onClick={() => alert(suggestion.terms)}
-																		 {...getSuggestionItemProps(suggestion, {style})}>
-																		{suggestion.description}
-																	</div>
-																);
-															})}
-														</div>
-													</>
-												)}
-											</PlacesAutocomplete>
-										)}
+															return (
+																<div className={"address-item"}
+																	 onClick={() => alert(suggestion.terms)}
+																	 {...getSuggestionItemProps(suggestion, {style})}>
+																	{suggestion.description}
+																</div>
+															);
+														})}
+													</div>
+												</>
+											)}
+										</PlacesAutocomplete>
 									</div>
 								</div>
 							</div>
@@ -366,7 +351,7 @@ class CommunityStep extends Component{
 													<h4 className="form-header">About</h4>
 													<Popup
 														trigger={<i style={{cursor: "pointer"}}
-															className={"fas fa-question-circle tooltip-icon"}> </i>}
+																	className={"fas fa-question-circle tooltip-icon"}> </i>}
 														position={"left center"}>
 														<div>Tell visitors more about your community...</div>
 													</Popup>
