@@ -8,7 +8,7 @@ import {
 	registerCard,
 	clearLastInvoice,
 	activateCommunity,
-	hideActivateDlg, verifyCoupon, clearCouponVerified, clearCouponFailed, clearActiveStatus
+	hideActivateDlg, verifyCoupon, clearCouponVerified, clearCouponFailed, clearActiveStatus, getPlan
 } from "../actions/community-actions";
 import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
@@ -60,6 +60,7 @@ class StripeSubscription extends Component{
 		this.props.getBillingStatus({
 			user_id: this.props.auth.user.id,
 		}, this.props.history);
+		this.props.getPlan();
 	}
 
 	onChange = e => {
@@ -159,8 +160,8 @@ class StripeSubscription extends Component{
 
 	render(){
 		let next_due_date = "", next_month1 = "", next_month2 = "";
+		const to_date = new Date();
 		if(this.props.community.subscription){
-			const to_date = new Date();
 			let i;
 			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
 			if(this.props.community.trialing){
@@ -178,6 +179,8 @@ class StripeSubscription extends Component{
 			next_month1 = getNextMonth(init_date, i);
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
+
+		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days).toLocaleDateString('en-US');
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
@@ -329,18 +332,26 @@ class StripeSubscription extends Component{
 											<div className="invoice-div top">
 												<div className="filtersheader-div">
 													<h4 className="table-header">Due Today</h4>
-													{this.props.community.subscription && this.props.community.trialing ? (
+													{(this.props.community.subscription && this.props.community.trialing) ? (
 														<h4 className={"w3-small w3-text-green"}
 															style={{marginLeft: "-70px"}}>
 															<br/>
 															Free trial
 															through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
 														</h4>
-													) : null}
+													) : (
+														this.props.community.trial_period_days > 0 ? (
+															<h4 className={"w3-small w3-text-green"}
+																style={{marginLeft: "-70px"}}>
+																<br/>
+																Free trial
+																through {upcoming_duedate}
+															</h4>
+														) : null)}
 												</div>
 												<div>
 													<div className="div10-bottom right">
-														{this.props.community.trialing ? null : (
+														{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
 															<h4 className={"value strikethrough" + (this.props.community.subscription ? "" : " grey")}>
 																{this.props.community.subscription ?
 																	showAmount(this.props.community.my_communities.active.length *
@@ -374,13 +385,13 @@ class StripeSubscription extends Component{
 																showAmount(this.props.community.upcoming_invoice.total)
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "$0.00")}
+																	: showAmount(this.props.community.plan_price))}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_due_date.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "00/00/0000")}
+																	: upcoming_duedate)}
 														</h4>
 													</div>
 													<div className="div10-bottom">
@@ -389,13 +400,13 @@ class StripeSubscription extends Component{
 																showAmount(this.props.community.upcoming_invoice.total)
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "$0.00")}
+																	: showAmount(this.props.community.plan_price))}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month1.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "00/00/0000")}
+																	: upcoming_duedate)}
 														</h4>
 													</div>
 													<div className="div10-bottom">
@@ -404,13 +415,13 @@ class StripeSubscription extends Component{
 																showAmount(this.props.community.upcoming_invoice.total)
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "$0.00")}
+																	: showAmount(this.props.community.plan_price))}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month2.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "00/00/0000")}
+																	: upcoming_duedate)}
 														</h4>
 													</div>
 												</div>
@@ -457,40 +468,43 @@ class StripeSubscription extends Component{
 												)}
 											</div>
 										</div>
-										<div className="form-row">
-											<CardElement className="CardInfoStyle" style={cardStyle}
-														 disabled={!this.state.editing_card && this.props.second}/>
-										</div>
-										{this.props.community.is_setting_card ? (
-											<div className={"w3-container w3-center w3-margin-top"}>
-												<i className="fas fa-spinner fa-spin"> </i>
+										{!this.props.second || this.state.editing_card ? (
+											<div className="form-row">
+												<CardElement className="CardInfoStyle" style={cardStyle}
+															 disabled={!this.state.editing_card && this.props.second}/>
 											</div>
 										) : (
-											customer ? (
-												<div className={"card-detail"}>
-													<div className={"card-detail-item w3-row w3-text-grey"}>
-														<div className={"w3-col l1"}>
-															<img alt={"Card image"}
-																 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
-														</div>
-														<div className={"w3-col l4"} title={"Card number"}>
-															**** **** ****&nbsp;
-															{customer.sources.data[0].last4}
-														</div>
-														<div className={"w3-col l3"} title={"Expiration"}>
-															{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
-														</div>
-														<div className={"w3-col l2"}
-															 title={customer.sources.data[0].cvc_check}>
-															***
-														</div>
-														<div className={"w3-col l2"}
-															 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
-															{customer.sources.data[0].address_zip}
+											this.props.community.is_setting_card ? (
+												<div className={"w3-container w3-center w3-margin-top"}>
+													<i className="fas fa-spinner fa-spin"> </i>
+												</div>
+											) : (
+												customer ? (
+													<div className={"card-detail"}>
+														<div className={"card-detail-item w3-row w3-text-grey"}>
+															<div className={"w3-col l1"}>
+																<img alt={"Card image"}
+																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+															</div>
+															<div className={"w3-col l4"} title={"Card number"}>
+																**** **** ****&nbsp;
+																{customer.sources.data[0].last4}
+															</div>
+															<div className={"w3-col l3"} title={"Expiration"}>
+																{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
+															</div>
+															<div className={"w3-col l2"}
+																 title={customer.sources.data[0].cvc_check}>
+																***
+															</div>
+															<div className={"w3-col l2"}
+																 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
+																{customer.sources.data[0].address_zip}
+															</div>
 														</div>
 													</div>
-												</div>
-											) : null
+												) : null
+											)
 										)}
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
@@ -540,6 +554,7 @@ StripeSubscription.propTypes = {
 	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
+	getPlan: PropTypes.func.isRequired,
 	verifyCoupon: PropTypes.func.isRequired,
 	clearActiveStatus: PropTypes.func.isRequired,
 	clearCouponVerified: PropTypes.func.isRequired,
@@ -560,6 +575,7 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{
+		getPlan,
 		verifyCoupon,
 		clearActiveStatus,
 		clearCouponVerified,
@@ -568,6 +584,6 @@ export default connect(
 		registerCard,
 		clearLastInvoice,
 		activateCommunity,
-		hideActivateDlg
+		hideActivateDlg,
 	}
 )(injectStripe(StripeSubscription));

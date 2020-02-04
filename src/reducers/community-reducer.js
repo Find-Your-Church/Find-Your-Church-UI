@@ -23,7 +23,7 @@ import {
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY
+	VIEW_COMMUNITY, GET_PLAN
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -57,6 +57,8 @@ const initialState = {
 	deactivating: false,
 	coupon_verified: false,
 	coupon_failed: false,
+	plan_price: 0,
+	trial_period_days: 0,
 
 	// for search
 	criteria: {
@@ -237,6 +239,12 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				coupon_failed: action.payload, // true or false
+			};
+		case GET_PLAN:
+			return {
+				...state,
+				plan_price: action.payload.plan_price,
+				trial_period_days: action.payload.trial_period_days,
 			};
 		case SEARCH_CRITERIA:
 			return {

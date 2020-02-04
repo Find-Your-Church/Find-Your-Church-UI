@@ -23,7 +23,7 @@ import {
 	SHOW_ACT_DLG,
 	COUPON_FAILED,
 	ACTIVE_STATUS,
-	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY,
+	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY, GET_PLAN,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -349,6 +349,24 @@ export const verifyCoupon = (info) => dispatch => {
 				type: COUPON_FAILED,
 				payload: true,
 			});
+		});
+};
+
+export const getPlan = () => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/stripe/getplan", {})
+		.then(res => {
+			console.log(res.data);
+			dispatch({
+				type: GET_PLAN,
+				payload: {
+					plan_price: res.data.amount,
+					trial_period_days: res.data.trial_period_days,
+				},
+			});
+		})
+		.catch(err => {
+			// nothing to here
 		});
 };
 
