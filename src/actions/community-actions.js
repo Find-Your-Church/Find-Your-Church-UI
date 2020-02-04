@@ -246,6 +246,10 @@ export const deactivateCommunity = (info) => dispatch => {
 				payload: {},
 			});
 		});
+	dispatch({
+		type: ACTIVE_STATUS,
+		payload: 0,
+	});
 };
 
 /**
