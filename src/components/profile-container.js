@@ -36,7 +36,7 @@ class ProfileContainer extends Component{
 				<div className="div-block-55">
 					<div className="profpic-container">
 						<div className="profpic-div">
-							<img src={"/uploaded/profiles/5de7326365d48a7932daf64f.jpg"}
+							<img src={this.props.auth.user.pic}
 								 width={"100"} height={"100"} alt="" className="image-4"/>
 						</div>
 					</div>

@@ -12,6 +12,8 @@ import "../../css/stripe-style.css";
 import formatNumner from "../../utils/formatNumber";
 import showAmount from "../../utils/showAmount";
 import Popup from "reactjs-popup";
+import isEmpty from "../../utils/isEmpty";
+import FileBase from "react-file-base64";
 
 const cardStyle = {
 	base: {
@@ -55,6 +57,7 @@ class Account extends Component{
 
 			user_admin_email: user.admin_email ? user.admin_email : user.email,
 			user_email: user.email,
+			user_pic: user.pic,
 			user_email_verified: user.email_verified,
 			user_email_verified_at: user.email_verified_at,
 			user_fname: user.fname,
@@ -78,6 +81,14 @@ class Account extends Component{
 		this.clickEditCard = this.clickEditCard.bind(this);
 	}
 
+	componentDidMount(){
+		this.props.getUserInfo({
+			user_id: this.props.auth.user.id,
+		});
+
+		this.setState({user_pic: this.props.auth.user.pic});
+	}
+
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
 			return {errors: nextProps.errors};
@@ -89,6 +100,20 @@ class Account extends Component{
 	onChange = e => {
 		this.setState({[e.target.id]: e.target.value});
 	};
+
+	changeUserPic(files){
+		this.setState({
+			user_pic:
+				files.base64.toString()
+		});
+
+		const userData = {
+			id: this.props.auth.user.id,
+			pic: this.state.user_pic,
+		};
+
+		this.props.updateUserInfo(userData);
+	}
 
 	changeUserName(){
 		// if editing, save the username via axios to BE API.
@@ -289,6 +314,23 @@ class Account extends Component{
 												position={"left top"}>
 												<div>Tell visitors more about your community...</div>
 											</Popup>
+										</div>
+										<div className="table-row pic">
+											<h4 className="table-header">Profile Picture</h4>
+											<h4 className="table-item">
+												<div className="w3-row">
+													<img className={"admin-pic"} src={
+														isEmpty(user.pic) ?
+															"/img/default-user.png"
+															: user.pic
+													} alt={`${user.fname}`}/>
+												</div>
+											</h4>
+											<label className={"table-link"}>
+												<i className={"fas fa-pen"}> </i>
+												<FileBase id="btn-upload" type="file" className="upload-button w-button"
+														  multiple={false} onDone={this.changeUserPic.bind(this)} height="38"/>
+											</label>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Name</h4>
