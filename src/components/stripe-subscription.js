@@ -164,14 +164,8 @@ class StripeSubscription extends Component{
 		if(this.props.community.subscription){
 			let i;
 			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
-			if(this.props.community.trialing){
-				next_due_date = getNextMonth(init_date, 1);
-				i = 2;
-			}
-			else{
-				next_due_date = init_date;
-				i = 1;
-			}
+			next_due_date = init_date;
+			i = 1;
 			while(next_due_date.getTime() < to_date.getTime()){
 				next_due_date = getNextMonth(init_date, i).date;
 				i++;
