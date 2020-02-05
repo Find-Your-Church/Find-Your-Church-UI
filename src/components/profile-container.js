@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Popup from "reactjs-popup";
+import isEmpty from "../utils/isEmpty";
 
 class ProfileContainer extends Component{
 	constructor(props){
@@ -41,7 +42,9 @@ class ProfileContainer extends Component{
 				<div className="div-block-55">
 					<div className="profpic-container">
 						<div className="profpic-div">
-							<img src={this.props.auth.user.pic}
+							<img src={isEmpty(this.props.auth.user.pic) ?
+								"/img/default-user.png"
+								: this.props.auth.user.pic}
 								 width={"100"} height={"100"} alt="" className="image-4"/>
 						</div>
 					</div>
