@@ -209,6 +209,8 @@ class SearchResults extends Component{
 				break;
 		}
 
+		results.sort(fnSort);
+
 		const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
 
 		const pl = criteria_radius > 1 ? "s" : "";
