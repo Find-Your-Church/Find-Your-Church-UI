@@ -60,7 +60,7 @@ class Thumbnail extends Component{
 		}, this.props.history);
 
 		// is available just move up?
-		if(this.props.community.my_communities.active.length < this.props.community.subscription.quantity + this.props.community.tickets){
+		if(this.props.community.subscription && (this.props.community.my_communities.active.length < this.props.community.subscription.quantity + this.props.community.tickets)){
 			this.props.activateCommunity({
 				id: this.props.auth.user.id,
 				community_id: this.props.value._id,
