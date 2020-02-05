@@ -3,6 +3,7 @@ import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo, logoutUser} from "../actions/auth-actions";
+import isEmpty from "../utils/isEmpty";
 
 class SiteHeader extends Component{
 	constructor(props){
@@ -54,7 +55,10 @@ class SiteHeader extends Component{
 									<span className={"name-on-header"}>{this.props.auth.user.fname}</span>
 								</span>
 									<div className="headerprofpic-div w3-right">
-										<img src={this.props.auth.user.pic}
+										<img src={
+											isEmpty(this.props.auth.user.pic) ?
+												"/img/default-user.png"
+												: this.props.auth.user.pic}
 											 alt={this.props.auth.user.fname} className="image-4"/>
 									</div>
 								</div>

@@ -9,7 +9,7 @@
 }
 
 .sign-body {
-	padding: 68px 0 0 0;
+	padding: 60px 0 0 0;
 	min-height: calc(100vh - var(--footer-height));
 	max-height: calc(100vh - var(--footer-height));
 	background-color: #e6e6e6;

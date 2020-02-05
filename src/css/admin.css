@@ -30,7 +30,7 @@
 .admin-right {
 	margin: 0;
 	padding: 20px 20px 20px 0;
-	height: calc(100vh - var(--footer-height) - 68px);
+	height: calc(100vh - var(--footer-height) - 60px);
 	overflow-y: auto;
 }
 
