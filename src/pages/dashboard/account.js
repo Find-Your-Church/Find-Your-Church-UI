@@ -271,8 +271,8 @@ class Account extends Component{
 		if(this.props.community.subscription){
 			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
 			const to_date = new Date();
-			next_due_date = getNextMonth(init_date, 1);
-			let i = 2;
+			next_due_date = init_date;
+			let i = 1;
 			while(next_due_date.getTime() < to_date.getTime()){
 				next_due_date = getNextMonth(init_date, i).date;
 				i++;
