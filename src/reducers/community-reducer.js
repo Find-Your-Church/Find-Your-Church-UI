@@ -23,10 +23,11 @@ import {
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY, GET_PLAN
+	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
+import num2String from "../utils/num-2-string";
 
 const initialState = {
 	// community
@@ -285,6 +286,22 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				view_community: action.payload,
+			};
+		case CLEAR_FILTER_MASK:
+			let bits = state.criteria.filter[action.payload.key].split("");
+			bits[action.payload.index] = "0";
+			const new_filter_value = bits.join("");
+
+			console.log(action.payload.key, state.criteria.filter[action.payload.key], new_filter_value);
+			return {
+				...state,
+				criteria: {
+					...state.criteria,
+					filter: {
+						...state.criteria.filter,
+						[action.payload.key]: new_filter_value,
+					}
+				}
 			};
 		default:
 			return state;

@@ -49,15 +49,15 @@ class SiteHeader extends Component{
 									  className="header-3lines-menu w3-bar-item w3-right">
 									<i className="fas fa-caret-down"> </i>
 								</Link>
-								<Link to="#" onClick={this.toggleAdminMenu} className="w3-bar-item w3-right">
+								<div className="w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>
-									<span className={"w3-hover-text-white"}>{this.props.auth.user.fname}</span>
+									<span className={"name-on-header"}>{this.props.auth.user.fname}</span>
 								</span>
 									<div className="headerprofpic-div w3-right">
 										<img src={this.props.auth.user.pic}
 											 alt={this.props.auth.user.fname} className="image-4"/>
 									</div>
-								</Link>
+								</div>
 							</>
 						)
 						: null}

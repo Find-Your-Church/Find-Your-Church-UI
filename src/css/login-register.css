@@ -103,7 +103,6 @@
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	background-color: transparent;
-	font-family: Montserrat, sans-serif;
 	color: #fff;
 	font-size: 18px;
 	line-height: 18px;
@@ -208,7 +207,7 @@
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
 	background-image: linear-gradient(180deg, #fff, #fff);
 	font-family: 'Source Sans Pro', sans-serif;
-	color: #1b0033;
+	color: #333;
 	text-align: left;
 }
 
@@ -220,7 +219,7 @@
 	border-color: #000 #000 #ccc;
 	background-color: #fff;
 	font-family: 'Source Sans Pro', sans-serif;
-	color: #1b0033;
+	color: #333;
 	font-size: 16px;
 	text-align: center;
 }
@@ -335,7 +334,6 @@ input.w-button {
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
-	font-family: Montserrat, sans-serif;
 	color: #2e89fe;
 	font-size: 12px;
 	line-height: 12px;
@@ -379,8 +377,7 @@ input.w-button {
 .or-text {
 	margin-top: 0;
 	margin-bottom: 0;
-	font-family: Montserrat, sans-serif;
-	color: #1b0033;
+	color: #333;
 	font-size: 14px;
 	line-height: 14px;
 	font-weight: 400;
@@ -461,7 +458,7 @@ input.w-button {
 	border-width: 1px;
 	border-color: #ccc;
 	background-color: #fff;
-	color: #1b0033;
+	color: #333;
 }
 
 .sdk-div button {
@@ -481,7 +478,6 @@ input.w-button {
 .kep-login-facebook.metro {
 	padding: 10px 8px 12px;
 	width: 100%;
-	font-family: Montserrat, sans-serif;
 	font-size: 14px;
 	font-weight: normal;
 	text-indent: 28px;
@@ -508,7 +504,6 @@ input.w-button {
 }
 
 .link-5 {
-	font-family: Montserrat, sans-serif;
 	color: rgba(27, 0, 51, 0.7);
 	font-size: 12px;
 	line-height: 12px;

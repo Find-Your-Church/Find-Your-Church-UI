@@ -13,10 +13,15 @@ class ProfileContainer extends Component{
 		};
 
 		this.toggleMenu = this.toggleMenu.bind(this);
+		this.hideMenu = this.hideMenu.bind(this);
 	}
 
 	toggleMenu(){
 		this.setState({is_show_menu: !this.state.is_show_menu});
+	}
+
+	hideMenu(){
+		this.setState({is_show_menu: false});
 	}
 
 	render(){
@@ -47,9 +52,16 @@ class ProfileContainer extends Component{
 						<h3 className="community-name">
 							{this.props.auth.user.fname} {this.props.auth.user.lname}
 						</h3>
-						<Link to="/dashboard/account" className={"w3-right"}>
+						<Link to="#" className={"w3-right"} onClick={this.toggleMenu}>
 							<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 						</Link>
+						<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
+							 onMouseLeave={this.hideMenu}
+							 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+							<Link to="/dashboard/account" className="listing-navlink w-nav-link">
+								Edit
+							</Link>
+						</nav>
 					</div>
 					<div className="personal-info">
 						<div className={"personal-info-item"} style={{backgroundImage: "url(/img/icon/icon-email.svg)"}}>
@@ -61,7 +73,8 @@ class ProfileContainer extends Component{
 					</div>
 				</div>
 				<Link to="/create-new-community" className="newcommunity-button">
-					<img src={"/img/icon/icon-new.svg"} alt={"create new community"}/>
+					{/*<img src={"/img/icon/icon-new.svg"} alt={"create new community"}/>*/}
+					+&nbsp;<i className={"fas fa-users"}> </i>
 					&nbsp;&nbsp;New Community
 				</Link>
 			</div>

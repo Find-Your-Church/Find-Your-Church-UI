@@ -1,16 +1,16 @@
 body {
-	--results-header-height: 72px;
+	--results-header-height: 88px;
 }
 
 #search-results-header {
 	position: relative;
 	height: var(--results-header-height);
-	margin-top: 68px;
-	padding: 10px 16px;
-	background-color: #ccc;
+	margin-top: 60px;
+	padding: 18px 20px;
+	background-color: #e6e6e6;
 }
 
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 990px) {
 	.search-form-input {
 		width: 480px;
 	}
@@ -23,38 +23,54 @@ body {
 
 .map-body {
 	position: absolute;
-	top: calc(var(--results-header-height) + 68px);
-	min-height: calc(100vh - 68px - var(--results-header-height));
+	top: calc(var(--results-header-height) + 60px);
+	min-height: calc(100vh - 60px - var(--results-header-height));
 	width: calc(100vw - 480px - 10vw);
+	min-width: 50vw;
 }
 
 .map-content {
-	min-height: calc(100vh - 68px - var(--results-header-height));
+	min-height: calc(100vh - 60px - var(--results-header-height));
 }
 
 .filter-panel {
 	position: absolute;
 	left: 0;
-	top: calc(var(--results-header-height) + 68px);
-	width: 320px;
-	height: calc(100vh - 68px - var(--results-header-height));
+	top: calc(var(--results-header-height) + 60px);
+	width: calc(100vw - 480px - 10vw);
+	min-width: 50vw;
+	height: calc(100vh - 60px - var(--results-header-height));
 	padding: 20px 32px;
 	background-color: #f8feff;
 	overflow-y: scroll;
-	opacity: 0.8;
+	opacity: 0.95;
 }
 
 .filter-panel .filter-div {
 	padding: 8px 0;
-	border-bottom: solid 1px #cccccc;
+	border-bottom: solid 1px #e6e6e6;
+}
+
+.filter-panel .filter-label {
+	font-size: 16px;
+}
+
+.filter-panel .filter-option {
+	font-size: 16px;
+}
+
+.filter-panel .filter-checkmark,
+.filter-panel .filter-radiomark {
+	margin-top: 4px;
 }
 
 .communities-container {
 	position: absolute;
 	right: 0;
-	top: calc(var(--results-header-height) + 68px);
+	top: calc(var(--results-header-height) + 60px);
 	width: calc(480px + 10vw);
-	height: calc(100vh - 68px - var(--results-header-height));
+	max-width: 50vw;
+	height: calc(100vh - 60px - var(--results-header-height));
 	padding: 8px;
 	background-color: #f3f3f3;
 	overflow-y: scroll;
@@ -93,14 +109,42 @@ body {
 
 .search-result-headline.empty {
 	background-repeat: no-repeat;
+	background-position: 0 4px;
 	text-indent: 32px;
-	height: 36px;
-	line-height: 24px;
+	height: auto;
+	font-size: 16px !important;
+	line-height: 32px;
+	color: #333;
 }
 
 .selected-thumbnail {
 	background-color: #fff;
 	box-shadow: 0 0 4px #8900fe;
+}
+
+.div-block-158 {
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.link-headernav.button-gradient {
+	display: block;
+	min-height: 0;
+	margin-left: 10px;
+	padding: 10px;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	background-color: #00e8fe;
+	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
+	box-shadow: 1px 1px 3px 0 #505050;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	font-size: 16px;
+}
+
+.link-headernav.button-gradient:hover {
+	background-image: linear-gradient(225deg, #8900fe, #2e89fe 50%, #00e8fe);
 }
 
 @media screen and (max-width: 990px) {
@@ -110,10 +154,11 @@ body {
 
 	#search-results-header {
 		height: auto;
+		border-bottom: solid 1px #cccccc;
 	}
 
 	.filter-panel {
-		top: 296px;
+		top: 336px;
 		width: 100vw;
 		height: auto;
 		z-index: 101;
@@ -124,14 +169,19 @@ body {
 	}
 
 	.communities-container {
-		top: 296px;
+		top: 336px;
 		width: 100vw;
+		max-width: 100vw;
 		height: auto;
 		z-index: 100;
 	}
 
+	#search-results-header * {
+		font-size: 18px;
+	}
+
 	#search-results-header .search-form-container {
-		min-width: calc(100vw - 32px);
+		min-width: calc(100vw - 40px);
 	}
 
 	#search-results-header .filter-link {
@@ -142,4 +192,25 @@ body {
 	.search-form {
 		box-shadow: none;
 	}
+}
+
+.selected-filter-item {
+	display: inline-block;
+	margin: 0 8px 8px 0;
+	padding: 3px 8px;
+	color: #fff;
+	background-color: #8900fe;
+}
+
+.selected-filter-item-close {
+	margin-left: 4px;
+	margin-top: 2px;
+	padding: 0 5px;
+	border-radius: 50%;
+	border: solid 1px #fff;
+	cursor: pointer;
+}
+
+.communities-container .selected-filter-item-close {
+	display: none;
 }

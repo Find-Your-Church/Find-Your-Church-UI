@@ -60,7 +60,6 @@
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	background-color: transparent;
-	font-family: Montserrat, sans-serif;
 	color: #fff;
 	font-size: 18px;
 	line-height: 18px;
@@ -301,7 +300,6 @@ h4 {
 .div-20top {
 	padding-top: 20px;
 	padding-left: 0;
-	font-family: Montserrat, sans-serif;
 }
 
 .div-block-147 {
@@ -404,7 +402,7 @@ h4 {
 
 .pay-info-row {
 	width: 100%;
-	padding: 12px 0;
+	padding: 6px 0;
 	color: #aaaaaa;
 }
 
@@ -502,10 +500,15 @@ h4 {
 }
 
 .card-detail-item {
-	padding: 4px 0;
+	padding: 6px 0;
 	height: auto;
-	font-size: 12px;
+	font-size: 14px;
+	color: #999999;
 	border-bottom: solid 1px #eaeaea;
+}
+
+.card-detail-item div {
+	color: #999999;
 }
 
 .card-detail-item .w3-col:not(:first-child) {

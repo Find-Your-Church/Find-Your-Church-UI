@@ -302,10 +302,10 @@ class Account extends Component{
 						<div className="div-20bottom">
 							<div className="container-inline w3-row">
 								<div className="flexdiv-leftright panel underline">
-									<h5 className="container-header">Account Information</h5>
+									<h5 className="container-title">Account</h5>
 								</div>
 								<div className={"sub-container w3-col m12 l6"}>
-									<div className={"sub-content"}>
+									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Admin Info</h5>
 											<Popup
@@ -419,7 +419,7 @@ class Account extends Component{
 									</div>
 								</div>
 								<div className={"sub-container w3-col m12 l6"}>
-									<div className={"sub-content"}>
+									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">User Info</h5>
 											<Popup
@@ -568,10 +568,10 @@ class Account extends Component{
 						<div className="div-20bottom">
 							<div className="container-inline w3-row">
 								<div className="flexdiv-leftright panel underline">
-									<h5 className="container-header">Payment Summary</h5>
+									<h5 className="container-title">Billing</h5>
 								</div>
 								<div className={"sub-container w3-col m12 l6"}>
-									<div className={"sub-content"}>
+									<div className={"sub-content payment"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Account Summary</h5>
 											<Popup
@@ -655,7 +655,7 @@ class Account extends Component{
 									</div>
 								</div>
 								<div className={"sub-container w3-col m12 l6"}>
-									<div className={"sub-content"}>
+									<div className={"sub-content payment"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Payment Method</h5>
 											<Link to="#" className={"table-link"} onClick={this.clickEditCard}>

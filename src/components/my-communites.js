@@ -43,7 +43,7 @@ class MyCommunities extends Component{
 							<Popup
 								trigger={<i style={{cursor: "pointer"}}
 											className={"fas fa-question-circle tooltip-icon"}> </i>}
-								position={"left top"}>
+								position={this.props.status === "active" ? "left top" : "left bottom"}>
 								<div>Tell visitors more about your community...</div>
 							</Popup>
 						</div>
@@ -59,7 +59,7 @@ class MyCommunities extends Component{
 									})}
 								</div>)
 							: (
-								<div className={"w3-small w3-text-grey"}>
+								<div className={"w3-normal w3-text-grey"}>
 									You are not the Admin for any {this.props.status} communities.
 								</div>
 							)

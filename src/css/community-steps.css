@@ -287,7 +287,7 @@
 	margin-bottom: 0;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	color: #1b0033;
+	color: #333;
 	font-size: 16px;
 	line-height: 32px;
 	font-weight: 600;
@@ -426,7 +426,7 @@
 	border-color: #000 #000 #ccc;
 	border-radius: 0;
 	background-color: transparent;
-	color: #1b0033;
+	color: #333;
 	text-align: left;
 }
 
@@ -448,7 +448,7 @@
 	border-width: 1px;
 	border-color: #ccc;
 	background-color: transparent;
-	color: #1b0033;
+	color: #333;
 }
 
 .steps-body .form-select.category {
@@ -456,7 +456,7 @@
 	margin-left: 0;
 	border-style: none;
 	border-color: #ccc;
-	color: #1b0033;
+	color: #333;
 	font-style: normal;
 }
 
@@ -478,7 +478,7 @@
 	max-width: 100%;
 	margin: 0;
 	border: none;
-	color: #1b0033;
+	color: #333;
 }
 
 .steps-body .w-form-done {
@@ -530,7 +530,7 @@
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-bottom: 0;
-	color: #1b0033;
+	color: #333;
 	font-size: 14px;
 	line-height: 20px;
 	font-weight: 600;

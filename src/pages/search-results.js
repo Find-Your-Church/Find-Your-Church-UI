@@ -22,6 +22,8 @@ import {ScrollTo} from "react-scroll-to";
 import '../css/search-results.css';
 import sorters from "../actions/sorters";
 import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sorter_newest} from "../utils/sorter-func";
+import isEmpty from "../utils/isEmpty";
+import SelectedFilters from "../components/selected-filters";
 
 class SearchResults extends Component{
 	constructor(props){
@@ -100,47 +102,69 @@ class SearchResults extends Component{
 
 	getDaysInfo = (checks) => {
 		this.props.setSearchFilter({days: checks});
-		this.setState({days: checks})
+		this.setState({days: checks});
+		this.doSearchByFilter();
 	};
 	getTimesInfo = (checks) => {
 		this.props.setSearchFilter({times: checks});
-		this.setState({times: checks})
+		this.setState({times: checks});
+		this.doSearchByFilter();
 	};
 	getFrequencyInfo = (checks) => {
 		this.props.setSearchFilter({frequency: checks});
-		this.setState({frequency: checks})
+		this.setState({frequency: checks});
+		this.doSearchByFilter();
 	};
 	getAgesInfo = (checks) => {
 		this.props.setSearchFilter({ages: checks});
-		this.setState({ages: checks})
+		this.setState({ages: checks});
+		this.doSearchByFilter();
 	};
 	getGenderInfo = (checks) => {
 		this.props.setSearchFilter({gender: checks});
-		this.setState({gender: checks})
+		this.setState({gender: checks});
+		this.doSearchByFilter();
 	};
 	getParkingInfo = (checks) => {
 		this.props.setSearchFilter({parking: checks});
-		this.setState({parking: checks})
+		this.setState({parking: checks});
+		this.doSearchByFilter();
 	};
 	getMinistriesInfo = (checks) => {
 		this.props.setSearchFilter({ministries: checks});
-		this.setState({ministries: checks})
+		this.setState({ministries: checks});
+		this.doSearchByFilter();
 	};
 	getOtherServicesInfo = (checks) => {
 		this.props.setSearchFilter({other_services: checks});
-		this.setState({other_services: checks})
+		this.setState({other_services: checks});
+		this.doSearchByFilter();
 	};
 	getAmbianceInfo = (checks) => {
 		this.props.setSearchFilter({ambiance: checks});
-		this.setState({ambiance: checks})
+		this.setState({ambiance: checks});
+		this.doSearchByFilter();
 	};
 	getEventTypeInfo = (checks) => {
 		this.props.setSearchFilter({event_type: checks});
-		this.setState({event_type: checks})
+		this.setState({event_type: checks});
+		this.doSearchByFilter();
 	};
 	getSupportTypeInfo = (checks) => {
 		this.props.setSearchFilter({support_type: checks});
-		this.setState({support_type: checks})
+		this.setState({support_type: checks});
+		this.doSearchByFilter();
+	};
+
+	doSearchByFilter = () => {
+		/*
+		this.props.doSearchCommunities({
+			...this.props.community.criteria,
+			address: this.props.community.criteria.my_address,
+			category: this.props.community.criteria.search_category,
+			radius: this.props.community.criteria.search_radius,
+		});
+		*/
 	};
 
 	hoverMarker = (index) => {
@@ -157,6 +181,10 @@ class SearchResults extends Component{
 
 	clearMarker = (index) => {
 		this.props.clearPicking();
+	};
+
+	refreshComponent = () => {
+		this.forceUpdate();
 	};
 
 	render(){
@@ -181,7 +209,9 @@ class SearchResults extends Component{
 				break;
 		}
 
-		const pl = this.props.criteria.radius > 1 ? "s" : "";
+		const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
+
+		const pl = criteria_radius > 1 ? "s" : "";
 		return (
 			<main id="content-body" className="w3-row">
 				<div id="search-results-header" className="w3-col s12">
@@ -208,6 +238,9 @@ class SearchResults extends Component{
 							  handleScroll={this.clickMarker}
 				/>
 				<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
+					<div className={"selected-filters"}>
+						<SelectedFilters filter={this.props.community.criteria.filter} handleRefresh={this.refreshComponent}/>
+					</div>
 					<div className={"filter-div"}>
 						<label className={"filter-label w3-large"}>Filters</label>
 						<Popup
@@ -219,50 +252,50 @@ class SearchResults extends Component{
 					</div>
 					<SearchFilterCheck filterTitle="Day(s)" filterName="days"
 									   send={this.getDaysInfo}
-									   value={this.state.days}
+									   value={this.props.community.criteria.filter.days}
 									   items={community_config.FILTERS.days}/>
 					<SearchFilterCheck filterTitle="Time(s)" filterName="times"
 									   send={this.getTimesInfo}
-									   value={this.state.times}
+									   value={this.props.community.criteria.filter.times}
 									   items={community_config.FILTERS.times}/>
 					<SearchFilterRadio filterTitle="Frequency" filterName="frequency"
 									   send={this.getFrequencyInfo}
-									   value={this.state.frequency}
+									   value={this.props.community.criteria.filter.frequency}
 									   items={community_config.FILTERS.frequency}/>
 					<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
 									   send={this.getAgesInfo}
-									   value={this.state.ages}
+									   value={this.props.community.criteria.filter.ages}
 									   items={community_config.FILTERS.ages}/>
 					<SearchFilterRadio filterTitle="Gender" filterName="gender"
 									   send={this.getGenderInfo}
-									   value={this.state.gender}
+									   value={this.props.community.criteria.filter.gender}
 									   items={community_config.FILTERS.gender}/>
 					<SearchFilterCheck filterTitle="Parking" filterName="parking"
 									   send={this.getParkingInfo}
-									   value={this.state.parking}
+									   value={this.props.community.criteria.filter.parking}
 									   items={community_config.FILTERS.parking}/>
 					<SearchFilterCheck filterTitle="Other Ministries"
 									   filterName="ministries"
 									   send={this.getMinistriesInfo}
-									   value={this.state.ministries}
+									   value={this.props.community.criteria.filter.ministries}
 									   items={community_config.FILTERS.ministries}/>
 					<SearchFilterCheck filterTitle="Other Services"
 									   filterName="other_services"
 									   send={this.getOtherServicesInfo}
-									   value={this.state.other_services}
+									   value={this.props.community.criteria.filter.other_services}
 									   items={community_config.FILTERS.other_services}/>
 					<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
 									   send={this.getAmbianceInfo}
-									   value={this.state.ambiance}
+									   value={this.props.community.criteria.filter.ambiance}
 									   items={community_config.FILTERS.ambiance}/>
 					<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
 									   send={this.getEventTypeInfo}
-									   value={this.state.event_type}
+									   value={this.props.community.criteria.filter.event_type}
 									   items={community_config.FILTERS.event_type}/>
 					<SearchFilterRadio filterTitle="Support Type"
 									   filterName="support_type"
 									   send={this.getSupportTypeInfo}
-									   value={this.state.support_type}
+									   value={this.props.community.criteria.filter.support_type}
 									   items={community_config.FILTERS.support_type}/>
 				</div>
 				<div className={"communities-container communities-body communities search-results w3-row"}>
@@ -283,21 +316,44 @@ class SearchResults extends Component{
 							{results.map((item, index) => {
 								this.myref[index] = React.createRef();
 								return (
-									<div className={"w3-half" + (this.props.community.picking === index ? " selected-thumbnail" : "")} key={"search" + index} ref={this.myref[index]}
-										 onMouseEnter={() => this.hoverMarker(index)} onMouseLeave={() => this.clearMarker()}>
+									<div
+										className={"w3-half" + (this.props.community.picking === index ? " selected-thumbnail" : "")}
+										key={"search" + index} ref={this.myref[index]}
+										onMouseEnter={() => this.hoverMarker(index)}
+										onMouseLeave={() => this.clearMarker()}>
 										<PublicThumbnail value={item.data}/>
 									</div>
 								)
 							})}
 						</div>
 					) : (
-						<div className={"search-result-headline empty w3-center w3-large"}
-							 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}
-						>
-							We couldn't find any {this.props.criteria.category} within {this.props.criteria.radius} mile{pl} of {this.props.criteria.address}.
-
-							Try expanding your search radius or join our mission and create the first one..
-						</div>
+						<>
+							<div className={"search-result-headline empty"}
+								 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}>
+								<div>
+									We couldn't find
+									any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}.
+								</div>
+								<div>
+									Try expanding your search radius.
+								</div>
+							</div>
+							{this.props.auth.isAuthenticated ? null : (
+								<>
+									<div style={{paddingLeft: "40px"}}>
+										Or join our mission and create the first one!
+									</div>
+									<div className="div-block-158">
+										<div className="div-navlink noresults">
+											<Link to={"/register-popup"}
+												  className="link-headernav button-gradient w-button">
+												Create an Account
+											</Link>
+										</div>
+									</div>
+								</>
+							)}
+						</>
 					)}
 				</div>
 			</main>
@@ -307,6 +363,7 @@ class SearchResults extends Component{
 
 SearchResults.propTypes = {
 	errors: PropTypes.object.isRequired,
+	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
 	criteria: PropTypes.object.isRequired,
 	setSearchCriteria: PropTypes.func.isRequired,
@@ -319,6 +376,7 @@ SearchResults.propTypes = {
 
 const mapStateToProps = state => ({
 	errors: state.errors,
+	auth: state.auth,
 	community: state.communities,
 	criteria: state.communities.criteria,
 
