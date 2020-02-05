@@ -23,7 +23,7 @@ import {
 	SHOW_ACT_DLG,
 	COUPON_FAILED,
 	ACTIVE_STATUS,
-	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY, GET_PLAN,
+	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -482,4 +482,11 @@ export const viewCommunity = (info) => dispatch => {
 				});
 			}
 		);
+};
+
+export const clearFilterMask = (key, i) => dispatch => {
+	dispatch({
+		type: CLEAR_FILTER_MASK,
+		payload: {key: key, index: i},
+	});
 };

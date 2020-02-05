@@ -8,27 +8,27 @@ class SiteFooter extends Component{
 
 	render(){
 		return (
-			<footer className="w3-center footer-div">
-				<div className={"w3-bar"}>
-					<Link to="#" className="w3-bar-item footer-link" onClick={() => this.redirectURL("mailto:support@findyourchurch.org")}>
-						Support
-					</Link>
-					<Link to="#" className="w3-bar-item footer-link" onClick={() => this.redirectURL("mailto:hello@findyourchurch.org")}>
-						Get in Touch
-					</Link>
-					<Link to="/make-suggestion" className="w3-bar-item footer-link">
-						Make a Suggestion
-					</Link>
-					<Link to="/terms-n-conditions" className="w3-bar-item footer-link">
-						Terms and Conditions
-					</Link>
-					<Link to="/privacy-policy" className="w3-bar-item footer-link">
-						Privacy Policy
-					</Link>
-					<Link to="/" className="w3-bar-item footer-link footer-logo">
-						&copy; FindYourChurch.org {new Date().getFullYear()}. All rights reserved.
-					</Link>
-				</div>
+			<footer className="footer-div">
+				<Link to="#" className="footer-link"
+					  onClick={() => this.redirectURL("mailto:support@findyourchurch.org")}>
+					Support
+				</Link>
+				<Link to="#" className="footer-link"
+					  onClick={() => this.redirectURL("mailto:hello@findyourchurch.org")}>
+					Get in Touch
+				</Link>
+				<Link to="/make-suggestion" className="footer-link">
+					Make a Suggestion
+				</Link>
+				<Link to="/terms-n-conditions" className="footer-link">
+					Terms and Conditions
+				</Link>
+				<Link to="/privacy-policy" className="footer-link">
+					Privacy Policy
+				</Link>
+				<Link to="/" className="footer-link footer-logo">
+					&copy; FindYourChurch.org {new Date().getFullYear()}. All rights reserved.
+				</Link>
 			</footer>
 		);
 	}

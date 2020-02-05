@@ -87,7 +87,7 @@
 	padding-top: 0;
 	padding-bottom: 0;
 	font-family: 'Source Sans Pro', sans-serif;
-	color: #1b0033;
+	color: #333;
 	font-size: 18px;
 	line-height: 18px;
 	font-weight: 600;
@@ -103,7 +103,7 @@
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #fff;
 	font-size: 15px;
-	line-height: 14px;
+	line-height: 22px;
 	text-align: center;
 	box-sizing: border-box;
 	opacity: 0.8;
@@ -213,13 +213,12 @@
 
 .communities-body .communityname {
 	display: inline-block;
-	font-family: 'Source Sans Pro', sans-serif;
 	-webkit-box-flex: 1;
 	-webkit-flex: 1;
 	-ms-flex: 1;
 	flex: 1;
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 600;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -264,7 +263,7 @@
 	right: 0;
 	top: 28px;
 	width: 100%;
-	padding: 0;
+	padding: 0 10px 10px 10px;
 	-webkit-box-ordinal-group: 1;
 	-ms-flex-order: 0;
 	order: 0;
@@ -276,9 +275,7 @@
 }
 
 .communities-body .listing-navmenu .w-nav-link:hover {
-	font-weight: 600;
-	color: #222222;
-	background-color: #f8f8f8;
+	color: #8900fe;
 }
 
 .communities-body .w-nav-link {
@@ -286,8 +283,9 @@
 	display: inline-block;
 	vertical-align: top;
 	text-decoration: none;
-	color: #222222;
-	padding: 20px;
+	color: #808080;
+	padding: 10px 0;
+	font-size: 16px;
 	text-align: left;
 	margin-left: auto;
 	margin-right: auto;
@@ -299,12 +297,10 @@
 
 .communities-body .listing-navlink {
 	display: block;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px 0;
 	border-style: none none solid;
 	border-width: 1px;
 	border-color: #000 #000 #fff;
-	font-family: 'Source Sans Pro', sans-serif;
 	color: #808080;
 	font-weight: 400;
 	text-align: right;

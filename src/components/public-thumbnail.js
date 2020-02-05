@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
 import "../css/communities.css"
 import "../css/community-steps.css"
+import SelectedFilters from "./selected-filters";
 
 class PublicThumbnail extends Component{
 	constructor(props){
@@ -111,6 +112,9 @@ class PublicThumbnail extends Component{
 						</div>
 						<div className="listingrow">
 							<h5 className="communityaddress">{this.props.value.address}</h5>
+						</div>
+						<div className="listingrow">
+							<SelectedFilters filter={this.props.value}/>
 						</div>
 					</div>
 				</div>
