@@ -11,7 +11,7 @@ import {getUserInfo} from "../actions/auth-actions";
  */
 class Home extends Component{
 	componentDidMount(){
-		this.props.getUserInfo();
+		this.props.getUserInfo({user_id: this.props.auth.user.id,});
 	}
 
 	render(){
