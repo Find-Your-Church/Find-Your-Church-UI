@@ -66,6 +66,16 @@ class ProfileContainer extends Component{
 							</Link>
 						</nav>
 					</div>
+					<div className="personal-info">
+						<div className={"members"}>
+							<img src={"/img/social/icon-facebook.svg"}
+								 alt="" className="personal-pic"/>
+						</div>
+						<div className={"members"}>
+							<img src={"/img/social/icon-facebook.svg"}
+								 alt="" className="personal-pic"/>
+						</div>
+					</div>
 					{/*
 					<div className="personal-info">
 						{isEmpty(this.props.auth.user.admin_email) ? null :
