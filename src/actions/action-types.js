@@ -12,6 +12,7 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const SET_SENDING_STATUS = "SET_SENDING_STATUS";
+export const WELCOME_MESSAGE = "WELCOME_MESSAGE";
 
 /**
  * community handles
@@ -50,3 +51,4 @@ export const SORT_ORDER = "SORT_ORDER";
 export const SET_PICKING = "SET_PICKING";
 export const VIEW_COMMUNITY = "VIEW_COMMUNITY";
 export const CLEAR_FILTER_MASK = "CLEAR_FILTER_MASK";
+export const CLEAR_CRITERIA = "CLEAR_CRITERIA";

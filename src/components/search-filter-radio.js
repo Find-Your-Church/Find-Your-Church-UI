@@ -12,7 +12,7 @@ class SearchFilterRadio extends Component{
 		this.checks = this.props.value.split("");
 
 		this.state = {
-			collapsed: props.collapsed || false,
+			collapsed: props.collapsed || true,
 		};
 
 		this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -37,35 +37,40 @@ class SearchFilterRadio extends Component{
 	render(){
 		return this.props.send ? (
 				<div className="filter-div">
-					<div className={"flexdiv-left labels"}>
+					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
-							   onClick={this.toggleCollapse}>{this.props.filterTitle}</label>
+							  >{this.props.filterTitle}</label>
 					</div>
-					<label className="filter-option">Any
-						<input type="radio"
-							   name={this.props.filterName} onClick={this.onClearCheck}
-						/>
-						<span className="filter-radiomark"> </span>
-					</label>
 					{
-						this.state.collapsed ? null :
-							this.props.items.map((item, index) => {
-								const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][this.max_length - index - 1] : 0;
-								const checked = this.props.community.criteria.filter[this.props.filterName].split("")[index] === "1";
-								return (
-									<label className={"filter-option" + (count === 0 ? " disabled" : "")} key={this.props.filterName + index} style={{display: "block"}}>{item}
-										<input type="radio" id={this.props.filterName + "[" + index + "]"}
-											   name={this.props.filterName} value={index} onClick={this.onCheck}
-											   defaultChecked={this.checks[index] === '1'}
-											   disabled={count === 0}
-											   checked={checked}
-										/>
-										<span className={"filter-radiomark" + (count === 0 ? " disabled" : "")}> </span>
-										&nbsp;
-										{count > 0 ? <>({count})</> : null}
-									</label>
-								)
-							})
+						this.state.collapsed ? null : (
+							<>
+								<label className="filter-option">Any
+									<input type="radio"
+										   name={this.props.filterName} onClick={this.onClearCheck}
+									/>
+									<span className="filter-radiomark"> </span>
+								</label>
+								{this.props.items.map((item, index) => {
+									const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][index] : 0;
+									const checked = this.props.community.criteria.filter[this.props.filterName].split("")[index] === "1";
+									return (
+										<label className={"filter-option" + (count === 0 ? " disabled" : "")}
+											   key={this.props.filterName + index}>{item}
+											<input type="radio" id={this.props.filterName + "[" + index + "]"}
+												   name={this.props.filterName} value={index} onClick={this.onCheck}
+												   defaultChecked={this.checks[index] === '1'}
+												   disabled={count === 0}
+												   checked={checked}
+											/>
+											<span
+												className={"filter-radiomark" + (count === 0 ? " disabled" : "")}> </span>
+											&nbsp;
+											{count > 0 ? <>({count})</> : null}
+										</label>
+									)
+								})}
+							</>
+						)
 					}
 				</div>
 			)
@@ -97,6 +102,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{
-	}
+	{}
 )(SearchFilterRadio);

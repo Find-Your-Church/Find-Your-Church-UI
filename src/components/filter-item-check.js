@@ -14,6 +14,12 @@ class FilterItemCheck extends Component{
 		this.toggleCollapse = this.toggleCollapse.bind(this);
 	}
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.collapsed !== this.props.collapsed){
+			this.setState({collapsed: this.props.collapsed});
+		}
+	}
+
 	toggleCollapse(){
 		this.setState({collapsed: !this.state.collapsed});
 	}
@@ -26,9 +32,9 @@ class FilterItemCheck extends Component{
 	render(){
 		return this.props.send ? (
 				<div className="filter-div">
-					<div className={"flexdiv-left labels"}>
+					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse} style={{cursor: "pointer"}}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
-							   onClick={this.toggleCollapse}>{this.props.filterTitle}</label>
+							  >{this.props.filterTitle}</label>
 					</div>
 					{
 						this.state.collapsed ? null :

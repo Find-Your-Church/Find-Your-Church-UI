@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import {
 	MESSAGE_FROM_API, RESET_MESSAGES,
 	SET_CURRENT_USER, SET_SENDING_STATUS,
-	UPDATE_USER_INFO,
+	UPDATE_USER_INFO, WELCOME_MESSAGE,
 } from "./action-types";
 import app_config from "../conf/config";
 
@@ -18,7 +18,14 @@ import app_config from "../conf/config";
 export const registerUser = (userData, history) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/register", userData)
-		.then(res => history.push("/welcome")) // re-direct to welcome page on successful register
+		.then(res => {
+			dispatch({
+				type: WELCOME_MESSAGE,
+				payload: true,
+			});
+
+			history.push("/login-popup");
+		}) // re-direct to welcome page on successful register
 		.catch(err =>
 			dispatch({
 				type: MESSAGE_FROM_API,
@@ -87,7 +94,7 @@ export const loginUser = (userData, history) => dispatch => {
 				payload: false,
 			});
 
-			history.push("/");
+			history.push("/dashboard");
 		})
 		.catch(err => {
 			dispatch({
@@ -360,5 +367,19 @@ export const clearErrors = () => dispatch => {
 	return dispatch({
 		type: RESET_MESSAGES,
 		payload: null,
+	})
+};
+
+export const showWelcomeMessage = () => dispatch => {
+	return dispatch({
+		type: WELCOME_MESSAGE,
+		payload: true,
+	})
+};
+
+export const hideWelcomeMessage = () => dispatch => {
+	return dispatch({
+		type: WELCOME_MESSAGE,
+		payload: false,
 	})
 };

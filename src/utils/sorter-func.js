@@ -12,18 +12,22 @@ export const sorter_farthest = (a, b) => {
 };
 
 export const sorter_name_asc = (a, b) => {
-	if(a.data.community_name > b.data.community_name)
+	const a_name = a.data.community_name.toLowerCase();
+	const b_name = b.data.community_name.toLowerCase();
+	if(a_name > b_name)
 		return 1;
-	else if(a.data.community_name < b.data.community_name)
+	else if(a_name < b_name)
 		return -1;
 	else
 		return 0;
 };
 
 export const sorter_name_desc = (a, b) => {
-	if(a.data.community_name > b.data.community_name)
+	const a_name = a.data.community_name.toLowerCase();
+	const b_name = b.data.community_name.toLowerCase();
+	if(a_name > b_name)
 		return -1;
-	else if(a.data.community_name < b.data.community_name)
+	else if(a_name < b_name)
 		return 1;
 	else
 		return 0;

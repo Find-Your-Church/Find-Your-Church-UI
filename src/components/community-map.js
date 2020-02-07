@@ -55,8 +55,8 @@ class CommunityMap extends Component{
 								}}
 								icon={{
 									url: this.props.community.picking === index ?
-										"/img/icon/icon-address-fill.svg"
-										: "/img/icon/icon-address-brown.svg"
+										"/img/icon/icon-address-marker-hover.svg"
+										: "/img/icon/icon-address-marker.svg"
 								}}
 						/>
 					)

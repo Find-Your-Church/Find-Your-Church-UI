@@ -23,6 +23,7 @@
 	border-radius: 0;
 	box-shadow: 1px 1px 3px 0 grey;
 	line-height: 14px;
+	z-index: 999px;
 }
 
 .header1-div.gradient {
@@ -87,6 +88,13 @@
 	grid-template-rows: auto;
 }
 
+@media screen and (max-width: 990px){
+	.columns-container {
+		-ms-grid-columns: 1fr;
+		grid-template-columns: 1fr;
+	}
+}
+
 .div-block-147 {
 	padding: 20px;
 	border: 1px none #fff;
@@ -111,6 +119,11 @@
 	border-bottom: 1px solid #e6e6e6;
 	background-color: transparent;
 	color: #333;
+}
+
+.edit-card a {
+	display: inline;
+	margin: 2px 6px;
 }
 
 h3 {
@@ -165,6 +178,11 @@ h3 {
 .invoice-div #coupon {
 	background-repeat: no-repeat;
 	background-position: right center;
+}
+
+.apply-button {
+	color: #fff;
+	background-color: #8900fe;
 }
 
 .subscriptioncontainer-div h4.value {
@@ -378,6 +396,7 @@ h4 {
 .form-input {
 	margin-bottom: 0;
 	padding: 10px;
+	line-height: 19px;
 	border-width: 1px;
 	border-radius: 0;
 	background-color: transparent;
@@ -408,7 +427,6 @@ h4 {
 
 .pay-info-row input {
 	border: none;
-	border-bottom: solid #cccccc 1px;
 }
 
 .submit-row {

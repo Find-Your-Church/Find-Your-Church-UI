@@ -43,27 +43,25 @@ class SiteHeader extends Component{
 						<img className="site-logo" src={"/img/logo.svg"}
 							 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
 					</Link>
-
-					{this.props.auth.isAuthenticated ? (
-							<>
-								<Link to="#" onClick={this.toggleAdminMenu}
-									  className="header-3lines-menu w3-bar-item w3-right">
-									<i className="fas fa-caret-down"> </i>
-								</Link>
-								<div className="w3-bar-item w3-right">
+					<Link to="#" onClick={this.toggleAdminMenu}
+						  className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
+						<i className="fas fa-caret-down"> </i>
+					</Link>
+					{this.props.auth.isAuthenticated ? (<>
+							<Link to="#" onClick={this.toggleAdminMenu}
+								  className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>
 									<span className={"name-on-header"}>{this.props.auth.user.fname}</span>
 								</span>
-									<div className="headerprofpic-div w3-right">
-										<img src={
-											isEmpty(this.props.auth.user.pic) ?
-												"/img/default-user.png"
-												: this.props.auth.user.pic}
-											 alt={this.props.auth.user.fname} className="image-4"/>
-									</div>
+								<div className="headerprofpic-div w3-right">
+									<img src={
+										isEmpty(this.props.auth.user.pic) ?
+											"/img/default-user.png"
+											: this.props.auth.user.pic}
+										 alt={this.props.auth.user.fname} className="image-4"/>
 								</div>
-							</>
-						)
+							</Link>
+						</>)
 						: null}
 
 					{!this.props.auth.isAuthenticated ?
@@ -72,30 +70,42 @@ class SiteHeader extends Component{
 						</Link>
 						: null}
 					{!this.props.auth.isAuthenticated ?
-						< Link to="/login-popup" className="w3-bar-item w3-right w3-hover-text-white">
+						< Link to="/login-popup" className="sign-in-link w3-bar-item w3-right">
 							Sign In
 						</Link>
 						: null}
 					{!this.props.auth.isAuthenticated ?
-						<Link to="/" className="w3-bar-item w3-right w3-hover-text-white">
+						<Link to="/" className="home-link w3-bar-item w3-right">
 							Home
 						</Link>
 						: null}
 				</header>
 				<div className="admin-menu w3-animate-top"
 					 onClick={this.toggleAdminMenu} onMouseLeave={this.hideAdminMenu}
-					 style={{display: this.state.showedAdminMenu ? "block" : "none"}}>
+					 style={{
+						 display: this.state.showedAdminMenu ? "block" : "none",
+					 }}>
 					<nav role="navigation" className="global-navcontainer w-nav-menu w--nav-menu-open">
 						<Link to="/" className="header-navlink w-nav-link w--nav-link-open">
 							Home</Link>
-						<Link to="/dashboard" className="header-navlink w-nav-link w--nav-link-open">
-							Dashboard</Link>
-						<Link to="/dashboard/account"
-							  className="header-navlink w-nav-link w--nav-link-open">
-							Account</Link>
-						<Link to="#" onClick={this.onLogoutClick}
-							  className="header-navlink w-nav-link w--nav-link-open">
-							Sign Out</Link>
+						{this.props.auth.isAuthenticated ? (<>
+							<Link to="/dashboard" className="header-navlink w-nav-link w--nav-link-open">
+								Dashboard</Link>
+							<Link to="/dashboard/account"
+								  className="header-navlink w-nav-link w--nav-link-open">
+								Account</Link>
+							<Link to="#" onClick={this.onLogoutClick}
+								  className="header-navlink w-nav-link w--nav-link-open">
+								Sign Out</Link>
+						</>) : null}
+						{this.props.auth.isAuthenticated ? null : (<>
+							<Link to="/login-popup"
+								  className="header-navlink w-nav-link w--nav-link-open">
+								Sign In</Link>
+							<Link to="/register-popup"
+								  className="header-navlink w-nav-link w--nav-link-open">
+								Create an Account</Link>
+						</>)}
 					</nav>
 				</div>
 			</div>

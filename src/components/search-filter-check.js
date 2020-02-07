@@ -12,7 +12,7 @@ class SearchFilterCheck extends Component{
 		this.checks = this.props.value.split("");
 
 		this.state = {
-			collapsed: props.collapsed || false,
+			collapsed: props.collapsed || true,
 		};
 
 		this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -31,18 +31,17 @@ class SearchFilterCheck extends Component{
 	render(){
 		return this.props.send ? (
 				<div className="filter-div">
-					<div className={"flexdiv-left labels"}>
+					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
-							   onClick={this.toggleCollapse}>{this.props.filterTitle}</label>
+							  >{this.props.filterTitle}</label>
 					</div>
 					{
 						this.state.collapsed ? null :
 							this.props.items.map((item, index) => {
-								const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][this.max_length - index - 1] : 0;
+								const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][index] : 0;
 								const checked = this.props.community.criteria.filter[this.props.filterName].split("")[index] === "1";
 								return (
-									<label className={"filter-option" + (count === 0 ? " disabled" : "")} key={this.props.filterName + index}
-										   style={{display: "block"}}>{item}
+									<label className={"filter-option" + (count === 0 ? " disabled" : "")} key={this.props.filterName + index}>{item}
 										<input type="checkbox" id={this.props.filterName + "[" + index + "]"}
 											   value={index} onClick={this.onCheck}
 											   defaultChecked={this.checks[index] === '1'}

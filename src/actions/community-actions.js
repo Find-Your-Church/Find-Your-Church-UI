@@ -185,6 +185,11 @@ export const activateCommunity = (info) => dispatch => {
 				type: ACTIVATING,
 				payload: false,
 			});
+
+			setTimeout(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
 		})
 		.catch(err => {
 			dispatch({
@@ -199,6 +204,11 @@ export const activateCommunity = (info) => dispatch => {
 				type: ACTIVATING,
 				payload: false,
 			});
+
+			setTimeout(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
 		});
 };
 
@@ -396,9 +406,12 @@ export const setSearchFilter = (info) => dispatch => {
 };
 
 export const doSearchCommunities = (criteria) => dispatch => {
+	console.log(criteria);
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/search", criteria)
 		.then(res => {
+			console.log("counts: ", res.data.counts);
+
 			dispatch({
 				type: SET_SEARCH_RESULTS,
 				payload: res.data,

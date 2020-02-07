@@ -119,6 +119,10 @@ class StripeSubscription extends Component{
 		this.setState({editing_card: !this.state.editing_card});
 	}
 
+	cancelEditCard = () => {
+		this.setState({editing_card: false});
+	};
+
 	async handleActivateCommunity(e){
 		if(this.props.stripe){
 			if(!this.props.second){
@@ -158,6 +162,10 @@ class StripeSubscription extends Component{
 		}
 	}
 
+	/**
+	 * this.props.community.subscription ? <- 2nd, or 1st.
+	 * @returns {*}
+	 */
 	render(){
 		let next_due_date = "", next_month1 = "", next_month2 = "";
 		const to_date = new Date();
@@ -173,6 +181,10 @@ class StripeSubscription extends Component{
 			next_month1 = getNextMonth(init_date, i);
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
+
+		const due_amount = this.props.community.subscription ?
+			showAmount((this.props.community.my_communities.active.length + 1) * this.props.community.plan_price)
+			: showAmount(this.props.community.plan_price);
 
 		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days).toLocaleDateString('en-US');
 
@@ -267,7 +279,7 @@ class StripeSubscription extends Component{
 													   id="coupon" onChange={this.onChange}
 													   value={this.state.coupon} autoFocus/>
 												<button onClick={this.verifyCoupon}
-														className={"w3-button w3-padding-small w3-teal"}>
+														className={"w3-button w3-padding-small apply-button"}>
 													Apply
 												</button>
 											</div>
@@ -375,11 +387,7 @@ class StripeSubscription extends Component{
 												<div>
 													<div className="div10-bottom">
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.upcoming_invoice ?
-																showAmount(this.props.community.upcoming_invoice.total)
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+															{due_amount}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_due_date.toLocaleDateString('en-US')
@@ -390,11 +398,7 @@ class StripeSubscription extends Component{
 													</div>
 													<div className="div10-bottom">
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.upcoming_invoice ?
-																showAmount(this.props.community.upcoming_invoice.total)
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+															{due_amount}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month1.toLocaleDateString('en-US')
@@ -405,11 +409,7 @@ class StripeSubscription extends Component{
 													</div>
 													<div className="div10-bottom">
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.upcoming_invoice ?
-																showAmount(this.props.community.upcoming_invoice.total)
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+															{due_amount}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month2.toLocaleDateString('en-US')
@@ -430,14 +430,21 @@ class StripeSubscription extends Component{
 								<div className="accordionheader-div">
 									<h3>Payment Information</h3>
 									{this.props.community.subscription ? (
-										<Link to="#" className={"table-link"}
-											  onClick={this.clickEditCard}>
+										<div className={"edit-card"}>
+											<Link to="#" className={"table-link"}
+												  onClick={this.clickEditCard}>
+												{this.state.editing_card ? (
+													<i className={"fas fa-save"}> </i>
+												) : (
+													<i className={"fas fa-pen"}> </i>
+												)}
+											</Link>
 											{this.state.editing_card ? (
-												<i className={"fas fa-save"}> </i>
-											) : (
-												<i className={"fas fa-pen"}> </i>
-											)}
-										</Link>
+												<Link to="#" className={"table-link w3-large"} onClick={this.cancelEditCard}>
+													<i className={"fas fa-times"}> </i>
+												</Link>
+											) : null}
+										</div>
 									) : null}
 								</div>
 								<div className="form-block w-form">

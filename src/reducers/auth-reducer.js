@@ -3,7 +3,7 @@ import {
 	SET_CURRENT_USER,
 	UPDATE_USER_INFO,
 	USER_LOADING,
-	SET_SENDING_STATUS,
+	SET_SENDING_STATUS, WELCOME_MESSAGE,
 } from "../actions/action-types";
 
 const isEmpty = require("is-empty");
@@ -12,6 +12,7 @@ const initialState = {
 	user: {},
 	loading: false,
 	is_sending: false, // if is requesting the password reset?
+	show_welcome: false,
 };
 
 export default function(state = initialState, action){
@@ -43,6 +44,11 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				is_sending: action.payload,
+			};
+		case WELCOME_MESSAGE:
+			return {
+				...state,
+				show_welcome: action.payload,
 			};
 		default:
 			return state;

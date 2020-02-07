@@ -8,11 +8,11 @@ const community_config = {
 	 * must include at least 1 category.
 	 */
 	CATEGORIES: [
-		"Church", "Young Adult Group", "Youth Group",
+		"Church", "Youth Group", "Young Adult Group", "Focus Group", "Life Group", "Support Group", "Event",
 	],
 
 	SEARCH_RADIUS: [
-		1, 3, 5, 1000, 5000, // 1000 and 5000 are for testing
+		1, 3, 5, 10, 20, 30, 5000,// 5000 are for testing
 	],
 
 	FILTERS: {

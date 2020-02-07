@@ -15,6 +15,7 @@ import PlacesAutocomplete, {
 	getLatLng
 } from "react-places-autocomplete";
 import Popup from "reactjs-popup";
+import isEmpty from "../../utils/isEmpty";
 
 class CommunityStep extends Component{
 	constructor(props){
@@ -33,8 +34,15 @@ class CommunityStep extends Component{
 
 		const p_obj = this.props.location.state;
 		this.state = {
+			error_community_name: false,
+			error_community_category: false,
+			error_community_address: false,
+			selectedChurch: false,
+			selectedEvent: false,
+			selectedSupportGroup: false,
+
 			data: p_obj === undefined ? {} : p_obj.obj,
-			errors: {},
+
 			is_editing: this.props.location.state !== undefined,
 			showedMembers: false,
 			passable: this.props.location.state !== undefined,
@@ -81,14 +89,6 @@ class CommunityStep extends Component{
 		this.fixURL = this.fixURL.bind(this);
 	}
 
-	static getDerivedStateFromProps(nextProps, prevState){
-		if(nextProps.errors){
-			return {errors: nextProps.errors};
-		}
-		else
-			return null;
-	}
-
 	getDaysInfo = (checks) => {
 		this.setState({days: checks})
 	};
@@ -124,7 +124,45 @@ class CommunityStep extends Component{
 	};
 
 	onChange = e => {
+		if(e.target.id === 'community_name'){
+			this.setState({error_community_name: false})
+		}
+
+		if(e.target.id === 'category'){
+			switch(e.target.value){
+				case 'Church':
+					this.setState({
+						selectedChurch: true,
+						selectedEvent: false,
+						selectedSupportGroup: false,
+					});
+					break;
+				case 'Event':
+					this.setState({
+						selectedChurch: false,
+						selectedEvent: true,
+						selectedSupportGroup: false,
+					});
+					break;
+				case 'Support Group':
+					this.setState({
+						selectedChurch: false,
+						selectedEvent: false,
+						selectedSupportGroup: true,
+					});
+					break;
+				default:
+					this.setState({
+						selectedChurch: false,
+						selectedEvent: false,
+						selectedSupportGroup: false,
+					});
+			}
+			this.setState({error_community_category: false})
+		}
 		this.setState({[e.target.id]: e.target.value});
+
+		this.forceUpdate();
 	};
 
 	onChangeAddress = val => {
@@ -140,6 +178,7 @@ class CommunityStep extends Component{
 				self.setState({coordinate: latLng, passable: true});
 			})
 			.catch(error => console.error('Error', error));
+		this.setState({error_community_address: false})
 	};
 
 	getBaseFile(files){
@@ -166,6 +205,25 @@ class CommunityStep extends Component{
 	}
 
 	onSubmitCommunity(){
+		if(isEmpty(this.state.community_name)){
+			this.setState({
+				error_community_name: true,
+			});
+		}
+		if(isEmpty(this.state.category)){
+			this.setState({
+				error_community_category: true,
+			});
+		}
+		if(isEmpty(this.state.address)){
+			this.setState({
+				error_community_address: true,
+			});
+		}
+
+		if(!this.state.passable || this.state.error_community_name || this.state.error_community_category || this.state.error_community_address)
+			return;
+
 		// saved the information into local storage to be submitted on to server.
 		const info_1 = {
 			community_name: this.state.community_name,
@@ -208,38 +266,47 @@ class CommunityStep extends Component{
 	}
 
 	render(){
-		// console.log(this.state.picture);
 		return (
 			<div>
 				<main className="steps-body">
 					<div className="container-inline">
 						<h3 className="header3 w3-bar">
 							<div className="create-menu w3-bar-item w3-left">
-								<Link to="/dashboard" className="w3-button cancel">Back</Link>
+								<Link to="/dashboard" className="w3-button cancel">
+									{this.state.is_editing ? ("Back") : "Cancel"}
+								</Link>
 							</div>
 							<div className="create-menu w3-bar-item w3-center">
 								{this.state.is_editing ?
-									(<><span style={{color: "#888"}}>Editing</span>&nbsp;
-										{this.state.data.community_name}</>)
+									(<>Editing {this.state.data.community_name}</>)
 									: "Create a New Community"
 								}
 
 							</div>
 							<div className="create-menu w3-bar-item w3-right">
 								<Link to="#" className="w3-button w3-right save"
-									  onClick={this.state.passable ? this.onSubmitCommunity : null}>Save</Link>
+									  onClick={this.onSubmitCommunity}>
+									{this.state.is_editing ? ("Save") : "Create"}
+								</Link>
 							</div>
 						</h3>
 						<div className="w-form-done">
 							<div>Thank you! Your submission has been received!</div>
 						</div>
-						<div className="w-form-fail"
-							 style={{display: this.state.errors.msg_community !== undefined ? "block" : "none"}}>
-							{this.state.errors.msg_community}
-						</div>
+						{!isEmpty(this.props.errors.msg_community) || this.state.error_community_name || this.state.error_community_category || this.state.error_community_address ?
+							<div className="w-form-fail" style={{display: "block"}}>
+								<div>{this.props.errors.msg_community}</div>
+								<div>{this.state.error_community_name ?
+									"Community name required" : null}</div>
+								<div>{this.state.error_community_category ?
+									"Category is required" : null}</div>
+								<div>{this.state.error_community_address ?
+									"Community address is required" : null}</div>
+							</div>
+							: null}
 						<div className="info-body w3-row">
 							<div className="left-part w3-half">
-								<div>
+								<div className={"community-info-container"}>
 									{
 										this.state.pictures.length > 0 ? (
 												<div id={"slider-frame"} className="slide-container">
@@ -260,9 +327,11 @@ class CommunityStep extends Component{
 											)
 											: (
 												<img id={"slider-frame"}
-													 className={"community-picture" + (this.state.pictures.length > 0 ? "" : " w3-opacity-max")}
+													 className={"community-picture"}
 													 alt="Community" title="Community pictures"
-													 src={this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
+													 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
+													 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
+												/>
 											)
 									}
 									<label className={"file-btn-container w3-button"}>
@@ -272,60 +341,77 @@ class CommunityStep extends Component{
 									</label>
 									<div className="basic-info"
 										 title={this.state.is_editing ? "These infos cannot be modified." : ""}>
-										<input type="text" className="form-input communityname w-input" maxLength="50"
-											   onChange={this.onChange}
-											   placeholder="Community name"
-											   id="community_name"
-											   value={this.state.community_name}
-											   required=""/>
-										<select className="form-select category w-select"
-												onChange={this.onChange}
-												id="category"
-												defaultValue={this.state.category}
-												required="">
-											<option value="">Category...</option>
-											{
-												community_config.CATEGORIES.map(cat => {
-													return (
-														<option value={cat} key={cat}>{cat}</option>
-													);
-												})
-											}
-										</select>
-										<PlacesAutocomplete
-											value={this.state.address}
-											class={"w3-input social-input"}
-											onChange={this.onChangeAddress}
-											onSelect={this.handleSelect}
-										>
-											{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-												<>
-													<input className="form-input w-input social-input"
-														   style={{backgroundImage: "url('/img/icon/icon-address.svg')"}}
-														   disabled={this.state.is_editing}
-														   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
-														   {...getInputProps({placeholder: "Address or City"})}
-														   required=""/>
-													<div className={"address-candidates"}>
-														{loading ? <div>...loading</div> : null}
-														{suggestions.map((suggestion) => {
-															const style = {
-																backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
-																backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-															};
+										<div className="community-info-title">
+											<h4>Community Info</h4>
+											<Popup
+												trigger={<i style={{cursor: "pointer"}}
+															className={"fas fa-question-circle tooltip-icon"}> </i>}
+												position={"left center"}>
+												<div>Tell visitors more about your community...</div>
+											</Popup>
+										</div>
+										<div className="community-info-body">
+											<input type="text" className="form-input communityname w-input"
+												   maxLength="50"
+												   onChange={this.onChange}
+												   placeholder="Community name"
+												   id="community_name"
+												   value={this.state.community_name}
+												   style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+												   required=""/>
+											<select className="form-select category w-select"
+													onChange={this.onChange}
+													id="category"
+													defaultValue={this.state.category}
+													style={{
+														backgroundImage: "url('/img/icon-down3.svg')",
+														borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
+													}}
+													required="">
+												<option value="">Category...</option>
+												{
+													community_config.CATEGORIES.map(cat => {
+														return (
+															<option value={cat} key={cat}>{cat}</option>
+														);
+													})
+												}
+											</select>
+											<PlacesAutocomplete
+												value={this.state.address}
+												class={"w3-input"}
+												onChange={this.onChangeAddress}
+												onSelect={this.handleSelect}
+											>
+												{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+													<>
+														<input className="form-input w-input"
+															   disabled={this.state.is_editing}
+															   style={{borderBottom: this.state.error_community_address ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+															   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
+															   {...getInputProps({placeholder: "Address, City or Zip Code"})}
+															   required=""/>
+														<div className={"address-candidates"}>
+															{loading ? <div>...loading</div> : null}
+															{suggestions.map((suggestion) => {
+																const style = {
+																	backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
+																	backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																};
 
-															return (
-																<div className={"address-item"}
-																	 onClick={() => alert(suggestion.terms)}
-																	 {...getSuggestionItemProps(suggestion, {style})}>
-																	{suggestion.description}
-																</div>
-															);
-														})}
-													</div>
-												</>
-											)}
-										</PlacesAutocomplete>
+																return (
+																	<div className={"address-item"}
+																		 onClick={() => alert(suggestion.terms)}
+																		 {...getSuggestionItemProps(suggestion, {style})}>
+																		{suggestion.description}
+																	</div>
+																);
+															})}
+														</div>
+													</>
+												)}
+											</PlacesAutocomplete>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -345,7 +431,7 @@ class CommunityStep extends Component{
 									: (
 										<form
 											id="wf-form-New-Community" name="wf-form-New-Community"
-											data-name="New Community" className="form1">
+											data-name="New Community" className="form1 w3-animate-opacity">
 											<div className={"view-paragraph"}>
 												<div className="flexdiv-left labels">
 													<h4 className="form-header">About</h4>
@@ -359,7 +445,7 @@ class CommunityStep extends Component{
 												<textarea
 													onChange={this.onChange}
 													placeholder="Tell visitors more about your community such as who you are, when you meet, what to expect, or anything else you'd like them to know!"
-													maxLength="500"
+													maxLength="5000"
 													id="about" required=""
 													value={this.state.about}
 													className="textarea w-input">
@@ -480,18 +566,22 @@ class CommunityStep extends Component{
 																	 send={this.getParkingInfo}
 																	 value={this.state.parking}
 																	 items={community_config.FILTERS.parking}/>
-													<FilterItemCheck filterTitle="Other Ministries"
-																	 filterName="ministries"
-																	 collapsed={true}
-																	 send={this.getMinistriesInfo}
-																	 value={this.state.ministries}
-																	 items={community_config.FILTERS.ministries}/>
-													<FilterItemCheck filterTitle="Other Services"
-																	 filterName="other_services"
-																	 collapsed={true}
-																	 send={this.getOtherServicesInfo}
-																	 value={this.state.other_services}
-																	 items={community_config.FILTERS.other_services}/>
+													{this.state.selectedChurch ?
+														<FilterItemCheck filterTitle="Other Ministries"
+																		 filterName="ministries"
+																		 collapsed={!this.state.selectedChurch}
+																		 send={this.getMinistriesInfo}
+																		 value={this.state.ministries}
+																		 items={community_config.FILTERS.ministries}/>
+														: null}
+													{this.state.selectedChurch ?
+														<FilterItemCheck filterTitle="Other Services"
+																		 filterName="other_services"
+																		 collapsed={!this.state.selectedChurch}
+																		 send={this.getOtherServicesInfo}
+																		 value={this.state.other_services}
+																		 items={community_config.FILTERS.other_services}/>
+														: null}
 													<div className="filter-div">
 														<div className="flexdiv-left labels">
 															<label className="filter-label">Average Attendance</label>
@@ -503,22 +593,29 @@ class CommunityStep extends Component{
 															   value={this.state.average_attendance}
 															   placeholder="0"/>
 													</div>
-													<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
-																	 collapsed={true}
-																	 send={this.getAmbianceInfo}
-																	 value={this.state.ambiance}
-																	 items={community_config.FILTERS.ambiance}/>
-													<FilterItemRadio filterTitle="Event Type" filterName="event_type"
-																	 collapsed={true}
-																	 send={this.getEventTypeInfo}
-																	 value={this.state.event_type}
-																	 items={community_config.FILTERS.event_type}/>
-													<FilterItemRadio filterTitle="Support Type"
-																	 filterName="support_type"
-																	 collapsed={true}
-																	 send={this.getSupportTypeInfo}
-																	 value={this.state.support_type}
-																	 items={community_config.FILTERS.support_type}/>
+													{this.state.selectedChurch ?
+														<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
+																		 collapsed={!this.state.selectedChurch}
+																		 send={this.getAmbianceInfo}
+																		 value={this.state.ambiance}
+																		 items={community_config.FILTERS.ambiance}/>
+														: null}
+													{this.state.selectedEvent ?
+														<FilterItemRadio filterTitle="Event Type"
+																		 filterName="event_type"
+																		 collapsed={!this.state.selectedEvent}
+																		 send={this.getEventTypeInfo}
+																		 value={this.state.event_type}
+																		 items={community_config.FILTERS.event_type}/>
+														: null}
+													{this.state.selectedSupportGroup ?
+														<FilterItemRadio filterTitle="Support Type"
+																		 filterName="support_type"
+																		 collapsed={!this.state.selectedSupportGroup}
+																		 send={this.getSupportTypeInfo}
+																		 value={this.state.support_type}
+																		 items={community_config.FILTERS.support_type}/>
+														: null}
 												</div>
 												<input type="submit" value="Create" data-wait="Please wait..."
 													   className="form-submit create w-button w3-hide"/>

@@ -45,7 +45,7 @@ class ProfileContainer extends Component{
 							<img src={isEmpty(this.props.auth.user.pic) ?
 								"/img/default-user.png"
 								: this.props.auth.user.pic}
-								 width={"100"} height={"100"} alt="" className="image-4"/>
+								 alt="" className="image-4"/>
 						</div>
 					</div>
 				</div>
@@ -67,17 +67,23 @@ class ProfileContainer extends Component{
 						</nav>
 					</div>
 					<div className="personal-info">
-						<div className={"personal-info-item"} style={{backgroundImage: "url(/img/icon/icon-email.svg)"}}>
-							{this.props.auth.user.admin_email}
-						</div>
-						<div className={"personal-info-item"} style={{backgroundImage: "url(/img/icon/icon-phone.svg)"}}>
-							{this.props.auth.user.phone}
-						</div>
+						{isEmpty(this.props.auth.user.admin_email) ? null :
+							<div className={"personal-info-item"}
+								 style={{backgroundImage: "url(/img/icon/icon-email.svg)"}}>
+								{this.props.auth.user.admin_email}
+							</div>
+						}
+						{isEmpty(this.props.auth.user.phone) ? null :
+							<div className={"personal-info-item"}
+								 style={{backgroundImage: "url(/img/icon/icon-phone.svg)"}}>
+								{this.props.auth.user.phone}
+							</div>
+						}
 					</div>
 				</div>
 				<Link to="/create-new-community" className="newcommunity-button">
 					{/*<img src={"/img/icon/icon-new.svg"} alt={"create new community"}/>*/}
-					+&nbsp;<i className={"fas fa-users"}> </i>
+					<i className={"fas fa-users"}> </i>
 					&nbsp;&nbsp;New Community
 				</Link>
 			</div>

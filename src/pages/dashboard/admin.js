@@ -59,7 +59,6 @@ class Admin extends Component{
 					<Elements>
 						<StripeSubscription second={!!this.props.community.subscription}/>
 					</Elements>
-					)}
 				</div>
 				<div id={"spinning-modal"} className={"w3-modal"}
 					 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
@@ -67,7 +66,7 @@ class Admin extends Component{
 						<i className="fas fa-spinner fa-spin"> </i>
 					</div>
 				</div>
-				<main className="admin-body w3-row">
+				<main className="admin-body w3-row" style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
 					<div className={"admin-wrapper"}>
 						<div className="admin-left w3-col">
 							<ProfileContainer/>

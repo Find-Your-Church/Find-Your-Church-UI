@@ -8,9 +8,47 @@
 	}
 }
 
+.w3-modal::-webkit-scrollbar {
+	width: 6px;
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.w3-modal::-webkit-scrollbar-thumb {
+	width: 6px;
+	border-radius: 6px;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.welcome-message {
+	padding-bottom: 24px;
+	font-size: 20px;
+	line-height: 32px;
+	text-align: center;
+	color: #999;
+	font-weight: 400;
+}
+
+@media screen and (max-width: 550px) {
+	.welcome-message {
+		padding-top: 24px;
+		font-size: 14px;
+		line-height: 18px;
+	}
+}
+
 .sign-body {
-	padding: 60px 0 0 0;
-	min-height: calc(100vh - var(--footer-height));
+	--header-height: 60px;
+}
+
+@media screen and (max-width: 550px) {
+	.sign-body {
+		--header-height: 96px;
+	}
+}
+
+.sign-body {
+	padding: var(--header-height) 0 0 0;
+	min-height: 586px;
 	max-height: calc(100vh - var(--footer-height));
 	background-color: #e6e6e6;
 	background-image: none;
@@ -38,7 +76,6 @@
 	-ms-flex: 1;
 	flex: 1;
 	background-size: auto;
-	opacity: 0.95;
 }
 
 .div-block-63 {
@@ -64,13 +101,12 @@
 
 .div-block-38 {
 	max-width: 550px;
-	width: 90vw;
 	padding: 40px;
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
 	align-self: center;
 	background-color: #fff;
-	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.75);
+	border: solid 1px #ccc;
 }
 
 .header1-div {
@@ -87,12 +123,12 @@
 	box-shadow: none;
 }
 
-.header1-div.gradient.shadow {
-	padding-right: 10px;
-	padding-left: 10px;
-	border-radius: 0;
-	box-shadow: none;
+.sign-body .header1-div.gradient.shadow {
+	padding: 10px 20px;
+	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
+	box-shadow: 0 1px 3px 0 grey;
 	line-height: 14px;
+	z-index: 1000;
 }
 
 .header3 {
@@ -121,7 +157,10 @@
 	padding: 10px 0 0;
 	border-radius: 3px;
 	background-color: #fff;
-	box-shadow: none;
+}
+
+.sign-body .form-div1 {
+	background-color: transparent;
 }
 
 .form-block1 {
@@ -167,7 +206,7 @@
 	background-image: none;
 }
 
-@media (max-width: 991px){
+@media (max-width: 990px) {
 	.input-div {
 		-webkit-box-orient: vertical;
 		-webkit-box-direction: normal;
@@ -175,6 +214,18 @@
 		-ms-flex-direction: column;
 		flex-direction: column;
 		border-bottom-style: none;
+	}
+}
+
+@media (max-width: 500px) {
+	.sign-body .div-block-38 {
+		padding: 8px;
+	}
+}
+
+@media (max-width: 400px) {
+	.sign-body .div-block-38 {
+		padding: 4px;
 	}
 }
 
@@ -193,20 +244,16 @@
 }
 
 .form-input.center:hover {
-	border-bottom-color: #8900fe;
+	/*border-bottom-color: #8900fe;*/
 }
 
 .form-input {
 	margin-bottom: 0;
 	padding: 10px;
-	border-style: none;
-	border-width: 1px;
-	border-color: #000 #000 #ccc;
-	border-radius: 0;
+	line-height: 18px;
 	background-color: transparent;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff));
 	background-image: linear-gradient(180deg, #fff, #fff);
-	font-family: 'Source Sans Pro', sans-serif;
 	color: #333;
 	text-align: left;
 }
@@ -224,8 +271,8 @@
 	text-align: center;
 }
 
-.form-input.center.w3-half{
-	width: 50%!important;
+.form-input.center.w3-half {
+	width: 50% !important;
 }
 
 @media (max-width: 991px) {
@@ -238,7 +285,7 @@
 
 @media (max-width: 480px) {
 	.form-input.center.w3-half {
-		width: 100%!important;
+		width: 100% !important;
 	}
 }
 
@@ -261,17 +308,15 @@
 .sign-body .form-submit {
 	width: 100%;
 	margin-top: 10px;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #ccc;
-	border-radius: 3px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: #fff;
 	background-image: -webkit-gradient(linear, left top, right top, from(#8900fe), color-stop(50%, #2e89fe), to(#00e8fe));
 	background-image: linear-gradient(90deg, #8900fe, #2e89fe 50%, #00e8fe);
+	box-shadow: 0 1px 3px 0 grey;
 	color: #fff;
-	font-size: 14px;
+	font-size: 16px;
+	line-height: 16px;
 	font-weight: 600;
 	text-align: center;
 }
@@ -294,11 +339,25 @@ input.w-button {
 	background-color: #dddddd;
 }
 
+.modal-terms-conditions header {
+	padding: 20px;
+	font-size: 20px;
+	color: #333;
+}
+
+.modal-terms-conditions .terms-conditions-content {
+	padding: 8px 20px;
+	font-size: 16px;
+	color: #333;
+}
+
 .sign-body .w-form-fail {
 	display: none;
 	margin-top: 10px;
 	padding: 10px;
 	background-color: #ffdede;
+	font-size: 14px;
+	color: brown;
 }
 
 .div-block-58 {
@@ -306,7 +365,8 @@ input.w-button {
 }
 
 .terms-conditions {
-	padding: 10px 0 16px;
+	padding: 20px 0;
+	line-height: 18px;
 	text-align: center;
 }
 
@@ -325,8 +385,13 @@ input.w-button {
 
 .fineprint.link {
 	padding-left: 5px;
-	color: rgba(27, 0, 51, 0.7);
+	color: #999;
 	text-decoration: none;
+	font-weight: bold;
+}
+
+.fineprint.link:hover {
+	color: #8900fe;
 }
 
 .form-link {
@@ -344,8 +409,9 @@ input.w-button {
 
 .form-link.termsofuse {
 	display: inline-block;
-	padding-top: 14px;
-	color: #2e89fe;
+	padding-top: 20px;
+	font-size: 16px;
+	color: #999;
 }
 
 .strikethrough-div {
@@ -377,14 +443,14 @@ input.w-button {
 .or-text {
 	margin-top: 0;
 	margin-bottom: 0;
-	color: #333;
+	color: #999;
 	font-size: 14px;
-	line-height: 14px;
+	line-height: 18px;
 	font-weight: 400;
 }
 
 .container-subdiv {
-	padding-top: 21px;
+	padding-top: 25px;
 	-webkit-align-self: stretch;
 	-ms-grid-row-align: stretch;
 	align-self: stretch;
@@ -463,6 +529,7 @@ input.w-button {
 
 .sdk-div button {
 	height: 39px;
+	box-shadow: 1px 1px 3px 0 grey !important;
 }
 
 .sdk-div button div {
@@ -470,27 +537,37 @@ input.w-button {
 	padding-bottom: 0 !important;
 }
 
+.sdk-div button div {
+	margin-left: 2px;
+	margin-top: 4px;
+}
+
 .sdk-div button span {
+	padding-top: 6px !important;
 	margin-left: auto;
 	margin-right: auto;
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 16px;
+	color: #333;
 }
 
 .kep-login-facebook.metro {
-	padding: 10px 8px 12px;
+	padding: 7px 8px 12px;
 	width: 100%;
-	font-size: 14px;
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 16px;
 	font-weight: normal;
 	text-indent: 28px;
 	text-transform: none;
-	background: #ffffff url("../img/icon-facebook.svg") no-repeat 12px 8px;
-	background-size: 22px;
-	color: #888;
+	background: #ffffff url("../img/icon-facebook.svg") no-repeat 14px 10px;
+	background-size: 20px;
+	color: #333;
 	border: none;
-	box-shadow: #999999 0 1px 2px 0;
+	box-shadow: 1px 1px 3px 0 grey;
 }
 
 .div-block-46 {
-	padding-top: 20px;
+	padding-top: 30px;
 }
 
 .heading-11 {
@@ -504,9 +581,14 @@ input.w-button {
 }
 
 .link-5 {
-	color: rgba(27, 0, 51, 0.7);
-	font-size: 12px;
-	line-height: 12px;
+	margin-top: 32px;
+	color: #999;
+	font-size: 16px;
+	line-height: 16px;
 	font-weight: 400;
 	text-decoration: none;
+}
+
+.link-5:hover {
+	color: #8900fe;
 }
