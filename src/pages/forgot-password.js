@@ -38,7 +38,7 @@ class ForgotPassword extends Component{
 						<i className={"fas fa-spinner fa-spin"}> </i>
 					</div>
 				</div>
-				<div className="sign-body">
+				<div className="sign-body" style={{filter: this.props.is_sending ? "blur(5px)" : "none"}}>
 					<div className="div-block-63">
 						<div className="div-block-38">
 							<div className="header1-div gradient shadow">
@@ -71,8 +71,8 @@ class ForgotPassword extends Component{
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
 										</div>
-										<div className="w-form-fail" style={{display: this.props.errors.msg ? "block" : "none"}}>
-											{this.props.errors.msg}
+										<div className="w-form-fail" style={{display: this.props.errors.msg_change ? "block" : "none"}}>
+											{this.props.errors.msg_change}
 										</div>
 									</div>
 								</div>

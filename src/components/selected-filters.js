@@ -7,7 +7,7 @@ import {clearFilterMask} from "../actions/community-actions";
 class SelectedFilters extends Component{
 	clearFilterValue = (key, i) => {
 		this.props.clearFilterMask(key, i);
-		this.props.handleRefresh();
+		this.props.handleRefresh(key, i);
 	};
 
 	render(){

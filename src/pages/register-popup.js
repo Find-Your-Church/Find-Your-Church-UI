@@ -8,11 +8,14 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-actions";
 import config from "../conf/config";
+import isEmpty from "../utils/isEmpty";
 
 class RegisterPopup extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
+			showedModal: false,
+
 			fname: "",
 			lname: "",
 			email: "",
@@ -76,11 +79,32 @@ class RegisterPopup extends Component{
 		this.props.registerGoogleUser(userData, this.props.history);
 	};
 
+	showModal = () => {
+		this.setState({showedModal: true})
+	};
+
+	hideModal = () => {
+		this.setState({showedModal: false})
+	};
+
 	render(){
 		return (
 			<main>
 				<div className="sign-body">
-					<div className="div-block-63">
+					<div className={"w3-modal modal-terms-conditions"} style={{display: this.state.showedModal ? "block" : "none"}}>
+						<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
+							<header className={"w3-container w3-border-bottom"}>
+							<span onClick={this.hideModal}
+								  className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
+								<div className={"terms-title"}>Terms and Conditions</div>
+							</header>
+							<div className={"w3-container terms-conditions-content"}>
+								<p>Terms...</p>
+								<p>Conditions...<br/><br/><br/><br/></p>
+							</div>
+						</div>
+					</div>
+					<div className="div-block-63" style={{filter: this.state.showedModal ? "blur(5px)" : "none"}}>
 						<div className="div-block-38">
 							<div className="header1-div gradient shadow">
 								<h3 className="header3 center">Create a free account to access your dashboard.</h3>
@@ -100,6 +124,7 @@ class RegisterPopup extends Component{
 														   value={this.state.fname}
 														   id="fname"
 														   placeholder="First name"
+														   style={{borderBottom: this.props.errors.msg_reg_fname ? "solid 1px #f00" : "none"}}
 														   required=""/>
 													<input type="text"
 														   className="form-input center  w-input-sign w3-half"
@@ -108,6 +133,7 @@ class RegisterPopup extends Component{
 														   value={this.state.lname}
 														   id="lname"
 														   placeholder="Last name"
+														   style={{borderBottom: this.props.errors.msg_reg_lname ? "solid 1px #f00" : "none"}}
 														   required=""/>
 												</div>
 											</div>
@@ -120,6 +146,7 @@ class RegisterPopup extends Component{
 														   value={this.state.email}
 														   id="email"
 														   placeholder="Email"
+														   style={{borderBottom: this.props.errors.msg_reg_email ? "solid 1px #f00" : "none"}}
 														   required=""/>
 												</div>
 											</div>
@@ -132,6 +159,7 @@ class RegisterPopup extends Component{
 														   value={this.state.password}
 														   id="password"
 														   placeholder="Password"
+														   style={{borderBottom: this.props.errors.msg_reg_password ? "solid 1px #f00" : "none"}}
 														   required=""/>
 													<input type="password"
 														   className="form-input center  w-input-sign w3-half"
@@ -140,6 +168,7 @@ class RegisterPopup extends Component{
 														   value={this.state.password2}
 														   id="password2"
 														   placeholder="Confirm password"
+														   style={{borderBottom: this.props.errors.msg_reg_password2 ? "solid 1px #f00" : "none"}}
 														   required=""/>
 												</div>
 											</div>
@@ -149,17 +178,30 @@ class RegisterPopup extends Component{
 													   className="form-submit round w-button-sign"/>
 											</div>
 										</form>
-										<div className="w-form-done">
-											<div>Thank you! Your submission has been received!</div>
-										</div>
-										<div className="w-form-fail" style={{display: this.props.errors.msg_register ? "block" : "none"}}>
+										<div className="w-form-done"
+											 style={{display: this.props.errors.msg_register ? "block" : "none"}}>
 											{this.props.errors.msg_register}
+										</div>
+										<div className="w-form-fail" style={{
+											display:
+												(!isEmpty(this.props.errors.msg_reg_fname) ||
+												!isEmpty(this.props.errors.msg_reg_lname) ||
+												!isEmpty(this.props.errors.msg_reg_email) ||
+												!isEmpty(this.props.errors.msg_reg_password) ||
+												!isEmpty(this.props.errors.msg_reg_password2)) ? "block" : "none"
+										}}>
+											<div>{this.props.errors.msg_reg_fname}</div>
+											<div>{this.props.errors.msg_reg_lname}</div>
+											<div>{this.props.errors.msg_reg_email}</div>
+											<div>{this.props.errors.msg_reg_password}</div>
+											<div>{this.props.errors.msg_reg_password2}</div>
 										</div>
 									</div>
 								</div>
 								<div className="terms-conditions">
 									<span className="fineprint">By registering you are agreeing to our</span>
-									<Link to="/terms-n-conditions" className="fineprint link">Terms and Conditions</Link>
+									<Link to="#" onClick={this.showModal} className="fineprint link">Terms and
+										Conditions</Link>
 								</div>
 							</div>
 							<div>
@@ -185,7 +227,7 @@ class RegisterPopup extends Component{
 						<div className="div-block-46">
 							<h1 className="heading-11">
 								<Link to="/login-popup" className="link-5">
-									Already have an account?&nbsp;Sign In
+									Already have an account? <strong>Sign In</strong>
 								</Link>
 							</h1>
 						</div>

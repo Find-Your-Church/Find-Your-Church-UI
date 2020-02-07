@@ -38,7 +38,7 @@ class SearchFilterCheck extends Component{
 					{
 						this.state.collapsed ? null :
 							this.props.items.map((item, index) => {
-								const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][this.max_length - index - 1] : 0;
+								const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][index] : 0;
 								const checked = this.props.community.criteria.filter[this.props.filterName].split("")[index] === "1";
 								return (
 									<label className={"filter-option" + (count === 0 ? " disabled" : "")} key={this.props.filterName + index}

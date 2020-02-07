@@ -12,6 +12,7 @@ export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 export const RESET_PASSWORD = "RESET_PASSWORD";
 export const SET_SENDING_STATUS = "SET_SENDING_STATUS";
+export const WELCOME_MESSAGE = "WELCOME_MESSAGE";
 
 /**
  * community handles

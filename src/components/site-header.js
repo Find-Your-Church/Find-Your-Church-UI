@@ -72,12 +72,12 @@ class SiteHeader extends Component{
 						</Link>
 						: null}
 					{!this.props.auth.isAuthenticated ?
-						< Link to="/login-popup" className="w3-bar-item w3-right w3-hover-text-white">
+						< Link to="/login-popup" className="w3-bar-item w3-right">
 							Sign In
 						</Link>
 						: null}
 					{!this.props.auth.isAuthenticated ?
-						<Link to="/" className="w3-bar-item w3-right w3-hover-text-white">
+						<Link to="/" className="w3-bar-item w3-right">
 							Home
 						</Link>
 						: null}

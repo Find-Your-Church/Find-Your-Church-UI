@@ -4,9 +4,10 @@ import {GoogleLogin} from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {loginUser, loginGoogleUser, clearErrors} from "../actions/auth-actions";
+import {loginUser, loginGoogleUser, clearErrors, hideWelcomeMessage} from "../actions/auth-actions";
 import config from "../conf/config";
 import SiteFooter from "../components/site-footer";
+import isEmpty from "../utils/isEmpty";
 
 class LoginPopup extends Component{
 	constructor(props){
@@ -37,6 +38,8 @@ class LoginPopup extends Component{
 			email: this.state.email,
 			password: this.state.password
 		}, this.props.history);
+
+		this.props.hideWelcomeMessage();
 	};
 
 	onFailure = (error) => {
@@ -59,13 +62,21 @@ class LoginPopup extends Component{
 	};
 
 	render(){
+		console.log(this.props.auth.show_welcome);
+
 		return (
 			<main>
 				<div className="sign-body">
 					<div className="div-block-63">
 						<div className="div-block-38">
+							{this.props.auth.show_welcome ? (
+								<h3 className={"welcome-message"}>
+									Congrats! Your account was successfully created.<br/>
+									Login now to access your dashboard!
+								</h3>
+							) : null}
 							<div className="header1-div gradient shadow">
-								<h3 className="header3 center">Welcome back! Sign in to tour dashboard.</h3>
+								<h3 className="header3 center">Welcome back! Sign in to your dashboard.</h3>
 							</div>
 							<div>
 								<div className="form-div1">
@@ -73,7 +84,7 @@ class LoginPopup extends Component{
 										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 											  name="wf-form-Registration"
 											  data-name="Registration" className="form1 w3-row">
-											<div className="form-row w3-half">
+											<div className="form-row">
 												<div className="input-div gradient">
 													<input type="email"
 														   className="form-input center w-input-sign"
@@ -82,11 +93,8 @@ class LoginPopup extends Component{
 														   value={this.state.email}
 														   id="email"
 														   placeholder="Email"
+														   style={{borderBottom: this.props.errors.msg_login_email ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
 														   required=""/>
-												</div>
-											</div>
-											<div className="form-row w3-half">
-												<div className="input-div gradient">
 													<input type="password"
 														   className="form-input center w-input-sign"
 														   maxLength="256"
@@ -94,6 +102,7 @@ class LoginPopup extends Component{
 														   value={this.state.password}
 														   id="password"
 														   placeholder="Password"
+														   style={{borderBottom: this.props.errors.msg_login_password ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
 														   required=""/>
 												</div>
 											</div>
@@ -106,9 +115,13 @@ class LoginPopup extends Component{
 										<div className="w-form-done">
 											<div>Thank you! Your submission has been received!</div>
 										</div>
-										<div className="w-form-fail"
-											 style={{display: this.props.errors.msg_login ? "block" : "none"}}>
-											{this.props.errors.msg_login}
+										<div className="w-form-fail" style={{
+											display:
+												(!isEmpty(this.props.errors.msg_login_email) ||
+													!isEmpty(this.props.errors.msg_login_password)) ? "block" : "none"
+										}}>
+											<div>{this.props.errors.msg_login_email}</div>
+											<div>{this.props.errors.msg_login_password}</div>
 										</div>
 									</div>
 									<div className="div-block-58"><p className="fineprint">
@@ -141,7 +154,7 @@ class LoginPopup extends Component{
 						<div className="div-block-46">
 							<h1 className="heading-11">
 								<Link to="/register-popup" className="link-5">
-									Don't have an account yet?&nbsp;Create one for free.
+									Don't have an account yet? <strong>Create one for free!</strong>
 								</Link>
 							</h1>
 						</div>
@@ -159,6 +172,7 @@ LoginPopup.propTypes = {
 	clearErrors: PropTypes.func.isRequired,
 	loginUser: PropTypes.func.isRequired,
 	loginGoogleUser: PropTypes.func.isRequired,
+	hideWelcomeMessage: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -172,5 +186,6 @@ export default connect(
 		clearErrors,
 		loginUser,
 		loginGoogleUser,
+		hideWelcomeMessage,
 	}
 )(LoginPopup);

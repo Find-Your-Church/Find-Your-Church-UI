@@ -101,70 +101,60 @@ class SearchResults extends Component{
 	};
 
 	getDaysInfo = (checks) => {
-		this.props.setSearchFilter({days: checks});
-		this.setState({days: checks});
-		this.doSearchByFilter();
+		const obj = {days: checks};
+		this.doSearchByFilter(obj);
 	};
 	getTimesInfo = (checks) => {
-		this.props.setSearchFilter({times: checks});
-		this.setState({times: checks});
-		this.doSearchByFilter();
+		const obj = {times: checks};
+		this.doSearchByFilter(obj);
 	};
 	getFrequencyInfo = (checks) => {
-		this.props.setSearchFilter({frequency: checks});
-		this.setState({frequency: checks});
-		this.doSearchByFilter();
+		const obj = {frequency: checks};
+		this.doSearchByFilter(obj);
 	};
 	getAgesInfo = (checks) => {
-		this.props.setSearchFilter({ages: checks});
-		this.setState({ages: checks});
-		this.doSearchByFilter();
+		const obj = {ages: checks};
+		this.doSearchByFilter(obj);
 	};
 	getGenderInfo = (checks) => {
-		this.props.setSearchFilter({gender: checks});
-		this.setState({gender: checks});
-		this.doSearchByFilter();
+		const obj = {gender: checks};
+		this.doSearchByFilter(obj);
 	};
 	getParkingInfo = (checks) => {
-		this.props.setSearchFilter({parking: checks});
-		this.setState({parking: checks});
-		this.doSearchByFilter();
+		const obj = {parking: checks};
+		this.doSearchByFilter(obj);
 	};
 	getMinistriesInfo = (checks) => {
-		this.props.setSearchFilter({ministries: checks});
-		this.setState({ministries: checks});
-		this.doSearchByFilter();
+		const obj = {ministries: checks};
+		this.doSearchByFilter(obj);
 	};
 	getOtherServicesInfo = (checks) => {
-		this.props.setSearchFilter({other_services: checks});
-		this.setState({other_services: checks});
-		this.doSearchByFilter();
+		const obj = {other_services: checks};
+		this.doSearchByFilter(obj);
 	};
 	getAmbianceInfo = (checks) => {
-		this.props.setSearchFilter({ambiance: checks});
-		this.setState({ambiance: checks});
-		this.doSearchByFilter();
+		const obj = {ambiance: checks};
+		this.doSearchByFilter(obj);
 	};
 	getEventTypeInfo = (checks) => {
-		this.props.setSearchFilter({event_type: checks});
-		this.setState({event_type: checks});
-		this.doSearchByFilter();
+		const obj = {event_type: checks};
+		this.doSearchByFilter(obj);
 	};
 	getSupportTypeInfo = (checks) => {
-		this.props.setSearchFilter({support_type: checks});
-		this.setState({support_type: checks});
-		this.doSearchByFilter();
+		const obj = {support_type: checks};
+		this.doSearchByFilter(obj);
 	};
 
-	doSearchByFilter = () => {
-		/*
+	doSearchByFilter = (obj) => {
+		this.props.setSearchFilter(obj);
+		this.setState(obj);
 		this.props.doSearchCommunities({
 			...this.props.community.criteria,
-			address: this.props.community.criteria.my_address,
-			category: this.props.community.criteria.search_category,
-			radius: this.props.community.criteria.search_radius,
+			filter: {
+				...this.props.community.criteria.filter,
+				...obj,
+			}
 		});
-		*/
 	};
 
 	hoverMarker = (index) => {
@@ -183,13 +173,17 @@ class SearchResults extends Component{
 		this.props.clearPicking();
 	};
 
-	refreshComponent = () => {
+	refreshComponent = (key, i) => {
 		this.forceUpdate();
+		const vals = this.props.community.criteria.filter[key].split("");
+		vals[i] = "0";
+		this.doSearchByFilter({[key]: vals.join("")});
 	};
 
 	render(){
 		// sort this.props.community.search_results
-		const results = [...this.props.community.search_results];
+		const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
+
 		let fnSort;
 		switch(this.props.community.sort_order){
 			case sorters.SORT_NEWEST:
@@ -241,7 +235,7 @@ class SearchResults extends Component{
 				/>
 				<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
 					<div className={"selected-filters"}>
-						<SelectedFilters filter={this.props.community.criteria.filter} handleRefresh={this.refreshComponent}/>
+						<SelectedFilters filter={this.props.community.criteria.filter} handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
 					</div>
 					<div className={"filter-div"}>
 						<label className={"filter-label w3-large"}>Filters</label>

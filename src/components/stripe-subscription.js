@@ -158,6 +158,10 @@ class StripeSubscription extends Component{
 		}
 	}
 
+	/**
+	 * this.props.community.subscription ? <- 2nd, or 1st.
+	 * @returns {*}
+	 */
 	render(){
 		let next_due_date = "", next_month1 = "", next_month2 = "";
 		const to_date = new Date();
@@ -173,6 +177,10 @@ class StripeSubscription extends Component{
 			next_month1 = getNextMonth(init_date, i);
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
+
+		const due_amount = this.props.community.subscription ?
+			showAmount((this.props.community.my_communities.active.length + 1) * this.props.community.plan_price)
+			: showAmount(this.props.community.plan_price);
 
 		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days).toLocaleDateString('en-US');
 
@@ -375,11 +383,7 @@ class StripeSubscription extends Component{
 												<div>
 													<div className="div10-bottom">
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.upcoming_invoice ?
-																showAmount(this.props.community.upcoming_invoice.total)
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+															{due_amount}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_due_date.toLocaleDateString('en-US')
@@ -390,11 +394,7 @@ class StripeSubscription extends Component{
 													</div>
 													<div className="div10-bottom">
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.upcoming_invoice ?
-																showAmount(this.props.community.upcoming_invoice.total)
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+															{due_amount}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month1.toLocaleDateString('en-US')
@@ -405,11 +405,7 @@ class StripeSubscription extends Component{
 													</div>
 													<div className="div10-bottom">
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.upcoming_invoice ?
-																showAmount(this.props.community.upcoming_invoice.total)
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+															{due_amount}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month2.toLocaleDateString('en-US')

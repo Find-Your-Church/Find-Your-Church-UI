@@ -297,7 +297,7 @@ class Account extends Component{
 						<i className={"fas fa-spinner fa-spin"}> </i>
 					</div>
 				</div>
-				<main className="account-body">
+				<main className="account-body" style={{filter: this.props.is_sending || this.props.community.is_setting_card ? "blur(4px)" : "none"}}>
 					<div className="div-20top _1080">
 						<div className="div-20bottom">
 							<div className="container-inline w3-row">

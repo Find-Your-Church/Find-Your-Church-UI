@@ -14,6 +14,12 @@ class FilterItemRadio extends Component{
 		this.toggleCollapse = this.toggleCollapse.bind(this);
 	}
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.collapsed !== this.props.collapsed){
+			this.setState({collapsed: this.props.collapsed});
+		}
+	}
+
 	toggleCollapse(){
 		this.setState({collapsed: !this.state.collapsed});
 	}

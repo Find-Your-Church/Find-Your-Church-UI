@@ -34,6 +34,17 @@
 	overflow-y: auto;
 }
 
+.admin-right::-webkit-scrollbar {
+	width: 6px;
+	background-color: #e6e6e6;
+}
+
+.admin-right::-webkit-scrollbar-thumb {
+	width: 6px;
+	border-radius: 6px;
+	background-color: #cccccc;
+}
+
 @media screen and (max-width: 990px) {
 	.admin-left {
 		width: 100%;

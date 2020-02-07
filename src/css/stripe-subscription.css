@@ -23,6 +23,7 @@
 	border-radius: 0;
 	box-shadow: 1px 1px 3px 0 grey;
 	line-height: 14px;
+	z-index: 999px;
 }
 
 .header1-div.gradient {

@@ -44,7 +44,7 @@ class ChangePassword extends Component{
 						<i className="fas fa-spinner fa-spin"> </i>
 					</div>
 				</div>
-				<div className="sign-body">
+				<div className="sign-body" style={{filter: this.props.is_sending ? "blur(4px)" : "none"}}>
 					<div className="div-block-63">
 						<div className="div-block-38">
 							<div className="header1-div gradient shadow">
