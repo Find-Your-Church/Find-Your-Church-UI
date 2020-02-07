@@ -12,7 +12,7 @@ const community_config = {
 	],
 
 	SEARCH_RADIUS: [
-		1, 3, 5, 10, 20, 30, 5000,// 5000 are for testing
+		1, 3, 5, 10, 20, 30,// 5000 are for testing
 	],
 
 	FILTERS: {

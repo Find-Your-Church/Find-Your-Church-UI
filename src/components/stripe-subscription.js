@@ -49,8 +49,6 @@ class StripeSubscription extends Component{
 		this.clickEditCard = this.clickEditCard.bind(this);
 		this.hideActivationDialog = this.hideActivationDialog.bind(this);
 		this.handleActivateCommunity = this.handleActivateCommunity.bind(this);
-
-		console.log(this.props.community.subscription);
 	}
 
 	componentDidMount(){
@@ -484,7 +482,7 @@ class StripeSubscription extends Component{
 													<div className={"card-detail"}>
 														<div className={"card-detail-item w3-row w3-text-grey"}>
 															<div className={"w3-col l1"}>
-																<img alt={"Card image"}
+																<img alt={"Payment card"}
 																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
 															</div>
 															<div className={"w3-col l4"} title={"Card number"}>

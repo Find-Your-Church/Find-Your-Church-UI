@@ -4,6 +4,8 @@ const app_config = {
 	FYC_API_URL: "https://api-dev.findyourchurch.org",
 //	FYC_API_URL: "http://192.168.1.65:5000",
 
+	MAX_PIC_SIZE: 3072, // in kBs, = 3MB
+
 	/**
 	 * Public key for Stripe payment.
 	 *

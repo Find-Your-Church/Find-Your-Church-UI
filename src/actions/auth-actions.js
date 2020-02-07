@@ -112,7 +112,6 @@ export const getUserInfo = (user_id) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/users/userinfo", user_id)
 		.then(res => {
-			console.log(res.data);
 			return dispatch({
 				type: UPDATE_USER_INFO,
 				payload: res.data,

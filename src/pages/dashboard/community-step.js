@@ -417,10 +417,10 @@ class CommunityStep extends Component{
 							</div>
 							<div className="right-part w3-half">
 								<div className={"tab w3-row"}>
-									<div className={"w3-half" + (this.state.showedMembers ? "" : " tab-selected")}
+									<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 										 onClick={this.selectTabDetails}>Details
 									</div>
-									<div className={"w3-half" + (this.state.showedMembers ? " tab-selected" : "")}
+									<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
 										 onClick={this.selectTabMembers}>Admin / Members
 									</div>
 								</div>

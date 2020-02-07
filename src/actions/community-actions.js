@@ -6,12 +6,8 @@ import {
 	RESET_MESSAGES,
 	GET_MY_COMMUNITIES,
 	SET_BILLING_INFO,
-	SET_STT_READY,
 	SET_STT_HIDE,
-	SET_STT_SENDING,
 	PICK_COMMUNITY,
-	CLEAR_BILLING_INFO,
-	SET_DIALOG_TITLE,
 	SET_STT_SET_CARD,
 	CLEAR_LAST_INVOICE,
 	SEARCH_CRITERIA,
@@ -115,7 +111,6 @@ export const registerCard = (info) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/setcard", info)
 		.then(res => {
-			console.log(res.data);
 			dispatch({
 				type: SET_BILLING_INFO,
 				payload: res.data,
@@ -286,7 +281,6 @@ export const deleteCommunity = (info, history) => dispatch => {
 };
 
 export const getBillingStatus = (info, history) => dispatch => {
-	console.log(info);
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/getstatus", info)
 		.then(res => {
@@ -340,7 +334,6 @@ export const verifyCoupon = (info) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/verifycoupon", info)
 		.then(res => {
-			console.log(res.data);
 			dispatch({
 				type: COUPON_VERIFIED,
 				payload: res.data.verified,
@@ -366,7 +359,6 @@ export const getPlan = () => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/getplan", {})
 		.then(res => {
-			console.log(res.data);
 			dispatch({
 				type: GET_PLAN,
 				payload: {
@@ -406,12 +398,9 @@ export const setSearchFilter = (info) => dispatch => {
 };
 
 export const doSearchCommunities = (criteria) => dispatch => {
-	console.log(criteria);
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/search", criteria)
 		.then(res => {
-			console.log("counts: ", res.data.counts);
-
 			dispatch({
 				type: SET_SEARCH_RESULTS,
 				payload: res.data,

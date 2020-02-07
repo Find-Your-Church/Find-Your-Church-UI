@@ -52,8 +52,6 @@ class StripeSubscription extends Component{
 		this.clickEditCard = this.clickEditCard.bind(this);
 		this.hideActivationDialog = this.hideActivationDialog.bind(this);
 		this.handleActivateCommunity = this.handleActivateCommunity.bind(this);
-
-		console.log(this.props.community.subscription);
 	}
 
 	onChange = e => {

@@ -292,7 +292,6 @@ export default function(state = initialState, action){
 			bits[action.payload.index] = "0";
 			const new_filter_value = bits.join("");
 
-			console.log(action.payload.key, state.criteria.filter[action.payload.key], new_filter_value);
 			return {
 				...state,
 				criteria: {

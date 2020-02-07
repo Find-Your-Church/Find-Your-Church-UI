@@ -18,7 +18,6 @@ import {
 } from "../actions/community-actions";
 import PublicThumbnail from "../components/public-thumbnail";
 import Popup from "reactjs-popup";
-import {ScrollTo} from "react-scroll-to";
 import '../css/search-results.css';
 import sorters from "../actions/sorters";
 import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sorter_newest} from "../utils/sorter-func";
@@ -162,7 +161,6 @@ class SearchResults extends Component{
 	};
 
 	clickMarker = (index) => {
-		console.log(index);
 		this.myref[index].current.scrollIntoView({
 			behavior: 'smooth',
 			block: 'start',
@@ -200,6 +198,9 @@ class SearchResults extends Component{
 				break;
 			case sorters.SORT_DIST_DESC:
 				fnSort = sorter_farthest;
+				break;
+			default:
+				fnSort = sorter_newest;
 				break;
 		}
 

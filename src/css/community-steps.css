@@ -295,7 +295,7 @@
 	cursor: pointer;
 }
 
-.steps-body .right-part .tab .w3-half {
+.steps-body .right-part .tab .w3-col {
 	padding: 9px 30px 9px;
 	text-align: center;
 	font-size: 18px;
@@ -305,7 +305,20 @@
 	color: #888;
 }
 
-.steps-body .right-part .tab .w3-half.tab-selected {
+@media screen and (max-width: 550px){
+	.steps-body .right-part .tab .w3-col {
+		padding: 9px 30px 9px;
+		text-align: center;
+		font-size: 18px;
+		font-weight: bold;
+		height: 48px;
+		line-height: 16px;
+		cursor: pointer;
+		color: #888;
+	}
+}
+
+.steps-body .right-part .tab .w3-col.tab-selected {
 	color: #8800fe;
 	border-bottom: solid 1px #8800fe;
 }

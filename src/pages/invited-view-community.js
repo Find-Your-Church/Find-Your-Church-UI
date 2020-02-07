@@ -91,7 +91,6 @@ class InvitedViewCommunity extends Component{
 	}
 
 	render(){
-		console.log(this.props.community.view_community);
 		const obj = this.props.community.view_community ? this.props.community.view_community : null;
 
 		return (obj === null ? null : (

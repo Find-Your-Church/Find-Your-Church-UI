@@ -62,8 +62,6 @@ class LoginPopup extends Component{
 	};
 
 	render(){
-		console.log(this.props.auth.show_welcome);
-
 		return (
 			<main>
 				<div className="sign-body">
