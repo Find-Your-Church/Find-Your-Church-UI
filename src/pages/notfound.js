@@ -5,12 +5,11 @@ class Notfound extends Component{
 	render(){
 		return (
 			<main>
-				<div className="sign-body">
+				<div className="notfound-body">
 					<h3 className="w3-display-middle">
 						Oops, :(<br/> the page was not found.
 					</h3>
 				</div>
-				<SiteFooter/>
 			</main>
 		);
 	}
