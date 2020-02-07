@@ -66,6 +66,7 @@ class ProfileContainer extends Component{
 							</Link>
 						</nav>
 					</div>
+					{/*
 					<div className="personal-info">
 						{isEmpty(this.props.auth.user.admin_email) ? null :
 							<div className={"personal-info-item"}
@@ -80,6 +81,7 @@ class ProfileContainer extends Component{
 							</div>
 						}
 					</div>
+					*/}
 				</div>
 				<Link to="/create-new-community" className="newcommunity-button">
 					{/*<img src={"/img/icon/icon-new.svg"} alt={"create new community"}/>*/}
