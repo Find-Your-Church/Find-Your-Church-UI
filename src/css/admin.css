@@ -129,10 +129,15 @@
 	padding-top: 0;
 	border: 3px solid #fff;
 	border-radius: 50%;
-	background-position: 0% 50%;
+	background-position: 0 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
 	box-shadow: 0 0 5px 0 #333;
+}
+
+.profpic-div .image-4 {
+	width: 94px;
+	height: 94px;
 }
 
 .image-4 {
@@ -140,6 +145,8 @@
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
+	-o-object-fit: cover;
+	object-fit: cover;
 }
 
 .profile-container .div-block-56 {

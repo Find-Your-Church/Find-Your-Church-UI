@@ -215,16 +215,16 @@ class SearchResults extends Component{
 					<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
 						Show Filters
 					</Link>
-					<div className={"sort-part w3-right"}>
-						<select id={"sorter"} className={"w3-select"} onChange={this.onChange}>
+					<span className={"sort-group"}>
+						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
+						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}>
 							<option value={sorters.SORT_NEWEST}>Newest</option>
 							<option value={sorters.SORT_NAME_ASC}>A - Z</option>
 							<option value={sorters.SORT_NAME_DESC}>Z - A</option>
 							<option value={sorters.SORT_DIST_ASC}>Closet</option>
 							<option value={sorters.SORT_DIST_DESC}>Farthest</option>
 						</select>
-					</div>
-					<label className={"w3-right w3-text-grey w3-margin-top"}>Sort by:&nbsp;</label>
+					</span>
 				</div>
 				<CommunityMap isMarkerShown criteria={this.props.criteria}
 							  googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
@@ -235,10 +235,11 @@ class SearchResults extends Component{
 				/>
 				<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
 					<div className={"selected-filters"}>
-						<SelectedFilters filter={this.props.community.criteria.filter} handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
+						<SelectedFilters filter={this.props.community.criteria.filter}
+										 handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
 					</div>
 					<div className={"filter-div"}>
-						<label className={"filter-label w3-large"}>Filters</label>
+						<label className={"filter-label w3-large"} style={{marginLeft: "-10px"}}>Filters</label>
 						<Popup
 							trigger={<i style={{cursor: "pointer"}}
 										className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
@@ -300,10 +301,11 @@ class SearchResults extends Component{
 							<div className={"search-result-headline"}>
 								<div className={"w3-col l10"}>
 									<span style={{fontWeight: "bold"}}>
-										{this.props.criteria.category}
+										{isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category}
 									</span>
 									&nbsp;near&nbsp;
-									<span style={{fontWeight: "bold"}}>{this.props.criteria.address}</span>
+									<span
+										style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>
 								</div>
 								<div className={"w3-col l2"}>
 									Results ({results.length})

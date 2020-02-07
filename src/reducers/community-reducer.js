@@ -23,7 +23,7 @@ import {
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK
+	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -300,6 +300,26 @@ export default function(state = initialState, action){
 					filter: {
 						...state.criteria.filter,
 						[action.payload.key]: new_filter_value,
+					}
+				}
+			};
+		case CLEAR_CRITERIA:
+			return {
+				...state,
+				criteria: {
+					...state.criteria,
+					filter: {
+						days: "0".repeat(community_config.FILTERS.days.length),
+						times: "0".repeat(community_config.FILTERS.times.length),
+						frequency: "0".repeat(community_config.FILTERS.frequency.length),
+						ages: "0".repeat(community_config.FILTERS.ages.length),
+						gender: "0".repeat(community_config.FILTERS.gender.length),
+						parking: "0".repeat(community_config.FILTERS.parking.length),
+						ministries: "0".repeat(community_config.FILTERS.ministries.length),
+						other_services: "0".repeat(community_config.FILTERS.other_services.length),
+						ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
+						event_type: "0".repeat(community_config.FILTERS.event_type.length),
+						support_type: "0".repeat(community_config.FILTERS.support_type.length),
 					}
 				}
 			};

@@ -51,3 +51,4 @@ export const SORT_ORDER = "SORT_ORDER";
 export const SET_PICKING = "SET_PICKING";
 export const VIEW_COMMUNITY = "VIEW_COMMUNITY";
 export const CLEAR_FILTER_MASK = "CLEAR_FILTER_MASK";
+export const CLEAR_CRITERIA = "CLEAR_CRITERIA";

@@ -59,7 +59,6 @@ class Admin extends Component{
 					<Elements>
 						<StripeSubscription second={!!this.props.community.subscription}/>
 					</Elements>
-					)}
 				</div>
 				<div id={"spinning-modal"} className={"w3-modal"}
 					 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>

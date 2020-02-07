@@ -187,6 +187,10 @@ button:focus {
 }
 
 @media screen and (max-width: 990px) {
+	#search-results-header .search-form-container {
+		border: none;
+	}
+
 	.search-container {
 		max-width: 560px;
 		padding: 20px;
@@ -431,4 +435,10 @@ button:focus {
 	min-height: 500px;
 	background-color: transparent;
 	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
+}
+
+@media screen and (max-width: 780px) {
+	.block-60 {
+		padding: 0;
+	}
 }

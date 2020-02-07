@@ -117,8 +117,7 @@ class Thumbnail extends Component{
 							style={{
 								backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
 									: "/img/community-default.jpg"}')`
-							}}
-							onClick={this.goView}>
+							}}>
 						</div>
 						<div className="listinginfo-div">
 							<div className="listingrow">

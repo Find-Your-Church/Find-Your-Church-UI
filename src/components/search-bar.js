@@ -51,6 +51,22 @@ class SearchBar extends Component{
 	};
 
 	handleSearch = () => {
+		const clear_obj = {
+			filter: {
+				days: "0".repeat(community_config.FILTERS.days.length),
+				times: "0".repeat(community_config.FILTERS.times.length),
+				frequency: "0".repeat(community_config.FILTERS.frequency.length),
+				ages: "0".repeat(community_config.FILTERS.ages.length),
+				gender: "0".repeat(community_config.FILTERS.gender.length),
+				parking: "0".repeat(community_config.FILTERS.parking.length),
+				ministries: "0".repeat(community_config.FILTERS.ministries.length),
+				other_services: "0".repeat(community_config.FILTERS.other_services.length),
+				ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
+				event_type: "0".repeat(community_config.FILTERS.event_type.length),
+				support_type: "0".repeat(community_config.FILTERS.support_type.length),
+			}
+		};
+
 		// -> /search-results
 		this.props.setSearchCriteria({
 			category: this.state.search_category,
@@ -58,6 +74,7 @@ class SearchBar extends Component{
 			address: this.state.my_address,
 			lat: this.state.my_lat,
 			lng: this.state.my_lng,
+			...clear_obj
 		});
 
 		this.props.doSearchCommunities({
@@ -65,7 +82,10 @@ class SearchBar extends Component{
 			address: this.state.my_address,
 			category: this.state.search_category,
 			radius: this.state.search_radius,
+			...clear_obj
 		});
+
+		this.forceUpdate();
 
 		// go to the search results!
 		// this.setState({my_address: "", searchable: false});
@@ -112,7 +132,7 @@ class SearchBar extends Component{
 								<input className="search-form-input w-node-5cf6ee0e50f3-ddb46e0f w-input"
 									   title={`Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.my_address}`}
 									   {...getInputProps({
-										   placeholder: this.props.community.criteria.address || "315 1st Avenue NE, Minneapolis, MN 55413",
+										   placeholder: this.props.community.criteria.address || "Address, City or Zip Code",
 									   })}
 									   required=""/>
 								<div className={"search-address-candidates"}>
@@ -140,7 +160,7 @@ class SearchBar extends Component{
 					</PlacesAutocomplete>
 					<Link to={"#"}
 						  onClick={this.state.searchable ? this.handleSearch : null}
-						  className={"search-form-button w-button" + (this.state.searchable ? "" : " w3-grey w3-text-light-grey")}
+						  className={"search-form-button w-button"}
 						  style={{cursor: (this.state.searchable ? "pointer" : "not-allowed")}}
 					>
 						{this.props.buttonTitle}

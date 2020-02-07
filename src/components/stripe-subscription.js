@@ -119,6 +119,10 @@ class StripeSubscription extends Component{
 		this.setState({editing_card: !this.state.editing_card});
 	}
 
+	cancelEditCard = () => {
+		this.setState({editing_card: false});
+	};
+
 	async handleActivateCommunity(e){
 		if(this.props.stripe){
 			if(!this.props.second){
@@ -275,7 +279,7 @@ class StripeSubscription extends Component{
 													   id="coupon" onChange={this.onChange}
 													   value={this.state.coupon} autoFocus/>
 												<button onClick={this.verifyCoupon}
-														className={"w3-button w3-padding-small w3-teal"}>
+														className={"w3-button w3-padding-small apply-button"}>
 													Apply
 												</button>
 											</div>
@@ -426,14 +430,21 @@ class StripeSubscription extends Component{
 								<div className="accordionheader-div">
 									<h3>Payment Information</h3>
 									{this.props.community.subscription ? (
-										<Link to="#" className={"table-link"}
-											  onClick={this.clickEditCard}>
+										<div className={"edit-card"}>
+											<Link to="#" className={"table-link"}
+												  onClick={this.clickEditCard}>
+												{this.state.editing_card ? (
+													<i className={"fas fa-save"}> </i>
+												) : (
+													<i className={"fas fa-pen"}> </i>
+												)}
+											</Link>
 											{this.state.editing_card ? (
-												<i className={"fas fa-save"}> </i>
-											) : (
-												<i className={"fas fa-pen"}> </i>
-											)}
-										</Link>
+												<Link to="#" className={"table-link w3-large"} onClick={this.cancelEditCard}>
+													<i className={"fas fa-times"}> </i>
+												</Link>
+											) : null}
+										</div>
 									) : null}
 								</div>
 								<div className="form-block w-form">

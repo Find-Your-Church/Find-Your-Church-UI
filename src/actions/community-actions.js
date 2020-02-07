@@ -185,6 +185,11 @@ export const activateCommunity = (info) => dispatch => {
 				type: ACTIVATING,
 				payload: false,
 			});
+
+			setInterval(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
 		})
 		.catch(err => {
 			dispatch({
@@ -199,6 +204,11 @@ export const activateCommunity = (info) => dispatch => {
 				type: ACTIVATING,
 				payload: false,
 			});
+
+			setInterval(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
 		});
 };
 

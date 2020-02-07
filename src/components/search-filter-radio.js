@@ -12,7 +12,7 @@ class SearchFilterRadio extends Component{
 		this.checks = this.props.value.split("");
 
 		this.state = {
-			collapsed: props.collapsed || false,
+			collapsed: props.collapsed || true,
 		};
 
 		this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -37,9 +37,9 @@ class SearchFilterRadio extends Component{
 	render(){
 		return this.props.send ? (
 				<div className="filter-div">
-					<div className={"flexdiv-left labels"}>
+					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
-							   onClick={this.toggleCollapse}>{this.props.filterTitle}</label>
+							  >{this.props.filterTitle}</label>
 					</div>
 					{
 						this.state.collapsed ? null : (
@@ -55,7 +55,7 @@ class SearchFilterRadio extends Component{
 									const checked = this.props.community.criteria.filter[this.props.filterName].split("")[index] === "1";
 									return (
 										<label className={"filter-option" + (count === 0 ? " disabled" : "")}
-											   key={this.props.filterName + index} style={{display: "block"}}>{item}
+											   key={this.props.filterName + index}>{item}
 											<input type="radio" id={this.props.filterName + "[" + index + "]"}
 												   name={this.props.filterName} value={index} onClick={this.onCheck}
 												   defaultChecked={this.checks[index] === '1'}

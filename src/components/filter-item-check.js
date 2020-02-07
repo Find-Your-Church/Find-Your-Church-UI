@@ -32,9 +32,9 @@ class FilterItemCheck extends Component{
 	render(){
 		return this.props.send ? (
 				<div className="filter-div">
-					<div className={"flexdiv-left labels"}>
+					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse} style={{cursor: "pointer"}}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
-							   onClick={this.toggleCollapse}>{this.props.filterTitle}</label>
+							  >{this.props.filterTitle}</label>
 					</div>
 					{
 						this.state.collapsed ? null :

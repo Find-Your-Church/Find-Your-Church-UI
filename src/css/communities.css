@@ -102,7 +102,7 @@
 	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #fff;
-	font-size: 15px;
+	font-size: 16px;
 	line-height: 22px;
 	text-align: center;
 	box-sizing: border-box;
@@ -113,7 +113,7 @@
 	/*background-image: linear-gradient(45deg, #00e8fe, #2e89fe 50%, #8900fe);*/
 	border: solid 2px #eeeeee;
 	padding-top: 4px;
-	height: 38px;
+	height: 36px;
 	box-shadow: 1px 1px 2px 0 #999999;
 	opacity: 1.0;
 }
@@ -222,6 +222,10 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.communities-body .communityname:hover {
+	color: #8900fe;
 }
 
 .communities-body .communitycategory,

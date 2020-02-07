@@ -6,6 +6,7 @@ import {pickCommunity, shareCommunity, reportCommunity} from "../actions/communi
 import "../css/communities.css"
 import "../css/community-steps.css"
 import SelectedFilters from "./selected-filters";
+import isEmpty from "../utils/isEmpty";
 
 class PublicThumbnail extends Component{
 	constructor(props){
@@ -31,12 +32,14 @@ class PublicThumbnail extends Component{
 	shareCommunity = () => {
 		if(this.props.auth.isAuthenticated){
 			const to_email = window.prompt("Please enter email address to be received this share-link.", "");
-			this.props.shareCommunity({
-				email: this.props.auth.user.email,
-				to_email: to_email,
-				community_id: this.props.value._id,
-			});
-			window.alert("Success! Sent a email to invite here.");
+			if(to_email !== null && !isEmpty(to_email)){
+				this.props.shareCommunity({
+					email: this.props.auth.user.email,
+					to_email: to_email,
+					community_id: this.props.value._id,
+				});
+				window.alert("Success! Sent a email to invite here.");
+			}
 		}
 		else{
 			window.alert("You must login to share the community.");
@@ -75,14 +78,13 @@ class PublicThumbnail extends Component{
 				<Redirect to={{pathname: '/public-view', state: {obj: this.props.value}}}/>
 			) : (
 
-				<div className="listing-container1" onMouseLeave={this.hideMenu}>
+				<div className={"listing-container1"} onMouseLeave={this.hideMenu}>
 					<div
 						className={"listingprofilepic-div" + (this.props.value.pictures && this.props.value.pictures.length > 0 ? "" : " w3-opacity-max")}
 						style={{
 							backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
 								: "/img/community-default.jpg"}')`
-						}}
-						onClick={this.goView}>
+						}}>
 					</div>
 					<div className="listinginfo-div">
 						<div className="listingrow">
