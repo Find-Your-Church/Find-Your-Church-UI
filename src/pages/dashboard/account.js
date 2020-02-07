@@ -14,6 +14,7 @@ import showAmount from "../../utils/showAmount";
 import Popup from "reactjs-popup";
 import isEmpty from "../../utils/isEmpty";
 import FileBase from "react-file-base64";
+import config from "../../conf/config";
 
 const cardStyle = {
 	base: {
@@ -37,6 +38,8 @@ class Account extends Component{
 		});
 		let {user} = props.auth;
 
+		this.tmr = null; // timer for displaying the error message
+
 		this.props.getMyCommunities(this.props.auth.user.id, true);
 		this.props.getMyCommunities(this.props.auth.user.id, false);
 
@@ -46,6 +49,7 @@ class Account extends Component{
 
 		const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
 		this.state = {
+			showSizeError: false,
 			editingUserName: false,
 			editingAdminEmail: false,
 			editingEmail: false,
@@ -102,6 +106,19 @@ class Account extends Component{
 	};
 
 	changeUserPic(files){
+		const file_size = parseInt(files.size);
+
+		console.log(file_size);
+
+		if(file_size > config.MAX_PIC_SIZE){
+			this.setState({showSizeError: true});
+
+			this.tmr = setTimeout(() => {
+				this.setState({showSizeError: false});
+			}, 3000);
+			return;
+		}
+
 		this.setState({
 			user_pic:
 				files.base64.toString()
@@ -264,6 +281,10 @@ class Account extends Component{
 		this.setState({editing_card: !this.state.editing_card});
 	}
 
+	cancelEditCard = () => {
+		this.setState({editing_card: false});
+	};
+
 	render(){
 		const {user} = this.props.auth;
 
@@ -297,7 +318,8 @@ class Account extends Component{
 						<i className={"fas fa-spinner fa-spin"}> </i>
 					</div>
 				</div>
-				<main className="account-body" style={{filter: this.props.is_sending || this.props.community.is_setting_card ? "blur(4px)" : "none"}}>
+				<main className="account-body"
+					  style={{filter: this.props.is_sending || this.props.community.is_setting_card ? "blur(4px)" : "none"}}>
 					<div className="div-20top _1080">
 						<div className="div-20bottom">
 							<div className="container-inline w3-row">
@@ -325,11 +347,16 @@ class Account extends Component{
 															: user.pic
 													} alt={`${user.fname}`}/>
 												</div>
+												<div className={"w3-text-red w3-small"}
+													 style={{display: this.state.showSizeError ? "block" : "none"}}>
+													Picture file size cannot be larger than 3 MB.
+												</div>
 											</h4>
 											<label className={"table-link"}>
 												<i className={"fas fa-pen"}> </i>
 												<FileBase id="btn-upload" type="file" className="upload-button w-button"
-														  multiple={false} onDone={this.changeUserPic.bind(this)} height="38"/>
+														  multiple={false} onDone={this.changeUserPic.bind(this)}
+														  height="38"/>
 											</label>
 										</div>
 										<div className="table-row">
@@ -665,6 +692,12 @@ class Account extends Component{
 													<i className={"fas fa-pen"}> </i>
 												)}
 											</Link>
+											{this.state.editing_card ? (
+												<Link to="#" className={"table-link w3-large"}
+													  onClick={this.cancelEditCard}>
+													<i className={"fas fa-times"}> </i>
+												</Link>
+											) : null}
 										</div>
 										<div className="form-row">
 											<div className={"pay-info-row"}>

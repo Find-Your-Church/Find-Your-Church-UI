@@ -156,6 +156,24 @@
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
+@media screen and (max-width: 790px){
+	.communities-body .listing-grid.dashboard {
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		-ms-grid-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 390px){
+	.communities-body .listing-grid.dashboard {
+		grid-column-gap: 6px;
+		grid-row-gap: 6px;
+		-ms-grid-columns: 1fr;
+		grid-template-columns: 1fr;
+	}
+}
+
 .communities-body .listing-container1 {
 	width: 100%;
 	max-height: none;

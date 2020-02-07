@@ -38,8 +38,11 @@ class SiteFooter extends Component{
 				</div>
 				<div className={"footer-link"}>
 					<Link to="/" className="footer-logo">
-						&copy; FindYourChurch.org {new Date().getFullYear()}. All rights reserved.
+						&copy; FindYourChurch.org {new Date().getFullYear()}.
 					</Link>
+					<span className={"footer-logo"}>
+						 All rights reserved.
+					</span>
 				</div>
 			</footer>
 		);

@@ -396,6 +396,7 @@ h4 {
 .form-input {
 	margin-bottom: 0;
 	padding: 10px;
+	line-height: 19px;
 	border-width: 1px;
 	border-radius: 0;
 	background-color: transparent;

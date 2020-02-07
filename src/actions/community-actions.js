@@ -186,7 +186,7 @@ export const activateCommunity = (info) => dispatch => {
 				payload: false,
 			});
 
-			setInterval(() => dispatch({
+			setTimeout(() => dispatch({
 				type: SHOW_ACT_DLG,
 				payload: false,
 			}), 2000);
@@ -205,7 +205,7 @@ export const activateCommunity = (info) => dispatch => {
 				payload: false,
 			});
 
-			setInterval(() => dispatch({
+			setTimeout(() => dispatch({
 				type: SHOW_ACT_DLG,
 				payload: false,
 			}), 2000);
