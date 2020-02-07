@@ -683,9 +683,9 @@ class Account extends Component{
 								</div>
 								<div className={"sub-container w3-col m12 l6"}>
 									<div className={"sub-content payment"}>
-										<div className="flexdiv-leftright underline">
-											<h5 className="container-header">Payment Method</h5>
-											<Link to="#" className={"table-link"} onClick={this.clickEditCard}>
+										<div className="flexdiv-leftright underline w3-row">
+											<h5 className="container-header w3-col s10">Payment Method</h5>
+											<Link to="#" className={"table-link w3-col s1"} onClick={this.clickEditCard}>
 												{this.state.editing_card ? (
 													<i className={"fas fa-save"}> </i>
 												) : (
@@ -693,7 +693,7 @@ class Account extends Component{
 												)}
 											</Link>
 											{this.state.editing_card ? (
-												<Link to="#" className={"table-link w3-large"}
+												<Link to="#" className={"table-link w3-large w3-col s1"}
 													  onClick={this.cancelEditCard}>
 													<i className={"fas fa-times"}> </i>
 												</Link>
