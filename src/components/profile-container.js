@@ -39,44 +39,45 @@ class ProfileContainer extends Component{
 						</Popup>
 					</div>
 				</div>
-				<div className="div-block-55">
-					<div className="profpic-container">
-						<div className="profpic-div">
-							<img src={isEmpty(this.props.auth.user.pic) ?
-								"/img/default-user.png"
-								: this.props.auth.user.pic}
-								 alt="" className="image-4"/>
+				<div className={"profile-container-wrapper"}>
+					<div className="div-block-55">
+						<div className="profpic-container">
+							<div className="profpic-div">
+								<img src={isEmpty(this.props.auth.user.pic) ?
+									"/img/default-user.png"
+									: this.props.auth.user.pic}
+									 alt="" className="image-4"/>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className="profile-info">
-					<div data-collapse="all" data-animation="default" data-duration="400"
-						 className="w-nav">
-						<h3 className="community-name">
-							{this.props.auth.user.fname} {this.props.auth.user.lname}
-						</h3>
-						<Link to="#" className={"w3-right"} onClick={this.toggleMenu}>
-							<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
-						</Link>
-						<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
-							 onMouseLeave={this.hideMenu}
-							 style={{display: this.state.is_show_menu ? "block" : "none"}}>
-							<Link to="/dashboard/account" className="listing-navlink w-nav-link">
-								Edit
+					<div className="profile-info">
+						<div data-collapse="all" data-animation="default" data-duration="400"
+							 className="w-nav">
+							<h3 className="community-name">
+								{this.props.auth.user.fname} {this.props.auth.user.lname}
+							</h3>
+							<Link to="#" className={"w3-right"} onClick={this.toggleMenu}>
+								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 							</Link>
-						</nav>
-					</div>
-					<div className="personal-info">
-						<div className={"members"}>
-							<img src={"/img/social/icon-facebook.svg"}
-								 alt="" className="personal-pic"/>
+							<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
+								 onMouseLeave={this.hideMenu}
+								 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+								<Link to="/dashboard/account" className="listing-navlink w-nav-link">
+									Edit
+								</Link>
+							</nav>
 						</div>
-						<div className={"members"}>
-							<img src={"/img/social/icon-facebook.svg"}
-								 alt="" className="personal-pic"/>
+						<div className="personal-info">
+							<div className={"members"}>
+								<img src={"/img/icon/icon-email-fill.svg"}
+									 alt="" className="personal-pic"/>
+							</div>
+							<div className={"members"}>
+								<img src={"/img/icon/icon-phone-fill.svg"}
+									 alt="" className="personal-pic"/>
+							</div>
 						</div>
-					</div>
-					{/*
+						{/*
 					<div className="personal-info">
 						{isEmpty(this.props.auth.user.admin_email) ? null :
 							<div className={"personal-info-item"}
@@ -92,6 +93,7 @@ class ProfileContainer extends Component{
 						}
 					</div>
 					*/}
+					</div>
 				</div>
 				<Link to="/create-new-community" className="newcommunity-button">
 					{/*<img src={"/img/icon/icon-new.svg"} alt={"create new community"}/>*/}

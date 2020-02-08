@@ -683,8 +683,13 @@ class Account extends Component{
 								</div>
 								<div className={"sub-container w3-col m12 l6"}>
 									<div className={"sub-content payment"}>
-										<div className="flexdiv-leftright underline w3-row">
+										<div className="flexdiv-leftright card underline w3-row">
 											<h5 className="container-header w3-col s10">Payment Method</h5>
+											{!this.state.editing_card ? (
+												<Link to="#" className={"table-link w3-large w3-col s1"}>
+													<i className={"fas fa-times"} style={{color: "transparent", cursor: "normal"}}> </i>
+												</Link>
+											) : null}
 											<Link to="#" className={"table-link w3-col s1"} onClick={this.clickEditCard}>
 												{this.state.editing_card ? (
 													<i className={"fas fa-save"}> </i>

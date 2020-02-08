@@ -124,6 +124,14 @@
 	flex: 1;
 }
 
+.flexdiv-leftright.card {
+	justify-content: normal;
+}
+
+.flexdiv-leftright.card .s1 {
+	text-align: right;
+}
+
 .flexdiv-left {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -163,7 +171,8 @@
 	padding-top: 0;
 	padding-bottom: 0;
 	font-size: 20px;
-	line-height: 16px;
+	line-height: 20px;
+	font-weight: 600;
 }
 
 .container-header {
@@ -173,7 +182,8 @@
 	padding-top: 0;
 	padding-bottom: 0;
 	font-size: 18px;
-	line-height: 16px;
+	line-height: 18px;
+	font-weight: 600;
 }
 
 .account-body .table-row {

@@ -183,7 +183,7 @@
 	-webkit-flex: 0 auto;
 	-ms-flex: 0 auto;
 	flex: 0 auto;
-	border: 1px solid #ccc;
+	border: 1px solid #e6e6e6;
 	background-color: #fff;
 }
 
@@ -248,11 +248,11 @@
 
 .communities-body .communitycategory,
 .communities-body .communityaddress {
-	margin: 6px 0;
+	margin: 0;
 	max-height: 24px;
 	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 15px;
-	line-height: 17px;
+	font-size: 16px;
+	line-height: 18px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

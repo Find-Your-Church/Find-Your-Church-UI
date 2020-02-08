@@ -25,6 +25,7 @@ class ViewCommunity extends Component{
 		const p_obj = this.props.location.state;
 		this.state = {
 			errors: {},
+			is_show_menu: false,
 			showedMembers: false,
 
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
@@ -56,6 +57,8 @@ class ViewCommunity extends Component{
 			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type
 		};
 
+		this.toggleMenu = this.toggleMenu.bind(this);
+		this.hideMenu = this.hideMenu.bind(this);
 		this.selectTabDetails = this.selectTabDetails.bind(this);
 		this.selectTabMembers = this.selectTabMembers.bind(this);
 	}
@@ -66,6 +69,14 @@ class ViewCommunity extends Component{
 		}
 		else
 			return null;
+	}
+
+	toggleMenu(){
+		this.setState({is_show_menu: !this.state.is_show_menu});
+	}
+
+	hideMenu(){
+		this.setState({is_show_menu: false});
 	}
 
 	selectTabDetails(e){
@@ -118,8 +129,34 @@ class ViewCommunity extends Component{
 													alt="Community" title="Community pictures"
 													src={this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
 											)}
-										<div className="basic-info">
-											<div style={{fontWeight: "bold"}}>{this.state.community_name}</div>
+										<div className="basic-info view">
+											<div className="w-nav" style={{fontWeight: "bold", position: "relative"}}>
+												<h3 className={"community-name"}>
+													{this.state.community_name}
+												</h3>
+												<Link to="#" className={"w3-right"} onClick={this.toggleMenu}>
+													<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+												</Link>
+												<nav role="navigation" className="w3-animate-opacity listing-navmenu view w-nav-menu"
+													 onMouseLeave={this.hideMenu}
+													 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Request to Join
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Add to Favorites
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Copy Link
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Share
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Flag / Report
+													</Link>
+												</nav>
+											</div>
 											<div>{this.state.category}</div>
 											<div>{this.state.address}</div>
 										</div>
@@ -127,10 +164,10 @@ class ViewCommunity extends Component{
 								</div>
 								<div className="right-part view w3-col l7">
 									<div className={"tab w3-row w3-margin-top"}>
-										<div className={"w3-half" + (this.state.showedMembers ? "" : " tab-selected")}
+										<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 											 onClick={this.selectTabDetails}>Details
 										</div>
-										<div className={"w3-half" + (this.state.showedMembers ? " tab-selected" : "")}
+										<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
 											 onClick={this.selectTabMembers}>Admin / Members
 										</div>
 									</div>

@@ -106,7 +106,7 @@
 }
 
 .community-info-body * {
-	font-size: 14px !important;
+	font-size: 16px !important;
 }
 
 .community-info-body .category {
@@ -126,6 +126,36 @@
 
 .left-part .basic-info {
 	padding: 10px;
+}
+
+.left-part .basic-info.view {
+	background-color: #fff;
+}
+
+.listing-navlink.view {
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-style: none none solid;
+	border-width: 1px;
+	border-color: #000 #000 #fff;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #808080;
+	font-weight: 400;
+	text-align: right;
+}
+
+.listing-navmenu.view {
+	position: absolute;
+	right: 0;
+	top: 28px;
+	width: 100%;
+	padding: 0;
+	order: 0;
+	background-color: #e6e6e6;
+	box-shadow: 0 1px 3px 0 rgba(80, 80, 80, 0.9);
+	line-height: 16px;
+	z-index: 1000;
 }
 
 .left-part .basic-info input, .left-part .basic-info select {
@@ -284,6 +314,8 @@
 	height: 18px;
 	line-height: 18px;
 	padding: 4px 0 0;
+	color: #333;
+	font-weight: 600;
 }
 
 .address-candidates .address-item {
@@ -397,21 +429,18 @@
 	background-color: #ffffff;
 }
 
-.view-paragraph .labels {
+.view-paragraph .labels,
+.view-paragraph.edit .labels{
 	padding: 0;
 	height: 38px;
 	border-bottom: solid 1px #ccc;
 }
 
 .view-paragraph.edit .filter-div {
-	border-top: solid 1px #ccc;
-}
-
-.view-paragraph.edit .filter-div:last-child {
 	border-bottom: solid 1px #ccc;
 }
 
-.view-paragraph.edit .labels {
+.view-paragraph.edit .input-div .labels {
 	border: none;
 }
 
@@ -423,7 +452,7 @@
 	padding: 8px 0;
 	min-height: 37px;
 	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	text-indent: 28px;
 	background-size: 22px;
 	background-position: left center;
@@ -485,7 +514,7 @@
 	height: 38px;
 	padding: 8px 12px;
 	margin-bottom: 10px;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.42857143;
 	color: #333333;
 	vertical-align: middle;
@@ -644,7 +673,7 @@
 	padding-left: 19px;
 	margin-right: 12px;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 16px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -677,7 +706,7 @@ body .filter-option.disabled:hover {
 
 .filter-checkmark {
 	position: absolute;
-	top: 3px;
+	top: 5px;
 	left: 0;
 	width: 14px;
 	height: 14px;
@@ -699,7 +728,7 @@ body .filter-option.disabled:hover {
 
 .filter-radiomark {
 	position: absolute;
-	top: 3px;
+	top: 5px;
 	left: 0;
 	height: 14px;
 	width: 14px;

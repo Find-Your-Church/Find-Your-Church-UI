@@ -93,13 +93,17 @@
 	margin-top: 4px;
 }
 
+.profile-container-wrapper {
+}
+
 .profile-container .div-block-55 {
 	margin-top: 20px;
 	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 	background-position: 50% 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
-	opacity: 0.9;
+	border-left: solid 1px #e6e6e6;
+	border-right: solid 1px #e6e6e6;
 }
 
 .profpic-container {
@@ -160,6 +164,9 @@
 	padding: 0 10px 10px;
 	margin-bottom: 20px;
 	background-color: #fff;
+	border-left: solid 1px #e6e6e6;
+	border-right: solid 1px #e6e6e6;
+	border-bottom: solid 1px #e6e6e6;
 	box-shadow: none;
 }
 
@@ -199,8 +206,8 @@
 	-ms-flex-order: -1;
 	order: -1;
 	color: #333;
-	font-size: 15px;
-	line-height: 15px;
+	font-size: 16px;
+	line-height: 16px;
 	font-weight: 700;
 }
 

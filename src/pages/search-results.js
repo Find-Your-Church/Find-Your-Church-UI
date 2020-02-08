@@ -214,7 +214,7 @@ class SearchResults extends Component{
 				<div id="search-results-header" className="w3-col s12">
 					<SearchBar buttonTitle="Update" init={true}/>
 					<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
-						Show Filters
+						{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 					</Link>
 					<span className={"sort-group"}>
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
@@ -239,8 +239,8 @@ class SearchResults extends Component{
 						<SelectedFilters filter={this.props.community.criteria.filter}
 										 handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
 					</div>
-					<div className={"filter-div"}>
-						<label className={"filter-label w3-large"} style={{marginLeft: "-10px"}}>Filters</label>
+					<div className={"filter-header-div"}>
+						<label className={"filter-label w3-large"}>Filters</label>
 						<Popup
 							trigger={<i style={{cursor: "pointer"}}
 										className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
@@ -248,59 +248,61 @@ class SearchResults extends Component{
 							<div>Tell visitors more about your community...</div>
 						</Popup>
 					</div>
-					<SearchFilterCheck filterTitle="Day(s)" filterName="days"
-									   send={this.getDaysInfo}
-									   value={this.props.community.criteria.filter.days}
-									   items={community_config.FILTERS.days}/>
-					<SearchFilterCheck filterTitle="Time(s)" filterName="times"
-									   send={this.getTimesInfo}
-									   value={this.props.community.criteria.filter.times}
-									   items={community_config.FILTERS.times}/>
-					<SearchFilterRadio filterTitle="Frequency" filterName="frequency"
-									   send={this.getFrequencyInfo}
-									   value={this.props.community.criteria.filter.frequency}
-									   items={community_config.FILTERS.frequency}/>
-					<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
-									   send={this.getAgesInfo}
-									   value={this.props.community.criteria.filter.ages}
-									   items={community_config.FILTERS.ages}/>
-					<SearchFilterRadio filterTitle="Gender" filterName="gender"
-									   send={this.getGenderInfo}
-									   value={this.props.community.criteria.filter.gender}
-									   items={community_config.FILTERS.gender}/>
-					<SearchFilterCheck filterTitle="Parking" filterName="parking"
-									   send={this.getParkingInfo}
-									   value={this.props.community.criteria.filter.parking}
-									   items={community_config.FILTERS.parking}/>
-					<SearchFilterCheck filterTitle="Other Ministries"
-									   filterName="ministries"
-									   send={this.getMinistriesInfo}
-									   value={this.props.community.criteria.filter.ministries}
-									   items={community_config.FILTERS.ministries}/>
-					<SearchFilterCheck filterTitle="Other Services"
-									   filterName="other_services"
-									   send={this.getOtherServicesInfo}
-									   value={this.props.community.criteria.filter.other_services}
-									   items={community_config.FILTERS.other_services}/>
-					<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
-									   send={this.getAmbianceInfo}
-									   value={this.props.community.criteria.filter.ambiance}
-									   items={community_config.FILTERS.ambiance}/>
-					<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
-									   send={this.getEventTypeInfo}
-									   value={this.props.community.criteria.filter.event_type}
-									   items={community_config.FILTERS.event_type}/>
-					<SearchFilterRadio filterTitle="Support Type"
-									   filterName="support_type"
-									   send={this.getSupportTypeInfo}
-									   value={this.props.community.criteria.filter.support_type}
-									   items={community_config.FILTERS.support_type}/>
+					<div className={"filter-group-container"}>
+						<SearchFilterCheck filterTitle="Day(s)" filterName="days"
+										   send={this.getDaysInfo}
+										   value={this.props.community.criteria.filter.days}
+										   items={community_config.FILTERS.days}/>
+						<SearchFilterCheck filterTitle="Time(s)" filterName="times"
+										   send={this.getTimesInfo}
+										   value={this.props.community.criteria.filter.times}
+										   items={community_config.FILTERS.times}/>
+						<SearchFilterRadio filterTitle="Frequency" filterName="frequency"
+										   send={this.getFrequencyInfo}
+										   value={this.props.community.criteria.filter.frequency}
+										   items={community_config.FILTERS.frequency}/>
+						<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
+										   send={this.getAgesInfo}
+										   value={this.props.community.criteria.filter.ages}
+										   items={community_config.FILTERS.ages}/>
+						<SearchFilterRadio filterTitle="Gender" filterName="gender"
+										   send={this.getGenderInfo}
+										   value={this.props.community.criteria.filter.gender}
+										   items={community_config.FILTERS.gender}/>
+						<SearchFilterCheck filterTitle="Parking" filterName="parking"
+										   send={this.getParkingInfo}
+										   value={this.props.community.criteria.filter.parking}
+										   items={community_config.FILTERS.parking}/>
+						<SearchFilterCheck filterTitle="Other Ministries"
+										   filterName="ministries"
+										   send={this.getMinistriesInfo}
+										   value={this.props.community.criteria.filter.ministries}
+										   items={community_config.FILTERS.ministries}/>
+						<SearchFilterCheck filterTitle="Other Services"
+										   filterName="other_services"
+										   send={this.getOtherServicesInfo}
+										   value={this.props.community.criteria.filter.other_services}
+										   items={community_config.FILTERS.other_services}/>
+						<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
+										   send={this.getAmbianceInfo}
+										   value={this.props.community.criteria.filter.ambiance}
+										   items={community_config.FILTERS.ambiance}/>
+						<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
+										   send={this.getEventTypeInfo}
+										   value={this.props.community.criteria.filter.event_type}
+										   items={community_config.FILTERS.event_type}/>
+						<SearchFilterRadio filterTitle="Support Type"
+										   filterName="support_type"
+										   send={this.getSupportTypeInfo}
+										   value={this.props.community.criteria.filter.support_type}
+										   items={community_config.FILTERS.support_type}/>
+					</div>
 				</div>
 				<div className={"communities-container communities-body communities search-results w3-row"}>
 					{results.length > 0 ? (
 						<div className="listing-grid dashboard">
-							<div className={"search-result-headline"}>
-								<div className={"w3-col l10"}>
+							<div className={"w3-row search-result-headline"}>
+								<div className={"search-result-container-header w3-col l10"}>
 									<span style={{fontWeight: "bold"}}>
 										{isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category}
 									</span>
@@ -308,7 +310,7 @@ class SearchResults extends Component{
 									<span
 										style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>
 								</div>
-								<div className={"w3-col l2"}>
+								<div className={"search-result-container-header-right w3-col l2"}>
 									Results ({results.length})
 								</div>
 							</div>

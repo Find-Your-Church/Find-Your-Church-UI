@@ -86,13 +86,13 @@ class ListMembers extends Component{
 															</div>
 														</div>
 														<div className="_10top-div icons">
-															<div className="icon-div listing">
-																<img src={"/img/social/icon-facebook.svg"} width="20" alt=""/>
+															<div>
+																<img src={"/img/icon/icon-email-fill.svg"}
+																	 alt="" className="personal-pic"/>
 															</div>
-															<div className="_10left-div">
-																<div className="icon-div">
-																	<img src={"/img/social/icon-facebook.svg"} width="20" alt=""/>
-																</div>
+															<div className={"w3-margin-left"}>
+																<img src={"/img/icon/icon-phone-fill.svg"}
+																	 alt="" className="personal-pic"/>
 															</div>
 														</div>
 													</div>
@@ -103,6 +103,7 @@ class ListMembers extends Component{
 								</div>
 							</div>
 						</div>
+						{/*
 						<div className="accordionrow-div">
 							<div className="accordingcontainer-div">
 								<div className="accordionheader-div">
@@ -364,6 +365,7 @@ class ListMembers extends Component{
 						</div>
 						<div className="_20top-div">
 						</div>
+						*/}
 					</div>
 				</div>
 			</div>
