@@ -9,6 +9,7 @@ body {
 	padding: 15px 20px;
 	line-height: 36px;
 	background-color: #e6e6e6;
+	border-bottom: 1px solid #ccc;
 }
 
 @media screen and (min-width: 990px) {
@@ -111,6 +112,7 @@ body {
 	padding: 10px;
 	background-color: #f3f3f3;
 	overflow-y: scroll;
+	box-shadow: -1px 2px 3px 0 grey;
 }
 
 .communities-container::-webkit-scrollbar {
@@ -277,7 +279,7 @@ body {
 
 	#search-results-header .filter-link {
 		float: left;
-		margin: 16px 0 0;
+		margin: 25px 0 0;
 	}
 
 	.search-form {
