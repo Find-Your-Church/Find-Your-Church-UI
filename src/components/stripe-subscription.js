@@ -190,106 +190,21 @@ class StripeSubscription extends Component{
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
 		return (
-			<div className="subscriptioncontainer-div w3-modal-content w3-card-4 w3-animate-zoom">
-				<div className="header1-div gradient shadow">
-					<h3 className="header3 center">
-						{this.props.second ?
-							"Add More Activations"
-							: "Activate Your Community"}
-					</h3>
-				</div>
-				<div className="container-div1">
-					<div className="columns-container">
-						<div>
-							<div className="div-block-147">
-								<div className="accordionheader-div nounderline">
-									<h3>Account Summary</h3>
-									<Popup
-										trigger={<i style={{cursor: "pointer"}}
-													className={"fas fa-question-circle tooltip-icon"}> </i>}
-										position={"left top"}>
-										<div>Tell visitors more about your community...</div>
-									</Popup>
-								</div>
-								<div className="subscribe-container">
-									<div className="invoice-row">
-										<div className="invoice-div">
-											<div className="filtersheader-div">
-												<h4 className="table-header">Activations</h4>
-												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																className={"fas fa-question-circle tooltip-icon"}> </i>}
-													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
-												</Popup>
-											</div>
-											<div>
-												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}
-													title={"Communities activated / Paid activations"}>
-													{formatNumber(this.props.community.my_communities.active.length)}
-													&nbsp;/&nbsp;
-													{this.props.community.subscription ?
-														formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
-														: (this.props.community.is_sending ?
-															<i className="fas fa-spinner fa-spin"> </i>
-															: "00")}
-												</h4>
-											</div>
-										</div>
-									</div>
-									<div className="invoice-row">
-										<div className="invoice-div">
-											<div className="filtersheader-div">
-												<h4 className="table-header">Price</h4>
-												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																className={"fas fa-question-circle tooltip-icon"}> </i>}
-													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
-												</Popup>
-											</div>
-											<div>
-												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-													{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount)
-														: (this.props.community.is_sending ?
-															<i className="fas fa-spinner fa-spin"> </i>
-															: "$0.00")}
-												</h4>
-											</div>
-										</div>
-									</div>
-									{this.props.second || this.props.community.is_sending ? null :
-										<div className="invoice-row">
-											<div className="invoice-div">
-												<div className="filtersheader-div">
-													<h4 className="table-header">Discount code</h4>
-												</div>
-												<input type="text"
-													   className="w3-half w3-border-bottom w3-hover-border-blue w3-center w3-normal"
-													   style={{
-														   border: "none",
-														   backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : (
-															   this.props.community.coupon_failed ? "url(/img/icon/icon-warning.svg)" : "none"
-														   )
-													   }}
-													   title={this.props.community.coupon_verified ? "Discount code verified" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
-													   placeholder="Enter discount code here"
-													   id="coupon" onChange={this.onChange}
-													   value={this.state.coupon} autoFocus/>
-												<button onClick={this.verifyCoupon}
-														className={"w3-button w3-padding-small apply-button"}>
-													Apply
-												</button>
-											</div>
-										</div>
-									}
-								</div>
-							</div>
-							<div className="div-20top">
+			<>
+				<div className="subscriptioncontainer-div w3-modal-content w3-card-4 w3-animate-zoom">
+					<div className="header1-div gradient shadow">
+						<h3 className="header3 center">
+							{this.props.second ?
+								"Add More Activations"
+								: "Activate Your Community"}
+						</h3>
+					</div>
+					<div className="container-div1">
+						<div className="columns-container">
+							<div>
 								<div className="div-block-147">
 									<div className="accordionheader-div nounderline">
-										<h3>Billing Summary</h3>
+										<h3>Account Summary</h3>
 										<Popup
 											trigger={<i style={{cursor: "pointer"}}
 														className={"fas fa-question-circle tooltip-icon"}> </i>}
@@ -300,16 +215,44 @@ class StripeSubscription extends Component{
 									<div className="subscribe-container">
 										<div className="invoice-row">
 											<div className="invoice-div">
+												<div className="filtersheader-div">
+													<h4 className="table-header">Activations</h4>
+													<Popup
+														trigger={<i style={{cursor: "pointer"}}
+																	className={"fas fa-question-circle tooltip-icon"}> </i>}
+														position={"right center"}>
+														<div>Tell visitors more about your community...</div>
+													</Popup>
+												</div>
 												<div>
-													<div className="filtersheader-div">
-														<h4
-															className="table-header">Subtotal</h4>
-													</div>
+													<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}
+														title={"Communities activated / Paid activations"}>
+														{formatNumber(this.props.community.my_communities.active.length)}
+														&nbsp;/&nbsp;
+														{this.props.community.subscription ?
+															formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
+															: (this.props.community.is_sending ?
+																<i className="fas fa-spinner fa-spin"> </i>
+																: "00")}
+													</h4>
+												</div>
+											</div>
+										</div>
+										<div className="invoice-row">
+											<div className="invoice-div">
+												<div className="filtersheader-div">
+													<h4 className="table-header">Price</h4>
+													<Popup
+														trigger={<i style={{cursor: "pointer"}}
+																	className={"fas fa-question-circle tooltip-icon"}> </i>}
+														position={"right center"}>
+														<div>Tell visitors more about your community...</div>
+													</Popup>
 												</div>
 												<div>
 													<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
 														{this.props.community.subscription ?
-															showAmount(this.props.community.subscription.quantity * this.props.community.subscription.plan.amount)
+															showAmount(this.props.community.subscription.plan.amount)
 															: (this.props.community.is_sending ?
 																<i className="fas fa-spinner fa-spin"> </i>
 																: "$0.00")}
@@ -317,236 +260,299 @@ class StripeSubscription extends Component{
 												</div>
 											</div>
 										</div>
-										{this.props.community.subscription !== "1" ? null :
+										{this.props.second || this.props.community.is_sending ? null :
 											<div className="invoice-row">
 												<div className="invoice-div">
 													<div className="filtersheader-div">
-														<h4 className="table-header">Taxes and Fees</h4>
+														<h4 className="table-header">Discount code</h4>
 													</div>
-													<div>
-														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{this.props.community.last_invoice ?
-																showAmount(this.props.community.last_invoice.tax)
-																: "$0.00"}
-														</h4>
-													</div>
+													<input type="text"
+														   className="w3-half w3-border-bottom w3-hover-border-blue w3-center w3-normal"
+														   style={{
+															   border: "none",
+															   backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : (
+																   this.props.community.coupon_failed ? "url(/img/icon/icon-warning.svg)" : "none"
+															   )
+														   }}
+														   title={this.props.community.coupon_verified ? "Discount code verified" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
+														   placeholder="Enter discount code here"
+														   id="coupon" onChange={this.onChange}
+														   value={this.state.coupon} autoFocus/>
+													<button onClick={this.verifyCoupon}
+															className={"w3-button w3-padding-small apply-button"}>
+														Apply
+													</button>
 												</div>
 											</div>
 										}
-										<div className="invoice-row">
-											<div className="invoice-div top">
-												<div className="filtersheader-div">
-													<h4 className="table-header">Due Today</h4>
-													{this.props.community.subscription ? (this.props.community.trialing ? (
-															<h4 className={"w3-small w3-text-green"}
-																style={{marginLeft: "-70px"}}>
-																<br/>
-																Free trial
-																through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
-															</h4>) : null)
-														: (
-															this.props.community.trial_period_days > 0 ? (
-																	<h4 className={"w3-small w3-text-green"}
-																		style={{marginLeft: "-70px"}}>
-																		<br/>
-																		Free trial
-																		through {upcoming_duedate}
-																	</h4>)
-																: null)}
-												</div>
-												<div>
-													<div className="div10-bottom right">
-														{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
-															<h4 className={"value strikethrough" + (this.props.community.subscription ? "" : " grey")}>
-																{this.props.community.subscription ?
-																	showAmount(this.props.community.my_communities.active.length *
-																		this.props.community.subscription.plan.amount)
-																	: (this.props.community.is_sending ?
-																		<i className="fas fa-spinner fa-spin"> </i>
-																		: "$0.00")}
-															</h4>
-														)}
-														<h4 className="value w3-text-green right">
-															{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
-																showAmount(this.props.community.my_communities.active.length *
-																	this.props.community.subscription.plan.amount)
-																: "$0.00")}
-														</h4>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div className="invoice-row">
-											<div className="invoice-div top">
-												<div className="filtersheader-div">
-													<h4 className="table-header">
-														Upcoming Billing
-													</h4>
-												</div>
-												<div>
-													<div className="div10-bottom">
-														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{due_amount}
-															&nbsp;on&nbsp;
-															{this.props.community.subscription ?
-																next_due_date.toLocaleDateString('en-US')
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: upcoming_duedate)}
-														</h4>
-													</div>
-													<div className="div10-bottom">
-														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{due_amount}
-															&nbsp;on&nbsp;
-															{this.props.community.subscription ?
-																next_month1.toLocaleDateString('en-US')
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: upcoming_duedate)}
-														</h4>
-													</div>
-													<div className="div10-bottom">
-														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-															{due_amount}
-															&nbsp;on&nbsp;
-															{this.props.community.subscription ?
-																next_month2.toLocaleDateString('en-US')
-																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: upcoming_duedate)}
-														</h4>
-													</div>
-												</div>
-											</div>
-										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div>
-							<div className="div-block-147 payiinfo">
-								<div className="accordionheader-div">
-									<h3>Payment Information</h3>
-									{this.props.community.subscription ? (
-										<div className={"edit-card"}>
-											<Link to="#" className={"table-link"}
-												  onClick={this.clickEditCard}>
-												{this.state.editing_card ? (
-													<i className={"fas fa-save"}> </i>
-												) : (
-													<i className={"fas fa-pen"}> </i>
-												)}
-											</Link>
-											{this.state.editing_card ? (
-												<Link to="#" className={"table-link w3-large"}
-													  onClick={this.cancelEditCard}>
-													<i className={"fas fa-times"}> </i>
-												</Link>
-											) : null}
+								<div className="div-20top">
+									<div className="div-block-147">
+										<div className="accordionheader-div nounderline">
+											<h3>Billing Summary</h3>
+											<Popup
+												trigger={<i style={{cursor: "pointer"}}
+															className={"fas fa-question-circle tooltip-icon"}> </i>}
+												position={"left top"}>
+												<div>Tell visitors more about your community...</div>
+											</Popup>
 										</div>
-									) : null}
-								</div>
-								<div className="form-block w-form">
-									<div className="subscribe-container inputs">
-										<div className="form-row">
-											<div className={"pay-info-row"}>
-												{!this.props.second || this.state.editing_card ? (
-													<div className="w3-row">
-														<input type="text" className="w3-half"
-															   title="First name" placeholder="First name"
-															   id="fname_on_card" onChange={this.onChange}
-															   value={this.state.fname_on_card} autoFocus/>
-														<input type="text" className="w3-half"
-															   title="Last name" placeholder="Last name"
-															   id="lname_on_card" onChange={this.onChange}
-															   value={this.state.lname_on_card}/>
-													</div>
-												) : (
-													<span className={"w3-center grey"}>
-														{customer ? customer.sources.data[0].name : "(Card holder name)"}
-													</span>
-												)}
-											</div>
-										</div>
-										{!this.props.second || this.state.editing_card ? (
-											<div className="form-row">
-												<CardElement className="CardInfoStyle" style={cardStyle}
-															 disabled={!this.state.editing_card && this.props.second}/>
-											</div>
-										) : (
-											this.props.community.is_setting_card ? (
-												<div className={"w3-container w3-center w3-margin-top"}>
-													<i className="fas fa-spinner fa-spin"> </i>
-												</div>
-											) : (
-												customer ? (
-													<div className={"card-detail"}>
-														<div className={"card-detail-item w3-row w3-text-grey"}>
-															<div className={"w3-col l1"}>
-																<img alt={"Payment card"}
-																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
-															</div>
-															<div className={"w3-col l4"} title={"Card number"}>
-																**** **** ****&nbsp;
-																{customer.sources.data[0].last4}
-															</div>
-															<div className={"w3-col l3"} title={"Expiration"}>
-																{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
-															</div>
-															<div className={"w3-col l2"}
-																 title={customer.sources.data[0].cvc_check}>
-																***
-															</div>
-															<div className={"w3-col l2"}
-																 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
-																{customer.sources.data[0].address_zip}
-															</div>
+										<div className="subscribe-container">
+											<div className="invoice-row">
+												<div className="invoice-div">
+													<div>
+														<div className="filtersheader-div">
+															<h4
+																className="table-header">Subtotal</h4>
 														</div>
 													</div>
-												) : null
-											)
-										)}
-										<div className="w-form-done">
-											<div>Thank you! Your submission has been received!</div>
+													<div>
+														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+															{this.props.community.subscription ?
+																showAmount(this.props.community.subscription.quantity * this.props.community.subscription.plan.amount)
+																: (this.props.community.is_sending ?
+																	<i className="fas fa-spinner fa-spin"> </i>
+																	: "$0.00")}
+														</h4>
+													</div>
+												</div>
+											</div>
+											{this.props.community.subscription !== "1" ? null :
+												<div className="invoice-row">
+													<div className="invoice-div">
+														<div className="filtersheader-div">
+															<h4 className="table-header">Taxes and Fees</h4>
+														</div>
+														<div>
+															<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+																{this.props.community.last_invoice ?
+																	showAmount(this.props.community.last_invoice.tax)
+																	: "$0.00"}
+															</h4>
+														</div>
+													</div>
+												</div>
+											}
+											<div className="invoice-row">
+												<div className="invoice-div top">
+													<div className="filtersheader-div">
+														<h4 className="table-header">Due Today</h4>
+														{this.props.community.subscription ? (this.props.community.trialing ? (
+																<h4 className={"w3-small w3-text-green"}
+																	style={{marginLeft: "-70px"}}>
+																	<br/>
+																	Free trial
+																	through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
+																</h4>) : null)
+															: (
+																this.props.community.trial_period_days > 0 ? (
+																		<h4 className={"w3-small w3-text-green"}
+																			style={{marginLeft: "-70px"}}>
+																			<br/>
+																			Free trial
+																			through {upcoming_duedate}
+																		</h4>)
+																	: null)}
+													</div>
+													<div>
+														<div className="div10-bottom right">
+															{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
+																<h4 className={"value strikethrough" + (this.props.community.subscription ? "" : " grey")}>
+																	{this.props.community.subscription ?
+																		showAmount(this.props.community.my_communities.active.length *
+																			this.props.community.subscription.plan.amount)
+																		: (this.props.community.is_sending ?
+																			<i className="fas fa-spinner fa-spin"> </i>
+																			: "$0.00")}
+																</h4>
+															)}
+															<h4 className="value w3-text-green right">
+																{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
+																	showAmount(this.props.community.my_communities.active.length *
+																		this.props.community.subscription.plan.amount)
+																	: "$0.00")}
+															</h4>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div className="invoice-row">
+												<div className="invoice-div top">
+													<div className="filtersheader-div">
+														<h4 className="table-header">
+															Upcoming Billing
+														</h4>
+													</div>
+													<div>
+														<div className="div10-bottom">
+															<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+																{due_amount}
+																&nbsp;on&nbsp;
+																{this.props.community.subscription ?
+																	next_due_date.toLocaleDateString('en-US')
+																	: (this.props.community.is_sending ?
+																		<i className="fas fa-spinner fa-spin"> </i>
+																		: upcoming_duedate)}
+															</h4>
+														</div>
+														<div className="div10-bottom">
+															<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+																{due_amount}
+																&nbsp;on&nbsp;
+																{this.props.community.subscription ?
+																	next_month1.toLocaleDateString('en-US')
+																	: (this.props.community.is_sending ?
+																		<i className="fas fa-spinner fa-spin"> </i>
+																		: upcoming_duedate)}
+															</h4>
+														</div>
+														<div className="div10-bottom">
+															<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+																{due_amount}
+																&nbsp;on&nbsp;
+																{this.props.community.subscription ?
+																	next_month2.toLocaleDateString('en-US')
+																	: (this.props.community.is_sending ?
+																		<i className="fas fa-spinner fa-spin"> </i>
+																		: upcoming_duedate)}
+															</h4>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div className="w-form-fail">
-											<div>Oops! Something went wrong while submitting the form.</div>
-										</div>
-									</div>
-									{this.props.community.activating || this.props.community.active_status !== 0 ? (
-										this.props.community.active_status === 1 ? (
-											<div className={"w3-center w3-xlarge w3-text-blue"}>Success!</div>
-										) : (this.props.community.active_status === 2 ? (
-											<div className={"w3-center w3-xlarge w3-text-red"}>Failed!</div>
-										) : null)
-									) : (
-										<div className="submit-row">
-											<button
-												onClick={this.state.editing_card ? null : this.handleActivateCommunity}
-												className={"form1-submit round w-button" + (this.state.editing_card ? " disabled" : "")}>
-												{this.props.community.subscription ?
-													"Approve Activation"
-													: "Activate Community"}
-											</button>
-										</div>
-									)}
-									<div className="div-20top" onClick={this.hideActivationDialog}
-										 style={{cursor: 'pointer'}}>
-										<p className="fineprint subscription w3-text-blue">Close</p>
 									</div>
 								</div>
 							</div>
-							<div className="div-20top">
-								<p className="fineprint subscription">
-									Payments are processed by <em className="italic-text">Stripe</em> and secured by a
-									256-bit SSL&nbsp;encryption.
-								</p>
+							<div>
+								<div className="div-block-147 payiinfo">
+									<div className="accordionheader-div">
+										<h3>Payment Information</h3>
+										{this.props.community.subscription ? (
+											<div className={"edit-card"}>
+												<Link to="#" className={"table-link"}
+													  onClick={this.clickEditCard}>
+													{this.state.editing_card ? (
+														<i className={"fas fa-save"}> </i>
+													) : (
+														<i className={"fas fa-pen"}> </i>
+													)}
+												</Link>
+												{this.state.editing_card ? (
+													<Link to="#" className={"table-link w3-large"}
+														  onClick={this.cancelEditCard}>
+														<i className={"fas fa-times"}> </i>
+													</Link>
+												) : null}
+											</div>
+										) : null}
+									</div>
+									<div className="form-block w-form">
+										<div className="subscribe-container inputs">
+											<div className="form-row">
+												<div className={"pay-info-row"}>
+													{!this.props.second || this.state.editing_card ? (
+														<div className="w3-row">
+															<input type="text" className="w3-half"
+																   title="First name" placeholder="First name"
+																   id="fname_on_card" onChange={this.onChange}
+																   value={this.state.fname_on_card} autoFocus/>
+															<input type="text" className="w3-half"
+																   title="Last name" placeholder="Last name"
+																   id="lname_on_card" onChange={this.onChange}
+																   value={this.state.lname_on_card}/>
+														</div>
+													) : (
+														<span className={"w3-center grey"}>
+														{customer ? customer.sources.data[0].name : "(Card holder name)"}
+													</span>
+													)}
+												</div>
+											</div>
+											{!this.props.second || this.state.editing_card ? (
+												<div className="form-row">
+													<CardElement className="CardInfoStyle" style={cardStyle}
+																 disabled={!this.state.editing_card && this.props.second}/>
+												</div>
+											) : (
+												this.props.community.is_setting_card ? (
+													<div className={"w3-container w3-center w3-margin-top"}>
+														<i className="fas fa-spinner fa-spin"> </i>
+													</div>
+												) : (
+													customer ? (
+														<div className={"card-detail"}>
+															<div className={"card-detail-item w3-row w3-text-grey"}>
+																<div className={"w3-col l1"}>
+																	<img alt={"Payment card"}
+																		 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+																</div>
+																<div className={"w3-col l4"} title={"Card number"}>
+																	**** **** ****&nbsp;
+																	{customer.sources.data[0].last4}
+																</div>
+																<div className={"w3-col l3"} title={"Expiration"}>
+																	{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
+																</div>
+																<div className={"w3-col l2"}
+																	 title={customer.sources.data[0].cvc_check}>
+																	***
+																</div>
+																<div className={"w3-col l2"}
+																	 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
+																	{customer.sources.data[0].address_zip}
+																</div>
+															</div>
+														</div>
+													) : null
+												)
+											)}
+											<div className="w-form-done">
+												<div>Thank you! Your submission has been received!</div>
+											</div>
+											<div className="w-form-fail">
+												<div>Oops! Something went wrong while submitting the form.</div>
+											</div>
+										</div>
+										{this.props.community.activating || this.props.community.active_status !== 0 ? (
+											this.props.community.active_status === 1 ? (
+												<div className={"w3-center w3-xlarge w3-text-blue"}>Success!</div>
+											) : (this.props.community.active_status === 2 ? (
+												<div className={"w3-center w3-xlarge w3-text-red"}>Failed!</div>
+											) : null)
+										) : (
+											<div className="submit-row">
+												<button
+													onClick={this.state.editing_card ? null : this.handleActivateCommunity}
+													className={"form1-submit round w-button" + (this.state.editing_card ? " disabled" : "")}>
+													{this.props.community.subscription ?
+														"Approve Activation"
+														: "Activate Community"}
+												</button>
+											</div>
+										)}
+										<div className="div-20top" onClick={this.hideActivationDialog}
+											 style={{cursor: 'pointer'}}>
+											<p className="fineprint subscription w3-text-blue">Close</p>
+										</div>
+									</div>
+								</div>
+								<div className="div-20top">
+									<p className="fineprint subscription">
+										Payments are processed by <em className="italic-text">Stripe</em> and secured by
+										a
+										256-bit SSL&nbsp;encryption.
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+				<div style={{minHeight: "86px"}}>
+
+				</div>
+			</>
 		);
 	}
 }

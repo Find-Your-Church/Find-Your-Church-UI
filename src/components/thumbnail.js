@@ -112,13 +112,15 @@ class Thumbnail extends Component{
 				) : (
 
 					<div className="listing-container1" onMouseLeave={this.hideMenu}>
-						<div
-							className={"listingprofilepic-div" + (this.props.value.pictures.length > 0 ? "" : " w3-opacity-max")}
-							style={{
-								backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
-									: "/img/community-default.jpg"}')`
-							}}>
-						</div>
+						<Link to="#" onClick={this.goView}>
+							<div
+								className={"listingprofilepic-div"}
+								style={{
+									backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
+										: "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
+								}}>
+							</div>
+						</Link>
 						<div className="listinginfo-div">
 							<div className="listingrow">
 								<div data-collapse="all" data-animation="default" data-duration="400"
@@ -192,5 +194,6 @@ export default connect(
 		clearActiveStatus,
 		clearCouponVerified,
 		clearCouponFailed,
-		getBillingStatus}
+		getBillingStatus
+	}
 )(Thumbnail);

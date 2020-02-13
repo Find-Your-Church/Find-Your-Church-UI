@@ -68,31 +68,35 @@ class ProfileContainer extends Component{
 							</nav>
 						</div>
 						<div className="personal-info">
-							<div className={"members"}>
-								<img src={"/img/icon/icon-email-fill.svg"}
-									 alt="" className="personal-pic"/>
-							</div>
-							<div className={"members"}>
-								<img src={"/img/icon/icon-phone-fill.svg"}
-									 alt="" className="personal-pic"/>
-							</div>
+							{isEmpty(this.props.auth.user.admin_email) ? null :
+								<div className={"members"} title={this.props.auth.user.admin_email}>
+									<img src={"/img/icon/icon-email-fill.svg"}
+										 alt="" className="personal-pic"/>
+								</div>
+							}
+							{isEmpty(this.props.auth.user.phone) ? null :
+								<div className={"members"} title={this.props.auth.user.phone}>
+									<img src={"/img/icon/icon-phone-fill.svg"}
+										 alt="" className="personal-pic"/>
+								</div>
+							}
 						</div>
 						{/*
-					<div className="personal-info">
-						{isEmpty(this.props.auth.user.admin_email) ? null :
-							<div className={"personal-info-item"}
-								 style={{backgroundImage: "url(/img/icon/icon-email.svg)"}}>
-								{this.props.auth.user.admin_email}
-							</div>
-						}
-						{isEmpty(this.props.auth.user.phone) ? null :
-							<div className={"personal-info-item"}
-								 style={{backgroundImage: "url(/img/icon/icon-phone.svg)"}}>
-								{this.props.auth.user.phone}
-							</div>
-						}
-					</div>
-					*/}
+						<div className="personal-info">
+							{isEmpty(this.props.auth.user.admin_email) ? null :
+								<div className={"personal-info-item"}
+									 style={{backgroundImage: "url(/img/icon/icon-email.svg)"}}>
+									{this.props.auth.user.admin_email}
+								</div>
+							}
+							{isEmpty(this.props.auth.user.phone) ? null :
+								<div className={"personal-info-item"}
+									 style={{backgroundImage: "url(/img/icon/icon-phone.svg)"}}>
+									{this.props.auth.user.phone}
+								</div>
+							}
+						</div>
+						*/}
 					</div>
 				</div>
 				<Link to="/create-new-community" className="newcommunity-button">

@@ -484,8 +484,9 @@
 
 .steps-body .form-input:invalid {
 	/*text-decoration: line-through;*/
-	color: #aa0022;
-	background-color: #ff8888;
+	color: #f00;
+	border-bottom-color: #f00!important;
+	background-color: #ffe5e5;
 }
 
 .steps-body .form-input.communityname {
@@ -540,7 +541,7 @@
 }
 
 .steps-body .w-input:focus, .steps-body .w-select:focus {
-	border-color: #3898EC;
+	border-color: #8900fe;
 	outline: 0;
 }
 
@@ -596,7 +597,7 @@
 	min-width: 100%;
 	max-width: 100%;
 	margin: 0;
-	font-size: 14px;
+	font-size: 16px;
 	border: none;
 	color: #333;
 }

@@ -44,7 +44,7 @@ class ListMembers extends Component{
 								</div>
 								<div className="accordioncontent-div">
 									<div className="_10top-div">
-										<div className="listing-grid profile">
+										<div className="listing-grid profile admin">
 											<div className="profile-container">
 												<div className="div-block-55">
 													<div className="profpic-container">
@@ -65,35 +65,45 @@ class ListMembers extends Component{
 																	to="#" className="communityname">
 																	{this.props.auth.user.fname} {this.props.auth.user.lname}
 																</Link>
-																<div className="listingnav-button w-nav-button">
-																	<Link to="#" className={"w3-right"}
-																		  onClick={this.toggleMenu}>
-																		<i className={"fas fa-ellipsis-h"}
-																		   style={{color: "#a1a1a1"}}> </i>
-																	</Link>
-																</div>
-																<nav role="navigation"
-																	 className="listing-navmenu w-nav-menu"
-																	 onMouseLeave={this.hideMenu}
-																	 style={{display: this.state.is_show_menu ? "block" : "none"}}>
-																	<div>
-																		<Link to="/dashboard/account"
-																			  className="listing-navlink single w-nav-link">Edit</Link>
-																	</div>
-																</nav>
+																{this.props.editable ? (
+																	<>
+																		<div className="listingnav-button w-nav-button">
+																			<Link to="#" className={"w3-right"}
+																				  onClick={this.toggleMenu}>
+																				<i className={"fas fa-ellipsis-h"}
+																				   style={{color: "#a1a1a1"}}> </i>
+																			</Link>
+																		</div>
+																		<nav role="navigation"
+																			 className="listing-navmenu w-nav-menu"
+																			 onMouseLeave={this.hideMenu}
+																			 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+																			<div>
+																				<Link to="/dashboard/account"
+																					  className="listing-navlink single w-nav-link">Edit</Link>
+																			</div>
+																		</nav>
+																	</>
+																) : null}
 																<div className="w-nav-overlay" data-wf-ignore="">
 																</div>
 															</div>
 														</div>
 														<div className="_10top-div icons">
-															<div>
-																<img src={"/img/icon/icon-email-fill.svg"}
-																	 alt="" className="personal-pic"/>
-															</div>
-															<div className={"w3-margin-left"}>
-																<img src={"/img/icon/icon-phone-fill.svg"}
-																	 alt="" className="personal-pic"/>
-															</div>
+															{isEmpty(this.props.auth.user.admin_email) ? null :
+																<div className={"admin-info-members"}
+																	 title={this.props.auth.user.admin_email}>
+																	<img src={"/img/icon/icon-email-fill.svg"}
+																		 alt="" className="personal-pic"/>
+																</div>
+															}
+															{isEmpty(this.props.auth.user.phone) ? null :
+																<div className={"admin-info-members"}
+																	 title={this.props.auth.user.phone}>
+																	<img src={"/img/icon/icon-phone-fill.svg"}
+																		 alt="" className="personal-pic"/>
+																</div>
+															}
 														</div>
 													</div>
 												</div>

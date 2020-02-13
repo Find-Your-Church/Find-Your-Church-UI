@@ -118,8 +118,12 @@ class PublicViewCommunity extends Component{
 													alt="Community" title="Community pictures"
 													src={this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
 											)}
-										<div className="basic-info">
-											<div style={{fontWeight: "bold"}}>{this.state.community_name}</div>
+										<div className="basic-info view">
+											<div className="w-nav" style={{fontWeight: "bold", position: "relative"}}>
+												<h3 className={"community-name"}>
+													{this.state.community_name}
+												</h3>
+											</div>
 											<div>{this.state.category}</div>
 											<div>{this.state.address}</div>
 										</div>
@@ -127,16 +131,16 @@ class PublicViewCommunity extends Component{
 								</div>
 								<div className="right-part view w3-col l7">
 									<div className={"tab w3-row w3-margin-top"}>
-										<div className={"w3-half" + (this.state.showedMembers ? "" : " tab-selected")}
+										<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 											 onClick={this.selectTabDetails}>Details
 										</div>
-										<div className={"w3-half" + (this.state.showedMembers ? " tab-selected" : "")}
+										<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
 											 onClick={this.selectTabMembers}>Admin / Members
 										</div>
 									</div>
 									{this.state.showedMembers ?
 										(
-											<ListMembers/>
+											<ListMembers editable={false}/>
 										)
 										: (
 											<>

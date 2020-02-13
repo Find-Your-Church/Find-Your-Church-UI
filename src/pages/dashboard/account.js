@@ -59,6 +59,8 @@ class Account extends Component{
 			editing_card: false,
 			errors: {},
 
+			is_invalid_phone: false,
+
 			user_admin_email: user.admin_email ? user.admin_email : user.email,
 			user_email: user.email,
 			user_pic: user.pic,
@@ -102,6 +104,8 @@ class Account extends Component{
 	}
 
 	onChange = e => {
+		if(e.target.id === 'user_phone')
+			this.setState({is_invalid_phone: false});
 		this.setState({[e.target.id]: e.target.value});
 	};
 
@@ -228,6 +232,10 @@ class Account extends Component{
 	changePhone(){
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingPhone){
+			if(this.state.is_invalid_phone){
+				return;
+			}
+
 			const userData = {
 				id: this.props.auth.user.id,
 				phone: this.state.user_phone,
@@ -243,6 +251,11 @@ class Account extends Component{
 		// anyway switch display method.
 		this.setState({editingPhone: !this.state.editingPhone});
 	}
+
+	onBlurPhone = (e) => {
+		if(!e.target.validity.valid)
+			this.setState({is_invalid_phone: true});
+	};
 
 	onVerifyEmail = () => {
 		this.props.verifyEmail({
@@ -424,7 +437,9 @@ class Account extends Component{
 													<div className="w3-row">
 														<input type="tel" className="w3-col"
 															   title="Phone" placeholder="Phone"
+															   pattern={config.US_PHONE_PATTERN}
 															   id="user_phone" onChange={this.onChange}
+															   onBlur={this.onBlurPhone}
 															   value={this.state.user_phone} autoFocus/>
 													</div>
 													: user.phone
@@ -432,6 +447,11 @@ class Account extends Component{
 												{this.state.errors.msg_phone !== undefined ?
 													<div className="error-item">
 														{this.state.errors.msg_phone}
+													</div>
+													: null}
+												{this.state.is_invalid_phone ?
+													<div className="error-item">
+														Invalid phone number
 													</div>
 													: null}
 											</h4>

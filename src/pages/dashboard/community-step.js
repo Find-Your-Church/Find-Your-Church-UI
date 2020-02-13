@@ -16,6 +16,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import Popup from "reactjs-popup";
 import isEmpty from "../../utils/isEmpty";
+import app_config from "../../conf/config";
 
 class CommunityStep extends Component{
 	constructor(props){
@@ -426,7 +427,7 @@ class CommunityStep extends Component{
 								</div>
 								{this.state.showedMembers ?
 									(
-										<ListMembers/>
+										<ListMembers editable={true}/>
 									)
 									: (
 										<form
@@ -479,12 +480,14 @@ class CommunityStep extends Component{
 														   placeholder="Email"
 														   value={this.state.email}
 														   id="email"/>
-													<input type="tel"
+													<input type="text"
 														   className="form-input w-input social-input w3-half"
 														   maxLength="256"
 														   style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}
 														   onChange={this.onChange}
-														   placeholder="Phone"
+														   pattern={app_config.US_PHONE_PATTERN}
+														   placeholder={"Phone"}
+														   title={"(123)456-7890 or 123-456-7890"}
 														   value={this.state.phone}
 														   id="phone"/>
 												</div>

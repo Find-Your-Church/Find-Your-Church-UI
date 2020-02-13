@@ -125,9 +125,9 @@ class ViewCommunity extends Component{
 											)
 											: (
 												<img
-													className={"community-picture" + (this.state.pictures.length > 0 ? "" : " w3-opacity-max")}
-													alt="Community" title="Community pictures"
-													src={this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
+													className={"community-picture"}
+													alt="Community" title={this.state.community_name}
+													src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
 											)}
 										<div className="basic-info view">
 											<div className="w-nav" style={{fontWeight: "bold", position: "relative"}}>
@@ -173,7 +173,7 @@ class ViewCommunity extends Component{
 									</div>
 									{this.state.showedMembers ?
 										(
-											<ListMembers/>
+											<ListMembers editable={true}/>
 										)
 										: (
 											<>

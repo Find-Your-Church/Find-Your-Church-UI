@@ -25,8 +25,22 @@ class FilterItemCheck extends Component{
 	}
 
 	onCheck = e => {
-		this.checks[e.target.value] = e.target.checked ? '1' : '0';
-		this.props.send(this.checks.join(""));
+		if(this.props.filterName === 'ages'){
+			if(parseInt(e.target.value) === 0 && e.target.checked){
+				const new_value = '1' + "0".repeat(this.props.items.length - 1);
+				this.checks = new_value.split("");
+				this.props.send(new_value);
+			}
+			else if(parseInt(e.target.value) !== 0 && e.target.checked){
+				this.checks[0] = '0';
+				this.checks[e.target.value] = e.target.checked ? '1' : '0';
+				this.props.send(this.checks.join(""));
+			}
+		}
+		else{
+			this.checks[e.target.value] = e.target.checked ? '1' : '0';
+			this.props.send(this.checks.join(""));
+		}
 	};
 
 	render(){
@@ -43,7 +57,7 @@ class FilterItemCheck extends Component{
 									<label className="filter-option" key={this.props.filterName + index}>{item}
 										<input type="checkbox" id={this.props.filterName + "[" + index + "]"}
 											   value={index} onClick={this.onCheck}
-											   defaultChecked={this.checks[index] === '1'}
+											   checked={this.checks[index] === '1'}
 										/>
 										<span className="filter-checkmark" key={this.props.filterName + "check" + index}> </span>
 									</label>

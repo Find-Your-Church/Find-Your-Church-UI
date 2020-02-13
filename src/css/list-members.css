@@ -40,8 +40,8 @@
 
 .members-container .accordioncontent-div {
 	overflow: visible;
-	padding-top: 0px;
-	padding-bottom: 0px;
+	padding-top: 0;
+	padding-bottom: 0;
 	border: 1px none #000;
 	font-family: 'Source Sans Pro', sans-serif;
 	line-height: 16px;
@@ -86,7 +86,7 @@
 }
 
 .members-container .listing-grid.profile {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	-ms-grid-columns: 1fr 1fr 1fr;
@@ -100,7 +100,7 @@
 	border-style: solid;
 	border-width: 1px;
 	border-color: #e6e6e6;
-	border-radius: 0px;
+	border-radius: 0;
 	background-color: #fff;
 }
 
@@ -120,7 +120,7 @@
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	padding: 30px 0px 0px;
+	padding: 30px 0 0;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
@@ -130,7 +130,7 @@
 	-ms-flex-align: center;
 	align-items: center;
 	border: 1px none #000;
-	border-radius: 0px;
+	border-radius: 0;
 	background-color: transparent;
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(65%, transparent), color-stop(0, #fff), color-stop(102%, #fff));
 	background-image: linear-gradient(180deg, transparent 65%, #fff 0, #fff 102%);
@@ -156,7 +156,7 @@
 }
 
 .members-container .div-block-56 {
-	padding: 0px;
+	padding: 0;
 	border: 1px none #000;
 	background-color: transparent;
 }
@@ -167,14 +167,14 @@
 	border-style: none;
 	border-width: 1px;
 	border-color: #e6e6e6;
-	border-radius: 0px;
+	border-radius: 0;
 	background-color: transparent;
 	box-shadow: none;
 }
 
 .members-container .listingrow {
 	display: block;
-	padding-bottom: 0px;
+	padding-bottom: 0;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
@@ -219,8 +219,8 @@
 	font-size: 24px;
 	display: none;
 	cursor: pointer;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	tap-highlight-color: rgba(0, 0, 0, 0);
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -229,7 +229,7 @@
 
 .members-container .listingnav-button {
 	display: block;
-	padding: 0px;
+	padding: 0;
 	-webkit-box-align: start;
 	-webkit-align-items: flex-start;
 	-ms-flex-align: start;
@@ -264,7 +264,7 @@
 	z-index: 0;
 	display: block;
 	margin-top: 5px;
-	padding: 10px 10px 0px;
+	padding: 10px 10px 0;
 	-webkit-box-ordinal-group: 1;
 	-webkit-order: 0;
 	-ms-flex-order: 0;
@@ -298,7 +298,7 @@
 .members-container .listing-navlink {
 	z-index: 1000;
 	display: block;
-	padding: 0px 0px 10px;
+	padding: 0 0 10px;
 	border-style: none none solid;
 	border-width: 1px;
 	border-color: #000 #000 #fff;
@@ -344,15 +344,15 @@
 	max-width: 20px;
 	min-height: 20px;
 	min-width: 20px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-	padding-bottom: 0px;
-	padding-left: 0px;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+	padding-bottom: 0;
+	padding-left: 0;
 	border: 1px none #000;
 	border-radius: 50%;
 	background-image: url(/img/icon-facebook.svg);
-	background-position: 0px 0px;
+	background-position: 0 0;
 	background-size: contain;
 	background-repeat: no-repeat;
 }
@@ -363,14 +363,23 @@
 
 .members-container .listing-grid.profile {
 	width: 100%;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	-ms-grid-columns: 1fr 1fr 1fr;
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media screen and (max-width: 550px){
+.admin-info-members:not(:first-child) {
+	margin-left: 10px;
+}
+
+.members-container .listing-grid.profile.admin {
+	-ms-grid-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 550px) {
 	.members-container .listing-grid.profile {
 		-ms-grid-columns: 1fr 1fr;
 		grid-template-columns: 1fr 1fr;
