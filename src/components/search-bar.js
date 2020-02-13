@@ -99,6 +99,9 @@ class SearchBar extends Component{
 			<div className="search-form-container w-form">
 				<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
 					<select id="search_category" onChange={this.onChange} defaultValue={this.props.community.criteria.category}
+							style={{
+								backgroundImage: "url('/img/icon-down3.svg')",
+							}}
 							className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
 						<option value="">Category...</option>
 						{
@@ -110,6 +113,9 @@ class SearchBar extends Component{
 						}
 					</select>
 					<select id="search_radius" onChange={this.onChange} defaultValue={this.props.community.criteria.radius}
+							style={{
+								backgroundImage: "url('/img/icon-down3.svg')",
+							}}
 							className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select">
 						<option value="">Radius...</option>
 						{

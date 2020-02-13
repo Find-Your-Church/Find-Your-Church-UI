@@ -36,11 +36,9 @@ class SiteFooter extends Component{
 						Privacy Policy
 					</Link>
 				</div>
-				<div className={"footer-link"}>
-					<Link to="/" className="footer-logo">
-						&copy; FindYourChurch.org {new Date().getFullYear()}.
-					</Link>
-					<span className={"footer-logo"}>
+				<div className={"footer-logo"}>
+					&copy; <Link to="/">FindYourChurch.org</Link> {new Date().getFullYear()}.&nbsp;
+					<span>
 						 All rights reserved.
 					</span>
 				</div>

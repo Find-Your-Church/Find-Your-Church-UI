@@ -43,11 +43,17 @@ class SiteHeader extends Component{
 						<img className="site-logo" src={"/img/logo.svg"}
 							 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
 					</Link>
-					<Link to="#" onClick={this.toggleAdminMenu}
-						  className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
-						<i className="fas fa-caret-down"> </i>
-					</Link>
+					{this.props.auth.isAuthenticated ? null : (
+						<Link to="#" onClick={this.toggleAdminMenu}
+							  className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
+							<i className="fas fa-bars"> </i>
+						</Link>
+					)}
 					{this.props.auth.isAuthenticated ? (<>
+							<Link to="#" onClick={this.toggleAdminMenu}
+								  className={"header-3lines-menu w3-bar-item w3-right"}>
+								<i className="fas fa-caret-down"> </i>
+							</Link>
 							<Link to="#" onClick={this.toggleAdminMenu}
 								  className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>
@@ -80,8 +86,7 @@ class SiteHeader extends Component{
 						</Link>
 						: null}
 				</header>
-				<div className="admin-menu w3-animate-top"
-					 onClick={this.toggleAdminMenu} onMouseLeave={this.hideAdminMenu}
+				<div className="admin-menu w3-animate-top" onClick={this.toggleAdminMenu} onMouseLeave={this.hideAdminMenu}
 					 style={{
 						 display: this.state.showedAdminMenu ? "block" : "none",
 					 }}>

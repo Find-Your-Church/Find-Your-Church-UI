@@ -73,11 +73,11 @@ a {
 .header-3lines-menu i {
 	padding-top: 4px;
 	font-size: 18px;
-	color: #e6e6e6;
+	color: #8900fe;
 }
 
 .header-3lines-menu i:hover {
-	color: #8900fe;
+	color: #e6e6e6;
 }
 
 .sign-up-link {
@@ -156,8 +156,6 @@ a {
 	}
 
 	.site-logo {
-		margin-top: 12px;
-		max-width: 180px;
 	}
 }
 
@@ -247,7 +245,7 @@ a {
 	box-shadow: 0 1px 5px 0 #505050;
 }
 
-.footer-link {
+.footer-link, .footer-logo {
 	display: block;
 	color: #e6e6e6;
 	font-size: 14px;
@@ -274,6 +272,8 @@ a {
 	}
 
 	.footer-logo {
+		padding: 2px 16px !important;
+		line-height: 22px;
 		text-align: center;
 		display: block !important;
 	}
@@ -297,9 +297,10 @@ a {
 
 	.footer-logo {
 		clear: both;
-		font-size: 16px;
+		font-size: 18px;
+		padding: 8px 16px !important;
+		line-height: 22px;
 		display: block !important;
-		color: #999;
 	}
 }
 

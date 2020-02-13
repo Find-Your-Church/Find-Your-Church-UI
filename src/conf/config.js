@@ -2,8 +2,9 @@
 const app_config = {
 //	FYC_API_URL: process.env.FYC_API_URL,
 	FYC_API_URL: "https://api-dev.findyourchurch.org",
-//	FYC_API_URL: "http://192.168.1.65:5000",
+//	FYC_API_URL: "http://192.168.1.5:5000",
 
+	US_PHONE_PATTERN: "[\(]?[0-9]{2,3}[\)\-]?[ ]?[0-9]{3}[\-]?[0-9]{4}",
 	MAX_PIC_SIZE: 3072, // in kBs, = 3MB
 
 	/**

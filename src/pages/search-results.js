@@ -218,7 +218,11 @@ class SearchResults extends Component{
 					</Link>
 					<span className={"sort-group"}>
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
-						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}>
+						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
+								style={{
+									backgroundImage: "url('/img/icon-down3-purple.svg')",
+								}}
+						>
 							<option value={sorters.SORT_NEWEST}>Newest</option>
 							<option value={sorters.SORT_NAME_ASC}>A - Z</option>
 							<option value={sorters.SORT_NAME_DESC}>Z - A</option>
