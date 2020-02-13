@@ -116,9 +116,9 @@ class PublicViewCommunity extends Component{
 											)
 											: (
 												<img
-													className={"community-picture" + (this.state.pictures.length > 0 ? "" : " w3-opacity-max")}
+													className={"community-picture"}
 													alt="Community" title="Community pictures"
-													src={this.state.picture ? this.state.picture : "/img/community-default.jpg"}/>
+													src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
 											)}
 										<div className="basic-info view">
 											<div className="w-nav" style={{fontWeight: "bold", position: "relative"}}>
