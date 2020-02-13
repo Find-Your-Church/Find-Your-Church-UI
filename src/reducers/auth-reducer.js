@@ -3,13 +3,14 @@ import {
 	SET_CURRENT_USER,
 	UPDATE_USER_INFO,
 	USER_LOADING,
-	SET_SENDING_STATUS, WELCOME_MESSAGE,
+	SET_SENDING_STATUS, WELCOME_MESSAGE, UPDATE_OWNER_INFO,
 } from "../actions/action-types";
 
 const isEmpty = require("is-empty");
 const initialState = {
 	isAuthenticated: false,
 	user: {},
+	owner: {},
 	loading: false,
 	is_sending: false, // if is requesting the password reset?
 	show_welcome: false,
@@ -27,6 +28,14 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				user: {
+					...state.user,
+					...action.payload,
+				}
+			};
+		case UPDATE_OWNER_INFO:
+			return {
+				...state,
+				owner: {
 					...state.user,
 					...action.payload,
 				}

@@ -7,6 +7,7 @@ import "../css/communities.css"
 import "../css/community-steps.css"
 import SelectedFilters from "./selected-filters";
 import isEmpty from "../utils/isEmpty";
+import {getOwnerInfo} from "../actions/auth-actions";
 
 class PublicThumbnail extends Component{
 	constructor(props){
@@ -25,6 +26,9 @@ class PublicThumbnail extends Component{
 	goView(e){
 		// redirect to community-step with this.props.value (community object with full info).
 		// console.log(this.props.value);
+		this.props.getOwnerInfo({
+			user_id: this.props.value.owner_id,
+		});
 
 		this.setState({is_viewing: true});
 	}
@@ -133,6 +137,7 @@ PublicThumbnail.propTypes = {
 	pickCommunity: PropTypes.func.isRequired,
 	shareCommunity: PropTypes.func.isRequired,
 	reportCommunity: PropTypes.func.isRequired,
+	getOwnerInfo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -142,5 +147,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{pickCommunity, shareCommunity, reportCommunity}
+	{pickCommunity, shareCommunity, reportCommunity, getOwnerInfo}
 )(PublicThumbnail);

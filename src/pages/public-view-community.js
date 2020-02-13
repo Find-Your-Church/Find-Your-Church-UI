@@ -6,6 +6,10 @@ import FilterItemRadio from "../components/filter-item-radio";
 import {Link} from "react-router-dom";
 import community_config from "../conf/community-conf";
 import ListMembers from "../components/list-members";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {pickCommunity, reportCommunity, shareCommunity} from "../actions/community-actions";
+import {getOwnerInfo} from "../actions/auth-actions";
 
 class PublicViewCommunity extends Component{
 	constructor(props){
@@ -140,7 +144,7 @@ class PublicViewCommunity extends Component{
 									</div>
 									{this.state.showedMembers ?
 										(
-											<ListMembers editable={false}/>
+											<ListMembers editable={false} user={this.props.auth.owner}/>
 										)
 										: (
 											<>
@@ -260,4 +264,15 @@ class PublicViewCommunity extends Component{
 	}
 }
 
-export default PublicViewCommunity;
+PublicViewCommunity.propTypes = {
+	auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+	auth: state.auth,
+});
+
+export default connect(
+	mapStateToProps,
+	{}
+)(PublicViewCommunity);

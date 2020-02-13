@@ -3,7 +3,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import {
 	MESSAGE_FROM_API, RESET_MESSAGES,
-	SET_CURRENT_USER, SET_SENDING_STATUS,
+	SET_CURRENT_USER, SET_SENDING_STATUS, UPDATE_OWNER_INFO,
 	UPDATE_USER_INFO, WELCOME_MESSAGE,
 } from "./action-types";
 import app_config from "../conf/config";
@@ -119,6 +119,23 @@ export const getUserInfo = (user_id) => dispatch => {
 		})
 		.catch(err => {
 
+		});
+};
+
+export const getOwnerInfo = (user_id) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/userinfo", user_id)
+		.then(res => {
+			return dispatch({
+				type: UPDATE_OWNER_INFO,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+			return dispatch({
+				type: UPDATE_OWNER_INFO,
+				payload: {},
+			});
 		});
 };
 

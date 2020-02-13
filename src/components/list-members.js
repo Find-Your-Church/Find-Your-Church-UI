@@ -27,6 +27,8 @@ class ListMembers extends Component{
 	}
 
 	render(){
+		const user = this.props.user ? this.props.user : this.props.auth.user;
+
 		return (
 			<div className={"w3-large w3-text-grey w3-animate-opacity"}>
 				<div className="members-container">
@@ -49,9 +51,9 @@ class ListMembers extends Component{
 												<div className="div-block-55">
 													<div className="profpic-container">
 														<div className="profpic-div">
-															<img src={isEmpty(this.props.auth.user.pic) ?
+															<img src={isEmpty(user.pic) ?
 																"/img/default-user.png"
-																: this.props.auth.user.pic}
+																: user.pic}
 																 alt="" className="image-4"/>
 														</div>
 													</div>
@@ -63,7 +65,7 @@ class ListMembers extends Component{
 																 data-duration="400" className="listing-nav w-nav">
 																<Link
 																	to="#" className="communityname">
-																	{this.props.auth.user.fname} {this.props.auth.user.lname}
+																	{user.fname} {user.lname}
 																</Link>
 																{this.props.editable ? (
 																	<>
@@ -90,16 +92,16 @@ class ListMembers extends Component{
 															</div>
 														</div>
 														<div className="_10top-div icons">
-															{isEmpty(this.props.auth.user.admin_email) ? null :
+															{isEmpty(user.admin_email) ? null :
 																<div className={"admin-info-members"}
-																	 title={this.props.auth.user.admin_email}>
+																	 title={user.admin_email}>
 																	<img src={"/img/icon/icon-email-fill.svg"}
 																		 alt="" className="personal-pic"/>
 																</div>
 															}
-															{isEmpty(this.props.auth.user.phone) ? null :
+															{isEmpty(user.phone) ? null :
 																<div className={"admin-info-members"}
-																	 title={this.props.auth.user.phone}>
+																	 title={user.phone}>
 																	<img src={"/img/icon/icon-phone-fill.svg"}
 																		 alt="" className="personal-pic"/>
 																</div>
@@ -132,9 +134,9 @@ class ListMembers extends Component{
 												<div className="div-block-55">
 													<div className="profpic-container">
 														<div className="profpic-div">
-															<img src={isEmpty(this.props.auth.user.pic) ?
+															<img src={isEmpty(user.pic) ?
 																"/img/default-user.png"
-																: this.props.auth.user.pic}
+																: user.pic}
 																 alt="" className="image-4"/>
 														</div>
 													</div>
@@ -180,9 +182,9 @@ class ListMembers extends Component{
 												<div className="div-block-55">
 													<div className="profpic-container">
 														<div className="profpic-div">
-															<img src={isEmpty(this.props.auth.user.pic) ?
+															<img src={isEmpty(user.pic) ?
 																"/img/default-user.png"
-																: this.props.auth.user.pic}
+																: user.pic}
 																 alt="" className="image-4"/>
 														</div>
 													</div>
@@ -228,9 +230,9 @@ class ListMembers extends Component{
 												<div className="div-block-55">
 													<div className="profpic-container">
 														<div className="profpic-div">
-															<img src={isEmpty(this.props.auth.user.pic) ?
+															<img src={isEmpty(user.pic) ?
 																"/img/default-user.png"
-																: this.props.auth.user.pic}
+																: user.pic}
 																 alt="" className="image-4"/>
 														</div>
 													</div>
@@ -276,9 +278,9 @@ class ListMembers extends Component{
 												<div className="div-block-55">
 													<div className="profpic-container">
 														<div className="profpic-div">
-															<img src={isEmpty(this.props.auth.user.pic) ?
+															<img src={isEmpty(user.pic) ?
 																"/img/default-user.png"
-																: this.props.auth.user.pic}
+																: user.pic}
 																 alt="" className="image-4"/>
 														</div>
 													</div>
@@ -324,9 +326,9 @@ class ListMembers extends Component{
 												<div className="div-block-55">
 													<div className="profpic-container">
 														<div className="profpic-div">
-															<img src={isEmpty(this.props.auth.user.pic) ?
+															<img src={isEmpty(user.pic) ?
 																"/img/default-user.png"
-																: this.props.auth.user.pic}
+																: user.pic}
 																 alt="" className="image-4"/>
 														</div>
 													</div>
