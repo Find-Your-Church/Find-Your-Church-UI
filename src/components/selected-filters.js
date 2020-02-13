@@ -28,6 +28,7 @@ class SelectedFilters extends Component{
 								</div>
 							);
 						}
+						return null;
 					});
 				})}
 			</div>

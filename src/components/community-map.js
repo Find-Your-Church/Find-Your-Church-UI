@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 // ref to https://medium.com/kirsten-werner/clickable-markers-in-a-google-maps-react-component-3e9a522e1fff
-import {withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps"
+import {withGoogleMap, GoogleMap, Marker} from "react-google-maps"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {setPicking} from "../actions/community-actions";

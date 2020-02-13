@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";

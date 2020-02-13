@@ -27,7 +27,6 @@ import {
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
-import num2String from "../utils/num-2-string";
 
 const initialState = {
 	// community
