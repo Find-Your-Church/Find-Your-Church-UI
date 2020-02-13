@@ -427,7 +427,7 @@ class StripeSubscription extends Component{
 							</div>
 							<div>
 								<div className="div-block-147 payiinfo">
-									<div className="accordionheader-div">
+									<div className="accordionheader-div nounderline">
 										<h3>Payment Information</h3>
 										{this.props.community.subscription ? (
 											<div className={"edit-card"}>
@@ -482,24 +482,24 @@ class StripeSubscription extends Component{
 													</div>
 												) : (
 													customer ? (
-														<div className={"card-detail"}>
+														<div className={"form-row"}>
 															<div className={"card-detail-item w3-row w3-text-grey"}>
-																<div className={"w3-col l1"}>
+																<div className={"w3-col s1"}>
 																	<img alt={"Payment card"}
 																		 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
 																</div>
-																<div className={"w3-col l4"} title={"Card number"}>
+																<div className={"w3-col s5"} title={"Card number"}>
 																	**** **** ****&nbsp;
 																	{customer.sources.data[0].last4}
 																</div>
-																<div className={"w3-col l3"} title={"Expiration"}>
+																<div className={"w3-col s3"} title={"Expiration"}>
 																	{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
 																</div>
-																<div className={"w3-col l2"}
+																<div className={"w3-col s1"}
 																	 title={customer.sources.data[0].cvc_check}>
 																	***
 																</div>
-																<div className={"w3-col l2"}
+																<div className={"w3-col s2"}
 																	 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
 																	{customer.sources.data[0].address_zip}
 																</div>

@@ -705,76 +705,89 @@ class Account extends Component{
 									<div className={"sub-content payment"}>
 										<div className="flexdiv-leftright card underline w3-row">
 											<h5 className="container-header w3-col s10">Payment Method</h5>
-											{!this.state.editing_card ? (
-												<Link to="#" className={"table-link w3-large w3-col s1"}>
-													<i className={"fas fa-times"} style={{color: "transparent", cursor: "normal"}}> </i>
-												</Link>
-											) : null}
-											<Link to="#" className={"table-link w3-col s1"} onClick={this.clickEditCard}>
-												{this.state.editing_card ? (
-													<i className={"fas fa-save"}> </i>
-												) : (
-													<i className={"fas fa-pen"}> </i>
-												)}
-											</Link>
-											{this.state.editing_card ? (
-												<Link to="#" className={"table-link w3-large w3-col s1"}
-													  onClick={this.cancelEditCard}>
-													<i className={"fas fa-times"}> </i>
-												</Link>
+											{this.props.community.subscription ? (
+												<>
+													{!this.state.editing_card ? (
+														<Link to="#" className={"table-link w3-large w3-col s1"}>
+															<i className={"fas fa-times"}
+															   style={{color: "transparent", cursor: "normal"}}> </i>
+														</Link>
+													) : null}
+													<Link to="#" className={"table-link w3-col s1"}
+														  onClick={this.clickEditCard}>
+														{this.state.editing_card ? (
+															<i className={"fas fa-save"}> </i>
+														) : (
+															<i className={"fas fa-pen"}> </i>
+														)}
+													</Link>
+													{this.state.editing_card ? (
+														<Link to="#" className={"table-link w3-large w3-col s1"}
+															  onClick={this.cancelEditCard}>
+															<i className={"fas fa-times"}> </i>
+														</Link>
+													) : null}
+												</>
 											) : null}
 										</div>
-										<div className="form-row">
-											<div className={"pay-info-row"}>
-												{this.state.editing_card ? (
-													<div className="w3-row">
-														<input type="text" className="w3-half"
-															   title="First name" placeholder="First name"
-															   id="fname_on_card" onChange={this.onChange}
-															   value={this.state.fname_on_card} autoFocus/>
-														<input type="text" className="w3-half"
-															   title="Last name" placeholder="Last name"
-															   id="lname_on_card" onChange={this.onChange}
-															   value={this.state.lname_on_card}/>
-													</div>
-												) : (
-													<span className={"w3-center grey"}>
+										{this.props.community.subscription ? (
+											<>
+												<div className="form-row">
+													<div className={"pay-info-row"}>
+														{this.state.editing_card ? (
+															<div className="w3-row">
+																<input type="text" className="w3-half"
+																	   title="First name" placeholder="First name"
+																	   id="fname_on_card" onChange={this.onChange}
+																	   value={this.state.fname_on_card} autoFocus/>
+																<input type="text" className="w3-half"
+																	   title="Last name" placeholder="Last name"
+																	   id="lname_on_card" onChange={this.onChange}
+																	   value={this.state.lname_on_card}/>
+															</div>
+														) : (
+															<span className={"w3-center grey"}>
 														{customer ? customer.sources.data[0].name : "(Card holder name)"}
 													</span>
-												)}
-											</div>
-										</div>
-										{this.state.editing_card ? (
-											<div className="form-row">
-												<CardElement className="CardInfoStyle" style={cardStyle}
-															 disabled={!this.state.editing_card}/>
-											</div>
-										) : (
-											<div className="form-row">
-												{customer ? (
-													<div className={"card-detail-item w3-row w3-text-grey"}
-														 style={{width: "100%"}}>
-														<div className={"w3-col l1"}>
-															<img alt={"Credit card"}
-																 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
-														</div>
-														<div className={"w3-col l4"} title={"Card number"}>
-															**** **** ****&nbsp;
-															{customer.sources.data[0].last4}
-														</div>
-														<div className={"w3-col l3"} title={"Expiration"}>
-															{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
-														</div>
-														<div className={"w3-col l2"}
-															 title={customer.sources.data[0].cvc_check}>
-															***
-														</div>
-														<div className={"w3-col l2"}
-															 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
-															{customer.sources.data[0].address_zip}
-														</div>
+														)}
 													</div>
-												) : null}
+												</div>
+												{this.state.editing_card ? (
+													<div className="form-row">
+														<CardElement className="CardInfoStyle" style={cardStyle}
+																	 disabled={!this.state.editing_card}/>
+													</div>
+												) : (
+													<div className="form-row">
+														{customer ? (
+															<div className={"card-detail-item w3-row w3-text-grey"}
+																 style={{width: "100%"}}>
+																<div className={"w3-col s1"}>
+																	<img alt={"Credit card"}
+																		 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+																</div>
+																<div className={"w3-col s5"} title={"Card number"}>
+																	**** **** ****&nbsp;
+																	{customer.sources.data[0].last4}
+																</div>
+																<div className={"w3-col s3"} title={"Expiration"}>
+																	{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
+																</div>
+																<div className={"w3-col s1"}
+																	 title={customer.sources.data[0].cvc_check}>
+																	***
+																</div>
+																<div className={"w3-col s2"}
+																	 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
+																	{customer.sources.data[0].address_zip}
+																</div>
+															</div>
+														) : null}
+													</div>
+												)}
+											</>
+										) : (
+											<div className={"w3-center"}>
 											</div>
 										)}
 										<div className="w-form-done">
