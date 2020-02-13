@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
 import "../css/communities.css"
 import "../css/community-steps.css"
 import SelectedFilters from "./selected-filters";
 import isEmpty from "../utils/isEmpty";
 import {getOwnerInfo} from "../actions/auth-actions";
+import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
 
 class PublicThumbnail extends Component{
 	constructor(props){

@@ -1,23 +1,20 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import redirectURL from "../utils/redirectURL";
 
 class SiteFooter extends Component{
-	redirectURL = url => {
-		window.open(url, "_blank", "width=800, height=600, location=no, toolbar=no");
-	};
-
 	render(){
 		return (
 			<footer className="footer-div">
 				<div className={"footer-link"}>
 					<Link to="#"
-						  onClick={() => this.redirectURL("mailto:support@findyourchurch.org")}>
+						  onClick={() => redirectURL("mailto:support@findyourchurch.org")}>
 						Support
 					</Link>
 				</div>
 				<div className={"footer-link"}>
 					<Link to="#"
-						  onClick={() => this.redirectURL("mailto:hello@findyourchurch.org")}>
+						  onClick={() => redirectURL("mailto:hello@findyourchurch.org")}>
 						Get in Touch
 					</Link>
 				</div>

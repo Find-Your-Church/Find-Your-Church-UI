@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Popup from "reactjs-popup";
 import isEmpty from "../utils/isEmpty";
+import redirectURL from "../utils/redirectURL";
 
 class ProfileContainer extends Component{
 	constructor(props){
@@ -69,16 +70,22 @@ class ProfileContainer extends Component{
 						</div>
 						<div className="personal-info">
 							{isEmpty(this.props.auth.user.admin_email) ? null :
-								<div className={"members"} title={this.props.auth.user.admin_email}>
-									<img src={"/img/icon/icon-email-fill.svg"}
-										 alt="" className="personal-pic"/>
-								</div>
+								<Link to="#" className={"members"}
+									  onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
+									<div title={this.props.auth.user.admin_email}>
+										<img src={"/img/icon/icon-email-fill.svg"}
+											 alt="" className="personal-pic"/>
+									</div>
+								</Link>
 							}
 							{isEmpty(this.props.auth.user.phone) ? null :
-								<div className={"members"} title={this.props.auth.user.phone}>
-									<img src={"/img/icon/icon-phone-fill.svg"}
-										 alt="" className="personal-pic"/>
-								</div>
+								<Link to="#" className={"members"}
+									  onClick={() => redirectURL("tel:" + this.props.auth.user.phone)}>
+									<div className={"members"} title={this.props.auth.user.phone}>
+										<img src={"/img/icon/icon-phone-fill.svg"}
+											 alt="" className="personal-pic"/>
+									</div>
+								</Link>
 							}
 						</div>
 						{/*

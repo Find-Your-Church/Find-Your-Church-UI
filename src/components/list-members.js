@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import isEmpty from "../utils/isEmpty";
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
+import redirectURL from "../utils/redirectURL";
 
 class ListMembers extends Component{
 	constructor(props){
@@ -93,18 +94,24 @@ class ListMembers extends Component{
 														</div>
 														<div className="_10top-div icons">
 															{isEmpty(user.admin_email) ? null :
-																<div className={"admin-info-members"}
-																	 title={user.admin_email}>
-																	<img src={"/img/icon/icon-email-fill.svg"}
-																		 alt="" className="personal-pic"/>
-																</div>
+																<Link to={"#"} className={"admin-info-members"}
+																	  onClick={() => redirectURL("mailto:" + user.admin_email)}>
+																	<div
+																		title={user.admin_email}>
+																		<img src={"/img/icon/icon-email-fill.svg"}
+																			 alt="" className="personal-pic"/>
+																	</div>
+																</Link>
 															}
 															{isEmpty(user.phone) ? null :
-																<div className={"admin-info-members"}
-																	 title={user.phone}>
-																	<img src={"/img/icon/icon-phone-fill.svg"}
-																		 alt="" className="personal-pic"/>
-																</div>
+																<Link to={"#"} className={"admin-info-members"}
+																	  onClick={() => redirectURL("tel:" + user.phone)}>
+																	<div className={"admin-info-members"}
+																		 title={user.phone}>
+																		<img src={"/img/icon/icon-phone-fill.svg"}
+																			 alt="" className="personal-pic"/>
+																	</div>
+																</Link>
 															}
 														</div>
 													</div>

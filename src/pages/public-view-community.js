@@ -8,8 +8,6 @@ import community_config from "../conf/community-conf";
 import ListMembers from "../components/list-members";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {pickCommunity, reportCommunity, shareCommunity} from "../actions/community-actions";
-import {getOwnerInfo} from "../actions/auth-actions";
 
 class PublicViewCommunity extends Component{
 	constructor(props){
