@@ -165,7 +165,7 @@
 	}
 }
 
-@media screen and (max-width: 390px){
+@media screen and (max-width: 600px){
 	.communities-body .listing-grid.dashboard {
 		grid-column-gap: 6px;
 		grid-row-gap: 6px;

@@ -45,6 +45,10 @@ a {
 	.header-3lines-menu.oos {
 		display: inline-block;
 	}
+
+	.admin-menu .header-navlink {
+		font-size: 18px !important;
+	}
 }
 
 .site-header .w3-bar-item {
@@ -159,7 +163,7 @@ a {
 	}
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.admin-menu {
 		width: 100vw;
 	}
@@ -258,7 +262,7 @@ a {
 	color: #fff;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.footer-div {
 		padding-top: 10px;
 		min-height: 64px;
@@ -321,7 +325,7 @@ a {
 	z-index: 1000;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.search-address-candidates {
 		left: 0;
 		top: 100px;

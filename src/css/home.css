@@ -106,7 +106,8 @@ button:focus {
 	margin: 0;
 	padding-top: 0;
 	padding-left: 5px;
-	border: 1px none #000;
+	border-style: none;
+	border-color: transparent;
 	background-color: #fff;
 	color: #333;
 	font-size: 16px;
@@ -201,7 +202,11 @@ button:focus {
 	background-repeat: no-repeat;
 }
 
-@media screen and (max-width: 990px) {
+.criteria-group {
+	background-color: #fff;
+}
+
+@media screen and (max-width: 991px) {
 	#search-results-header .search-form-container {
 		border: none;
 	}
@@ -249,10 +254,12 @@ button:focus {
 
 	.search-form-dropdown {
 		display: inline-block;
-		width: 49.999%;
-		margin-top: 0;
+		width: 50%;
+		margin: 0;
+	}
+
+	.criteria-group {
 		margin-bottom: 20px;
-		margin-left: 0;
 	}
 
 	.search-form-input {
@@ -281,6 +288,11 @@ button:focus {
 		font-weight: 400;
 		max-height: 50px;
 		min-height: 50px;
+	}
+
+	.criteria-group,
+	.search-form-input,
+	.search-form-button {
 		box-shadow: 1px 1px 2px 0 rgba(80, 80, 80, 0.9);
 	}
 }

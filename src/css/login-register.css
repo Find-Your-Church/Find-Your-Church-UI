@@ -2,7 +2,7 @@
 	--footer-height: 46px;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.sign-body {
 		--footer-height: 64px;
 	}
@@ -188,12 +188,13 @@
 	margin: 0;
 }
 
-.form-row {
+.sign-body .form-row {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
 	padding-bottom: 0;
+	border: none;
 }
 
 .input-div.gradient {
@@ -202,11 +203,10 @@
 	-webkit-flex: 1;
 	-ms-flex: 1;
 	flex: 1;
-	border-bottom: 1px none #ccc;
 	background-image: none;
 }
 
-@media (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.input-div {
 		-webkit-box-orient: vertical;
 		-webkit-box-direction: normal;
@@ -217,13 +217,52 @@
 	}
 }
 
-@media (max-width: 500px) {
+@media screen and (max-width: 600px) {
+	.sign-body {
+		height: auto;
+		max-height: none;
+	}
+
+	.sign-body .div-block-63 {
+		display: block;
+		height: auto;
+	}
+
+	.sign-body .header3.center {
+		font-size: 20px;
+		line-height: 22px;
+	}
+
+	.sign-body .form-input.center {
+		line-height: 18px;
+		font-size: 18px !important;
+	}
+
+	.sign-body .form-submit {
+		font-size: 18px !important;
+		height: 40px;
+	}
+
+	.sign-body .w-form-fail {
+		font-size: 18px !important;
+	}
+
+	.sign-body .fineprint,
+	.sign-body .or-text,
+	.sign-body .link-5,
+	.sign-body .sdk-div button span,
+	.sign-body .kep-login-facebook.metro {
+		font-size: 18px;
+	}
+}
+
+@media screen and (max-width: 500px) {
 	.sign-body .div-block-38 {
 		padding: 8px;
 	}
 }
 
-@media (max-width: 400px) {
+@media screen and (max-width: 400px) {
 	.sign-body .div-block-38 {
 		padding: 4px;
 	}
@@ -258,17 +297,18 @@
 	text-align: left;
 }
 
-.form-input.center {
+.sign-body .form-input.center {
 	width: 100%;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-style: none none solid;
-	border-color: #000 #000 #ccc;
 	background-color: #fff;
 	font-family: 'Source Sans Pro', sans-serif;
 	color: #333;
 	font-size: 16px;
 	text-align: center;
+	border-style: none;
+	border-bottom-width: 1px !important;
+	border-bottom-style: solid !important;
 }
 
 .form-input.center.w3-half {
@@ -473,7 +513,7 @@ input.w-button {
 	grid-template-rows: auto;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.sdk-div {
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
@@ -566,8 +606,8 @@ input.w-button {
 	box-shadow: 1px 1px 3px 0 grey;
 }
 
-.div-block-46 {
-	padding-top: 30px;
+.sign-body .div-block-46 {
+	padding: 30px;
 }
 
 .heading-11 {

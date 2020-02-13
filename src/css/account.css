@@ -2,9 +2,25 @@
 	--footer-height: 46px;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.account-body {
 		--footer-height: 64px;
+	}
+
+	.div-20top._1080 {
+		padding: 20px 10px !important;
+	}
+
+	.table-item input,
+	.table-item.right,
+	.table-item.right div,
+	.pay-info-row span,
+	.pay-info-row input {
+		font-size: 20px !important;
+	}
+
+	.account-body .container-inline {
+		padding: 10px 0 !important;
 	}
 }
 
@@ -253,7 +269,7 @@
 	margin-bottom: 0;
 	color: #333;
 	font-family: "Source Sans Pro", sans-serif;
-	font-size: 15px;
+	font-size: 16px;
 	line-height: 24px;
 	font-weight: 400;
 	text-align: left;
@@ -266,6 +282,7 @@
 .table-item input {
 	margin: -2px 0 -3px 0;
 	border: none;
+	font-size: 16px;
 	border-bottom: 1px solid #666;
 	background-color: transparent;
 	height: 20px;

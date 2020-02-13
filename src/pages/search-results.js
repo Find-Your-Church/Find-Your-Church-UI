@@ -342,22 +342,22 @@ class SearchResults extends Component{
 								<div>
 									Try expanding your search radius.
 								</div>
-							</div>
-							{this.props.auth.isAuthenticated ? null : (
-								<>
-									<div style={{paddingLeft: "40px"}}>
-										Or join our mission and create the first one!
-									</div>
-									<div className="div-block-158">
-										<div className="div-navlink noresults">
-											<Link to={"/register-popup"}
-												  className="link-headernav button-gradient w-button">
-												Create an Account
-											</Link>
+								{this.props.auth.isAuthenticated ? null : (
+									<>
+										<div>
+											Or join our mission and create the first one!
 										</div>
-									</div>
-								</>
-							)}
+										<div className="div-block-158">
+											<div className="div-navlink noresults">
+												<Link to={"/register-popup"}
+													  className="link-headernav button-gradient w-button">
+													Create an Account
+												</Link>
+											</div>
+										</div>
+									</>
+								)}
+							</div>
 						</>
 					)}
 				</div>

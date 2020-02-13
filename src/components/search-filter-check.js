@@ -74,8 +74,8 @@ class SearchFilterCheck extends Component{
 			)
 			: (
 				<div className={"view-filter w3-row"}>
-					<div className={"filter-title w3-col l4"}>{this.props.filterTitle}</div>
-					<div className={"filter-value w3-col l8"}>
+					<div className={"filter-title w3-col s4"}>{this.props.filterTitle}</div>
+					<div className={"filter-value w3-col s8"}>
 						{this.props.items.map((item, index) => {
 							return this.checks[index] === '1' ? (
 									<span className={"filter-value-item"} key={this.props.filterName + "check" + index}>

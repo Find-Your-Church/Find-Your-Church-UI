@@ -2,7 +2,7 @@
 	--footer-height: 46px;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 991px) {
 	.admin-body {
 		--footer-height: 64px;
 	}
@@ -45,7 +45,24 @@
 	background-color: #cccccc;
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 600px) {
+	.admin-left,
+	.admin-right {
+		padding: 20px 5px !important;
+	}
+
+	.profile-container,
+	.dashboard-container {
+		padding: 20px 10px !important;
+	}
+
+	.profile-header,
+	.communities-body .container-header {
+		font-size: 20px !important;
+	}
+}
+
+@media screen and (max-width: 991px) {
 	.admin-left {
 		width: 100%;
 	}
@@ -73,7 +90,7 @@
 	border: solid 1px #ccc;
 }
 
-.profile-header-wrapper{
+.profile-header-wrapper {
 	padding-bottom: 6px;
 	border-bottom: solid 1px #e6e6e6;
 }
@@ -88,7 +105,7 @@
 	font-weight: 600;
 }
 
-.profile-header-wrapper i{
+.profile-header-wrapper i {
 	float: right;
 	margin-top: 4px;
 }
@@ -222,7 +239,7 @@
 	border-radius: 100%;
 }
 
-.personal-info .members .personal-pic{
+.personal-info .members .personal-pic {
 	border-radius: 100%;
 	cursor: pointer;
 }

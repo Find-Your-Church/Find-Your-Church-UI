@@ -124,7 +124,7 @@ class RegisterPopup extends Component{
 														   value={this.state.fname}
 														   id="fname"
 														   placeholder="First name"
-														   style={{borderBottom: this.props.errors.msg_reg_fname ? "solid 1px #f00" : "none"}}
+														   style={{borderBottomColor: this.props.errors.msg_reg_fname ? "#f00" : "#e6e6e6"}}
 														   required=""/>
 													<input type="text"
 														   className="form-input center  w-input-sign w3-half"
@@ -133,7 +133,7 @@ class RegisterPopup extends Component{
 														   value={this.state.lname}
 														   id="lname"
 														   placeholder="Last name"
-														   style={{borderBottom: this.props.errors.msg_reg_lname ? "solid 1px #f00" : "none"}}
+														   style={{borderBottomColor: this.props.errors.msg_reg_lname ? "#f00" : "#e6e6e6"}}
 														   required=""/>
 												</div>
 											</div>
@@ -146,7 +146,7 @@ class RegisterPopup extends Component{
 														   value={this.state.email}
 														   id="email"
 														   placeholder="Email"
-														   style={{borderBottom: this.props.errors.msg_reg_email ? "solid 1px #f00" : "none"}}
+														   style={{borderBottomColor: this.props.errors.msg_reg_email ? "#f00" : "#e6e6e6"}}
 														   required=""/>
 												</div>
 											</div>
@@ -159,7 +159,7 @@ class RegisterPopup extends Component{
 														   value={this.state.password}
 														   id="password"
 														   placeholder="Password"
-														   style={{borderBottom: this.props.errors.msg_reg_password ? "solid 1px #f00" : "none"}}
+														   style={{borderBottomColor: this.props.errors.msg_reg_password ? "#f00" : "#e6e6e6"}}
 														   required=""/>
 													<input type="password"
 														   className="form-input center  w-input-sign w3-half"
@@ -168,7 +168,7 @@ class RegisterPopup extends Component{
 														   value={this.state.password2}
 														   id="password2"
 														   placeholder="Confirm password"
-														   style={{borderBottom: this.props.errors.msg_reg_password2 ? "solid 1px #f00" : "none"}}
+														   style={{borderBottomColor: this.props.errors.msg_reg_password2 ? "#f00" : "#e6e6e6"}}
 														   required=""/>
 												</div>
 											</div>

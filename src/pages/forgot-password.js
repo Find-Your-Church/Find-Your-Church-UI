@@ -59,6 +59,7 @@ class ForgotPassword extends Component{
 														   value={this.state.email}
 														   id="email"
 														   placeholder="Email"
+														   style={{borderBottomColor: "#e6e6e6"}}
 														   required=""/>
 												</div>
 											</div>
