@@ -295,7 +295,7 @@ class Account extends Component{
 			next_due_date = init_date;
 			let i = 1;
 			while(next_due_date.getTime() < to_date.getTime()){
-				next_due_date = getNextMonth(init_date, i).date;
+				next_due_date = getNextMonth(init_date, i);
 				i++;
 			}
 			next_month1 = getNextMonth(init_date, i);

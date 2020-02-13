@@ -172,8 +172,9 @@ class StripeSubscription extends Component{
 			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
 			next_due_date = init_date;
 			i = 1;
-			while(next_due_date.getTime() < to_date.getTime()){
-				next_due_date = getNextMonth(init_date, i).date;
+			const to_date_time = to_date.getTime();
+			while(next_due_date.getTime() < to_date_time){
+				next_due_date = getNextMonth(init_date, i);
 				i++;
 			}
 			next_month1 = getNextMonth(init_date, i);
@@ -336,22 +337,22 @@ class StripeSubscription extends Component{
 											<div className="invoice-div top">
 												<div className="filtersheader-div">
 													<h4 className="table-header">Due Today</h4>
-													{(this.props.community.subscription && this.props.community.trialing) ? (
-														<h4 className={"w3-small w3-text-green"}
-															style={{marginLeft: "-70px"}}>
-															<br/>
-															Free trial
-															through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
-														</h4>
-													) : (
-														this.props.community.trial_period_days > 0 ? (
+													{this.props.community.subscription ? (this.props.community.trialing ? (
 															<h4 className={"w3-small w3-text-green"}
 																style={{marginLeft: "-70px"}}>
 																<br/>
 																Free trial
-																through {upcoming_duedate}
-															</h4>
-														) : null)}
+																through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
+															</h4>) : null)
+														: (
+															this.props.community.trial_period_days > 0 ? (
+																	<h4 className={"w3-small w3-text-green"}
+																		style={{marginLeft: "-70px"}}>
+																		<br/>
+																		Free trial
+																		through {upcoming_duedate}
+																	</h4>)
+																: null)}
 												</div>
 												<div>
 													<div className="div10-bottom right">
@@ -438,7 +439,8 @@ class StripeSubscription extends Component{
 												)}
 											</Link>
 											{this.state.editing_card ? (
-												<Link to="#" className={"table-link w3-large"} onClick={this.cancelEditCard}>
+												<Link to="#" className={"table-link w3-large"}
+													  onClick={this.cancelEditCard}>
 													<i className={"fas fa-times"}> </i>
 												</Link>
 											) : null}
