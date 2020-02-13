@@ -36,7 +36,6 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				owner: {
-					...state.owner,
 					...action.payload,
 				}
 			};
