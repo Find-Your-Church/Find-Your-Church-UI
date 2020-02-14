@@ -172,7 +172,9 @@ class CommunityStep extends Component{
 
 	handleSelect = address => {
 		const self = this;
-		self.setState({address: address});
+		// remove ", USA" from address.
+		const trimmed_address = address.replace(", USA", "");
+		self.setState({address: trimmed_address});
 		geocodeByAddress(address)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
