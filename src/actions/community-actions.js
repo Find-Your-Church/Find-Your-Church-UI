@@ -19,7 +19,7 @@ import {
 	SHOW_ACT_DLG,
 	COUPON_FAILED,
 	ACTIVE_STATUS,
-	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK,
+	SORT_ORDER, SET_PICKING, VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, SEARCHING,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -398,6 +398,11 @@ export const setSearchFilter = (info) => dispatch => {
 };
 
 export const doSearchCommunities = (criteria) => dispatch => {
+	dispatch({
+		type: SEARCHING,
+		payload: true,
+	});
+
 	axios
 		.post(app_config.FYC_API_URL + "/api/communities/search", criteria)
 		.then(res => {
@@ -405,18 +410,28 @@ export const doSearchCommunities = (criteria) => dispatch => {
 				type: SET_SEARCH_RESULTS,
 				payload: res.data,
 			});
+
+			dispatch({
+				type: SEARCHING,
+				payload: false,
+			});
 		})
 		.catch(err => {
-				dispatch({
-					type: SET_SEARCH_RESULTS,
-					payload: [],
-				});
-				dispatch({
-					type: MESSAGE_FROM_API,
-					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
-				});
-			}
-		);
+			dispatch({
+				type: SET_SEARCH_RESULTS,
+				payload: [],
+			});
+
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
+			});
+
+			dispatch({
+				type: SEARCHING,
+				payload: false,
+			});
+		});
 };
 
 export const setSortOrder = (sorter) => dispatch => {

@@ -23,7 +23,7 @@ import {
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA
+	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA, SEARCHING
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -87,6 +87,7 @@ const initialState = {
 	counts: {},
 	picking: -1, // index og the results
 	view_community: null,
+	searching: false,
 };
 
 export default function(state = initialState, action){
@@ -320,6 +321,11 @@ export default function(state = initialState, action){
 						support_type: "0".repeat(community_config.FILTERS.support_type.length),
 					}
 				}
+			};
+		case SEARCHING:
+			return {
+				...state,
+				searching: action.payload,
 			};
 		default:
 			return state;
