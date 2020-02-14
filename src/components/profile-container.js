@@ -70,21 +70,17 @@ class ProfileContainer extends Component{
 						</div>
 						<div className="personal-info">
 							{isEmpty(this.props.auth.user.admin_email) ? null :
-								<Link to="#" className={"members"}
+								<Link to="#" className={"members"} title={this.props.auth.user.admin_email}
 									  onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
-									<div title={this.props.auth.user.admin_email}>
-										<img src={"/img/icon/icon-email-fill.svg"}
-											 alt="" className="personal-pic"/>
-									</div>
+									<img src={"/img/icon/icon-email-fill.svg"}
+										 alt="" className="personal-pic"/>
 								</Link>
 							}
 							{isEmpty(this.props.auth.user.phone) ? null :
-								<Link to="#" className={"members"}
+								<Link to="#" className={"members"} title={this.props.auth.user.phone}
 									  onClick={() => redirectURL("tel:" + this.props.auth.user.phone)}>
-									<div className={"members"} title={this.props.auth.user.phone}>
-										<img src={"/img/icon/icon-phone-fill.svg"}
-											 alt="" className="personal-pic"/>
-									</div>
+									<img src={"/img/icon/icon-phone-fill.svg"}
+										 alt="" className="personal-pic"/>
 								</Link>
 							}
 						</div>

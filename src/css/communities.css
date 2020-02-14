@@ -249,16 +249,14 @@
 .communities-body .communitycategory,
 .communities-body .communityaddress {
 	margin: 0;
+	padding-bottom: 1px;
 	max-height: 24px;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
-	line-height: 18px;
+	line-height: 20px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-}
-
-.communities-body .communityaddress {
 }
 
 .communities-body .listing-nav {

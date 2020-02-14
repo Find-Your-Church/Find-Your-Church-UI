@@ -47,7 +47,6 @@ class Account extends Component{
 			user_id: this.props.auth.user.id,
 		}, this.props.history);
 
-		const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
 		this.state = {
 			showSizeError: false,
 			editingUserName: false,
@@ -74,8 +73,7 @@ class Account extends Component{
 			user_password2: "",
 			user_ref_code: user.ref_code === undefined ? "" : user.ref_code,
 
-			fname_on_card: name_on_card[0],
-			lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
+			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
 		};
 
 		this.changeUserName = this.changeUserName.bind(this);
@@ -266,8 +264,7 @@ class Account extends Component{
 
 	async clickEditCard(){
 		if(this.state.editing_card){
-			const full_name = `${this.state.fname_on_card} ${this.state.lname_on_card}`;
-			const {token} = await this.props.stripe.createToken({name: full_name,});
+			const {token} = await this.props.stripe.createToken({name: this.state.name_on_card,});
 
 			/**
 			 * register new card.
@@ -277,17 +274,15 @@ class Account extends Component{
 					id: this.props.auth.user.id,
 					source: token.id,
 					email: this.props.auth.user.email,
-					name: full_name,
-					description: 'Holder: ' + full_name,
+					name: this.state.name_on_card,
+					description: 'Holder: ' + this.state.name_on_card,
 				});
 			}
 		}
 		else{
 			const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
-			const name_on_card = (customer ? customer.sources.data[0].name : "").split(" ");
 			this.setState({
-				fname_on_card: name_on_card[0],
-				lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
+				name_on_card: customer ? customer.sources.data[0].name : "",
 			});
 		}
 
@@ -736,14 +731,10 @@ class Account extends Component{
 													<div className={"pay-info-row"}>
 														{this.state.editing_card ? (
 															<div className="w3-row">
-																<input type="text" className="w3-half"
-																	   title="First name" placeholder="First name"
-																	   id="fname_on_card" onChange={this.onChange}
-																	   value={this.state.fname_on_card} autoFocus/>
-																<input type="text" className="w3-half"
-																	   title="Last name" placeholder="Last name"
-																	   id="lname_on_card" onChange={this.onChange}
-																	   value={this.state.lname_on_card}/>
+																<input type="text" className="w3-col s12"
+																	   title="Name on card" placeholder="Name on card"
+																	   id="name_on_card" onChange={this.onChange}
+																	   value={this.state.name_on_card} autoFocus/>
 															</div>
 														) : (
 															<span className={"w3-center grey"}>

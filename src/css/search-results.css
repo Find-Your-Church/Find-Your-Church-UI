@@ -228,10 +228,6 @@ body {
 	padding-bottom: 20px;
 }
 
-.search-results .communityname{
-	line-height: 18px!important;
-}
-
 .link-headernav.button-gradient {
 	display: block;
 	min-height: 0;
@@ -318,19 +314,21 @@ body {
 
 .selected-filter-item {
 	display: inline-block;
-	margin: 0 8px 8px 0;
 	padding: 3px 8px;
 	color: #fff;
 	background-color: #8900fe;
 }
 
-.selected-filter-item-close {
-	margin-left: 4px;
-	margin-top: 2px;
-	padding: 0 5px;
-	border-radius: 50%;
-	border: solid 1px #fff;
-	cursor: pointer;
+.filter-panel .selected-filter-item {
+	margin: 0 8px 16px 0;
+}
+
+.listingrow .selected-filter-item {
+	margin: 10px 0 0 0;
+}
+
+.listingrow .selected-filter-item:not(:first-child) {
+	margin-left: 10px;
 }
 
 .communities-container .selected-filter-item-close {

@@ -203,7 +203,16 @@ button:focus {
 }
 
 .criteria-group {
+	width: 320px;
+	min-width: 320px;
 	background-color: #fff;
+}
+
+.criteria-group #search_category,
+.criteria-group #search_radius {
+	white-space: nowrap;
+	overflow: hidden !important;
+	text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 991px) {
@@ -259,6 +268,7 @@ button:focus {
 	}
 
 	.criteria-group {
+		width: 100% !important;
 		margin-bottom: 20px;
 	}
 
@@ -269,6 +279,7 @@ button:focus {
 		padding-left: 10px;
 		-webkit-align-self: auto;
 		align-self: auto;
+		line-height: 48px;
 	}
 
 	.search-form-button {

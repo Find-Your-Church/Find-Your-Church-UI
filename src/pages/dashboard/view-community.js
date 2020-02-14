@@ -6,6 +6,7 @@ import FilterItemRadio from "../../components/filter-item-radio";
 import {Link} from "react-router-dom";
 import community_config from "../../conf/community-conf";
 import ListMembers from "../../components/list-members";
+import Popup from "reactjs-popup";
 
 class ViewCommunity extends Component{
 	constructor(props){
@@ -107,7 +108,7 @@ class ViewCommunity extends Component{
 										{this.state.community_name}
 									</div>
 								</h3>
-								<div className="left-part w3-col l5">
+								<div className="left-part w3-col l6">
 									<div>
 										{this.state.pictures.length > 0 ? (
 												<div className="slide-container">
@@ -130,15 +131,15 @@ class ViewCommunity extends Component{
 													src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
 											)}
 										<div className="basic-info view">
-											<div className="w-nav" style={{fontWeight: "bold", position: "relative"}}>
-												<h3 className={"community-name"}>
-													{this.state.community_name}
-												</h3>
-												<Link to="#" className={"w3-right"} onClick={this.toggleMenu}>
+											<div className="community-info-title view">
+												<h4>Community Info</h4>
+												<Link to="#" className={"menu-icon-3dot w3-right"}
+													  onClick={this.toggleMenu}>
 													<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 												</Link>
-												<nav role="navigation" className="w3-animate-opacity listing-navmenu view w-nav-menu"
-													 onMouseLeave={this.hideMenu}
+												<nav role="navigation"
+													 className="w3-animate-opacity listing-navmenu view w-nav-menu"
+													 onClick={this.toggleMenu} onMouseLeave={this.hideMenu}
 													 style={{display: this.state.is_show_menu ? "block" : "none"}}>
 													<Link to="#" className="listing-navlink view w-nav-link">
 														Request to Join
@@ -157,13 +158,22 @@ class ViewCommunity extends Component{
 													</Link>
 												</nav>
 											</div>
-											<div>{this.state.category}</div>
-											<div>{this.state.address}</div>
+											<div className="community-info-body">
+												<div className="form-input view">
+													{this.state.community_name}
+												</div>
+												<div className="form-input view">
+													{this.state.category}
+												</div>
+												<div className="form-input view">
+													{this.state.address}
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div className="right-part view w3-col l7">
-									<div className={"tab w3-row w3-margin-top"}>
+								<div className="right-part view w3-col l6">
+									<div className={"tab w3-row"}>
 										<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 											 onClick={this.selectTabDetails}>Details
 										</div>

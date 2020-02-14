@@ -98,7 +98,7 @@ class PublicViewCommunity extends Component{
 										{this.state.community_name}
 									</div>
 								</h3>
-								<div className="left-part w3-col l5">
+								<div className="left-part w3-col l6">
 									<div>
 										{this.state.pictures.length > 0 ? (
 												<div className="slide-container">
@@ -121,18 +121,25 @@ class PublicViewCommunity extends Component{
 													src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
 											)}
 										<div className="basic-info view">
-											<div className="w-nav" style={{fontWeight: "bold", position: "relative"}}>
-												<h3 className={"community-name"}>
-													{this.state.community_name}
-												</h3>
+											<div className="community-info-title view">
+												<h4>Community Info</h4>
 											</div>
-											<div>{this.state.category}</div>
-											<div>{this.state.address}</div>
+											<div className="community-info-body">
+												<div className="form-input view">
+													{this.state.community_name}
+												</div>
+												<div className="form-input view">
+													{this.state.category}
+												</div>
+												<div className="form-input view">
+													{this.state.address}
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div className="right-part view w3-col l7">
-									<div className={"tab w3-row w3-margin-top"}>
+								<div className="right-part view w3-col l6">
+									<div className={"tab w3-row"}>
 										<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 											 onClick={this.selectTabDetails}>Details
 										</div>

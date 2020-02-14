@@ -34,15 +34,13 @@ class StripeSubscription extends Component{
 	constructor(props){
 		super(props);
 
-		const name_on_card = (this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "").split(" ");
 		this.state = {
 			errors: {},
 
 			coupon: '',
 
 			editing_card: false,
-			fname_on_card: name_on_card[0],
-			lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
+			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
 		};
 
 		this.verifyCoupon = this.verifyCoupon.bind(this);
@@ -89,8 +87,7 @@ class StripeSubscription extends Component{
 
 	async clickEditCard(){
 		if(this.state.editing_card){
-			const full_name = `${this.state.fname_on_card} ${this.state.lname_on_card}`;
-			const {token} = await this.props.stripe.createToken({name: full_name,});
+			const {token} = await this.props.stripe.createToken({name: this.state.name_on_card,});
 
 			/**
 			 * register new card.
@@ -100,17 +97,15 @@ class StripeSubscription extends Component{
 					id: this.props.auth.user.id,
 					source: token.id,
 					email: this.props.auth.user.email,
-					name: full_name,
-					description: 'Holder: ' + full_name,
+					name: this.state.name_on_card,
+					description: 'Holder: ' + this.state.name_on_card,
 				});
 			}
 		}
 		else{
 			const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
-			const name_on_card = (customer ? customer.sources.data[0].name : "").split(" ");
 			this.setState({
-				fname_on_card: name_on_card[0],
-				lname_on_card: name_on_card[1] === undefined ? "" : name_on_card[1],
+				name_on_card: customer.sources.data[0].name,
 			});
 		}
 
@@ -124,8 +119,7 @@ class StripeSubscription extends Component{
 	async handleActivateCommunity(e){
 		if(this.props.stripe){
 			if(!this.props.second){
-				const full_name = `${this.state.fname_on_card} ${this.state.lname_on_card}`;
-				const {token} = await this.props.stripe.createToken({name: full_name,});
+				const {token} = await this.props.stripe.createToken({name: this.state.name_on_card,});
 
 				/**
 				 * register new card.
@@ -134,8 +128,8 @@ class StripeSubscription extends Component{
 					this.props.activateCommunity({
 						source: token.id,
 						email: this.props.auth.user.email,
-						name: full_name,
-						description: 'Holder: ' + full_name,
+						name: this.state.name_on_card,
+						description: 'Holder: ' + this.state.name_on_card,
 						community_id: this.props.community.community_activated,
 						id: this.props.auth.user.id,
 						coupon: this.props.community.coupon_verified ? this.state.coupon : null,
@@ -454,19 +448,15 @@ class StripeSubscription extends Component{
 												<div className={"pay-info-row"}>
 													{!this.props.second || this.state.editing_card ? (
 														<div className="w3-row">
-															<input type="text" className="w3-half"
-																   title="First name" placeholder="First name"
-																   id="fname_on_card" onChange={this.onChange}
-																   value={this.state.fname_on_card} autoFocus/>
-															<input type="text" className="w3-half"
-																   title="Last name" placeholder="Last name"
-																   id="lname_on_card" onChange={this.onChange}
-																   value={this.state.lname_on_card}/>
+															<input type="text" className="w3-col s12"
+																   title="Name on card" placeholder="Name on card"
+																   id="name_on_card" onChange={this.onChange}
+																   value={this.state.name_on_card} autoFocus/>
 														</div>
 													) : (
 														<span className={"w3-center grey"}>
-														{customer ? customer.sources.data[0].name : "(Card holder name)"}
-													</span>
+															{customer ? customer.sources.data[0].name : "(Card holder name)"}
+														</span>
 													)}
 												</div>
 											</div>

@@ -14,7 +14,7 @@ class SearchBar extends Component{
 		super(props);
 
 		this.state = {
-			searchable: true,
+			searchable: false,
 
 			search_category: this.props.community.criteria.category,
 			search_radius: this.props.community.criteria.radius,
@@ -41,55 +41,63 @@ class SearchBar extends Component{
 
 	handleSelect = address => {
 		const self = this;
-		self.setState({my_address: address});
+		// remove ", USA" from address.
+		const trimmed_address = address.replace(", USA", "");
+		self.setState({my_address: trimmed_address});
 		geocodeByAddress(address)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
 				self.setState({my_lat: latLng.lat, my_lng: latLng.lng, searchable: true});
+				this.props.setSearchCriteria({
+					lat: latLng.lat,
+					lng: latLng.lng,
+				});
 			})
 			.catch(error => console.error('Error', error));
 	};
 
 	handleSearch = () => {
-		const clear_obj = {
-			filter: {
-				days: "0".repeat(community_config.FILTERS.days.length),
-				times: "0".repeat(community_config.FILTERS.times.length),
-				frequency: "0".repeat(community_config.FILTERS.frequency.length),
-				ages: "0".repeat(community_config.FILTERS.ages.length),
-				gender: "0".repeat(community_config.FILTERS.gender.length),
-				parking: "0".repeat(community_config.FILTERS.parking.length),
-				ministries: "0".repeat(community_config.FILTERS.ministries.length),
-				other_services: "0".repeat(community_config.FILTERS.other_services.length),
-				ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-				event_type: "0".repeat(community_config.FILTERS.event_type.length),
-				support_type: "0".repeat(community_config.FILTERS.support_type.length),
-			}
-		};
+		if(this.state.searchable){
+			const clear_obj = {
+				filter: {
+					days: "0".repeat(community_config.FILTERS.days.length),
+					times: "0".repeat(community_config.FILTERS.times.length),
+					frequency: "0".repeat(community_config.FILTERS.frequency.length),
+					ages: "0".repeat(community_config.FILTERS.ages.length),
+					gender: "0".repeat(community_config.FILTERS.gender.length),
+					parking: "0".repeat(community_config.FILTERS.parking.length),
+					ministries: "0".repeat(community_config.FILTERS.ministries.length),
+					other_services: "0".repeat(community_config.FILTERS.other_services.length),
+					ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
+					event_type: "0".repeat(community_config.FILTERS.event_type.length),
+					support_type: "0".repeat(community_config.FILTERS.support_type.length),
+				}
+			};
 
-		// -> /search-results
-		this.props.setSearchCriteria({
-			category: this.state.search_category,
-			radius: this.state.search_radius,
-			address: this.state.my_address,
-			lat: this.state.my_lat,
-			lng: this.state.my_lng,
-			...clear_obj
-		});
+			// -> /search-results
+			this.props.setSearchCriteria({
+				category: this.state.search_category,
+				radius: this.state.search_radius,
+				address: this.state.my_address,
+				lat: this.state.my_lat,
+				lng: this.state.my_lng,
+				...clear_obj
+			});
 
-		this.props.doSearchCommunities({
-			...this.props.community.criteria,
-			address: this.state.my_address,
-			category: this.state.search_category,
-			radius: this.state.search_radius,
-			...clear_obj
-		});
+			this.props.doSearchCommunities({
+				...this.props.community.criteria,
+				category: this.state.search_category,
+				radius: this.state.search_radius,
+				address: this.state.my_address,
+				lat: this.state.my_lat,
+				lng: this.state.my_lng,
+				...clear_obj
+			});
 
-		this.forceUpdate();
-
-		// go to the search results!
-		// this.setState({my_address: "", searchable: false});
-		this.setState({ready2go: true});
+			// go to the search results!
+			this.setState({searchable: false});
+			this.setState({ready2go: true});
+		}
 	};
 
 	render(){
@@ -144,7 +152,6 @@ class SearchBar extends Component{
 									   {...getInputProps({
 										   placeholder: this.props.community.criteria.address || "Address, City or Zip Code",
 									   })}
-									   style={{textAlign: "center"}}
 									   required=""/>
 								<div className={"search-address-candidates"}>
 									{loading ?
@@ -153,7 +160,7 @@ class SearchBar extends Component{
 									{suggestions.map((suggestion) => {
 										const style = {
 											color: suggestion.active ? "#ffffff" : "#254184",
-											backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
+											backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
 											backgroundImage: "url('/img/icon/icon-address-fill.svg')",
 										};
 

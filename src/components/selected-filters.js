@@ -24,7 +24,14 @@ class SelectedFilters extends Component{
 							return (
 								<div className={"selected-filter-item"} key={`filter_val_${key}_${i}`}>
 									{community_config.FILTERS[key][i]}
-									<span className={"selected-filter-item-close"} onClick={() => this.clearFilterValue(key, i)}>&times;</span>
+									{this.props.handleRefresh ? (
+										<>
+											&nbsp;&nbsp;&nbsp;&nbsp;
+											<i className={"fas fa-times-circle"}
+											   style={{cursor: "pointer"}}
+											   onClick={() => this.clearFilterValue(key, i)}> </i>
+										</>
+									) : null}
 								</div>
 							);
 						}

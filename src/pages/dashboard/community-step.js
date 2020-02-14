@@ -340,8 +340,7 @@ class CommunityStep extends Component{
 										<FileBase id="btn-upload" type="file" className="upload-button w-button"
 												  multiple={false} onDone={this.getBaseFile.bind(this)} height="38"/>
 									</label>
-									<div className="basic-info"
-										 title={this.state.is_editing ? "These infos cannot be modified." : ""}>
+									<div className="basic-info">
 										<div className="community-info-title">
 											<h4>Community Info</h4>
 											<Popup

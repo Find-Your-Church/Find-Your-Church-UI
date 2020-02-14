@@ -320,34 +320,36 @@ a {
 
 .search-address-candidates {
 	position: absolute;
-	left: 0;
+	left: 286px;
 	top: 50px;
+	width: 457px;
+	min-width: 457px;
+	max-width: 457px;
 	z-index: 1000;
+}
+
+.search-address-candidates .address-item {
+	padding: 6px 16px 6px 32px;
+	height: auto;
+	line-height: 22px;
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	cursor: pointer;
+	border-bottom: solid 1px #fff;
+	color: #808080;
 }
 
 @media screen and (max-width: 991px) {
 	.search-address-candidates {
 		left: 0;
-		top: 100px;
-		max-width: calc(100vw - 20px);
+		top: 120px;
+		width: 100%;
+		min-width: 100%;
+		max-width: 100%;
 	}
 
 	.search-address-candidates .address-item {
-		font-size: 14px;
+		max-width: 100%;
+		font-size: 18px;
 	}
-}
-
-.search-address-candidates .address-item {
-	padding: 4px 16px;
-	height: 48px;
-	line-height: 42px;
-	background-repeat: no-repeat;
-	background-position: 2px center;
-	text-indent: 32px;
-	cursor: pointer;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	border-bottom: solid 1px #fff;
-	color: #808080;
 }
