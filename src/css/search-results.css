@@ -334,3 +334,7 @@ body {
 .communities-container .selected-filter-item-close {
 	display: none;
 }
+
+.communities-body.search-results {
+	margin-bottom: 0 !important;
+}

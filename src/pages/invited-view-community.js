@@ -9,6 +9,7 @@ import ListMembers from "../components/list-members";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {viewCommunity} from "../actions/community-actions";
+import Popup from "reactjs-popup";
 
 class InvitedViewCommunity extends Component{
 	constructor(props){
@@ -129,11 +130,16 @@ class InvitedViewCommunity extends Component{
 														alt="Community" title="Community pictures"
 														src={this.props.community.view_community.picture ? this.props.community.view_community.picture : "/img/community-default.jpg"}/>
 												)}
-											<div className="basic-info">
-												<div
-													style={{fontWeight: "bold"}}>{this.props.community.view_community.community_name}</div>
-												<div>{this.props.community.view_community.category}</div>
-												<div>{this.props.community.view_community.address}</div>
+											<div className="basic-info view">
+												<div className="listingrow view" style={{position: "relative"}}>
+													<strong>{this.props.community.view_community.community_name}</strong>
+												</div>
+												<div className="listingrow view">
+													{this.props.community.view_community.category}
+												</div>
+												<div className="listingrow view">
+													{this.props.community.view_community.address}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -157,14 +163,24 @@ class InvitedViewCommunity extends Component{
 													<div className={"view-paragraph"}>
 														<div className="flexdiv-left labels">
 															<h4 className="form-header">About</h4>
-															<i className={"fas fa-question-circle tooltip-icon"}> </i>
+															<Popup
+																trigger={<i style={{cursor: "pointer"}}
+																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																position={"left center"}>
+																<div>Tell visitors more about your community...</div>
+															</Popup>
 														</div>
 														<div>{this.props.community.view_community.about || "..."}</div>
 													</div>
 													<div className={"view-paragraph"}>
 														<div className="flexdiv-left labels">
 															<h4 className="form-header">Community Contact</h4>
-															<i className={"fas fa-question-circle tooltip-icon"}> </i>
+															<Popup
+																trigger={<i style={{cursor: "pointer"}}
+																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																position={"left center"}>
+																<div>Tell visitors more about your community...</div>
+															</Popup>
 														</div>
 														<div className="input-div w3-row">
 															<div className="view-item w3-col l12"
@@ -187,7 +203,12 @@ class InvitedViewCommunity extends Component{
 													<div className={"view-paragraph"}>
 														<div className="flexdiv-left labels">
 															<h4 className="form-header">Links and Resources</h4>
-															<i className={"fas fa-question-circle tooltip-icon"}> </i>
+															<Popup
+																trigger={<i style={{cursor: "pointer"}}
+																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																position={"left center"}>
+																<div>Tell visitors more about your community...</div>
+															</Popup>
 														</div>
 														<div className={"social-link-group"}>
 															{community_config.SOCIALS.map(item => {
@@ -206,7 +227,12 @@ class InvitedViewCommunity extends Component{
 													<div className={"view-paragraph"}>
 														<div className="flexdiv-left labels">
 															<h4 className="form-header">More Info</h4>
-															<i className={"fas fa-question-circle tooltip-icon"}> </i>
+															<Popup
+																trigger={<i style={{cursor: "pointer"}}
+																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																position={"left center"}>
+																<div>Tell visitors more about your community...</div>
+															</Popup>
 														</div>
 														<div className="input-div">
 															<FilterItemCheck filterTitle="Day(s)" filterName="days"

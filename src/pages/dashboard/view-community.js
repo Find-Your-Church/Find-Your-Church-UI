@@ -110,7 +110,7 @@ class ViewCommunity extends Component{
 								</h3>
 								<div className="left-part w3-col l6">
 									<div>
-										{this.state.pictures.length > 0 ? (
+										{this.state.pictures.length > 1 ? (
 												<div className="slide-container">
 													<Slide {...this.slide_options}>
 														{this.state.pictures.map((pic, index) => {
@@ -124,15 +124,23 @@ class ViewCommunity extends Component{
 													</Slide>
 												</div>
 											)
-											: (
+											: (this.state.pictures.length > 0 ? (
+												<div className="slide-container">
+													<div className="each-slide">
+														<div
+															style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+														</div>
+													</div>
+												</div>
+											) : (
 												<img
 													className={"community-picture"}
 													alt="Community" title={this.state.community_name}
 													src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
-											)}
+											))}
 										<div className="basic-info view">
-											<div className="community-info-title view">
-												<h4>Community Info</h4>
+											<div className="listingrow view" style={{position: "relative"}}>
+												<strong>{this.state.community_name}</strong>
 												<Link to="#" className={"menu-icon-3dot w3-right"}
 													  onClick={this.toggleMenu}>
 													<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
@@ -158,16 +166,11 @@ class ViewCommunity extends Component{
 													</Link>
 												</nav>
 											</div>
-											<div className="community-info-body">
-												<div className="form-input view">
-													{this.state.community_name}
-												</div>
-												<div className="form-input view">
-													{this.state.category}
-												</div>
-												<div className="form-input view">
-													{this.state.address}
-												</div>
+											<div className="listingrow view">
+												{this.state.category}
+											</div>
+											<div className="listingrow view">
+												{this.state.address}
 											</div>
 										</div>
 									</div>
@@ -190,37 +193,60 @@ class ViewCommunity extends Component{
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">About</h4>
-														<i className={"fas fa-question-circle tooltip-icon"}> </i>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
 													</div>
-													<div>{this.state.about || "..."}</div>
+													<div className="input-div">
+														{this.state.about || ""}
+													</div>
 												</div>
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">Community Contact</h4>
-														<i className={"fas fa-question-circle tooltip-icon"}> </i>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
 													</div>
 													<div className="input-div w3-row">
-														<div className="view-item w3-col l12"
-															 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
-															{this.state.community_contact ||
-															<span style={{color: "#aaa"}}>Contact name</span>}
-														</div>
-														<div className="view-item w3-half"
-															 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
-															{this.state.email ||
-															<span style={{color: "#aaa"}}>Email</span>}
-														</div>
-														<div className="view-item w3-half"
-															 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
-															{this.state.phone ||
-															<span style={{color: "#aaa"}}>Phone</span>}
-														</div>
+														{this.state.community_contact ?
+															<div className="view-item w3-col l12"
+																 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
+																{this.state.community_contact ||
+																<span style={{color: "#aaa"}}>Contact name</span>}
+															</div>
+															: null}
+														{this.state.email ?
+															<div className="view-item w3-half"
+																 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
+																{this.state.email ||
+																<span style={{color: "#aaa"}}>Email</span>}
+															</div>
+															: null}
+														{this.state.phone ?
+															<div className="view-item w3-half"
+																 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
+																{this.state.phone ||
+																<span style={{color: "#aaa"}}>Phone</span>}
+															</div>
+															: null}
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">Links and Resources</h4>
-														<i className={"fas fa-question-circle tooltip-icon"}> </i>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
 													</div>
 													<div className={"social-link-group"}>
 														{community_config.SOCIALS.map(item => {
@@ -239,7 +265,12 @@ class ViewCommunity extends Component{
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">More Info</h4>
-														<i className={"fas fa-question-circle tooltip-icon"}> </i>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
 													</div>
 													<div className="input-div">
 														<FilterItemCheck filterTitle="Day(s)" filterName="days"
@@ -268,16 +299,18 @@ class ViewCommunity extends Component{
 																		 filterName="other_services"
 																		 value={this.state.other_services}
 																		 items={community_config.FILTERS.other_services}/>
-														<div className="view-filter w3-row">
-															<div className={"filter-title w3-col l4"}>
-																Average Attendance
+														{this.state.average_attendance > 0 ?
+															<div className="view-filter w3-row">
+																<div className={"filter-title w3-col l4"}>
+																	Average Attendance
+																</div>
+																{this.state.average_attendance ?
+																	<span className={"filter-value-item"}>
+																		{this.state.average_attendance}
+																	</span>
+																	: null}
 															</div>
-															{this.state.average_attendance ?
-																<span className={"filter-value-item"}>
-																{this.state.average_attendance}
-															</span>
-																: null}
-														</div>
+															: null}
 														<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
 																		 value={this.state.ambiance}
 																		 items={community_config.FILTERS.ambiance}/>

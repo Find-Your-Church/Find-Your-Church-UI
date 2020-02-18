@@ -131,7 +131,7 @@ class Thumbnail extends Component{
 									<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
 										<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 									</div>
-									<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
+									<nav role="navigation" className={"w3-animate-opacity listing-navmenu w-nav-menu"}
 										 style={{display: this.state.is_show_menu ? "block" : "none"}}>
 										<Link to="#" className="listing-navlink w-nav-link" onClick={this.goEdit}>
 											Edit

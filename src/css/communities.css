@@ -5,7 +5,7 @@
 }
 
 .communities-body:last-child {
-	margin-bottom: 0;
+	margin-bottom: 32px;
 }
 
 .communities-body .dashboard-container {
@@ -156,24 +156,6 @@
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media screen and (max-width: 790px){
-	.communities-body .listing-grid.dashboard {
-		grid-column-gap: 10px;
-		grid-row-gap: 10px;
-		-ms-grid-columns: 1fr 1fr;
-		grid-template-columns: 1fr 1fr;
-	}
-}
-
-@media screen and (max-width: 600px){
-	.communities-body .listing-grid.dashboard {
-		grid-column-gap: 6px;
-		grid-row-gap: 6px;
-		-ms-grid-columns: 1fr;
-		grid-template-columns: 1fr;
-	}
-}
-
 .communities-body .listing-container1 {
 	width: 100%;
 	max-height: none;
@@ -201,7 +183,7 @@
 	padding-top: 56.25%;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: center top;
+	background-position: center center;
 	overflow: hidden;
 	min-height: auto;
 	-webkit-box-pack: center;
@@ -215,9 +197,9 @@
 
 /*
 .communities-body .listingprofilepic-div:hover {
-	-webkit-transform: scale(1.01);
-	-ms-transform: scale(1.01);
-	transform: scale(1.01);
+	-webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
 }
 */
 
@@ -225,8 +207,8 @@
 	padding: 10px;
 }
 
-.communities-body .listingrow {
-
+.info-body .left-part .listingrow.view {
+	font-size: 16px;
 }
 
 .communities-body .communityname {
@@ -281,7 +263,7 @@
 .communities-body .listing-navmenu {
 	position: absolute;
 	right: 0;
-	top: 28px;
+	top: 24px;
 	width: 100%;
 	padding: 0 10px 10px 10px;
 	-webkit-box-ordinal-group: 1;
@@ -292,6 +274,24 @@
 	font-family: 'Source Sans Pro', sans-serif;
 	line-height: 16px;
 	z-index: 1000;
+}
+
+@media screen and (max-width: 790px){
+	.communities-body .listing-grid.dashboard {
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		-ms-grid-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.communities-body .listing-grid.dashboard {
+		grid-column-gap: 6px;
+		grid-row-gap: 6px;
+		-ms-grid-columns: 1fr;
+		grid-template-columns: 1fr;
+	}
 }
 
 .communities-body .listing-navmenu .w-nav-link:hover {

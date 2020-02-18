@@ -367,7 +367,7 @@ export const updateUserInfo = (userData) => dispatch => {
 				});
 				dispatch({
 					type: MESSAGE_FROM_API,
-					payload: res.data
+					payload: {}, // res.data
 				});
 			}
 		)

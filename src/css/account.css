@@ -87,8 +87,20 @@
 	background-color: #f3f3f3;
 }
 
-.sub-container {
+.account-body .sub-container {
 	padding: 10px;
+}
+
+.account-body .sub-container.h-left {
+	height: 298px;
+}
+
+.account-body .sub-container.h-right {
+	height: 390px;
+}
+
+.account-body .sub-container.bottom {
+	height: 261px;
 }
 
 .sub-container .sub-content {
@@ -97,12 +109,10 @@
 	border: solid 1px #e6e6e6;
 }
 
-.sub-container .sub-content.account {
-	min-height: 317px;
-}
-
+.sub-container .sub-content.account,
 .sub-container .sub-content.payment {
-	min-height: 236px;
+	height: 100%;
+	min-height: 100%;
 }
 
 .flexdiv-leftright.panel.underline {

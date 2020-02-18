@@ -29,7 +29,7 @@ class MyCommunities extends Component{
 							<h5 className="container-header">
 								{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities
 								{this.props.status === "active" ? (
-									<>&nbsp;&nbsp;<span className={"w3-small w3-text-grey w3-border-left"}>&nbsp;&nbsp;
+									<span className={"counter-part w3-small w3-text-grey w3-border-left"}>
 										{formatNumber(this.props.community.my_communities.active.length)}
 										&nbsp;/&nbsp;
 										{this.props.community.subscription ?
@@ -37,7 +37,7 @@ class MyCommunities extends Component{
 											: (this.props.community.is_sending ?
 												<i className="fas fa-spinner fa-spin"> </i>
 												: "00")}
-									</span></>
+									</span>
 								) : null}
 							</h5>
 							<Popup

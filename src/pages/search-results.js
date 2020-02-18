@@ -209,6 +209,20 @@ class SearchResults extends Component{
 		const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
 
 		const pl = criteria_radius > 1 ? "s" : "";
+
+		let selectedChurches = false;
+		let selectedEvents = false;
+		let selectedSupportGroups = false;
+		if(this.props.community.criteria.category === "Churches"){
+			selectedChurches = true;
+		}
+		else if(this.props.community.criteria.category === "Events"){
+			selectedEvents = true;
+		}
+		else if(this.props.community.criteria.category === "Support Groups"){
+			selectedSupportGroups = true;
+		}
+
 		return (
 			<main id="content-body" className="w3-row">
 				<div id={"spinning-modal"} className={"w3-modal"}
@@ -284,29 +298,39 @@ class SearchResults extends Component{
 											   send={this.getParkingInfo}
 											   value={this.props.community.criteria.filter.parking}
 											   items={community_config.FILTERS.parking}/>
-							<SearchFilterCheck filterTitle="Other Ministries"
-											   filterName="ministries"
-											   send={this.getMinistriesInfo}
-											   value={this.props.community.criteria.filter.ministries}
-											   items={community_config.FILTERS.ministries}/>
-							<SearchFilterCheck filterTitle="Other Services"
-											   filterName="other_services"
-											   send={this.getOtherServicesInfo}
-											   value={this.props.community.criteria.filter.other_services}
-											   items={community_config.FILTERS.other_services}/>
-							<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
-											   send={this.getAmbianceInfo}
-											   value={this.props.community.criteria.filter.ambiance}
-											   items={community_config.FILTERS.ambiance}/>
-							<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
-											   send={this.getEventTypeInfo}
-											   value={this.props.community.criteria.filter.event_type}
-											   items={community_config.FILTERS.event_type}/>
-							<SearchFilterRadio filterTitle="Support Type"
-											   filterName="support_type"
-											   send={this.getSupportTypeInfo}
-											   value={this.props.community.criteria.filter.support_type}
-											   items={community_config.FILTERS.support_type}/>
+							{selectedChurches ?
+								<SearchFilterCheck filterTitle="Other Ministries"
+												   filterName="ministries"
+												   send={this.getMinistriesInfo}
+												   value={this.props.community.criteria.filter.ministries}
+												   items={community_config.FILTERS.ministries}/>
+								: null}
+							{selectedChurches ?
+								<SearchFilterCheck filterTitle="Other Services"
+												   filterName="other_services"
+												   send={this.getOtherServicesInfo}
+												   value={this.props.community.criteria.filter.other_services}
+												   items={community_config.FILTERS.other_services}/>
+								: null}
+							{selectedChurches ?
+								<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
+												   send={this.getAmbianceInfo}
+												   value={this.props.community.criteria.filter.ambiance}
+												   items={community_config.FILTERS.ambiance}/>
+								: null}
+							{selectedEvents ?
+								<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
+												   send={this.getEventTypeInfo}
+												   value={this.props.community.criteria.filter.event_type}
+												   items={community_config.FILTERS.event_type}/>
+								: null}
+							{selectedSupportGroups ?
+								<SearchFilterRadio filterTitle="Support Type"
+												   filterName="support_type"
+												   send={this.getSupportTypeInfo}
+												   value={this.props.community.criteria.filter.support_type}
+												   items={community_config.FILTERS.support_type}/>
+								: null}
 						</div>
 					</div>
 					<div className={"communities-container communities-body communities search-results w3-row"}>

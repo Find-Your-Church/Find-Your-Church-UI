@@ -45,6 +45,12 @@
 	background-color: #cccccc;
 }
 
+.admin-right .counter-part {
+	margin-left: 10px;
+	padding-left: 10px;
+	font-size: 12px;
+}
+
 @media screen and (max-width: 600px) {
 	.admin-left,
 	.admin-right {
@@ -337,7 +343,7 @@
 .profile-info .listing-navmenu {
 	position: absolute;
 	right: 0;
-	top: 28px;
+	top: 20px;
 	width: 100%;
 	padding: 0;
 	order: 0;
@@ -358,6 +364,10 @@
 	color: #808080;
 	font-weight: 400;
 	text-align: right;
+}
+
+.members-container .profile-info .listing-navlink {
+	padding: 10px !important;
 }
 
 .profile-info .listing-navlink:hover {
@@ -413,8 +423,17 @@
 }
 
 .profile-info .personal-info {
-	padding-left: 2px;
+	position: relative;
 	font-size: 16px;
+}
+
+.profile-info .profile-info-header {
+	line-height: 16px;
+}
+
+.profile-info .profile-3dot {
+	font-size: 16px;
+	line-height: 18px;
 }
 
 .profile-info .content-text {

@@ -35,6 +35,9 @@ class CommunityStep extends Component{
 
 		const p_obj = this.props.location.state;
 		this.state = {
+			showSizeError: false,
+			showCountError: false,
+			showTotalSizeError: false,
 			error_community_name: false,
 			error_community_category: false,
 			error_community_address: false,
@@ -131,21 +134,21 @@ class CommunityStep extends Component{
 
 		if(e.target.id === 'category'){
 			switch(e.target.value){
-				case 'Church':
+				case 'Churches':
 					this.setState({
 						selectedChurch: true,
 						selectedEvent: false,
 						selectedSupportGroup: false,
 					});
 					break;
-				case 'Event':
+				case 'Events':
 					this.setState({
 						selectedChurch: false,
 						selectedEvent: true,
 						selectedSupportGroup: false,
 					});
 					break;
-				case 'Support Group':
+				case 'Support Groups':
 					this.setState({
 						selectedChurch: false,
 						selectedEvent: false,
@@ -185,10 +188,49 @@ class CommunityStep extends Component{
 	};
 
 	getBaseFile(files){
+		const file_size = parseInt(files.size);
+		const img_buf = files.base64.toString();
+
+		let total_size = 0;
+		for(let i = 0; i < this.state.pictures.length; i++){
+			total_size += this.state.pictures[i].length;
+		}
+
+		total_size += img_buf.length;
+
+		console.log(total_size);
+
+		if(total_size >= app_config.MAX_TOTAL_SIZE){
+			this.setState({showTotalSizeError: true});
+
+			this.tmr = setTimeout(() => {
+				this.setState({showTotalSizeError: false});
+			}, 6000);
+			return;
+		}
+
+		if(this.state.pictures.length >= app_config.MAX_PIC_COUNT){
+			this.setState({showCountError: true});
+
+			this.tmr = setTimeout(() => {
+				this.setState({showCountError: false});
+			}, 6000);
+			return;
+		}
+
+		if(file_size > app_config.MAX_PIC_SIZE){
+			this.setState({showSizeError: true});
+
+			this.tmr = setTimeout(() => {
+				this.setState({showSizeError: false});
+			}, 6000);
+			return;
+		}
+
 		this.setState({
 			pictures: [
 				...this.state.pictures,
-				files.base64.toString()
+				img_buf,
 			],
 		});
 	}
@@ -296,6 +338,19 @@ class CommunityStep extends Component{
 						<div className="w-form-done">
 							<div>Thank you! Your submission has been received!</div>
 						</div>
+						<div className={"w-form-fail"}
+							 style={{display: this.state.showSizeError ? "block" : "none"}}>
+							Picture file size cannot be larger than 3 MB.
+						</div>
+						<div className={"w-form-fail"}
+							 style={{display: this.state.showCountError ? "block" : "none"}}>
+							Cannot upload more than {app_config.MAX_PIC_COUNT} pictures.
+						</div>
+						<div className={"w-form-fail"}
+							 style={{display: this.state.showTotalSizeError ? "block" : "none"}}>
+							Total size cannot be larger
+							than {Math.round(app_config.MAX_TOTAL_SIZE / 1048576)} MB.
+						</div>
 						{!isEmpty(this.props.errors.msg_community) || this.state.error_community_name || this.state.error_community_category || this.state.error_community_address ?
 							<div className="w-form-fail" style={{display: "block"}}>
 								<div>{this.props.errors.msg_community}</div>
@@ -310,34 +365,42 @@ class CommunityStep extends Component{
 						<div className="info-body w3-row">
 							<div className="left-part w3-half">
 								<div className={"community-info-container"}>
-									{
-										this.state.pictures.length > 0 ? (
-												<div id={"slider-frame"} className="slide-container">
-													<Slide {...this.slide_options}>
-														{this.state.pictures.map((pic, index) => {
-															return (
-																<div className="each-slide" key={index}>
-																	<div style={{backgroundImage: `url(${pic})`}}>
+									{this.state.pictures.length > 1 ? (
+										<div id={"slider-frame"} className="slide-container">
+											<Slide {...this.slide_options}>
+												{this.state.pictures.map((pic, index) => {
+													return (
+														<div className="each-slide" key={index}>
+															<div style={{backgroundImage: `url(${pic})`}}>
 																		<span className={"slide-remove w3-button"}
 																			  title={"Remove this picture"}
 																			  onClick={() => this.removeSlide(index)}>&times;</span>
-																	</div>
-																</div>
-															);
-														})}
-													</Slide>
+															</div>
+														</div>
+													);
+												})}
+											</Slide>
+										</div>
+									) : (this.state.pictures.length > 0 ? (
+										<div id={"slider-frame"} className="slide-container">
+											<div className="each-slide">
+												<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+													<span className={"slide-remove w3-button"}
+														  title={"Remove this picture"}
+														  onClick={() => this.removeSlide(0)}>&times;</span>
 												</div>
-											)
-											: (
-												<img id={"slider-frame"}
-													 className={"community-picture"}
-													 alt="Community" title="Community pictures"
-													 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
-													 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
-												/>
-											)
-									}
-									<label className={"file-btn-container w3-button"}>
+											</div>
+										</div>
+									) : (
+										<img id={"slider-frame"}
+											 className={"community-picture"}
+											 alt="Community" title="Community pictures"
+											 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
+											 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
+										/>
+									))}
+									<label className={"file-btn-container w3-button"}
+										   title={"The picture ratio should be 16:9."}>
 										Upload New Picture
 										<FileBase id="btn-upload" type="file" className="upload-button w-button"
 												  multiple={false} onDone={this.getBaseFile.bind(this)} height="38"/>

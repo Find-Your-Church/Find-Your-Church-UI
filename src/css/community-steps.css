@@ -78,8 +78,7 @@
 	margin-top: 0;
 	margin-bottom: 0;
 	padding: 0;
-	border-top-left-radius: 3px;
-	border-top-right-radius: 3px;
+	border-radius: 0 !important;
 	background-color: transparent;
 	color: #323232;
 	font-size: 18px;
@@ -125,6 +124,10 @@
 
 .info-body .left-part {
 	padding-right: 20px;
+}
+
+.info-body .left-part div {
+	background-color: #fff;
 }
 
 .info-body .left-part .community-info-container {
@@ -265,7 +268,7 @@
 	align-items: center;
 	justify-content: center;
 	background-size: cover;
-	background-position: center top;
+	background-position: center center;
 	background-repeat: no-repeat;
 }
 

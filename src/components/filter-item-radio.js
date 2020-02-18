@@ -9,6 +9,7 @@ class FilterItemRadio extends Component{
 
 		this.state = {
 			collapsed: props.collapsed || false,
+			is_empty: true,
 		};
 
 		this.toggleCollapse = this.toggleCollapse.bind(this);
@@ -30,12 +31,23 @@ class FilterItemRadio extends Component{
 		this.props.send(new_value);
 	};
 
+	componentDidMount(){
+		if(!this.props.send){
+			for(let i = 0; i < this.props.items.length; i++){
+				if(this.checks[i] === '1'){
+					this.setState({is_empty: false});
+				}
+			}
+		}
+	}
+
 	render(){
-		return this.props.send ? (
+		return this.props.send ?
+			(
 				<div className="filter-div">
 					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse} style={{cursor: "pointer"}}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
-							  >{this.props.filterTitle}</label>
+						>{this.props.filterTitle}</label>
 					</div>
 					{
 						this.state.collapsed ? null :
@@ -54,7 +66,7 @@ class FilterItemRadio extends Component{
 				</div>
 			)
 			: (
-				<div className={"view-filter w3-row"}>
+				<div className={"view-filter w3-row"} style={{display: this.state.is_empty ? "none" : "block"}}>
 					<div className={"filter-title w3-col s4"}>{this.props.filterTitle}</div>
 					<div className={"filter-value w3-col s8"}>
 						{this.props.items.map((item, index) => {

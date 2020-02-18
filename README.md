@@ -40,7 +40,7 @@ Considerable materials are:
 
 #### `/conf/community-config.js`
     CATEGORIES: [
-        "Church", "Young Adult Group", "Youth Group",
+        "Churches", "Young Adult Groups", "Youth Groups",
     ],
 
     SEARCH_RADIUS: [

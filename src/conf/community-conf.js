@@ -8,7 +8,7 @@ const community_config = {
 	 * must include at least 1 category.
 	 */
 	CATEGORIES: [
-		"Church", "Youth Group", "Young Adult Group", "Focus Group", "Life Group", "Support Group", "Event",
+		"Churches", "Youth Groups", "Young Adult Groups", "Focus Groups", "Life Groups", "Support Groups", "Events",
 	],
 
 	SEARCH_RADIUS: [
@@ -22,7 +22,7 @@ const community_config = {
 		ages: ["All", "Elementary", "Jr. High", "High School", "Young Adult", "20's", "30's", "40's", "50's", "60's", "Retired"],
 		gender: ["Co-ed", "Men", "Women"],
 		parking: ["Street", "Parking Lot", "Parking Ramp", "Handicap", "Drop-off / Pick-up Zone"],
-		ministries: ["Sunday School", "Youth Group", "Young Adults", "Small Groups", "Life Groups", "Support Groups", "Alpha"],
+		ministries: ["Sunday School", "Youth Groups", "Young Adults", "Small Groups", "Life Groups", "Support Groups", "Alpha"],
 		other_services: ["Child Care", "First Communion", "Wedding Ceremony's", "Marriage Counseling", "Financial Consult", "Event / Space Rental"],
 		average_attendance: 0,
 		ambiance: ["Contemporary", "Traditional", "Both-Separate", "Both-Combined"],

@@ -31,6 +31,12 @@ class SearchBar extends Component{
 	onChange = e => {
 		if(e.target.id === 'search_radius')
 			this.setState({[e.target.id]: parseInt(e.target.value)});
+		if(e.target.id === 'search_category'){
+			this.props.setSearchCriteria({
+				category: e.target.value,
+			});
+			this.setState({[e.target.id]: e.target.value});
+		}
 		else
 			this.setState({[e.target.id]: e.target.value});
 	};

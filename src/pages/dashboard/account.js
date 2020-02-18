@@ -334,7 +334,7 @@ class Account extends Component{
 								<div className="flexdiv-leftright panel underline">
 									<h5 className="container-title">Account</h5>
 								</div>
-								<div className={"sub-container w3-col m12 l6"}>
+								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-left" : " h-right")}>
 									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Admin Info</h5>
@@ -424,9 +424,7 @@ class Account extends Component{
 											</Link>
 										</div>
 										<div className="table-row">
-											<div id="w-node-cb8d7881b980-27fc25a8" className="flexdiv-left">
-												<h4 className="table-header">Phone</h4>
-											</div>
+											<h4 className="table-header">Phone</h4>
 											<h4 className="table-item">
 												{this.state.editingPhone ?
 													<div className="w3-row">
@@ -460,7 +458,7 @@ class Account extends Component{
 										</div>
 									</div>
 								</div>
-								<div className={"sub-container w3-col m12 l6"}>
+								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-left" : " h-right")}>
 									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">User Info</h5>
@@ -542,7 +540,7 @@ class Account extends Component{
 															   id="user_password2" onChange={this.onChange}
 															   value={this.state.user_password2}/>
 													</div>
-													: "*".repeat(16)
+													: "*".repeat(8)
 												}
 												{this.state.errors.msg_password !== undefined ?
 													<div className="error-item">
@@ -559,15 +557,15 @@ class Account extends Component{
 											</Link>
 										</div>
 										<div className="table-row">
-											<div id="w-node-cb8d7881b980-27fc25a8" className="flexdiv-left">
-												<h4 className="table-header">Referral Code</h4>
+											<h4 className="table-header">
+												Referral Code
 												<Popup
 													trigger={<i style={{cursor: "pointer"}}
 																className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"right center"}>
 													<div>Tell visitors more about your community...</div>
 												</Popup>
-											</div>
+											</h4>
 											<h4 className="table-item">
 												{this.state.editingRefCode ?
 													<div className="w3-row">
@@ -612,7 +610,7 @@ class Account extends Component{
 								<div className="flexdiv-leftright panel underline">
 									<h5 className="container-title">Billing</h5>
 								</div>
-								<div className={"sub-container w3-col m12 l6"}>
+								<div className={"sub-container w3-col m12 l6 bottom"}>
 									<div className={"sub-content payment"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Account Summary</h5>
@@ -696,7 +694,7 @@ class Account extends Component{
 										</div>
 									</div>
 								</div>
-								<div className={"sub-container w3-col m12 l6"}>
+								<div className={"sub-container w3-col m12 l6 bottom"}>
 									<div className={"sub-content payment"}>
 										<div className="flexdiv-leftright card underline w3-row">
 											<h5 className="container-header w3-col s10">Payment Method</h5>

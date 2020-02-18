@@ -53,11 +53,11 @@ class ProfileContainer extends Component{
 					</div>
 					<div className="profile-info">
 						<div data-collapse="all" data-animation="default" data-duration="400"
-							 className="w-nav">
+							 className="w-nav profile-info-header">
 							<h3 className="community-name">
 								{this.props.auth.user.fname} {this.props.auth.user.lname}
 							</h3>
-							<Link to="#" className={"w3-right"} onClick={this.toggleMenu}>
+							<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
 								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 							</Link>
 							<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"

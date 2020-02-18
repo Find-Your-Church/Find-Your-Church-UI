@@ -59,6 +59,10 @@
 	font-family: 'Source Sans Pro', sans-serif;
 }
 
+.members-container ._10top-div.icons {
+	margin-top: 0;
+}
+
 .members-container .listing-grid {
 	display: -ms-grid;
 	display: grid;
@@ -95,6 +99,7 @@
 .members-container .profile-container {
 	min-width: auto;
 	width: auto;
+	max-width: 194px;
 	padding: 0;
 	border-style: solid;
 	border-width: 1px;
@@ -161,7 +166,7 @@
 }
 
 .members-container .profile-info {
-	padding: 10px;
+	padding: 0;
 	margin: 0;
 	border-style: none;
 	border-width: 1px;
@@ -245,7 +250,8 @@
 	-webkit-flex: 0 0 auto;
 	-ms-flex: 0 0 auto;
 	flex: 0 0 auto;
-	line-height: 16px;
+	font-size: 16px;
+	line-height: 18px;
 }
 
 .members-container .threedoticon {
