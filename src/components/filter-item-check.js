@@ -68,7 +68,7 @@ class FilterItemCheck extends Component{
 								return (
 									<label className="filter-option" key={this.props.filterName + index}>{item}
 										<input type="checkbox" id={this.props.filterName + "[" + index + "]"}
-											   value={index} onClick={this.onCheck}
+											   value={index} onClick={this.onCheck} onChange={this.onCheck}
 											   checked={this.checks[index] === '1'}
 										/>
 										<span className="filter-checkmark"
