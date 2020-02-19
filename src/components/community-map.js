@@ -17,17 +17,15 @@ class CommunityMap extends Component{
 				zoom = 14;
 				break;
 			case 2:
-				zoom = 13;
-				break;
 			case 3:
-				zoom = 12;
+				zoom = 13;
 				break;
 			case 4:
 			case 5:
-				zoom = 11;
+				zoom = 12;
 				break;
 			default:
-				zoom = 10;
+				zoom = 14;
 		}
 		return zoom; //
 	}
@@ -46,7 +44,7 @@ class CommunityMap extends Component{
 					   defaultCenter={{lat: this.props.criteria.lat, lng: this.props.criteria.lng}}
 					   center={{lat: this.props.criteria.lat, lng: this.props.criteria.lng}}
 			>
-				{this.props.community.search_results.map((item, index) => {
+				{this.props.results.map((item, index) => {
 					return (
 						<Marker key={"marker" + index} onClick={() => this.onClickMarker(index)}
 								position={{
@@ -58,6 +56,7 @@ class CommunityMap extends Component{
 										"/img/icon/icon-address-marker-hover.svg"
 										: "/img/icon/icon-address-marker.svg"
 								}}
+								zIndex={this.props.community.picking === index ? 1000 : 900}
 						/>
 					)
 				})}

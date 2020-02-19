@@ -93,6 +93,15 @@ class CommunityStep extends Component{
 		this.fixURL = this.fixURL.bind(this);
 	}
 
+	componentDidMount(){
+		geocodeByAddress(this.state.address)
+			.then(results => getLatLng(results[0]))
+			.then(latLng => {
+				this.setState({coordinate: latLng, passable: true});
+			})
+			.catch(error => console.error('Error', error));
+	}
+
 	getDaysInfo = (checks) => {
 		this.setState({days: checks})
 	};
@@ -303,7 +312,7 @@ class CommunityStep extends Component{
 			support_type: this.state.support_type
 		};
 
-		this.props.createCommunityStep(this.props.location.state === undefined, this.props.auth.user.id, this.state.community_id, info_1, info_2, this.props.history);
+		this.props.createCommunityStep(!this.state.is_editing, this.props.auth.user.id, this.state.community_id, info_1, info_2, this.props.history);
 	};
 
 	removeSlide(index){

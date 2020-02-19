@@ -26,10 +26,11 @@ class MyCommunities extends Component{
 				<div className="dashboard-container">
 					<div className="containerheader-div underline">
 						<div className="flexdiv-left">
-							<h5 className="container-header">
+							<div className="container-header">
 								{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities
 								{this.props.status === "active" ? (
-									<span className={"counter-part w3-small w3-text-grey w3-border-left"}>
+									<div className={"counter-part"}>
+										<div className={"counter-part-border"}>
 										{formatNumber(this.props.community.my_communities.active.length)}
 										&nbsp;/&nbsp;
 										{this.props.community.subscription ?
@@ -37,15 +38,16 @@ class MyCommunities extends Component{
 											: (this.props.community.is_sending ?
 												<i className="fas fa-spinner fa-spin"> </i>
 												: "00")}
-									</span>
+										</div>
+									</div>
 								) : null}
-							</h5>
-							<Popup
-								trigger={<i style={{cursor: "pointer"}}
-											className={"fas fa-question-circle tooltip-icon"}> </i>}
-								position={this.props.status === "active" ? "left top" : "left bottom"}>
-								<div>Tell visitors more about your community...</div>
-							</Popup>
+								<Popup
+									trigger={<i style={{cursor: "pointer"}}
+												className={"fas fa-question-circle tooltip-icon"}> </i>}
+									position={this.props.status === "active" ? "left top" : "left bottom"}>
+									<div>Tell visitors more about your community...</div>
+								</Popup>
+							</div>
 						</div>
 					</div>
 					<div className="div-20top">

@@ -14,8 +14,6 @@ class SearchBar extends Component{
 		super(props);
 
 		this.state = {
-			searchable: false,
-
 			search_category: this.props.community.criteria.category,
 			search_radius: this.props.community.criteria.radius,
 			my_address: this.props.community.criteria.address,
@@ -29,13 +27,31 @@ class SearchBar extends Component{
 	}
 
 	onChange = e => {
-		if(e.target.id === 'search_radius')
-			this.setState({[e.target.id]: parseInt(e.target.value)});
+		if(e.target.id === 'search_radius'){
+			const rad = parseInt(e.target.value);
+			this.setState({[e.target.id]: rad});
+
+			// this.props.setSearchCriteria({
+			// 	radius: rad,
+			// });
+			//
+			// this.props.doSearchCommunities({
+			// 	...this.props.community.criteria,
+			// 	radius: rad,
+			// });
+		}
 		if(e.target.id === 'search_category'){
 			this.props.setSearchCriteria({
 				category: e.target.value,
 			});
 			this.setState({[e.target.id]: e.target.value});
+			// this.props.setSearchCriteria({
+			// 	category: e.target.value,
+			// });
+			// this.props.doSearchCommunities({
+			// 	...this.props.community.criteria,
+			// 	category: e.target.value,
+			// });
 		}
 		else
 			this.setState({[e.target.id]: e.target.value});
@@ -50,20 +66,28 @@ class SearchBar extends Component{
 		// remove ", USA" from address.
 		const trimmed_address = address.replace(", USA", "");
 		self.setState({my_address: trimmed_address});
+
 		geocodeByAddress(address)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
-				self.setState({my_lat: latLng.lat, my_lng: latLng.lng, searchable: true});
-				this.props.setSearchCriteria({
-					lat: latLng.lat,
-					lng: latLng.lng,
-				});
+				self.setState({my_lat: latLng.lat, my_lng: latLng.lng});
+				// this.props.setSearchCriteria({
+				// 	address: trimmed_address,
+				// 	lat: latLng.lat,
+				// 	lng: latLng.lng,
+				// });
+				// this.props.doSearchCommunities({
+				// 	...this.props.community.criteria,
+				// 	address: trimmed_address,
+				// 	lat: latLng.lat,
+				// 	lng: latLng.lng,
+				// });
 			})
 			.catch(error => console.error('Error', error));
 	};
 
 	handleSearch = () => {
-		if(this.state.searchable){
+		if(this.state.my_lat && this.state.my_lng){
 			const clear_obj = {
 				filter: {
 					days: "0".repeat(community_config.FILTERS.days.length),
@@ -101,12 +125,13 @@ class SearchBar extends Component{
 			});
 
 			// go to the search results!
-			this.setState({searchable: false});
 			this.setState({ready2go: true});
 		}
 	};
 
 	render(){
+		const searchable = this.state.my_lat && this.state.my_lng;
+
 		return this.state.ready2go && !this.props.init ? (
 			<Redirect to={"/search-results"}/>
 		) : (
@@ -183,9 +208,9 @@ class SearchBar extends Component{
 						)}
 					</PlacesAutocomplete>
 					<Link to={"#"}
-						  onClick={this.state.searchable ? this.handleSearch : null}
+						  onClick={searchable ? this.handleSearch : null}
 						  className={"search-form-button w-button"}
-						  style={{cursor: (this.state.searchable ? "pointer" : "not-allowed")}}
+						  style={{cursor: (searchable ? "pointer" : "not-allowed")}}
 					>
 						{this.props.buttonTitle}
 					</Link>

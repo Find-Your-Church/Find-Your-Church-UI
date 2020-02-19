@@ -257,6 +257,7 @@ class SearchResults extends Component{
 								  loadingElement={<div/>}
 								  containerElement={<div className="map-body"/>}
 								  mapElement={<div className="map-content"/>}
+								  results={results}
 								  handleScroll={this.clickMarker}
 					/>
 					<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
@@ -339,9 +340,9 @@ class SearchResults extends Component{
 								<div className={"w3-row search-result-headline"}>
 									<div className={"search-result-container-header w3-col l10"}>
 									<span style={{fontWeight: "bold"}}>
-										{isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category}
+										{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
 									</span>
-										&nbsp;near&nbsp;
+										&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
 										<span
 											style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>
 									</div>

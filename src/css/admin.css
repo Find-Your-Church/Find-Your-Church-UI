@@ -46,9 +46,16 @@
 }
 
 .admin-right .counter-part {
-	margin-left: 10px;
+	display: inline-block;
 	padding-left: 10px;
+}
+
+.admin-right .counter-part-border {
+	font-family: Roboto, sans-serif;
 	font-size: 12px;
+	padding-left: 10px;
+	color: #333;
+	border-left: 1px solid #ccc;
 }
 
 @media screen and (max-width: 600px) {
