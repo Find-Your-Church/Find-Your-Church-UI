@@ -31,27 +31,27 @@ class SearchBar extends Component{
 			const rad = parseInt(e.target.value);
 			this.setState({[e.target.id]: rad});
 
-			// this.props.setSearchCriteria({
-			// 	radius: rad,
-			// });
-			//
-			// this.props.doSearchCommunities({
-			// 	...this.props.community.criteria,
-			// 	radius: rad,
-			// });
+			this.props.setSearchCriteria({
+				radius: rad,
+			});
+
+			this.props.doSearchCommunities({
+				...this.props.community.criteria,
+				radius: rad,
+			});
 		}
 		if(e.target.id === 'search_category'){
 			this.props.setSearchCriteria({
 				category: e.target.value,
 			});
 			this.setState({[e.target.id]: e.target.value});
-			// this.props.setSearchCriteria({
-			// 	category: e.target.value,
-			// });
-			// this.props.doSearchCommunities({
-			// 	...this.props.community.criteria,
-			// 	category: e.target.value,
-			// });
+			this.props.setSearchCriteria({
+				category: e.target.value,
+			});
+			this.props.doSearchCommunities({
+				...this.props.community.criteria,
+				category: e.target.value,
+			});
 		}
 		else
 			this.setState({[e.target.id]: e.target.value});
@@ -71,17 +71,17 @@ class SearchBar extends Component{
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
 				self.setState({my_lat: latLng.lat, my_lng: latLng.lng});
-				// this.props.setSearchCriteria({
-				// 	address: trimmed_address,
-				// 	lat: latLng.lat,
-				// 	lng: latLng.lng,
-				// });
-				// this.props.doSearchCommunities({
-				// 	...this.props.community.criteria,
-				// 	address: trimmed_address,
-				// 	lat: latLng.lat,
-				// 	lng: latLng.lng,
-				// });
+				this.props.setSearchCriteria({
+					address: trimmed_address,
+					lat: latLng.lat,
+					lng: latLng.lng,
+				});
+				this.props.doSearchCommunities({
+					...this.props.community.criteria,
+					address: trimmed_address,
+					lat: latLng.lat,
+					lng: latLng.lng,
+				});
 			})
 			.catch(error => console.error('Error', error));
 	};
