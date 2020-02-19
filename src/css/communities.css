@@ -80,7 +80,7 @@
 }
 
 .communities-body .container-header {
-	width: calc(100% - 20px);
+	width: 100%;
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 0;

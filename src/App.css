@@ -33,6 +33,10 @@ a {
 	z-index: 1000;
 }
 
+.site-header .header-3lines-menu {
+	padding-right: 4px !important;
+}
+
 .header-3lines-menu.oos {
 	display: none;
 }

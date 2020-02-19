@@ -33,14 +33,16 @@
 .steps-body {
 	margin-top: 59px;
 	min-height: calc(100vh - 200px);
-	padding: 20px;
+	padding: 0;
 	background-color: #e6e6e6;
 }
 
 .steps-body .view-wrapper {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 1040px;
+	max-width: 1080px;
+	padding: 20px;
+	background-color: #f3f3f3;
 }
 
 .steps-body .view-wrapper .info-body {
@@ -51,10 +53,17 @@
 	margin-bottom: 18px !important;
 }
 
+.steps-body .container-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1080px;
+	padding: 20px;
+	background-color: #f3f3f3;
+}
+
 .steps-body .container-inline {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 1040px;
 	position: relative;
 }
 
@@ -202,13 +211,13 @@
 
 .info-body .right-part::-webkit-scrollbar {
 	width: 6px;
-	background-color: #e6e6e6;
+	background-color: #f8f8f8;
 }
 
 .info-body .right-part::-webkit-scrollbar-thumb {
 	width: 6px;
 	border-radius: 6px;
-	background-color: #ccc;
+	background-color: #e6e6e6;
 }
 
 .info-body .right-part.view {
@@ -377,7 +386,7 @@
 }
 
 .steps-body .right-part .tab .w3-col {
-	padding: 9px 30px 9px;
+	padding: 0 30px 9px;
 	text-align: center;
 	font-size: 18px;
 	font-weight: bold;

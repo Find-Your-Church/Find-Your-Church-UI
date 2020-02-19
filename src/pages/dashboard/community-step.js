@@ -323,381 +323,386 @@ class CommunityStep extends Component{
 		return (
 			<div>
 				<main className="steps-body">
-					<div className="container-inline">
-						<h3 className="header3 w3-bar">
-							<div className="create-menu w3-bar-item w3-left">
-								<Link to="/dashboard" className="w3-button cancel">
-									{this.state.is_editing ? ("Back") : "Cancel"}
-								</Link>
-							</div>
-							<div className="create-menu w3-bar-item w3-center">
-								{this.state.is_editing ?
-									(<>Editing {this.state.data.community_name}</>)
-									: "Create a New Community"
-								}
+					<div className={"container-wrapper"}>
+						<div className="container-inline">
+							<h3 className="header3 w3-bar">
+								<div className="create-menu w3-bar-item w3-left">
+									<Link to="/dashboard" className="w3-button cancel">
+										{this.state.is_editing ? ("Back") : "Cancel"}
+									</Link>
+								</div>
+								<div className="create-menu w3-bar-item w3-center">
+									{this.state.is_editing ?
+										(<>Editing {this.state.data.community_name}</>)
+										: "Create a New Community"
+									}
 
+								</div>
+								<div className="create-menu w3-bar-item w3-right">
+									<Link to="#" className="w3-button w3-right save"
+										  onClick={this.onSubmitCommunity}>
+										{this.state.is_editing ? ("Save") : "Create"}
+									</Link>
+								</div>
+							</h3>
+							<div className="w-form-done">
+								<div>Thank you! Your submission has been received!</div>
 							</div>
-							<div className="create-menu w3-bar-item w3-right">
-								<Link to="#" className="w3-button w3-right save"
-									  onClick={this.onSubmitCommunity}>
-									{this.state.is_editing ? ("Save") : "Create"}
-								</Link>
+							<div className={"w-form-fail"}
+								 style={{display: this.state.showSizeError ? "block" : "none"}}>
+								Picture file size cannot be larger than 3 MB.
 							</div>
-						</h3>
-						<div className="w-form-done">
-							<div>Thank you! Your submission has been received!</div>
-						</div>
-						<div className={"w-form-fail"}
-							 style={{display: this.state.showSizeError ? "block" : "none"}}>
-							Picture file size cannot be larger than 3 MB.
-						</div>
-						<div className={"w-form-fail"}
-							 style={{display: this.state.showCountError ? "block" : "none"}}>
-							Cannot upload more than {app_config.MAX_PIC_COUNT} pictures.
-						</div>
-						<div className={"w-form-fail"}
-							 style={{display: this.state.showTotalSizeError ? "block" : "none"}}>
-							Total size cannot be larger
-							than {Math.round(app_config.MAX_TOTAL_SIZE / 1048576)} MB.
-						</div>
-						{!isEmpty(this.props.errors.msg_community) || this.state.error_community_name || this.state.error_community_category || this.state.error_community_address ?
-							<div className="w-form-fail" style={{display: "block"}}>
-								<div>{this.props.errors.msg_community}</div>
-								<div>{this.state.error_community_name ?
-									"Community name required" : null}</div>
-								<div>{this.state.error_community_category ?
-									"Category is required" : null}</div>
-								<div>{this.state.error_community_address ?
-									"Community address is required" : null}</div>
+							<div className={"w-form-fail"}
+								 style={{display: this.state.showCountError ? "block" : "none"}}>
+								Cannot upload more than {app_config.MAX_PIC_COUNT} pictures.
 							</div>
-							: null}
-						<div className="info-body w3-row">
-							<div className="left-part w3-half">
-								<div className={"community-info-container"}>
-									{this.state.pictures.length > 1 ? (
-										<div id={"slider-frame"} className="slide-container">
-											<Slide {...this.slide_options}>
-												{this.state.pictures.map((pic, index) => {
-													return (
-														<div className="each-slide" key={index}>
-															<div style={{backgroundImage: `url(${pic})`}}>
+							<div className={"w-form-fail"}
+								 style={{display: this.state.showTotalSizeError ? "block" : "none"}}>
+								Total size cannot be larger
+								than {Math.round(app_config.MAX_TOTAL_SIZE / 1048576)} MB.
+							</div>
+							{!isEmpty(this.props.errors.msg_community) || this.state.error_community_name || this.state.error_community_category || this.state.error_community_address ?
+								<div className="w-form-fail" style={{display: "block"}}>
+									<div>{this.props.errors.msg_community}</div>
+									<div>{this.state.error_community_name ?
+										"Community name required" : null}</div>
+									<div>{this.state.error_community_category ?
+										"Category is required" : null}</div>
+									<div>{this.state.error_community_address ?
+										"Community address is required" : null}</div>
+								</div>
+								: null}
+							<div className="info-body w3-row">
+								<div className="left-part w3-half">
+									<div className={"community-info-container"}>
+										{this.state.pictures.length > 1 ? (
+											<div id={"slider-frame"} className="slide-container">
+												<Slide {...this.slide_options}>
+													{this.state.pictures.map((pic, index) => {
+														return (
+															<div className="each-slide" key={index}>
+																<div style={{backgroundImage: `url(${pic})`}}>
 																		<span className={"slide-remove w3-button"}
 																			  title={"Remove this picture"}
 																			  onClick={() => this.removeSlide(index)}>&times;</span>
+																</div>
 															</div>
-														</div>
-													);
-												})}
-											</Slide>
-										</div>
-									) : (this.state.pictures.length > 0 ? (
-										<div id={"slider-frame"} className="slide-container">
-											<div className="each-slide">
-												<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+														);
+													})}
+												</Slide>
+											</div>
+										) : (this.state.pictures.length > 0 ? (
+											<div id={"slider-frame"} className="slide-container">
+												<div className="each-slide">
+													<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
 													<span className={"slide-remove w3-button"}
 														  title={"Remove this picture"}
 														  onClick={() => this.removeSlide(0)}>&times;</span>
-												</div>
-											</div>
-										</div>
-									) : (
-										<img id={"slider-frame"}
-											 className={"community-picture"}
-											 alt="Community" title="Community pictures"
-											 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
-											 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
-										/>
-									))}
-									<label className={"file-btn-container w3-button"}
-										   title={"The picture ratio should be 16:9."}>
-										Upload New Picture
-										<FileBase id="btn-upload" type="file" className="upload-button w-button"
-												  multiple={false} onDone={this.getBaseFile.bind(this)} height="38"/>
-									</label>
-									<div className="basic-info">
-										<div className="community-info-title">
-											<h4>Community Info</h4>
-											<Popup
-												trigger={<i style={{cursor: "pointer"}}
-															className={"fas fa-question-circle tooltip-icon"}> </i>}
-												position={"left center"}>
-												<div>Tell visitors more about your community...</div>
-											</Popup>
-										</div>
-										<div className="community-info-body">
-											<input type="text" className="form-input communityname w-input"
-												   maxLength="50"
-												   onChange={this.onChange}
-												   placeholder="Community name"
-												   id="community_name"
-												   value={this.state.community_name}
-												   style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
-												   required=""/>
-											<select className="form-select category w-select"
-													onChange={this.onChange}
-													id="category"
-													defaultValue={this.state.category}
-													style={{
-														backgroundImage: "url('/img/icon-down3.svg')",
-														borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
-													}}
-													required="">
-												<option value="">Category...</option>
-												{
-													community_config.CATEGORIES.map(cat => {
-														return (
-															<option value={cat} key={cat}>{cat}</option>
-														);
-													})
-												}
-											</select>
-											<PlacesAutocomplete
-												value={this.state.address}
-												class={"w3-input"}
-												onChange={this.onChangeAddress}
-												onSelect={this.handleSelect}
-											>
-												{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-													<>
-														<input className="form-input w-input"
-															   disabled={this.state.is_editing}
-															   style={{borderBottom: this.state.error_community_address ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
-															   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
-															   {...getInputProps({placeholder: "Address, City or Zip Code"})}
-															   required=""/>
-														<div className={"address-candidates"}>
-															{loading ? <div>...loading</div> : null}
-															{suggestions.map((suggestion) => {
-																const style = {
-																	backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
-																	backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-																};
-
-																return (
-																	<div className={"address-item"}
-																		 onClick={() => alert(suggestion.terms)}
-																		 {...getSuggestionItemProps(suggestion, {style})}>
-																		{suggestion.description}
-																	</div>
-																);
-															})}
-														</div>
-													</>
-												)}
-											</PlacesAutocomplete>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className="right-part w3-half">
-								<div className={"tab w3-row"}>
-									<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
-										 onClick={this.selectTabDetails}>Details
-									</div>
-									<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-										 onClick={this.selectTabMembers}>Admin / Members
-									</div>
-								</div>
-								{this.state.showedMembers ?
-									(
-										<ListMembers editable={true}/>
-									)
-									: (
-										<form
-											id="wf-form-New-Community" name="wf-form-New-Community"
-											data-name="New Community" className="form1 w3-animate-opacity">
-											<div className={"view-paragraph"}>
-												<div className="flexdiv-left labels">
-													<h4 className="form-header">About</h4>
-													<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"left center"}>
-														<div>Tell visitors more about your community...</div>
-													</Popup>
-												</div>
-												<textarea
-													onChange={this.onChange}
-													placeholder="Tell visitors more about your community such as who you are, when you meet, what to expect, or anything else you'd like them to know!"
-													maxLength="5000"
-													id="about" required=""
-													value={this.state.about}
-													className="textarea w-input">
-											</textarea>
-											</div>
-											<div className={"view-paragraph"}>
-												<div className="flexdiv-left labels">
-													<h4 className="form-header">Community Contact</h4>
-													<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"left center"}>
-														<div>Tell visitors more about your community...</div>
-													</Popup>
-												</div>
-												<div className="input-div w3-row">
-													<input type="text"
-														   className="form-input w-input social-input w3-col l12"
-														   maxLength="256"
-														   style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}
-														   onChange={this.onChange}
-														   placeholder="Contact name"
-														   id="community_contact"
-														   value={this.state.community_contact}
-														   required=""/>
-													<input type="email"
-														   className="form-input w-input social-input w3-half"
-														   maxLength="256"
-														   style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}
-														   onChange={this.onChange}
-														   placeholder="Email"
-														   value={this.state.email}
-														   id="email"/>
-													<input type="text"
-														   className="form-input w-input social-input w3-half"
-														   maxLength="256"
-														   style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}
-														   onChange={this.onChange}
-														   pattern={app_config.US_PHONE_PATTERN}
-														   placeholder={"Phone"}
-														   title={"(123)456-7890 or 123-456-7890"}
-														   value={this.state.phone}
-														   id="phone"/>
-												</div>
-											</div>
-											<div className={"view-paragraph"}>
-												<div className="flexdiv-left labels">
-													<h4 className="form-header">Links and Resources</h4>
-													<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"left center"}>
-														<div>Tell visitors more about your community...</div>
-													</Popup>
-												</div>
-												<div className="input-div w3-row">
-													{community_config.SOCIALS.map(item => {
-														const key_name = item.toLowerCase();
-														let link_placeholder = `${item}`;
-														switch(key_name){
-															case 'facebook':
-																link_placeholder += " page link";
-																break;
-															case 'instagram':
-																link_placeholder += " username";
-																break;
-															case 'twitter':
-																link_placeholder += " handle";
-																break;
-															default:
-																link_placeholder += " link";
-														}
-
-														return (
-															<input type="url" key={key_name}
-																   className="form-input w-input w3-half social-input"
-																   maxLength="256"
-																   onBlur={this.fixURL}
-																   style={{backgroundImage: "url('/img/social/icon-" + key_name + ".svg')"}}
-																   onChange={this.onChange}
-																   placeholder={link_placeholder}
-																   value={this.state[key_name]}
-																   id={key_name}/>
-														);
-													})}
-												</div>
-											</div>
-											<div className={"view-paragraph edit"}>
-												<div className="flexdiv-left labels">
-													<h4 className="form-header">More Info</h4>
-													<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"left center"}>
-														<div>Tell visitors more about your community...</div>
-													</Popup>
-												</div>
-												<div className="input-div">
-													<FilterItemCheck filterTitle="Day(s)" filterName="days"
-																	 send={this.getDaysInfo}
-																	 value={this.state.days}
-																	 items={community_config.FILTERS.days}/>
-													<FilterItemCheck filterTitle="Time(s)" filterName="times"
-																	 send={this.getTimesInfo}
-																	 value={this.state.times}
-																	 items={community_config.FILTERS.times}/>
-													<FilterItemRadio filterTitle="Frequency" filterName="frequency"
-																	 send={this.getFrequencyInfo}
-																	 value={this.state.frequency}
-																	 items={community_config.FILTERS.frequency}/>
-													<FilterItemCheck filterTitle="Age(s)" filterName="ages"
-																	 send={this.getAgesInfo}
-																	 value={this.state.ages}
-																	 items={community_config.FILTERS.ages}/>
-													<FilterItemRadio filterTitle="Gender" filterName="gender"
-																	 send={this.getGenderInfo}
-																	 value={this.state.gender}
-																	 items={community_config.FILTERS.gender}/>
-													<FilterItemCheck filterTitle="Parking" filterName="parking"
-																	 send={this.getParkingInfo}
-																	 value={this.state.parking}
-																	 items={community_config.FILTERS.parking}/>
-													{this.state.selectedChurch ?
-														<FilterItemCheck filterTitle="Other Ministries"
-																		 filterName="ministries"
-																		 collapsed={!this.state.selectedChurch}
-																		 send={this.getMinistriesInfo}
-																		 value={this.state.ministries}
-																		 items={community_config.FILTERS.ministries}/>
-														: null}
-													{this.state.selectedChurch ?
-														<FilterItemCheck filterTitle="Other Services"
-																		 filterName="other_services"
-																		 collapsed={!this.state.selectedChurch}
-																		 send={this.getOtherServicesInfo}
-																		 value={this.state.other_services}
-																		 items={community_config.FILTERS.other_services}/>
-														: null}
-													<div className="filter-div">
-														<div className="flexdiv-left labels">
-															<label className="filter-label">Average Attendance</label>
-														</div>
-														<input type="number" className="attendance-input w-input"
-															   id="average_attendance"
-															   onChange={this.onChange}
-															   min={"0"}
-															   value={this.state.average_attendance}
-															   placeholder="0"/>
 													</div>
-													{this.state.selectedChurch ?
-														<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
-																		 collapsed={!this.state.selectedChurch}
-																		 send={this.getAmbianceInfo}
-																		 value={this.state.ambiance}
-																		 items={community_config.FILTERS.ambiance}/>
-														: null}
-													{this.state.selectedEvent ?
-														<FilterItemRadio filterTitle="Event Type"
-																		 filterName="event_type"
-																		 collapsed={!this.state.selectedEvent}
-																		 send={this.getEventTypeInfo}
-																		 value={this.state.event_type}
-																		 items={community_config.FILTERS.event_type}/>
-														: null}
-													{this.state.selectedSupportGroup ?
-														<FilterItemRadio filterTitle="Support Type"
-																		 filterName="support_type"
-																		 collapsed={!this.state.selectedSupportGroup}
-																		 send={this.getSupportTypeInfo}
-																		 value={this.state.support_type}
-																		 items={community_config.FILTERS.support_type}/>
-														: null}
 												</div>
-												<input type="submit" value="Create" data-wait="Please wait..."
-													   className="form-submit create w-button w3-hide"/>
 											</div>
-										</form>
-									)}
+										) : (
+											<img id={"slider-frame"}
+												 className={"community-picture"}
+												 alt="Community" title="Community pictures"
+												 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
+												 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
+											/>
+										))}
+										<label className={"file-btn-container w3-button"}
+											   title={"The picture ratio should be 16:9."}>
+											Upload New Picture
+											<FileBase id="btn-upload" type="file" className="upload-button w-button"
+													  multiple={false} onDone={this.getBaseFile.bind(this)}
+													  height="38"/>
+										</label>
+										<div className="basic-info">
+											<div className="community-info-title">
+												<h4>Community Info</h4>
+												<Popup
+													trigger={<i style={{cursor: "pointer"}}
+																className={"fas fa-question-circle tooltip-icon"}> </i>}
+													position={"left center"}>
+													<div>Tell visitors more about your community...</div>
+												</Popup>
+											</div>
+											<div className="community-info-body">
+												<input type="text" className="form-input communityname w-input"
+													   maxLength="50"
+													   onChange={this.onChange}
+													   placeholder="Community name"
+													   id="community_name"
+													   value={this.state.community_name}
+													   style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+													   required=""/>
+												<select className="form-select category w-select"
+														onChange={this.onChange}
+														id="category"
+														defaultValue={this.state.category}
+														style={{
+															backgroundImage: "url('/img/icon-down3.svg')",
+															borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
+														}}
+														required="">
+													<option value="">Category...</option>
+													{
+														community_config.CATEGORIES.map(cat => {
+															return (
+																<option value={cat} key={cat}>{cat}</option>
+															);
+														})
+													}
+												</select>
+												<PlacesAutocomplete
+													value={this.state.address}
+													class={"w3-input"}
+													onChange={this.onChangeAddress}
+													onSelect={this.handleSelect}
+												>
+													{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+														<>
+															<input className="form-input w-input"
+																   disabled={this.state.is_editing}
+																   style={{borderBottom: this.state.error_community_address ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+																   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
+																   {...getInputProps({placeholder: "Address, City or Zip Code"})}
+																   required=""/>
+															<div className={"address-candidates"}>
+																{loading ? <div>...loading</div> : null}
+																{suggestions.map((suggestion) => {
+																	const style = {
+																		backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
+																		backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																	};
+
+																	return (
+																		<div className={"address-item"}
+																			 onClick={() => alert(suggestion.terms)}
+																			 {...getSuggestionItemProps(suggestion, {style})}>
+																			{suggestion.description}
+																		</div>
+																	);
+																})}
+															</div>
+														</>
+													)}
+												</PlacesAutocomplete>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="right-part w3-half">
+									<div className={"tab w3-row"}>
+										<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
+											 onClick={this.selectTabDetails}>Details
+										</div>
+										<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
+											 onClick={this.selectTabMembers}>Admin / Members
+										</div>
+									</div>
+									{this.state.showedMembers ?
+										(
+											<ListMembers editable={true}/>
+										)
+										: (
+											<form
+												id="wf-form-New-Community" name="wf-form-New-Community"
+												data-name="New Community" className="form1 w3-animate-opacity">
+												<div className={"view-paragraph"}>
+													<div className="flexdiv-left labels">
+														<h4 className="form-header">About</h4>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
+													</div>
+													<textarea
+														onChange={this.onChange}
+														placeholder="Tell visitors more about your community such as who you are, when you meet, what to expect, or anything else you'd like them to know!"
+														maxLength="5000"
+														id="about" required=""
+														value={this.state.about}
+														className="textarea w-input">
+											</textarea>
+												</div>
+												<div className={"view-paragraph"}>
+													<div className="flexdiv-left labels">
+														<h4 className="form-header">Community Contact</h4>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
+													</div>
+													<div className="input-div w3-row">
+														<input type="text"
+															   className="form-input w-input social-input w3-col l12"
+															   maxLength="256"
+															   style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}
+															   onChange={this.onChange}
+															   placeholder="Contact name"
+															   id="community_contact"
+															   value={this.state.community_contact}
+															   required=""/>
+														<input type="email"
+															   className="form-input w-input social-input w3-half"
+															   maxLength="256"
+															   style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}
+															   onChange={this.onChange}
+															   placeholder="Email"
+															   value={this.state.email}
+															   id="email"/>
+														<input type="text"
+															   className="form-input w-input social-input w3-half"
+															   maxLength="256"
+															   style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}
+															   onChange={this.onChange}
+															   pattern={app_config.US_PHONE_PATTERN}
+															   placeholder={"Phone"}
+															   title={"(123)456-7890 or 123-456-7890"}
+															   value={this.state.phone}
+															   id="phone"/>
+													</div>
+												</div>
+												<div className={"view-paragraph"}>
+													<div className="flexdiv-left labels">
+														<h4 className="form-header">Links and Resources</h4>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
+													</div>
+													<div className="input-div w3-row">
+														{community_config.SOCIALS.map(item => {
+															const key_name = item.toLowerCase();
+															let link_placeholder = `${item}`;
+															switch(key_name){
+																case 'facebook':
+																	link_placeholder += " page link";
+																	break;
+																case 'instagram':
+																	link_placeholder += " username";
+																	break;
+																case 'twitter':
+																	link_placeholder += " handle";
+																	break;
+																default:
+																	link_placeholder += " link";
+															}
+
+															return (
+																<input type="url" key={key_name}
+																	   className="form-input w-input w3-half social-input"
+																	   maxLength="256"
+																	   onBlur={this.fixURL}
+																	   style={{backgroundImage: "url('/img/social/icon-" + key_name + ".svg')"}}
+																	   onChange={this.onChange}
+																	   placeholder={link_placeholder}
+																	   value={this.state[key_name]}
+																	   id={key_name}/>
+															);
+														})}
+													</div>
+												</div>
+												<div className={"view-paragraph edit"}>
+													<div className="flexdiv-left labels">
+														<h4 className="form-header">More Info</h4>
+														<Popup
+															trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+															position={"left center"}>
+															<div>Tell visitors more about your community...</div>
+														</Popup>
+													</div>
+													<div className="input-div">
+														<FilterItemCheck filterTitle="Day(s)" filterName="days"
+																		 send={this.getDaysInfo}
+																		 value={this.state.days}
+																		 items={community_config.FILTERS.days}/>
+														<FilterItemCheck filterTitle="Time(s)" filterName="times"
+																		 send={this.getTimesInfo}
+																		 value={this.state.times}
+																		 items={community_config.FILTERS.times}/>
+														<FilterItemRadio filterTitle="Frequency" filterName="frequency"
+																		 send={this.getFrequencyInfo}
+																		 value={this.state.frequency}
+																		 items={community_config.FILTERS.frequency}/>
+														<FilterItemCheck filterTitle="Age(s)" filterName="ages"
+																		 send={this.getAgesInfo}
+																		 value={this.state.ages}
+																		 items={community_config.FILTERS.ages}/>
+														<FilterItemRadio filterTitle="Gender" filterName="gender"
+																		 send={this.getGenderInfo}
+																		 value={this.state.gender}
+																		 items={community_config.FILTERS.gender}/>
+														<FilterItemCheck filterTitle="Parking" filterName="parking"
+																		 send={this.getParkingInfo}
+																		 value={this.state.parking}
+																		 items={community_config.FILTERS.parking}/>
+														{this.state.selectedChurch ?
+															<FilterItemCheck filterTitle="Other Ministries"
+																			 filterName="ministries"
+																			 collapsed={!this.state.selectedChurch}
+																			 send={this.getMinistriesInfo}
+																			 value={this.state.ministries}
+																			 items={community_config.FILTERS.ministries}/>
+															: null}
+														{this.state.selectedChurch ?
+															<FilterItemCheck filterTitle="Other Services"
+																			 filterName="other_services"
+																			 collapsed={!this.state.selectedChurch}
+																			 send={this.getOtherServicesInfo}
+																			 value={this.state.other_services}
+																			 items={community_config.FILTERS.other_services}/>
+															: null}
+														<div className="filter-div">
+															<div className="flexdiv-left labels">
+																<label className="filter-label">Average
+																	Attendance</label>
+															</div>
+															<input type="number" className="attendance-input w-input"
+																   id="average_attendance"
+																   onChange={this.onChange}
+																   min={"0"}
+																   value={this.state.average_attendance}
+																   placeholder="0"/>
+														</div>
+														{this.state.selectedChurch ?
+															<FilterItemRadio filterTitle="Ambiance"
+																			 filterName="ambiance"
+																			 collapsed={!this.state.selectedChurch}
+																			 send={this.getAmbianceInfo}
+																			 value={this.state.ambiance}
+																			 items={community_config.FILTERS.ambiance}/>
+															: null}
+														{this.state.selectedEvent ?
+															<FilterItemRadio filterTitle="Event Type"
+																			 filterName="event_type"
+																			 collapsed={!this.state.selectedEvent}
+																			 send={this.getEventTypeInfo}
+																			 value={this.state.event_type}
+																			 items={community_config.FILTERS.event_type}/>
+															: null}
+														{this.state.selectedSupportGroup ?
+															<FilterItemRadio filterTitle="Support Type"
+																			 filterName="support_type"
+																			 collapsed={!this.state.selectedSupportGroup}
+																			 send={this.getSupportTypeInfo}
+																			 value={this.state.support_type}
+																			 items={community_config.FILTERS.support_type}/>
+															: null}
+													</div>
+													<input type="submit" value="Create" data-wait="Please wait..."
+														   className="form-submit create w-button w3-hide"/>
+												</div>
+											</form>
+										)}
+								</div>
 							</div>
 						</div>
 					</div>
