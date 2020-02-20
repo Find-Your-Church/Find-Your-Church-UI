@@ -13,6 +13,22 @@ class SearchBar extends Component{
 	constructor(props){
 		super(props);
 
+		this.clear_obj = {
+			filter: {
+				days: "0".repeat(community_config.FILTERS.days.length),
+				times: "0".repeat(community_config.FILTERS.times.length),
+				frequency: "0".repeat(community_config.FILTERS.frequency.length),
+				ages: "0".repeat(community_config.FILTERS.ages.length),
+				gender: "0".repeat(community_config.FILTERS.gender.length),
+				parking: "0".repeat(community_config.FILTERS.parking.length),
+				ministries: "0".repeat(community_config.FILTERS.ministries.length),
+				other_services: "0".repeat(community_config.FILTERS.other_services.length),
+				ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
+				event_type: "0".repeat(community_config.FILTERS.event_type.length),
+				support_type: "0".repeat(community_config.FILTERS.support_type.length),
+			}
+		};
+
 		this.state = {
 			search_category: this.props.community.criteria.category,
 			search_radius: this.props.community.criteria.radius,
@@ -33,11 +49,13 @@ class SearchBar extends Component{
 
 			this.props.setSearchCriteria({
 				radius: rad,
+				...this.clear_obj,
 			});
 
 			this.props.doSearchCommunities({
 				...this.props.community.criteria,
 				radius: rad,
+				...this.clear_obj,
 			});
 		}
 		if(e.target.id === 'search_category'){
@@ -47,10 +65,12 @@ class SearchBar extends Component{
 			this.setState({[e.target.id]: e.target.value});
 			this.props.setSearchCriteria({
 				category: e.target.value,
+				...this.clear_obj,
 			});
 			this.props.doSearchCommunities({
 				...this.props.community.criteria,
 				category: e.target.value,
+				...this.clear_obj,
 			});
 		}
 		else
@@ -75,12 +95,14 @@ class SearchBar extends Component{
 					address: trimmed_address,
 					lat: latLng.lat,
 					lng: latLng.lng,
+					...this.clear_obj,
 				});
 				this.props.doSearchCommunities({
 					...this.props.community.criteria,
 					address: trimmed_address,
 					lat: latLng.lat,
 					lng: latLng.lng,
+					...this.clear_obj,
 				});
 			})
 			.catch(error => console.error('Error', error));
@@ -88,22 +110,6 @@ class SearchBar extends Component{
 
 	handleSearch = () => {
 		if(this.state.my_lat && this.state.my_lng){
-			const clear_obj = {
-				filter: {
-					days: "0".repeat(community_config.FILTERS.days.length),
-					times: "0".repeat(community_config.FILTERS.times.length),
-					frequency: "0".repeat(community_config.FILTERS.frequency.length),
-					ages: "0".repeat(community_config.FILTERS.ages.length),
-					gender: "0".repeat(community_config.FILTERS.gender.length),
-					parking: "0".repeat(community_config.FILTERS.parking.length),
-					ministries: "0".repeat(community_config.FILTERS.ministries.length),
-					other_services: "0".repeat(community_config.FILTERS.other_services.length),
-					ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-					event_type: "0".repeat(community_config.FILTERS.event_type.length),
-					support_type: "0".repeat(community_config.FILTERS.support_type.length),
-				}
-			};
-
 			// -> /search-results
 			this.props.setSearchCriteria({
 				category: this.state.search_category,
@@ -111,7 +117,7 @@ class SearchBar extends Component{
 				address: this.state.my_address,
 				lat: this.state.my_lat,
 				lng: this.state.my_lng,
-				...clear_obj
+				...this.clear_obj,
 			});
 
 			this.props.doSearchCommunities({
@@ -121,7 +127,7 @@ class SearchBar extends Component{
 				address: this.state.my_address,
 				lat: this.state.my_lat,
 				lng: this.state.my_lng,
-				...clear_obj
+				...this.clear_obj,
 			});
 
 			// go to the search results!

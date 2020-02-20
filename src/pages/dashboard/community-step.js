@@ -34,6 +34,7 @@ class CommunityStep extends Component{
 		};
 
 		const p_obj = this.props.location.state;
+
 		this.state = {
 			showSizeError: false,
 			showCountError: false,
@@ -56,8 +57,8 @@ class CommunityStep extends Component{
 			category: p_obj === undefined ? "" : p_obj.obj.category,
 			address: p_obj === undefined ? "" : p_obj.obj.address,
 			coordinate: {
-				lat: null,
-				lng: null,
+				lat: p_obj === undefined ? null : p_obj.obj.coordinate.lat,
+				lng: p_obj === undefined ? null : p_obj.obj.coordinate.lng,
 			},
 			pictures: p_obj === undefined ? [] : p_obj.obj.pictures,
 			community_contact: p_obj === undefined ? "" : p_obj.obj.community_contact,
