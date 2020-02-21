@@ -23,6 +23,7 @@ class Home extends Component{
 						<SearchBar buttonTitle="Search"/>
 					</div>
 				</div>
+				{/*
 				<div className="block-50">
 					<div className="block-60">
 						<iframe className="embedly-embed"
@@ -90,6 +91,7 @@ class Home extends Component{
 				</div>
 				<div className="block-52 teal">
 				</div>
+				*/}
 				<SiteFooter/>
 			</main>
 		);
