@@ -1,4 +1,5 @@
-@import url("css/fonts/fonts.css");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body::-webkit-scrollbar {
 	width: 6px;

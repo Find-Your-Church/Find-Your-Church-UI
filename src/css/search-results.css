@@ -10,6 +10,8 @@ body {
 	line-height: 36px;
 	background-color: #e6e6e6;
 	border-bottom: 1px solid #ccc;
+	box-shadow: 0 1px 3px #888;
+	z-index: 100;
 }
 
 @media screen and (min-width: 991px) {
@@ -253,12 +255,16 @@ body {
 	}
 
 	#search-results-header {
+		padding-bottom: 2px;
 		height: auto;
 		border-bottom: solid 1px #cccccc;
+		box-shadow: 0 1px 3px #888;
+		z-index: 100;
 	}
 
 	#search-results-header .sort-group {
-		margin-top: 16px;
+		margin-top: 0;
+		line-height: 68px;
 	}
 
 	#search-results-header .sort-group * {
@@ -274,6 +280,7 @@ body {
 
 	.communities-container.search-results {
 		left: 0;
+		z-index: 0;
 	}
 
 	.communities-container {
@@ -294,8 +301,9 @@ body {
 
 	#search-results-header .filter-link {
 		float: left;
-		margin: 25px 0 0;
-		line-height: 16px;
+		margin: 0;
+		height: 68px;
+		line-height: 68px;
 		font-size: 18px;
 	}
 

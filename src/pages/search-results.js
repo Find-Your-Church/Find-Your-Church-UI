@@ -338,7 +338,7 @@ class SearchResults extends Component{
 						{results.length > 0 ? (
 							<div className="listing-grid dashboard">
 								<div className={"w3-row search-result-headline"}>
-									<div className={"search-result-container-header w3-col l10"}>
+									<div className={"search-result-container-header w3-col s10"}>
 									<span style={{fontWeight: "bold"}}>
 										{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
 									</span>
@@ -346,7 +346,7 @@ class SearchResults extends Component{
 										<span
 											style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>
 									</div>
-									<div className={"search-result-container-header-right w3-col l2"}>
+									<div className={"search-result-container-header-right w3-col s2"}>
 										Results ({results.length})
 									</div>
 								</div>

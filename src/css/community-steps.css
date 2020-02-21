@@ -260,7 +260,8 @@
 }
 
 .steps-body .slide-container .indicators {
-	margin-top: 8px;
+	margin: 2px 0 -10px;
+	height: 8px;
 }
 
 .steps-body .slide-container h3 {

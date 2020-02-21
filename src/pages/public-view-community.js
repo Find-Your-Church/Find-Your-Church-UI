@@ -28,6 +28,8 @@ class PublicViewCommunity extends Component{
 		const p_obj = this.props.location.state;
 		this.state = {
 			errors: {},
+			is_show_menu: false,
+
 			showedMembers: false,
 
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
@@ -59,6 +61,8 @@ class PublicViewCommunity extends Component{
 			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type
 		};
 
+		this.toggleMenu = this.toggleMenu.bind(this);
+		this.hideMenu = this.hideMenu.bind(this);
 		this.selectTabDetails = this.selectTabDetails.bind(this);
 		this.selectTabMembers = this.selectTabMembers.bind(this);
 	}
@@ -69,6 +73,14 @@ class PublicViewCommunity extends Component{
 		}
 		else
 			return null;
+	}
+
+	toggleMenu(){
+		this.setState({is_show_menu: !this.state.is_show_menu});
+	}
+
+	hideMenu(){
+		this.setState({is_show_menu: false});
 	}
 
 	selectTabDetails(e){
@@ -101,7 +113,7 @@ class PublicViewCommunity extends Component{
 								</h3>
 								<div className="left-part w3-col l6">
 									<div>
-										{this.state.pictures.length > 0 ? (
+										{this.state.pictures.length > 1 ? (
 												<div className="slide-container">
 													<Slide {...this.slide_options}>
 														{this.state.pictures.map((pic, index) => {
@@ -115,15 +127,47 @@ class PublicViewCommunity extends Component{
 													</Slide>
 												</div>
 											)
-											: (
+											: (this.state.pictures.length > 0 ? (
+												<div className="slide-container">
+													<div className="each-slide">
+														<div
+															style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+														</div>
+													</div>
+												</div>
+											) : (
 												<img
 													className={"community-picture"}
-													alt="Community" title="Community pictures"
+													alt="Community" title={this.state.community_name}
 													src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
-											)}
+											))}
 										<div className="basic-info view">
 											<div className="listingrow view" style={{position: "relative"}}>
 												<strong>{this.state.community_name}</strong>
+												<Link to="#" className={"menu-icon-3dot w3-right"}
+													  onClick={this.toggleMenu}>
+													<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+												</Link>
+												<nav role="navigation"
+													 className="w3-animate-opacity listing-navmenu view w-nav-menu"
+													 onClick={this.toggleMenu} onMouseLeave={this.hideMenu}
+													 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Request to Join
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Add to Favorites
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Copy Link
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Share
+													</Link>
+													<Link to="#" className="listing-navlink view w-nav-link">
+														Flag / Report
+													</Link>
+												</nav>
 											</div>
 											<div className="listingrow view">
 												{this.state.category}

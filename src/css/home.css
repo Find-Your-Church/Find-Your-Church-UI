@@ -35,10 +35,18 @@
 .search-form-header {
 	margin: 0 0 20px 0;
 	color: #fff;
-	font-size: 30px;
-	line-height: 28px;
+	font-family: Roboto, sans-serif;
+	font-size: 28px;
+	line-height: 32px;
 	font-weight: 700;
 	text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+	.search-form-header {
+		font-size: 32px;
+		line-height: 38px;
+	}
 }
 
 .search-form-container {
@@ -125,15 +133,14 @@ button:focus {
 	margin-top: 0;
 	margin-bottom: 0;
 	margin-left: 0;
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-left: 10px;
+	padding: 0 10px 0 0;
 	border: none;
 	background-color: #fff;
 	color: #333;
 	font-size: 16px;
 	line-height: 18px;
 	font-weight: 500;
+	border-radius: 0 !important;
 }
 
 #search-results-header .search-form-button {
@@ -189,7 +196,7 @@ button:focus {
 
 .search-form-dropdown {
 	padding-left: 10px;
-	padding-right: 20px;
+	padding-right: 14px;
 	line-height: 36px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -200,6 +207,12 @@ button:focus {
 	background-size: 12px;
 	background-position: right center;
 	background-repeat: no-repeat;
+}
+
+.search-form-dropdown:last-child {
+	padding-left: 6px;
+	padding-right: 20px;
+	background-position: calc(100% - 6px) center;
 }
 
 .criteria-group {
@@ -270,6 +283,7 @@ button:focus {
 	.criteria-group {
 		width: 100% !important;
 		margin-bottom: 20px;
+		min-width: 100%;
 	}
 
 	.search-form-input {
@@ -289,6 +303,7 @@ button:focus {
 		padding-bottom: 10px;
 		background-color: #8900fe;
 		text-align: left;
+		font-weight: 600 !important;
 		border: none;
 	}
 
@@ -304,7 +319,8 @@ button:focus {
 	.criteria-group,
 	.search-form-input,
 	.search-form-button {
-		box-shadow: 1px 1px 2px 0 rgba(80, 80, 80, 0.9);
+		border-radius: 0 !important;
+		box-shadow: 1px 1px 2px 0 rgba(80, 80, 80, 0.9) !important;
 	}
 }
 
