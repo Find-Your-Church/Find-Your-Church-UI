@@ -210,6 +210,20 @@ body {
 	font-weight: 400;
 }
 
+@media screen and (max-width: 600px) {
+	.search-result-container-header {
+		display: block;
+		font-size: 20px;
+	}
+
+	.search-result-container-header-right {
+		display: block;
+		padding-top: 10px;
+		text-align: left;
+		font-size: 18px;
+	}
+}
+
 .search-result-headline.empty {
 	background-repeat: no-repeat;
 	background-position: 0 4px;
