@@ -518,6 +518,26 @@
 	padding: 0;
 }
 
+.view-paragraph .input-div.about {
+	padding-top: 10px !important;
+}
+
+.view-paragraph .input-div.about pre {
+	width: 100%;
+	margin: 0;
+	font-family: "Source Sans Pro", sans-serif;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+}
+
+.input-div.about .read-more {
+	color: #999999;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .steps-body .right-part .view-item {
 	padding: 8px 0;
 	min-height: 37px;

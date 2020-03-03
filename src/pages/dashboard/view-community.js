@@ -6,11 +6,14 @@ import FilterItemRadio from "../../components/filter-item-radio";
 import {Link} from "react-router-dom";
 import community_config from "../../conf/community-conf";
 import ListMembers from "../../components/list-members";
-import Popup from "reactjs-popup";
+
+// import Popup from "reactjs-popup";
 
 class ViewCommunity extends Component{
 	constructor(props){
 		super(props);
+
+		this.aboutLimit = 10;
 
 		this.slide_options = {
 			duration: 4000,
@@ -43,6 +46,8 @@ class ViewCommunity extends Component{
 			podcast: p_obj === undefined ? "" : p_obj.obj.podcast,
 			twitter: p_obj === undefined ? "" : p_obj.obj.twitter,
 			about: p_obj === undefined ? "" : p_obj.obj.about,
+
+			showedAboutShort: true,
 
 			days: p_obj === undefined ? "0".repeat(community_config.FILTERS.days.length) : p_obj.obj.days,
 			times: p_obj === undefined ? "0".repeat(community_config.FILTERS.times.length) : p_obj.obj.times,
@@ -92,8 +97,19 @@ class ViewCommunity extends Component{
 		window.open(url, "_blank", "width=800, height=600, location=no, toolbar=no");
 	}
 
+	handleReadMore = () => {
+		this.setState({showedAboutShort: !this.state.showedAboutShort});
+	};
+
 	render(){
 		// console.log(this.state.picture);
+		let aboutShort = this.state.about.substr(0, this.aboutLimit);
+		let isMore = false;
+		if(aboutShort.length !== this.state.about.length){
+			aboutShort += "...";
+			isMore = true;
+		}
+
 		return (
 			<div>
 				<main className="steps-body">
@@ -193,26 +209,49 @@ class ViewCommunity extends Component{
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">About</h4>
-														<Popup
+														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
-														</Popup>
+														</Popup>*/}
 													</div>
-													<div className="input-div">
-														{this.state.about || ""}
+													<div className="input-div about">
+														{this.state.showedAboutShort ? (
+																<>
+																	<pre>
+																		{aboutShort}&nbsp;
+																	</pre>
+																	{isMore ? (
+																		<div className={"read-more"}
+																			 onClick={this.handleReadMore}>read more</div>
+																	) : null}
+																</>
+															)
+															: (
+																<>
+																	<pre>
+																		{this.state.about}
+																	</pre>
+																	{isMore ? (
+																		<div className={"read-more"}
+																			 onClick={this.handleReadMore}>show
+																			less</div>
+																	) : null}
+																</>
+															)
+														}
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">Community Contact</h4>
-														<Popup
+														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
-														</Popup>
+														</Popup>*/}
 													</div>
 													<div className="input-div w3-row">
 														{this.state.community_contact ?
@@ -241,12 +280,12 @@ class ViewCommunity extends Component{
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">Links and Resources</h4>
-														<Popup
+														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
-														</Popup>
+														</Popup>*/}
 													</div>
 													<div className={"social-link-group"}>
 														{community_config.SOCIALS.map(item => {
@@ -265,12 +304,12 @@ class ViewCommunity extends Component{
 												<div className={"view-paragraph"}>
 													<div className="flexdiv-left labels">
 														<h4 className="form-header">More Info</h4>
-														<Popup
+														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
-														</Popup>
+														</Popup>*/}
 													</div>
 													<div className="input-div">
 														<FilterItemCheck filterTitle="Day(s)" filterName="days"
