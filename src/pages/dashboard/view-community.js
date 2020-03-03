@@ -13,7 +13,7 @@ class ViewCommunity extends Component{
 	constructor(props){
 		super(props);
 
-		this.aboutLimit = 240;
+		this.aboutLimit = 200;
 
 		this.slide_options = {
 			duration: 4000,
