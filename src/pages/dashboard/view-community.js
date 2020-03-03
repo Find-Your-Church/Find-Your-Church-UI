@@ -202,7 +202,7 @@ class ViewCommunity extends Component{
 									</div>
 									{this.state.showedMembers ?
 										(
-											<ListMembers editable={true}/>
+											<ListMembers editable={false}/>
 										)
 										: (
 											<>

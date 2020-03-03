@@ -20,6 +20,13 @@ a {
 	text-decoration: none;
 }
 
+.popup-content {
+	padding: 8px 10px !important;
+	font-size: 18px !important;
+	font-weight: 400 !important;
+	line-height: 22px;
+}
+
 .site-header {
 	position: absolute;
 	top: 0;
