@@ -154,25 +154,38 @@ class StripeSubscription extends Component{
 		}
 	}
 
+	getDateDiff(prev, next){
+		return (next.getTime() - prev.getTime()) / 86400000; // i day in milliseconds
+	}
+
 	/**
 	 * this.props.community.subscription ? <- 2nd, or 1st.
 	 * @returns {*}
 	 */
 	render(){
-		let next_due_date = "", next_month1 = "", next_month2 = "";
+		let prev_due_date = "", next_due_date = "", next_month1 = "", next_month2 = "";
 		const to_date = new Date();
+		let due_duration = 1, due_reminder = 0, prorated = 1;
 		if(this.props.community.subscription){
 			let i;
 			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
 			next_due_date = init_date;
+			prev_due_date = init_date;
 			i = 1;
 			const to_date_time = to_date.getTime();
 			while(next_due_date.getTime() < to_date_time){
+				prev_due_date = next_due_date;
 				next_due_date = getNextMonth(init_date, i);
 				i++;
 			}
 			next_month1 = getNextMonth(init_date, i);
 			next_month2 = getNextMonth(init_date, i + 1);
+
+			due_duration = this.getDateDiff(prev_due_date, next_due_date);
+			if(due_duration === 0)
+				due_duration = 1;
+			due_reminder = this.getDateDiff(to_date, next_due_date);
+			prorated = due_reminder / due_duration;
 		}
 
 		const due_amount = this.props.community.subscription ?
@@ -304,7 +317,7 @@ class StripeSubscription extends Component{
 													<div>
 														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
 															{this.props.community.subscription ?
-																showAmount(this.props.community.subscription.quantity * this.props.community.subscription.plan.amount)
+																showAmount(prorated * this.props.community.subscription.plan.amount)
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
 																	: "$0.00")}
@@ -354,8 +367,7 @@ class StripeSubscription extends Component{
 															{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
 																<h4 className={"value strikethrough" + (this.props.community.subscription ? "" : " grey")}>
 																	{this.props.community.subscription ?
-																		showAmount(this.props.community.my_communities.active.length *
-																			this.props.community.subscription.plan.amount)
+																		showAmount(prorated * this.props.community.subscription.plan.amount)
 																		: (this.props.community.is_sending ?
 																			<i className="fas fa-spinner fa-spin"> </i>
 																			: "$0.00")}
@@ -363,8 +375,7 @@ class StripeSubscription extends Component{
 															)}
 															<h4 className="value w3-text-green right">
 																{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
-																	showAmount(this.props.community.my_communities.active.length *
-																		this.props.community.subscription.plan.amount)
+																	showAmount(prorated * this.props.community.subscription.plan.amount)
 																	: "$0.00")}
 															</h4>
 														</div>

@@ -30,6 +30,13 @@
 	}
 }
 
+.steps-body .form-input:hover,
+.steps-body .form-input:focus,
+.steps-body .form-select.category:hover,
+.steps-body .form-select.category:focus {
+	border-bottom: 1px solid #8900fe !important;
+}
+
 .steps-body {
 	margin-top: 59px;
 	min-height: calc(100vh - 200px);
@@ -137,6 +144,10 @@
 
 .info-body .left-part div {
 	background-color: #fff;
+}
+
+.info-body .left-part div.popup-overlay {
+	background-color: transparent;
 }
 
 .info-body .left-part .community-info-container {
