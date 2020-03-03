@@ -182,8 +182,9 @@ class StripeSubscription extends Component{
 			next_month2 = getNextMonth(init_date, i + 1);
 
 			due_duration = this.getDateDiff(prev_due_date, next_due_date);
-			if(due_duration === 0)
-				due_duration = 1;
+			if(due_duration === 0){
+				due_duration = 30;
+			}
 			due_reminder = this.getDateDiff(to_date, next_due_date);
 			prorated = due_reminder / due_duration;
 		}
