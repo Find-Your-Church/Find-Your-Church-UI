@@ -342,7 +342,7 @@ class Account extends Component{
 												trigger={<i style={{cursor: "pointer"}}
 															className={"fas fa-question-circle tooltip-icon"}> </i>}
 												position={"left top"}>
-												<div>Tell visitors more about your community...</div>
+												<div>This information is displayed on your Admin Profile. Admins must provide at least one form of contact and have the ability to add or remove community members.</div>
 											</Popup>
 										</div>
 										<div className="table-row pic">
@@ -466,7 +466,7 @@ class Account extends Component{
 												trigger={<i style={{cursor: "pointer"}}
 															className={"fas fa-question-circle tooltip-icon"}> </i>}
 												position={"left top"}>
-												<div>Tell visitors more about your community...</div>
+												<div>This information is private and only viewable by you. You can update your login credentials and change your referral code at any time.</div>
 											</Popup>
 										</div>
 										<div className="table-row">
@@ -559,12 +559,6 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">
 												Referral Code
-												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																className={"fas fa-question-circle tooltip-icon"}> </i>}
-													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingRefCode ?
@@ -617,8 +611,8 @@ class Account extends Component{
 											<Popup
 												trigger={<i style={{cursor: "pointer"}}
 															className={"fas fa-question-circle tooltip-icon"}> </i>}
-												position={"left top"}>
-												<div>Tell visitors more about your community...</div>
+												position={"left center"}>
+												<div>This is a snapshot displaying: the number of communities currently active out of the total number of communities you've paid for this billing cycle; the price you're paying per active community; and a preview of your upcoming payments based on your current account summary.</div>
 											</Popup>
 										</div>
 										<div className="table-row-2">
@@ -628,7 +622,7 @@ class Account extends Component{
 													trigger={<i style={{cursor: "pointer"}}
 																className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
+													<div>The number of communities currently active out of the total number of communities you've paid for this billing cycle. You will only be charged for active communities on your next and future billing cycles.</div>
 												</Popup>
 											</div>
 											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}
@@ -649,7 +643,7 @@ class Account extends Component{
 													trigger={<i style={{cursor: "pointer"}}
 																className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"right center"}>
-													<div>Tell visitors more about your community...</div>
+													<div>The price you are paying per active community, per month. You are not billed for inactive communities.</div>
 												</Popup>
 											</div>
 											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}>
@@ -661,7 +655,15 @@ class Account extends Component{
 											</h4>
 										</div>
 										<div className="table-row-2">
-											<h4 className="table-header">Upcoming Payments</h4>
+											<h4 className="table-header">
+												Upcoming Payments
+												<Popup
+													trigger={<i style={{cursor: "pointer"}}
+																className={"fas fa-question-circle tooltip-icon"}> </i>}
+													position={"right center"}>
+													<div>(Active Communities) x (Price per Communitiy) = Upcoming Payment</div>
+												</Popup>
+											</h4>
 											<h4 className={"table-item right"}>
 												<div className={(this.props.community.subscription ? "" : " grey")}>
 													{uc_amount}

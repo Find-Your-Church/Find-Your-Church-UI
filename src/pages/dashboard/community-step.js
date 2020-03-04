@@ -424,7 +424,7 @@ class CommunityStep extends Component{
 													trigger={<i style={{cursor: "pointer"}}
 																className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left center"}>
-													<div>Tell visitors more about your community...</div>
+													<div>This is the information that will be used as initial search criteria and displayed on your community thumbnail. You can update this information at any time.</div>
 												</Popup>
 											</div>
 											<div className="community-info-body">
@@ -516,7 +516,7 @@ class CommunityStep extends Component{
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
+															<div>This is where you can tell users about your community, where they can go to learn more or, or how they can get involved. You can edit and update this information at any time.</div>
 														</Popup>
 													</div>
 													<textarea
@@ -535,7 +535,7 @@ class CommunityStep extends Component{
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
+															<div>This is the primary point of contact for the community. Examples might include a leader, admin, office, support, etc. You can edit and update this information at any time and we always encourage connecting on social media or over coffee to make sure It's a good fit.</div>
 														</Popup>
 													</div>
 													<div className="input-div w3-row">
@@ -575,7 +575,7 @@ class CommunityStep extends Component{
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
+															<div>These are the links and resources you can provide users for them to learn more about your community and/or connect online. You can edit and update these at any time.</div>
 														</Popup>
 													</div>
 													<div className="input-div w3-row">
@@ -617,7 +617,7 @@ class CommunityStep extends Component{
 															trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
+															<div>These are the filters that a user can apply to help them narrow down their search. You can edit and update these at any time.</div>
 														</Popup>
 													</div>
 													<div className="input-div">

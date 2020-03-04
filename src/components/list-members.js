@@ -42,7 +42,7 @@ class ListMembers extends Component{
 										trigger={<i style={{cursor: "pointer"}}
 													className={"fas fa-question-circle tooltip-icon"}> </i>}
 										position={"left top"}>
-										<div>Tell visitors more about your community...</div>
+										<div>Community admins are the primary point of contact for the communities they manage. You can edit the information displayed on your Admin Profile from your "Account" page at any time. Admins must provide at least one form of contact and have the ability to add or remove community members.</div>
 									</Popup>
 								</div>
 								<div className="accordioncontent-div">

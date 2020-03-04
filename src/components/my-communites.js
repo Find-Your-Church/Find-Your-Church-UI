@@ -43,9 +43,15 @@ class MyCommunities extends Component{
 								) : null}
 								<Popup
 									trigger={<i style={{cursor: "pointer"}}
-												className={"fas fa-question-circle tooltip-icon"}> </i>}
+												className={"communities-tooltip fas fa-question-circle tooltip-icon"}> </i>}
 									position={this.props.status === "active" ? "left top" : "left bottom"}>
-									<div>Tell visitors more about your community...</div>
+									<div>
+										{this.props.status === "active" ? (
+											"These are the communities that will appear in search results when they match a users search criteria."
+										) : (
+											"These communities will not appear in search results and are only viewable by admins and active community members. New communities are set to \"Inactive\" by default and you can create as many inactive communities as you'd like at no charge."
+										)}
+									</div>
 								</Popup>
 							</div>
 						</div>

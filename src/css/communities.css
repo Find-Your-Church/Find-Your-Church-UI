@@ -64,6 +64,12 @@
 	flex: 1;
 }
 
+.communities-body .container-header .communities-tooltip {
+	margin-top: 4px;
+	padding: 0;
+	height: 28px;
+}
+
 .communities-body .containerheader-div.underline {
 	padding-bottom: 10px;
 	-webkit-box-align: stretch;

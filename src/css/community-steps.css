@@ -506,6 +506,14 @@
 	border-bottom: solid 1px #ccc;
 }
 
+.view-paragraph .labels {
+	cursor: pointer;
+}
+
+.part-animation {
+	transition: ease .3s;
+}
+
 .view-paragraph.edit .filter-div {
 	border-bottom: solid 1px #ccc;
 }

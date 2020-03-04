@@ -33,10 +33,11 @@ class ProfileContainer extends Component{
 					<div className={"profile-header-wrapper"}>
 						<h5 className="profile-header">Admin Profile</h5>
 						<Popup
+							className={"profile-tooltip"}
 							trigger={<i style={{cursor: "pointer"}}
 										className={"fas fa-question-circle tooltip-icon"}> </i>}
-							position={"right top"}>
-							<div>Tell visitors more about your community...</div>
+							position={"left top"}>
+							<div>This is the information that will be displayed on each of the communities you are an admin of. You can update the information on your Admin Profile from your "Account" page.</div>
 						</Popup>
 					</div>
 				</div>

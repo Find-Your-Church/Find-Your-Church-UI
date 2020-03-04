@@ -60,7 +60,12 @@ class ViewCommunity extends Component{
 			average_attendance: p_obj === undefined ? 0 : p_obj.obj.average_attendance,
 			ambiance: p_obj === undefined ? "0".repeat(community_config.FILTERS.ambiance.length) : p_obj.obj.ambiance,
 			event_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.event_type.length) : p_obj.obj.event_type,
-			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type
+			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type,
+
+			collapsedAboutPart: true,
+			collapsedContactPart: true,
+			collapsedLinksPart: true,
+			collapsedMorePart: true,
 		};
 
 		this.toggleMenu = this.toggleMenu.bind(this);
@@ -99,6 +104,22 @@ class ViewCommunity extends Component{
 
 	handleReadMore = () => {
 		this.setState({showedAboutShort: !this.state.showedAboutShort});
+	};
+
+	toggleAboutPart = () => {
+		this.setState({collapsedAboutPart: !this.state.collapsedAboutPart});
+	};
+
+	toggleContactPart = () => {
+		this.setState({collapsedContactPart: !this.state.collapsedContactPart});
+	};
+
+	toggleLinksPart = () => {
+		this.setState({collapsedLinksPart: !this.state.collapsedLinksPart});
+	};
+
+	toggleMorePart = () => {
+		this.setState({collapsedMorePart: !this.state.collapsedMorePart});
 	};
 
 	render(){
@@ -207,7 +228,7 @@ class ViewCommunity extends Component{
 										: (
 											<>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 														<h4 className="form-header">About</h4>
 														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
@@ -216,7 +237,8 @@ class ViewCommunity extends Component{
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
 													</div>
-													<div className="input-div about">
+													<div className="input-div about part-animation"
+														 style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
 														{this.state.showedAboutShort ? (
 																<>
 																	<pre>
@@ -244,7 +266,7 @@ class ViewCommunity extends Component{
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleContactPart}>
 														<h4 className="form-header">Community Contact</h4>
 														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
@@ -253,7 +275,7 @@ class ViewCommunity extends Component{
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
 													</div>
-													<div className="input-div w3-row">
+													<div className="input-div w3-row part-animation" style={{display: this.state.collapsedContactPart ? "block" : "none"}}>
 														{this.state.community_contact ?
 															<div className="view-item w3-col l12"
 																 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
@@ -278,7 +300,7 @@ class ViewCommunity extends Component{
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleLinksPart}>
 														<h4 className="form-header">Links and Resources</h4>
 														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
@@ -287,7 +309,7 @@ class ViewCommunity extends Component{
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
 													</div>
-													<div className={"social-link-group"}>
+													<div className={"social-link-group part-animation"} style={{display: this.state.collapsedLinksPart ? "block" : "none"}}>
 														{community_config.SOCIALS.map(item => {
 															const key_name = item.toLowerCase();
 															return this.state[key_name] ? (
@@ -302,7 +324,7 @@ class ViewCommunity extends Component{
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleMorePart}>
 														<h4 className="form-header">More Info</h4>
 														{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
@@ -311,7 +333,7 @@ class ViewCommunity extends Component{
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
 													</div>
-													<div className="input-div">
+													<div className="input-div part-animation" style={{display: this.state.collapsedMorePart ? "block" : "none"}}>
 														<FilterItemCheck filterTitle="Day(s)" filterName="days"
 																		 value={this.state.days}
 																		 items={community_config.FILTERS.days}/>
