@@ -193,7 +193,9 @@ class StripeSubscription extends Component{
 			showAmount((this.props.community.my_communities.active.length + 1) * this.props.community.plan_price)
 			: showAmount(this.props.community.plan_price);
 
-		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days).toLocaleDateString('en-US');
+		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days);
+		const upcoming_duedate1 = getNextMonth(upcoming_duedate, 1);
+		const upcoming_duedate2 = getNextMonth(upcoming_duedate, 2);
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
@@ -213,12 +215,6 @@ class StripeSubscription extends Component{
 								<div className="div-block-147">
 									<div className="accordionheader-div nounderline">
 										<h3>Account Summary</h3>
-										<Popup
-											trigger={<i style={{cursor: "pointer"}}
-														className={"fas fa-question-circle tooltip-icon"}> </i>}
-											position={"left top"}>
-											<div>Tell visitors more about your community...</div>
-										</Popup>
 									</div>
 									<div className="subscribe-container">
 										<div className="invoice-row">
@@ -229,13 +225,13 @@ class StripeSubscription extends Component{
 														trigger={<i style={{cursor: "pointer"}}
 																	className={"fas fa-question-circle tooltip-icon"}> </i>}
 														position={"right center"}>
-														<div>Tell visitors more about your community...</div>
+														<div>The number of communities currently active out of the total number of communities you've paid for this billing cycle. You are only charged for active communities on your next and future billing cycles.</div>
 													</Popup>
 												</div>
 												<div>
 													<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}
 														title={"Communities activated / Paid activations"}>
-														{formatNumber(this.props.community.my_communities.active.length)}
+														{this.props.second ? formatNumber(this.props.community.my_communities.active.length) : "01"}
 														&nbsp;/&nbsp;
 														{this.props.community.subscription ?
 															formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
@@ -254,7 +250,7 @@ class StripeSubscription extends Component{
 														trigger={<i style={{cursor: "pointer"}}
 																	className={"fas fa-question-circle tooltip-icon"}> </i>}
 														position={"right center"}>
-														<div>Tell visitors more about your community...</div>
+														<div>The price you are paying per active community, per month. You are not billed for inactive communities.</div>
 													</Popup>
 												</div>
 												<div>
@@ -263,7 +259,7 @@ class StripeSubscription extends Component{
 															showAmount(this.props.community.subscription.plan.amount)
 															: (this.props.community.is_sending ?
 																<i className="fas fa-spinner fa-spin"> </i>
-																: "$0.00")}
+																: showAmount(this.props.community.plan_price))}
 													</h4>
 												</div>
 											</div>
@@ -299,12 +295,6 @@ class StripeSubscription extends Component{
 									<div className="div-block-147">
 										<div className="accordionheader-div nounderline">
 											<h3>Billing Summary</h3>
-											<Popup
-												trigger={<i style={{cursor: "pointer"}}
-															className={"fas fa-question-circle tooltip-icon"}> </i>}
-												position={"left top"}>
-												<div>Tell visitors more about your community...</div>
-											</Popup>
 										</div>
 										<div className="subscribe-container">
 											<div className="invoice-row">
@@ -321,7 +311,7 @@ class StripeSubscription extends Component{
 																showAmount(prorated * this.props.community.subscription.plan.amount)
 																: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "$0.00")}
+																	: showAmount(this.props.community.plan_price))}
 														</h4>
 													</div>
 												</div>
@@ -359,7 +349,7 @@ class StripeSubscription extends Component{
 																			style={{marginLeft: "-70px"}}>
 																			<br/>
 																			Free trial
-																			through {upcoming_duedate}
+																			through {upcoming_duedate.toLocaleDateString('en-US')}
 																		</h4>)
 																	: null)}
 													</div>
@@ -374,11 +364,11 @@ class StripeSubscription extends Component{
 																			: "$0.00")}
 																</h4>
 															)}
-															{this.props.community.trialing ? (
+															{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? (
 																<h4 className="value w3-text-green right">
 																	{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
 																		showAmount(prorated * this.props.community.subscription.plan.amount)
-																		: "$0.00")}
+																		: this.props.community.trial_period_days > 0 ? "$0.00" : this.props.community.plan_price)}
 																</h4>
 															) : null}
 														</div>
@@ -390,6 +380,12 @@ class StripeSubscription extends Component{
 													<div className="filtersheader-div">
 														<h4 className="table-header">
 															Upcoming Billing
+															<Popup
+																trigger={<i style={{cursor: "pointer"}}
+																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																position={"right center"}>
+																<div>(Total Active Communities) x (Monthly Price) = Upcoming Payment</div>
+															</Popup>
 														</h4>
 													</div>
 													<div>
@@ -401,7 +397,7 @@ class StripeSubscription extends Component{
 																	next_due_date.toLocaleDateString('en-US')
 																	: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
-																		: upcoming_duedate)}
+																		: upcoming_duedate.toLocaleDateString('en-US'))}
 															</h4>
 														</div>
 														<div className="div10-bottom">
@@ -412,7 +408,7 @@ class StripeSubscription extends Component{
 																	next_month1.toLocaleDateString('en-US')
 																	: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
-																		: upcoming_duedate)}
+																		: upcoming_duedate1.toLocaleDateString('en-US'))}
 															</h4>
 														</div>
 														<div className="div10-bottom">
@@ -423,7 +419,7 @@ class StripeSubscription extends Component{
 																	next_month2.toLocaleDateString('en-US')
 																	: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
-																		: upcoming_duedate)}
+																		: upcoming_duedate2.toLocaleDateString('en-US'))}
 															</h4>
 														</div>
 													</div>
