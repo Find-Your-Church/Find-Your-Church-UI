@@ -8,11 +8,12 @@ import community_config from "../conf/community-conf";
 import ListMembers from "../components/list-members";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Popup from "reactjs-popup";
 
 class PublicViewCommunity extends Component{
 	constructor(props){
 		super(props);
+
+		this.aboutLimit = 200;
 
 		this.slide_options = {
 			duration: 4000,
@@ -29,7 +30,6 @@ class PublicViewCommunity extends Component{
 		this.state = {
 			errors: {},
 			is_show_menu: false,
-
 			showedMembers: false,
 
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
@@ -47,6 +47,8 @@ class PublicViewCommunity extends Component{
 			twitter: p_obj === undefined ? "" : p_obj.obj.twitter,
 			about: p_obj === undefined ? "" : p_obj.obj.about,
 
+			showedAboutShort: true,
+
 			days: p_obj === undefined ? "0".repeat(community_config.FILTERS.days.length) : p_obj.obj.days,
 			times: p_obj === undefined ? "0".repeat(community_config.FILTERS.times.length) : p_obj.obj.times,
 			frequency: p_obj === undefined ? "0".repeat(community_config.FILTERS.frequency.length) : p_obj.obj.frequency,
@@ -58,7 +60,12 @@ class PublicViewCommunity extends Component{
 			average_attendance: p_obj === undefined ? 0 : p_obj.obj.average_attendance,
 			ambiance: p_obj === undefined ? "0".repeat(community_config.FILTERS.ambiance.length) : p_obj.obj.ambiance,
 			event_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.event_type.length) : p_obj.obj.event_type,
-			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type
+			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type,
+
+			collapsedAboutPart: true,
+			collapsedContactPart: true,
+			collapsedLinksPart: true,
+			collapsedMorePart: true,
 		};
 
 		this.toggleMenu = this.toggleMenu.bind(this);
@@ -95,8 +102,31 @@ class PublicViewCommunity extends Component{
 		window.open(url, "_blank", "width=800, height=600, location=no, toolbar=no");
 	}
 
+	toggleAboutPart = () => {
+		this.setState({collapsedAboutPart: !this.state.collapsedAboutPart});
+	};
+
+	toggleContactPart = () => {
+		this.setState({collapsedContactPart: !this.state.collapsedContactPart});
+	};
+
+	toggleLinksPart = () => {
+		this.setState({collapsedLinksPart: !this.state.collapsedLinksPart});
+	};
+
+	toggleMorePart = () => {
+		this.setState({collapsedMorePart: !this.state.collapsedMorePart});
+	};
+
 	render(){
 		// console.log(this.state.picture);
+		let aboutShort = this.state.about.substr(0, this.aboutLimit);
+		let isMore = false;
+		if(aboutShort.length !== this.state.about.length){
+			aboutShort += "...";
+			isMore = true;
+		}
+
 		return (
 			<div>
 				<main className="steps-body">
@@ -189,35 +219,46 @@ class PublicViewCommunity extends Component{
 									</div>
 									{this.state.showedMembers ?
 										(
-											<ListMembers editable={false} user={this.props.auth.owner}/>
+											<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>
 										)
 										: (
 											<>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 														<h4 className="form-header">About</h4>
-														<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
-															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
-														</Popup>
 													</div>
-													<div className="input-div">
-														{this.state.about || ""}
+													<div className="input-div about" style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
+														{this.state.showedAboutShort ? (
+																<>
+																	<pre>
+																		{aboutShort}&nbsp;
+																	</pre>
+																	{isMore ? (
+																		<div className={"read-more"}
+																			 onClick={this.handleReadMore}>read more</div>
+																	) : null}
+																</>
+															)
+															: (
+																<>
+																	<pre>
+																		{this.state.about}
+																	</pre>
+																	{isMore ? (
+																		<div className={"read-more"}
+																			 onClick={this.handleReadMore}>show
+																			less</div>
+																	) : null}
+																</>
+															)
+														}
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleContactPart}>
 														<h4 className="form-header">Community Contact</h4>
-														<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
-															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
-														</Popup>
 													</div>
-													<div className="input-div w3-row">
+													<div className="input-div w3-row" style={{display: this.state.collapsedContactPart ? "block" : "none"}}>
 														{this.state.community_contact ?
 															<div className="view-item w3-col l12"
 																 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
@@ -242,16 +283,10 @@ class PublicViewCommunity extends Component{
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleLinksPart}>
 														<h4 className="form-header">Links and Resources</h4>
-														<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
-															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
-														</Popup>
 													</div>
-													<div className={"social-link-group"}>
+													<div className={"social-link-group"} style={{display: this.state.collapsedLinksPart ? "block" : "none"}}>
 														{community_config.SOCIALS.map(item => {
 															const key_name = item.toLowerCase();
 															return this.state[key_name] ? (
@@ -266,16 +301,10 @@ class PublicViewCommunity extends Component{
 													</div>
 												</div>
 												<div className={"view-paragraph"}>
-													<div className="flexdiv-left labels">
+													<div className="flexdiv-left labels" onClick={this.toggleMorePart}>
 														<h4 className="form-header">More Info</h4>
-														<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
-															position={"left center"}>
-															<div>Tell visitors more about your community...</div>
-														</Popup>
 													</div>
-													<div className="input-div">
+													<div className="input-div" style={{display: this.state.collapsedMorePart ? "block" : "none"}}>
 														<FilterItemCheck filterTitle="Day(s)" filterName="days"
 																		 value={this.state.days}
 																		 items={community_config.FILTERS.days}/>

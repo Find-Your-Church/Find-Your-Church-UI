@@ -38,12 +38,19 @@ class ListMembers extends Component{
 							<div className="accordingcontainer-div">
 								<div className="accordionheader-div">
 									<h3>Admin</h3>
-									<Popup
-										trigger={<i style={{cursor: "pointer"}}
-													className={"fas fa-question-circle tooltip-icon"}> </i>}
-										position={"left top"}>
-										<div>Community admins are the primary point of contact for the communities they manage. You can edit the information displayed on your Admin Profile from your "Account" page at any time. Admins must provide at least one form of contact and have the ability to add or remove community members.</div>
-									</Popup>
+									{this.props.fromPublic ? null :
+										<Popup
+											trigger={<i style={{cursor: "pointer"}}
+														className={"fas fa-question-circle tooltip-icon"}> </i>}
+											position={"left top"}>
+											<div>Community admins are the primary point of contact for the communities
+												they manage. You can edit the information displayed on your Admin
+												Profile from your "Account" page at any time. Admins must provide at
+												least one form of contact and have the ability to add or remove
+												community members.
+											</div>
+										</Popup>
+									}
 								</div>
 								<div className="accordioncontent-div">
 									<div className="_10top-div">
