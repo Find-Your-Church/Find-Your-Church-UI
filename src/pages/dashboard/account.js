@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {CardElement, injectStripe} from "react-stripe-elements";
 import {getUserInfo, updateUserInfo, verifyEmail} from "../../actions/auth-actions";
-import {getMyCommunities, getBillingStatus, registerCard} from "../../actions/community-actions";
+import {getMyCommunities, getBillingStatus, registerCard, getPlan} from "../../actions/community-actions";
 import SiteFooter from "../../components/site-footer";
 import getNextMonth from "../../utils/getNextMonth";
 import '../../css/account.css';
@@ -91,6 +91,7 @@ class Account extends Component{
 		});
 
 		this.setState({user_pic: this.props.auth.user.pic});
+		this.props.getPlan();
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -651,7 +652,7 @@ class Account extends Component{
 													showAmount(this.props.community.subscription.plan.amount)
 													: (this.props.community.is_sending ?
 														<i className="fas fa-spinner fa-spin"> </i>
-														: "$0.00")}
+														: showAmount(this.props.community.plan_price))}
 											</h4>
 										</div>
 										<div className="table-row-2">
@@ -804,6 +805,7 @@ Account.propTypes = {
 	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
+	getPlan: PropTypes.func.isRequired,
 	verifyEmail: PropTypes.func.isRequired,
 	getUserInfo: PropTypes.func.isRequired,
 	updateUserInfo: PropTypes.func.isRequired,
@@ -821,5 +823,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{getMyCommunities, verifyEmail, getUserInfo, registerCard, updateUserInfo, getBillingStatus}
+	{getMyCommunities, verifyEmail, getUserInfo, registerCard, updateUserInfo, getBillingStatus, getPlan}
 )(injectStripe(Account));
