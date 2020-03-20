@@ -231,6 +231,7 @@
 
 .community-name {
 	display: inline-block;
+	max-width: calc(100% - 22px);
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-top: 0;
