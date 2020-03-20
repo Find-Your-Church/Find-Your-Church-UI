@@ -90,7 +90,7 @@ const initialState = {
 	view_community: null, // community info to be viewed on public view page.
 	searching: false,
 
-	back_url: '', // on the community view page, press back button
+	back_url: '/search-results', // on the community view page, press back button
 };
 
 export default function(state = initialState, action){
