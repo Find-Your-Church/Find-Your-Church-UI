@@ -79,9 +79,8 @@ class PublicThumbnail extends Component{
 	render(){
 		return (
 			this.state.is_viewing ? (
-				<Redirect to={{pathname: '/public-view', state: {obj: this.props.value}}}/>
+				<Redirect to={{pathname: `/view-community/${this.props.value._id}`, state: {obj: this.props.value}}}/>
 			) : (
-
 				<div className={"listing-container1"} onMouseLeave={this.hideMenu}>
 					<Link to="#" onClick={this.goView}>
 						<div

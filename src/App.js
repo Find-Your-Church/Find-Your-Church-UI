@@ -82,6 +82,7 @@ class App extends Component{
 						<Switch>
 							<Route exact path="/" component={Home}/>
 							<Route exact path="/search-results" component={SearchResults}/>
+							<Route path="/search-results/:criteria" component={SearchResults}/>
 
 							<Route exact path="/login-popup" component={LoginPopup}/>
 							<Route exact path="/register-popup" component={RegisterPopup}/>

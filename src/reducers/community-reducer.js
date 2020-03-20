@@ -62,6 +62,7 @@ const initialState = {
 
 	// for search
 	criteria: {
+		owner: null,
 		category: '',
 		radius: 5, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
 		address: "",
@@ -85,8 +86,8 @@ const initialState = {
 	sort_order: sorters.SORT_NEWEST,
 	search_results: [],
 	counts: {},
-	picking: -1, // index og the results
-	view_community: null,
+	picking: -1, // index of the results
+	view_community: null, // community info to be viewed on public view page.
 	searching: false,
 };
 

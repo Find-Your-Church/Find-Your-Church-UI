@@ -37,7 +37,7 @@ class SiteHeader extends Component{
 
 	render(){
 		return (
-			<div>
+			<div id={"main-header"}>
 				<header className="site-header w3-bar">
 					<Link to="/">
 						<img className="site-logo" src={"/img/logo.svg"}
