@@ -10,7 +10,7 @@ import SearchFilterRadio from "../components/search-filter-radio";
 import {Link} from "react-router-dom";
 import {
 	clearPicking,
-	doSearchCommunities,
+	doSearchCommunities, setBackUrl,
 	setPicking,
 	setSearchCriteria,
 	setSearchFilter,
@@ -100,6 +100,12 @@ class SearchResults extends Component{
 	componentDidMount(){
 //		this.props.doSearchCommunities({...this.props.community.criteria});
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(this.props.community.criteria !== prevProps.community.criteria){
+			this.props.setBackUrl("/search-results/" + btoa(JSON.stringify(this.props.community.criteria)));
+		}
 	}
 
 	onChange = e => {
@@ -233,8 +239,6 @@ class SearchResults extends Component{
 		else if(this.props.community.criteria.category === "Support Groups"){
 			selectedSupportGroups = true;
 		}
-
-		const backUrl = "/search-results/" + btoa(JSON.stringify(this.props.community.criteria));
 
 		return (
 				<main id="content-body" className="w3-row">
@@ -371,7 +375,7 @@ class SearchResults extends Component{
 															key={"search" + index} ref={this.myref[index]}
 															onMouseEnter={() => this.hoverMarker(index)}
 															onMouseLeave={() => this.clearMarker()}>
-														<PublicThumbnail value={item.data} backUrl={backUrl}/>
+														<PublicThumbnail value={item.data}/>
 													</div>
 											)
 										})}
@@ -423,6 +427,7 @@ SearchResults.propTypes = {
 	doSearchCommunities: PropTypes.func.isRequired,
 	setPicking: PropTypes.func.isRequired,
 	clearPicking: PropTypes.func.isRequired,
+	setBackUrl: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -446,5 +451,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 		mapStateToProps,
-		{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking}
+		{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking, setBackUrl}
 )(SearchResults);

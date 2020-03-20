@@ -103,6 +103,10 @@
 	height: 261px;
 }
 
+.account-body .sub-container.search-preview {
+	min-height: 320px;
+}
+
 .sub-container .sub-content {
 	padding: 20px;
 	background-color: #ffffff;

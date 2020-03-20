@@ -23,7 +23,7 @@ import {
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA, SEARCHING
+	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA, SEARCHING, SET_BACK_URL
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -89,6 +89,8 @@ const initialState = {
 	picking: -1, // index of the results
 	view_community: null, // community info to be viewed on public view page.
 	searching: false,
+
+	back_url: '', // on the community view page, press back button
 };
 
 export default function(state = initialState, action){
@@ -327,6 +329,11 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				searching: action.payload,
+			};
+		case SET_BACK_URL:
+			return {
+				...state,
+				back_url: action.payload,
 			};
 		default:
 			return state;

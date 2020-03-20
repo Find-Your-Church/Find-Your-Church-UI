@@ -54,3 +54,4 @@ export const VIEW_COMMUNITY = "VIEW_COMMUNITY";
 export const CLEAR_FILTER_MASK = "CLEAR_FILTER_MASK";
 export const CLEAR_CRITERIA = "CLEAR_CRITERIA";
 export const SEARCHING = "SEARCHING";
+export const SET_BACK_URL = "SET_BACK_URL";

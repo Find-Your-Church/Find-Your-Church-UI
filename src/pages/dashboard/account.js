@@ -21,6 +21,7 @@ import Popup from "reactjs-popup";
 import isEmpty from "../../utils/isEmpty";
 import FileBase from "react-file-base64";
 import config from "../../conf/config";
+import community_config from "../../conf/community-conf";
 
 const cardStyle = {
 	base: {
@@ -53,6 +54,28 @@ class Account extends Component{
 			user_id: this.props.auth.user.id,
 		}, this.props.history);
 
+		this.previewCriteria = {
+			owner: null,
+			category: '',
+			radius: null,
+			address: '',
+			lat: 44.989999,
+			lng: -93.256088,
+			filter: {
+				days: '0000000',
+				times: '000',
+				frequency: '00000',
+				ages: '00000000000',
+				gender: '000',
+				parking: '00000',
+				ministries: '0000000',
+				other_services: '000000',
+				ambiance: '0000',
+				event_type: '00000000',
+				support_type: '00000'
+			}
+		};
+
 		this.state = {
 			showSizeError: false,
 			editingUserName: false,
@@ -80,6 +103,10 @@ class Account extends Component{
 			user_ref_code: user.ref_code === undefined ? "" : user.ref_code,
 
 			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
+
+			frameUrl: '',
+			frameShortCode: '',
+			frameCode: '',
 		};
 
 		this.changeUserName = this.changeUserName.bind(this);
@@ -99,30 +126,22 @@ class Account extends Component{
 		this.setState({user_pic: this.props.auth.user.pic});
 		this.props.getPlan();
 
-		const iframe_param = btoa(JSON.stringify({
-			owner: this.props.auth.user.id,
-			category: '',
-			radius: null,
-			address: '',
-			lat: 44.989999,
-			lng: -93.256088,
-			filter: {
-				days: '0000000',
-				times: '000',
-				frequency: '00000',
-				ages: '00000000000',
-				gender: '000',
-				parking: '00000',
-				ministries: '0000000',
-				other_services: '000000',
-				ambiance: '0000',
-				event_type: '00000000',
-				support_type: '00000'
-			}
-		}));
-
-		this.frameUrl = `${window.location.protocol}//${window.location.host}/search-results/${iframe_param}`;
+		this.previewCriteria.owner = this.props.auth.user.id;
+		this.applyUpdatedCriteria();
 	}
+
+	applyUpdatedCriteria = () => {
+		const iframe_param = btoa(JSON.stringify(this.previewCriteria));
+
+		const preview_url = `${window.location.protocol}//${window.location.host}/search-results/${iframe_param}`;
+		const short_url = preview_url.substr(0, 160);
+
+		this.setState({
+			frameUrl: preview_url,
+			frameShortCode: `<iframe src="${short_url}..."></iframe>`,
+			frameCode: `<iframe src="${preview_url}"></iframe>`,
+		});
+	};
 
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
@@ -328,6 +347,11 @@ class Account extends Component{
 		const copyText = document.querySelector("#frame-url");
 		copyText.select();
 		document.execCommand("copy");
+	};
+
+	onChangePreviewCategory = e => {
+		this.previewCriteria.category = e.target.value;
+		this.applyUpdatedCriteria();
 	};
 
 	render(){
@@ -645,7 +669,7 @@ class Account extends Component{
 									<div className="flexdiv-leftright panel underline">
 										<h5 className="container-title">Billing</h5>
 									</div>
-									<div className={"sub-container w3-col m12 l6 bottom"}>
+									<div className={"sub-container w3-col m12 l6 search-preview"}>
 										<div className={"sub-content payment"}>
 											<div className="flexdiv-leftright underline">
 												<h5 className="container-header">
@@ -678,22 +702,45 @@ class Account extends Component{
 													paddingTop: "16px",
 													paddingRight: "16px"
 												}}>
-													&lt;iframe
-													src="{this.frameUrl ? this.frameUrl.substr(0, 64) : null}..."&gt;&lt;/iframe&gt;
-													<input id={"frame-url"} value={this.frameUrl} style={{opacity: "0"}}/>
-												</div>
-												<div className={"purple-link"} onClick={this.copyDynamicUrl}
-														 style={{minHeight: "64px", paddingTop: "16px"}}>Copy
+													<select id="preview-category" onChange={this.onChangePreviewCategory}
+																	defaultValue={this.props.community.criteria.category}
+																	style={{
+																		width: "50%",
+																		backgroundColor: "#eee",
+																		backgroundImage: "url('/img/icon-down3-purple.svg')",
+																	}}
+																	className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select w3-col s6">
+														<option value="">Category...</option>
+														{
+															community_config.CATEGORIES.map(cat => {
+																return (
+																		<option value={cat} key={"search-" + cat}>{cat}</option>
+																);
+															})
+														}
+													</select>
+													<div style={{float: "left", width: "50%", textAlign: "right"}}>
+														<div className={"purple-link"} onClick={this.copyDynamicUrl} style={{
+															height: "40px",
+															lineHeight: "40px",
+														}}>
+															Copy
+														</div>
+													</div>
+													<div>
+														{this.state.frameShortCode}
+														<input id={"frame-url"} value={this.state.frameCode} style={{opacity: "0", width: "8px"}}/>
+													</div>
 												</div>
 											</div>
 											<div style={{marginTop: "10px"}}>
-												<a href={this.frameUrl} className={"purple-link"} target={"_new"}>
+												<a href={this.state.frameUrl} className={"purple-link"} target={"_new"}>
 													Preview
 												</a>
 											</div>
 										</div>
 									</div>
-									<div className={"sub-container w3-col m12 l6 bottom"}>
+									<div className={"sub-container w3-col m12 l6 search-preview"}>
 										<img className={"account-preview-iframe"} src={"../img/iframe-preview.png"} alt={"preview iframe"}/>
 									</div>
 								</div>

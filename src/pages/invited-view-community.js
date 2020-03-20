@@ -105,7 +105,7 @@ class InvitedViewCommunity extends Component{
 									<div className="info-body w3-row">
 										<h3 className="header3 w3-bar w3-margin-bottom">
 											<div className="create-menu w3-bar-item w3-left">
-												<Link to="/search-results" className="w3-button cancel">Back</Link>
+												<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
 											</div>
 											<div className="create-menu w3-bar-item w3-center">
 												{this.props.community.view_community.community_name}
