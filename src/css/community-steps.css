@@ -271,7 +271,7 @@
 }
 
 .steps-body .slide-container .indicators {
-	margin: 2px 0 -10px;
+	margin: 8px 0 -10px;
 	height: 8px;
 }
 
@@ -489,7 +489,7 @@
 }
 
 .steps-body .input-div {
-	padding: 0 10px 10px 10px !important;
+	padding: 6px 10px 10px !important;
 	background-color: #fff;
 }
 
@@ -590,7 +590,7 @@
 
 .steps-body .form-input.communityname {
 	margin-bottom: 0;
-	padding-left: 10px;
+	padding-left: 0;
 	border-bottom-style: none;
 }
 
@@ -601,7 +601,7 @@
 }
 
 .right-part .social-link-group {
-	padding: 8px 0 0;
+	padding: 14px 10px 8px;
 	background-color: #fff;
 }
 
@@ -635,6 +635,10 @@
 	text-align: left;
 }
 
+.steps-body .form-input.address {
+	padding-left: 0;
+}
+
 .steps-body .form-input.view {
 	padding: 8px 10px;
 	line-height: 21px;
@@ -662,7 +666,7 @@
 }
 
 .steps-body .form-select.category {
-	padding: 6px 12px 6px 9px;
+	padding: 6px 12px 6px 0;
 	margin-bottom: 0;
 	margin-left: 0;
 	border-style: none;
@@ -706,6 +710,17 @@
 	color: #333;
 }
 
+.steps-body .textarea::-webkit-scrollbar {
+	width: 6px;
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.steps-body .textarea::-webkit-scrollbar-thumb {
+	width: 6px;
+	border-radius: 6px;
+	background-color: rgba(100, 100, 100, 0.4);
+}
+
 .steps-body .w-form-done {
 	display: none;
 	padding: 20px;
@@ -739,8 +754,8 @@
 .steps-body .filter-div {
 	margin-top: 0;
 	margin-bottom: 0;
-	padding-top: 8px;
-	padding-bottom: 6px;
+	/*padding-top: 8px;*/
+	padding-bottom: 0;
 	-webkit-justify-content: space-around;
 	-ms-flex-pack: distribute;
 	justify-content: space-around;
@@ -792,6 +807,10 @@
 
 .filter-option:last-child {
 	margin-right: 0;
+}
+
+.steps-body .filter-option:last-child {
+	padding-bottom: 8px;
 }
 
 body .filter-option:hover {
@@ -890,10 +909,15 @@ body .filter-option.disabled:hover {
 .steps-body .attendance-input {
 	max-width: 75px;
 	margin-bottom: 0;
+	padding-right: 0;
 	border-style: none none solid;
 	border-width: 1px;
-	border-color: #000 #000 #ccc;
+	border-color: #000 #000 #eee;
 	background-color: transparent;
+}
+
+.steps-body .attendance-input:hover {
+	border-bottom-color: #8900fe;
 }
 
 .steps-body .form-submit.create {

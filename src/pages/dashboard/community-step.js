@@ -64,6 +64,7 @@ class CommunityStep extends Component{
 			community_contact: p_obj === undefined ? "" : p_obj.obj.community_contact,
 			phone: p_obj === undefined ? "" : p_obj.obj.phone,
 			email: p_obj === undefined ? "" : p_obj.obj.email,
+			website: p_obj === undefined ? "" : p_obj.obj.website,
 			facebook: p_obj === undefined ? "" : p_obj.obj.facebook,
 			instagram: p_obj === undefined ? "" : p_obj.obj.instagram,
 			vimeo: p_obj === undefined ? "" : p_obj.obj.vimeo,
@@ -289,6 +290,7 @@ class CommunityStep extends Component{
 			community_contact: this.state.community_contact,
 			phone: this.state.phone,
 			email: this.state.email,
+			website: this.state.website,
 			facebook: this.state.facebook,
 			instagram: this.state.instagram,
 			vimeo: this.state.vimeo,
@@ -462,7 +464,7 @@ class CommunityStep extends Component{
 												>
 													{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 														<>
-															<input className="form-input w-input"
+															<input className="form-input w-input address"
 																   disabled={this.state.is_editing}
 																   style={{borderBottom: this.state.error_community_address ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
 																   title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}

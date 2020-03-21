@@ -27,6 +27,7 @@ pictures: [,…]
 community_contact: ""
 phone: ""
 email: ""
+website: ""
 facebook: ""
 instagram: ""
 vimeo: ""

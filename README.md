@@ -52,7 +52,7 @@ Considerable materials are:
     },
 
     SOCIALS: [
-        "Facebook", "Instagram", "Vimeo", "Youtube", "Podcast", "Twitter",
+        "Website", "Facebook", "Instagram", "Vimeo", "Youtube", "Podcast", "Twitter",
     ]
 #### For the production, some configurations must be replaced:
     FYC_API_URL,

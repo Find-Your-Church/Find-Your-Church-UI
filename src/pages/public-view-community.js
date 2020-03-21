@@ -39,6 +39,7 @@ class PublicViewCommunity extends Component{
 			community_contact: p_obj === undefined ? "" : p_obj.obj.community_contact,
 			phone: p_obj === undefined ? "" : p_obj.obj.phone,
 			email: p_obj === undefined ? "" : p_obj.obj.email,
+			website: p_obj === undefined ? "" : p_obj.obj.website,
 			facebook: p_obj === undefined ? "" : p_obj.obj.facebook,
 			instagram: p_obj === undefined ? "" : p_obj.obj.instagram,
 			vimeo: p_obj === undefined ? "" : p_obj.obj.vimeo,

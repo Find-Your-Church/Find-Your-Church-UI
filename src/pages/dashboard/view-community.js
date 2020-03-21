@@ -39,6 +39,7 @@ class ViewCommunity extends Component{
 			community_contact: p_obj === undefined ? "" : p_obj.obj.community_contact,
 			phone: p_obj === undefined ? "" : p_obj.obj.phone,
 			email: p_obj === undefined ? "" : p_obj.obj.email,
+			website: p_obj === undefined ? "" : p_obj.obj.website,
 			facebook: p_obj === undefined ? "" : p_obj.obj.facebook,
 			instagram: p_obj === undefined ? "" : p_obj.obj.instagram,
 			vimeo: p_obj === undefined ? "" : p_obj.obj.vimeo,
@@ -284,18 +285,18 @@ class ViewCommunity extends Component{
 															</div>
 															: null}
 														{this.state.email ?
-															<div className="view-item w3-half"
+															<a href={"mailto:" + this.state.email} className="view-item w3-half"
 																 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
 																{this.state.email ||
 																<span style={{color: "#aaa"}}>Email</span>}
-															</div>
+															</a>
 															: null}
 														{this.state.phone ?
-															<div className="view-item w3-half"
+															<a href={"tel:" + this.state.phone} className="view-item w3-half"
 																 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
 																{this.state.phone ||
 																<span style={{color: "#aaa"}}>Phone</span>}
-															</div>
+															</a>
 															: null}
 													</div>
 												</div>

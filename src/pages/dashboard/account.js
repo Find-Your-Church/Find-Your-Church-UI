@@ -375,7 +375,7 @@ class Account extends Component{
 				showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
 				: (this.props.community.is_sending ?
 						<i className="fas fa-spinner fa-spin"> </i>
-						: "$0.00");
+						: "");
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
@@ -667,7 +667,7 @@ class Account extends Component{
 							<div className="div-20bottom">
 								<div className="container-inline w3-row">
 									<div className="flexdiv-leftright panel underline">
-										<h5 className="container-title">Billing</h5>
+										<h5 className="container-title">Developer Console</h5>
 									</div>
 									<div className={"sub-container w3-col m12 l6 search-preview"}>
 										<div className={"sub-content payment"}>
@@ -773,7 +773,7 @@ class Account extends Component{
 											</div>
 											<div className="table-row-2">
 												<div className="flexdiv-left">
-													<h4 className="table-header">Activations</h4>
+													<h4 className="table-header">Active Accounts</h4>
 													<Popup
 															trigger={<i style={{cursor: "pointer"}}
 																					className={"fas fa-question-circle tooltip-icon"}> </i>}
@@ -812,7 +812,7 @@ class Account extends Component{
 															showAmount(this.props.community.subscription.plan.amount)
 															: (this.props.community.is_sending ?
 																	<i className="fas fa-spinner fa-spin"> </i>
-																	: showAmount(this.props.community.plan_price))}
+																	: "-")}
 												</h4>
 											</div>
 											<div className="table-row-2">
@@ -828,30 +828,27 @@ class Account extends Component{
 												<h4 className={"table-item right"}>
 													<div className={(this.props.community.subscription ? "" : " grey")}>
 														{uc_amount}
-														&nbsp;on&nbsp;
 														{this.props.community.subscription ?
-																next_due_date.toLocaleDateString('en-US')
+																"&nbsp;on&nbsp;" + next_due_date.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
-																		: "00/00/0000")}
+																		: "-")}
 													</div>
 													<div className={(this.props.community.subscription ? "" : " grey")}>
 														{uc_amount}
-														&nbsp;on&nbsp;
 														{this.props.community.subscription ?
-																next_month1.toLocaleDateString('en-US')
+																"&nbsp;on&nbsp;" + next_month1.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
-																		: "00/00/0000")}
+																		: "-")}
 													</div>
 													<div className={(this.props.community.subscription ? "" : " grey")}>
 														{uc_amount}
-														&nbsp;on&nbsp;
 														{this.props.community.subscription ?
-																next_month2.toLocaleDateString('en-US')
+																"&nbsp;on&nbsp;" + next_month2.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
-																		: "00/00/0000")}
+																		: "-")}
 													</div>
 												</h4>
 											</div>
@@ -939,7 +936,8 @@ class Account extends Component{
 														)}
 													</>
 											) : (
-													<div className={"w3-center"}>
+													<div className={"w3-center w3-padding w3-text-grey"}>
+														N/A
 													</div>
 											)}
 											<div className="w-form-done">
