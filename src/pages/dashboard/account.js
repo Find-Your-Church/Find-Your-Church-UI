@@ -829,7 +829,7 @@ class Account extends Component{
 													<div className={(this.props.community.subscription ? "" : " grey")}>
 														{uc_amount}
 														{this.props.community.subscription ?
-																"&nbsp;on&nbsp;" + next_due_date.toLocaleDateString('en-US')
+																" on " + next_due_date.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
 																		: "-")}
@@ -837,7 +837,7 @@ class Account extends Component{
 													<div className={(this.props.community.subscription ? "" : " grey")}>
 														{uc_amount}
 														{this.props.community.subscription ?
-																"&nbsp;on&nbsp;" + next_month1.toLocaleDateString('en-US')
+																" on " + next_month1.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
 																		: "-")}
@@ -845,7 +845,7 @@ class Account extends Component{
 													<div className={(this.props.community.subscription ? "" : " grey")}>
 														{uc_amount}
 														{this.props.community.subscription ?
-																"&nbsp;on&nbsp;" + next_month2.toLocaleDateString('en-US')
+																" on " + next_month2.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
 																		<i className="fas fa-spinner fa-spin"> </i>
 																		: "-")}
