@@ -67,6 +67,10 @@ class InvitedViewCommunity extends Component{
 		window.open(url, "_blank", "width=800, height=600, location=no, toolbar=no");
 	}
 
+	handleReadMore = () => {
+		this.setState({showedAboutShort: !this.state.showedAboutShort});
+	};
+
 	toggleAboutPart = () => {
 		this.setState({collapsedAboutPart: !this.state.collapsedAboutPart});
 	};
@@ -201,9 +205,9 @@ class InvitedViewCommunity extends Component{
 																			 style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
 																		{this.state.showedAboutShort ? (
 																						<>
-																	<pre>
-																		{aboutShort}&nbsp;
-																	</pre>
+																							<pre>
+																								{aboutShort}&nbsp;
+																							</pre>
 																							{isMore ? (
 																									<div className={"read-more"}
 																											 onClick={this.handleReadMore}>read more</div>
@@ -212,13 +216,12 @@ class InvitedViewCommunity extends Component{
 																				)
 																				: (
 																						<>
-																	<pre>
-																		{this.props.community.view_community.about}
-																	</pre>
+																							<pre>
+																								{this.props.community.view_community.about}
+																							</pre>
 																							{isMore ? (
 																									<div className={"read-more"}
-																											 onClick={this.handleReadMore}>show
-																										less</div>
+																											 onClick={this.handleReadMore}>show less</div>
 																							) : null}
 																						</>
 																				)
