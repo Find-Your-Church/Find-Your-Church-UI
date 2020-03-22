@@ -737,7 +737,7 @@ class Account extends Component{
 												</div>
 											</div>
 											<div style={{marginTop: "10px"}}>
-												<Link to={this.state.previewUrl} className={"purple-link"} target={"_new"}>
+												<Link to={this.state.previewUrl} className={"purple-link"}>
 													Preview
 												</Link>
 											</div>

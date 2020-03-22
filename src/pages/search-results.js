@@ -24,6 +24,7 @@ import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sort
 import isEmpty from "../utils/isEmpty";
 import SelectedFilters from "../components/selected-filters";
 import SiteHeader from "../components/site-header";
+import SearchResultsIframe from "./search-results-iframe";
 
 class SearchResults extends Component{
 	constructor(props){
@@ -244,7 +245,6 @@ class SearchResults extends Component{
 		return (
 				<>
 					<SiteHeader/>
-
 					<main id="content-body" className="w3-row">
 						<div id={"spinning-modal"} className={"w3-modal"}
 								 style={{display: this.props.community.searching ? "block" : "none"}}>
