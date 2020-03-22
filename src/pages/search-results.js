@@ -34,7 +34,7 @@ class SearchResults extends Component{
 		this.criteria = criteria;
 
 		if(criteria !== undefined){
-			let crt = JSON.parse(atob(criteria));
+			let crt = JSON.parse(decodeURIComponent(criteria));
 			console.log(crt);
 			this.criteria = crt;
 			props.setSearchCriteria(crt);
@@ -104,7 +104,7 @@ class SearchResults extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria){
-			this.props.setBackUrl("/search-results/" + btoa(JSON.stringify(this.props.community.criteria)));
+			this.props.setBackUrl("/search-results/" + encodeURIComponent(JSON.stringify(this.props.community.criteria, null, '')));
 		}
 	}
 

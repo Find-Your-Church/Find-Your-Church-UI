@@ -131,7 +131,7 @@ class Account extends Component{
 	}
 
 	applyUpdatedCriteria = () => {
-		const iframe_param = btoa(JSON.stringify(this.previewCriteria));
+		const iframe_param = encodeURIComponent(JSON.stringify(this.previewCriteria, null, ''));
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results/${iframe_param}`;
 		const short_url = preview_url.substr(0, 160);
@@ -676,8 +676,10 @@ class Account extends Component{
 													How to display your communities on your own website
 												</h5>
 											</div>
-											<div>
-												Create Copy Publish
+											<div className={"iframe-preview-guideline"}>
+												<div>Create</div>
+												<div>Copy</div>
+												<div>Publish</div>
 											</div>
 											<div className="flexdiv-leftright underline">
 												<h5 className="container-header">
@@ -700,7 +702,6 @@ class Account extends Component{
 													minHeight: "64px",
 													wordBreak: "break-all",
 													paddingTop: "16px",
-													paddingRight: "16px"
 												}}>
 													<select id="preview-category" onChange={this.onChangePreviewCategory}
 																	defaultValue={this.props.community.criteria.category}
