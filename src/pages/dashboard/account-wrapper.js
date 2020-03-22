@@ -1,13 +1,17 @@
 import React, {Component} from "react";
 import {Elements} from "react-stripe-elements";
 import Account from "./account";
+import SiteHeader from "../../components/site-header";
 
 class AccountWrapper extends Component{
 	render(){
-		return(
-			<Elements>
-				<Account/>
-			</Elements>
+		return (
+				<>
+					<SiteHeader/>
+					<Elements>
+						<Account/>
+					</Elements>
+				</>
 		);
 	}
 }

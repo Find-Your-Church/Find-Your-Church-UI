@@ -5,6 +5,8 @@ import SiteFooter from "../components/site-footer";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
+import SiteHeader from "../components/site-header";
+import {BrowserRouter as Router} from "react-router-dom";
 
 /**
  *
@@ -16,14 +18,16 @@ class Home extends Component{
 
 	render(){
 		return (
-			<main className="home-main">
-				<div className="block-48 w3-display-container">
-					<div className="search-container w3-display-middle">
-						<h1 className="search-form-header">What kind of community are you looking for?</h1>
-						<SearchBar buttonTitle="Search"/>
-					</div>
-				</div>
-				{/*
+				<>
+					<SiteHeader/>
+					<main className="home-main">
+						<div className="block-48 w3-display-container">
+							<div className="search-container w3-display-middle">
+								<h1 className="search-form-header">What kind of community are you looking for?</h1>
+								<SearchBar buttonTitle="Search"/>
+							</div>
+						</div>
+						{/*
 				<div className="block-50">
 					<div className="block-60">
 						<iframe className="embedly-embed"
@@ -92,8 +96,9 @@ class Home extends Component{
 				<div className="block-52 teal">
 				</div>
 				*/}
-				<SiteFooter/>
-			</main>
+						<SiteFooter/>
+					</main>
+				</>
 		);
 	}
 }
@@ -106,6 +111,6 @@ const mapStateToProps = state => ({
 	auth: state.auth
 });
 export default connect(
-	mapStateToProps,
-	{getUserInfo}
+		mapStateToProps,
+		{getUserInfo}
 )(Home);

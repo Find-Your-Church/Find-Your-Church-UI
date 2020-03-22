@@ -107,6 +107,7 @@ class Account extends Component{
 			frameUrl: '',
 			frameShortCode: '',
 			frameCode: '',
+			previewUrl: '',
 		};
 
 		this.changeUserName = this.changeUserName.bind(this);
@@ -140,6 +141,7 @@ class Account extends Component{
 			frameUrl: preview_url,
 			frameShortCode: `<iframe src="${short_url}..."></iframe>`,
 			frameCode: `<iframe src="${preview_url}"></iframe>`,
+			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
 	};
 
@@ -735,9 +737,9 @@ class Account extends Component{
 												</div>
 											</div>
 											<div style={{marginTop: "10px"}}>
-												<a href={this.state.frameUrl} className={"purple-link"} target={"_new"}>
+												<Link to={this.state.previewUrl} className={"purple-link"} target={"_new"}>
 													Preview
-												</a>
+												</Link>
 											</div>
 										</div>
 									</div>

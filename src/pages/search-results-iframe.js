@@ -25,7 +25,7 @@ import isEmpty from "../utils/isEmpty";
 import SelectedFilters from "../components/selected-filters";
 import SiteHeader from "../components/site-header";
 
-class SearchResults extends Component{
+class SearchResultsIframe extends Component{
 	constructor(props){
 		super(props);
 
@@ -243,8 +243,6 @@ class SearchResults extends Component{
 
 		return (
 				<>
-					<SiteHeader/>
-
 					<main id="content-body" className="w3-row">
 						<div id={"spinning-modal"} className={"w3-modal"}
 								 style={{display: this.props.community.searching ? "block" : "none"}}>
@@ -421,7 +419,7 @@ class SearchResults extends Component{
 	}
 }
 
-SearchResults.propTypes = {
+SearchResultsIframe.propTypes = {
 	errors: PropTypes.object.isRequired,
 	auth: PropTypes.object.isRequired,
 	community: PropTypes.object.isRequired,
@@ -457,4 +455,4 @@ const mapStateToProps = state => ({
 export default connect(
 		mapStateToProps,
 		{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking, setBackUrl}
-)(SearchResults);
+)(SearchResultsIframe);

@@ -3,6 +3,7 @@ import SiteFooter from "../components/site-footer";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {doResetPassword} from "../actions/auth-actions";
+import SiteHeader from "../components/site-header";
 
 class ResetPassword extends Component{
 	constructor(props){
@@ -33,14 +34,17 @@ class ResetPassword extends Component{
 
 	render(){
 		return (
-			<main>
-				<div className="sign-body">
-					<h4 className="w3-display-middle w3-text-grey">
-						{this.state.errors.error}
-					</h4>
-				</div>
-				<SiteFooter/>
-			</main>
+				<>
+					<SiteHeader/>
+					<main>
+						<div className="sign-body">
+							<h4 className="w3-display-middle w3-text-grey">
+								{this.state.errors.error}
+							</h4>
+						</div>
+						<SiteFooter/>
+					</main>
+				</>
 		);
 	}
 }
@@ -55,6 +59,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-	mapStateToProps,
-	{doResetPassword}
+		mapStateToProps,
+		{doResetPassword}
 )(ResetPassword);

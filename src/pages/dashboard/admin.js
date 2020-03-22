@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {getUserInfo} from "../../actions/auth-actions";
 import {getBillingStatus, clearLastInvoice, showActivateDlg} from "../../actions/community-actions";
 import {Elements} from "react-stripe-elements";
+import SiteHeader from "../../components/site-header";
 
 class Admin extends Component{
 	constructor(props){
@@ -53,32 +54,36 @@ class Admin extends Component{
 		 * style={{display: this.props.community.is_showing ? "block" : "none"}}
 		 */
 		return (
-			<div>
-				<div id={"stripe-modal"} className={"w3-modal"}
-					 style={{display: this.props.community.showing ? "block" : "none"}}>
-					<Elements>
-						<StripeSubscription second={!!this.props.community.subscription}/>
-					</Elements>
-				</div>
-				<div id={"spinning-modal"} className={"w3-modal"}
-					 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
-					<div className="w3-display-middle w3-text-white w3-jumbo">
-						<i className="fas fa-spinner fa-spin"> </i>
-					</div>
-				</div>
-				<main className="admin-body w3-row" style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
-					<div className={"admin-wrapper"}>
-						<div className="admin-left w3-col">
-							<ProfileContainer/>
+				<>
+					<SiteHeader/>
+					<div>
+						<div id={"stripe-modal"} className={"w3-modal"}
+								 style={{display: this.props.community.showing ? "block" : "none"}}>
+							<Elements>
+								<StripeSubscription second={!!this.props.community.subscription}/>
+							</Elements>
 						</div>
-						<div className="admin-right w3-rest">
-							<MyCommunities status="active" handleShowSubDlg={this.showSubDlg}/>
-							<MyCommunities status="inactive" handleShowSubDlg={this.showSubDlg}/>
+						<div id={"spinning-modal"} className={"w3-modal"}
+								 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
+							<div className="w3-display-middle w3-text-white w3-jumbo">
+								<i className="fas fa-spinner fa-spin"> </i>
+							</div>
 						</div>
+						<main className="admin-body w3-row"
+									style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
+							<div className={"admin-wrapper"}>
+								<div className="admin-left w3-col">
+									<ProfileContainer/>
+								</div>
+								<div className="admin-right w3-rest">
+									<MyCommunities status="active" handleShowSubDlg={this.showSubDlg}/>
+									<MyCommunities status="inactive" handleShowSubDlg={this.showSubDlg}/>
+								</div>
+							</div>
+						</main>
+						<SiteFooter/>
 					</div>
-				</main>
-				<SiteFooter/>
-			</div>
+				</>
 		);
 	}
 }
@@ -100,6 +105,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-	mapStateToProps,
-	{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
+		mapStateToProps,
+		{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
 )(Admin);

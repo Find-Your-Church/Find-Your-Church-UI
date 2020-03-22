@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import SiteFooter from "../components/site-footer";
 import "../css/login-register.css";
-import {Link, withRouter} from "react-router-dom";
+import {BrowserRouter as Router, Link, withRouter} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";
@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-actions";
 import config from "../conf/config";
 import isEmpty from "../utils/isEmpty";
+import SiteHeader from "../components/site-header";
 
 class RegisterPopup extends Component{
 	constructor(props){
@@ -89,152 +90,157 @@ class RegisterPopup extends Component{
 
 	render(){
 		return (
-			<main>
-				<div className="sign-body">
-					<div className={"w3-modal modal-terms-conditions"} style={{display: this.state.showedModal ? "block" : "none"}}>
-						<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
-							<header className={"w3-container w3-border-bottom"}>
+				<>
+					<SiteHeader/>
+
+					<main>
+						<div className="sign-body">
+							<div className={"w3-modal modal-terms-conditions"}
+									 style={{display: this.state.showedModal ? "block" : "none"}}>
+								<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
+									<header className={"w3-container w3-border-bottom"}>
 							<span onClick={this.hideModal}
-								  className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
-								<div className={"terms-title"}>Terms and Conditions</div>
-							</header>
-							<div className={"w3-container terms-conditions-content"}>
-								<p>Terms...</p>
-								<p>Conditions...<br/><br/><br/><br/></p>
-							</div>
-						</div>
-					</div>
-					<div className="div-block-63" style={{filter: this.state.showedModal ? "blur(5px)" : "none"}}>
-						<div className="div-block-38">
-							<div className="header1-div gradient shadow">
-								<h3 className="header3 center">Create a free account to access your dashboard.</h3>
-							</div>
-							<div>
-								<div className="form-div1">
-									<div className="form-block1 w-form">
-										<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
-											  name="wf-form-Registration"
-											  data-name="Registration" className="form1">
-											<div className="form-row">
-												<div className="input-div gradient w3-row">
-													<input type="text"
-														   className="form-input center  w-input-sign w3-half"
-														   maxLength="256"
-														   onChange={this.onChange}
-														   value={this.state.fname}
-														   id="fname"
-														   placeholder="First name"
-														   style={{borderBottomColor: this.props.errors.msg_reg_fname ? "#f00" : "#e6e6e6"}}
-														   required=""/>
-													<input type="text"
-														   className="form-input center  w-input-sign w3-half"
-														   maxLength="256"
-														   onChange={this.onChange}
-														   value={this.state.lname}
-														   id="lname"
-														   placeholder="Last name"
-														   style={{borderBottomColor: this.props.errors.msg_reg_lname ? "#f00" : "#e6e6e6"}}
-														   required=""/>
-												</div>
-											</div>
-											<div className="form-row">
-												<div className="input-div gradient">
-													<input type="email"
-														   className="form-input center  w-input-sign"
-														   maxLength="256"
-														   onChange={this.onChange}
-														   value={this.state.email}
-														   id="email"
-														   placeholder="Email"
-														   style={{borderBottomColor: this.props.errors.msg_reg_email ? "#f00" : "#e6e6e6"}}
-														   required=""/>
-												</div>
-											</div>
-											<div className="form-row">
-												<div className="input-div gradient">
-													<input type="password"
-														   className="form-input center  w-input-sign w3-half"
-														   maxLength="256"
-														   onChange={this.onChange}
-														   value={this.state.password}
-														   id="password"
-														   placeholder="Password"
-														   style={{borderBottomColor: this.props.errors.msg_reg_password ? "#f00" : "#e6e6e6"}}
-														   required=""/>
-													<input type="password"
-														   className="form-input center  w-input-sign w3-half"
-														   maxLength="256"
-														   onChange={this.onChange}
-														   value={this.state.password2}
-														   id="password2"
-														   placeholder="Confirm password"
-														   style={{borderBottomColor: this.props.errors.msg_reg_password2 ? "#f00" : "#e6e6e6"}}
-														   required=""/>
-												</div>
-											</div>
-											<div className="submit-row">
-												<input type="submit" value="Create Account"
-													   data-wait="Please wait..."
-													   className="form-submit round w-button-sign"/>
-											</div>
-										</form>
-										<div className="w-form-done"
-											 style={{display: this.props.errors.msg_register ? "block" : "none"}}>
-											{this.props.errors.msg_register}
-										</div>
-										<div className="w-form-fail" style={{
-											display:
-												(!isEmpty(this.props.errors.msg_reg_fname) ||
-												!isEmpty(this.props.errors.msg_reg_lname) ||
-												!isEmpty(this.props.errors.msg_reg_email) ||
-												!isEmpty(this.props.errors.msg_reg_password) ||
-												!isEmpty(this.props.errors.msg_reg_password2)) ? "block" : "none"
-										}}>
-											<div>{this.props.errors.msg_reg_fname}</div>
-											<div>{this.props.errors.msg_reg_lname}</div>
-											<div>{this.props.errors.msg_reg_email}</div>
-											<div>{this.props.errors.msg_reg_password}</div>
-											<div>{this.props.errors.msg_reg_password2}</div>
-										</div>
-									</div>
-								</div>
-								<div className="terms-conditions">
-									<span className="fineprint">By registering you are agreeing to our</span>
-									<Link to="#" onClick={this.showModal} className="fineprint link">Terms and
-										Conditions</Link>
-								</div>
-							</div>
-							<div>
-								<div className="strikethrough-div">
-									<div className="or-div"><h4 className="or-text">or</h4></div>
-								</div>
-								<div className="container-subdiv">
-									<div className="sdk-div">
-										<GoogleLogin
-											clientId={config.GOOGLE_CLIENT_ID}
-											buttonText="Sign up with Google"
-											onSuccess={this.googleResponse}
-											onFailure={this.onFailure}/>
-										<FacebookLogin
-											appId={config.FACEBOOK_APP_ID}
-											autoLoad={false}
-											fields="name,email,picture"
-											callback={this.facebookResponse}/>
+										className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
+										<div className={"terms-title"}>Terms and Conditions</div>
+									</header>
+									<div className={"w3-container terms-conditions-content"}>
+										<p>Terms...</p>
+										<p>Conditions...<br/><br/><br/><br/></p>
 									</div>
 								</div>
 							</div>
+							<div className="div-block-63" style={{filter: this.state.showedModal ? "blur(5px)" : "none"}}>
+								<div className="div-block-38">
+									<div className="header1-div gradient shadow">
+										<h3 className="header3 center">Create a free account to access your dashboard.</h3>
+									</div>
+									<div>
+										<div className="form-div1">
+											<div className="form-block1 w-form">
+												<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
+															name="wf-form-Registration"
+															data-name="Registration" className="form1">
+													<div className="form-row">
+														<div className="input-div gradient w3-row">
+															<input type="text"
+																		 className="form-input center  w-input-sign w3-half"
+																		 maxLength="256"
+																		 onChange={this.onChange}
+																		 value={this.state.fname}
+																		 id="fname"
+																		 placeholder="First name"
+																		 style={{borderBottomColor: this.props.errors.msg_reg_fname ? "#f00" : "#e6e6e6"}}
+																		 required=""/>
+															<input type="text"
+																		 className="form-input center  w-input-sign w3-half"
+																		 maxLength="256"
+																		 onChange={this.onChange}
+																		 value={this.state.lname}
+																		 id="lname"
+																		 placeholder="Last name"
+																		 style={{borderBottomColor: this.props.errors.msg_reg_lname ? "#f00" : "#e6e6e6"}}
+																		 required=""/>
+														</div>
+													</div>
+													<div className="form-row">
+														<div className="input-div gradient">
+															<input type="email"
+																		 className="form-input center  w-input-sign"
+																		 maxLength="256"
+																		 onChange={this.onChange}
+																		 value={this.state.email}
+																		 id="email"
+																		 placeholder="Email"
+																		 style={{borderBottomColor: this.props.errors.msg_reg_email ? "#f00" : "#e6e6e6"}}
+																		 required=""/>
+														</div>
+													</div>
+													<div className="form-row">
+														<div className="input-div gradient">
+															<input type="password"
+																		 className="form-input center  w-input-sign w3-half"
+																		 maxLength="256"
+																		 onChange={this.onChange}
+																		 value={this.state.password}
+																		 id="password"
+																		 placeholder="Password"
+																		 style={{borderBottomColor: this.props.errors.msg_reg_password ? "#f00" : "#e6e6e6"}}
+																		 required=""/>
+															<input type="password"
+																		 className="form-input center  w-input-sign w3-half"
+																		 maxLength="256"
+																		 onChange={this.onChange}
+																		 value={this.state.password2}
+																		 id="password2"
+																		 placeholder="Confirm password"
+																		 style={{borderBottomColor: this.props.errors.msg_reg_password2 ? "#f00" : "#e6e6e6"}}
+																		 required=""/>
+														</div>
+													</div>
+													<div className="submit-row">
+														<input type="submit" value="Create Account"
+																	 data-wait="Please wait..."
+																	 className="form-submit round w-button-sign"/>
+													</div>
+												</form>
+												<div className="w-form-done"
+														 style={{display: this.props.errors.msg_register ? "block" : "none"}}>
+													{this.props.errors.msg_register}
+												</div>
+												<div className="w-form-fail" style={{
+													display:
+															(!isEmpty(this.props.errors.msg_reg_fname) ||
+																	!isEmpty(this.props.errors.msg_reg_lname) ||
+																	!isEmpty(this.props.errors.msg_reg_email) ||
+																	!isEmpty(this.props.errors.msg_reg_password) ||
+																	!isEmpty(this.props.errors.msg_reg_password2)) ? "block" : "none"
+												}}>
+													<div>{this.props.errors.msg_reg_fname}</div>
+													<div>{this.props.errors.msg_reg_lname}</div>
+													<div>{this.props.errors.msg_reg_email}</div>
+													<div>{this.props.errors.msg_reg_password}</div>
+													<div>{this.props.errors.msg_reg_password2}</div>
+												</div>
+											</div>
+										</div>
+										<div className="terms-conditions">
+											<span className="fineprint">By registering you are agreeing to our</span>
+											<Link to="#" onClick={this.showModal} className="fineprint link">Terms and
+												Conditions</Link>
+										</div>
+									</div>
+									<div>
+										<div className="strikethrough-div">
+											<div className="or-div"><h4 className="or-text">or</h4></div>
+										</div>
+										<div className="container-subdiv">
+											<div className="sdk-div">
+												<GoogleLogin
+														clientId={config.GOOGLE_CLIENT_ID}
+														buttonText="Sign up with Google"
+														onSuccess={this.googleResponse}
+														onFailure={this.onFailure}/>
+												<FacebookLogin
+														appId={config.FACEBOOK_APP_ID}
+														autoLoad={false}
+														fields="name,email,picture"
+														callback={this.facebookResponse}/>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="div-block-46">
+									<h1 className="heading-11">
+										<Link to="/login-popup" className="link-5">
+											Already have an account? <strong>Sign In</strong>
+										</Link>
+									</h1>
+								</div>
+							</div>
 						</div>
-						<div className="div-block-46">
-							<h1 className="heading-11">
-								<Link to="/login-popup" className="link-5">
-									Already have an account? <strong>Sign In</strong>
-								</Link>
-							</h1>
-						</div>
-					</div>
-				</div>
-				<SiteFooter/>
-			</main>
+						<SiteFooter/>
+					</main>
+				</>
 		);
 	}
 }
@@ -251,10 +257,10 @@ const mapStateToProps = state => ({
 	errors: state.errors
 });
 export default connect(
-	mapStateToProps,
-	{
-		clearErrors,
-		registerUser,
-		registerGoogleUser,
-	}
+		mapStateToProps,
+		{
+			clearErrors,
+			registerUser,
+			registerGoogleUser,
+		}
 )(withRouter(RegisterPopup));

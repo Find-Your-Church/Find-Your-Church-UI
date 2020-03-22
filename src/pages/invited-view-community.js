@@ -9,6 +9,7 @@ import ListMembers from "../components/list-members";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {viewCommunity} from "../actions/community-actions";
+import SiteHeader from "../components/site-header";
 
 class InvitedViewCommunity extends Component{
 	constructor(props){
@@ -102,245 +103,248 @@ class InvitedViewCommunity extends Component{
 			console.log(this.props.auth.user.id);
 
 			return (
-					<div>
-						<main className="steps-body">
-							<div className={"view-wrapper"}>
-								<div className="container-inline">
-									<div className="info-body w3-row">
-										<h3 className="header3 w3-bar w3-margin-bottom">
-											<div className="create-menu w3-bar-item w3-left">
-												<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
-											</div>
-											<div className="create-menu w3-bar-item w3-center">
-												{this.props.community.view_community.community_name}
-											</div>
-										</h3>
-										<div className="left-part w3-col l6">
-											<div>
-												{this.props.community.view_community.pictures.length > 1 ? (
-																<div className="slide-container">
-																	<Slide {...this.slide_options}>
-																		{this.props.community.view_community.pictures.map((pic, index) => {
-																			return (
-																					<div className="each-slide" key={index}>
-																						<div style={{backgroundImage: `url(${pic})`}}>
+					<>
+						<SiteHeader/>
+						<div>
+							<main className="steps-body">
+								<div className={"view-wrapper"}>
+									<div className="container-inline">
+										<div className="info-body w3-row">
+											<h3 className="header3 w3-bar w3-margin-bottom">
+												<div className="create-menu w3-bar-item w3-left">
+													<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
+												</div>
+												<div className="create-menu w3-bar-item w3-center">
+													{this.props.community.view_community.community_name}
+												</div>
+											</h3>
+											<div className="left-part w3-col l6">
+												<div>
+													{this.props.community.view_community.pictures.length > 1 ? (
+																	<div className="slide-container">
+																		<Slide {...this.slide_options}>
+																			{this.props.community.view_community.pictures.map((pic, index) => {
+																				return (
+																						<div className="each-slide" key={index}>
+																							<div style={{backgroundImage: `url(${pic})`}}>
+																							</div>
 																						</div>
-																					</div>
-																			);
-																		})}
-																	</Slide>
-																</div>
-														)
-														: (this.props.community.view_community.pictures.length > 0 ? (
-																<div className="slide-container">
-																	<div className="each-slide">
-																		<div
-																				style={{backgroundImage: `url(${this.props.community.view_community.pictures[0]})`}}>
+																				);
+																			})}
+																		</Slide>
+																	</div>
+															)
+															: (this.props.community.view_community.pictures.length > 0 ? (
+																	<div className="slide-container">
+																		<div className="each-slide">
+																			<div
+																					style={{backgroundImage: `url(${this.props.community.view_community.pictures[0]})`}}>
+																			</div>
 																		</div>
 																	</div>
-																</div>
-														) : (
-																<img
-																		className={"community-picture"}
-																		alt="Community" title={this.props.community.view_community.community_name}
-																		src={this.props.community.view_community.picture ? this.props.community.view_community.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
-														))}
-												<div className="basic-info view">
-													<div className="listingrow view" style={{position: "relative"}}>
-														<strong>{this.props.community.view_community.community_name}</strong>
-														<Link to="#" className={"menu-icon-3dot w3-right"}
-																	onClick={this.toggleMenu}>
-															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
-														</Link>
-														<nav role="navigation"
-																 className="w3-animate-opacity listing-navmenu view w-nav-menu"
-																 onClick={this.toggleMenu} onMouseLeave={this.hideMenu}
-																 style={{display: this.state.is_show_menu ? "block" : "none"}}>
-															<Link to="#" className="listing-navlink view w-nav-link">
-																Request to Join
+															) : (
+																	<img
+																			className={"community-picture"}
+																			alt="Community" title={this.props.community.view_community.community_name}
+																			src={this.props.community.view_community.picture ? this.props.community.view_community.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
+															))}
+													<div className="basic-info view">
+														<div className="listingrow view" style={{position: "relative"}}>
+															<strong>{this.props.community.view_community.community_name}</strong>
+															<Link to="#" className={"menu-icon-3dot w3-right"}
+																		onClick={this.toggleMenu}>
+																<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 															</Link>
-															<Link to="#" className="listing-navlink view w-nav-link">
-																Add to Favorites
-															</Link>
-															<Link to="#" className="listing-navlink view w-nav-link">
-																Copy Link
-															</Link>
-															<Link to="#" className="listing-navlink view w-nav-link">
-																Share
-															</Link>
-															<Link to="#" className="listing-navlink view w-nav-link">
-																Flag / Report
-															</Link>
-														</nav>
-													</div>
-													<div className="listingrow view">
-														{this.props.community.view_community.category}
-													</div>
-													<div className="listingrow view">
-														{this.props.community.view_community.address}
+															<nav role="navigation"
+																	 className="w3-animate-opacity listing-navmenu view w-nav-menu"
+																	 onClick={this.toggleMenu} onMouseLeave={this.hideMenu}
+																	 style={{display: this.state.is_show_menu ? "block" : "none"}}>
+																<Link to="#" className="listing-navlink view w-nav-link">
+																	Request to Join
+																</Link>
+																<Link to="#" className="listing-navlink view w-nav-link">
+																	Add to Favorites
+																</Link>
+																<Link to="#" className="listing-navlink view w-nav-link">
+																	Copy Link
+																</Link>
+																<Link to="#" className="listing-navlink view w-nav-link">
+																	Share
+																</Link>
+																<Link to="#" className="listing-navlink view w-nav-link">
+																	Flag / Report
+																</Link>
+															</nav>
+														</div>
+														<div className="listingrow view">
+															{this.props.community.view_community.category}
+														</div>
+														<div className="listingrow view">
+															{this.props.community.view_community.address}
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<div className="right-part view w3-col l6">
-											<div className={"tab w3-row"}>
-												<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
-														 onClick={this.selectTabDetails}>Details
+											<div className="right-part view w3-col l6">
+												<div className={"tab w3-row"}>
+													<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
+															 onClick={this.selectTabDetails}>Details
+													</div>
+													<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
+															 onClick={this.selectTabMembers}>Admin / Members
+													</div>
 												</div>
-												<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-														 onClick={this.selectTabMembers}>Admin / Members
-												</div>
-											</div>
-											{this.state.showedMembers ?
-													(
-															<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>
-													)
-													: (
-															<>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
-																		<h4 className="form-header">About</h4>
-																	</div>
-																	<div className="input-div about"
-																			 style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
-																		{this.state.showedAboutShort ? (
-																						<>
+												{this.state.showedMembers ?
+														(
+																<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>
+														)
+														: (
+																<>
+																	<div className={"view-paragraph"}>
+																		<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
+																			<h4 className="form-header">About</h4>
+																		</div>
+																		<div className="input-div about"
+																				 style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
+																			{this.state.showedAboutShort ? (
+																							<>
 																							<pre>
 																								{aboutShort}&nbsp;
 																							</pre>
-																							{isMore ? (
-																									<div className={"read-more"}
-																											 onClick={this.handleReadMore}>read more</div>
-																							) : null}
-																						</>
-																				)
-																				: (
-																						<>
+																								{isMore ? (
+																										<div className={"read-more"}
+																												 onClick={this.handleReadMore}>read more</div>
+																								) : null}
+																							</>
+																					)
+																					: (
+																							<>
 																							<pre>
 																								{this.props.community.view_community.about}
 																							</pre>
-																							{isMore ? (
-																									<div className={"read-more"}
-																											 onClick={this.handleReadMore}>show less</div>
-																							) : null}
-																						</>
-																				)
-																		}
+																								{isMore ? (
+																										<div className={"read-more"}
+																												 onClick={this.handleReadMore}>show less</div>
+																								) : null}
+																							</>
+																					)
+																			}
+																		</div>
 																	</div>
-																</div>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleContactPart}>
-																		<h4 className="form-header">Community Contact</h4>
-																	</div>
-																	<div className="input-div w3-row"
-																			 style={{display: this.state.collapsedContactPart ? "block" : "none"}}>
-																		{this.props.community.view_community.community_contact ?
-																				<div className="view-item w3-col l12"
-																						 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
-																					{this.props.community.view_community.community_contact ||
-																					<span style={{color: "#aaa"}}>Contact name</span>}
-																				</div>
-																				: null}
-																		{this.props.community.view_community.email ?
-																				<div className="view-item w3-half"
-																						 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
-																					{this.props.community.view_community.email ||
-																					<span style={{color: "#aaa"}}>Email</span>}
-																				</div>
-																				: null}
-																		{this.props.community.view_community.phone ?
-																				<div className="view-item w3-half"
-																						 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
-																					{this.props.community.view_community.phone ||
-																					<span style={{color: "#aaa"}}>Phone</span>}
-																				</div>
-																				: null}
-																	</div>
-																</div>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleLinksPart}>
-																		<h4 className="form-header">Links and Resources</h4>
-																	</div>
-																	<div className={"social-link-group"}
-																			 style={{display: this.state.collapsedLinksPart ? "block" : "none"}}>
-																		{community_config.SOCIALS.map(item => {
-																			const key_name = item.toLowerCase();
-																			return this.props.community.view_community[key_name] ? (
-																					<Link to="#" key={item}
-																								onClick={() => this.redirectURL(this.props.community.view_community[key_name])}
-																								className={"social-link"}>
-																						<img src={`/img/social/icon-${key_name}.svg`}
-																								 title={item} alt={item}/>
-																					</Link>
-																			) : null;
-																		})}
-																	</div>
-																</div>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleMorePart}>
-																		<h4 className="form-header">More Info</h4>
-																	</div>
-																	<div className="input-div"
-																			 style={{display: this.state.collapsedMorePart ? "block" : "none"}}>
-																		<FilterItemCheck filterTitle="Day(s)" filterName="days"
-																										 value={this.props.community.view_community.days}
-																										 items={community_config.FILTERS.days}/>
-																		<FilterItemCheck filterTitle="Time(s)" filterName="times"
-																										 value={this.props.community.view_community.times}
-																										 items={community_config.FILTERS.times}/>
-																		<FilterItemRadio filterTitle="Frequency" filterName="frequency"
-																										 value={this.props.community.view_community.frequency}
-																										 items={community_config.FILTERS.frequency}/>
-																		<FilterItemCheck filterTitle="Age(s)" filterName="ages"
-																										 value={this.props.community.view_community.ages}
-																										 items={community_config.FILTERS.ages}/>
-																		<FilterItemRadio filterTitle="Gender" filterName="gender"
-																										 value={this.props.community.view_community.gender}
-																										 items={community_config.FILTERS.gender}/>
-																		<FilterItemCheck filterTitle="Parking" filterName="parking"
-																										 value={this.props.community.view_community.parking}
-																										 items={community_config.FILTERS.parking}/>
-																		<FilterItemCheck filterTitle="Other Ministries"
-																										 filterName="ministries"
-																										 value={this.props.community.view_community.ministries}
-																										 items={community_config.FILTERS.ministries}/>
-																		<FilterItemCheck filterTitle="Other Services"
-																										 filterName="other_services"
-																										 value={this.props.community.view_community.other_services}
-																										 items={community_config.FILTERS.other_services}/>
-																		{this.props.community.view_community.average_attendance > 0 ?
-																				<div className="view-filter w3-row">
-																					<div className={"filter-title w3-col l4"}>
-																						Average Attendance
+																	<div className={"view-paragraph"}>
+																		<div className="flexdiv-left labels" onClick={this.toggleContactPart}>
+																			<h4 className="form-header">Community Contact</h4>
+																		</div>
+																		<div className="input-div w3-row"
+																				 style={{display: this.state.collapsedContactPart ? "block" : "none"}}>
+																			{this.props.community.view_community.community_contact ?
+																					<div className="view-item w3-col l12"
+																							 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
+																						{this.props.community.view_community.community_contact ||
+																						<span style={{color: "#aaa"}}>Contact name</span>}
 																					</div>
-																					{this.props.community.view_community.average_attendance ?
-																							<span className={"filter-value-item"}>
+																					: null}
+																			{this.props.community.view_community.email ?
+																					<div className="view-item w3-half"
+																							 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
+																						{this.props.community.view_community.email ||
+																						<span style={{color: "#aaa"}}>Email</span>}
+																					</div>
+																					: null}
+																			{this.props.community.view_community.phone ?
+																					<div className="view-item w3-half"
+																							 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
+																						{this.props.community.view_community.phone ||
+																						<span style={{color: "#aaa"}}>Phone</span>}
+																					</div>
+																					: null}
+																		</div>
+																	</div>
+																	<div className={"view-paragraph"}>
+																		<div className="flexdiv-left labels" onClick={this.toggleLinksPart}>
+																			<h4 className="form-header">Links and Resources</h4>
+																		</div>
+																		<div className={"social-link-group"}
+																				 style={{display: this.state.collapsedLinksPart ? "block" : "none"}}>
+																			{community_config.SOCIALS.map(item => {
+																				const key_name = item.toLowerCase();
+																				return this.props.community.view_community[key_name] ? (
+																						<Link to="#" key={item}
+																									onClick={() => this.redirectURL(this.props.community.view_community[key_name])}
+																									className={"social-link"}>
+																							<img src={`/img/social/icon-${key_name}.svg`}
+																									 title={item} alt={item}/>
+																						</Link>
+																				) : null;
+																			})}
+																		</div>
+																	</div>
+																	<div className={"view-paragraph"}>
+																		<div className="flexdiv-left labels" onClick={this.toggleMorePart}>
+																			<h4 className="form-header">More Info</h4>
+																		</div>
+																		<div className="input-div"
+																				 style={{display: this.state.collapsedMorePart ? "block" : "none"}}>
+																			<FilterItemCheck filterTitle="Day(s)" filterName="days"
+																											 value={this.props.community.view_community.days}
+																											 items={community_config.FILTERS.days}/>
+																			<FilterItemCheck filterTitle="Time(s)" filterName="times"
+																											 value={this.props.community.view_community.times}
+																											 items={community_config.FILTERS.times}/>
+																			<FilterItemRadio filterTitle="Frequency" filterName="frequency"
+																											 value={this.props.community.view_community.frequency}
+																											 items={community_config.FILTERS.frequency}/>
+																			<FilterItemCheck filterTitle="Age(s)" filterName="ages"
+																											 value={this.props.community.view_community.ages}
+																											 items={community_config.FILTERS.ages}/>
+																			<FilterItemRadio filterTitle="Gender" filterName="gender"
+																											 value={this.props.community.view_community.gender}
+																											 items={community_config.FILTERS.gender}/>
+																			<FilterItemCheck filterTitle="Parking" filterName="parking"
+																											 value={this.props.community.view_community.parking}
+																											 items={community_config.FILTERS.parking}/>
+																			<FilterItemCheck filterTitle="Other Ministries"
+																											 filterName="ministries"
+																											 value={this.props.community.view_community.ministries}
+																											 items={community_config.FILTERS.ministries}/>
+																			<FilterItemCheck filterTitle="Other Services"
+																											 filterName="other_services"
+																											 value={this.props.community.view_community.other_services}
+																											 items={community_config.FILTERS.other_services}/>
+																			{this.props.community.view_community.average_attendance > 0 ?
+																					<div className="view-filter w3-row">
+																						<div className={"filter-title w3-col l4"}>
+																							Average Attendance
+																						</div>
+																						{this.props.community.view_community.average_attendance ?
+																								<span className={"filter-value-item"}>
 																		{this.props.community.view_community.average_attendance}
 																	</span>
-																							: null}
-																				</div>
-																				: null}
-																		<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
-																										 value={this.props.community.view_community.ambiance}
-																										 items={community_config.FILTERS.ambiance}/>
-																		<FilterItemRadio filterTitle="Event Type"
-																										 filterName="event_type"
-																										 value={this.props.community.view_community.event_type}
-																										 items={community_config.FILTERS.event_type}/>
-																		<FilterItemRadio filterTitle="Support Type"
-																										 filterName="support_type"
-																										 value={this.props.community.view_community.support_type}
-																										 items={community_config.FILTERS.support_type}/>
+																								: null}
+																					</div>
+																					: null}
+																			<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
+																											 value={this.props.community.view_community.ambiance}
+																											 items={community_config.FILTERS.ambiance}/>
+																			<FilterItemRadio filterTitle="Event Type"
+																											 filterName="event_type"
+																											 value={this.props.community.view_community.event_type}
+																											 items={community_config.FILTERS.event_type}/>
+																			<FilterItemRadio filterTitle="Support Type"
+																											 filterName="support_type"
+																											 value={this.props.community.view_community.support_type}
+																											 items={community_config.FILTERS.support_type}/>
+																		</div>
 																	</div>
-																</div>
-															</>
-													)}
+																</>
+														)}
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</main>
-					</div>
+							</main>
+						</div>
+					</>
 			);
 		}
 	}

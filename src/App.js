@@ -30,6 +30,8 @@ import TermsNConditionsPage from "./pages/terms-n-conditions-page";
 import PrivacyPolicy from "./pages/privacy-policy";
 import PublicViewCommunity from "./pages/public-view-community";
 import InvitedViewCommunity from "./pages/invited-view-community";
+import PreviewSearchResults from "./pages/preview-search-results";
+import SearchResultsIframe from "./pages/search-results-iframe";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -78,11 +80,12 @@ class App extends Component{
 			<Provider store={store}>
 				<StripeProvider stripe={this.state.stripe}>
 					<Router>
-						<SiteHeader/>
 						<Switch>
 							<Route exact path="/" component={Home}/>
 							<Route exact path="/search-results" component={SearchResults}/>
 							<Route path="/search-results/:criteria" component={SearchResults}/>
+							<Route path="/search-results-iframe/:criteria" component={SearchResultsIframe}/>
+							<Route path="/preview-search-results/:criteria" component={PreviewSearchResults}/>
 
 							<Route exact path="/login-popup" component={LoginPopup}/>
 							<Route exact path="/register-popup" component={RegisterPopup}/>
