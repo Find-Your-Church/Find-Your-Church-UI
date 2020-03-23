@@ -373,3 +373,8 @@ a {
 		font-size: 18px;
 	}
 }
+
+#spinning-modal {
+	background: #8900fe;
+	background: linear-gradient(45deg, rgba(137,0,254,1) 0%, rgba(46,137,254,1) 50%, rgba(0,232,254,1) 100%);
+}

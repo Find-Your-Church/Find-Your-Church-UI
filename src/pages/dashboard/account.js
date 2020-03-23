@@ -108,6 +108,8 @@ class Account extends Component{
 			frameShortCode: '',
 			frameCode: '',
 			previewUrl: '',
+
+			showedCopyNotification: false,
 		};
 
 		this.changeUserName = this.changeUserName.bind(this);
@@ -134,8 +136,8 @@ class Account extends Component{
 	applyUpdatedCriteria = () => {
 		const iframe_param = encodeURIComponent(JSON.stringify(this.previewCriteria, null, ''));
 
-		const preview_url = `${window.location.protocol}//${window.location.host}/search-results/${iframe_param}`;
-		const short_url = preview_url.substr(0, 160);
+		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
+		const short_url = preview_url.substr(0, 100);
 
 		this.setState({
 			frameUrl: preview_url,
@@ -346,9 +348,22 @@ class Account extends Component{
 	};
 
 	copyDynamicUrl = () => {
+		if(this.state.showedCopyNotification)
+			return;
+
 		const copyText = document.querySelector("#frame-url");
 		copyText.select();
 		document.execCommand("copy");
+
+		this.setState({
+			showedCopyNotification: true
+		});
+
+		setTimeout(() => {
+			this.setState({
+				showedCopyNotification: false
+			});
+		}, 3000);
 	};
 
 	onChangePreviewCategory = e => {
@@ -673,6 +688,7 @@ class Account extends Component{
 									</div>
 									<div className={"sub-container w3-col m12 l6 search-preview"}>
 										<div className={"sub-content payment"}>
+											{/*
 											<div className="flexdiv-leftright underline">
 												<h5 className="container-header">
 													How to display your communities on your own website
@@ -683,6 +699,7 @@ class Account extends Component{
 												<div>Copy</div>
 												<div>Publish</div>
 											</div>
+											*/}
 											<div className="flexdiv-leftright underline">
 												<h5 className="container-header">
 													iFrame Code
@@ -705,6 +722,7 @@ class Account extends Component{
 													wordBreak: "break-all",
 													paddingTop: "16px",
 												}}>
+													{/*
 													<select id="preview-category" onChange={this.onChangePreviewCategory}
 																	defaultValue={this.props.community.criteria.category}
 																	style={{
@@ -722,13 +740,8 @@ class Account extends Component{
 															})
 														}
 													</select>
+													*/}
 													<div style={{float: "left", width: "50%", textAlign: "right"}}>
-														<div className={"purple-link"} onClick={this.copyDynamicUrl} style={{
-															height: "40px",
-															lineHeight: "40px",
-														}}>
-															Copy
-														</div>
 													</div>
 													<div>
 														{this.state.frameShortCode}
@@ -737,9 +750,16 @@ class Account extends Component{
 												</div>
 											</div>
 											<div style={{marginTop: "10px"}}>
+												<div className={"purple-link"} onClick={this.copyDynamicUrl}>
+													Copy
+												</div>
 												<Link to={this.state.previewUrl} className={"purple-link"}>
 													Preview
 												</Link>
+											</div>
+											<div className={"copy-notification"}
+													 style={{display: this.state.showedCopyNotification ? "block" : "none"}}>
+												<b>iFrame code</b> has been copied into the clipboard.
 											</div>
 										</div>
 									</div>

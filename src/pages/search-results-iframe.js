@@ -18,7 +18,7 @@ import {
 } from "../actions/community-actions";
 import PublicThumbnail from "../components/public-thumbnail";
 import Popup from "reactjs-popup";
-import '../css/search-results.css';
+import '../css/search-results-iframe.css';
 import sorters from "../actions/sorters";
 import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sorter_newest} from "../utils/sorter-func";
 import isEmpty from "../utils/isEmpty";
@@ -105,7 +105,8 @@ class SearchResultsIframe extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria){
-			this.props.setBackUrl("/search-results/" + encodeURIComponent(JSON.stringify(this.props.community.criteria, null, '')));
+			const param = encodeURIComponent(JSON.stringify(this.props.community.criteria, null, ''));
+			this.props.setBackUrl(`/search-results-iframe/${param}`);
 		}
 	}
 
@@ -243,7 +244,7 @@ class SearchResultsIframe extends Component{
 
 		return (
 				<>
-					<main id="content-body" className="w3-row">
+					<main id="content-body-iframe" className="w3-row">
 						<div id={"spinning-modal"} className={"w3-modal"}
 								 style={{display: this.props.community.searching ? "block" : "none"}}>
 							<div className="w3-display-middle w3-text-white w3-jumbo">

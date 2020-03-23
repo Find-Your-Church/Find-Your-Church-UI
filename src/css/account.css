@@ -195,10 +195,22 @@
 }
 
 .purple-link {
+	display: inline-block;
+	font-family: Roboto, sans-serif;
 	font-size: 16px;
 	font-weight: 600;
+	line-height: 20px;
 	color: #8900fe;
 	cursor: pointer;
+}
+
+.purple-link:not(:first-child) {
+	margin-left: 16px;
+}
+
+.copy-notification {
+	padding-top: 8px;
+	color: #008900;
 }
 
 .account-preview-iframe {

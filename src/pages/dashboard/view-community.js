@@ -374,8 +374,8 @@ class ViewCommunity extends Component{
 																					</div>
 																					{this.state.average_attendance ?
 																							<span className={"filter-value-item"}>
-																		{this.state.average_attendance}
-																	</span>
+																								{this.state.average_attendance}
+																							</span>
 																							: null}
 																				</div>
 																				: null}

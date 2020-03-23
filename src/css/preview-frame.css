@@ -55,8 +55,8 @@
 .preview-frame {
 	box-sizing: border-box;
 	width: 100%;
-	height: calc(100vh - 98px);
-	margin-top: 92px;
+	height: calc(100vh - 158px);
+	margin-top: 152px;
 	outline: none;
 	border: none;
 	overflow: hidden;

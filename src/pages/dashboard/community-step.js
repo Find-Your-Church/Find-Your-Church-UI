@@ -381,47 +381,49 @@ class CommunityStep extends Component{
 									<div className="info-body w3-row">
 										<div className="left-part w3-half">
 											<div className={"community-info-container"}>
-												{this.state.pictures.length > 1 ? (
-														<div id={"slider-frame"} className="slide-container">
-															<Slide {...this.slide_options}>
-																{this.state.pictures.map((pic, index) => {
-																	return (
-																			<div className="each-slide" key={index}>
-																				<div style={{backgroundImage: `url(${pic})`}}>
-																		<span className={"slide-remove w3-button"}
-																					title={"Remove this picture"}
-																					onClick={() => this.removeSlide(index)}>&times;</span>
+												<div className={"slider-part"}>
+													{this.state.pictures.length > 1 ? (
+															<div id={"slider-frame"} className="slide-container">
+																<Slide {...this.slide_options}>
+																	{this.state.pictures.map((pic, index) => {
+																		return (
+																				<div className="each-slide" key={index}>
+																					<div style={{backgroundImage: `url(${pic})`}}>
+																					<span className={"slide-remove w3-button w3-black w3-hover-white-black"}
+																								title={"Remove this picture"}
+																								onClick={() => this.removeSlide(index)}>&times;</span>
+																					</div>
 																				</div>
-																			</div>
-																	);
-																})}
-															</Slide>
-														</div>
-												) : (this.state.pictures.length > 0 ? (
-														<div id={"slider-frame"} className="slide-container">
-															<div className="each-slide">
-																<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
-													<span className={"slide-remove w3-button"}
-																title={"Remove this picture"}
-																onClick={() => this.removeSlide(0)}>&times;</span>
+																		);
+																	})}
+																</Slide>
+															</div>
+													) : (this.state.pictures.length > 0 ? (
+															<div id={"slider-frame"} className="slide-container">
+																<div className="each-slide">
+																	<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+																	<span className={"slide-remove w3-button"}
+																				title={"Remove this picture"}
+																				onClick={() => this.removeSlide(0)}>&times;</span>
+																	</div>
 																</div>
 															</div>
-														</div>
-												) : (
-														<img id={"slider-frame"}
-																 className={"community-picture"}
-																 alt="Community" title="Community pictures"
-																 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
-																 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
-														/>
-												))}
-												<label className={"file-btn-container w3-button"}
-															 title={"The picture ratio should be 16:9."}>
-													Upload New Picture
-													<FileBase id="btn-upload" type="file" className="upload-button w-button"
-																		multiple={false} onDone={this.getBaseFile.bind(this)}
-																		height="38"/>
-												</label>
+													) : (
+															<img id={"slider-frame"}
+																	 className={"community-picture each-slide"}
+																	 alt="Community" title="Community pictures"
+																	 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
+																	 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
+															/>
+													))}
+													<label className={"file-btn-container w3-button"}
+																 title={"The picture ratio should be 16:9."}>
+														Upload New Picture
+														<FileBase id="btn-upload" type="file" className="upload-button w-button"
+																			multiple={false} onDone={this.getBaseFile.bind(this)}
+																			height="38"/>
+													</label>
+												</div>
 												<div className="basic-info">
 													<div className="community-info-title">
 														<h4>Community Info</h4>
@@ -652,14 +654,18 @@ class CommunityStep extends Component{
 																										 send={this.getFrequencyInfo}
 																										 value={this.state.frequency}
 																										 items={community_config.FILTERS.frequency}/>
-																		<FilterItemCheck filterTitle="Age(s)" filterName="ages"
-																										 send={this.getAgesInfo}
-																										 value={this.state.ages}
-																										 items={community_config.FILTERS.ages}/>
-																		<FilterItemRadio filterTitle="Gender" filterName="gender"
-																										 send={this.getGenderInfo}
-																										 value={this.state.gender}
-																										 items={community_config.FILTERS.gender}/>
+																		{this.state.selectedChurch || this.state.category === "" ? null : (
+																				<>
+																					<FilterItemCheck filterTitle="Age(s)" filterName="ages"
+																													 send={this.getAgesInfo}
+																													 value={this.state.ages}
+																													 items={community_config.FILTERS.ages}/>
+																					<FilterItemRadio filterTitle="Gender" filterName="gender"
+																													 send={this.getGenderInfo}
+																													 value={this.state.gender}
+																													 items={community_config.FILTERS.gender}/>
+																				</>
+																		)}
 																		<FilterItemCheck filterTitle="Parking" filterName="parking"
 																										 send={this.getParkingInfo}
 																										 value={this.state.parking}

@@ -106,7 +106,10 @@ class SearchResults extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria){
-			this.props.setBackUrl("/search-results/" + encodeURIComponent(JSON.stringify(this.props.community.criteria, null, '')));
+			const param = encodeURIComponent(JSON.stringify(this.props.community.criteria, null, ''));
+			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results/${param}`;
+			window.history.pushState("object or string", "Title", search_results_url);
+			this.props.setBackUrl(`/search-results/${param}`);
 		}
 	}
 

@@ -16,11 +16,17 @@ class PublicThumbnail extends Component{
 		this.state = {
 			is_viewing: false,
 			is_show_menu: false,
+			community_name_url: '',
 		};
 
 		this.goView = this.goView.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
+	}
+
+	componentDidMount(){
+		const community_name_url = this.props.value.community_name.split(" ").join("-");
+		this.setState({community_name_url: community_name_url});
 	}
 
 	goView(e){
@@ -79,7 +85,7 @@ class PublicThumbnail extends Component{
 	render(){
 		return (
 			this.state.is_viewing ? (
-				<Redirect to={{pathname: `/view-community/${this.props.value._id}`, state: {obj: this.props.value}}}/>
+				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value}}}/>
 			) : (
 				<div className={"listing-container1"} onMouseLeave={this.hideMenu}>
 					<Link to="#" onClick={this.goView}>

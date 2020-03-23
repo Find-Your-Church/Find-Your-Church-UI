@@ -17,7 +17,8 @@ class InvitedViewCommunity extends Component{
 
 		this.aboutLimit = 200;
 
-		this.community_id = props.location.pathname.substr(16); // 16 - length of "/view-community/", which is URL prefix for reset.
+		const param = props.location.pathname.substr(16); // 16 - length of "/view-community/", which is URL prefix for reset.
+		this.community_id = param.split("-").pop();
 		this.props.viewCommunity({id: this.community_id});
 
 		this.slide_options = {
