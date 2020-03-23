@@ -25,8 +25,6 @@ class PublicThumbnail extends Component{
 	}
 
 	componentDidMount(){
-		const community_name_url = this.props.value.community_name.split(" ").join("-");
-		this.setState({community_name_url: community_name_url});
 	}
 
 	goView(e){
@@ -36,6 +34,8 @@ class PublicThumbnail extends Component{
 			user_id: this.props.value.owner_id,
 		});
 
+		const community_name_url = this.props.value.community_name.split(" ").join("-");
+		this.setState({community_name_url: community_name_url});
 		this.setState({is_viewing: true});
 	}
 
