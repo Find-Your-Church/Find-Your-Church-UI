@@ -25,6 +25,11 @@ class PublicThumbnail extends Component{
 	}
 
 	componentDidMount(){
+		const name4url = this.props.value.community_name.split(" ").join("-");
+		console.log(name4url);
+		this.setState({
+			community_name_url: name4url
+		});
 	}
 
 	goView(e){
@@ -34,8 +39,6 @@ class PublicThumbnail extends Component{
 			user_id: this.props.value.owner_id,
 		});
 
-		const community_name_url = this.props.value.community_name.split(" ").join("-");
-		this.setState({community_name_url: community_name_url});
 		this.setState({is_viewing: true});
 	}
 
@@ -83,14 +86,12 @@ class PublicThumbnail extends Component{
 	}
 
 	render(){
-		const community_name_url = this.props.value.community_name.split(" ").join("-");
-
 		return (
 			this.state.is_viewing ? (
-				<Redirect to={{pathname: `/view-community/${community_name_url}-${this.props.value._id}`, state: {obj: this.props.value}}}/>
+				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value}}}/>
 			) : (
 				<div className={"listing-container1"} onMouseLeave={this.hideMenu}>
-					<Link to="#" onClick={this.goView}>
+					<div onClick={this.goView}>
 						<div
 							className={"listingprofilepic-div"}
 							style={{
@@ -98,7 +99,7 @@ class PublicThumbnail extends Component{
 									: "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
 							}}>
 						</div>
-					</Link>
+					</div>
 					<div className="listinginfo-div">
 						<div className="listingrow">
 							<div data-collapse="all" data-animation="default" data-duration="400"
