@@ -134,7 +134,9 @@ class Account extends Component{
 	}
 
 	applyUpdatedCriteria = () => {
-		const iframe_param = encodeURIComponent(JSON.stringify(this.previewCriteria, null, ''));
+		console.log(this.previewCriteria);
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.category}-${this.previewCriteria.address}-`
+				+ btoa(JSON.stringify(this.previewCriteria, null, ''));
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
 		const short_url = preview_url.substr(0, 100);
@@ -751,7 +753,7 @@ class Account extends Component{
 											</div>
 											<div style={{marginTop: "10px"}}>
 												<div className={"purple-link"} onClick={this.copyDynamicUrl}>
-													Copy
+													Copy Code
 												</div>
 												<Link to={this.state.previewUrl} className={"purple-link"}>
 													Preview
@@ -759,18 +761,20 @@ class Account extends Component{
 											</div>
 											<div className={"copy-notification"}
 													 style={{display: this.state.showedCopyNotification ? "block" : "none"}}>
-												<b>iFrame code</b> has been copied into the clipboard.
+												Code has been copied to the clipboard.
 											</div>
 										</div>
 									</div>
 									<div className={"sub-container w3-col m12 l6 search-preview"}>
-										<iframe width={"100%"} height={"100%"} src={this.state.frameUrl} style={{
-											margin: "-480px -960px",
-											width: "2400px",
-											height: "1200px",
-											overflow: "hidden",
-											transform: "scale(0.2)",
-										}}></iframe>
+										<div className={"sub-content payment"}>
+											<iframe width={"100%"} height={"100%"} src={this.state.frameUrl} style={{
+												margin: "-412px -720px",
+												width: "1906px",
+												height: "1080px",
+												overflow: "hidden",
+												transform: "scale(0.25)",
+											}}></iframe>
+										</div>
 									</div>
 								</div>
 							</div>

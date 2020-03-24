@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import SearchFilterCheck from "../components/search-filter-check";
 import SearchFilterRadio from "../components/search-filter-radio";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
 	clearPicking,
 	doSearchCommunities, setBackUrl,
@@ -23,7 +23,6 @@ import sorters from "../actions/sorters";
 import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sorter_newest} from "../utils/sorter-func";
 import isEmpty from "../utils/isEmpty";
 import SelectedFilters from "../components/selected-filters";
-import SiteHeader from "../components/site-header";
 
 class SearchResultsIframe extends Component{
 	constructor(props){
@@ -35,7 +34,8 @@ class SearchResultsIframe extends Component{
 		this.criteria = criteria;
 
 		if(criteria !== undefined){
-			let crt = JSON.parse(decodeURIComponent(criteria));
+			this.criteria = criteria.split('-').pop();
+			let crt = JSON.parse(atob(this.criteria));
 			console.log(crt);
 			this.criteria = crt;
 			props.setSearchCriteria(crt);
@@ -105,7 +105,7 @@ class SearchResultsIframe extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria){
-			const param = encodeURIComponent(JSON.stringify(this.props.community.criteria, null, ''));
+			const param = btoa(JSON.stringify(this.props.community.criteria, null, ''));
 			this.props.setBackUrl(`/search-results-iframe/${param}`);
 		}
 	}

@@ -29,7 +29,7 @@ a {
 	line-height: 22px;
 }
 
-@media screen and (min-width: 990px){
+@media screen and (min-width: 990px) {
 	.profile-tooltip-content {
 		width: 200px !important;
 	}
@@ -57,9 +57,9 @@ a {
 	display: none;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.sign-up-link, .sign-in-link, .home-link {
-		display: none!important;
+		display: none !important;
 	}
 
 	.header-3lines-menu.oos {
@@ -374,7 +374,10 @@ a {
 	}
 }
 
-#spinning-modal {
-	background: #8900fe;
-	background: linear-gradient(45deg, rgba(137,0,254,1) 0%, rgba(46,137,254,1) 50%, rgba(0,232,254,1) 100%);
+#spinning-modal i.fas {
+	position: relative;
+	background-color: #8900fe;
+	background-image: linear-gradient(140deg, rgba(137, 0, 254, 1) 0%, rgba(46, 137, 254, 1) 50%, rgba(0, 232, 254, 1) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
