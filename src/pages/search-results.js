@@ -24,7 +24,6 @@ import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sort
 import isEmpty from "../utils/isEmpty";
 import SelectedFilters from "../components/selected-filters";
 import SiteHeader from "../components/site-header";
-import SearchResultsIframe from "./search-results-iframe";
 
 class SearchResults extends Component{
 	constructor(props){
@@ -32,20 +31,7 @@ class SearchResults extends Component{
 
 		this.myref = [];
 
-		const {criteria} = props.match.params;
-		this.criteria = criteria;
-
-		if(criteria !== undefined){
-			this.criteria = criteria.split("-").pop();
-			let crt = JSON.parse(atob(this.criteria));
-			console.log(crt);
-			this.criteria = crt;
-			props.setSearchCriteria(crt);
-		}
-
-		this.state = {
-			showed_filter: false,
-
+		const initial_filter = {
 			days: "0".repeat(community_config.FILTERS.days.length),
 			times: "0".repeat(community_config.FILTERS.times.length),
 			frequency: "0".repeat(community_config.FILTERS.frequency.length),
@@ -57,6 +43,29 @@ class SearchResults extends Component{
 			ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
 			event_type: "0".repeat(community_config.FILTERS.event_type.length),
 			support_type: "0".repeat(community_config.FILTERS.support_type.length)
+		};
+
+		const {category, radius, lat, lng, filter} = props.match.params;
+		this.category = category === 'undefined' || category === undefined ? '' : category;
+		this.radius = radius === 'null' || radius === undefined || isNaN(radius) ? null : parseInt(radius);
+		this.lat = parseFloat(lat) || 0;
+		this.lng = parseFloat(lng) || 0;
+		this.filter = filter ? JSON.parse(decodeURIComponent(filter)) : initial_filter;
+
+		this.criteria = {
+			category: this.category.replace(/-/g, " "),
+			radius: this.radius,
+			lat: this.lat,
+			lng: this.lng,
+			filter: {...this.filter},
+		};
+
+		props.setSearchCriteria(this.criteria);
+
+		this.state = {
+			showed_filter: false,
+
+			...initial_filter,
 		};
 	}
 
@@ -101,13 +110,13 @@ class SearchResults extends Component{
 	}
 
 	componentDidMount(){
-//		this.props.doSearchCommunities({...this.props.community.criteria});
+		console.log(this.criteria);
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot){
-		if(this.props.community.criteria !== prevProps.community.criteria){
-			const param = `${this.props.auth.user.fname}-${this.props.auth.user.lname}-${this.props.community.criteria.category}-${this.props.community.criteria.address}-` + btoa(JSON.stringify(this.props.community.criteria, null, ''));
+		if(this.props.community.criteria !== prevProps.community.criteria || this.state.showed_filter !== prevState.showed_filter){
+			const param = `${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + encodeURIComponent(JSON.stringify(this.props.community.criteria.filter, null, ''));
 			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
 			this.props.setBackUrl(`/search-results/${param}`);
@@ -364,9 +373,9 @@ class SearchResults extends Component{
 										<div className="listing-grid dashboard">
 											<div className={"w3-row search-result-headline"}>
 												<div className={"search-result-container-header w3-col m10"}>
-									<span style={{fontWeight: "bold"}}>
-										{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
-									</span>
+													<span style={{fontWeight: "bold"}}>
+														{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
+													</span>
 													&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
 													<span
 															style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>

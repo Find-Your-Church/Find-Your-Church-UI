@@ -270,6 +270,7 @@ export default function(state = initialState, action){
 				}
 			};
 		case SET_SEARCH_RESULTS:
+			console.log(action.payload.counts);
 			return {
 				...state,
 				search_results: action.payload.results,

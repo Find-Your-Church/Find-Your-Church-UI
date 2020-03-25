@@ -10,7 +10,6 @@ class CommunityMap extends Component{
 	constructor(props){
 		super(props);
 
-
 		this.state = {
 			lat: 0,
 			lng: 0,

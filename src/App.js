@@ -83,9 +83,9 @@ class App extends Component{
 						<Switch>
 							<Route exact path="/" component={Home}/>
 							<Route exact path="/search-results" component={SearchResults}/>
-							<Route path="/search-results/:criteria" component={SearchResults}/>
+							<Route path="/search-results/:category/:radius/:lat/:lng/:filter" component={SearchResults}/>
 							<Route path="/search-results-iframe/:criteria" component={SearchResultsIframe}/>
-							<Route path="/preview-search-results/:criteria" component={PreviewSearchResults}/>
+							<Route path="/preview-search-results/:name/:criteria" component={PreviewSearchResults}/>
 
 							<Route exact path="/login-popup" component={LoginPopup}/>
 							<Route exact path="/register-popup" component={RegisterPopup}/>

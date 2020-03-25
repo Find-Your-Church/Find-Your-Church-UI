@@ -7,10 +7,11 @@ class PreviewSearchResults extends Component{
 	constructor(props){
 		super(props);
 
-		const {criteria} = props.match.params;
+		const {name, criteria} = props.match.params;
 		this.criteria = criteria;
 
 		this.state = {
+			name: name.replace(/-/g, " "),
 			frameUrl: '',
 		};
 	}
@@ -31,7 +32,7 @@ class PreviewSearchResults extends Component{
 							<i className={"fas fa-chevron-circle-left"}></i>
 							&nbsp;&nbsp;&nbsp;Back to Account</Link>
 						</div>
-						<h1 className="heading-28">Preview Your Communities</h1>
+						<h1 className="heading-28">Preview {this.state.name}'s Communities</h1>
 					</div>
 					<iframe className={"preview-frame"} src={this.state.frameUrl}></iframe>
 				</div>

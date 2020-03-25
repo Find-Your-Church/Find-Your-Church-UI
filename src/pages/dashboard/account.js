@@ -135,10 +135,10 @@ class Account extends Component{
 
 	applyUpdatedCriteria = () => {
 		console.log(this.previewCriteria);
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.category}-${this.previewCriteria.address}-`
-				+ btoa(JSON.stringify(this.previewCriteria, null, ''));
+		const criteria = encodeURIComponent(JSON.stringify(this.previewCriteria, null, ''));
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}/${criteria}`;
 
-		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
+		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${criteria}`;
 		const short_url = preview_url.substr(0, 100);
 
 		this.setState({

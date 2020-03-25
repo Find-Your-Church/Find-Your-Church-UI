@@ -34,9 +34,7 @@ class SearchResultsIframe extends Component{
 		this.criteria = criteria;
 
 		if(criteria !== undefined){
-			this.criteria = criteria.split('-').pop();
-			let crt = JSON.parse(atob(this.criteria));
-			console.log(crt);
+			let crt = JSON.parse(decodeURIComponent(this.criteria));
 			this.criteria = crt;
 			props.setSearchCriteria(crt);
 		}
@@ -105,7 +103,7 @@ class SearchResultsIframe extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria){
-			const param = btoa(JSON.stringify(this.props.community.criteria, null, ''));
+			const param = encodeURIComponent(JSON.stringify(this.props.community.criteria, null, ''));
 			this.props.setBackUrl(`/search-results-iframe/${param}`);
 		}
 	}
