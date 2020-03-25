@@ -187,6 +187,8 @@ class StripeSubscription extends Component{
 			}
 			due_reminder = this.getDateDiff(to_date, next_due_date);
 			prorated = due_reminder / due_duration;
+
+			console.log(init_date, due_reminder, due_duration);
 		}
 
 		const due_amount = this.props.community.subscription ?
@@ -312,8 +314,9 @@ class StripeSubscription extends Component{
 														</div>
 														<div>
 															<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-																{this.props.community.subscription ?
-																		showAmount(prorated * this.props.community.subscription.plan.amount)
+																{this.props.community.subscription ? (
+																				this.props.community.trialing || this.props.community.trial_period_days > 0 ? "" :
+																						showAmount(prorated * this.props.community.subscription.plan.amount))
 																		: (this.props.community.is_sending ?
 																				<i className="fas fa-spinner fa-spin"> </i>
 																				: showAmount(this.props.community.plan_price))}
@@ -518,7 +521,8 @@ class StripeSubscription extends Component{
 											</div>
 											{this.props.community.activating || this.props.community.active_status !== 0 ? (
 													this.props.community.active_status === 1 ? (
-															<div className={"w3-center w3-xlarge"} style={{color: "#8900fe", paddingTop: "20px", paddingBottom: "0"}}>Success!</div>
+															<div className={"w3-center w3-xlarge"}
+																	 style={{color: "#8900fe", paddingTop: "20px", paddingBottom: "0"}}>Success!</div>
 													) : (this.props.community.active_status === 2 ? (
 															<div className={"w3-center w3-xlarge w3-text-red"}>Failed!</div>
 													) : null)
@@ -535,7 +539,8 @@ class StripeSubscription extends Component{
 											)}
 											<div className="div-20top" onClick={this.hideActivationDialog}
 													 style={{cursor: 'pointer'}}>
-												<p className="fineprint subscription w3-text-blue" style={{color: "#8900fe", paddingBottom: "10px"}}>Close</p>
+												<p className="fineprint subscription w3-text-blue"
+													 style={{color: "#8900fe", paddingBottom: "10px"}}>Close</p>
 											</div>
 										</div>
 									</div>
