@@ -46,11 +46,20 @@ class SearchResults extends Component{
 		};
 
 		const {category, radius, lat, lng, filter} = props.match.params;
-		this.category = category === 'undefined' || category === undefined ? '' : category;
-		this.radius = radius === 'null' || radius === undefined || isNaN(radius) ? null : parseInt(radius);
-		this.lat = parseFloat(lat) || 0;
-		this.lng = parseFloat(lng) || 0;
-		this.filter = filter ? JSON.parse(decodeURIComponent(filter)) : initial_filter;
+		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
+			this.category = props.community.criteria.category;
+			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
+			this.lat = props.community.criteria.lat;
+			this.lng = props.community.criteria.lng;
+			this.filter = {...props.community.criteria.filter};
+		}
+		else{
+			this.category = category === 'undefined' || category === undefined ? '' : category;
+			this.radius = radius === 'null' || radius === '' || isNaN(radius) ? null : parseInt(radius);
+			this.lat = parseFloat(lat);
+			this.lng = parseFloat(lng);
+			this.filter = filter ? JSON.parse(decodeURIComponent(filter)) : initial_filter;
+		}
 
 		this.criteria = {
 			category: this.category.replace(/-/g, " "),
@@ -245,6 +254,7 @@ class SearchResults extends Component{
 		let selectedChurches = false;
 		let selectedEvents = false;
 		let selectedSupportGroups = false;
+		let selectedNone = false;
 		if(this.props.community.criteria.category === "Churches"){
 			selectedChurches = true;
 		}
@@ -254,6 +264,11 @@ class SearchResults extends Component{
 		else if(this.props.community.criteria.category === "Support Groups"){
 			selectedSupportGroups = true;
 		}
+		else if(this.props.community.criteria.category === ""){
+			selectedNone = true;
+		}
+
+		console.log("category: ", this.props.community.criteria.category);
 
 		return (
 				<>
@@ -321,14 +336,18 @@ class SearchResults extends Component{
 																		 send={this.getFrequencyInfo}
 																		 value={this.props.community.criteria.filter.frequency}
 																		 items={community_config.FILTERS.frequency}/>
-									<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
-																		 send={this.getAgesInfo}
-																		 value={this.props.community.criteria.filter.ages}
-																		 items={community_config.FILTERS.ages}/>
-									<SearchFilterRadio filterTitle="Gender" filterName="gender"
-																		 send={this.getGenderInfo}
-																		 value={this.props.community.criteria.filter.gender}
-																		 items={community_config.FILTERS.gender}/>
+									{selectedChurches || selectedNone ? null : (
+											<>
+												<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
+																					 send={this.getAgesInfo}
+																					 value={this.props.community.criteria.filter.ages}
+																					 items={community_config.FILTERS.ages}/>
+												<SearchFilterRadio filterTitle="Gender" filterName="gender"
+																					 send={this.getGenderInfo}
+																					 value={this.props.community.criteria.filter.gender}
+																					 items={community_config.FILTERS.gender}/>
+											</>
+									)}
 									<SearchFilterCheck filterTitle="Parking" filterName="parking"
 																		 send={this.getParkingInfo}
 																		 value={this.props.community.criteria.filter.parking}
@@ -378,7 +397,7 @@ class SearchResults extends Component{
 													</span>
 													&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
 													<span
-															style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>
+															style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}</span>
 												</div>
 												<div className={"search-result-container-header-right w3-col m2"}>
 													Results ({results.length})
@@ -403,7 +422,7 @@ class SearchResults extends Component{
 													 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}>
 												<div>
 													We couldn't find
-													any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}.
+													any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}.
 												</div>
 												<div>
 													Try expanding your search radius.

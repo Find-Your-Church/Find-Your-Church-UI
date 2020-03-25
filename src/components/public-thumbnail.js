@@ -26,7 +26,6 @@ class PublicThumbnail extends Component{
 
 	componentDidMount(){
 		const name4url = this.props.value.community_name.split(" ").join("-");
-		console.log(name4url);
 		this.setState({
 			community_name_url: name4url
 		});
