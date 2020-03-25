@@ -518,7 +518,7 @@ class StripeSubscription extends Component{
 											</div>
 											{this.props.community.activating || this.props.community.active_status !== 0 ? (
 													this.props.community.active_status === 1 ? (
-															<div className={"w3-center w3-xlarge w3-text-blue"}>Success!</div>
+															<div className={"w3-center w3-xlarge"} style={{color: "#8900fe", paddingTop: "20px", paddingBottom: "0"}}>Success!</div>
 													) : (this.props.community.active_status === 2 ? (
 															<div className={"w3-center w3-xlarge w3-text-red"}>Failed!</div>
 													) : null)
@@ -535,7 +535,7 @@ class StripeSubscription extends Component{
 											)}
 											<div className="div-20top" onClick={this.hideActivationDialog}
 													 style={{cursor: 'pointer'}}>
-												<p className="fineprint subscription w3-text-blue">Close</p>
+												<p className="fineprint subscription w3-text-blue" style={{color: "#8900fe", paddingBottom: "10px"}}>Close</p>
 											</div>
 										</div>
 									</div>

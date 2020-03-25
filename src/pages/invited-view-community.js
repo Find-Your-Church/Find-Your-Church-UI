@@ -246,18 +246,18 @@ class InvitedViewCommunity extends Component{
 																					</div>
 																					: null}
 																			{this.props.community.view_community.email ?
-																					<div className="view-item w3-half"
+																					<a href={"mailto:" + this.props.community.view_community.email} className="view-item w3-half"
 																							 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
 																						{this.props.community.view_community.email ||
 																						<span style={{color: "#aaa"}}>Email</span>}
-																					</div>
+																					</a>
 																					: null}
 																			{this.props.community.view_community.phone ?
-																					<div className="view-item w3-half"
+																					<a href={"tel:" + this.props.community.view_community.phone} className="view-item w3-half"
 																							 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
 																						{this.props.community.view_community.phone ||
 																						<span style={{color: "#aaa"}}>Phone</span>}
-																					</div>
+																					</a>
 																					: null}
 																		</div>
 																	</div>

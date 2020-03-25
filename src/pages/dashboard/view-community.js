@@ -245,9 +245,9 @@ class ViewCommunity extends Component{
 																			 style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
 																		{this.state.showedAboutShort ? (
 																						<>
-																	<pre>
-																		{aboutShort}&nbsp;
-																	</pre>
+																							<pre>
+																								{aboutShort}&nbsp;
+																							</pre>
 																							{isMore ? (
 																									<div className={"read-more"}
 																											 onClick={this.handleReadMore}>read more</div>
@@ -256,9 +256,9 @@ class ViewCommunity extends Component{
 																				)
 																				: (
 																						<>
-																	<pre>
-																		{this.state.about}
-																	</pre>
+																							<pre>
+																								{this.state.about}
+																							</pre>
 																							{isMore ? (
 																									<div className={"read-more"}
 																											 onClick={this.handleReadMore}>show
