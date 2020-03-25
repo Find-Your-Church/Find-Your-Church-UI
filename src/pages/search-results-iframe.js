@@ -30,18 +30,7 @@ class SearchResultsIframe extends Component{
 
 		this.myref = [];
 
-		const {criteria} = props.match.params;
-		this.criteria = criteria;
-
-		if(criteria !== undefined){
-			let crt = JSON.parse(decodeURIComponent(this.criteria));
-			this.criteria = crt;
-			props.setSearchCriteria(crt);
-		}
-
-		this.state = {
-			showed_filter: false,
-
+		this.initial_filter = {
 			days: "0".repeat(community_config.FILTERS.days.length),
 			times: "0".repeat(community_config.FILTERS.times.length),
 			frequency: "0".repeat(community_config.FILTERS.frequency.length),
@@ -53,6 +42,43 @@ class SearchResultsIframe extends Component{
 			ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
 			event_type: "0".repeat(community_config.FILTERS.event_type.length),
 			support_type: "0".repeat(community_config.FILTERS.support_type.length)
+		};
+
+		const {owner, category, radius, lat, lng, filter} = props.match.params;
+		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
+			this.category = null;
+			this.category = props.community.criteria.category;
+			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
+			this.lat = props.community.criteria.lat;
+			this.lng = props.community.criteria.lng;
+			this.filter = {...props.community.criteria.filter};
+		}
+		else{
+			this.owner = owner;
+			this.category = category === 'undefined' ? '' : category;
+			this.radius = radius === 'null' || radius === '' || isNaN(radius) ? null : parseInt(radius);
+			this.lat = parseFloat(lat);
+			this.lng = parseFloat(lng);
+			this.filter = filter === 'undefined' ? this.initial_filter : this.url2filters(filter);
+		}
+
+		console.log(this.filter);
+
+		this.criteria = {
+			owner: this.owner.split("-").pop(),
+			category: this.category.replace(/-/g, " "),
+			radius: this.radius,
+			lat: this.lat,
+			lng: this.lng,
+			filter: {...this.filter},
+		};
+
+		props.setSearchCriteria(this.criteria);
+
+		this.state = {
+			showed_filter: false,
+
+			...this.initial_filter,
 		};
 	}
 
@@ -101,9 +127,57 @@ class SearchResultsIframe extends Component{
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
 	}
 
+	filters2url = () => {
+		const filter_keys = Object.keys(community_config.FILTERS4URL);
+
+		let url_result = '';
+		let is1st = true;
+		for(let key of filter_keys){
+			const key_value = this.props.community.criteria.filter[key].split("");
+			for(let i = 0; i < key_value.length; i++){
+				if(key_value[i] === "1"){
+					url_result += (is1st ? "" : "-") + community_config.FILTERS4URL[key][i];
+					is1st = false;
+				}
+			}
+		}
+
+		return url_result === '' ? 'undefined' : url_result;
+	};
+
+	/**
+	 *
+	 * @param url {string|null} filter1-filter2-filter3
+	 */
+	url2filters = (url) => {
+		if(url === undefined)
+			return;
+
+		const url_filters = url.split("-");
+		let filter_item = url_filters.shift();
+
+		let criteria_filter = {...this.initial_filter};
+		const filter_keys = Object.keys(community_config.FILTERS4URL);
+		for(let key of filter_keys){
+			let key_value = "0".repeat(community_config.FILTERS4URL[key].length).split("");
+			for(let i = 0; i < key_value.length; i++){
+				if(community_config.FILTERS4URL[key][i] === filter_item){
+					key_value[i] = "1";
+					filter_item = url_filters.shift();
+				}
+			}
+			key_value = key_value.join("");
+			criteria_filter[key] = key_value;
+		}
+
+		return criteria_filter;
+	};
+
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria){
-			const param = encodeURIComponent(JSON.stringify(this.props.community.criteria, null, ''));
+			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + this.filters2url();
+			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${param}`;
+			window.history.pushState("object or string", "Title", search_results_url);
 			this.props.setBackUrl(`/search-results-iframe/${param}`);
 		}
 	}

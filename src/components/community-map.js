@@ -34,7 +34,7 @@ class CommunityMap extends Component{
 
 	radiusToZoom(radius){
 		if(radius === null || radius === undefined || isNaN(radius))
-			return 2;
+			return 3;
 
 		if(radius > 8)
 			return Math.round(14 - Math.log(radius) / Math.LN2);

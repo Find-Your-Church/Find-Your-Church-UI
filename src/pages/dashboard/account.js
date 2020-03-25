@@ -133,17 +133,33 @@ class Account extends Component{
 		this.applyUpdatedCriteria();
 	}
 
+	filters2url = () => {
+		const filter_keys = Object.keys(community_config.FILTERS4URL);
+
+		let url_result = '';
+		let is1st = true;
+		for(let key of filter_keys){
+			const key_value = this.previewCriteria.filter[key].split("");
+			for(let i = 0; i < key_value.length; i++){
+				if(key_value[i] === "1"){
+					url_result += (is1st ? "" : "-") + community_config.FILTERS4URL[key][i];
+					is1st = false;
+				}
+			}
+		}
+
+		return url_result === '' ? 'undefined' : url_result;
+	};
+
 	applyUpdatedCriteria = () => {
 		console.log(this.previewCriteria);
-		const criteria = encodeURIComponent(JSON.stringify(this.previewCriteria, null, ''));
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}/${criteria}`;
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/undefined/null/${this.previewCriteria.lat}/${this.previewCriteria.lng}/${this.filters2url()}`;
 
-		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${criteria}`;
-		const short_url = preview_url.substr(0, 100);
+		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
 
 		this.setState({
 			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${short_url}..."></iframe>`,
+			frameShortCode: `<iframe src="${preview_url}"></iframe>`,
 			frameCode: `<iframe src="${preview_url}"></iframe>`,
 			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
