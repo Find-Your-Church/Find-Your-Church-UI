@@ -304,26 +304,26 @@ class StripeSubscription extends Component{
 												<h3>Billing Summary</h3>
 											</div>
 											<div className="subscribe-container">
-												<div className="invoice-row">
-													<div className="invoice-div">
-														<div>
-															<div className="filtersheader-div">
-																<h4
-																		className="table-header">Subtotal</h4>
+												{this.props.community.trialing ? null : (
+														<div className="invoice-row">
+															<div className="invoice-div">
+																<div>
+																	<div className="filtersheader-div">
+																		<h4
+																				className="table-header">Subtotal</h4>
+																	</div>
+																</div>
+																<div>
+																	<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+																		{this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
+																				: (this.props.community.is_sending ?
+																						<i className="fas fa-spinner fa-spin"> </i>
+																						: showAmount(this.props.community.plan_price))}
+																	</h4>
+																</div>
 															</div>
 														</div>
-														<div>
-															<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-																{this.props.community.subscription ? (
-																				this.props.community.trialing || this.props.community.trial_period_days > 0 ? "" :
-																						showAmount(prorated * this.props.community.subscription.plan.amount))
-																		: (this.props.community.is_sending ?
-																				<i className="fas fa-spinner fa-spin"> </i>
-																				: showAmount(this.props.community.plan_price))}
-															</h4>
-														</div>
-													</div>
-												</div>
+												)}
 												{this.props.community.subscription !== "1" ? null :
 														<div className="invoice-row">
 															<div className="invoice-div">
