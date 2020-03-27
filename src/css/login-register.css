@@ -2,7 +2,7 @@
 	--footer-height: 46px;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.sign-body {
 		--footer-height: 64px;
 	}
@@ -206,7 +206,7 @@
 	background-image: none;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.input-div {
 		-webkit-box-orient: vertical;
 		-webkit-box-direction: normal;
@@ -315,7 +315,7 @@
 	width: 50% !important;
 }
 
-@media (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.form-input {
 		border-bottom-style: solid;
 		font-size: 20px;
@@ -323,7 +323,7 @@
 	}
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
 	.form-input.center.w3-half {
 		width: 100% !important;
 	}
@@ -513,7 +513,7 @@ input.w-button {
 	grid-template-rows: auto;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.sdk-div {
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;

@@ -2,7 +2,7 @@
 	--footer-height: 46px;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.steps-body {
 		--footer-height: 64px;
 	}
@@ -236,7 +236,7 @@
 	overflow-y: scroll;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.info-body .left-part {
 		padding-right: 0;
 		width: 100%;
@@ -332,7 +332,7 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.steps-body .file-btn-container {
 		left: calc(50vw - 100px);
 		top: calc(24vw + 120px);

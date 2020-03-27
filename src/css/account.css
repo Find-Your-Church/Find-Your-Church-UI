@@ -2,7 +2,7 @@
 	--footer-height: 46px;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	.account-body {
 		--footer-height: 64px;
 	}

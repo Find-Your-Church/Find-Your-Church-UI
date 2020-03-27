@@ -232,7 +232,7 @@ button:focus {
 	text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 979px) {
 	#search-results-header .search-form-container {
 		border: none;
 	}

@@ -88,7 +88,7 @@
 	grid-template-rows: auto;
 }
 
-@media screen and (max-width: 991px){
+@media screen and (max-width: 979px){
 	.columns-container {
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
