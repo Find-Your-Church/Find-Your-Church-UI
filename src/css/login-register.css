@@ -28,7 +28,7 @@
 	font-weight: 400;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
 	.welcome-message {
 		padding-top: 24px;
 		font-size: 14px;
@@ -40,14 +40,14 @@
 	--header-height: 60px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
 	.sign-body {
 		--header-height: 96px;
 	}
 }
 
 .sign-body {
-	padding: var(--header-height) 0 0 0;
+	padding: var(--header-height) 5px 5px;
 	min-height: 586px;
 	max-height: calc(100vh - var(--footer-height));
 	background-color: #e6e6e6;
@@ -101,6 +101,7 @@
 
 .div-block-38 {
 	max-width: 550px;
+	margin: 0 auto;
 	padding: 40px;
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
@@ -256,15 +257,9 @@
 	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
 	.sign-body .div-block-38 {
-		padding: 8px;
-	}
-}
-
-@media screen and (max-width: 400px) {
-	.sign-body .div-block-38 {
-		padding: 4px;
+		padding: 10px;
 	}
 }
 

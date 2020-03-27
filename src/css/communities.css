@@ -4,6 +4,16 @@
 	align-self: stretch;
 }
 
+@media screen and (max-width: 600px){
+	.communities-body {
+		margin-bottom: 5px;
+	}
+
+	.communities-body:last-child {
+		margin-bottom: 5px !important;
+	}
+}
+
 .communities-body:last-child {
 	margin-bottom: 32px;
 }

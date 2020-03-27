@@ -62,7 +62,11 @@
 @media screen and (max-width: 600px) {
 	.admin-left,
 	.admin-right {
-		padding: 20px 5px !important;
+		padding: 5px !important;
+	}
+
+	.admin-right {
+		padding-top: 0 !important;
 	}
 
 	.profile-container,

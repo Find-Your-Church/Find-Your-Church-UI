@@ -783,6 +783,10 @@ class Account extends Component{
 									</div>
 									<div className={"sub-container w3-col m12 l6 search-preview"}>
 										<div className={"sub-content payment"}>
+											<img src={"/img/iframe-preview.png"} style={{
+												width: "100%",
+											}}/>
+											{/*
 											<iframe width={"100%"} height={"100%"} src={this.state.frameUrl} style={{
 												margin: "-412px -720px",
 												width: "1906px",
@@ -790,6 +794,7 @@ class Account extends Component{
 												overflow: "hidden",
 												transform: "scale(0.25)",
 											}}></iframe>
+											*/}
 										</div>
 									</div>
 								</div>

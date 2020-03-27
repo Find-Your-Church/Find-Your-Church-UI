@@ -384,7 +384,7 @@
 	grid-template-columns: 1fr 1fr;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
 	.members-container .listing-grid.profile {
 		-ms-grid-columns: 1fr 1fr;
 		grid-template-columns: 1fr 1fr;

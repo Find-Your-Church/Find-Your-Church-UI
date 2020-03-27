@@ -410,7 +410,7 @@
 	color: #888;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
 	.steps-body .right-part .tab .w3-col {
 		padding: 9px 30px 9px;
 		text-align: center;

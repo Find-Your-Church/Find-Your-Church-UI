@@ -235,6 +235,7 @@ button:focus {
 @media screen and (max-width: 979px) {
 	#search-results-header .search-form-container {
 		border: none;
+		max-width: 100% !important;
 	}
 
 	.search-container {
