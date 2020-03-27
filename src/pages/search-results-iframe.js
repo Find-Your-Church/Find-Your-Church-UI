@@ -304,6 +304,7 @@ class SearchResultsIframe extends Component{
 		let selectedChurches = false;
 		let selectedEvents = false;
 		let selectedSupportGroups = false;
+		let selectedNone = false;
 		if(this.props.community.criteria.category === "Churches"){
 			selectedChurches = true;
 		}
@@ -312,6 +313,9 @@ class SearchResultsIframe extends Component{
 		}
 		else if(this.props.community.criteria.category === "Support Groups"){
 			selectedSupportGroups = true;
+		}
+		else if(this.props.community.criteria.category === ""){
+			selectedNone = true;
 		}
 
 		return (
@@ -379,14 +383,18 @@ class SearchResultsIframe extends Component{
 																		 send={this.getFrequencyInfo}
 																		 value={this.props.community.criteria.filter.frequency}
 																		 items={community_config.FILTERS.frequency}/>
-									<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
-																		 send={this.getAgesInfo}
-																		 value={this.props.community.criteria.filter.ages}
-																		 items={community_config.FILTERS.ages}/>
-									<SearchFilterRadio filterTitle="Gender" filterName="gender"
-																		 send={this.getGenderInfo}
-																		 value={this.props.community.criteria.filter.gender}
-																		 items={community_config.FILTERS.gender}/>
+									{selectedChurches || selectedNone ? null : (
+											<>
+												<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
+																					 send={this.getAgesInfo}
+																					 value={this.props.community.criteria.filter.ages}
+																					 items={community_config.FILTERS.ages}/>
+												<SearchFilterRadio filterTitle="Gender" filterName="gender"
+																					 send={this.getGenderInfo}
+																					 value={this.props.community.criteria.filter.gender}
+																					 items={community_config.FILTERS.gender}/>
+											</>
+									)}
 									<SearchFilterCheck filterTitle="Parking" filterName="parking"
 																		 send={this.getParkingInfo}
 																		 value={this.props.community.criteria.filter.parking}
