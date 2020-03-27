@@ -442,7 +442,7 @@ class SearchResults extends Component{
 													</span>
 													&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
 													<span
-															style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}</span>
+															style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `any location` : "any location") : this.props.criteria.address}</span>
 												</div>
 												<div className={"search-result-container-header-right w3-col m2"}>
 													Results ({results.length})
@@ -467,7 +467,7 @@ class SearchResults extends Component{
 													 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}>
 												<div>
 													We couldn't find
-													any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}.
+													any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng && false) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}.
 												</div>
 												<div>
 													Try expanding your search radius.
