@@ -103,12 +103,15 @@ class InvitedViewCommunity extends Component{
 
 			console.log(this.props.auth.user.id);
 
+			const in_frame = window.location !== window.parent.location;
+
 			return (
 					<>
-						<SiteHeader/>
-						<div>
-							<main className="steps-body">
-								<div className={"view-wrapper"}>
+						{in_frame ? null : (
+								<SiteHeader/>
+						)}
+							<main className="steps-body" style={{marginTop: in_frame ? "0" : "59px"}}>
+								<div className={"view-wrapper"} style={{minHeight: in_frame ? "100vh" : "calc(100vh - 200px)"}}>
 									<div className="container-inline">
 										<div className="info-body w3-row">
 											<h3 className="header3 w3-bar w3-margin-bottom">
@@ -186,7 +189,7 @@ class InvitedViewCommunity extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part view w3-col l6">
+											<div className="right-part view w3-col l6" style={{height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 129px)"}}>
 												<div className={"tab w3-row"}>
 													<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 															 onClick={this.selectTabDetails}>Details
@@ -246,15 +249,17 @@ class InvitedViewCommunity extends Component{
 																					</div>
 																					: null}
 																			{this.props.community.view_community.email ?
-																					<a href={"mailto:" + this.props.community.view_community.email} className="view-item w3-half"
-																							 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
+																					<a href={"mailto:" + this.props.community.view_community.email}
+																						 className="view-item w3-half"
+																						 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
 																						{this.props.community.view_community.email ||
 																						<span style={{color: "#aaa"}}>Email</span>}
 																					</a>
 																					: null}
 																			{this.props.community.view_community.phone ?
-																					<a href={"tel:" + this.props.community.view_community.phone} className="view-item w3-half"
-																							 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
+																					<a href={"tel:" + this.props.community.view_community.phone}
+																						 className="view-item w3-half"
+																						 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
 																						{this.props.community.view_community.phone ||
 																						<span style={{color: "#aaa"}}>Phone</span>}
 																					</a>
@@ -344,7 +349,6 @@ class InvitedViewCommunity extends Component{
 									</div>
 								</div>
 							</main>
-						</div>
 					</>
 			);
 		}
