@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import SiteFooter from "../components/site-footer";
 import "../css/login-register.css";
-import {BrowserRouter as Router, Link, withRouter} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import {GoogleLogin} from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";

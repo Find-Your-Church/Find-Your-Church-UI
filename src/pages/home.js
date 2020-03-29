@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
-import {BrowserRouter as Router} from "react-router-dom";
 
 /**
  *
