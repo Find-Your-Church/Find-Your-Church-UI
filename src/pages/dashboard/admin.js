@@ -71,6 +71,22 @@ class Admin extends Component{
 						</div>
 						<main className="admin-body w3-row"
 									style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
+							<div className="div-block-213">
+								<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
+									<div className="div-block-231"><a href="/create-a-community" className="button-create w-button"><em
+											className="newcommunity-icon"></em> <span className="text-span-3">New Community</span></a></div>
+								</div>
+								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">Dashboard -
+									Communities</h1></div>
+								<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
+									<div className="div-block-215 underline"><a href="#" className="link-6"><em
+											className="italic-text-7 current"></em></a></div>
+									<div className="div-block-215"><a href="/dashboard-results" className="link-6"><em
+											className="italic-text-7 gray"></em></a></div>
+									<div className="div-block-215"><a href="/dashboard-results" className="link-6"><em
+											className="italic-text-7 gray"></em></a></div>
+								</div>
+							</div>
 							<div className={"admin-wrapper"}>
 								<div className="admin-left w3-col">
 									<ProfileContainer/>

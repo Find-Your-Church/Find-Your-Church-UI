@@ -120,60 +120,71 @@ class RegisterPopup extends Component{
 												<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 															name="wf-form-Registration"
 															data-name="Registration" className="form1">
-													<div className="form-row">
-														<div className="input-div gradient w3-row">
+													<div className={"input-group"}>
+														<div className={"forminput-div"}>
+															<label htmlFor={"fname"} className={"form-label"}>First name</label>
 															<input type="text"
-																		 className="form-input center  w-input-sign w3-half"
+																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.fname}
 																		 id="fname"
-																		 placeholder="First name"
-																		 style={{borderBottomColor: this.props.errors.msg_reg_fname ? "#f00" : "#e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_reg_fname ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
+														</div>
+														<div className={"forminput-div"}>
+															<label htmlFor={"lname"} className={"form-label"}>Last name</label>
 															<input type="text"
-																		 className="form-input center  w-input-sign w3-half"
+																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.lname}
 																		 id="lname"
-																		 placeholder="Last name"
-																		 style={{borderBottomColor: this.props.errors.msg_reg_lname ? "#f00" : "#e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_reg_lname ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
-													</div>
-													<div className="form-row">
-														<div className="input-div gradient">
+														<div className={"forminput-div span-2"}>
+															<label htmlFor={"email"} className={"form-label"}>Email</label>
 															<input type="email"
 																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.email}
 																		 id="email"
-																		 placeholder="Email"
-																		 style={{borderBottomColor: this.props.errors.msg_reg_email ? "#f00" : "#e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_reg_email ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
-													</div>
-													<div className="form-row">
-														<div className="input-div gradient">
+														<div className={"forminput-div"}>
+															<label htmlFor={"password"} className={"form-label"}>Password</label>
 															<input type="password"
-																		 className="form-input center  w-input-sign w3-half"
+																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password}
 																		 id="password"
-																		 placeholder="Password"
-																		 style={{borderBottomColor: this.props.errors.msg_reg_password ? "#f00" : "#e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_reg_password ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
+														</div>
+														<div className={"forminput-div"}>
+															<label htmlFor={"password2"} className={"form-label"}>Confirm password</label>
 															<input type="password"
-																		 className="form-input center  w-input-sign w3-half"
+																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password2}
 																		 id="password2"
-																		 placeholder="Confirm password"
-																		 style={{borderBottomColor: this.props.errors.msg_reg_password2 ? "#f00" : "#e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																		 required=""/>
+														</div>
+														<div className={"forminput-div"}>
+															<label htmlFor={"zipcode"} className={"form-label"}>Zip code</label>
+															<input type="text"
+																		 className="form-input center  w-input-sign"
+																		 maxLength="256"
+																		 onChange={this.onChange}
+																		 value={this.state.password2}
+																		 id="zipcode"
+																		 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
 													</div>
@@ -209,6 +220,10 @@ class RegisterPopup extends Component{
 												Conditions</Link>
 										</div>
 									</div>
+									<div className="strikethrough-div">
+										<div className="or-div"></div>
+									</div>
+									{/*
 									<div>
 										<div className="strikethrough-div">
 											<div className="or-div"><h4 className="or-text">or</h4></div>
@@ -228,13 +243,14 @@ class RegisterPopup extends Component{
 											</div>
 										</div>
 									</div>
-								</div>
-								<div className="div-block-46">
-									<h1 className="heading-11">
-										<Link to="/login-popup" className="link-5">
-											Already have an account? <strong>Sign In</strong>
-										</Link>
-									</h1>
+									*/}
+									<div className="div-block-46">
+										<h1 className="heading-11">
+											<Link to="/login-popup" className="link-5">
+												Already have an account? <strong>Sign In</strong>
+											</Link>
+										</h1>
+									</div>
 								</div>
 							</div>
 						</div>

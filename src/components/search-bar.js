@@ -146,9 +146,10 @@ class SearchBar extends Component{
 											defaultValue={this.props.community.criteria.category}
 											style={{
 												backgroundImage: "url('/img/icon-down3-purple.svg')",
+												backgroundSize: "9px",
 											}}
 											className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select w3-col s6">
-								<option value="">Category...</option>
+								<option value="">All Communities</option>
 								{
 									community_config.CATEGORIES.map(cat => {
 										return (
@@ -161,6 +162,7 @@ class SearchBar extends Component{
 											defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
 											style={{
 												backgroundImage: "url('/img/icon-down3-purple.svg')",
+												backgroundSize: "9px",
 											}}
 											className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select w3-col s6">
 								<option value="">Radius...</option>

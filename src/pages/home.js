@@ -22,7 +22,7 @@ class Home extends Component{
 					<main className="home-main">
 						<div className="block-48 w3-display-container">
 							<div className="search-container w3-display-middle">
-								<h1 className="search-form-header">What kind of community are you looking for?</h1>
+								<h1 className="search-form-header">Find a community near you.</h1>
 								<SearchBar buttonTitle="Search"/>
 							</div>
 						</div>
