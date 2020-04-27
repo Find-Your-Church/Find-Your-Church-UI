@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import {Provider} from "react-redux";
 import 'w3-css/w3.css';
 import './App.css';
-import SiteHeader from "./components/site-header";
 import Home from "./pages/home";
 import SearchResults from "./pages/search-results";
 import LoginPopup from "./pages/login-popup";

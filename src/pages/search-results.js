@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import SearchFilterCheck from "../components/search-filter-check";
 import SearchFilterRadio from "../components/search-filter-radio";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
 	clearPicking,
 	doSearchCommunities, setBackUrl,

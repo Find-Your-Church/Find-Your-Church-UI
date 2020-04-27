@@ -785,7 +785,7 @@ class Account extends Component{
 										<div className={"sub-content payment"}>
 											<img src={"/img/iframe-preview.png"} style={{
 												width: "100%",
-											}}/>
+											}} alt={"preview panel"}/>
 											{/*
 											<iframe width={"100%"} height={"100%"} src={this.state.frameUrl} style={{
 												margin: "-412px -720px",
