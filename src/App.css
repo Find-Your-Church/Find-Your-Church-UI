@@ -107,7 +107,7 @@ a {
 .header-3lines-menu i {
 	padding-top: 4px;
 	font-size: 18px;
-	color: #8900fe;
+	color: #2e89fe;
 }
 
 .header-3lines-menu i:hover {
@@ -341,7 +341,7 @@ a {
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
 	align-self: center;
-	color: #999999;
+	color: rgba(14, 0, 25, 0.2);
 }
 
 .search-address-candidates {
