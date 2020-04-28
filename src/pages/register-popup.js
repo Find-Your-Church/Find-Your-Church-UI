@@ -22,6 +22,7 @@ class RegisterPopup extends Component{
 			email: "",
 			password: "",
 			password2: "",
+			zip_code: "",
 			errors: {}
 		};
 	}
@@ -55,7 +56,8 @@ class RegisterPopup extends Component{
 			lname: this.state.lname,
 			email: this.state.email,
 			password: this.state.password,
-			password2: this.state.password2
+			password2: this.state.password2,
+			zip_code: this.state.zip_code,
 		};
 		this.props.registerUser(newUser, this.props.history);
 	};
@@ -182,9 +184,9 @@ class RegisterPopup extends Component{
 																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
-																		 value={this.state.password2}
-																		 id="zipcode"
-																		 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																		 value={this.state.zip_code}
+																		 id="zip_code"
+																		 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
 													</div>
@@ -204,13 +206,15 @@ class RegisterPopup extends Component{
 																	!isEmpty(this.props.errors.msg_reg_lname) ||
 																	!isEmpty(this.props.errors.msg_reg_email) ||
 																	!isEmpty(this.props.errors.msg_reg_password) ||
-																	!isEmpty(this.props.errors.msg_reg_password2)) ? "block" : "none"
+																	!isEmpty(this.props.errors.msg_reg_password2) ||
+																	!isEmpty(this.props.errors.msg_reg_zip_code)) ? "block" : "none"
 												}}>
 													<div>{this.props.errors.msg_reg_fname}</div>
 													<div>{this.props.errors.msg_reg_lname}</div>
 													<div>{this.props.errors.msg_reg_email}</div>
 													<div>{this.props.errors.msg_reg_password}</div>
 													<div>{this.props.errors.msg_reg_password2}</div>
+													<div>{this.props.errors.msg_reg_zip_code}</div>
 												</div>
 											</div>
 										</div>

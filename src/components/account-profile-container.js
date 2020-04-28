@@ -6,7 +6,7 @@ import Popup from "reactjs-popup";
 import isEmpty from "../utils/isEmpty";
 import redirectURL from "../utils/redirectURL";
 
-class ProfileContainer extends Component{
+class AccountProfileContainer extends Component{
 	constructor(props){
 		super(props);
 
@@ -28,21 +28,9 @@ class ProfileContainer extends Component{
 
 	render(){
 		return (
-			<div className="profile-container">
-				<div className="containerheader-div underline">
-					<div className={"profile-header-wrapper"}>
-						<h5 className="profile-header">Admin Profile</h5>
-						<Popup
-							className={"profile-tooltip"}
-							trigger={<i style={{cursor: "pointer"}}
-										className={"fas fa-question-circle tooltip-icon"}> </i>}
-							position={"left top"}>
-							<div>This is the information that will be displayed on each of the communities you are an admin of. You can update the information on your Admin Profile from your "Account" page.</div>
-						</Popup>
-					</div>
-				</div>
+			<div className="profile-container" style={{padding: "0", border: "none"}}>
 				<div className={"profile-container-wrapper"}>
-					<div className="div-block-55">
+					<div className="div-block-55" style={{marginTop: "0"}}>
 						<div className="profpic-container">
 							<div className="profpic-div">
 								<img src={isEmpty(this.props.auth.user.pic) ?
@@ -52,7 +40,7 @@ class ProfileContainer extends Component{
 							</div>
 						</div>
 					</div>
-					<div className="profile-info">
+					<div className="profile-info" style={{marginBottom: "0"}}>
 						<div data-collapse="all" data-animation="default" data-duration="400"
 							 className="w-nav profile-info-header">
 							<h3 className="community-name">
@@ -92,7 +80,7 @@ class ProfileContainer extends Component{
 	}
 }
 
-ProfileContainer.propTypes = {
+AccountProfileContainer.propTypes = {
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
 };
@@ -105,4 +93,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{}
-)(ProfileContainer);
+)(AccountProfileContainer);
