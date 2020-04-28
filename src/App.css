@@ -43,9 +43,8 @@ a {
 	padding: 12px 20px 0;
 	font-size: 16px;
 	background-color: transparent;
-	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
-	border-bottom: 1px none grey;
-	box-shadow: 0 1px 3px 0 grey;
+	background-image: linear-gradient(180deg, #fff, #fff), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
+	border-bottom: 1px solid rgba(27, 0, 51, 0.15);
 	z-index: 1000;
 }
 
@@ -63,6 +62,10 @@ a {
 	display: none;
 }
 
+.home-link {
+	border-right: 1px solid rgba(27, 0, 51, 0.1) !important;
+}
+
 @media screen and (max-width: 600px) {
 	.sign-up-link, .sign-in-link, .home-link {
 		display: none !important;
@@ -78,12 +81,12 @@ a {
 }
 
 .site-header .w3-bar-item {
-	padding: 7px 8px;
+	padding: 7px 10px;
 	font-size: 16px;
 }
 
 .site-header .w3-bar-item:hover {
-	color: #fff;
+	color: rgba(51, 51, 51, 0.5);
 }
 
 .site-logo {
@@ -93,17 +96,18 @@ a {
 
 .site-header a {
 	line-height: 22px;
-	color: #e6e6e6;
+	color: #2e89fe;
+	font-weight: 600;
 }
 
 .name-on-header {
-	color: #e6e6e6;
+	color: #2e89fe;
 }
 
 .header-3lines-menu i {
 	padding-top: 4px;
 	font-size: 18px;
-	color: #8900fe;
+	color: #2e89fe;
 }
 
 .header-3lines-menu i:hover {
@@ -115,17 +119,15 @@ a {
 	margin-left: 10px;
 	height: 38px;
 	font-size: 16px !important;
-	border: 1px solid #fff !important;
 	border-radius: 3px;
 	background-color: #00e8fe;
 	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
-	box-shadow: 1px 1px 3px 0 #505050;
 	color: #e6e6e6;
 	text-decoration: none;
 }
 
 .sign-up-link:hover {
-	background-image: linear-gradient(225deg, #8900fe, #2e89fe 50%, #00e8fe);
+	box-shadow: 1px 1px 3px 0 rgba(14, 0, 25, 0.25);
 }
 
 .headerprofpic-div {
@@ -166,7 +168,7 @@ a {
 }
 
 .headerprofpic-welcome:before {
-	color: #8900fe;
+	color: rgba(51, 51, 51, 0.5);
 	content: "Welcome, ";
 }
 
@@ -213,11 +215,7 @@ a {
 	-webkit-box-ordinal-group: 1;
 	-ms-flex-order: 0;
 	order: 0;
-	border-style: solid none none;
-	border-width: 1px;
-	border-color: #ccc #000 #000;
-	background-color: #fff;
-	box-shadow: 0 1px 3px 0 grey;
+	opacity: 0.8;
 }
 
 .admin-menu .header-navlink {
@@ -225,16 +223,18 @@ a {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #e6e6e6;
-	font-size: 16px;
-	color: grey;
-	background-color: #ccc;
+	color: #ddd9e1;
+	background-color: transparent;
+	background-image: linear-gradient(180deg, rgb(27, 0, 51), rgb(27, 0, 51)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 	font-family: "Source Sans Pro", sans-serif;
-	font-weight: 400;
+	font-size: 16px;
+	font-weight: 600;
 	text-align: center;
+	line-height: 36px;
 }
 
 .admin-menu .header-navlink:hover {
-	color: #8900fe;
+	color: #2e89fe;
 }
 
 .footer-div {
@@ -341,7 +341,7 @@ a {
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
 	align-self: center;
-	color: #999999;
+	color: rgba(14, 0, 25, 0.2);
 }
 
 .search-address-candidates {

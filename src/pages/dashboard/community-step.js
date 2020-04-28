@@ -329,28 +329,28 @@ class CommunityStep extends Component{
 					<SiteHeader/>
 					<div>
 						<main className="steps-body">
+							<h3 className="header3 w3-bar">
+								<div className="create-menu w3-bar-item w3-left">
+									<Link to="/dashboard" className="w3-button cancel">
+										{this.state.is_editing ? ("Back") : "Cancel"}
+									</Link>
+								</div>
+								<div className="create-menu w3-bar-item w3-center">
+									{this.state.is_editing ?
+											(<>Editing {this.state.data.community_name}</>)
+											: "Create a New Community"
+									}
+
+								</div>
+								<div className="create-menu w3-bar-item w3-right">
+									<Link to="#" className="w3-button w3-right save"
+												onClick={this.onSubmitCommunity}>
+										{this.state.is_editing ? ("Save") : "Save"}
+									</Link>
+								</div>
+							</h3>
 							<div className={"container-wrapper"}>
 								<div className="container-inline">
-									<h3 className="header3 w3-bar">
-										<div className="create-menu w3-bar-item w3-left">
-											<Link to="/dashboard" className="w3-button cancel">
-												{this.state.is_editing ? ("Back") : "Cancel"}
-											</Link>
-										</div>
-										<div className="create-menu w3-bar-item w3-center">
-											{this.state.is_editing ?
-													(<>Editing {this.state.data.community_name}</>)
-													: "Create a New Community"
-											}
-
-										</div>
-										<div className="create-menu w3-bar-item w3-right">
-											<Link to="#" className="w3-button w3-right save"
-														onClick={this.onSubmitCommunity}>
-												{this.state.is_editing ? ("Save") : "Create"}
-											</Link>
-										</div>
-									</h3>
 									<div className="w-form-done">
 										<div>Thank you! Your submission has been received!</div>
 									</div>
@@ -450,7 +450,8 @@ class CommunityStep extends Component{
 																		id="category"
 																		defaultValue={this.state.category}
 																		style={{
-																			backgroundImage: "url('/img/icon-down3.svg')",
+																			backgroundImage: "url('/img/icon-down3-purple.svg')",
+																			backgroundSize: "10px",
 																			borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
 																		}}
 																		required="">
