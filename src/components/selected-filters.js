@@ -27,8 +27,8 @@ class SelectedFilters extends Component{
 									{this.props.handleRefresh ? (
 										<>
 											&nbsp;&nbsp;&nbsp;&nbsp;
-											<i className={"fas fa-times-circle"}
-											   style={{cursor: "pointer"}}
+											<i className={"far fa-times-circle"}
+											   style={{cursor: "pointer", color: "#fff"}}
 											   onClick={() => this.clearFilterValue(key, i)}> </i>
 										</>
 									) : null}

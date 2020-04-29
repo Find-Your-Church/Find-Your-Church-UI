@@ -106,6 +106,7 @@ class PublicThumbnail extends Component{
 								<Link to="#" className="communityname" onClick={this.goView}>
 									{this.props.value.community_name}
 								</Link>
+								{/*
 								<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
 									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 								</div>
@@ -120,6 +121,7 @@ class PublicThumbnail extends Component{
 								</nav>
 								<div className="w-nav-overlay" data-wf-ignore="">
 								</div>
+								*/}
 							</div>
 						</div>
 						<div className="listingrow">
