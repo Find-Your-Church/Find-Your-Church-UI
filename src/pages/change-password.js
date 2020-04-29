@@ -80,9 +80,11 @@ class ChangePassword extends Component{
 														</div>
 													</div>
 													<div className="submit-row" style={{marginTop: "11px"}}>
-														<input type="submit" value="Save"
+														<input type="submit" value="Set password"
 																	 data-wait="Please wait..."
-																	 className="form-submit round w-button-sign"/>
+																	 className="form-submit round w-button-sign"
+																	 style={{marginTop: "0"}}
+														/>
 													</div>
 												</form>
 												<div className="w-form-done">
@@ -95,13 +97,13 @@ class ChangePassword extends Component{
 											</div>
 										</div>
 									</div>
-								</div>
-								<div className="div-block-46">
-									<h1 className="heading-11">
-										<Link to="/login-popup" className="link-5">
-											Back to Sign In
-										</Link>
-									</h1>
+									<div className="div-block-46">
+										<h1 className="heading-11">
+											<Link to="/login-popup" className="link-5">
+												Back to <span style={{fontWeight: "600", color: "#2e89fe"}}>Sign In</span>
+											</Link>
+										</h1>
+									</div>
 								</div>
 							</div>
 						</div>
