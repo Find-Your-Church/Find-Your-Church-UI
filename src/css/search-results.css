@@ -150,7 +150,7 @@ body {
 	height: 36px;
 	font-size: 16px;
 	line-height: 52px;
-	color: #8900fe;
+	color: #2e89fe;
 	font-weight: 600;
 }
 
@@ -168,7 +168,7 @@ body {
 	font-size: 16px;
 	border: none;
 	cursor: pointer;
-	color: #8900fe;
+	color: #2e89fe;
 	/* customize the combo-box */
 	padding-right: 16px;
 	-webkit-appearance: none;

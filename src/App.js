@@ -31,6 +31,7 @@ import PublicViewCommunity from "./pages/public-view-community";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
+import DashboardResults from "./pages/dashboard/dashboard-results";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -102,6 +103,7 @@ class App extends Component{
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
 							<PrivateRoute exact path="/dashboard" component={Admin}/>
+							<PrivateRoute exact path="/dashboard-results" component={DashboardResults}/>
 							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/account" component={AccountWrapper}/>
 							<Route exact path="/make-suggestion" component={MakeSuggestionPage}/>

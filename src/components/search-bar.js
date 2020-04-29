@@ -213,13 +213,15 @@ class SearchBar extends Component{
 									</>
 							)}
 						</PlacesAutocomplete>
-						<Link to={"#"}
-									onClick={searchable ? this.handleSearch : null}
-									className={"search-form-button w-button"}
-									style={{cursor: (searchable ? "pointer" : "not-allowed")}}
-						>
-							{this.props.buttonTitle}
-						</Link>
+						{this.props.buttonTitle === "Update" ? null : (
+								<Link to={"#"}
+											onClick={searchable ? this.handleSearch : null}
+											className={"search-form-button w-button"}
+											style={{cursor: (searchable ? "pointer" : "not-allowed")}}
+								>
+									{this.props.buttonTitle}
+								</Link>
+						)}
 					</form>
 					<div className="w-form-done" style={{display: "none"}}>
 						<div>Thank you! Your submission has been received!</div>

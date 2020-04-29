@@ -219,7 +219,9 @@ button:focus {
 }
 
 .criteria-group {
+	padding-top: 5px;
 	width: 340px;
+	height: 50px;
 	min-width: 340px;
 	background-color: #fff;
 }
