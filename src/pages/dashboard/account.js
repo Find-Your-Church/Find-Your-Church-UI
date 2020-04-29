@@ -84,6 +84,7 @@ class Account extends Component{
 			editingEmail: false,
 			editingPassword: false,
 			editingPhone: false,
+			editingZipCode: false,
 			editingRefCode: false,
 			editing_card: false,
 			errors: {},
@@ -101,6 +102,7 @@ class Account extends Component{
 			user_registered_at: user.registered_at,
 			user_password: "",
 			user_password2: "",
+			user_zip_code: user.zip_code,
 			user_ref_code: user.ref_code === undefined ? "" : user.ref_code,
 
 			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
@@ -321,6 +323,25 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingPhone: !this.state.editingPhone});
+	}
+
+	changeZipCode = () => {
+		// if editing, save the referral code via axios to BE database.
+		if(this.state.editingZipCode){
+			const userData = {
+				id: this.props.auth.user.id,
+				zip_code: this.state.user_zip_code,
+			};
+			this.props.updateUserInfo(userData);
+		}
+		else{
+			this.setState({
+				user_zip_code: this.props.auth.user.zip_code,
+			});
+		}
+
+		// anyway switch display method.
+		this.setState({editingZipCode: !this.state.editingZipCode});
 	}
 
 	onBlurPhone = (e) => {
@@ -566,10 +587,10 @@ class Account extends Component{
 														<div className="w3-row">
 															<input type="text" className="w3-col"
 																		 title="Zip code" placeholder="Zip code"
-																		 id="zip_code" onChange={this.onChange}
+																		 id="user_zip_code" onChange={this.onChange}
 																		 value={this.state.zip_code} autoFocus/>
 														</div>
-														: user.phone
+														: user.zip_code
 												}
 												{this.state.errors.msg_zip_code !== undefined ?
 														<div className="error-item">
