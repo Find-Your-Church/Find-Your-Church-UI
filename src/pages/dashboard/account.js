@@ -342,7 +342,7 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingZipCode: !this.state.editingZipCode});
-	}
+	};
 
 	onBlurPhone = (e) => {
 		if(!e.target.validity.valid)
@@ -836,7 +836,7 @@ class Account extends Component{
 										</div>
 										<div className="table-row-2">
 											<div className="flexdiv-left">
-												<h4 className="table-header">Active Accounts</h4>
+												<h4 className="table-header">Active Communities</h4>
 												<Popup
 														trigger={<i style={{cursor: "pointer"}}
 																				className={"fas fa-question-circle tooltip-icon"}> </i>}
@@ -858,27 +858,7 @@ class Account extends Component{
 																: "00")}
 											</h4>
 										</div>
-										<div className="table-row-2">
-											<div className="flexdiv-left">
-												<h4 className="table-header">Price</h4>
-												<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																				className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"right center"}>
-													<div>The price you are paying per active community, per month. You are not billed for
-														inactive communities.
-													</div>
-												</Popup>
-											</div>
-											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}>
-												{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount)
-														: (this.props.community.is_sending ?
-																<i className="fas fa-spinner fa-spin"> </i>
-																: "-")}
-											</h4>
-										</div>
-										<div className="table-row-2">
+										<div className="table-row-2 upcoming" style={{borderBottom: "none"}}>
 											<h4 className="table-header">
 												Upcoming Payments
 												<Popup
@@ -889,29 +869,32 @@ class Account extends Component{
 												</Popup>
 											</h4>
 											<h4 className={"table-item right"}>
-												<div className={(this.props.community.subscription ? "" : " grey")}>
-													{uc_amount}
-													{this.props.community.subscription ?
-															" on " + next_due_date.toLocaleDateString('en-US')
-															: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "-")}
+												<div className={"upcoming-payment-table-row"}>
+													<div><b>Date</b></div>
+													<div><b>Active</b></div>
+													<div><b>Price</b></div>
+													<div><b>Total</b></div>
 												</div>
-												<div className={(this.props.community.subscription ? "" : " grey")}>
-													{uc_amount}
-													{this.props.community.subscription ?
-															" on " + next_month1.toLocaleDateString('en-US')
-															: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "-")}
+												<div className={"upcoming-payment-table-row"}>
+													<div>{this.props.community.subscription ? next_due_date.toLocaleDateString('en-US') : "-"}</div>
+													<div>{this.props.community.my_communities.active.length}</div>
+													<div>{this.props.community.subscription ?
+															showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_amount}</div>
 												</div>
-												<div className={(this.props.community.subscription ? "" : " grey")}>
-													{uc_amount}
-													{this.props.community.subscription ?
-															" on " + next_month2.toLocaleDateString('en-US')
-															: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "-")}
+												<div className={"upcoming-payment-table-row"}>
+													<div>{this.props.community.subscription ? next_month1.toLocaleDateString('en-US') : "-"}</div>
+													<div>{this.props.community.my_communities.active.length}</div>
+													<div>{this.props.community.subscription ?
+															showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_amount}</div>
+												</div>
+												<div className={"upcoming-payment-table-row"}>
+													<div>{this.props.community.subscription ? next_month2.toLocaleDateString('en-US') : "-"}</div>
+													<div>{this.props.community.my_communities.active.length}</div>
+													<div>{this.props.community.subscription ?
+															showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_amount}</div>
 												</div>
 											</h4>
 										</div>
