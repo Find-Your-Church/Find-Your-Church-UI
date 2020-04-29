@@ -463,7 +463,7 @@ class Account extends Component{
 								<div className="flexdiv-leftright panel underline">
 									<h5 className="container-title">Account</h5>
 								</div>
-								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-left" : " h-right")}>
+								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-right" : " h-right")}>
 									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Admin Info</h5>
