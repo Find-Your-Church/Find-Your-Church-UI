@@ -59,32 +59,34 @@ class ChangePassword extends Component{
 												<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 															name="wf-form-Registration"
 															data-name="Registration" className="form1">
-													<div className="form-row">
-														<div className="input-div gradient w3-row">
+													<div className={"input-group"}>
+														<div className={"forminput-div span-2"}>
+															<label htmlFor={"email"} className={"form-label"}>New password</label>
 															<input type="password"
-																		 className="form-input center w-input-sign w3-half"
+																		 className="form-input center w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password}
 																		 id="password"
-																		 placeholder="New password"
 																		 required=""/>
+														</div>
+														<div className={"forminput-div span-2"}>
+															<label htmlFor={"email"} className={"form-label"}>Confirm password</label>
 															<input type="password"
-																		 className="form-input center w-input-sign w3-half"
+																		 className="form-input center w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password2}
 																		 id="password2"
-																		 placeholder="Confirm password"
 																		 required=""/>
 														</div>
-													</div>
-													<div className="submit-row" style={{marginTop: "11px"}}>
-														<input type="submit" value="Set password"
-																	 data-wait="Please wait..."
-																	 className="form-submit round w-button-sign"
-																	 style={{marginTop: "0"}}
-														/>
+														<div className={"forminput-div span-2"}>
+															<input type="submit" value="Set password"
+																		 data-wait="Please wait..."
+																		 className="form-submit round w-button-sign"
+																		 style={{marginTop: "0"}}
+															/>
+														</div>
 													</div>
 												</form>
 												<div className="w-form-done">
