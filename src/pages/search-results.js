@@ -335,7 +335,8 @@ class SearchResults extends Component{
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
-											backgroundImage: "url('/img/icon-down3-purple.svg')",
+											backgroundImage: "url('/img/icon-down3-blue.svg')",
+											backgroundSize: "10px",
 										}}
 						>
 							<option value={sorters.SORT_NEWEST}>Newest</option>

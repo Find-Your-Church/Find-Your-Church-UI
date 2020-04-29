@@ -8,7 +8,7 @@ body {
 	margin-top: 60px;
 	padding: 15px 20px;
 	line-height: 36px;
-	background-color: #e6e6e6;
+	background-color: #f3f2f4;
 	border-bottom: 1px solid #ccc;
 	/*box-shadow: 0 1px 3px #888;*/
 	z-index: 100;
@@ -117,7 +117,7 @@ body {
 	max-width: 50vw;
 	height: calc(100vh - 60px - var(--results-header-height));
 	padding: 10px;
-	background-color: #f3f3f3;
+	background-color: #e6e5e7;
 	overflow-y: scroll;
 	box-shadow: -1px 2px 3px 0 grey;
 }
@@ -338,8 +338,9 @@ body {
 .selected-filter-item {
 	display: inline-block;
 	padding: 3px 8px;
-	color: #fff;
-	background-color: #8900fe;
+	color: #333;
+	background-color: #e7e5ea;
+	border-radius: 3px;
 }
 
 .filter-panel .selected-filter-item {
@@ -350,8 +351,8 @@ body {
 	margin: 10px 0 0 0;
 }
 
-.listingrow .selected-filter-item:not(:first-child) {
-	margin-left: 10px;
+.listingrow .selected-filter-item:not(:last-child) {
+	margin-right: 10px;
 }
 
 .communities-container .selected-filter-item-close {
