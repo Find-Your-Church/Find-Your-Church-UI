@@ -105,9 +105,12 @@ a {
 }
 
 .header-3lines-menu i {
-	padding-top: 4px;
-	font-size: 18px;
+	font-size: 22px;
 	color: #2e89fe;
+}
+
+.header-3lines-menu i.fa-angle-down {
+	padding-top: 4px;
 }
 
 .header-3lines-menu i:hover {

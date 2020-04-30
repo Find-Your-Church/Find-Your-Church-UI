@@ -362,12 +362,14 @@ class SearchResults extends Component{
 								</div>
 								<div className={"filter-header-div"}>
 									<label className={"filter-label w3-large"}>Filters</label>
+									{/*
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
 																	className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
 											position={"left top"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>
+									*/}
 								</div>
 								<div className={"filter-group-container"}>
 									<SearchFilterCheck filterTitle="Day(s)" filterName="days"
