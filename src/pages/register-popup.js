@@ -121,7 +121,7 @@ class RegisterPopup extends Component{
 					<SiteHeader/>
 
 					<main>
-						<div className="sign-body">
+						<div className="sign-body register">
 							<div className={"w3-modal modal-terms-conditions"}
 									 style={{display: this.state.showedModal ? "block" : "none"}}>
 								<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
