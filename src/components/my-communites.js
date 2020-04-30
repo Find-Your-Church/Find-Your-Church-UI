@@ -3,7 +3,17 @@ import "../css/communities.css"
 import Thumbnail from "./thumbnail";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getMyCommunities} from "../actions/community-actions";
+import {
+	activateMultiCommunity,
+	clearActiveStatus,
+	clearCouponFailed,
+	clearCouponVerified,
+	deactivateMultiCommunity,
+	deleteMultiCommunity,
+	getBillingStatus,
+	getMyCommunities,
+	pickMultiCommunity
+} from "../actions/community-actions";
 import formatNumber from "../utils/formatNumber";
 import Popup from "reactjs-popup";
 import community_config from "../conf/community-conf";
@@ -50,6 +60,65 @@ class MyCommunities extends Component{
 
 	onChangeCategory = e => {
 		this.setState({selected_category: e.target.value});
+	};
+
+	handleActivateMulti = () => {
+		if(this.selected_communities.length > 0){
+			this.props.clearActiveStatus();
+			this.props.clearCouponVerified();
+			this.props.clearCouponFailed();
+			this.props.getBillingStatus({
+				user_id: this.props.auth.user.id,
+			}, this.props.history);
+
+			// is available just move up?
+			if(this.props.community.subscription && (this.props.community.my_communities.active.length + this.selected_communities.length <= this.props.community.subscription.quantity + this.props.community.tickets)){
+				this.props.activateMultiCommunity({
+					id: this.props.auth.user.id,
+					community_ids: this.selected_communities,
+					source: null,
+					coupon: null,
+				});
+			}
+			else{
+				// pick the community to be activated
+				this.props.pickMultiCommunity({
+					community_ids: this.selected_communities,
+				});
+
+				// show modal dialog
+				this.props.handleShowSubDlg();
+			}
+
+			this.selected_communities = [];
+			this.setState({selected_count: this.selected_communities.length});
+		}
+	};
+
+	handleDeactivateMulti = () => {
+		if(this.selected_communities.length > 0){
+			// do deactivate the community.
+			this.props.deactivateMultiCommunity({
+				id: this.props.auth.user.id,
+				community_ids: this.selected_communities,
+			});
+
+			this.selected_communities = [];
+			this.setState({selected_count: this.selected_communities.length});
+		}
+	};
+
+	handleDeleteMulti = () => {
+		if(this.selected_communities.length > 0){
+			if(true === window.confirm(`Delete ${this.selected_communities.length} communities?`)){
+				this.props.deleteMultiCommunity({
+					community_ids: this.selected_communities,
+				}, this.props.history);
+
+				this.selected_communities = [];
+				this.setState({selected_count: this.selected_communities.length});
+			}
+		}
 	};
 
 	render(){
@@ -115,11 +184,17 @@ class MyCommunities extends Component{
 								</div>
 								{
 									this.props.status === "active" ? (
-											<a href="#" className="button-delete w-button">Deactivate ({this.state.selected_count})</a>
+											<a href="#" className="button-delete w-button" onClick={this.handleDeactivateMulti}>
+												Deactivate ({this.state.selected_count})
+											</a>
 									) : (
 											<>
-												<a href="#" className="button-delete w-button" style={{color: "#2e89fe"}}>Activate ({this.state.selected_count})</a>
-												<a href="#" className="button-delete w-button">Delete ({this.state.selected_count})</a>
+												<a href="#" className="button-delete w-button" style={{color: "#2e89fe"}} onClick={this.handleActivateMulti}>
+													Activate ({this.state.selected_count})
+												</a>
+												<a href="#" className="button-delete w-button" onClick={this.handleDeleteMulti}>
+													Delete ({this.state.selected_count})
+												</a>
 											</>
 									)
 								}
@@ -148,7 +223,7 @@ class MyCommunities extends Component{
 												{this.props.communities[this.props.status].map((community, index) => {
 													if(this.state.selected_category === "" || community.category === this.state.selected_category)
 														return (
-																<Thumbnail key={this.props.status + index} status={this.props.status}
+																<Thumbnail key={this.props.status + community._id} status={this.props.status}
 																					 value={community} handleShowSubDlg={this.props.handleShowSubDlg}
 																					 handleSelect={this.selectCommunity}
 																/>
@@ -176,6 +251,14 @@ MyCommunities.propTypes = {
 	errors: PropTypes.object.isRequired,
 	communities: PropTypes.object.isRequired,
 	getMyCommunities: PropTypes.func.isRequired,
+	activateMultiCommunity: PropTypes.func.isRequired,
+	deactivateMultiCommunity: PropTypes.func.isRequired,
+	deleteMultiCommunity: PropTypes.func.isRequired,
+	pickMultiCommunity: PropTypes.func.isRequired,
+	clearActiveStatus: PropTypes.func.isRequired,
+	clearCouponVerified: PropTypes.func.isRequired,
+	clearCouponFailed: PropTypes.func.isRequired,
+	getBillingStatus: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -187,5 +270,15 @@ const mapStateToProps = state => ({
 
 export default connect(
 		mapStateToProps,
-		{getMyCommunities}
+		{
+			getMyCommunities,
+			activateMultiCommunity,
+			deactivateMultiCommunity,
+			deleteMultiCommunity,
+			pickMultiCommunity,
+			clearActiveStatus,
+			clearCouponVerified,
+			clearCouponFailed,
+			getBillingStatus,
+		}
 )(MyCommunities);

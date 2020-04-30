@@ -8,7 +8,13 @@ import {
 	registerCard,
 	clearLastInvoice,
 	activateCommunity,
-	hideActivateDlg, verifyCoupon, clearCouponVerified, clearCouponFailed, clearActiveStatus, getPlan
+	hideActivateDlg,
+	verifyCoupon,
+	clearCouponVerified,
+	clearCouponFailed,
+	clearActiveStatus,
+	getPlan,
+	activateMultiCommunity
 } from "../actions/community-actions";
 import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
@@ -125,12 +131,12 @@ class StripeSubscription extends Component{
 				 * register new card.
 				 */
 				if(token !== undefined){
-					this.props.activateCommunity({
+					this.props.activateMultiCommunity({
 						source: token.id,
 						email: this.props.auth.user.email,
 						name: this.state.name_on_card,
 						description: 'Holder: ' + this.state.name_on_card,
-						community_id: this.props.community.community_activated,
+						community_ids: this.props.community.communities_activated,
 						id: this.props.auth.user.id,
 						coupon: this.props.community.coupon_verified ? this.state.coupon : null,
 					});
@@ -140,8 +146,8 @@ class StripeSubscription extends Component{
 				// check the customer information
 				if(this.props.auth.user.billing_info){
 					// activate this community as existed stripe customer.
-					this.props.activateCommunity({
-						community_id: this.props.community.community_activated,
+					this.props.activateMultiCommunity({
+						community_ids: this.props.community.communities_activated,
 						source: null,
 						id: this.props.auth.user.id,
 						coupon: this.props.community.coupon_verified ? this.state.coupon : null,
@@ -192,8 +198,8 @@ class StripeSubscription extends Component{
 		}
 
 		const due_amount = this.props.community.subscription ?
-				showAmount((this.props.community.my_communities.active.length + 1) * this.props.community.plan_price)
-				: showAmount(this.props.community.plan_price);
+				showAmount((this.props.community.my_communities.active.length + this.props.community.communities_activated.length) * this.props.community.plan_price)
+				: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price);
 
 		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days);
 		const upcoming_duedate1 = getNextMonth(upcoming_duedate, 1);
@@ -239,8 +245,8 @@ class StripeSubscription extends Component{
 												<h4 className="table-header">Active / Paid</h4>
 											</div>
 											<div>
-												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
-													{this.props.second ? this.props.community.my_communities.active.length : "1"}
+												<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
+													{this.props.second ? this.props.community.my_communities.active.length : this.props.community.communities_activated.length}
 													&nbsp;/&nbsp;
 													{this.props.community.subscription ?
 															this.props.community.subscription.quantity + this.props.community.tickets
@@ -254,10 +260,22 @@ class StripeSubscription extends Component{
 									<div className="invoice-row">
 										<div className="invoice-div">
 											<div className="filtersheader-div">
+												<h4 className="table-header">New Activations</h4>
+											</div>
+											<div>
+												<h4 className={"value"}>
+													{this.props.community.communities_activated.length - this.props.community.tickets}
+												</h4>
+											</div>
+										</div>
+									</div>
+									<div className="invoice-row">
+										<div className="invoice-div">
+											<div className="filtersheader-div">
 												<h4 className="table-header">Price</h4>
 											</div>
 											<div>
-												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+												<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
 													{this.props.community.subscription ?
 															showAmount(this.props.community.subscription.plan.amount)
 															: (this.props.community.is_sending ?
@@ -316,11 +334,11 @@ class StripeSubscription extends Component{
 														</div>
 													</div>
 													<div>
-														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+														<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
 															{this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
 																	: (this.props.community.is_sending ?
 																			<i className="fas fa-spinner fa-spin"> </i>
-																			: showAmount(this.props.community.plan_price))}
+																			: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))}
 														</h4>
 													</div>
 												</div>
@@ -333,7 +351,7 @@ class StripeSubscription extends Component{
 														<h4 className="table-header">Taxes and Fees</h4>
 													</div>
 													<div>
-														<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+														<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
 															{this.props.community.last_invoice ?
 																	showAmount(this.props.community.last_invoice.tax)
 																	: "$0.00"}
@@ -362,9 +380,9 @@ class StripeSubscription extends Component{
 											<div>
 												<div className="div10-bottom right">
 													{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
-															<h4 className={"value " + (this.props.community.trialing ? "strikethrough" : "") + (this.props.community.subscription ? "" : " grey")}>
+															<h4 className={"value " + (this.props.community.trialing ? "strikethrough" : "") + (this.props.community.subscription ? "" : " ")}>
 																{this.props.community.subscription ?
-																		showAmount(prorated * this.props.community.subscription.plan.amount)
+																		showAmount(prorated * this.props.community.communities_activated.length * this.props.community.subscription.plan.amount)
 																		: (this.props.community.is_sending ?
 																				<i className="fas fa-spinner fa-spin"> </i>
 																				: "$0.00")}
@@ -390,7 +408,7 @@ class StripeSubscription extends Component{
 											</div>
 											<div>
 												<div className="div10-bottom">
-													<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+													<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
 														{due_amount}
 														&nbsp;on&nbsp;
 														{this.props.community.subscription ?
@@ -401,7 +419,7 @@ class StripeSubscription extends Component{
 													</h4>
 												</div>
 												<div className="div10-bottom">
-													<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+													<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
 														{due_amount}
 														&nbsp;on&nbsp;
 														{this.props.community.subscription ?
@@ -412,7 +430,7 @@ class StripeSubscription extends Component{
 													</h4>
 												</div>
 												<div className="div10-bottom">
-													<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
+													<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
 														{due_amount}
 														&nbsp;on&nbsp;
 														{this.props.community.subscription ?
@@ -564,7 +582,7 @@ StripeSubscription.propTypes = {
 	getBillingStatus: PropTypes.func.isRequired,
 	registerCard: PropTypes.func.isRequired,
 	clearLastInvoice: PropTypes.func.isRequired,
-	activateCommunity: PropTypes.func.isRequired,
+	activateMultiCommunity: PropTypes.func.isRequired,
 	hideActivateDlg: PropTypes.func.isRequired,
 };
 
@@ -585,7 +603,7 @@ export default connect(
 			getBillingStatus,
 			registerCard,
 			clearLastInvoice,
-			activateCommunity,
+			activateMultiCommunity,
 			hideActivateDlg,
 		}
 )(injectStripe(StripeSubscription));

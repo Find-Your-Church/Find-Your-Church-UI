@@ -18,6 +18,7 @@ class Thumbnail extends Component{
 			is_editing: false,
 			is_viewing: false,
 			is_show_menu: false,
+			checked: false,
 		};
 
 		this.goEdit = this.goEdit.bind(this);
@@ -103,8 +104,16 @@ class Thumbnail extends Component{
 	}
 
 	handleCheck = e => {
-		this.props.handleSelect(this.props.value._id, e.target.checked);
+		const new_value = !this.state.checked;
+		this.setState({checked: new_value});
+		this.props.handleSelect(this.props.value._id, new_value);
 	};
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(this.props.status === "inactive" && prevProps.community.communities_activated !== this.props.community.communities_activated && this.props.community.communities_activated.length === 0){
+			this.setState({checked: false});
+		}
+	}
 
 	render(){
 		return (
@@ -165,8 +174,7 @@ class Thumbnail extends Component{
 										<div className="form-block-4">
 											<form id="email-form" name="email-form" data-name="Email Form"><label
 													className="w-checkbox checkbox-field">
-												<input type="checkbox" id="checkbox" name="checkbox"
-															 data-name="Checkbox"
+												<input type="checkbox" checked={this.state.checked}
 															 className="w-checkbox-input checkbox" onClick={this.handleCheck}/>
 												<span
 														className="checkbox-label w-form-label">.</span></label></form>
@@ -209,6 +217,6 @@ export default connect(
 			clearActiveStatus,
 			clearCouponVerified,
 			clearCouponFailed,
-			getBillingStatus
+			getBillingStatus,
 		}
 )(Thumbnail);
