@@ -14,12 +14,35 @@ class MyCommunities extends Component{
 
 		this.state = {
 			selected_category: "",
+			selected_count: 0,
 		};
+
+		this.selected_communities = []; // array of community IDs
 
 		this.refresh = this.refresh.bind(this);
 
 		this.refresh();
 	}
+
+	selectCommunity = (community_id, selected = true) => {
+		if(selected){
+			if(!this.selected_communities.includes(community_id)){
+				this.selected_communities.push(community_id);
+			}
+		}
+		else{
+			if(this.selected_communities.includes(community_id)){
+				const index = this.selected_communities.indexOf(community_id);
+				if (index > -1) {
+					this.selected_communities.splice(index, 1);
+				}
+			}
+		}
+
+		this.setState({selected_count: this.selected_communities.length});
+
+		console.log("selected: ", this.selected_communities);
+	};
 
 	refresh(){
 		this.props.getMyCommunities(this.props.auth.user.id, this.props.status === "active");
@@ -92,11 +115,11 @@ class MyCommunities extends Component{
 								</div>
 								{
 									this.props.status === "active" ? (
-											<a href="#" className="button-delete w-button">Deactivate (x)</a>
+											<a href="#" className="button-delete w-button">Deactivate ({this.state.selected_count})</a>
 									) : (
 											<>
-												<a href="#" className="button-delete w-button" style={{color: "#2e89fe"}}>Activate (x)</a>
-												<a href="#" className="button-delete w-button">Delete (x)</a>
+												<a href="#" className="button-delete w-button" style={{color: "#2e89fe"}}>Activate ({this.state.selected_count})</a>
+												<a href="#" className="button-delete w-button">Delete ({this.state.selected_count})</a>
 											</>
 									)
 								}
@@ -126,7 +149,9 @@ class MyCommunities extends Component{
 													if(this.state.selected_category === "" || community.category === this.state.selected_category)
 														return (
 																<Thumbnail key={this.props.status + index} status={this.props.status}
-																					 value={community} handleShowSubDlg={this.props.handleShowSubDlg}/>
+																					 value={community} handleShowSubDlg={this.props.handleShowSubDlg}
+																					 handleSelect={this.selectCommunity}
+																/>
 														);
 													else
 														return null;

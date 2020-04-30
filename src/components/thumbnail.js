@@ -102,6 +102,10 @@ class Thumbnail extends Component{
 		}
 	}
 
+	handleCheck = e => {
+		this.props.handleSelect(this.props.value._id, e.target.checked);
+	};
+
 	render(){
 		return (
 				this.state.is_viewing ? (
@@ -163,7 +167,7 @@ class Thumbnail extends Component{
 													className="w-checkbox checkbox-field">
 												<input type="checkbox" id="checkbox" name="checkbox"
 															 data-name="Checkbox"
-															 className="w-checkbox-input checkbox"/>
+															 className="w-checkbox-input checkbox" onClick={this.handleCheck}/>
 												<span
 														className="checkbox-label w-form-label">.</span></label></form>
 										</div>
