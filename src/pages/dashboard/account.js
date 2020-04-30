@@ -329,18 +329,21 @@ class Account extends Component{
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingZipCode){
 			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c&address=${this.state.user_zip_code},US`)
-					.then(response => {
-						console.log(response.json());
-					})
+					.then(response => response.json())
 					.then(data => {
-						console.log(data);
-					});
+						if(data.results.length > 0){
+							const userData = {
+								id: this.props.auth.user.id,
+								zip_code: this.state.user_zip_code,
+								location: data.results[0].geometry.location,
+							};
 
-			const userData = {
-				id: this.props.auth.user.id,
-				zip_code: this.state.user_zip_code,
-			};
-			this.props.updateUserInfo(userData);
+							this.props.updateUserInfo(userData);
+						}
+						else{
+							this.setState({errors: {msg_zip_code: 'Invalid zip code'}})
+						}
+					});
 		}
 		else{
 			this.setState({

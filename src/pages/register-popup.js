@@ -51,15 +51,40 @@ class RegisterPopup extends Component{
 	onSubmit = e => {
 		e.preventDefault();
 
-		const newUser = {
-			fname: this.state.fname,
-			lname: this.state.lname,
-			email: this.state.email,
-			password: this.state.password,
-			password2: this.state.password2,
-			zip_code: this.state.zip_code,
-		};
-		this.props.registerUser(newUser, this.props.history);
+		if(this.state.zip_code.length > 0){
+			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c&address=${this.state.user_zip_code},US`)
+					.then(response => response.json())
+					.then(data => {
+						if(data.results.length > 0){
+							const newUser = {
+								fname: this.state.fname,
+								lname: this.state.lname,
+								email: this.state.email,
+								password: this.state.password,
+								password2: this.state.password2,
+								zip_code: this.state.zip_code,
+								location: data.results[0].geometry.location,
+							};
+
+							this.props.registerUser(newUser, this.props.history);
+						}
+						else{
+							alert('Invalid zip code');
+						}
+					});
+		}
+		else{
+			const newUser = {
+				fname: this.state.fname,
+				lname: this.state.lname,
+				email: this.state.email,
+				password: this.state.password,
+				password2: this.state.password2,
+				zip_code: this.state.zip_code,
+			};
+
+			this.props.registerUser(newUser, this.props.history);
+		}
 	};
 
 	onFailure = (error) => {
