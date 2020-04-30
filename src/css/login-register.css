@@ -80,6 +80,10 @@
 	background-size: auto;
 }
 
+.sign-body form {
+	padding-top: 10px;
+}
+
 .div-block-63 {
 	display: -webkit-box;
 	display: -webkit-flex;
