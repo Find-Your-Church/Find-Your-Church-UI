@@ -328,6 +328,14 @@ class Account extends Component{
 	changeZipCode = () => {
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingZipCode){
+			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c&address=${this.state.user_zip_code},US`)
+					.then(response => {
+						console.log(response.json());
+					})
+					.then(data => {
+						console.log(data);
+					});
+
 			const userData = {
 				id: this.props.auth.user.id,
 				zip_code: this.state.user_zip_code,

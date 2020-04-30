@@ -19,11 +19,6 @@ class SiteFooter extends Component{
 					</Link>
 				</div>
 				<div className={"footer-link"}>
-					<Link to="/make-suggestion">
-						Make a Suggestion
-					</Link>
-				</div>
-				<div className={"footer-link"}>
 					<Link to="/terms-n-conditions">
 						Terms and Conditions
 					</Link>
