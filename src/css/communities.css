@@ -164,6 +164,8 @@
 }
 
 #sel_category {
+	margin: 0 -10px;
+	padding: 0 10px;
 	width: 160px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
