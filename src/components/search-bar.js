@@ -152,7 +152,7 @@ class SearchBar extends Component{
 								{
 									community_config.CATEGORIES.map(cat => {
 										return (
-												<option value={cat} key={"search-" + cat}>{cat}</option>
+												<option value={cat} key={"search-" + cat} title={community_config.TOOL_TIPS[cat]}>{cat}</option>
 										);
 									})
 								}

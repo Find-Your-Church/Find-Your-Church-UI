@@ -459,7 +459,7 @@ class CommunityStep extends Component{
 															{
 																community_config.CATEGORIES.map(cat => {
 																	return (
-																			<option value={cat} key={cat}>{cat}</option>
+																			<option value={cat} key={cat} title={community_config.TOOL_TIPS[cat]}>{cat}</option>
 																	);
 																})
 															}

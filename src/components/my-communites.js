@@ -121,6 +121,10 @@ class MyCommunities extends Component{
 		}
 	};
 
+	handleCategoryOver = e => {
+		console.log(e);
+	};
+
 	render(){
 		return (
 				<div className="communities-body">
@@ -171,7 +175,9 @@ class MyCommunities extends Component{
 											{
 												community_config.CATEGORIES.map(cat => {
 													return (
-															<option value={cat} key={"search-" + cat}>{cat}</option>
+															<option value={cat} key={"search-" + cat}
+																			title={community_config.TOOL_TIPS[cat]}
+															>{cat}</option>
 													);
 												})
 											}
