@@ -55,7 +55,8 @@ a {
 }
 
 .site-header .header-3lines-menu {
-	padding-right: 4px !important;
+	margin-right: 0 !important;
+	padding-right: 2px !important;
 }
 
 .header-3lines-menu.oos {
