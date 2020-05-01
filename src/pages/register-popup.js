@@ -11,6 +11,7 @@ import config from "../conf/config";
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import terms_conditions from "../terms-conditions";
 
 class RegisterPopup extends Component{
 	constructor(props){
@@ -122,13 +123,11 @@ class RegisterPopup extends Component{
 									 style={{display: this.state.showedModal ? "block" : "none"}}>
 								<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
 									<header className={"w3-container w3-border-bottom"}>
-							<span onClick={this.hideModal}
-										className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
+										<span onClick={this.hideModal} className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
 										<div className={"terms-title"}>Terms and Conditions</div>
 									</header>
-									<div className={"w3-container terms-conditions-content"}>
-										<p>Terms...</p>
-										<p>Conditions...<br/><br/><br/><br/></p>
+									<div className={"w3-container terms-conditions-content"}
+											 dangerouslySetInnerHTML={{__html: terms_conditions}}>
 									</div>
 								</div>
 							</div>
