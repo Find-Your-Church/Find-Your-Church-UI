@@ -36,8 +36,7 @@
 .search-form-header {
 	margin: 0 0 20px 0;
 	color: #f3f2f5;
-	font-family: Roboto, sans-serif;
-	font-size: 32px;
+	font-size: 38px;
 	line-height: 32px;
 	font-weight: 700;
 	text-align: center;
@@ -68,7 +67,7 @@
 }
 
 #search-results-header .search-form-container {
-	border: solid 1px #ccc;
+	border: solid 1px #ddd9e1;
 }
 
 .search-form {
@@ -79,6 +78,7 @@
 	display: flex;
 	width: auto;
 	height: auto;
+	min-height: 50px;
 	padding-top: 0;
 	padding-bottom: 0;
 	padding-left: 0;
@@ -100,6 +100,7 @@
 	color: #6534ff;
 	font-size: 16px;
 	line-height: 16px;
+	opacity: 0.92;
 }
 
 input:focus,
@@ -121,7 +122,7 @@ button:focus {
 	border-color: transparent;
 	background-color: #fff;
 	color: #333;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 18px;
 	font-weight: 500;
 	text-align: left;
@@ -140,7 +141,7 @@ button:focus {
 	border: none;
 	background-color: #fff;
 	color: #333;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 18px;
 	font-weight: 500;
 	border-radius: 0 !important;
@@ -312,7 +313,6 @@ button:focus {
 		background-color: #8900fe;
 		text-align: left;
 		font-weight: 600 !important;
-		border: none;
 	}
 
 	.search-form-dropdown,
@@ -326,7 +326,7 @@ button:focus {
 	.criteria-group,
 	.search-form-input,
 	.search-form-button {
-		border: 1px solid rgba(14, 0, 25, 0.15);
+		border: 1px solid #e8e5ea;
 		border-radius: 3px !important;
 	}
 }

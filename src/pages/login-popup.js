@@ -102,9 +102,9 @@ class LoginPopup extends Component{
 																<label htmlFor={"email"} className={"form-label"}>
 																	Password
 																</label>
-																<Link
-																		to="/forgot-password" style={{textAlign: "right"}}><span
-																		className="form-link termsofuse">Lost Password</span></Link>
+																<Link to="/forgot-password" class={"lost-password"}>
+																	<span className="form-link termsofuse">Lost Password</span>
+																</Link>
 															</div>
 															<input type="password"
 																		 className="form-input center w-input-sign"
@@ -138,9 +138,9 @@ class LoginPopup extends Component{
 											</div>
 										</div>
 									</div>
-									<div style={{height: "20px"}}> </div>
+									<div style={{height: "20px"}}></div>
 									<div className="strikethrough-div">
-										<div className="or-div"> </div>
+										<div className="or-div"></div>
 									</div>
 									{/*
 									<div>
@@ -166,7 +166,10 @@ class LoginPopup extends Component{
 									<div className="div-block-46">
 										<h1 className="heading-11">
 											<Link to="/register-popup" className="link-5">
-												<div style={{display: "inline-block"}}>Don't have an account yet?</div> <div style={{display: "inline-block", fontWeight: "600", color: "#2e89fe"}}>Create one for free</div>
+												<div style={{display: "inline-block"}}>Don't have an account yet?</div>
+												<div style={{display: "inline-block", fontWeight: "600", color: "#2e89fe"}}>Create one for
+													free
+												</div>
 											</Link>
 										</h1>
 									</div>

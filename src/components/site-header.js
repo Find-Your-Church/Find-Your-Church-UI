@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link, withRouter} from "react-router-dom";
+import {Link, withRouter, useLocation} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo, logoutUser} from "../actions/auth-actions";
@@ -10,6 +10,7 @@ class SiteHeader extends Component{
 		super(props);
 		this.state = {
 			showedAdminMenu: false,
+
 		};
 
 		this.toggleAdminMenu = this.toggleAdminMenu.bind(this);
@@ -36,6 +37,8 @@ class SiteHeader extends Component{
 	};
 
 	render(){
+		console.log(this.props.location.pathname);
+
 		return (
 				<div id={"main-header"}>
 					<header className="site-header w3-bar">
@@ -52,7 +55,7 @@ class SiteHeader extends Component{
 						{this.props.auth.isAuthenticated ? (<>
 									<Link to="#" onClick={this.toggleAdminMenu}
 												className={"header-3lines-menu w3-bar-item w3-right"}>
-										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}} />
+										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}}/>
 									</Link>
 									<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>
@@ -69,20 +72,24 @@ class SiteHeader extends Component{
 								</>)
 								: null}
 
-						{!this.props.auth.isAuthenticated ?
-								<Link to="/register-popup" className="sign-up-link w3-bar-item w3-right w3-text-white">
-									Create an Account
-								</Link>
-								: null}
-						{!this.props.auth.isAuthenticated ?
-								< Link to="/login-popup" className="sign-in-link w3-bar-item w3-right">
-									Sign In
-								</Link>
-								: null}
-						{!this.props.auth.isAuthenticated ?
-								<Link to="/" className="home-link w3-bar-item w3-right">
-									Home
-								</Link>
+						{!this.props.auth.isAuthenticated ? (
+										<>
+											<Link to="/register-popup" className="sign-up-link w3-bar-item w3-right w3-text-white">
+												Create an Account
+											</Link>
+											< Link to="/login-popup"
+														 className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/login-popup" ? "current" : "")}>
+												Sign In
+											</Link>
+											<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "0"}}>&nbsp;</div>
+											<Link to="/"
+														className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}
+														style={{marginRight: "7px"}}
+											>
+												Home
+											</Link>
+										</>
+								)
 								: null}
 					</header>
 					<div className="admin-menu w3-animate-top" onClick={this.toggleAdminMenu} onMouseLeave={this.hideAdminMenu}

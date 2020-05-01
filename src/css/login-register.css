@@ -542,9 +542,15 @@ input.w-button {
 	text-decoration: none;
 }
 
+.lost-password {
+	text-align: right;
+	line-height: 16px;
+	margin-bottom: 10px;
+}
+
 .form-link.termsofuse {
 	display: inline-block;
-	font-size: 16px;
+	font-size: 15px;
 	color: #999;
 }
 

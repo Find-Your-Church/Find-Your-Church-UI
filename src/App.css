@@ -62,7 +62,7 @@ a {
 	display: none;
 }
 
-.home-link {
+.header-link-sep {
 	border-right: 1px solid rgba(27, 0, 51, 0.1) !important;
 }
 
@@ -81,12 +81,14 @@ a {
 }
 
 .site-header .w3-bar-item {
-	padding: 7px 10px;
+	margin: 0 10px;
+	padding: 7px 0;
 	font-size: 16px;
 }
 
 .site-header .w3-bar-item:hover {
-	color: rgba(51, 51, 51, 0.5);
+	color: #2e89fe;
+	border-bottom: 1px solid #2e89fe;
 }
 
 .site-logo {
@@ -96,8 +98,13 @@ a {
 
 .site-header a {
 	line-height: 22px;
-	color: #2e89fe;
+	color: #adadad;
 	font-weight: 600;
+}
+
+.site-header a.current {
+	color: #2e89fe;
+	border-bottom: none !important;
 }
 
 .name-on-header {
@@ -128,10 +135,12 @@ a {
 	color: #e6e6e6;
 	text-decoration: none;
 	line-height: 15px !important;
+	opacity: 0.9;
 }
 
 .sign-up-link:hover {
 	box-shadow: 1px 1px 3px 0 rgba(14, 0, 25, 0.25);
+	opacity: 1;
 }
 
 .headerprofpic-div {
