@@ -612,7 +612,7 @@ class Account extends Component{
 											<h4 className="table-header">Zip code</h4>
 											<h4 className="table-item">
 												{this.state.editingZipCode ?
-														<div className="w3-row">
+														<div className="w3-row" style={{position: "relative"}}>
 															<PlacesAutocomplete
 																	value={this.state.user_zip_code}
 																	onChange={this.onChangeAddress}
@@ -627,7 +627,9 @@ class Account extends Component{
 																						 })}
 																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																						 required="" autoFocus/>
-																			<div className={"search-address-candidates"}>
+																			<div className={"search-address-candidates"}
+																					 style={{top: "24px", left: "0"}}
+																			>
 																				{loading ?
 																						<div
 																								className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
