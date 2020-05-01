@@ -10,6 +10,7 @@ import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-act
 import config from "../conf/config";
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 
 class RegisterPopup extends Component{
 	constructor(props){
@@ -58,26 +59,10 @@ class RegisterPopup extends Component{
 			password: this.state.password,
 			password2: this.state.password2,
 			zip_code: this.state.zip_code,
-			location: {lat: null, lng: null},
+			location: {lat: this.state.my_lat, lng: this.state.my_lng},
 		};
 
-		if(this.state.zip_code.length > 0){
-			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c&address=${this.state.user_zip_code},US`)
-					.then(response => response.json())
-					.then(data => {
-						if(data.results.length > 0){
-							newUser.location = data.results[0].geometry.location;
-						}
-
-						this.props.registerUser(newUser, this.props.history);
-
-						console.log("zip code -> ", newUser.location);
-					});
-		}
-		else{
-			this.props.registerUser(newUser, this.props.history);
-		}
-
+		this.props.registerUser(newUser, this.props.history);
 		console.log(newUser.location);
 	};
 
@@ -107,6 +92,23 @@ class RegisterPopup extends Component{
 
 	hideModal = () => {
 		this.setState({showedModal: false})
+	};
+
+	onChangeAddress = val => {
+		this.setState({zip_code: val});
+	};
+
+	handleSelect = address => {
+		const self = this;
+
+		self.setState({my_address: address});
+
+		geocodeByAddress(address)
+				.then(results => getLatLng(results[0]))
+				.then(latLng => {
+					self.setState({my_lat: latLng.lat, my_lng: latLng.lng});
+				})
+				.catch(error => console.error('Error', error));
 	};
 
 	render(){
@@ -197,16 +199,45 @@ class RegisterPopup extends Component{
 																		 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
-														<div className={"forminput-div"}>
+														<div className={"forminput-div"} style={{position: "relative"}}>
 															<label htmlFor={"zipcode"} className={"form-label"}>Zip code</label>
-															<input type="text"
-																		 className="form-input center  w-input-sign"
-																		 maxLength="256"
-																		 onChange={this.onChange}
-																		 value={this.state.zip_code}
-																		 id="zip_code"
-																		 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																		 required=""/>
+															<PlacesAutocomplete
+																	value={this.state.zip_code}
+																	onChange={this.onChangeAddress}
+																	onSelect={this.handleSelect}
+															>
+																{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+																		<>
+																			<input className="form-input center  w-input-sign"
+																						 title={`Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.my_address}`}
+																						 {...getInputProps({
+																							 placeholder: "",
+																						 })}
+																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																						 required=""/>
+																			<div className={"search-address-candidates"}>
+																				{loading ?
+																						<div
+																								className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+																				{suggestions.map((suggestion) => {
+																					const style = {
+																						color: suggestion.active ? "#ffffff" : "#254184",
+																						backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
+																						backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																					};
+
+																					return (
+																							<div className={"address-item"}
+																									 onClick={() => alert(suggestion.terms)}
+																									 {...getSuggestionItemProps(suggestion, {style})}>
+																								{suggestion.description}
+																							</div>
+																					);
+																				})}
+																			</div>
+																		</>
+																)}
+															</PlacesAutocomplete>
 														</div>
 													</div>
 													<div className="submit-row">
