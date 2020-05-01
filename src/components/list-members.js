@@ -75,7 +75,7 @@ class ListMembers extends Component{
 																	to="#" className="communityname">
 																	{user.fname} {user.lname}
 																</Link>
-																{this.props.editable ? (
+																{this.props.editable && false ? (
 																	<>
 																		<div className="listingnav-button w-nav-button">
 																			<Link to="#" className={"w3-right"}

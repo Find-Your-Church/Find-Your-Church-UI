@@ -197,6 +197,7 @@ class ViewCommunity extends Component{
 												<div className="basic-info view">
 													<div className="listingrow view" style={{position: "relative"}}>
 														<strong>{this.state.community_name}</strong>
+														{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
 															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
@@ -221,6 +222,7 @@ class ViewCommunity extends Component{
 																Flag / Report
 															</Link>
 														</nav>
+														*/}
 													</div>
 													<div className="listingrow view">
 														{this.state.category}
@@ -237,7 +239,7 @@ class ViewCommunity extends Component{
 														 onClick={this.selectTabDetails}>Details
 												</div>
 												<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-														 onClick={this.selectTabMembers}>Admin / Members
+														 onClick={this.selectTabMembers}>Admin
 												</div>
 											</div>
 											{this.state.showedMembers ?
@@ -245,7 +247,7 @@ class ViewCommunity extends Component{
 															<ListMembers editable={false}/>
 													)
 													: (
-															<>
+															<div className={"w3-animate-opacity"}>
 																<div className={"view-paragraph"}>
 																	<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 																		<h4 className="form-header">About</h4>
@@ -407,7 +409,7 @@ class ViewCommunity extends Component{
 																										 items={community_config.FILTERS.support_type}/>
 																	</div>
 																</div>
-															</>
+															</div>
 													)}
 										</div>
 									</div>

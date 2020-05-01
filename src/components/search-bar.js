@@ -141,39 +141,37 @@ class SearchBar extends Component{
 		) : (
 				<div className="search-form-container w-form">
 					<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
-						<div className={"criteria-group w3-row"}>
-							<select id="search_category" onChange={this.onChange}
-											defaultValue={this.props.community.criteria.category}
-											style={{
-												backgroundImage: "url('/img/icon-down3-purple.svg')",
-											}}
-											className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select w3-col s6">
-								<option value="">All Communities</option>
-								{
-									community_config.CATEGORIES.map(cat => {
-										return (
-												<option value={cat} key={"search-" + cat} title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-										);
-									})
-								}
-							</select>
-							<select id="search_radius" onChange={this.onChange}
-											defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
-											style={{
-												backgroundImage: "url('/img/icon-down3-purple.svg')",
-											}}
-											className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select w3-col s6">
-								<option value="">Radius...</option>
-								{
-									community_config.SEARCH_RADIUS.map(r => {
-										const pl = r > 1 ? "s" : "";
-										return (
-												<option value={r} key={"search-" + r}>within {r} mile{pl} of</option>
-										);
-									})
-								}
-							</select>
-						</div>
+						<select id="search_category" onChange={this.onChange}
+										defaultValue={this.props.community.criteria.category}
+										style={{
+											backgroundImage: "url('/img/icon-down3-purple.svg')",
+										}}
+										className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+							<option value="">All Communities</option>
+							{
+								community_config.CATEGORIES.map(cat => {
+									return (
+											<option value={cat} key={"search-" + cat} title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+									);
+								})
+							}
+						</select>
+						<select id="search_radius" onChange={this.onChange}
+										defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
+										style={{
+											backgroundImage: "url('/img/icon-down3-purple.svg')",
+										}}
+										className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select">
+							<option value="">Radius...</option>
+							{
+								community_config.SEARCH_RADIUS.map(r => {
+									const pl = r > 1 ? "s" : "";
+									return (
+											<option value={r} key={"search-" + r}>within {r} mile{pl} of</option>
+									);
+								})
+							}
+						</select>
 						<PlacesAutocomplete
 								style={{position: "relative"}}
 								value={this.state.my_address}

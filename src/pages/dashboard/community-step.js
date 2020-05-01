@@ -337,7 +337,7 @@ class CommunityStep extends Component{
 								</div>
 								<div className="create-menu w3-bar-item w3-center">
 									{this.state.is_editing ?
-											(<>Editing {this.state.data.community_name}</>)
+											(<><span style={{color: "#858585"}}>Editing</span> {this.state.data.community_name}</>)
 											: "Create a New Community"
 									}
 
@@ -508,7 +508,7 @@ class CommunityStep extends Component{
 														 onClick={this.selectTabDetails}>Details
 												</div>
 												<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-														 onClick={this.selectTabMembers}>Admin / Members
+														 onClick={this.selectTabMembers}>Admin
 												</div>
 											</div>
 											{this.state.showedMembers ?
