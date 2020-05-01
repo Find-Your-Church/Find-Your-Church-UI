@@ -214,7 +214,7 @@ class RegisterPopup extends Component{
 																						 })}
 																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																						 required=""/>
-																			<div className={"search-address-candidates"}>
+																			<div className={"search-address-candidates"} style={{left: "0", top: "72px"}}>
 																				{loading ?
 																						<div
 																								className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}

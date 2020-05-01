@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import redirectURL from "../utils/redirectURL";
 import terms_conditions from "../terms-conditions";
 import privacy_policy from "../privacy-policy";
+import about_company from "../about-company";
 
 class SiteFooter extends Component{
 	constructor(props){
@@ -21,6 +22,10 @@ class SiteFooter extends Component{
 
 	showModalPrivacyPolicy = () => {
 		this.setState({showedModal: true, title: 'Privacy Policy', content: privacy_policy});
+	};
+
+	showModalAboutCompany = () => {
+		this.setState({showedModal: true, title: 'About Us', content: about_company});
 	};
 
 	hideModal = () => {
@@ -65,7 +70,7 @@ class SiteFooter extends Component{
 					</Link>
 				</div>
 				<div className={"footer-logo"}>
-					&copy; <Link to="/">FindYourChurch.org</Link> {new Date().getFullYear()}.&nbsp;
+					&copy; <Link to="#" onClick={this.showModalAboutCompany}>FindYourChurch.org {new Date().getFullYear()}</Link>.&nbsp;
 					<span>
 						 All rights reserved.
 					</span>

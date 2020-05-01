@@ -23,6 +23,7 @@ import FileBase from "react-file-base64";
 import config from "../../conf/config";
 import community_config from "../../conf/community-conf";
 import AccountProfileContainer from "../../components/account-profile-container";
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 
 const cardStyle = {
 	base: {
@@ -103,6 +104,7 @@ class Account extends Component{
 			user_password: "",
 			user_password2: "",
 			user_zip_code: user.zip_code,
+			user_location: user.location === undefined ? {lat: null, lng: null} : user.location,
 			user_ref_code: user.ref_code === undefined ? "" : user.ref_code,
 
 			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
@@ -328,22 +330,13 @@ class Account extends Component{
 	changeZipCode = () => {
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingZipCode){
-			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAHmAy2d4gujgzmbjA8_fujQq-LwFy1J2c&address=${this.state.user_zip_code},US`)
-					.then(response => response.json())
-					.then(data => {
-						if(data.results.length > 0){
-							const userData = {
-								id: this.props.auth.user.id,
-								zip_code: this.state.user_zip_code,
-								location: data.results[0].geometry.location,
-							};
+			const userData = {
+				id: this.props.auth.user.id,
+				zip_code: this.state.user_zip_code,
+				location: this.state.user_location,
+			};
 
-							this.props.updateUserInfo(userData);
-						}
-						else{
-							this.setState({errors: {msg_zip_code: 'Invalid zip code'}})
-						}
-					});
+			this.props.updateUserInfo(userData);
 		}
 		else{
 			this.setState({
@@ -353,6 +346,23 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingZipCode: !this.state.editingZipCode});
+	};
+
+	onChangeAddress = val => {
+		this.setState({user_zip_code: val});
+	};
+
+	handleSelect = address => {
+		const self = this;
+
+		self.setState({my_address: address});
+
+		geocodeByAddress(address)
+				.then(results => getLatLng(results[0]))
+				.then(latLng => {
+					self.setState({user_location: {lat: latLng.lat, lng: latLng.lng}});
+				})
+				.catch(error => console.error('Error', error));
 	};
 
 	onBlurPhone = (e) => {
@@ -603,10 +613,43 @@ class Account extends Component{
 											<h4 className="table-item">
 												{this.state.editingZipCode ?
 														<div className="w3-row">
-															<input type="text" className="w3-col"
-																		 title="Zip code" placeholder="Zip code"
-																		 id="user_zip_code" onChange={this.onChange}
-																		 value={this.state.zip_code} autoFocus/>
+															<PlacesAutocomplete
+																	value={this.state.user_zip_code}
+																	onChange={this.onChangeAddress}
+																	onSelect={this.handleSelect}
+															>
+																{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+																		<>
+																			<input className="w3-col"
+																						 title={`Lat: ${this.state.user_location.lat}, Lng: ${this.state.user_location.lng}, ${this.state.my_address}`}
+																						 {...getInputProps({
+																							 placeholder: "Zip code",
+																						 })}
+																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																						 required="" autoFocus/>
+																			<div className={"search-address-candidates"}>
+																				{loading ?
+																						<div
+																								className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+																				{suggestions.map((suggestion) => {
+																					const style = {
+																						color: suggestion.active ? "#ffffff" : "#254184",
+																						backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
+																						backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																					};
+
+																					return (
+																							<div className={"address-item"}
+																									 onClick={() => alert(suggestion.terms)}
+																									 {...getSuggestionItemProps(suggestion, {style})}>
+																								{suggestion.description}
+																							</div>
+																					);
+																				})}
+																			</div>
+																		</>
+																)}
+															</PlacesAutocomplete>
 														</div>
 														: user.zip_code
 												}

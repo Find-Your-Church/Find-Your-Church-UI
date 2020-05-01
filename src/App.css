@@ -131,7 +131,7 @@ a {
 
 .sign-up-link {
 	padding: 12px 15px !important;
-	margin-left: 10px;
+	margin: 0 !important;
 	height: 38px;
 	font-size: 16px !important;
 	border-radius: 3px;
