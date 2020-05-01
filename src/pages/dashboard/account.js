@@ -492,8 +492,10 @@ class Account extends Component{
 													trigger={<i style={{cursor: "pointer"}}
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left top"}>
-												<div>This information is displayed on your Admin Profile. Admins must provide at least one
-													form of contact and have the ability to add or remove community members.
+												<div>
+													By default, you are the admin for any community that you create and are required to provide at least one form of
+													communication. If you are not the primary point of contact for the community, you can assign a 'Community Contact' when
+													creating a new community.
 												</div>
 											</Popup>
 										</div>
@@ -684,8 +686,8 @@ class Account extends Component{
 													trigger={<i style={{cursor: "pointer"}}
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left top"}>
-												<div>This information is private and only viewable by you. You can update your login
-													credentials and change your referral code at any time.
+												<div>
+													This information is private and only viewable by you. Use this section to update your login credentials at any time.
 												</div>
 											</Popup>
 										</div>
@@ -890,25 +892,15 @@ class Account extends Component{
 													trigger={<i style={{cursor: "pointer"}}
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left center"}>
-												<div>This is a snapshot displaying: the number of communities currently active out of the
-													total number of communities you've paid for this billing cycle; the price you're paying per
-													active community; and a preview of your upcoming payments based on your current account
-													summary.
+												<div>
+													This is a snapshot showing you how many communities you have active out of the total amount you've paid for this billing
+													cycle; as well as the upcoming payments you can expect based on your current number of active communities.
 												</div>
 											</Popup>
 										</div>
 										<div className="table-row-2">
 											<div className="flexdiv-left">
 												<h4 className="table-header">Active Communities</h4>
-												<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																				className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"right center"}>
-													<div>The number of communities currently active out of the total number of communities
-														you've paid for this billing cycle. You will only be charged for active communities on
-														your next and future billing cycles.
-													</div>
-												</Popup>
 											</div>
 											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}
 													title={"Communities activated / Paid activations"}>
@@ -924,12 +916,6 @@ class Account extends Component{
 										<div className="table-row-2 upcoming" style={{borderBottom: "none"}}>
 											<h4 className="table-header">
 												Upcoming Payments
-												<Popup
-														trigger={<i style={{cursor: "pointer"}}
-																				className={"fas fa-question-circle tooltip-icon"}> </i>}
-														position={"right center"}>
-													<div>(Active Communities) x (Price per Communitiy) = Upcoming Payment</div>
-												</Popup>
 											</h4>
 											<h4 className={"table-item"}>
 												<div className={"upcoming-payment-table-row"}>

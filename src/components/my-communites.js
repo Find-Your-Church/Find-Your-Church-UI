@@ -152,9 +152,13 @@ class MyCommunities extends Component{
 											position={this.props.status === "active" ? "left top" : "left bottom"}>
 										<div>
 											{this.props.status === "active" ? (
-													"These are the communities that will appear in search results when they match a users search criteria."
+													"These communities WILL be displayed on your website when you use the iFrame feature and will appear in public search\n" +
+													"results when they match a users criteria."
 											) : (
-													"These communities will not appear in search results and are only viewable by admins and active community members. New communities are set to \"Inactive\" by default and you can create as many inactive communities as you'd like at no charge."
+													"These communities WILL NOT be displayed on your website when you use the iFrame feature and WILL NOT appear in\n" +
+													"public search results if they match a users criteria. To activate a community, click the checkbox on the community or\n" +
+													"communities you wish to activate, and then click \"Activate\". New communities are inactive by default and must be\n" +
+													"manually activated."
 											)}
 										</div>
 									</Popup>

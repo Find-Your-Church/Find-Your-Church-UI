@@ -186,12 +186,12 @@ class DashboardResults extends Component{
 										<Popup
 												trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
-												position={"left center"}>
+												position={"left top"}>
 											<div>
-												This is a snapshot displaying: the number of communities currently active out of the
-												total number of communities you've paid for this billing cycle; the price you're paying per
-												active community; and a preview of your upcoming payments based on your current account
-												summary.
+												If your organization has your own website, you can use the code below to display your communities on any page(s) or
+												section(s) of your website. The preview below is what your iframe will look like when dispalyed on your website, and only
+												displays the communities currently active on your dashboard. The search, filter, and view technology is fully responsive
+												and is compatible with any device or browser.
 											</div>
 										</Popup>
 									</div>

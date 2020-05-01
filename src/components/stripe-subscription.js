@@ -229,12 +229,8 @@ class StripeSubscription extends Component{
 																	className={"fas fa-question-circle tooltip-icon"}> </i>}
 											position={"left top"}>
 										<div>
-											<b>Active / Paid:</b> The number of communities currently active out of the total number of
-											communities
-											you've paid for this billing cycle. You are only charged for active communities on your
-											next and future billing cycles.<br/>
-											<b>Price:</b> The price you are paying per active community, per month. You are not billed for
-											inactive communities.<br/>
+											This is a summary showing you how many communities you have active out of the total amount you've paid for this billing
+											cycle; as well as the quantity and price of the additional activations you're approving.
 										</div>
 									</Popup>
 								</div>
@@ -319,6 +315,9 @@ class StripeSubscription extends Component{
 																	className={"fas fa-question-circle tooltip-icon"}> </i>}
 											position={"left center"}>
 										<div>
+											This is a summary showing you the total dollar amount due today as well as the upcoming payments you can expect based
+											on your current number of active communities + the additional activations you're about to approve.
+											<br/>
 											<b>Upcoming Payments:</b><br/>(Total Active Communities) x (Monthly Price) = Upcoming Payment<br/>
 										</div>
 									</Popup>

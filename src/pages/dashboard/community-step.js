@@ -431,8 +431,9 @@ class CommunityStep extends Component{
 																trigger={<i style={{cursor: "pointer"}}
 																						className={"fas fa-question-circle tooltip-icon"}> </i>}
 																position={"left center"}>
-															<div>This is the information that will be used as initial search criteria and displayed on
-																your community thumbnail. You can update this information at any time.
+															<div>
+																This is the information that will be used as initial search criteria and displayed on your community thumbnail. You can
+																update this information at any time.
 															</div>
 														</Popup>
 													</div>
@@ -526,9 +527,9 @@ class CommunityStep extends Component{
 																				trigger={<i style={{cursor: "pointer"}}
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
-																			<div>This is where you can tell users about your community, where they can go to
-																				learn more or, or how they can get involved. You can edit and update this
-																				information at any time.
+																			<div>
+																				This is where you can tell users about your community, where they can go to learn more, how they can get involved,
+																				and/or anything else you'd like them to know about your community. You can edit and update this information at any time.
 																			</div>
 																		</Popup>
 																	</div>
@@ -548,10 +549,11 @@ class CommunityStep extends Component{
 																				trigger={<i style={{cursor: "pointer"}}
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
-																			<div>This is the primary point of contact for the community. Examples might
-																				include a leader, admin, office, support, etc. You can edit and update this
-																				information at any time and we always encourage connecting on social media or
-																				over coffee to make sure It's a good fit.
+																			<div>
+																				This is the primary point of contact for the community. Examples might include a leader, admin, office staff, support, etc.
+																				You can edit and update this information at any time. If you host your community in someone's home or office space, we
+																				strongly encourage connecting on social media or over coffee to make sure It's a good fit before sharing any additional
+																				personal information.
 																			</div>
 																		</Popup>
 																	</div>
@@ -592,9 +594,10 @@ class CommunityStep extends Component{
 																				trigger={<i style={{cursor: "pointer"}}
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
-																			<div>These are the links and resources you can provide users for them to learn
-																				more about your community and/or connect online. You can edit and update these
-																				at any time.
+																			<div>
+																				These are the links and resources you can provide users for them to learn more about your community and/or connect
+																				online. Any links that you do not wish to include will be hidden from your public profile. You can edit and update these at
+																				any time.
 																			</div>
 																		</Popup>
 																	</div>
@@ -637,8 +640,9 @@ class CommunityStep extends Component{
 																				trigger={<i style={{cursor: "pointer"}}
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
-																			<div>These are the filters that a user can apply to help them narrow down their
-																				search. You can edit and update these at any time.
+																			<div>
+																				These are the filters that a user can apply to help them narrow down their search and are optional. You are welcome to
+																				provide as much or as little information as you feel comfortable with. You can edit and update these at any time.
 																			</div>
 																		</Popup>
 																	</div>
