@@ -193,6 +193,10 @@
 	box-shadow: none;
 }
 
+.form-3:hover {
+	border-color: #2e89fe;
+}
+
 .select-field {
 	display: block;
 	margin-bottom: 0;
@@ -682,8 +686,8 @@ a.w--current {
 	margin-top: 0;
 	margin-left: 0;
 	padding-top: 0;
-	background-color: #8900fe;
-	color: #8900fe;
+	background-color: #2e89fe;
+	color: #2e89fe;
 	font-size: 20px;
 	line-height: 1.8;
 }

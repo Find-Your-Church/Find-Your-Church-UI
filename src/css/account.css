@@ -56,8 +56,9 @@
 }
 
 .div-20bottom {
-	border-top: 1px solid rgba(27, 0, 51, 0.05);
+	border-top: 1px solid rgba(27, 0, 51, 0.15);
 	padding-bottom: 20px;
+	background-color: #f3f2f5;
 }
 
 .div-20top._1080 {
@@ -86,6 +87,7 @@
 	width: auto;
 	margin-right: auto;
 	margin-left: auto;
+	margin-bottom: 20px;
 	padding: 10px;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
@@ -105,6 +107,10 @@
 	-ms-grid-rows: auto auto;
 	grid-template-rows: auto auto;
 	background-color: #e8e5ea;
+}
+
+.account-body .container-inline:last-child {
+	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
 }
 
 .account-body .sub-container {
@@ -230,7 +236,7 @@
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 20px;
-	color: #8900fe;
+	color: #2e89fe;
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -253,10 +259,10 @@
 .container-title {
 	display: inline-block;
 	margin-top: 3px;
-	margin-bottom: 0;
+	margin-bottom: 10px;
 	padding-top: 0;
 	padding-bottom: 0;
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 20px;
 	font-weight: 600;
 }
@@ -491,7 +497,7 @@
 }
 
 .email-verify-part .link {
-	color: #8900fe !important;
+	color: #2e89fe !important;
 }
 
 .account-body .admin-pic {
