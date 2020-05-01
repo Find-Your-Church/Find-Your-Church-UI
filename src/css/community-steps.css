@@ -38,8 +38,8 @@
 }
 
 .steps-body {
-	margin-top: 59px;
-	min-height: calc(100vh - 200px);
+	margin-top: 70px;
+	min-height: calc(100vh - 148px);
 	padding: 0;
 	background-color: #f4f2f5;
 }
@@ -301,7 +301,7 @@
 }
 
 .info-body .right-part {
-	height: calc(100vh - var(--footer-height) - 129px);
+	height: calc(100vh - var(--footer-height) - 140px);
 	overflow-y: scroll;
 }
 
@@ -317,7 +317,7 @@
 }
 
 .info-body .right-part.view {
-	height: calc(100vh - var(--footer-height) - 129px);
+	height: calc(100vh - var(--footer-height) - 142px);
 	overflow-y: scroll;
 }
 

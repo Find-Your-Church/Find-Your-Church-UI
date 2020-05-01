@@ -189,7 +189,7 @@ class InvitedViewCommunity extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part view w3-col l8" style={{height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 129px)"}}>
+											<div className="right-part view w3-col l8" style={{height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 142px)"}}>
 												<div className={"tab w3-row"}>
 													<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 															 onClick={this.selectTabDetails}>Details

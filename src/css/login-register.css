@@ -38,7 +38,7 @@
 }
 
 .sign-body {
-	--header-height: 60px;
+	--header-height: 70px;
 }
 
 @media screen and (max-width: 600px) {
@@ -80,6 +80,12 @@
 	background-size: auto;
 }
 
+.sign-body.register {
+	padding: 90px 0 20px;
+	min-height: calc(100vh - var(--footer-height));
+	max-height: none;
+}
+
 .sign-body form {
 	padding-top: 10px;
 }
@@ -89,7 +95,7 @@
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	height: calc(100vh - 105px);
+	min-height: calc(100vh - 105px);
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
@@ -115,7 +121,8 @@
 }
 
 .div-block-38.login {
-	max-width: 360px;
+	max-width: 372px;
+	min-width: auto;
 }
 
 .header1-div {
@@ -133,14 +140,14 @@
 }
 
 .sign-body .header1-div.gradient.shadow {
-	padding: 40px;
+	padding: 40px 20px;
 	background-image: linear-gradient(45deg, rgba(137, 0, 254, 0.6), rgba(46, 137, 254, 0.6) 50%, rgba(0, 232, 254, 0.6)), url("../img/Search-background.jpg");
 	background-position: 0 0, 100% 50%;
 	background-size: auto, cover;
 	background-repeat: repeat, no-repeat;
 	background-attachment: scroll, scroll;
 	box-shadow: none;
-	line-height: 14px;
+	line-height: 24px;
 	z-index: 1000;
 }
 
@@ -165,11 +172,12 @@
 	font-size: 24px;
 	font-weight: 700;
 	text-align: center;
+	line-height: 28px;
 }
 
 .sign-body .form-div1 {
 	margin-top: 0;
-	padding: 20px 0 0;
+	padding: 12px 0 0;
 	border-radius: 3px;
 	background-color: transparent;
 }

@@ -77,7 +77,7 @@ class Admin extends Component{
 									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
 										<div className="div-block-231"><Link to="/create-new-community"
 																												 className="button-create w-button"><i
-												className={"fas fa-users"}> </i>&nbsp;<span className="text-span-3">New Community</span></Link>
+												className={"fas fa-users"}> </i><span className="text-span-3">New Community</span></Link>
 										</div>
 									</div>
 									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">Dashboard
@@ -88,10 +88,13 @@ class Admin extends Component{
 											<Link to="/dashboard" className="link-6">
 												<em className="italic-text-7 current"><i className="fas fa-th"></i></em>
 											</Link></div>
+										{/*
 										<div className="div-block-215">
 											<Link to="/dashboard-results" className="link-6">
 												<em className="italic-text-7 gray"><i className="fas fa-user-circle"></i></em>
-											</Link></div>
+											</Link>
+										</div>
+										*/}
 										<div className="div-block-215">
 											<Link to="/dashboard-results" className="link-6">
 												<em className="italic-text-7 gray"><i className="fas fa-map-marked-alt"></i></em>

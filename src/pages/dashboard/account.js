@@ -462,7 +462,7 @@ class Account extends Component{
 								<div className="div-block-231">
 									<Link to="/dashboard"
 												className="button-create w-button">
-										<i className="fas fa-th"></i>&nbsp;<span className="text-span-3">Dashboard</span></Link>
+										<i className="fas fa-th"></i><span className="text-span-3">Dashboard</span></Link>
 								</div>
 							</div>
 							<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
@@ -489,18 +489,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row pic" style={{borderBottom: "none"}}>
 											<AccountProfileContainer/>
-											<h4 className="table-item">
-												<div className={"w3-text-red w3-small"}
-														 style={{display: this.state.showSizeError ? "block" : "none"}}>
-													Picture file size cannot be larger than 3 MB.
-												</div>
-											</h4>
-											<label className={"table-link"}>
-												<i className={"fas fa-pen"}> </i>
-												<FileBase id="btn-upload" type="file" className="upload-button w-button"
-																	multiple={false} onDone={this.changeUserPic.bind(this)}
-																	height="38"/>
-											</label>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Name</h4>
@@ -532,8 +520,27 @@ class Account extends Component{
 												)}
 											</Link>
 										</div>
+										<div className="table-row pic" style={{paddingBottom: "20px"}}>
+											<h4 className="table-header">Picture</h4>
+											<div className="profpic-div">
+												<img src={isEmpty(this.props.auth.user.pic) ?
+														"/img/default-user.png"
+														: this.props.auth.user.pic}
+														 alt="" className="image-4"/>
+												<div className={"w3-text-red w3-small"}
+														 style={{display: this.state.showSizeError ? "block" : "none"}}>
+													Picture file size cannot be larger than 3 MB.
+												</div>
+											</div>
+											<label className={"table-link"}>
+												<i className={"fas fa-pen"}> </i>
+												<FileBase id="btn-upload" type="file" className="upload-button w-button"
+																	multiple={false} onDone={this.changeUserPic.bind(this)}
+																	height="38"/>
+											</label>
+										</div>
 										<div className="table-row">
-											<h4 className="table-header">Email</h4>
+											<h4 className="table-header">Contact Email</h4>
 											<h4 className="table-item">
 												{this.state.editingAdminEmail ?
 														<div className="w3-row">
@@ -559,7 +566,7 @@ class Account extends Component{
 											</Link>
 										</div>
 										<div className="table-row">
-											<h4 className="table-header">Phone</h4>
+											<h4 className="table-header">Contact Phone</h4>
 											<h4 className="table-item">
 												{this.state.editingPhone ?
 														<div className="w3-row">
@@ -833,7 +840,7 @@ class Account extends Component{
 								<div className={"sub-container w3-col m12 l6 bottom"}>
 									<div className={"sub-content payment"}>
 										<div className="flexdiv-leftright underline">
-											<h5 className="container-header">Account Summary</h5>
+											<h5 className="container-header">Payment Summary</h5>
 											<Popup
 													trigger={<i style={{cursor: "pointer"}}
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
@@ -879,7 +886,7 @@ class Account extends Component{
 													<div>(Active Communities) x (Price per Communitiy) = Upcoming Payment</div>
 												</Popup>
 											</h4>
-											<h4 className={"table-item right"}>
+											<h4 className={"table-item"}>
 												<div className={"upcoming-payment-table-row"}>
 													<div><b>Date</b></div>
 													<div><b>Active</b></div>
