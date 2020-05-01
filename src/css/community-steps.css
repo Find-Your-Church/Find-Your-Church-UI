@@ -34,7 +34,7 @@
 .steps-body .form-input:focus,
 .steps-body .form-select.category:hover,
 .steps-body .form-select.category:focus {
-	border-bottom: 1px solid #8900fe !important;
+	border-bottom: 1px solid #2e89fe !important;
 }
 
 .steps-body {

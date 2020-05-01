@@ -386,7 +386,7 @@ a {
 
 #spinning-modal i.fas {
 	position: relative;
-	background-color: #8900fe;
+	background-color: #2e89fe;
 	background-image: linear-gradient(140deg, rgba(137, 0, 254, 1) 0%, rgba(46, 137, 254, 1) 50%, rgba(0, 232, 254, 1) 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
