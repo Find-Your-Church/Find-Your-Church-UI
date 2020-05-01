@@ -52,7 +52,7 @@ class SiteHeader extends Component{
 						{this.props.auth.isAuthenticated ? (<>
 									<Link to="#" onClick={this.toggleAdminMenu}
 												className={"header-3lines-menu w3-bar-item w3-right"}>
-										<i className="fas fa-angle-down"> </i>
+										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}} />
 									</Link>
 									<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>

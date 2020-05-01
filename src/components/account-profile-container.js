@@ -46,6 +46,7 @@ class AccountProfileContainer extends Component{
 							<h3 className="community-name">
 								{this.props.auth.user.fname} {this.props.auth.user.lname}
 							</h3>
+							{/*
 							<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
 								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
 							</Link>
@@ -56,6 +57,7 @@ class AccountProfileContainer extends Component{
 									Edit
 								</Link>
 							</nav>
+							*/}
 						</div>
 						<div className="personal-info">
 							{isEmpty(this.props.auth.user.admin_email) ? null :

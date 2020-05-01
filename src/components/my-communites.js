@@ -165,6 +165,7 @@ class MyCommunities extends Component{
 										<select
 												id="sel_category" name="sel_category" className="select-field w-select"
 												onChange={this.onChangeCategory}
+												style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
 										>
 											<option value="">All Communities</option>
 											{
@@ -199,6 +200,7 @@ class MyCommunities extends Component{
 									)
 								}
 							</div>
+							{/*
 							<div data-duration-in="300" data-duration-out="100" id="w-node-21585007d979-44cf2aa3" className="w-tabs">
 								<div className="tabs-menu-4 w-tab-menu" role="tablist">
 									<a data-w-tab="Tab 1"
@@ -215,6 +217,7 @@ class MyCommunities extends Component{
 										</div>
 									</a></div>
 							</div>
+							*/}
 						</div>
 
 						<div className="div-20top">

@@ -166,7 +166,7 @@ class LoginPopup extends Component{
 									<div className="div-block-46">
 										<h1 className="heading-11">
 											<Link to="/register-popup" className="link-5">
-												Don't have an account yet? <strong>Create one for free</strong>
+												<div style={{display: "inline-block"}}>Don't have an account yet?</div> <div style={{display: "inline-block", fontWeight: "600", color: "#2e89fe"}}>Create one for free</div>
 											</Link>
 										</h1>
 									</div>
