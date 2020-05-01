@@ -362,7 +362,7 @@ a {
 
 .search-address-candidates {
 	position: absolute;
-	left: 286px;
+	right: 0;
 	top: 50px;
 	width: 457px;
 	min-width: 457px;
