@@ -534,7 +534,7 @@ class Account extends Component{
 										</div>
 										<div className="table-row pic" style={{paddingBottom: "20px"}}>
 											<h4 className="table-header">Picture</h4>
-											<div className="profpic-div">
+											<div className="profpic-div-small" style={{marginLeft: "auto"}}>
 												<img src={isEmpty(this.props.auth.user.pic) ?
 														"/img/default-user.png"
 														: this.props.auth.user.pic}

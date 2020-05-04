@@ -311,6 +311,7 @@ body {
 	}
 
 	#content-body-iframe .filter-panel {
+		padding-bottom: 0;
 		top: 266px;
 		width: 100vw;
 		height: auto;

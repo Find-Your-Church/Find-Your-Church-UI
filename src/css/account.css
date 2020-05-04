@@ -443,6 +443,27 @@
 	width: 15px;
 }
 
+.account-body .profpic-div-small {
+	overflow: hidden;
+	width: auto;
+	max-width: 54px;
+	max-height: 54px;
+	min-width: 54px;
+	min-height: 54px;
+	padding-top: 0;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	background-position: 0 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	box-shadow: 0 1px 3px 0 #e8e5ea;
+}
+
+.account-body  .profpic-div-small .image-4 {
+	width: 50px;
+	height: 50px;
+}
+
 #w-node-cb8d7881b980-27fc25a8 {
 	-ms-grid-row-align: center;
 	align-self: center;

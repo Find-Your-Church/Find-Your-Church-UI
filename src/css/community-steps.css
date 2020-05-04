@@ -683,8 +683,9 @@
 	padding: 5px 10px;
 	font-size: 14px;
 	font-weight: 600;
-	color: #fff;
-	background-color: #8900fe;
+	color: #333;
+	background-color: #e7e5ea;
+	border-radius: 3px;
 }
 
 .steps-body .form-input:invalid {

@@ -753,3 +753,7 @@ input.w-button {
 .link-5 strong {
 	color: #2e89fe;
 }
+
+.sign-body .submit-row {
+	padding-top: 0;
+}

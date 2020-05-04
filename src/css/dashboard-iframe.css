@@ -64,5 +64,10 @@
 }
 
 #preview-frame {
-	height: calc(100vh - 325px);
+	min-height: calc(100vw * 9 / 16);
+}
+
+@media screen and (max-width: 979px){
+	#preview-frame {
+	}
 }

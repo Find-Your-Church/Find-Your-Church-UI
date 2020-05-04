@@ -28,7 +28,7 @@ class SelectedFilters extends Component{
 										<>
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<i className={"far fa-times-circle"}
-											   style={{cursor: "pointer", color: "#fff"}}
+											   style={{cursor: "pointer", color: "#333"}}
 											   onClick={() => this.clearFilterValue(key, i)}> </i>
 										</>
 									) : null}

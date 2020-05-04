@@ -141,21 +141,24 @@ class SearchBar extends Component{
 		) : (
 				<div className="search-form-container w-form">
 					<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
-						<select id="search_category" onChange={this.onChange}
-										defaultValue={this.props.community.criteria.category}
-										style={{
-											backgroundImage: "url('/img/icon-down3-purple.svg')",
-										}}
-										className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
-							<option value="">All Communities</option>
-							{
-								community_config.CATEGORIES.map(cat => {
-									return (
-											<option value={cat} key={"search-" + cat} title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-									);
-								})
-							}
-						</select>
+						{this.props.showedCategory ? (
+								<select id="search_category" onChange={this.onChange}
+												defaultValue={this.props.community.criteria.category}
+												style={{
+													backgroundImage: "url('/img/icon-down3-purple.svg')",
+												}}
+												className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+									<option value="">All Communities</option>
+									{
+										community_config.CATEGORIES.map(cat => {
+											return (
+													<option value={cat} key={"search-" + cat}
+																	title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+											);
+										})
+									}
+								</select>
+						) : null}
 						<select id="search_radius" onChange={this.onChange}
 										defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
 										style={{

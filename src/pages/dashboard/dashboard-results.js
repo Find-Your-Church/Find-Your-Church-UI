@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ReactDOM from 'react-dom';
 import '../../css/dashboard.css';
 import '../../css/dashboard-iframe.css';
 import ProfileContainer from "../../components/profile-container";
@@ -42,6 +43,8 @@ class DashboardResults extends Component{
 			}
 		};
 
+		this.refIframe = React.createRef();
+
 		this.state = {
 			errors: {},
 
@@ -56,6 +59,8 @@ class DashboardResults extends Component{
 			previewUrl: '',
 
 			showedCopyNotification: false,
+
+			iFrameHeight: 'calc(100vw * 9 / 16',
 		};
 
 		this.showSubDlg = this.showSubDlg.bind(this);
@@ -81,6 +86,8 @@ class DashboardResults extends Component{
 
 		this.previewCriteria.owner = this.props.auth.user.id;
 		this.applyUpdatedCriteria();
+
+		this.setState({iFrameHeight:  this.refIframe.current.contentWindow.document.body.scrollHeight + 'px'});
 	}
 
 	onChangePreviewCategory = e => {
@@ -216,8 +223,8 @@ class DashboardResults extends Component{
 																									className="copied-message">Code has been copied to
 										clipboard.</h4></div>
 								</div>
-								<iframe id="preview-frame" src={this.state.frameUrl}
-												style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}> </iframe>
+								<iframe id="preview-frame" src={this.state.frameUrl} ref={this.refIframe}
+												style={{width: "100%", height: this.state.iFrameHeight, outline: "none", border: "none", overflow: "hidden"}}> </iframe>
 							</div>
 						</main>
 					</div>

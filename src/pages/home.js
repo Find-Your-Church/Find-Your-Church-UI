@@ -23,7 +23,7 @@ class Home extends Component{
 						<div className="block-48 w3-display-container">
 							<div className="search-container w3-display-middle">
 								<h1 className="search-form-header">Find a community near you.</h1>
-								<SearchBar buttonTitle="Search"/>
+								<SearchBar buttonTitle="Search" showedCategory={true}/>
 							</div>
 						</div>
 						{/*

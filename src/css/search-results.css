@@ -311,6 +311,7 @@ body {
 	}
 
 	.filter-panel {
+		padding-bottom: 0;
 		top: 336px;
 		width: 100vw;
 		height: auto;

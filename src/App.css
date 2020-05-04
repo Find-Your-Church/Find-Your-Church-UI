@@ -93,6 +93,10 @@ a {
 	border-bottom: 1px solid #2e89fe;
 }
 
+.site-header .sign-in-link {
+	margin-right: 20px;
+}
+
 .site-header .w3-bar-item:hover {
 }
 
