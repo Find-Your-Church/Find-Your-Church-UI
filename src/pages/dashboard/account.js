@@ -544,7 +544,7 @@ class Account extends Component{
 													Picture file size cannot be larger than 3 MB.
 												</div>
 											</div>
-											<label className={"table-link"}>
+											<label className={"table-link"} style={{marginTop: "0", lineHeight: "48px"}}>
 												<i className={"fas fa-pen"}> </i>
 												<FileBase id="btn-upload" type="file" className="upload-button w-button"
 																	multiple={false} onDone={this.changeUserPic.bind(this)}

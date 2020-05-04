@@ -224,7 +224,7 @@ class DashboardResults extends Component{
 										clipboard.</h4></div>
 								</div>
 								<iframe id="preview-frame" src={this.state.frameUrl} ref={this.refIframe}
-												style={{width: "100%", height: this.state.iFrameHeight, outline: "none", border: "none", overflow: "hidden"}}> </iframe>
+												style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}> </iframe>
 							</div>
 						</main>
 					</div>
