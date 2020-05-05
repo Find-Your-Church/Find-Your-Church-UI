@@ -143,8 +143,8 @@ class DashboardResults extends Component{
 
 		this.setState({
 			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"></iframe>`,
-			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"></iframe>`,
+			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"></iframe>`,
+			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"></iframe>`,
 			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
 	};
