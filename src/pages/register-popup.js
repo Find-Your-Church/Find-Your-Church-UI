@@ -102,7 +102,9 @@ class RegisterPopup extends Component{
 	handleSelect = address => {
 		const self = this;
 
-		self.setState({my_address: address});
+		const matches = address.match(/(\d+)/);
+
+		self.setState({my_address: address, zip_code: matches[0]});
 
 		geocodeByAddress(address)
 				.then(results => getLatLng(results[0]))
@@ -199,7 +201,7 @@ class RegisterPopup extends Component{
 																		 required=""/>
 														</div>
 														<div className={"forminput-div"} style={{position: "relative"}}>
-															<label htmlFor={"zipcode"} className={"form-label"}>Zip code</label>
+															<label htmlFor={"zipcode"} className={"form-label"}>City or zip code</label>
 															<PlacesAutocomplete
 																	value={this.state.zip_code}
 																	onChange={this.onChangeAddress}
@@ -208,7 +210,7 @@ class RegisterPopup extends Component{
 																{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 																		<>
 																			<input className="form-input center  w-input-sign"
-																						 title={`Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.my_address}`}
+																						 title={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
 																						 {...getInputProps({
 																							 placeholder: "",
 																						 })}

@@ -14,7 +14,7 @@
 	background-attachment: fixed;
 }
 
-@media screen and (max-width: 991px){
+@media screen and (max-width: 991px) {
 	.home-main {
 		background-image: linear-gradient(282deg, #e6e6e6, #fff 20%, hsla(0, 0%, 52.9%, 0) 0, hsla(0, 0%, 78%, 0) 60%, #fff 0, #e6e6e6);
 	}
@@ -37,6 +37,7 @@
 	background-attachment: scroll, scroll;
 	border-radius: 3px;
 	box-shadow: -2px 2px 5px 0 rgba(27, 0, 51, 0.25);
+	animation: sliding_up ease 1s;
 }
 
 .search-form-header {
@@ -368,7 +369,7 @@ button:focus {
 	}
 }
 
-@media screen and (max-width: 479px){
+@media screen and (max-width: 479px) {
 	.search-container {
 		padding: 30px 10px 40px;
 	}

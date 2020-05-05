@@ -355,7 +355,9 @@ class Account extends Component{
 	handleSelect = address => {
 		const self = this;
 
-		self.setState({my_address: address});
+		const matches = address.match(/(\d+)/);
+
+		self.setState({my_address: address, user_zip_code: matches[0]});
 
 		geocodeByAddress(address)
 				.then(results => getLatLng(results[0]))

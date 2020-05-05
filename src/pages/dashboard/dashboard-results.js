@@ -135,8 +135,9 @@ class DashboardResults extends Component{
 	applyUpdatedCriteria = () => {
 		const lat = this.state.user_lat === null ? this.previewCriteria.lat : this.state.user_lat;
 		const lng = this.state.user_lng === null ? this.previewCriteria.lng : this.state.user_lng;
+		const radius_in_url = this.state.user_lat === null ? "null" : "30";
 		console.log(this.previewCriteria);
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/undefined/30/${lat}/${lng}/${this.filters2url()}`;
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/undefined/${radius_in_url}/${lat}/${lng}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
 
