@@ -18,6 +18,8 @@ import Popup from "reactjs-popup";
 import isEmpty from "../../utils/isEmpty";
 import app_config from "../../conf/config";
 import SiteHeader from "../../components/site-header";
+import Tooltip from "rmc-tooltip";
+import 'rmc-tooltip/assets/bootstrap.css';
 
 class CommunityStep extends Component{
 	constructor(props){
@@ -85,7 +87,10 @@ class CommunityStep extends Component{
 			average_attendance: p_obj === undefined ? 0 : p_obj.obj.average_attendance,
 			ambiance: p_obj === undefined ? "0".repeat(community_config.FILTERS.ambiance.length) : p_obj.obj.ambiance,
 			event_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.event_type.length) : p_obj.obj.event_type,
-			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type
+			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type,
+
+			showed_tooltip: false,
+			tooltip_content: community_config.TOOL_TIPS[""],
 		};
 
 		this.selectTabDetails = this.selectTabDetails.bind(this);
@@ -145,6 +150,16 @@ class CommunityStep extends Component{
 		}
 
 		if(e.target.id === 'category'){
+			this.setState({
+				tooltip_content: community_config.TOOL_TIPS[e.target.value],
+				showed_tooltip: true,
+			});
+
+			const self = this;
+			setTimeout(() => {
+				self.setState({showed_tooltip: true})
+			}, 500);
+
 			switch(e.target.value){
 				case 'Churches':
 					this.setState({
@@ -432,7 +447,8 @@ class CommunityStep extends Component{
 																						className={"fas fa-question-circle tooltip-icon"}> </i>}
 																position={"left center"}>
 															<div>
-																This is the information that will be used as initial search criteria and displayed on your community thumbnail. You can
+																This is the information that will be used as initial search criteria and displayed on
+																your community thumbnail. You can
 																update this information at any time.
 															</div>
 														</Popup>
@@ -446,25 +462,30 @@ class CommunityStep extends Component{
 																	 value={this.state.community_name}
 																	 style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
 																	 required=""/>
-														<select className="form-select category w-select"
-																		onChange={this.onChange}
-																		id="category"
-																		defaultValue={this.state.category}
-																		style={{
-																			backgroundImage: "url('/img/icon-down3-purple.svg')",
-																			backgroundSize: "10px",
-																			borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
-																		}}
-																		required="">
-															<option value="">Category...</option>
-															{
-																community_config.CATEGORIES.map(cat => {
-																	return (
-																			<option value={cat} key={cat} title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-																	);
-																})
-															}
-														</select>
+														<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 6],}}
+																		 visible={this.state.showed_tooltip}
+														>
+															<select className="form-select category w-select"
+																			onChange={this.onChange}
+																			id="category"
+																			defaultValue={this.state.category}
+																			style={{
+																				backgroundImage: "url('/img/icon-down3-purple.svg')",
+																				backgroundSize: "10px",
+																				borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
+																			}}
+																			required="">
+																<option value="">Category...</option>
+																{
+																	community_config.CATEGORIES.map(cat => {
+																		return (
+																				<option value={cat} key={cat}
+																								title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+																		);
+																	})
+																}
+															</select>
+														</Tooltip>
 														<PlacesAutocomplete
 																value={this.state.address}
 																class={"w3-input"}
@@ -528,8 +549,10 @@ class CommunityStep extends Component{
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
 																			<div>
-																				This is where you can tell users about your community, where they can go to learn more, how they can get involved,
-																				and/or anything else you'd like them to know about your community. You can edit and update this information at any time.
+																				This is where you can tell users about your community, where they can go to
+																				learn more, how they can get involved,
+																				and/or anything else you'd like them to know about your community. You can edit
+																				and update this information at any time.
 																			</div>
 																		</Popup>
 																	</div>
@@ -550,9 +573,12 @@ class CommunityStep extends Component{
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
 																			<div>
-																				This is the primary point of contact for the community. Examples might include a leader, admin, office staff, support, etc.
-																				You can edit and update this information at any time. If you host your community in someone's home or office space, we
-																				strongly encourage connecting on social media or over coffee to make sure It's a good fit before sharing any additional
+																				This is the primary point of contact for the community. Examples might include a
+																				leader, admin, office staff, support, etc.
+																				You can edit and update this information at any time. If you host your community
+																				in someone's home or office space, we
+																				strongly encourage connecting on social media or over coffee to make sure It's a
+																				good fit before sharing any additional
 																				personal information.
 																			</div>
 																		</Popup>
@@ -595,8 +621,10 @@ class CommunityStep extends Component{
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
 																			<div>
-																				These are the links and resources you can provide users for them to learn more about your community and/or connect
-																				online. Any links that you do not wish to include will be hidden from your public profile. You can edit and update these at
+																				These are the links and resources you can provide users for them to learn more
+																				about your community and/or connect
+																				online. Any links that you do not wish to include will be hidden from your
+																				public profile. You can edit and update these at
 																				any time.
 																			</div>
 																		</Popup>
@@ -641,8 +669,10 @@ class CommunityStep extends Component{
 																										className={"fas fa-question-circle tooltip-icon"}> </i>}
 																				position={"left center"}>
 																			<div>
-																				These are the filters that a user can apply to help them narrow down their search and are optional. You are welcome to
-																				provide as much or as little information as you feel comfortable with. You can edit and update these at any time.
+																				These are the filters that a user can apply to help them narrow down their
+																				search and are optional. You are welcome to
+																				provide as much or as little information as you feel comfortable with. You can
+																				edit and update these at any time.
 																			</div>
 																		</Popup>
 																	</div>

@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {doSearchCommunities, setSearchCriteria} from "../actions/community-actions";
 import community_config from "../conf/community-conf";
+import Tooltip from "rmc-tooltip";
+import 'rmc-tooltip/assets/bootstrap.css';
 
 class SearchBar extends Component{
 	constructor(props){
@@ -37,6 +39,9 @@ class SearchBar extends Component{
 			my_lng: this.props.community.criteria.lng,
 
 			ready2go: false,
+
+			showed_tooltip: false,
+			tooltip_content: community_config.TOOL_TIPS[""],
 		};
 
 		this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -59,6 +64,11 @@ class SearchBar extends Component{
 			});
 		}
 		if(e.target.id === 'search_category'){
+			this.setState({
+				tooltip_content: community_config.TOOL_TIPS[e.target.value],
+				showed_tooltip: true,
+			});
+
 			this.props.setSearchCriteria({
 				category: e.target.value,
 			});
@@ -142,22 +152,26 @@ class SearchBar extends Component{
 				<div className="search-form-container w-form">
 					<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
 						{this.props.showedCategory ? (
-								<select id="search_category" onChange={this.onChange}
-												defaultValue={this.props.community.criteria.category}
-												style={{
-													backgroundImage: "url('/img/icon-down3-purple.svg')",
-												}}
-												className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
-									<option value="">All Communities</option>
-									{
-										community_config.CATEGORIES.map(cat => {
-											return (
-													<option value={cat} key={"search-" + cat}
-																	title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-											);
-										})
-									}
-								</select>
+								<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 6],}}
+												 visible={this.state.tooltip_content === '' || this.state.tooltip_content === undefined ? false : this.state.showed_tooltip}
+								>
+									<select id="search_category" onChange={this.onChange}
+													defaultValue={this.props.community.criteria.category}
+													style={{
+														backgroundImage: "url('/img/icon-down3-purple.svg')",
+													}}
+													className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+										<option value="">All Communities</option>
+										{
+											community_config.CATEGORIES.map(cat => {
+												return (
+														<option value={cat} key={"search-" + cat}
+																		title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+												);
+											})
+										}
+									</select>
+								</Tooltip>
 						) : null}
 						<select id="search_radius" onChange={this.onChange}
 										defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
