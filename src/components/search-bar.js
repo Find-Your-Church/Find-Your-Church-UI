@@ -150,6 +150,15 @@ class SearchBar extends Component{
 	};
 
 	render(){
+		const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
+		let cats = [];
+		for(let i = 0; i < results.length; i++){
+			const cat = results[i].data.category;
+			if(cats.includes(cat))
+				continue;
+			cats.push(cat);
+		}
+
 		const searchable = !isNaN(this.state.my_lat) && !isNaN(this.state.my_lng);
 
 		return this.state.ready2go && !this.props.init ? (
@@ -168,10 +177,10 @@ class SearchBar extends Component{
 													<option value="">All Communities</option>
 													{
 														community_config.CATEGORIES.map(cat => {
-															return (
+															return cats.includes(cat) ? (
 																	<option value={cat} key={"search-" + cat}
 																					title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-															);
+															) : null;
 														})
 													}
 												</select>
@@ -189,10 +198,10 @@ class SearchBar extends Component{
 														<option value="">All Communities</option>
 														{
 															community_config.CATEGORIES.map(cat => {
-																return (
+																return cats.includes(cat) ? (
 																		<option value={cat} key={"search-" + cat}
 																						title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-																);
+																) : null;
 															})
 														}
 													</select>
