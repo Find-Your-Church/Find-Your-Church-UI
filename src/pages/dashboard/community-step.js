@@ -196,6 +196,12 @@ class CommunityStep extends Component{
 		this.forceUpdate();
 	};
 
+	onBlurCategory = () => {
+		this.setState({
+			showed_tooltip: false,
+		});
+	};
+
 	onChangeAddress = val => {
 		this.setState({address: val, passable: false});
 	};
@@ -467,6 +473,7 @@ class CommunityStep extends Component{
 														>
 															<select className="form-select category w-select"
 																			onChange={this.onChange}
+																			onBlur={this.onBlurCategory}
 																			id="category"
 																			defaultValue={this.state.category}
 																			style={{

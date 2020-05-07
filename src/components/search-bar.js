@@ -87,6 +87,12 @@ class SearchBar extends Component{
 			this.setState({[e.target.id]: e.target.value});
 	};
 
+	onBlurCategory = () => {
+		this.setState({
+			showed_tooltip: false,
+		});
+	};
+
 	onChangeAddress = val => {
 		this.setState({my_address: val, searchable: false});
 	};
@@ -155,7 +161,7 @@ class SearchBar extends Component{
 								<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 6],}}
 												 visible={this.state.tooltip_content === '' || this.state.tooltip_content === undefined ? false : this.state.showed_tooltip}
 								>
-									<select id="search_category" onChange={this.onChange}
+									<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
 													defaultValue={this.props.community.criteria.category}
 													style={{
 														backgroundImage: "url('/img/icon-down3-purple.svg')",
