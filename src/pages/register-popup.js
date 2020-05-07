@@ -12,12 +12,15 @@ import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import terms_conditions from "../terms-conditions";
+import Tooltip from "rmc-tooltip";
+import 'rmc-tooltip/assets/bootstrap.css';
 
 class RegisterPopup extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			showedModal: false,
+			showed_tooltip: false,
 
 			fname: "",
 			lname: "",
@@ -103,8 +106,9 @@ class RegisterPopup extends Component{
 		const self = this;
 
 		const matches = address.match(/(\d+)/);
+		const trimmed_address = address.replace(", USA", "");
 
-		self.setState({my_address: address, zip_code: matches[0]});
+		self.setState({my_address: address, zip_code: trimmed_address /*matches[0]*/});
 
 		geocodeByAddress(address)
 				.then(results => getLatLng(results[0]))
@@ -112,6 +116,14 @@ class RegisterPopup extends Component{
 					self.setState({my_lat: latLng.lat, my_lng: latLng.lng});
 				})
 				.catch(error => console.error('Error', error));
+	};
+
+	onFocusZipCode = () => {
+		this.setState({showed_tooltip: true});
+	};
+
+	onBlurZipCode = () => {
+		this.setState({showed_tooltip: false});
 	};
 
 	render(){
@@ -195,12 +207,14 @@ class RegisterPopup extends Component{
 																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
+																		 onFocus={this.onFocusZipCode}
+																		 onBlur={this.onBlurZipCode}
 																		 value={this.state.password2}
 																		 id="password2"
 																		 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
-														<div className={"forminput-div"} style={{position: "relative"}}>
+														<div className={"forminput-div span-2"} style={{position: "relative"}}>
 															<label htmlFor={"zipcode"} className={"form-label"}>City or zip code</label>
 															<PlacesAutocomplete
 																	value={this.state.zip_code}
@@ -209,13 +223,18 @@ class RegisterPopup extends Component{
 															>
 																{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 																		<>
-																			<input className="form-input center  w-input-sign"
-																						 title={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
-																						 {...getInputProps({
-																							 placeholder: "",
-																						 })}
-																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																						 required=""/>
+																			<Tooltip placement={"top"}
+																							 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
+																							 align={{offset: [0, 6],}}
+																							 visible={this.state.showed_tooltip}
+																			>
+																				<input className="form-input center  w-input-sign"
+																							 {...getInputProps({
+																								 placeholder: "",
+																							 })}
+																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																							 required=""/>
+																			</Tooltip>
 																			<div className={"search-address-candidates"} style={{left: "0", top: "72px"}}>
 																				{loading ?
 																						<div
