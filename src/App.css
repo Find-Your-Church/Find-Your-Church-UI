@@ -22,23 +22,23 @@ a {
 
 @keyframes sliding_up {
 	from {
-		top: 65%;
-		opacity: 0.2;
+		left: calc(50% - 25px);
+		top: calc(50% + 50px);
 	}
 
 	to {
+		left: 50%;
 		top: 50%;
-		opacity: 1;
 	}
 }
 
 @keyframes zoom_in {
 	from {
-		transform: scale(0.75);
+		padding-top: 50px;
 	}
 
 	to {
-		transform: scale(1);
+		padding-top: 0;
 	}
 }
 

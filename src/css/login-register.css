@@ -122,7 +122,7 @@
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
 	align-self: center;
-	animation: zoom_in ease 1s;
+	animation: zoom_in ease 0.7s;
 }
 
 .div-block-38.login {
