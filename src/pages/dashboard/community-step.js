@@ -468,7 +468,7 @@ class CommunityStep extends Component{
 																	 value={this.state.community_name}
 																	 style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
 																	 required=""/>
-														<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 6],}}
+														<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
 																		 visible={this.state.showed_tooltip}
 														>
 															<select className="form-select category w-select"

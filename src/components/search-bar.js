@@ -42,9 +42,26 @@ class SearchBar extends Component{
 
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
+
+			cats: [],
 		};
 
 		this.onChangeAddress = this.onChangeAddress.bind(this);
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.community.search_results !== this.props.community.search_results){
+			const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
+			let cats = [];
+			for(let i = 0; i < results.length; i++){
+				const cat = results[i].data.category;
+				if(cats.includes(cat))
+					continue;
+				cats.push(cat);
+			}
+
+			this.setState({cats: cats});
+		}
 	}
 
 	onChange = e => {
@@ -150,15 +167,6 @@ class SearchBar extends Component{
 	};
 
 	render(){
-		const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
-		let cats = [];
-		for(let i = 0; i < results.length; i++){
-			const cat = results[i].data.category;
-			if(cats.includes(cat))
-				continue;
-			cats.push(cat);
-		}
-
 		const searchable = !isNaN(this.state.my_lat) && !isNaN(this.state.my_lng);
 
 		return this.state.ready2go && !this.props.init ? (
@@ -177,16 +185,15 @@ class SearchBar extends Component{
 													<option value="">All Communities</option>
 													{
 														community_config.CATEGORIES.map(cat => {
-															return this.props.buttonTitle !== "Update" || cats.includes(cat) ? (
-																	<option value={cat} key={"search-" + cat}
-																					title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+															return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+																	<option value={cat} key={"search-" + cat}>{cat}</option>
 															) : null;
 														})
 													}
 												</select>
 										)
 										: (
-												<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 6],}}
+												<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
 																 visible={this.state.tooltip_content === '' || this.state.tooltip_content === undefined ? false : this.state.showed_tooltip}
 												>
 													<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
@@ -198,9 +205,8 @@ class SearchBar extends Component{
 														<option value="">All Communities</option>
 														{
 															community_config.CATEGORIES.map(cat => {
-																return this.props.buttonTitle !== "Update" || cats.includes(cat) ? (
-																		<option value={cat} key={"search-" + cat}
-																						title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+																return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+																		<option value={cat} key={"search-" + cat}>{cat}</option>
 																) : null;
 															})
 														}
