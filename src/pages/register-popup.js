@@ -119,7 +119,7 @@ class RegisterPopup extends Component{
 	};
 
 	onFocusZipCode = () => {
-		this.setState({showed_tooltip: true});
+		// this.setState({showed_tooltip: true});
 	};
 
 	onBlurZipCode = () => {
@@ -207,8 +207,6 @@ class RegisterPopup extends Component{
 																		 className="form-input center  w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
-																		 onFocus={this.onFocusZipCode}
-																		 onBlur={this.onBlurZipCode}
 																		 value={this.state.password2}
 																		 id="password2"
 																		 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
@@ -225,13 +223,15 @@ class RegisterPopup extends Component{
 																		<>
 																			<Tooltip placement={"top"}
 																							 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
-																							 align={{offset: [0, 6],}}
+																							 align={{offset: [0, 2],}}
 																							 visible={this.state.showed_tooltip}
 																			>
 																				<input className="form-input center  w-input-sign"
 																							 {...getInputProps({
 																								 placeholder: "",
 																							 })}
+																							 onFocus={this.onFocusZipCode}
+																							 onBlur={this.onBlurZipCode}
 																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																							 required=""/>
 																			</Tooltip>

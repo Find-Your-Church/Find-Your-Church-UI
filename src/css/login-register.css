@@ -490,7 +490,7 @@ input.w-button {
 .sign-body .w-form-fail {
 	display: none;
 	margin-top: 10px;
-	padding: 10px;
+	padding: 20px;
 	background-color: #ffdede;
 	font-size: 14px;
 	color: brown;
@@ -756,5 +756,5 @@ input.w-button {
 }
 
 .sign-body .submit-row {
-	padding-top: 15px;
+	padding-top: 10px;
 }

@@ -24,6 +24,7 @@ import config from "../../conf/config";
 import community_config from "../../conf/community-conf";
 import AccountProfileContainer from "../../components/account-profile-container";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import Tooltip from "rmc-tooltip/es";
 
 const cardStyle = {
 	base: {
@@ -115,6 +116,7 @@ class Account extends Component{
 			previewUrl: '',
 
 			showedCopyNotification: false,
+			showed_tooltip: false,
 		};
 
 		this.changeUserName = this.changeUserName.bind(this);
@@ -327,6 +329,14 @@ class Account extends Component{
 		this.setState({editingPhone: !this.state.editingPhone});
 	}
 
+	onFocusZipCode = () => {
+		// this.setState({showed_tooltip: true});
+	};
+
+	onBlurZipCode = () => {
+		this.setState({showed_tooltip: false});
+	};
+
 	changeZipCode = () => {
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingZipCode){
@@ -496,8 +506,10 @@ class Account extends Component{
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left top"}>
 												<div>
-													By default, you are the admin for any community that you create and are required to provide at least one form of
-													communication. If you are not the primary point of contact for the community, you can assign a 'Community Contact' when
+													By default, you are the admin for any community that you create and are required to provide at
+													least one form of
+													communication. If you are not the primary point of contact for the community, you can assign a
+													'Community Contact' when
 													creating a new community.
 												</div>
 											</Popup>
@@ -614,7 +626,7 @@ class Account extends Component{
 											</Link>
 										</div>
 										<div className="table-row">
-											<h4 className="table-header">Zip code</h4>
+											<h4 className="table-header">City or zip code</h4>
 											<h4 className="table-item">
 												{this.state.editingZipCode ?
 														<div className="w3-row" style={{position: "relative"}}>
@@ -625,13 +637,21 @@ class Account extends Component{
 															>
 																{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 																		<>
-																			<input className="w3-col"
-																						 title={`Lat: ${this.state.user_location.lat}, Lng: ${this.state.user_location.lng}, ${this.state.my_address}`}
-																						 {...getInputProps({
-																							 placeholder: "Zip code",
-																						 })}
-																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																						 required="" autoFocus/>
+																			<Tooltip placement={"top"}
+																							 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
+																							 align={{offset: [0, 2],}}
+																							 visible={this.state.showed_tooltip}
+																			>
+																				<input className="w3-col"
+																							 title={`Lat: ${this.state.user_location.lat}, Lng: ${this.state.user_location.lng}, ${this.state.my_address}`}
+																							 {...getInputProps({
+																								 placeholder: "Zip code",
+																							 })}
+																							 onFocus={this.onFocusZipCode}
+																							 onBlur={this.onBlurZipCode}
+																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																							 required="" autoFocus/>
+																			</Tooltip>
 																			<div className={"search-address-candidates"}
 																					 style={{top: "24px", left: "0", textAlign: "left"}}
 																			>
@@ -691,7 +711,8 @@ class Account extends Component{
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left top"}>
 												<div>
-													This information is private and only viewable by you. Use this section to update your login credentials at any time.
+													This information is private and only viewable by you. Use this section to update your login
+													credentials at any time.
 												</div>
 											</Popup>
 										</div>
@@ -897,8 +918,10 @@ class Account extends Component{
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
 													position={"left center"}>
 												<div>
-													This is a snapshot showing you how many communities you have active out of the total amount you've paid for this billing
-													cycle; as well as the upcoming payments you can expect based on your current number of active communities.
+													This is a snapshot showing you how many communities you have active out of the total amount
+													you've paid for this billing
+													cycle; as well as the upcoming payments you can expect based on your current number of active
+													communities.
 												</div>
 											</Popup>
 										</div>
