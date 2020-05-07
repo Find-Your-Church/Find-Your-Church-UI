@@ -356,8 +356,9 @@ class Account extends Component{
 		const self = this;
 
 		const matches = address.match(/(\d+)/);
+		const trimmed_address = address.replace(", USA", "");
 
-		self.setState({my_address: address, user_zip_code: matches[0]});
+		self.setState({my_address: address, user_zip_code: trimmed_address /*matches[0]*/});
 
 		geocodeByAddress(address)
 				.then(results => getLatLng(results[0]))
@@ -632,7 +633,7 @@ class Account extends Component{
 																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																						 required="" autoFocus/>
 																			<div className={"search-address-candidates"}
-																					 style={{top: "24px", left: "0"}}
+																					 style={{top: "24px", left: "0", textAlign: "left"}}
 																			>
 																				{loading ?
 																						<div
@@ -642,6 +643,7 @@ class Account extends Component{
 																						color: suggestion.active ? "#ffffff" : "#254184",
 																						backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
 																						backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																						textAlign: "left",
 																					};
 
 																					return (

@@ -187,7 +187,7 @@
 .admin-right {
 	margin: 0;
 	padding: 0;
-	height: calc(100vh - var(--footer-height) - 154px);
+	height: auto; /* calc(100vh - var(--footer-height) - 154px); */
 	overflow-y: auto;
 	background-color: #f3f2f4;
 }
