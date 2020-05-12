@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import SearchFilterCheck from "../components/search-filter-check";
 import SearchFilterRadio from "../components/search-filter-radio";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {
 	clearPicking,
 	doSearchCommunities, setBackUrl,
@@ -327,7 +327,7 @@ class SearchResults extends Component{
 						</div>
 						<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
 							<div id="search-results-header" className="w3-col s12">
-								<SearchBar buttonTitle="Update" init={true}/>
+								<SearchBar buttonTitle="Update" init={true} showedCategory={true}/>
 								<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
 									{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 								</Link>
@@ -335,7 +335,8 @@ class SearchResults extends Component{
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
-											backgroundImage: "url('/img/icon-down3-purple.svg')",
+											backgroundImage: "url('/img/icon-down3-blue.svg')",
+											backgroundSize: "10px",
 										}}
 						>
 							<option value={sorters.SORT_NEWEST}>Newest</option>
@@ -361,12 +362,14 @@ class SearchResults extends Component{
 								</div>
 								<div className={"filter-header-div"}>
 									<label className={"filter-label w3-large"}>Filters</label>
+									{/*
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
 																	className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
 											position={"left top"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>
+									*/}
 								</div>
 								<div className={"filter-group-container"}>
 									<SearchFilterCheck filterTitle="Day(s)" filterName="days"

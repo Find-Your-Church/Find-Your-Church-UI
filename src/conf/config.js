@@ -1,6 +1,7 @@
 
 const app_config = {
 //	FYC_API_URL: process.env.FYC_API_URL,
+//	FYC_API_URL: "https://api-dev.findyourchurch.org",
 	FYC_API_URL: "https://api-uat.findyourchurch.org",
 //	FYC_API_URL: "http://192.168.1.5:5000",
 

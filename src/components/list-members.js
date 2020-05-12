@@ -43,11 +43,10 @@ class ListMembers extends Component{
 											trigger={<i style={{cursor: "pointer"}}
 														className={"fas fa-question-circle tooltip-icon"}> </i>}
 											position={"left top"}>
-											<div>Community admins are the primary point of contact for the communities
-												they manage. You can edit the information displayed on your Admin
-												Profile from your "Account" page at any time. Admins must provide at
-												least one form of contact and have the ability to add or remove
-												community members.
+											<div>
+												Community admins are the users who own and manage the community a user is viewing. You can edit the information
+												displayed on your Admin Profile from your "Account" page at any time. Admins must provide at least one form of contact
+												and have the ability to add or remove community members.
 											</div>
 										</Popup>
 									}
@@ -75,7 +74,7 @@ class ListMembers extends Component{
 																	to="#" className="communityname">
 																	{user.fname} {user.lname}
 																</Link>
-																{this.props.editable ? (
+																{this.props.editable && false ? (
 																	<>
 																		<div className="listingnav-button w-nav-button">
 																			<Link to="#" className={"w3-right"}

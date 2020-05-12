@@ -178,6 +178,7 @@ class PublicViewCommunity extends Component{
 												<div className="basic-info view">
 													<div className="listingrow view" style={{position: "relative"}}>
 														<strong>{this.state.community_name}</strong>
+														{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
 															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
@@ -202,6 +203,7 @@ class PublicViewCommunity extends Component{
 																Flag / Report
 															</Link>
 														</nav>
+														*/}
 													</div>
 													<div className="listingrow view">
 														{this.state.category}
@@ -218,7 +220,7 @@ class PublicViewCommunity extends Component{
 														 onClick={this.selectTabDetails}>Details
 												</div>
 												<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-														 onClick={this.selectTabMembers}>Admin / Members
+														 onClick={this.selectTabMembers}>Admin
 												</div>
 											</div>
 											{this.state.showedMembers ?

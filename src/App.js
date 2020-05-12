@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import {Provider} from "react-redux";
 import 'w3-css/w3.css';
 import './App.css';
-import SiteHeader from "./components/site-header";
 import Home from "./pages/home";
 import SearchResults from "./pages/search-results";
 import LoginPopup from "./pages/login-popup";
@@ -32,6 +31,7 @@ import PublicViewCommunity from "./pages/public-view-community";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
+import DashboardResults from "./pages/dashboard/dashboard-results";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -103,6 +103,7 @@ class App extends Component{
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
 							<PrivateRoute exact path="/dashboard" component={Admin}/>
+							<PrivateRoute exact path="/dashboard-results" component={DashboardResults}/>
 							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/account" component={AccountWrapper}/>
 							<Route exact path="/make-suggestion" component={MakeSuggestionPage}/>

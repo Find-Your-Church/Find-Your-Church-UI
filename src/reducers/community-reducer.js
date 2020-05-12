@@ -23,7 +23,14 @@ import {
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA, SEARCHING, SET_BACK_URL
+	VIEW_COMMUNITY,
+	GET_PLAN,
+	CLEAR_FILTER_MASK,
+	CLEAR_CRITERIA,
+	SEARCHING,
+	SET_BACK_URL,
+	ACTIVATE_MULTI_COMMUNITY,
+	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY
 } from "../actions/action-types";
 import community_config from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -38,6 +45,7 @@ const initialState = {
 
 	// for stripe
 	community_activated: null,
+	communities_activated: [],
 	is_setting_card: false,
 	is_showing: false,
 	is_sending: false,
@@ -64,7 +72,7 @@ const initialState = {
 	criteria: {
 		owner: null,
 		category: '',
-		radius: 5, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
+		radius: 10, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
 		address: "",
 		lat: 44.989999,
 		lng: -93.256088,
@@ -135,6 +143,25 @@ export default function(state = initialState, action){
 			}
 			else
 				return state;
+		case ACTIVATE_MULTI_COMMUNITY:
+			const inactives_ = state.my_communities.inactive.filter(item => !action.payload.includes(item._id));
+			let picked_ = state.my_communities.inactive.filter(item => action.payload.includes(item._id));
+			if(picked_.length > 0){
+				for(let i = 0; i < picked_.length; i++){
+					picked_[i].activated = true;
+				}
+				const actives_ = [...state.my_communities.active, ...picked_];
+
+				return {
+					...state,
+					my_communities: {
+						active: actives_,
+						inactive: inactives_,
+					}
+				};
+			}
+			else
+				return state;
 		case DEACTIVATE_COMMUNITY:
 			const actives_1 = state.my_communities.active.filter(item => action.payload !== item._id);
 			let picked_1 = state.my_communities.active.filter(item => action.payload === item._id);
@@ -152,6 +179,25 @@ export default function(state = initialState, action){
 			}
 			else
 				return state;
+		case DEACTIVATE_MULTI_COMMUNITY:
+			const actives_1_ = state.my_communities.active.filter(item => !action.payload.includes(item._id));
+			let picked_1_ = state.my_communities.active.filter(item => action.payload.includes(item._id));
+			if(picked_1_.length > 0){
+				for(let i = 0; i < picked_1_.length; i++){
+					picked_1_[i].activated = false;
+				}
+				const inactives_1_ = [...state.my_communities.inactive, ...picked_1_];
+
+				return {
+					...state,
+					my_communities: {
+						active: actives_1_,
+						inactive: inactives_1_,
+					}
+				};
+			}
+			else
+				return state;
 		case DELETE_COMMUNITY:
 			const new_actives = state.my_communities.active.filter(item => action.payload !== item._id);
 			const new_inactives = state.my_communities.inactive.filter(item => action.payload !== item._id);
@@ -163,10 +209,26 @@ export default function(state = initialState, action){
 					inactive: new_inactives,
 				}
 			};
+		case DELETE_MULTI_COMMUNITY:
+			const new_actives_ = state.my_communities.active.filter(item => !action.payload.includes(item._id));
+			const new_inactives_ = state.my_communities.inactive.filter(item => !action.payload.includes(item._id));
+
+			return {
+				...state,
+				my_communities: {
+					active: new_actives_,
+					inactive: new_inactives_,
+				}
+			};
 		case PICK_COMMUNITY:
 			return {
 				...state,
 				community_activated: action.payload,
+			};
+		case PICK_MULTI_COMMUNITY:
+			return {
+				...state,
+				communities_activated: action.payload,
 			};
 		case SET_BILLING_INFO:
 			return {

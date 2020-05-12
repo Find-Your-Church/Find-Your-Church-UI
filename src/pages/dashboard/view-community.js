@@ -3,7 +3,7 @@ import {Slide} from 'react-slideshow-image';
 import "../../css/community-steps.css";
 import FilterItemCheck from "../../components/filter-item-check";
 import FilterItemRadio from "../../components/filter-item-radio";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import community_config from "../../conf/community-conf";
 import ListMembers from "../../components/list-members";
 import SiteHeader from "../../components/site-header";
@@ -30,6 +30,9 @@ class ViewCommunity extends Component{
 		const p_obj = this.props.location.state;
 		this.state = {
 			errors: {},
+			community_obj: p_obj,
+			is_editing: false,
+
 			is_show_menu: false,
 			showedMembers: false,
 
@@ -124,6 +127,10 @@ class ViewCommunity extends Component{
 		this.setState({collapsedMorePart: !this.state.collapsedMorePart});
 	};
 
+	onEditCommunity = () => {
+		this.setState({is_editing: true});
+	};
+
 	render(){
 		// console.log(this.state.picture);
 		let aboutShort = this.state.about.substr(0, this.aboutLimit);
@@ -133,24 +140,32 @@ class ViewCommunity extends Component{
 			isMore = true;
 		}
 
-		return (
+		return this.state.is_editing ? (
+				<Redirect to={{pathname: '/edit', state: {obj: this.state.community_obj.obj}}}/>
+		) : (
 				<>
 					<SiteHeader/>
 					<div>
 						<main className="steps-body">
+							<h3 className="header3 w3-bar">
+								<div className="create-menu w3-bar-item w3-left">
+									<Link to="/dashboard" className="w3-button cancel">Back</Link>
+								</div>
+								<div className="create-menu w3-bar-item w3-center">
+									{this.state.community_name}
+								</div>
+								<div className="create-menu w3-bar-item w3-right">
+									<Link to="#" className="w3-button w3-right edit"
+												onClick={this.onEditCommunity}>
+										Edit
+									</Link>
+								</div>
+							</h3>
 							<div className={"view-wrapper"}>
 								<div className="container-inline">
 									<div className="info-body w3-row">
-										<h3 className="header3 w3-bar w3-margin-bottom">
-											<div className="create-menu w3-bar-item w3-left">
-												<Link to="/dashboard" className="w3-button cancel">Back</Link>
-											</div>
-											<div className="create-menu w3-bar-item w3-center">
-												{this.state.community_name}
-											</div>
-										</h3>
-										<div className="left-part w3-col l6">
-											<div>
+										<div className="left-part w3-col l4">
+											<div style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
 												{this.state.pictures.length > 1 ? (
 																<div className="slide-container">
 																	<Slide {...this.slide_options}>
@@ -182,6 +197,7 @@ class ViewCommunity extends Component{
 												<div className="basic-info view">
 													<div className="listingrow view" style={{position: "relative"}}>
 														<strong>{this.state.community_name}</strong>
+														{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
 															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
@@ -206,6 +222,7 @@ class ViewCommunity extends Component{
 																Flag / Report
 															</Link>
 														</nav>
+														*/}
 													</div>
 													<div className="listingrow view">
 														{this.state.category}
@@ -216,13 +233,13 @@ class ViewCommunity extends Component{
 												</div>
 											</div>
 										</div>
-										<div className="right-part view w3-col l6">
+										<div className="right-part view w3-col l8">
 											<div className={"tab w3-row"}>
 												<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 														 onClick={this.selectTabDetails}>Details
 												</div>
 												<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-														 onClick={this.selectTabMembers}>Admin / Members
+														 onClick={this.selectTabMembers}>Admin
 												</div>
 											</div>
 											{this.state.showedMembers ?
@@ -230,7 +247,7 @@ class ViewCommunity extends Component{
 															<ListMembers editable={false}/>
 													)
 													: (
-															<>
+															<div className={"w3-animate-opacity"}>
 																<div className={"view-paragraph"}>
 																	<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 																		<h4 className="form-header">About</h4>
@@ -392,7 +409,7 @@ class ViewCommunity extends Component{
 																										 items={community_config.FILTERS.support_type}/>
 																	</div>
 																</div>
-															</>
+															</div>
 													)}
 										</div>
 									</div>

@@ -110,20 +110,20 @@ class InvitedViewCommunity extends Component{
 						{in_frame ? null : (
 								<SiteHeader/>
 						)}
-							<main className="steps-body" style={{marginTop: in_frame ? "0" : "59px"}}>
+							<main className="steps-body" style={{marginTop: in_frame ? "0" : "70px"}}>
+								<h3 className="header3 w3-bar">
+									<div className="create-menu w3-bar-item w3-left">
+										<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
+									</div>
+									<div className="create-menu w3-bar-item w3-center">
+										{this.props.community.view_community.community_name}
+									</div>
+								</h3>
 								<div className={"view-wrapper"} style={{minHeight: in_frame ? "100vh" : "calc(100vh - 200px)"}}>
 									<div className="container-inline">
 										<div className="info-body w3-row">
-											<h3 className="header3 w3-bar w3-margin-bottom">
-												<div className="create-menu w3-bar-item w3-left">
-													<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
-												</div>
-												<div className="create-menu w3-bar-item w3-center">
-													{this.props.community.view_community.community_name}
-												</div>
-											</h3>
-											<div className="left-part w3-col l6">
-												<div>
+											<div className="left-part w3-col l4">
+												<div style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
 													{this.props.community.view_community.pictures.length > 1 ? (
 																	<div className="slide-container">
 																		<Slide {...this.slide_options}>
@@ -155,6 +155,7 @@ class InvitedViewCommunity extends Component{
 													<div className="basic-info view">
 														<div className="listingrow view" style={{position: "relative"}}>
 															<strong>{this.props.community.view_community.community_name}</strong>
+															{/*
 															<Link to="#" className={"menu-icon-3dot w3-right"}
 																		onClick={this.toggleMenu}>
 																<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
@@ -179,6 +180,7 @@ class InvitedViewCommunity extends Component{
 																	Flag / Report
 																</Link>
 															</nav>
+															*/}
 														</div>
 														<div className="listingrow view">
 															{this.props.community.view_community.category}
@@ -189,13 +191,13 @@ class InvitedViewCommunity extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part view w3-col l6" style={{height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 129px)"}}>
+											<div className="right-part view w3-col l8" style={{height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 142px)"}}>
 												<div className={"tab w3-row"}>
 													<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 															 onClick={this.selectTabDetails}>Details
 													</div>
 													<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-															 onClick={this.selectTabMembers}>Admin / Members
+															 onClick={this.selectTabMembers}>Admin
 													</div>
 												</div>
 												{this.state.showedMembers ?

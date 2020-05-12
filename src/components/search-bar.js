@@ -8,6 +8,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {doSearchCommunities, setSearchCriteria} from "../actions/community-actions";
 import community_config from "../conf/community-conf";
+import Tooltip from "rmc-tooltip";
+import 'rmc-tooltip/assets/bootstrap.css';
 
 class SearchBar extends Component{
 	constructor(props){
@@ -37,9 +39,29 @@ class SearchBar extends Component{
 			my_lng: this.props.community.criteria.lng,
 
 			ready2go: false,
+
+			showed_tooltip: false,
+			tooltip_content: community_config.TOOL_TIPS[""],
+
+			cats: [],
 		};
 
 		this.onChangeAddress = this.onChangeAddress.bind(this);
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.community.search_results !== this.props.community.search_results){
+			const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
+			let cats = [];
+			for(let i = 0; i < results.length; i++){
+				const cat = results[i].data.category;
+				if(cats.includes(cat))
+					continue;
+				cats.push(cat);
+			}
+
+			this.setState({cats: cats});
+		}
 	}
 
 	onChange = e => {
@@ -59,6 +81,11 @@ class SearchBar extends Component{
 			});
 		}
 		if(e.target.id === 'search_category'){
+			this.setState({
+				tooltip_content: community_config.TOOL_TIPS[e.target.value],
+				showed_tooltip: true,
+			});
+
 			this.props.setSearchCriteria({
 				category: e.target.value,
 			});
@@ -75,6 +102,12 @@ class SearchBar extends Component{
 		}
 		else
 			this.setState({[e.target.id]: e.target.value});
+	};
+
+	onBlurCategory = () => {
+		this.setState({
+			showed_tooltip: false,
+		});
 	};
 
 	onChangeAddress = val => {
@@ -141,39 +174,62 @@ class SearchBar extends Component{
 		) : (
 				<div className="search-form-container w-form">
 					<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
-						<div className={"criteria-group w3-row"}>
-							<select id="search_category" onChange={this.onChange}
-											defaultValue={this.props.community.criteria.category}
-											style={{
-												backgroundImage: "url('/img/icon-down3-purple.svg')",
-											}}
-											className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select w3-col s6">
-								<option value="">Category...</option>
-								{
-									community_config.CATEGORIES.map(cat => {
-										return (
-												<option value={cat} key={"search-" + cat}>{cat}</option>
-										);
-									})
-								}
-							</select>
-							<select id="search_radius" onChange={this.onChange}
-											defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
-											style={{
-												backgroundImage: "url('/img/icon-down3-purple.svg')",
-											}}
-											className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select w3-col s6">
-								<option value="">Radius...</option>
-								{
-									community_config.SEARCH_RADIUS.map(r => {
-										const pl = r > 1 ? "s" : "";
-										return (
-												<option value={r} key={"search-" + r}>within {r} mile{pl} of</option>
-										);
-									})
-								}
-							</select>
-						</div>
+						{this.props.showedCategory ? (
+								this.props.buttonTitle === "Update" ? (
+												<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
+																defaultValue={this.props.community.criteria.category}
+																style={{
+																	backgroundImage: "url('/img/icon-down3-purple.svg')",
+																}}
+																className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+													<option value="">All Communities</option>
+													{
+														community_config.CATEGORIES.map(cat => {
+															return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+																	<option value={cat} key={"search-" + cat}>{cat}</option>
+															) : null;
+														})
+													}
+												</select>
+										)
+										: (
+												<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
+																 visible={this.state.tooltip_content === '' || this.state.tooltip_content === undefined ? false : this.state.showed_tooltip}
+												>
+													<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
+																	defaultValue={this.props.community.criteria.category}
+																	style={{
+																		backgroundImage: "url('/img/icon-down3-purple.svg')",
+																	}}
+																	className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+														<option value="">All Communities</option>
+														{
+															community_config.CATEGORIES.map(cat => {
+																return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+																		<option value={cat} key={"search-" + cat}>{cat}</option>
+																) : null;
+															})
+														}
+													</select>
+												</Tooltip>
+										)
+						) : null}
+						<select id="search_radius" onChange={this.onChange}
+										defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
+										style={{
+											backgroundImage: "url('/img/icon-down3-purple.svg')",
+										}}
+										className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select">
+							<option value="">Radius...</option>
+							{
+								community_config.SEARCH_RADIUS.map(r => {
+									const pl = r > 1 ? "s" : "";
+									return (
+											<option value={r} key={"search-" + r}>within {r} mile{pl} of</option>
+									);
+								})
+							}
+						</select>
 						<PlacesAutocomplete
 								style={{position: "relative"}}
 								value={this.state.my_address}
@@ -211,13 +267,15 @@ class SearchBar extends Component{
 									</>
 							)}
 						</PlacesAutocomplete>
-						<Link to={"#"}
-									onClick={searchable ? this.handleSearch : null}
-									className={"search-form-button w-button"}
-									style={{cursor: (searchable ? "pointer" : "not-allowed")}}
-						>
-							{this.props.buttonTitle}
-						</Link>
+						{this.props.buttonTitle === "Update" ? null : (
+								<Link to={"#"}
+											onClick={searchable ? this.handleSearch : null}
+											className={"search-form-button w-button"}
+											style={{cursor: (searchable ? "pointer" : "not-allowed")}}
+								>
+									{this.props.buttonTitle}
+								</Link>
+						)}
 					</form>
 					<div className="w-form-done" style={{display: "none"}}>
 						<div>Thank you! Your submission has been received!</div>

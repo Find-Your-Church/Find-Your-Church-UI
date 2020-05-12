@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
-import {BrowserRouter as Router} from "react-router-dom";
 
 /**
  *
@@ -23,8 +22,8 @@ class Home extends Component{
 					<main className="home-main">
 						<div className="block-48 w3-display-container">
 							<div className="search-container w3-display-middle">
-								<h1 className="search-form-header">What kind of community are you looking for?</h1>
-								<SearchBar buttonTitle="Search"/>
+								<h1 className="search-form-header">Find a community near you.</h1>
+								<SearchBar buttonTitle="Search" showedCategory={true}/>
 							</div>
 						</div>
 						{/*

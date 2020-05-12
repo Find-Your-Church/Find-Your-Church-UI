@@ -8,7 +8,7 @@ class PrivacyPolicy extends Component{
 				<>
 					<SiteHeader/>
 					<main>
-						<div className="sign-body">
+						<div className="sign-body other">
 							<div className="w3-xxlarge w3-display-middle w3-center w3-text-blue">
 								Privacy Policy
 							</div>

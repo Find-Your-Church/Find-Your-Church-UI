@@ -329,7 +329,7 @@ class SearchResultsIframe extends Component{
 						</div>
 						<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
 							<div id="search-results-header" className="w3-col s12">
-								<SearchBar buttonTitle="Update" init={true}/>
+								<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true}/>
 								<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
 									{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 								</Link>
@@ -337,7 +337,7 @@ class SearchResultsIframe extends Component{
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
-											backgroundImage: "url('/img/icon-down3-purple.svg')",
+											backgroundImage: "url('/img/icon-down3-blue.svg')",
 										}}
 						>
 							<option value={sorters.SORT_NEWEST}>Newest</option>
@@ -363,12 +363,14 @@ class SearchResultsIframe extends Component{
 								</div>
 								<div className={"filter-header-div"}>
 									<label className={"filter-label w3-large"}>Filters</label>
+									{/*
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
 																	className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
 											position={"left top"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>
+									*/}
 								</div>
 								<div className={"filter-group-container"}>
 									<SearchFilterCheck filterTitle="Day(s)" filterName="days"
