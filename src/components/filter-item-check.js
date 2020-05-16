@@ -27,12 +27,12 @@ class FilterItemCheck extends Component{
 
 	onCheck = e => {
 		if(this.props.filterName === 'ages'){
-			if(parseInt(e.target.value) === 0 && e.target.checked){
-				const new_value = '1' + "0".repeat(this.props.items.length - 1);
+			if(parseInt(e.target.value) === 0){
+				const new_value = (e.target.checked ? '1' : '0') + "0".repeat(this.props.items.length - 1);
 				this.checks = new_value.split("");
 				this.props.send(new_value);
 			}
-			else if(parseInt(e.target.value) !== 0 && e.target.checked){
+			else if(parseInt(e.target.value) !== 0){
 				this.checks[0] = '0';
 				this.checks[e.target.value] = e.target.checked ? '1' : '0';
 				this.props.send(this.checks.join(""));

@@ -104,7 +104,7 @@ class Account extends Component{
 			user_registered_at: user.registered_at,
 			user_password: "",
 			user_password2: "",
-			user_zip_code: user.zip_code,
+			user_zip_code: user.zip_code === undefined ? "" : user.zip_code,
 			user_location: user.location === undefined ? {lat: null, lng: null} : user.location,
 			user_ref_code: user.ref_code === undefined ? "" : user.ref_code,
 

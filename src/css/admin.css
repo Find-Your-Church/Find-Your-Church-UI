@@ -11,8 +11,7 @@
 .admin-body {
 	margin-top: 70px;
 	min-height: calc(100vh - var(--footer-height) - 70px);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#e7e5ea), to(#e7e5ea));
-	background-image: linear-gradient(180deg, #e7e5ea, #e7e5ea);
+	background-color: #f3f2f4;
 }
 
 .admin-body .admin-wrapper {

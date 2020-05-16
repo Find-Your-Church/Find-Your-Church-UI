@@ -261,6 +261,12 @@
 	background-color: #fff;
 }
 
+.community-info-container .slider-part {
+	position: relative;
+}
+
+
+
 .community-info-body {
 	padding: 0 10px 10px;
 }
@@ -425,25 +431,12 @@
 	display: none;
 	overflow: hidden;
 	position: absolute;
-	left: calc(25vw - 90px);
-	top: calc(12vw + 120px);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 	border-radius: 36px;
 	border: 2px solid #ccc;
 	background-color: #fff;
-}
-
-@media screen and (min-width: 1080px) {
-	.steps-body .file-btn-container {
-		left: 180px;
-		top: 250px;
-	}
-}
-
-@media screen and (max-width: 979px) {
-	.steps-body .file-btn-container {
-		left: calc(50vw - 100px);
-		top: calc(24vw + 120px);
-	}
 }
 
 .steps-body .left-part input[type="file"] {

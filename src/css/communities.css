@@ -265,9 +265,7 @@
 .button-delete:hover {
 	border-style: none;
 	border-color: rgba(27, 0, 51, 0.15);
-	background-color: #fff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 0, 51, 0.05)), to(rgba(27, 0, 51, 0.05)));
-	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.05), rgba(27, 0, 51, 0.05));
+	background-color: #e8e5ea;
 	box-shadow: none;
 	color: #333;
 }

@@ -13,13 +13,13 @@ const community_config = {
 
 	TOOL_TIPS: {
 		"": "All Communities",
-		"Churches": "Churches offer weekly gatherings for anyone and everyone to come together, hear a message,and worship through music.",
+		"Churches": "Churches offer weekly gatherings for anyone and everyone to come together, hear a message, and worship through music.",
 		"Youth Groups": "Youth Groups are a faith based gathering for youth in Jr. and/or Sr. High.",
 		"Young Adult Groups": "Young Adult Groups are a faith based gathering typically for young adults aged 18 - 29.",
-		"Focus Groups": "Focus Groups foster stimulating discussion that focus on a common interest or topic such as abook club, bible study, alpha, prayer meetings, etc.",
-		"Life Groups": "Life Groups are primarily social by nature and provide an opportunity to connect with othersthat may be in a similar season of life such as age, education, occupation, etc.",
+		"Focus Groups": "Focus Groups foster stimulating discussion that focus on a common interest or topic such as a book club, bible study, alpha, prayer meetings, etc.",
+		"Life Groups": "Life Groups are primarily social by nature and provide an opportunity to connect with others that may be in a similar season of life such as age, education, occupation, etc.",
 		"Support Groups": "Support Groups are a faith based network of people sharing a common obstacle or life event.",
-		"Events": "Events cover a wide variety of one-time and/or recurring occasions such as concerts, nationalconventions, community outreach, neighborhood bbq’s, worship night, etc.",
+		"Events": "Events cover a wide variety of one-time and/or recurring occasions such as concerts, national conventions, community outreach, neighborhood bbq’s, worship night, etc.",
 		"Social Groups": "Social Groups connect others with similar interests and are typically theme based such as rockclimbing, photography, video games, watch party’s, organized sports, etc.",
 	},
 
