@@ -5,7 +5,9 @@ class FilterItemCheck extends Component{
 	constructor(props){
 		super(props);
 
-		this.checks = this.props.value.split("");
+		this.checks = this.props.value === undefined ?
+			"0".repeat(community_config.FILTERS[this.props.filterName].length).split("")
+			: this.props.value.split("");
 
 		this.state = {
 			collapsed: props.collapsed || false,

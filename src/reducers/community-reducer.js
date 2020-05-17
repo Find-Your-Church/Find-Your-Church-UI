@@ -32,7 +32,7 @@ import {
 	ACTIVATE_MULTI_COMMUNITY,
 	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY
 } from "../actions/action-types";
-import community_config from "../conf/community-conf";
+import {INIT_FILTERS} from "../conf/community-conf";
 import sorters from "../actions/sorters";
 
 const initialState = {
@@ -77,17 +77,7 @@ const initialState = {
 		lat: 44.989999,
 		lng: -93.256088,
 		filter: {
-			days: "0".repeat(community_config.FILTERS.days.length),
-			times: "0".repeat(community_config.FILTERS.times.length),
-			frequency: "0".repeat(community_config.FILTERS.frequency.length),
-			ages: "0".repeat(community_config.FILTERS.ages.length),
-			gender: "0".repeat(community_config.FILTERS.gender.length),
-			parking: "0".repeat(community_config.FILTERS.parking.length),
-			ministries: "0".repeat(community_config.FILTERS.ministries.length),
-			other_services: "0".repeat(community_config.FILTERS.other_services.length),
-			ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-			event_type: "0".repeat(community_config.FILTERS.event_type.length),
-			support_type: "0".repeat(community_config.FILTERS.support_type.length)
+			...INIT_FILTERS,
 		}
 	},
 
@@ -373,17 +363,7 @@ export default function(state = initialState, action){
 				criteria: {
 					...state.criteria,
 					filter: {
-						days: "0".repeat(community_config.FILTERS.days.length),
-						times: "0".repeat(community_config.FILTERS.times.length),
-						frequency: "0".repeat(community_config.FILTERS.frequency.length),
-						ages: "0".repeat(community_config.FILTERS.ages.length),
-						gender: "0".repeat(community_config.FILTERS.gender.length),
-						parking: "0".repeat(community_config.FILTERS.parking.length),
-						ministries: "0".repeat(community_config.FILTERS.ministries.length),
-						other_services: "0".repeat(community_config.FILTERS.other_services.length),
-						ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-						event_type: "0".repeat(community_config.FILTERS.event_type.length),
-						support_type: "0".repeat(community_config.FILTERS.support_type.length),
+						...INIT_FILTERS,
 					}
 				}
 			};

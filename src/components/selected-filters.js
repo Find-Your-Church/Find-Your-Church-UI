@@ -17,6 +17,10 @@ class SelectedFilters extends Component{
 				{filter_keys.map(key => {
 					if(key === "average_attendance")
 						return null;
+
+					if(this.props.filter[key] === undefined)
+						return null;
+
 					const key_value = this.props.filter[key].split("");
 					const criteria_value = this.props.community.criteria.filter[key].split("");
 					return key_value.map((val, i) => {
