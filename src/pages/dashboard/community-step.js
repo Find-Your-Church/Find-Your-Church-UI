@@ -668,10 +668,9 @@ class CommunityStep extends Component{
 
 																			return (
 																					<input type="url" key={key_name}
-																								 className="form-input w-input w3-half social-input"
+																								 className={`form-input w-input w3-half social-input ${key_name}`}
 																								 maxLength="256"
 																								 onBlur={this.fixURL}
-																								 style={{backgroundImage: "url('/img/social/icon-" + key_name + ".svg')"}}
 																								 onChange={this.onChange}
 																								 placeholder={community_config.SOCIAL_PLACEHOLDERS[index]/*link_placeholder*/}
 																								 value={this.state[key_name]}
