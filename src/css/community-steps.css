@@ -700,6 +700,38 @@
 	text-indent: 20px;
 }
 
+.social-input.website {
+	background-image: url("../img/social/icon-website.svg");
+}
+
+.social-input.facebook {
+	background-image: url("../img/social/icon-facebook.svg");
+}
+
+.social-input.instagram {
+	background-image: url("../img/social/icon-instagram.svg");
+}
+
+.social-input.vimeo {
+	background-image: url("../img/social/icon-vimeo.svg");
+}
+
+.social-input.youtube {
+	background-image: url("../img/social/icon-youtube.svg");
+}
+
+.social-input.twitter {
+	background-image: url("../img/social/icon-twitter.svg");
+}
+
+.social-input.podcast {
+	background-image: url("../img/social/icon-podcast.svg");
+}
+
+.social-input.zoom {
+	background-image: url("../img/social/icon-zoom.svg");
+}
+
 .right-part .social-link-group {
 	padding: 14px 10px 8px;
 	background-color: #fff;
