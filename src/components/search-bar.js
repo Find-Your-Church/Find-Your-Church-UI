@@ -159,8 +159,10 @@ class SearchBar extends Component{
 	render(){
 		const searchable = !isNaN(this.state.my_lat) && !isNaN(this.state.my_lng);
 
-		const category_in_path = this.props.path === undefined ? ""
-			: this.props.path.split("/")[2].replace(/-/g, " ");
+		let category_in_path = this.props.path === undefined ? ""
+			: this.props.path.split("/")[2];
+
+		category_in_path = category_in_path === undefined ? "" : category_in_path.replace(/-/g, " ");
 
 		return this.state.ready2go && !this.props.init ? (
 			<Redirect to={"/search-results"}/>
