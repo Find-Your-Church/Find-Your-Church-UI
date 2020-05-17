@@ -101,8 +101,6 @@ class InvitedViewCommunity extends Component{
 				isMore = true;
 			}
 
-			console.log(this.props.auth.user.id);
-
 			const in_frame = window.location !== window.parent.location;
 
 			return (
@@ -280,8 +278,7 @@ class InvitedViewCommunity extends Component{
 																						<Link to="#" key={item}
 																									onClick={() => this.redirectURL(this.props.community.view_community[key_name])}
 																									className={"social-link"}>
-																							<img src={`/img/social/icon-${key_name}.svg`}
-																									 title={item} alt={item}/>
+																							<div className={`view-link-icon ${key_name}`} title={item}/>
 																						</Link>
 																				) : null;
 																			})}

@@ -144,7 +144,7 @@
 	border-radius: 3px;
 }
 
-@media screen and (max-width: 375px){
+@media screen and (max-width: 375px) {
 	.steps-body .header3 .w3-button {
 		padding: 10px 0;
 		border: none !important;
@@ -264,8 +264,6 @@
 .community-info-container .slider-part {
 	position: relative;
 }
-
-
 
 .community-info-body {
 	padding: 0 10px 10px;
@@ -419,7 +417,7 @@
 	opacity: 1;
 }
 
-.steps-body .slider-part:hover .each-slide{
+.steps-body .slider-part:hover .each-slide {
 	opacity: 0.4;
 }
 
@@ -700,36 +698,36 @@
 	text-indent: 20px;
 }
 
-.social-input.website {
-	background-image: url("../img/social/icon-website.svg");
+.website {
+	background-image: url("../img/social/icon-website.svg") !important;
 }
 
-.social-input.facebook {
-	background-image: url("../img/social/icon-facebook.svg");
+.facebook {
+	background-image: url("../img/social/icon-facebook.svg") !important;
 }
 
-.social-input.instagram {
-	background-image: url("../img/social/icon-instagram.svg");
+.instagram {
+	background-image: url("../img/social/icon-instagram.svg") !important;
 }
 
-.social-input.vimeo {
-	background-image: url("../img/social/icon-vimeo.svg");
+.vimeo {
+	background-image: url("../img/social/icon-vimeo.svg") !important;
 }
 
-.social-input.youtube {
-	background-image: url("../img/social/icon-youtube.svg");
+.youtube {
+	background-image: url("../img/social/icon-youtube.svg") !important;
 }
 
-.social-input.twitter {
-	background-image: url("../img/social/icon-twitter.svg");
+.twitter {
+	background-image: url("../img/social/icon-twitter.svg") !important;
 }
 
-.social-input.podcast {
-	background-image: url("../img/social/icon-podcast.svg");
+.podcast {
+	background-image: url("../img/social/icon-podcast.svg") !important;
 }
 
-.social-input.zoom {
-	background-image: url("../img/social/icon-zoom.svg");
+.zoom {
+	background-image: url("../img/social/icon-zoom.svg") !important;
 }
 
 .right-part .social-link-group {
@@ -739,6 +737,13 @@
 
 .right-part .social-link:not(:first-child) {
 	margin-left: 16px;
+}
+
+.view-link-icon {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background-repeat: no-repeat;
 }
 
 .steps-body .w-input, .steps-body .w-select {

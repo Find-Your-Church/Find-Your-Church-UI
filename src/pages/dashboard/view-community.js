@@ -342,8 +342,7 @@ class ViewCommunity extends Component{
 																					<Link to="#" key={item}
 																								onClick={() => this.redirectURL(this.state[key_name])}
 																								className={"social-link"}>
-																						<img src={`/img/social/icon-${key_name}.svg`}
-																								 title={item} alt={item}/>
+																						<div className={`view-link-icon ${key_name}`} title={item}/>
 																					</Link>
 																			) : null;
 																		})}
