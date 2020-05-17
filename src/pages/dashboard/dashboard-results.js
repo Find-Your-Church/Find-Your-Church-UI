@@ -134,8 +134,8 @@ class DashboardResults extends Component{
 
 		this.setState({
 			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"></iframe>`,
-			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"></iframe>`,
+			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"/>`,
+			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"/>`,
 			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
 	};
@@ -164,23 +164,35 @@ class DashboardResults extends Component{
 						<div className={"admin-wrapper"}>
 							<div className="div-block-213">
 								<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-									<div className="div-block-231"><Link to="/create-new-community"
-																											 className="button-create w-button"><i
-										className={"fas fa-users"}> </i><span className="text-span-3">New Community</span></Link>
+									<div className="div-block-231">
+										<Link to="/create-new-community"
+													className="button-create w-button">
+											<i
+												className={"fas fa-users"}/>
+											<span className="text-span-3">New Community</span>
+										</Link>
 									</div>
 								</div>
-								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
-									Dashboard - iFrame
-								</h1></div>
+								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
+									<h1 className="heading-40">
+										Dashboard - iFrame
+									</h1>
+								</div>
 								<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
 									<div className="div-block-215">
 										<Link to="/dashboard" className="link-6">
-											<em className="italic-text-7 gray"><i className="fas fa-th"></i></em>
-										</Link></div>
+											<em className="italic-text-7 gray">
+												<i className="fas fa-th"/>
+											</em>
+										</Link>
+									</div>
 									<div className="div-block-215 underline">
 										<Link to="/dashboard-results" className="link-6">
-											<em className="italic-text-7 current"><i className="fas fa-map-marked-alt"></i></em>
-										</Link></div>
+											<em className="italic-text-7 current">
+												<i className="fas fa-map-marked-alt"/>
+											</em>
+										</Link>
+									</div>
 								</div>
 							</div>
 							<div className="tabs-menu-6 w-tab-menu" role="tablist">
@@ -198,11 +210,11 @@ class DashboardResults extends Component{
 							{
 								this.state.showed_details ? (
 									<div className={"iframe-details w3-animate-opacity"}>
-										<div className="accordionheader-div"
-												 style={{
-												 	margin: "20px 0",
-												 }}
-										>
+										<div className="accordionheader-div" style={{
+											paddingBottom: "20px",
+											borderBottom: "1px solid #d3ced7",
+											color: "#333",
+										}}>
 											<h4 className="accountcontainer-header">
 												Iframe embed code generator:
 											</h4>
@@ -224,8 +236,169 @@ class DashboardResults extends Component{
 											</Popup>
 										</div>
 										<div className="div-block-239">
-											<div className="accordionheader-div"><h4 className="accountcontainer-header">
-												Display your communities on your website using your custom iFrame code below:&nbsp;</h4>
+											<div className="accordionheader-div">
+												<h4 className="accountcontainer-header">
+													Customize your iframe search results display
+												</h4>
+											</div>
+											<div className="iframe-container">
+												<div className="form-block-6 w-form">
+													<form id="email-form" name="email-form" data-name="Email Form">
+														<div className="customiframe-grid">
+															<div className="forminput-div">
+																<div className="div-block-285">
+																	<label htmlFor="email-7" className="field-label">Default category:</label>
+																	<Popup
+																		trigger={<i style={{cursor: "pointer"}}
+																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		position={"right top"}>
+																		<div>
+																			...
+																		</div>
+																	</Popup>
+																</div>
+																<div className="iframeinput-container">
+																	<select id="field-4" name="field-4"
+																					data-name="Field 4"
+																					className="iframe-dropdown w-select">
+																		<option value="">All Communities</option>
+																		<option value="">Churches</option>
+																		<option value="life_groups">Life Groups</option>
+																		<option value="Third">Young Adult Groups</option>
+																		<option value="Another Choice">Support Groups</option>
+																		<option value="Another Choice">Social Groups</option>
+																		<option value="Another Choice">Youth Groups</option>
+																		<option value="Another Choice">Focus Groups</option>
+																	</select>
+																</div>
+															</div>
+															<div className="forminput-div">
+																<div className="div-block-285">
+																	<label htmlFor="email-7" className="field-label">Default radius:</label>
+																	<Popup
+																		trigger={<i style={{cursor: "pointer"}}
+																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		position={"left top"}>
+																		<div>
+																			...
+																		</div>
+																	</Popup>
+																</div>
+																<div className="iframeinput-container">
+																	<select id="field-2" name="field-2"
+																					data-name="Field 2"
+																					className="iframe-dropdown w-select">
+																		<option value="1">within 1 mile of</option>
+																		<option value="3">within 3 miles of</option>
+																		<option value="5">within 5 miles of</option>
+																		<option value="Another Choice">within 10 miles of</option>
+																		<option value="Another Choice">within 20 miles of</option>
+																		<option value="Another Choice">within 30 miles of</option>
+																	</select>
+																</div>
+															</div>
+															<div className="forminput-div">
+																<div className="div-block-285">
+																	<label htmlFor="email-7" className="field-label">Address, city or zip code</label>
+																	<Popup
+																		trigger={<i style={{cursor: "pointer"}}
+																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		position={"left top"}>
+																		<div>
+																			...
+																		</div>
+																	</Popup>
+																</div>
+																<div className="iframeinput-container">
+																	<input type="email"
+																				 className="iframe-input w-input"
+																				 maxLength="256" name="email-6"
+																				 data-name="Email 6" placeholder=""
+																				 id="email-6" required=""/>
+																</div>
+															</div>
+															<div className="forminput-div">
+																<div className="div-block-285">
+																	<label htmlFor="email-7" className="field-label">Header background:</label>
+																	<Popup
+																		trigger={<i style={{cursor: "pointer"}}
+																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		position={"right top"}>
+																		<div>
+																			...
+																		</div>
+																	</Popup>
+																</div>
+																<div className="iframeinput-container">
+																	<input type="email"
+																				 className="iframe-input w-input"
+																				 maxLength="256" name="email-6"
+																				 data-name="Email 6" placeholder="#f3f2f5"
+																				 id="email-6" required=""/>
+																	<a href="#" className="color-button base w-button">
+																	</a>
+																</div>
+															</div>
+															<div className="forminput-div">
+																<div className="div-block-285">
+																	<label htmlFor="email-7" className="field-label">Results
+																		background:</label>
+																	<Popup
+																		trigger={<i style={{cursor: "pointer"}}
+																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		position={"left top"}>
+																		<div>
+																			...
+																		</div>
+																	</Popup>
+																</div>
+																<div className="iframeinput-container">
+																	<input type="email"
+																				 className="iframe-input w-input"
+																				 maxLength="256" name="email-6"
+																				 data-name="Email 6" placeholder="#e8e5ea"
+																				 id="email-6" required=""/>
+																	<a href="#" className="color-button white w-button">
+																	</a>
+																</div>
+															</div>
+															<div className="forminput-div">
+																<div className="div-block-285">
+																	<label htmlFor="email-7" className="field-label">Buttons:</label>
+																	<Popup
+																		trigger={<i style={{cursor: "pointer"}}
+																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		position={"left top"}>
+																		<div>
+																			...
+																		</div>
+																	</Popup>
+																</div>
+																<div className="iframeinput-container">
+																	<input type="email"
+																				 className="iframe-input w-input"
+																				 maxLength="256" name="email-6"
+																				 data-name="Email 6" placeholder="#2e89fe"
+																				 id="email-6" required=""/>
+																	<a href="#"
+																		 className="color-button blue w-button">
+																	</a>
+																</div>
+															</div>
+														</div>
+													</form>
+													<div className="w-form-done">
+														<div>Thank you! Your submission has been received!</div>
+													</div>
+													<div className="w-form-fail">
+														<div>Oops! Something went wrong while submitting the form.</div>
+													</div>
+												</div>
+											</div>
+											<div className="accordionheader-div">
+												<h4 className="accountcontainer-header">
+													Copy your iframe code
+												</h4>
 												<Popup
 													trigger={<i style={{cursor: "pointer"}}
 																			className={"fas fa-question-circle tooltip-icon"}> </i>}
@@ -263,7 +436,44 @@ class DashboardResults extends Component{
 													 style={{display: this.state.showedCopyNotification ? "inline-block" : "none"}}>
 												<h4 id="w-node-2d27cd761068-78e24ec3"
 														className="copied-message">Code has been copied to
-													clipboard.</h4></div>
+													clipboard.</h4>
+											</div>
+										</div>
+										<div className="dashboardheader-div" style={{
+											padding: "20px 0",
+											borderBottom: "1px solid #d3ced7",
+											color: "#333",
+										}}>
+											<h4 className="accountcontainer-header">How to display your communities on your own site:</h4>
+										</div>
+										<div className="div-block-267">
+											<div>
+												<div className="div-block-269"><h4 className="heading-55">Add an HTML iframe element to the
+													page and/or section you wish to display your communities.</h4><h5
+													className="heading-60">Every website builder such as Wix, SquareSpace, or WordPress will
+													have the ability to embed an iframe code anywhere on your site. Contact our <a
+														href="mailto:support@findyourchurch.org">support team</a> if you're having trouble! </h5>
+													<div id="w-node-48c15404bdc2-78e24ec3" className="div-block-270"></div>
+												</div>
+											</div>
+											<div id="w-node-f4ddd54c6618-78e24ec3">
+												<div className="div-block-269"><h4 className="heading-55">Copy / paste the code above into the
+													HTML iframe element you just added and save your site.</h4><h5 className="heading-60">Your
+													search results should appear on your website after pasting / saving and be fully functional.
+													You may need to update or publish your site to refresh and display the iframe.</h5>
+													<div id="w-node-eb84c39ce958-78e24ec3" className="div-block-270-copy"></div>
+												</div>
+											</div>
+											<div>
+												<div className="div-block-269"><h4 className="heading-55">That's it! If you need any help
+													please do not hesitate to contact our <a href="mailto:support@findyourchurch.org"
+																																	 className="link-10">support team</a>. </h4><h5
+													className="heading-60">The iframe is automatically connected to your dashboard so anytime
+													you add, update, or remove a community - it will <strong>automatically</strong> update
+													anywhere you have your search results displayed. </h5>
+													<div className="div-block-270-copy-copy"></div>
+												</div>
+											</div>
 										</div>
 									</div>
 								) : (
