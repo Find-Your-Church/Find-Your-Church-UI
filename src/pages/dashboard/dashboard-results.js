@@ -9,6 +9,7 @@ import {getBillingStatus, clearLastInvoice, showActivateDlg} from "../../actions
 import SiteHeader from "../../components/site-header";
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
+import {SketchPicker} from "react-color";
 import community_config, {INIT_FILTERS} from "../../conf/community-conf";
 
 class DashboardResults extends Component{
@@ -48,6 +49,8 @@ class DashboardResults extends Component{
 			iFrameHeight: 'calc(100vw * 9 / 16',
 
 			showed_details: true,
+
+			showed_color: false,
 		};
 
 		this.showSubDlg = this.showSubDlg.bind(this);
@@ -335,8 +338,19 @@ class DashboardResults extends Component{
 																				 maxLength="256" name="email-6"
 																				 data-name="Email 6" placeholder="#f3f2f5"
 																				 id="email-6" required=""/>
-																	<a href="#" className="color-button base w-button">
+																	<a href="#" className="color-button base w-button" onClick={() => {
+																		this.setState({showed_color: true});
+																	}}>
 																	</a>
+																	{
+																		this.state.showed_color ? (
+																			<div style={{
+																				position: "absolute",
+																			}}>
+																				<SketchPicker/>
+																			</div>
+																		) : null
+																	}
 																</div>
 															</div>
 															<div className="forminput-div">
