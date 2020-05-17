@@ -37,8 +37,6 @@ class SiteHeader extends Component{
 	};
 
 	render(){
-		console.log(this.props.location.pathname);
-
 		return (
 				<div id={"main-header"}>
 					<header className="site-header w3-bar">
