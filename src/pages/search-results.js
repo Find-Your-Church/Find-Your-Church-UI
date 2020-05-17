@@ -332,7 +332,7 @@ class SearchResults extends Component{
 						</div>
 						<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
 							<div id="search-results-header" className="w3-col s12">
-								<SearchBar buttonTitle="Update" init={true} showedCategory={true}/>
+								<SearchBar buttonTitle="Update" init={true} showedCategory={true} path={this.props.location.pathname}/>
 								<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
 									{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 								</Link>
