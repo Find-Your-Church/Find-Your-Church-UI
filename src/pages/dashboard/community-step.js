@@ -612,24 +612,24 @@ class CommunityStep extends Component{
 																					 id="community_contact"
 																					 value={this.state.community_contact}
 																					 required=""/>
-																		<input type="email"
-																					 className="form-input w-input social-input w3-half"
-																					 maxLength="256"
-																					 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}
-																					 onChange={this.onChange}
-																					 placeholder="Email"
-																					 value={this.state.email}
-																					 id="email"/>
 																		<input type="text"
 																					 className="form-input w-input social-input w3-half"
 																					 maxLength="256"
 																					 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}
 																					 onChange={this.onChange}
 																					 pattern={app_config.US_PHONE_PATTERN}
-																					 placeholder={"Phone"}
+																					 placeholder={"(123)456-7890"}
 																					 title={"(123)456-7890 or 123-456-7890"}
 																					 value={this.state.phone}
 																					 id="phone"/>
+																		<input type="email"
+																					 className="form-input w-input social-input w3-half"
+																					 maxLength="256"
+																					 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}
+																					 onChange={this.onChange}
+																					 placeholder="johnsmith@gmail.com"
+																					 value={this.state.email}
+																					 id="email"/>
 																	</div>
 																</div>
 																<div className={"view-paragraph"}>

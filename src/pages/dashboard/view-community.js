@@ -308,18 +308,18 @@ class ViewCommunity extends Component{
 																					<span style={{color: "#aaa"}}>Contact name</span>}
 																				</div>
 																				: null}
+																		{this.state.phone ?
+																			<a href={"tel:" + this.state.phone} className="view-item w3-half"
+																				 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
+																				{this.state.phone ||
+																				<span style={{color: "#aaa"}}>Phone</span>}
+																			</a>
+																			: null}
 																		{this.state.email ?
 																				<a href={"mailto:" + this.state.email} className="view-item w3-half"
 																					 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
 																					{this.state.email ||
 																					<span style={{color: "#aaa"}}>Email</span>}
-																				</a>
-																				: null}
-																		{this.state.phone ?
-																				<a href={"tel:" + this.state.phone} className="view-item w3-half"
-																					 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
-																					{this.state.phone ||
-																					<span style={{color: "#aaa"}}>Phone</span>}
 																				</a>
 																				: null}
 																	</div>
