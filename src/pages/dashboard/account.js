@@ -21,7 +21,7 @@ import Popup from "reactjs-popup";
 import isEmpty from "../../utils/isEmpty";
 import FileBase from "react-file-base64";
 import config from "../../conf/config";
-import community_config from "../../conf/community-conf";
+import community_config, {INIT_FILTERS} from "../../conf/community-conf";
 import AccountProfileContainer from "../../components/account-profile-container";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import Tooltip from "rmc-tooltip/es";
@@ -65,17 +65,7 @@ class Account extends Component{
 			lat: 44.989999,
 			lng: -93.256088,
 			filter: {
-				days: '0000000',
-				times: '000',
-				frequency: '00000',
-				ages: '00000000000',
-				gender: '000',
-				parking: '00000',
-				ministries: '0000000',
-				other_services: '000000',
-				ambiance: '0000',
-				event_type: '00000000',
-				support_type: '00000'
+				...INIT_FILTERS,
 			}
 		};
 
@@ -146,6 +136,9 @@ class Account extends Component{
 		let url_result = '';
 		let is1st = true;
 		for(let key of filter_keys){
+			if(this.previewCriteria.filter[key] === undefined)
+				continue;
+
 			const key_value = this.previewCriteria.filter[key].split("");
 			for(let i = 0; i < key_value.length; i++){
 				if(key_value[i] === "1"){

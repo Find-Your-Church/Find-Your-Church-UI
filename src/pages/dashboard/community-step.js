@@ -72,15 +72,18 @@ class CommunityStep extends Component{
 			instagram: p_obj === undefined ? "" : p_obj.obj.instagram,
 			vimeo: p_obj === undefined ? "" : p_obj.obj.vimeo,
 			youtube: p_obj === undefined ? "" : p_obj.obj.youtube,
-			podcast: p_obj === undefined ? "" : p_obj.obj.podcast,
 			twitter: p_obj === undefined ? "" : p_obj.obj.twitter,
+			podcast: p_obj === undefined ? "" : p_obj.obj.podcast,
+			zoom: p_obj === undefined ? "" : p_obj.obj.zoom,
 			about: p_obj === undefined ? "" : p_obj.obj.about,
 
 			days: p_obj === undefined ? "0".repeat(community_config.FILTERS.days.length) : p_obj.obj.days,
 			times: p_obj === undefined ? "0".repeat(community_config.FILTERS.times.length) : p_obj.obj.times,
 			frequency: p_obj === undefined ? "0".repeat(community_config.FILTERS.frequency.length) : p_obj.obj.frequency,
+			hosting: p_obj === undefined || p_obj.obj.hosting === undefined ? "0".repeat(community_config.FILTERS.hosting.length) : p_obj.obj.hosting,
 			ages: p_obj === undefined ? "0".repeat(community_config.FILTERS.ages.length) : p_obj.obj.ages,
 			gender: p_obj === undefined ? "0".repeat(community_config.FILTERS.gender.length) : p_obj.obj.gender,
+			kids_welcome: p_obj === undefined || p_obj.obj.kids_welcome === undefined ? "0".repeat(community_config.FILTERS.kids_welcome.length) : p_obj.obj.kids_welcome,
 			parking: p_obj === undefined ? "0".repeat(community_config.FILTERS.parking.length) : p_obj.obj.parking,
 			ministries: p_obj === undefined ? "0".repeat(community_config.FILTERS.ministries.length) : p_obj.obj.ministries,
 			other_services: p_obj === undefined ? "0".repeat(community_config.FILTERS.other_services.length) : p_obj.obj.other_services,
@@ -119,11 +122,17 @@ class CommunityStep extends Component{
 	getFrequencyInfo = (checks) => {
 		this.setState({frequency: checks})
 	};
+	getHostingInfo = (checks) => {
+		this.setState({hosting: checks})
+	};
 	getAgesInfo = (checks) => {
 		this.setState({ages: checks})
 	};
 	getGenderInfo = (checks) => {
 		this.setState({gender: checks})
+	};
+	getKidsWelcomeInfo = (checks) => {
+		this.setState({kids_welcome: checks})
 	};
 	getParkingInfo = (checks) => {
 		this.setState({parking: checks})
@@ -317,8 +326,9 @@ class CommunityStep extends Component{
 			instagram: this.state.instagram,
 			vimeo: this.state.vimeo,
 			youtube: this.state.youtube,
-			podcast: this.state.podcast,
 			twitter: this.state.twitter,
+			podcast: this.state.podcast,
+			zoom: this.state.zoom,
 			about: this.state.about,
 		};
 
@@ -326,8 +336,10 @@ class CommunityStep extends Component{
 			days: this.state.days,
 			times: this.state.times,
 			frequency: this.state.frequency,
+			hosting: this.state.hosting,
 			ages: this.state.ages,
 			gender: this.state.gender,
+			kids_welcome: this.state.kids_welcome,
 			parking: this.state.parking,
 			ministries: this.state.ministries,
 			other_services: this.state.other_services,
@@ -637,7 +649,7 @@ class CommunityStep extends Component{
 																		</Popup>
 																	</div>
 																	<div className="input-div w3-row">
-																		{community_config.SOCIALS.map(item => {
+																		{community_config.SOCIALS.map((item, index) => {
 																			const key_name = item.toLowerCase();
 																			let link_placeholder = `${item}`;
 																			switch(key_name){
@@ -661,7 +673,7 @@ class CommunityStep extends Component{
 																								 onBlur={this.fixURL}
 																								 style={{backgroundImage: "url('/img/social/icon-" + key_name + ".svg')"}}
 																								 onChange={this.onChange}
-																								 placeholder={link_placeholder}
+																								 placeholder={community_config.SOCIAL_PLACEHOLDERS[index]/*link_placeholder*/}
 																								 value={this.state[key_name]}
 																								 id={key_name}/>
 																			);
@@ -698,6 +710,10 @@ class CommunityStep extends Component{
 																										 items={community_config.FILTERS.frequency}/>
 																		{this.state.selectedChurch || this.state.category === "" ? null : (
 																				<>
+																					<FilterItemCheck filterTitle="Hosting" filterName="hosting"
+																													 send={this.getHostingInfo}
+																													 value={this.state.hosting}
+																													 items={community_config.FILTERS.hosting}/>
 																					<FilterItemCheck filterTitle="Age(s)" filterName="ages"
 																													 send={this.getAgesInfo}
 																													 value={this.state.ages}
@@ -706,6 +722,10 @@ class CommunityStep extends Component{
 																													 send={this.getGenderInfo}
 																													 value={this.state.gender}
 																													 items={community_config.FILTERS.gender}/>
+																					<FilterItemRadio filterTitle="Kids Welcome" filterName="kids_welcome"
+																													 send={this.getKidsWelcomeInfo}
+																													 value={this.state.kids_welcome}
+																													 items={community_config.FILTERS.kids_welcome}/>
 																				</>
 																		)}
 																		<FilterItemCheck filterTitle="Parking" filterName="parking"

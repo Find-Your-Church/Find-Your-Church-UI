@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {doSearchCommunities, setSearchCriteria} from "../actions/community-actions";
-import community_config from "../conf/community-conf";
+import community_config, {INIT_FILTERS} from "../conf/community-conf";
 import Tooltip from "rmc-tooltip";
 import 'rmc-tooltip/assets/bootstrap.css';
 
@@ -17,17 +17,7 @@ class SearchBar extends Component{
 
 		this.clear_obj = {
 			filter: {
-				days: "0".repeat(community_config.FILTERS.days.length),
-				times: "0".repeat(community_config.FILTERS.times.length),
-				frequency: "0".repeat(community_config.FILTERS.frequency.length),
-				ages: "0".repeat(community_config.FILTERS.ages.length),
-				gender: "0".repeat(community_config.FILTERS.gender.length),
-				parking: "0".repeat(community_config.FILTERS.parking.length),
-				ministries: "0".repeat(community_config.FILTERS.ministries.length),
-				other_services: "0".repeat(community_config.FILTERS.other_services.length),
-				ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-				event_type: "0".repeat(community_config.FILTERS.event_type.length),
-				support_type: "0".repeat(community_config.FILTERS.support_type.length),
+				...INIT_FILTERS,
 			}
 		};
 

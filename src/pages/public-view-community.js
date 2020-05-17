@@ -45,8 +45,9 @@ class PublicViewCommunity extends Component{
 			instagram: p_obj === undefined ? "" : p_obj.obj.instagram,
 			vimeo: p_obj === undefined ? "" : p_obj.obj.vimeo,
 			youtube: p_obj === undefined ? "" : p_obj.obj.youtube,
-			podcast: p_obj === undefined ? "" : p_obj.obj.podcast,
 			twitter: p_obj === undefined ? "" : p_obj.obj.twitter,
+			podcast: p_obj === undefined ? "" : p_obj.obj.podcast,
+			zoom: p_obj === undefined ? "" : p_obj.obj.zoom,
 			about: p_obj === undefined ? "" : p_obj.obj.about,
 
 			showedAboutShort: true,
@@ -54,8 +55,10 @@ class PublicViewCommunity extends Component{
 			days: p_obj === undefined ? "0".repeat(community_config.FILTERS.days.length) : p_obj.obj.days,
 			times: p_obj === undefined ? "0".repeat(community_config.FILTERS.times.length) : p_obj.obj.times,
 			frequency: p_obj === undefined ? "0".repeat(community_config.FILTERS.frequency.length) : p_obj.obj.frequency,
+			hosting: p_obj === undefined || p_obj.obj.hosting === undefined ? "0".repeat(community_config.FILTERS.hosting.length) : p_obj.obj.hosting,
 			ages: p_obj === undefined ? "0".repeat(community_config.FILTERS.ages.length) : p_obj.obj.ages,
 			gender: p_obj === undefined ? "0".repeat(community_config.FILTERS.gender.length) : p_obj.obj.gender,
+			kids_welcome: p_obj === undefined || p_obj.obj.kids_welcome === undefined ? "0".repeat(community_config.FILTERS.kids_welcome.length) : p_obj.obj.kids_welcome,
 			parking: p_obj === undefined ? "0".repeat(community_config.FILTERS.parking.length) : p_obj.obj.parking,
 			ministries: p_obj === undefined ? "0".repeat(community_config.FILTERS.ministries.length) : p_obj.obj.ministries,
 			other_services: p_obj === undefined ? "0".repeat(community_config.FILTERS.other_services.length) : p_obj.obj.other_services,
@@ -324,12 +327,18 @@ class PublicViewCommunity extends Component{
 																		<FilterItemRadio filterTitle="Frequency" filterName="frequency"
 																										 value={this.state.frequency}
 																										 items={community_config.FILTERS.frequency}/>
+																		<FilterItemCheck filterTitle="Hosting" filterName="hosting"
+																										 value={this.state.hosting}
+																										 items={community_config.FILTERS.hosting}/>
 																		<FilterItemCheck filterTitle="Age(s)" filterName="ages"
 																										 value={this.state.ages}
 																										 items={community_config.FILTERS.ages}/>
 																		<FilterItemRadio filterTitle="Gender" filterName="gender"
 																										 value={this.state.gender}
 																										 items={community_config.FILTERS.gender}/>
+																		<FilterItemRadio filterTitle="Kids Welcome" filterName="kids_welcome"
+																										 value={this.state.kids_welcome}
+																										 items={community_config.FILTERS.kids_welcome}/>
 																		<FilterItemCheck filterTitle="Parking" filterName="parking"
 																										 value={this.state.parking}
 																										 items={community_config.FILTERS.parking}/>

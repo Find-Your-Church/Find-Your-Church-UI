@@ -302,12 +302,18 @@ class InvitedViewCommunity extends Component{
 																			<FilterItemRadio filterTitle="Frequency" filterName="frequency"
 																											 value={this.props.community.view_community.frequency}
 																											 items={community_config.FILTERS.frequency}/>
+																			<FilterItemCheck filterTitle="Hosting" filterName="hosting"
+																											 value={this.props.community.view_community.hosting}
+																											 items={community_config.FILTERS.hosting}/>
 																			<FilterItemCheck filterTitle="Age(s)" filterName="ages"
 																											 value={this.props.community.view_community.ages}
 																											 items={community_config.FILTERS.ages}/>
 																			<FilterItemRadio filterTitle="Gender" filterName="gender"
 																											 value={this.props.community.view_community.gender}
 																											 items={community_config.FILTERS.gender}/>
+																			<FilterItemRadio filterTitle="Kids Welcome" filterName="kids_welcome"
+																											 value={this.props.community.view_community.kids_welcome}
+																											 items={community_config.FILTERS.kids_welcome}/>
 																			<FilterItemCheck filterTitle="Parking" filterName="parking"
 																											 value={this.props.community.view_community.parking}
 																											 items={community_config.FILTERS.parking}/>
