@@ -1,7 +1,7 @@
 
 const community_config = {
 	SOCIALS: [
-		"Website", "Facebook", "Instagram", "Vimeo", "Youtube", "Twitter", "Podcast",
+		"Website", "Facebook", "Instagram", "Vimeo", "Youtube", "Twitter", "Podcast", "Zoom",
 	],
 
 	/**
