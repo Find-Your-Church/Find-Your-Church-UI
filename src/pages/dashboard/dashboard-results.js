@@ -1,16 +1,11 @@
 import React, {Component} from "react";
-import ReactDOM from 'react-dom';
 import '../../css/dashboard.css';
+import '../../css/dashboard-results.css';
 import '../../css/dashboard-iframe.css';
-import ProfileContainer from "../../components/profile-container";
-import MyCommunities from "../../components/my-communites";
-import SiteFooter from "../../components/site-footer";
-import StripeSubscription from "../../components/stripe-subscription";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../../actions/auth-actions";
 import {getBillingStatus, clearLastInvoice, showActivateDlg} from "../../actions/community-actions";
-import {Elements} from "react-stripe-elements";
 import SiteHeader from "../../components/site-header";
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
@@ -61,6 +56,8 @@ class DashboardResults extends Component{
 			showedCopyNotification: false,
 
 			iFrameHeight: 'calc(100vw * 9 / 16',
+
+			showed_details: true,
 		};
 
 		this.showSubDlg = this.showSubDlg.bind(this);
@@ -87,7 +84,8 @@ class DashboardResults extends Component{
 		this.previewCriteria.owner = this.props.auth.user.id;
 		this.applyUpdatedCriteria();
 
-		this.setState({iFrameHeight:  this.refIframe.current.contentWindow.document.body.scrollHeight + 'px'});
+		if(!this.state.showed_details)
+			this.setState({iFrameHeight: this.refIframe.current.contentWindow.document.body.scrollHeight + 'px'});
 	}
 
 	onChangePreviewCategory = e => {
@@ -153,6 +151,10 @@ class DashboardResults extends Component{
 		this.props.showActivateDlg();
 	}
 
+	selectTabDetail = isDetail => {
+		this.setState({showed_details: isDetail});
+	}
+
 	render(){
 		/**
 		 * TODO: replace:
@@ -161,75 +163,126 @@ class DashboardResults extends Component{
 		 * style={{display: this.props.community.is_showing ? "block" : "none"}}
 		 */
 		return (
-				<>
-					<SiteHeader/>
-					<div>
-						<main className="admin-body w3-row"
-									style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
-							<div className={"admin-wrapper"}>
-								<div className="div-block-213">
-									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-										<div className="div-block-231"><Link to="/create-new-community"
-																												 className="button-create w-button"><i
-												className={"fas fa-users"}> </i><span className="text-span-3">New Community</span></Link>
-										</div>
-									</div>
-									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
-										Dashboard - iFrame
-									</h1></div>
-									<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
-										<div className="div-block-215">
-											<Link to="/dashboard" className="link-6">
-												<em className="italic-text-7 gray"><i className="fas fa-th"></i></em>
-											</Link></div>
-										<div className="div-block-215 underline">
-											<Link to="/dashboard-results" className="link-6">
-												<em className="italic-text-7 current"><i className="fas fa-map-marked-alt"></i></em>
-											</Link></div>
+			<>
+				<SiteHeader/>
+				<div>
+					<main className="admin-body dashboard-results w3-row"
+								style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
+						<div className={"admin-wrapper"}>
+							<div className="div-block-213">
+								<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
+									<div className="div-block-231"><Link to="/create-new-community"
+																											 className="button-create w-button"><i
+										className={"fas fa-users"}> </i><span className="text-span-3">New Community</span></Link>
 									</div>
 								</div>
-								<div className="div-block-239">
-									<div className="accordionheader-div"><h4 className="accountcontainer-header">
-										Display your communities on your website using your custom iFrame code below:&nbsp;</h4>
-										<Popup
+								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
+									Dashboard - iFrame
+								</h1></div>
+								<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
+									<div className="div-block-215">
+										<Link to="/dashboard" className="link-6">
+											<em className="italic-text-7 gray"><i className="fas fa-th"></i></em>
+										</Link></div>
+									<div className="div-block-215 underline">
+										<Link to="/dashboard-results" className="link-6">
+											<em className="italic-text-7 current"><i className="fas fa-map-marked-alt"></i></em>
+										</Link></div>
+								</div>
+							</div>
+							<div className="tabs-menu-6 w-tab-menu" role="tablist">
+								<div data-w-tab="Tab 1"
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
+										 href="#" onClick={() => this.selectTabDetail(true)}>
+									<div>Details</div>
+								</div>
+								<div data-w-tab="Tab 2"
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}
+										 href="#" onClick={() => this.selectTabDetail(false)}>
+									<div>Preview</div>
+								</div>
+							</div>
+							{
+								this.state.showed_details ? (
+									<div className={"iframe-details w3-animate-opacity"}>
+										<div className="accordionheader-div"
+												 style={{
+												 	margin: "20px 0",
+												 }}
+										>
+											<h4 className="accountcontainer-header">
+												Iframe embed code generator:
+											</h4>
+											<Popup
 												trigger={<i style={{cursor: "pointer"}}
 																		className={"fas fa-question-circle tooltip-icon"}> </i>}
 												position={"left top"}>
-											<div>
-												If your organization has your own website, you can use the code below to display your communities on any page(s) or
-												section(s) of your website. The preview below is what your iframe will look like when dispalyed on your website, and only
-												displays the communities currently active on your dashboard. The search, filter, and view technology is fully responsive
-												and is compatible with any device or browser.
+												<div>
+													If your organization has your own website, you can use the code below to display your
+													communities
+													on any page(s) or
+													section(s) of your website. The preview below is what your iframe will look like when
+													dispalyed on
+													your website, and only
+													displays the communities currently active on your dashboard. The search, filter, and view
+													technology is fully responsive
+													and is compatible with any device or browser.
+												</div>
+											</Popup>
+										</div>
+										<div className="div-block-239">
+											<div className="accordionheader-div"><h4 className="accountcontainer-header">
+												Display your communities on your website using your custom iFrame code below:&nbsp;</h4>
+												<Popup
+													trigger={<i style={{cursor: "pointer"}}
+																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+													position={"left top"}>
+													<div>
+														If your organization has your own website, you can use the code below to display your
+														communities
+														on any page(s) or
+														section(s) of your website. The preview below is what your iframe will look like when
+														dispalyed on
+														your website, and only
+														displays the communities currently active on your dashboard. The search, filter, and view
+														technology is fully responsive
+														and is compatible with any device or browser.
+													</div>
+												</Popup>
 											</div>
-										</Popup>
+											<div className="div-block-182">
+												<h4 id="w-node-2d27cd76105d-78e24ec3"
+														className="table-header">
+													{this.state.frameShortCode}
+													<input id={"frame-url"} value={this.state.frameCode} style={{opacity: "0", width: "8px"}}/>
+												</h4>
+											</div>
+											<div className="_20right-div _20top-div">
+												<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
+													<a href="#" className="link-3" style={{
+														color: "#8900fe",
+														fontWeight: "600",
+														textDecoration: "none"
+													}} onClick={this.copyDynamicUrl}>Copy Code</a>
+												</h4>
+											</div>
+											<div className="_20top-div"
+													 style={{display: this.state.showedCopyNotification ? "inline-block" : "none"}}>
+												<h4 id="w-node-2d27cd761068-78e24ec3"
+														className="copied-message">Code has been copied to
+													clipboard.</h4></div>
+										</div>
 									</div>
-									<div className="div-block-182">
-										<h4 id="w-node-2d27cd76105d-78e24ec3"
-												className="table-header">
-											{this.state.frameShortCode}
-											<input id={"frame-url"} value={this.state.frameCode} style={{opacity: "0", width: "8px"}}/>
-										</h4>
-									</div>
-									<div className="_20right-div _20top-div">
-										<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
-											<a href="#" className="link-3" style={{
-												color: "#8900fe",
-												fontWeight: "600",
-												textDecoration: "none"
-											}} onClick={this.copyDynamicUrl}>Copy Code</a>
-										</h4>
-									</div>
-									<div className="_20top-div" style={{display: this.state.showedCopyNotification ? "inline-block" : "none"}}>
-										<h4 id="w-node-2d27cd761068-78e24ec3"
-																									className="copied-message">Code has been copied to
-										clipboard.</h4></div>
-								</div>
-								<iframe id="preview-frame" src={this.state.frameUrl} ref={this.refIframe}
-												style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}> </iframe>
-							</div>
-						</main>
-					</div>
-				</>
+								) : (
+									<iframe id="preview-frame" className={"w3-animate-opacity"} src={this.state.frameUrl}
+													ref={this.refIframe}
+													style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
+								)
+							}
+						</div>
+					</main>
+				</div>
+			</>
 		);
 	}
 }
@@ -251,6 +304,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
+	mapStateToProps,
+	{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
 )(DashboardResults);
