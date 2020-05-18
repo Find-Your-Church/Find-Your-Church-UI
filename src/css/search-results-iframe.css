@@ -118,7 +118,7 @@ body {
 	height: calc(100vh - var(--results-header-height));
 	padding: 10px;
 	background-color: #e8e5ea;
-	overflow-y: scroll;
+	overflow-y: auto;
 	border-left: 1px solid #ddd9e1;
 }
 
