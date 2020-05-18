@@ -74,6 +74,7 @@ export const community_config = {
 };
 
 export const INIT_FILTERS = {
+	community_name: "",
 	days: "0".repeat(community_config.FILTERS.days.length),
 	times: "0".repeat(community_config.FILTERS.times.length),
 	frequency: "0".repeat(community_config.FILTERS.frequency.length),
