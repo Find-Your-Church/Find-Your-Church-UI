@@ -159,8 +159,8 @@ class Account extends Component{
 
 		this.setState({
 			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"></iframe>`,
-			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"></iframe>`,
+			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"/>`,
+			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"/>`,
 			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
 	};
@@ -478,7 +478,7 @@ class Account extends Component{
 								<div className="div-block-231">
 									<Link to="/dashboard"
 												className="button-create w-button">
-										<i className="fas fa-th"></i><span className="text-span-3">Dashboard</span></Link>
+										<i className="fas fa-th"/><span className="text-span-3">Dashboard</span></Link>
 								</div>
 							</div>
 							<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
