@@ -551,7 +551,7 @@ class StripeSubscription extends Component{
 							</div>
 							<div style={{padding: "10px 20px 48px"}}>
 								<div className={"subscription-lock-icon"}>
-									<i className="fas fa-lock"></i>
+									<i className="fas fa-lock"/>
 								</div>
 								<p className="fineprint subscription">
 									Payments are processed by <span className="stripe-label">Stripe</span> and secured by

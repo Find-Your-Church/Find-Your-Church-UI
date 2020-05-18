@@ -29,8 +29,6 @@ class MyCommunities extends Component{
 
 		this.selected_communities = []; // array of community IDs
 
-		this.refresh = this.refresh.bind(this);
-
 		this.refresh();
 	}
 
@@ -54,9 +52,9 @@ class MyCommunities extends Component{
 		console.log("selected: ", this.selected_communities);
 	};
 
-	refresh(){
+	refresh = () => {
 		this.props.getMyCommunities(this.props.auth.user.id, this.props.status === "active");
-	}
+	};
 
 	onChangeCategory = e => {
 		this.setState({selected_category: e.target.value});
@@ -127,12 +125,12 @@ class MyCommunities extends Component{
 
 	render(){
 		return (
-				<div className="communities-body">
+				<div className="communities-body w3-animate-opacity" style={{display: this.props.showed ? "block" : "none"}}>
 					<div className="dashboard-container">
 						<div className="containerheader-div underline">
 							<div className="flexdiv-left">
 								<div className="container-header">
-									{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities
+									Owner
 									{this.props.status === "active" ? (
 											<div className={"counter-part"}>
 												<div className={"counter-part-border"}>
@@ -217,12 +215,12 @@ class MyCommunities extends Component{
 										 className="dashboard-tab w-inline-block w-tab-link w--current"
 										 tabIndex="-1" id="w-tabs-1-data-w-tab-0">
 										<div className="text-block-3"><em className="italic-text-7 current">
-											<i className="fas fa-portrait"></i></em></div>
+											<i className="fas fa-portrait"/></em></div>
 									</a>
 									<a data-w-tab="Tab 2" className="dashboard-tab w-inline-block w-tab-link" tabIndex="-1">
 										<div className="text-block-4">
 											<em className="italic-text-7 gray">
-												<i className="fas fa-list"></i>
+												<i className="fas fa-list"/>
 											</em>
 										</div>
 									</a></div>

@@ -35,12 +35,12 @@ class PreviewSearchResults extends Component{
 				<div className={"preview-frame-wrapper"}>
 					<div className={"preview-frame-header"}>
 						<div className="div-block-185"><Link to="/dashboard/account" className="button-6 w-button-back">
-							<i className={"fas fa-chevron-circle-left"}></i>
+							<i className={"fas fa-chevron-circle-left"}/>
 							&nbsp;&nbsp;&nbsp;Back to Account</Link>
 						</div>
 						<h1 className="heading-28">Preview {this.state.owner_name}'s Communities</h1>
 					</div>
-					<iframe className={"preview-frame"} src={this.state.frameUrl}></iframe>
+					<iframe className={"preview-frame"} src={this.state.frameUrl}/>
 				</div>
 		);
 	}
