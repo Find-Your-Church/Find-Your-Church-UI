@@ -35,7 +35,7 @@ class ProfileContainer extends Component{
 							<Popup
 									className={"profile-tooltip"}
 									trigger={<i style={{cursor: "pointer"}}
-															className={"fas fa-question-circle tooltip-icon"}> </i>}
+															className={"fas fa-question-circle tooltip-icon"}/>}
 									position={"left top"}>
 								<div>This is the information that will be displayed on each of the communities you are an admin of. You
 									can update the information on your Admin Profile from your "Account" page.
@@ -62,7 +62,7 @@ class ProfileContainer extends Component{
 								</h3>
 								{/*
 								<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
-									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 								</Link>
 								<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 									 onMouseLeave={this.hideMenu}

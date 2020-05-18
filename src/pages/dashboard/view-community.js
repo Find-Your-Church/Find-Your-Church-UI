@@ -203,7 +203,7 @@ class ViewCommunity extends Component{
 														{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
-															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 														</Link>
 														<nav role="navigation"
 																 className="w3-animate-opacity listing-navmenu view w-nav-menu"
@@ -256,7 +256,7 @@ class ViewCommunity extends Component{
 																		<h4 className="form-header">About</h4>
 																		{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
@@ -294,7 +294,7 @@ class ViewCommunity extends Component{
 																		<h4 className="form-header">Community Contact</h4>
 																		{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
@@ -329,7 +329,7 @@ class ViewCommunity extends Component{
 																		<h4 className="form-header">Links and Resources</h4>
 																		{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
@@ -353,7 +353,7 @@ class ViewCommunity extends Component{
 																		<h4 className="form-header">More Info</h4>
 																		{/*<Popup
 															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}

@@ -44,7 +44,7 @@ class ChangePassword extends Component{
 					<main>
 						<div className="w3-modal" style={{display: this.props.is_sending ? "block" : "none"}}>
 							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"> </i>
+								<i className="fas fa-spinner fa-spin"/>
 							</div>
 						</div>
 						<div className="sign-body" style={{filter: this.props.is_sending ? "blur(4px)" : "none"}}>

@@ -24,6 +24,7 @@ export const community_config = {
 
 	TOOL_TIPS: {
 		"": "All Communities",
+		"undefined": "All Communities",
 		"Churches": "Churches offer weekly gatherings for anyone and everyone to come together, hear a message, and worship through music.",
 		"Youth Groups": "Youth Groups are a faith based gathering for youth in Jr. and/or Sr. High.",
 		"Young Adult Groups": "Young Adult Groups are a faith based gathering typically for young adults aged 18 - 29.",

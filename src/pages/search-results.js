@@ -327,7 +327,7 @@ class SearchResults extends Component{
 						<div id={"spinning-modal"} className={"w3-modal"}
 								 style={{display: this.props.community.searching ? "block" : "none"}}>
 							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"> </i>
+								<i className="fas fa-spinner fa-spin"/>
 							</div>
 						</div>
 						<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
@@ -370,7 +370,7 @@ class SearchResults extends Component{
 									{/*
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
+																	className={"fas fa-question-circle tooltip-icon w3-right"}/>}
 											position={"left top"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>

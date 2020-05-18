@@ -144,7 +144,7 @@ class Thumbnail extends Component{
 													{this.props.value.community_name}
 												</Link>
 												<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
-													<i className={"fas fa-pen"} style={{fontSize: "12px", color: "rgba(14, 0, 25, 0.2)"}}> </i>
+													<i className={"fas fa-pen"} style={{fontSize: "12px", color: "rgba(14, 0, 25, 0.2)"}}/>
 												</div>
 												<nav role="navigation" className={"w3-animate-opacity listing-navmenu w-nav-menu"}
 														 style={{display: this.state.is_show_menu ? "block" : "none"}}>

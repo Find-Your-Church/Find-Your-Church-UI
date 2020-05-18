@@ -159,10 +159,18 @@ class SearchBar extends Component{
 	render(){
 		const searchable = !isNaN(this.state.my_lat) && !isNaN(this.state.my_lng);
 
-		let category_in_path = this.props.path === undefined ? ""
-			: this.props.path.split("/")[2];
+		let category_in_path = "";
+		if(this.props.path !== undefined){
+			const params = this.props.path.split('/');
+			console.log(params);
 
-		category_in_path = category_in_path === undefined ? "" : category_in_path.replace(/-/g, " ");
+			if(params[1] === "search-results"){
+				category_in_path = params[2] === undefined ? "" : params[2].replace(/-/g, ' ');
+			}
+			else if(params[1] === "search-results-iframe"){
+				category_in_path = params[3] === undefined ? "" : params[3].replace(/-/g, ' ');
+			}
+		}
 
 		return this.state.ready2go && !this.props.init ? (
 			<Redirect to={"/search-results"}/>

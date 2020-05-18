@@ -41,7 +41,7 @@ class ListMembers extends Component{
 									{this.props.fromPublic ? null :
 										<Popup
 											trigger={<i style={{cursor: "pointer"}}
-														className={"fas fa-question-circle tooltip-icon"}> </i>}
+														className={"fas fa-question-circle tooltip-icon"}/>}
 											position={"left top"}>
 											<div>
 												Community admins are the users who own and manage the community a user is viewing. You can edit the information
@@ -80,7 +80,7 @@ class ListMembers extends Component{
 																			<Link to="#" className={"w3-right"}
 																				  onClick={this.toggleMenu}>
 																				<i className={"fas fa-ellipsis-h"}
-																				   style={{color: "#a1a1a1"}}> </i>
+																				   style={{color: "#a1a1a1"}}/>
 																			</Link>
 																		</div>
 																		<nav role="navigation"
@@ -135,7 +135,7 @@ class ListMembers extends Component{
 									<h3>Community</h3>
 									<Popup
 										trigger={<i style={{cursor: "pointer"}}
-													className={"fas fa-question-circle tooltip-icon"}> </i>}
+													className={"fas fa-question-circle tooltip-icon"}/>}
 										position={"left bottom"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>

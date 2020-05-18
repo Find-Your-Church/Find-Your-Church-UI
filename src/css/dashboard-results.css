@@ -321,3 +321,50 @@
 	-o-object-fit: fill;
 	object-fit: fill;
 }
+
+.div-block-184 {
+	padding: 100px 200px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(232, 229, 234, 0.95)), to(hsla(0, 0%, 100%, 0.8))), url("../img/iframe-header-bg.jpg");
+	background-image: linear-gradient(180deg, rgba(232, 229, 234, 0.95), hsla(0, 0%, 100%, 0.8)), url("../img/iframe-header-bg.jpg");
+	background-position: 0px 0px, 50% 0%;
+	background-size: auto, cover;
+	background-repeat: repeat, no-repeat;
+	background-attachment: scroll, fixed;
+	text-align: center;
+}
+
+.div-block-184 .div-block-185 {
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	right: 0%;
+	bottom: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	text-align: left;
+}
+
+.div-block-184 .heading-28 {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	color: #333;
+	font-size: 32px;
+	line-height: 32px;
+	font-weight: 700;
+}
+
+.div-block-184 .paragraph-5 {
+	margin: 0;
+	padding-top: 20px;
+	font-size: 18px;
+	line-height: 24px;
+	text-align: left;
+}
+
+.div-block-184 .link-10 {
+	color: #2e89fe;
+	font-size: 16px;
+	line-height: 20px;
+	text-decoration: none;
+}

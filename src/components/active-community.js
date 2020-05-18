@@ -183,14 +183,14 @@ class StripeSubscription extends Component{
 							<div className="div-block-147">
 								<div className="accordionheader-div nounderline">
 									<h3>Account Summary</h3>
-									<i className={"fas fa-question-circle tooltip-icon"}> </i>
+									<i className={"fas fa-question-circle tooltip-icon"}/>
 								</div>
 								<div className="subscribe-container">
 									<div className="invoice-row">
 										<div className="invoice-div">
 											<div className="filtersheader-div">
 												<h4 className="table-header">Activations</h4>
-												<i className={"fas fa-question-circle tooltip-icon"}> </i>
+												<i className={"fas fa-question-circle tooltip-icon"}/>
 											</div>
 											<div>
 												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}
@@ -200,7 +200,7 @@ class StripeSubscription extends Component{
 													{this.props.community.subscription ?
 														formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
 														: (this.props.community.is_sending ?
-															<i className="fas fa-spinner fa-spin"> </i>
+															<i className="fas fa-spinner fa-spin"/>
 															: "00")}
 												</h4>
 											</div>
@@ -210,14 +210,14 @@ class StripeSubscription extends Component{
 										<div className="invoice-div">
 											<div className="filtersheader-div">
 												<h4 className="table-header">Price</h4>
-												<i className={"fas fa-question-circle tooltip-icon"}> </i>
+												<i className={"fas fa-question-circle tooltip-icon"}/>
 											</div>
 											<div>
 												<h4 className={"value" + (this.props.community.subscription ? "" : " grey")}>
 													{this.props.community.subscription ?
 														showAmount(this.props.community.subscription.plan.amount)
 														: (this.props.community.is_sending ?
-															<i className="fas fa-spinner fa-spin"> </i>
+															<i className="fas fa-spinner fa-spin"/>
 															: "$0.00")}
 												</h4>
 											</div>
@@ -248,7 +248,7 @@ class StripeSubscription extends Component{
 								<div className="div-block-147">
 									<div className="accordionheader-div nounderline">
 										<h3>Billing Summary</h3>
-										<i className={"fas fa-question-circle tooltip-icon"}> </i>
+										<i className={"fas fa-question-circle tooltip-icon"}/>
 									</div>
 									<div className="subscribe-container">
 										<div className="invoice-row">
@@ -264,7 +264,7 @@ class StripeSubscription extends Component{
 														{this.props.community.subscription ?
 															showAmount(this.props.community.subscription.quantity * this.props.community.subscription.plan.amount)
 															: (this.props.community.is_sending ?
-																<i className="fas fa-spinner fa-spin"> </i>
+																<i className="fas fa-spinner fa-spin"/>
 																: "$0.00")}
 													</h4>
 												</div>
@@ -307,7 +307,7 @@ class StripeSubscription extends Component{
 																	showAmount(this.props.community.my_communities.active.length *
 																		this.props.community.subscription.plan.amount)
 																	: (this.props.community.is_sending ?
-																		<i className="fas fa-spinner fa-spin"> </i>
+																		<i className="fas fa-spinner fa-spin"/>
 																		: "$0.00")}
 															</h4>
 														)}
@@ -334,13 +334,13 @@ class StripeSubscription extends Component{
 															{this.props.community.upcoming_invoice ?
 																showAmount(this.props.community.upcoming_invoice.total)
 																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "$0.00")}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_due_date.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "00/00/0000")}
 														</h4>
 													</div>
@@ -349,13 +349,13 @@ class StripeSubscription extends Component{
 															{this.props.community.upcoming_invoice ?
 																showAmount(this.props.community.upcoming_invoice.total)
 																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "$0.00")}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month1.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "00/00/0000")}
 														</h4>
 													</div>
@@ -364,13 +364,13 @@ class StripeSubscription extends Component{
 															{this.props.community.upcoming_invoice ?
 																showAmount(this.props.community.upcoming_invoice.total)
 																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "$0.00")}
 															&nbsp;on&nbsp;
 															{this.props.community.subscription ?
 																next_month2.toLocaleDateString('en-US')
 																: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "00/00/0000")}
 														</h4>
 													</div>
@@ -389,9 +389,9 @@ class StripeSubscription extends Component{
 										<Link to="#" className={"table-link"}
 											  onClick={this.clickEditCard}>
 											{this.state.editing_card ? (
-												<i className={"fas fa-save"}> </i>
+												<i className={"fas fa-save"}/>
 											) : (
-												<i className={"fas fa-pen"}> </i>
+												<i className={"fas fa-pen"}/>
 											)}
 										</Link>
 									) : null}
@@ -424,7 +424,7 @@ class StripeSubscription extends Component{
 										</div>
 										{this.props.community.is_setting_card ? (
 											<div className={"w3-container w3-center w3-margin-top"}>
-												<i className="fas fa-spinner fa-spin"> </i>
+												<i className="fas fa-spinner fa-spin"/>
 											</div>
 										) : (
 											this.props.auth.user.billing_info ? (

@@ -462,7 +462,7 @@ class CommunityStep extends Component{
 														<h4>Community Info</h4>
 														<Popup
 																trigger={<i style={{cursor: "pointer"}}
-																						className={"fas fa-question-circle tooltip-icon"}> </i>}
+																						className={"fas fa-question-circle tooltip-icon"}/>}
 																position={"left center"}>
 															<div>
 																This is the information that will be used as initial search criteria and displayed on
@@ -565,7 +565,7 @@ class CommunityStep extends Component{
 																		<h4 className="form-header">About</h4>
 																		<Popup
 																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}> </i>}
+																										className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
 																				This is where you can tell users about your community, where they can go to
@@ -589,7 +589,7 @@ class CommunityStep extends Component{
 																		<h4 className="form-header">Community Contact</h4>
 																		<Popup
 																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}> </i>}
+																										className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
 																				This is the primary point of contact for the community. Examples might include a
@@ -637,7 +637,7 @@ class CommunityStep extends Component{
 																		<h4 className="form-header">Links and Resources</h4>
 																		<Popup
 																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}> </i>}
+																										className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
 																				These are the links and resources you can provide users for them to learn more
@@ -684,7 +684,7 @@ class CommunityStep extends Component{
 																		<h4 className="form-header">More Info</h4>
 																		<Popup
 																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}> </i>}
+																										className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
 																				These are the filters that a user can apply to help them narrow down their

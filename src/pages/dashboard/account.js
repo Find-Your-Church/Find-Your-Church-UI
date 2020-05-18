@@ -458,7 +458,7 @@ class Account extends Component{
 		const uc_amount = this.props.community.subscription ?
 				showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
 				: (this.props.community.is_sending ?
-						<i className="fas fa-spinner fa-spin"> </i>
+						<i className="fas fa-spinner fa-spin"/>
 						: "");
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
@@ -468,7 +468,7 @@ class Account extends Component{
 					<div className="w3-modal"
 							 style={{display: this.props.is_sending || this.props.community.is_setting_card ? "block" : "none"}}>
 						<div className="w3-display-middle w3-text-white w3-jumbo">
-							<i className={"fas fa-spinner fa-spin"}> </i>
+							<i className={"fas fa-spinner fa-spin"}/>
 						</div>
 					</div>
 					<main className="account-body"
@@ -496,7 +496,7 @@ class Account extends Component{
 											<h5 className="container-header">Admin Info</h5>
 											<Popup
 													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																			className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left top"}>
 												<div>
 													By default, you are the admin for any community that you create and are required to provide at
@@ -534,9 +534,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeUserName}>
 												{this.state.editingUserName ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -553,7 +553,7 @@ class Account extends Component{
 												</div>
 											</div>
 											<label className={"table-link"} style={{marginTop: "0", lineHeight: "48px"}}>
-												<i className={"fas fa-pen"}> </i>
+												<i className={"fas fa-pen"}/>
 												<FileBase id="btn-upload" type="file" className="upload-button w-button"
 																	multiple={false} onDone={this.changeUserPic.bind(this)}
 																	height="38"/>
@@ -579,9 +579,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeAdminEmail}>
 												{this.state.editingAdminEmail ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -612,9 +612,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changePhone}>
 												{this.state.editingPhone ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -687,9 +687,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeZipCode}>
 												{this.state.editingZipCode ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -701,7 +701,7 @@ class Account extends Component{
 											<h5 className="container-header">User Info</h5>
 											<Popup
 													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																			className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left top"}>
 												<div>
 													This information is private and only viewable by you. Use this section to update your login
@@ -760,9 +760,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeEmail}>
 												{this.state.editingEmail ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -790,9 +790,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changePassword}>
 												{this.state.editingPassword ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -818,9 +818,9 @@ class Account extends Component{
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeRefCode}>
 												{this.state.editingRefCode ? (
-														<i className={"fas fa-save"}> </i>
+														<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}> </i>
+														<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -851,7 +851,7 @@ class Account extends Component{
 											</h5>
 											<Popup
 													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																			className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left center"}>
 												<div>
 													This is a snapshot displaying: the number of communities currently active out of the
@@ -908,7 +908,7 @@ class Account extends Component{
 											<h5 className="container-header">Payment Summary</h5>
 											<Popup
 													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																			className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left center"}>
 												<div>
 													This is a snapshot showing you how many communities you have active out of the total amount
@@ -929,7 +929,7 @@ class Account extends Component{
 												{this.props.community.subscription ?
 														formatNumner(this.props.community.subscription.quantity + this.props.community.tickets)
 														: (this.props.community.is_sending ?
-																<i className="fas fa-spinner fa-spin"> </i>
+																<i className="fas fa-spinner fa-spin"/>
 																: "00")}
 											</h4>
 										</div>
@@ -978,21 +978,21 @@ class Account extends Component{
 														{!this.state.editing_card ? (
 																<Link to="#" className={"table-link w3-large w3-col s1"}>
 																	<i className={"fas fa-times"}
-																		 style={{color: "transparent", cursor: "normal"}}> </i>
+																		 style={{color: "transparent", cursor: "normal"}}/>
 																</Link>
 														) : null}
 														<Link to="#" className={"table-link w3-col s1"}
 																	onClick={this.clickEditCard}>
 															{this.state.editing_card ? (
-																	<i className={"fas fa-save"}> </i>
+																	<i className={"fas fa-save"}/>
 															) : (
-																	<i className={"fas fa-pen"}> </i>
+																	<i className={"fas fa-pen"}/>
 															)}
 														</Link>
 														{this.state.editing_card ? (
 																<Link to="#" className={"table-link w3-large w3-col s1"}
 																			onClick={this.cancelEditCard}>
-																	<i className={"fas fa-times"}> </i>
+																	<i className={"fas fa-times"}/>
 																</Link>
 														) : null}
 													</>
