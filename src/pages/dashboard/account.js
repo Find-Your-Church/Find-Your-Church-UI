@@ -197,7 +197,7 @@ class Account extends Component{
 
 		this.setState({
 			user_pic:
-					files.base64.toString()
+				files.base64.toString()
 		});
 
 		const userData = {
@@ -366,11 +366,11 @@ class Account extends Component{
 		self.setState({my_address: address, user_zip_code: trimmed_address /*matches[0]*/});
 
 		geocodeByAddress(address)
-				.then(results => getLatLng(results[0]))
-				.then(latLng => {
-					self.setState({user_location: {lat: latLng.lat, lng: latLng.lng}});
-				})
-				.catch(error => console.error('Error', error));
+			.then(results => getLatLng(results[0]))
+			.then(latLng => {
+				self.setState({user_location: {lat: latLng.lat, lng: latLng.lng}});
+			})
+			.catch(error => console.error('Error', error));
 	};
 
 	onBlurPhone = (e) => {
@@ -462,60 +462,61 @@ class Account extends Component{
 		}
 
 		const uc_amount = this.props.community.subscription ?
-				showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
-				: (this.props.community.is_sending ?
-						<i className="fas fa-spinner fa-spin"/>
-						: "");
+			showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
+			: (this.props.community.is_sending ?
+				<i className="fas fa-spinner fa-spin"/>
+				: "");
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
 		return (
-				<div>
-					<div className="w3-modal"
-							 style={{display: this.props.is_sending || this.props.community.is_setting_card ? "block" : "none"}}>
-						<div className="w3-display-middle w3-text-white w3-jumbo">
-							<i className={"fas fa-spinner fa-spin"}/>
-						</div>
+			<div>
+				<div className="w3-modal"
+						 style={{display: this.props.is_sending || this.props.community.is_setting_card ? "block" : "none"}}>
+					<div className="w3-display-middle w3-text-white w3-jumbo">
+						<i className={"fas fa-spinner fa-spin"}/>
 					</div>
-					<main className="account-body"
-								style={{filter: this.props.is_sending || this.props.community.is_setting_card ? "blur(4px)" : "none"}}>
-						<div className="div-block-213">
-							<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-								<div className="div-block-231">
-									<Link to="/dashboard"
-												className="button-create w-button">
-										<i className="fas fa-th"/><span className="text-span-3">Dashboard</span></Link>
-								</div>
+				</div>
+				<main className="account-body"
+							style={{filter: this.props.is_sending || this.props.community.is_setting_card ? "blur(4px)" : "none"}}>
+					<div className="div-block-213">
+						<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
+							<div className="div-block-231">
+								<Link to="/dashboard"
+											className="button-create w-button">
+									<i className="fas fa-th"/><span className="text-span-3">Dashboard</span></Link>
 							</div>
-							<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
-								Account
-							</h1></div>
 						</div>
-						<div className="div-20bottom">
-							<div className="tabs-menu-6 w-tab-menu" role="tablist">
-								<div data-w-tab="Tab 1"
-										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
-										 onClick={() => this.selectTabDetails(true)}>
-									<div>Account Details</div>
-								</div>
-								<div data-w-tab="Tab 2"
-										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}
-										 onClick={() => this.selectTabDetails(false)}>
-									<div>Billing</div>
-								</div>
+						<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
+							Account
+						</h1></div>
+					</div>
+					<div className="div-20bottom">
+						<div className="tabs-menu-6 w-tab-menu" role="tablist">
+							<div data-w-tab="Tab 1"
+									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
+									 onClick={() => this.selectTabDetails(true)}>
+								<div>Account Details</div>
 							</div>
-							<div className="container-inline w3-row" style={{display: this.state.showed_details ? "block" : "none"}}>
-								<div className="flexdiv-leftright panel underline">
-									<h5 className="container-title">Account Details</h5>
-								</div>
-								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-right" : " h-right")}>
+							<div data-w-tab="Tab 2"
+									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}
+									 onClick={() => this.selectTabDetails(false)}>
+								<div>Billing</div>
+							</div>
+						</div>
+						<div className="container-inline" style={{display: this.state.showed_details ? "block" : "none"}}>
+							<div className="flexdiv-leftright panel underline">
+								<h5 className="container-title">Account Details</h5>
+							</div>
+							<div className={"account-details-group"}>
+								<div className={"sub-container"}>
 									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Admin Profile</h5>
 											<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"left top"}>
+												trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
+												position={"left top"}>
 												<div>
 													By default, you are the admin for any community that you create and are required to provide at
 													least one form of
@@ -532,29 +533,29 @@ class Account extends Component{
 											<h4 className="table-header">Name</h4>
 											<h4 className="table-item">
 												{this.state.editingUserName ?
-														<div className="w3-row">
-															<input type="text" className="w3-half"
-																		 title="First name" placeholder="First name"
-																		 id="user_fname" onChange={this.onChange}
-																		 value={this.state.user_fname} autoFocus/>
-															<input type="text" className="w3-half"
-																		 title="Last name" placeholder="Last name"
-																		 id="user_lname" onChange={this.onChange}
-																		 value={this.state.user_lname}/>
-														</div>
-														: user.fname + " " + user.lname
+													<div className="w3-row">
+														<input type="text" className="w3-half"
+																	 title="First name" placeholder="First name"
+																	 id="user_fname" onChange={this.onChange}
+																	 value={this.state.user_fname} autoFocus/>
+														<input type="text" className="w3-half"
+																	 title="Last name" placeholder="Last name"
+																	 id="user_lname" onChange={this.onChange}
+																	 value={this.state.user_lname}/>
+													</div>
+													: user.fname + " " + user.lname
 												}
 												{this.state.errors.msg_name !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_name}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_name}
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeUserName}>
 												{this.state.editingUserName ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -562,8 +563,8 @@ class Account extends Component{
 											<h4 className="table-header">Picture</h4>
 											<div className="profpic-div-small" style={{marginLeft: "auto"}}>
 												<img src={isEmpty(this.props.auth.user.pic) ?
-														"/img/default-user.png"
-														: this.props.auth.user.pic}
+													"/img/default-user.png"
+													: this.props.auth.user.pic}
 														 alt="" className="image-4"/>
 												<div className={"w3-text-red w3-small"}
 														 style={{display: this.state.showSizeError ? "block" : "none"}}>
@@ -581,25 +582,25 @@ class Account extends Component{
 											<h4 className="table-header">Contact Email</h4>
 											<h4 className="table-item">
 												{this.state.editingAdminEmail ?
-														<div className="w3-row">
-															<input type="email" className="w3-col"
-																		 title="Admin Email" placeholder="Admin Email"
-																		 id="user_admin_email" onChange={this.onChange}
-																		 value={this.state.user_admin_email} autoFocus/>
-														</div>
-														: user.admin_email
+													<div className="w3-row">
+														<input type="email" className="w3-col"
+																	 title="Admin Email" placeholder="Admin Email"
+																	 id="user_admin_email" onChange={this.onChange}
+																	 value={this.state.user_admin_email} autoFocus/>
+													</div>
+													: user.admin_email
 												}
 												{this.state.errors.msg_admin_email !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_admin_email}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_admin_email}
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeAdminEmail}>
 												{this.state.editingAdminEmail ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -607,32 +608,32 @@ class Account extends Component{
 											<h4 className="table-header">Contact Phone</h4>
 											<h4 className="table-item">
 												{this.state.editingPhone ?
-														<div className="w3-row">
-															<input type="tel" className="w3-col"
-																		 title="Phone" placeholder="Phone"
-																		 pattern={config.US_PHONE_PATTERN}
-																		 id="user_phone" onChange={this.onChange}
-																		 onBlur={this.onBlurPhone}
-																		 value={this.state.user_phone} autoFocus/>
-														</div>
-														: user.phone
+													<div className="w3-row">
+														<input type="tel" className="w3-col"
+																	 title="Phone" placeholder="Phone"
+																	 pattern={config.US_PHONE_PATTERN}
+																	 id="user_phone" onChange={this.onChange}
+																	 onBlur={this.onBlurPhone}
+																	 value={this.state.user_phone} autoFocus/>
+													</div>
+													: user.phone
 												}
 												{this.state.errors.msg_phone !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_phone}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_phone}
+													</div>
+													: null}
 												{this.state.is_invalid_phone ?
-														<div className="error-item">
-															Invalid phone number
-														</div>
-														: null}
+													<div className="error-item">
+														Invalid phone number
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changePhone}>
 												{this.state.editingPhone ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -640,87 +641,87 @@ class Account extends Component{
 											<h4 className="table-header">City or zip code</h4>
 											<h4 className="table-item">
 												{this.state.editingZipCode ?
-														<div className="w3-row" style={{position: "relative"}}>
-															<PlacesAutocomplete
-																	value={this.state.user_zip_code}
-																	onChange={this.onChangeAddress}
-																	onSelect={this.handleSelect}
-															>
-																{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-																		<>
-																			<Tooltip placement={"top"}
-																							 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
-																							 align={{offset: [0, 2],}}
-																							 visible={this.state.showed_tooltip}
-																			>
-																				<input className="w3-col"
-																							 title={`Lat: ${this.state.user_location.lat}, Lng: ${this.state.user_location.lng}, ${this.state.my_address}`}
-																							 {...getInputProps({
-																								 placeholder: "Zip code",
-																							 })}
-																							 onFocus={this.onFocusZipCode}
-																							 onBlur={this.onBlurZipCode}
-																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																							 required="" autoFocus/>
-																			</Tooltip>
-																			<div className={"search-address-candidates"}
-																					 style={{top: "24px", left: "0", textAlign: "left"}}
-																			>
-																				{loading ?
-																						<div
-																								className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
-																				{suggestions.map((suggestion) => {
-																					const style = {
-																						color: suggestion.active ? "#ffffff" : "#254184",
-																						backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
-																						backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-																						textAlign: "left",
-																					};
+													<div className="w3-row" style={{position: "relative"}}>
+														<PlacesAutocomplete
+															value={this.state.user_zip_code}
+															onChange={this.onChangeAddress}
+															onSelect={this.handleSelect}
+														>
+															{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+																<>
+																	<Tooltip placement={"top"}
+																					 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
+																					 align={{offset: [0, 2],}}
+																					 visible={this.state.showed_tooltip}
+																	>
+																		<input className="w3-col"
+																					 title={`Lat: ${this.state.user_location.lat}, Lng: ${this.state.user_location.lng}, ${this.state.my_address}`}
+																					 {...getInputProps({
+																						 placeholder: "Zip code",
+																					 })}
+																					 onFocus={this.onFocusZipCode}
+																					 onBlur={this.onBlurZipCode}
+																					 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																					 required="" autoFocus/>
+																	</Tooltip>
+																	<div className={"search-address-candidates"}
+																			 style={{top: "24px", left: "0", textAlign: "left"}}
+																	>
+																		{loading ?
+																			<div
+																				className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+																		{suggestions.map((suggestion) => {
+																			const style = {
+																				color: suggestion.active ? "#ffffff" : "#254184",
+																				backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
+																				backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																				textAlign: "left",
+																			};
 
-																					return (
-																							<div className={"address-item"}
-																									 onClick={() => alert(suggestion.terms)}
-																									 {...getSuggestionItemProps(suggestion, {style})}>
-																								{suggestion.description}
-																							</div>
-																					);
-																				})}
-																			</div>
-																		</>
-																)}
-															</PlacesAutocomplete>
-														</div>
-														: user.zip_code
+																			return (
+																				<div className={"address-item"}
+																						 onClick={() => alert(suggestion.terms)}
+																						 {...getSuggestionItemProps(suggestion, {style})}>
+																					{suggestion.description}
+																				</div>
+																			);
+																		})}
+																	</div>
+																</>
+															)}
+														</PlacesAutocomplete>
+													</div>
+													: user.zip_code
 												}
 												{this.state.errors.msg_zip_code !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_zip_code}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_zip_code}
+													</div>
+													: null}
 												{this.state.is_invalid_zip_code ?
-														<div className="error-item">
-															Invalid zip code
-														</div>
-														: null}
+													<div className="error-item">
+														Invalid zip code
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeZipCode}>
 												{this.state.editingZipCode ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
 									</div>
 								</div>
-								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-right" : " h-right")}>
+								<div className={"sub-container"}>
 									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">User Info</h5>
 											<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"left top"}>
+												trigger={<i style={{cursor: "pointer"}}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
+												position={"left top"}>
 												<div>
 													This information is private and only viewable by you. Use this section to update your login
 													credentials at any time.
@@ -733,54 +734,54 @@ class Account extends Component{
 												user.email_verified ? "This email was verified." : ""
 											}>
 												{this.state.editingEmail ?
-														<div className="w3-row">
-															<input type="email" className="w3-col"
-																		 title="Email" placeholder="Email"
-																		 id="user_email" onChange={this.onChange}
-																		 value={this.state.user_email} autoFocus/>
-														</div>
-														: (
-																<>
-																	{user.email}
-																	{user.email_verified ? (
-																			<img src={"/img/icon/icon-verified.svg"}
-																					 className={"verified-mark"}
-																					 alt={"verified mark"}
-																					 title={"Verified at: " + new Date(user.email_verified_at).toString()}/>
-																	) : (
-																			<div className={"email-verify-part"}>
-																				<div>
-																					Email not verified.
-																				</div>
-																				{this.props.auth.user.pended_at ? (
-																						<div>
-																							Email change pending
-																							confirmation:<br/>{
-																							new Date(this.props.auth.user.pended_at).toLocaleString('en-US')
-																						}
-																						</div>
-																				) : null}
-																				<div className={"link"} style={{cursor: "pointer"}}
-																						 onClick={this.onVerifyEmail}>
-																					{this.props.auth.user.pended_at ? "Res" : "S"}end
-																					Confirmation Link
-																				</div>
-																			</div>
-																	)}
-																</>
-														)
+													<div className="w3-row">
+														<input type="email" className="w3-col"
+																	 title="Email" placeholder="Email"
+																	 id="user_email" onChange={this.onChange}
+																	 value={this.state.user_email} autoFocus/>
+													</div>
+													: (
+														<>
+															{user.email}
+															{user.email_verified ? (
+																<img src={"/img/icon/icon-verified.svg"}
+																		 className={"verified-mark"}
+																		 alt={"verified mark"}
+																		 title={"Verified at: " + new Date(user.email_verified_at).toString()}/>
+															) : (
+																<div className={"email-verify-part"}>
+																	<div>
+																		Email not verified.
+																	</div>
+																	{this.props.auth.user.pended_at ? (
+																		<div>
+																			Email change pending
+																			confirmation:<br/>{
+																			new Date(this.props.auth.user.pended_at).toLocaleString('en-US')
+																		}
+																		</div>
+																	) : null}
+																	<div className={"link"} style={{cursor: "pointer"}}
+																			 onClick={this.onVerifyEmail}>
+																		{this.props.auth.user.pended_at ? "Res" : "S"}end
+																		Confirmation Link
+																	</div>
+																</div>
+															)}
+														</>
+													)
 												}
 												{this.state.errors.msg_email !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_email}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_email}
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeEmail}>
 												{this.state.editingEmail ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -788,29 +789,29 @@ class Account extends Component{
 											<h4 className="table-header">Password</h4>
 											<h4 className="table-item">
 												{this.state.editingPassword ?
-														<div className="w3-row">
-															<input type="password" className="w3-half"
-																		 title="Password" placeholder="Password"
-																		 id="user_password" onChange={this.onChange}
-																		 value={this.state.user_password} autoFocus/>
-															<input type="password" className="w3-half"
-																		 title="Confirm" placeholder="Confirm"
-																		 id="user_password2" onChange={this.onChange}
-																		 value={this.state.user_password2}/>
-														</div>
-														: "*".repeat(8)
+													<div className="w3-row">
+														<input type="password" className="w3-half"
+																	 title="Password" placeholder="Password"
+																	 id="user_password" onChange={this.onChange}
+																	 value={this.state.user_password} autoFocus/>
+														<input type="password" className="w3-half"
+																	 title="Confirm" placeholder="Confirm"
+																	 id="user_password2" onChange={this.onChange}
+																	 value={this.state.user_password2}/>
+													</div>
+													: "*".repeat(8)
 												}
 												{this.state.errors.msg_password !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_password}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_password}
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changePassword}>
 												{this.state.editingPassword ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -820,25 +821,25 @@ class Account extends Component{
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingRefCode ?
-														<div className="w3-row">
-															<input type="text" className="w3-col"
-																		 title="Referral code" placeholder="Referral code"
-																		 id="user_ref_code" onChange={this.onChange}
-																		 value={this.state.user_ref_code} autoFocus/>
-														</div>
-														: user.ref_code
+													<div className="w3-row">
+														<input type="text" className="w3-col"
+																	 title="Referral code" placeholder="Referral code"
+																	 id="user_ref_code" onChange={this.onChange}
+																	 value={this.state.user_ref_code} autoFocus/>
+													</div>
+													: user.ref_code
 												}
 												{this.state.errors.msg_ref_code !== undefined ?
-														<div className="error-item">
-															{this.state.errors.msg_ref_code}
-														</div>
-														: null}
+													<div className="error-item">
+														{this.state.errors.msg_ref_code}
+													</div>
+													: null}
 											</h4>
 											<Link to="#" className="table-link" onClick={this.changeRefCode}>
 												{this.state.editingRefCode ? (
-														<i className={"fas fa-save"}/>
+													<i className={"fas fa-save"}/>
 												) : (
-														<i className={"fas fa-pen"}/>
+													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
 										</div>
@@ -856,7 +857,8 @@ class Account extends Component{
 									</div>
 								</div>
 							</div>
-							{/*
+						</div>
+						{/*
 							<div className="container-inline w3-row">
 								<div className="flexdiv-leftright panel underline">
 									<h5 className="container-title">Developer Console</h5>
@@ -916,176 +918,178 @@ class Account extends Component{
 								</div>
 							</div>
 							*/}
-							<div className="container-inline w3-row" style={{display: this.state.showed_details ? "none" : "block"}}>
-								<div className="flexdiv-leftright panel underline">
-									<h5 className="container-title">Billing</h5>
-								</div>
-								<div className={"sub-container w3-col m12 l6 bottom"}>
-									<div className={"sub-content payment"}>
-										<div className="flexdiv-leftright underline">
-											<h5 className="container-header">Payment Summary</h5>
-											<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"left center"}>
-												<div>
-													This is a snapshot showing you how many communities you have active out of the total amount
-													you've paid for this billing
-													cycle; as well as the upcoming payments you can expect based on your current number of active
-													communities.
-												</div>
-											</Popup>
-										</div>
-										<div className="table-row-2">
-											<div className="flexdiv-left">
-												<h4 className="table-header">Active Communities</h4>
+						<div className="container-inline" style={{display: this.state.showed_details ? "none" : "block"}}>
+							<div className="flexdiv-leftright panel underline">
+								<h5 className="container-title">Billing</h5>
+							</div>
+							<div class={"account-details-group"}>
+							<div className={"sub-container"}>
+								<div className={"sub-content payment"}>
+									<div className="flexdiv-leftright underline">
+										<h5 className="container-header">Billing Summary</h5>
+										<Popup
+											trigger={<i style={{cursor: "pointer"}}
+																	className={"fas fa-question-circle tooltip-icon"}/>}
+											position={"left center"}>
+											<div>
+												This is a snapshot showing you how many communities you have active out of the total amount
+												you've paid for this billing
+												cycle; as well as the upcoming payments you can expect based on your current number of active
+												communities.
 											</div>
-											<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}
-													title={"Communities activated / Paid activations"}>
-												{formatNumner(this.props.community.my_communities.active.length)}
-												&nbsp;/&nbsp;
-												{this.props.community.subscription ?
-														formatNumner(this.props.community.subscription.quantity + this.props.community.tickets)
-														: (this.props.community.is_sending ?
-																<i className="fas fa-spinner fa-spin"/>
-																: "00")}
-											</h4>
-										</div>
-										<div className="table-row-2 upcoming" style={{borderBottom: "none"}}>
-											<h4 className="table-header">
-												Upcoming Payments
-											</h4>
-											<h4 className={"table-item"}>
-												<div className={"upcoming-payment-table-row"}>
-													<div><b>Date</b></div>
-													<div><b>Active</b></div>
-													<div><b>Price</b></div>
-													<div><b>Total</b></div>
-												</div>
-												<div className={"upcoming-payment-table-row"}>
-													<div>{this.props.community.subscription ? next_due_date.toLocaleDateString('en-US') : "-"}</div>
-													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-															showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
-													<div>{uc_amount}</div>
-												</div>
-												<div className={"upcoming-payment-table-row"}>
-													<div>{this.props.community.subscription ? next_month1.toLocaleDateString('en-US') : "-"}</div>
-													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-															showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
-													<div>{uc_amount}</div>
-												</div>
-												<div className={"upcoming-payment-table-row"}>
-													<div>{this.props.community.subscription ? next_month2.toLocaleDateString('en-US') : "-"}</div>
-													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-															showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
-													<div>{uc_amount}</div>
-												</div>
-											</h4>
-										</div>
+										</Popup>
 									</div>
-								</div>
-								<div className={"sub-container w3-col m12 l6 bottom"}>
-									<div className={"sub-content payment"}>
-										<div className="flexdiv-leftright card underline w3-row">
-											<h5 className="container-header w3-col s10">Payment Method</h5>
-											{this.props.community.subscription ? (
-													<>
-														{!this.state.editing_card ? (
-																<Link to="#" className={"table-link w3-large w3-col s1"}>
-																	<i className={"fas fa-times"}
-																		 style={{color: "transparent", cursor: "normal"}}/>
-																</Link>
-														) : null}
-														<Link to="#" className={"table-link w3-col s1"}
-																	onClick={this.clickEditCard}>
-															{this.state.editing_card ? (
-																	<i className={"fas fa-save"}/>
-															) : (
-																	<i className={"fas fa-pen"}/>
-															)}
-														</Link>
-														{this.state.editing_card ? (
-																<Link to="#" className={"table-link w3-large w3-col s1"}
-																			onClick={this.cancelEditCard}>
-																	<i className={"fas fa-times"}/>
-																</Link>
-														) : null}
-													</>
-											) : null}
+									<div className="table-row-2">
+										<div className="flexdiv-left">
+											<h4 className="table-header">Active Communities</h4>
 										</div>
-										{this.props.community.subscription ? (
-												<>
-													<div className="form-row">
-														<div className={"pay-info-row"}>
-															{this.state.editing_card ? (
-																	<div className="w3-row">
-																		<input type="text" className="w3-col s12"
-																					 title="Name on card" placeholder="Name on card"
-																					 id="name_on_card" onChange={this.onChange}
-																					 value={this.state.name_on_card} autoFocus/>
-																	</div>
-															) : (
-																	<span className={"w3-center grey"}>
-														{customer ? customer.sources.data[0].name : "(Card holder name)"}
-													</span>
-															)}
-														</div>
-													</div>
-													{this.state.editing_card ? (
-															<div className="form-row">
-																<CardElement className="CardInfoStyle" style={cardStyle}
-																						 disabled={!this.state.editing_card}/>
-															</div>
-													) : (
-															<div className="form-row">
-																{customer ? (
-																		<div className={"card-detail-item w3-row w3-text-grey"}
-																				 style={{width: "100%"}}>
-																			<div className={"w3-col s1"}>
-																				<img alt={"Credit card"}
-																						 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
-																			</div>
-																			<div className={"w3-col s5"} title={"Card number"}>
-																				**** **** ****&nbsp;
-																				{customer.sources.data[0].last4}
-																			</div>
-																			<div className={"w3-col s3"} title={"Expiration"}>
-																				{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
-																			</div>
-																			<div className={"w3-col s1"}
-																					 title={customer.sources.data[0].cvc_check}>
-																				***
-																			</div>
-																			<div className={"w3-col s2"}
-																					 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
-																				{customer.sources.data[0].address_zip}
-																			</div>
-																		</div>
-																) : null}
-															</div>
-													)}
-												</>
-										) : (
-												<div className={"w3-center w3-padding w3-text-grey"}>
-													N/A
-												</div>
-										)}
-										<div className="w-form-done">
-											<div>Thank you! Your submission has been received!</div>
-										</div>
-										<div className="w-form-fail">
-											<div>Oops! Something went wrong while submitting the form.</div>
-										</div>
+										<h4 className={"table-item right" + (this.props.community.subscription ? "" : " grey")}
+												title={"Communities activated / Paid activations"}>
+											{formatNumner(this.props.community.my_communities.active.length)}
+											&nbsp;/&nbsp;
+											{this.props.community.subscription ?
+												formatNumner(this.props.community.subscription.quantity + this.props.community.tickets)
+												: (this.props.community.is_sending ?
+													<i className="fas fa-spinner fa-spin"/>
+													: "00")}
+										</h4>
+									</div>
+									<div className="table-row-2 upcoming" style={{borderBottom: "none"}}>
+										<h4 className="table-header">
+											Upcoming Payments
+										</h4>
+										<h4 className={"table-item"}>
+											<div className={"upcoming-payment-table-row"}>
+												<div><b>Date</b></div>
+												<div><b>Active</b></div>
+												<div><b>Price</b></div>
+												<div><b>Total</b></div>
+											</div>
+											<div className={"upcoming-payment-table-row"}>
+												<div>{this.props.community.subscription ? next_due_date.toLocaleDateString('en-US') : "-"}</div>
+												<div>{this.props.community.my_communities.active.length}</div>
+												<div>{this.props.community.subscription ?
+													showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+												<div>{uc_amount}</div>
+											</div>
+											<div className={"upcoming-payment-table-row"}>
+												<div>{this.props.community.subscription ? next_month1.toLocaleDateString('en-US') : "-"}</div>
+												<div>{this.props.community.my_communities.active.length}</div>
+												<div>{this.props.community.subscription ?
+													showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+												<div>{uc_amount}</div>
+											</div>
+											<div className={"upcoming-payment-table-row"}>
+												<div>{this.props.community.subscription ? next_month2.toLocaleDateString('en-US') : "-"}</div>
+												<div>{this.props.community.my_communities.active.length}</div>
+												<div>{this.props.community.subscription ?
+													showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+												<div>{uc_amount}</div>
+											</div>
+										</h4>
 									</div>
 								</div>
 							</div>
+							<div className={"sub-container"}>
+								<div className={"sub-content payment"}>
+									<div className="flexdiv-leftright card underline w3-row">
+										<h5 className="container-header w3-col s10">Payment Summary</h5>
+										{this.props.community.subscription ? (
+											<>
+												{!this.state.editing_card ? (
+													<Link to="#" className={"table-link w3-large w3-col s1"}>
+														<i className={"fas fa-times"}
+															 style={{color: "transparent", cursor: "normal"}}/>
+													</Link>
+												) : null}
+												<Link to="#" className={"table-link w3-col s1"}
+															onClick={this.clickEditCard}>
+													{this.state.editing_card ? (
+														<i className={"fas fa-save"}/>
+													) : (
+														<i className={"fas fa-pen"}/>
+													)}
+												</Link>
+												{this.state.editing_card ? (
+													<Link to="#" className={"table-link w3-large w3-col s1"}
+																onClick={this.cancelEditCard}>
+														<i className={"fas fa-times"}/>
+													</Link>
+												) : null}
+											</>
+										) : null}
+									</div>
+									{this.props.community.subscription ? (
+										<>
+											<div className="form-row">
+												<div className={"pay-info-row"}>
+													{this.state.editing_card ? (
+														<div className="w3-row">
+															<input type="text" className="w3-col s12"
+																		 title="Name on card" placeholder="Name on card"
+																		 id="name_on_card" onChange={this.onChange}
+																		 value={this.state.name_on_card} autoFocus/>
+														</div>
+													) : (
+														<span className={"w3-center grey"}>
+														{customer ? customer.sources.data[0].name : "(Card holder name)"}
+													</span>
+													)}
+												</div>
+											</div>
+											{this.state.editing_card ? (
+												<div className="form-row">
+													<CardElement className="CardInfoStyle" style={cardStyle}
+																			 disabled={!this.state.editing_card}/>
+												</div>
+											) : (
+												<div className="form-row">
+													{customer ? (
+														<div className={"card-detail-item w3-row w3-text-grey"}
+																 style={{width: "100%"}}>
+															<div className={"w3-col s1"}>
+																<img alt={"Credit card"}
+																		 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+															</div>
+															<div className={"w3-col s5"} title={"Card number"}>
+																**** **** ****&nbsp;
+																{customer.sources.data[0].last4}
+															</div>
+															<div className={"w3-col s3"} title={"Expiration"}>
+																{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
+															</div>
+															<div className={"w3-col s1"}
+																	 title={customer.sources.data[0].cvc_check}>
+																***
+															</div>
+															<div className={"w3-col s2"}
+																	 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
+																{customer.sources.data[0].address_zip}
+															</div>
+														</div>
+													) : null}
+												</div>
+											)}
+										</>
+									) : (
+										<div className={"w3-center w3-padding w3-text-grey"}>
+											N/A
+										</div>
+									)}
+									<div className="w-form-done">
+										<div>Thank you! Your submission has been received!</div>
+									</div>
+									<div className="w-form-fail">
+										<div>Oops! Something went wrong while submitting the form.</div>
+									</div>
+								</div>
+							</div>
+							</div>
 						</div>
-					</main>
-					<SiteFooter/>
-				</div>
+					</div>
+				</main>
+				<SiteFooter/>
+			</div>
 		);
 	}
 }
@@ -1113,15 +1117,15 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{
-			getMyCommunities,
-			verifyEmail,
-			getUserInfo,
-			registerCard,
-			updateUserInfo,
-			getBillingStatus,
-			getPlan,
-			setSearchCriteria
-		}
+	mapStateToProps,
+	{
+		getMyCommunities,
+		verifyEmail,
+		getUserInfo,
+		registerCard,
+		updateUserInfo,
+		getBillingStatus,
+		getPlan,
+		setSearchCriteria
+	}
 )(injectStripe(Account));
