@@ -236,13 +236,8 @@
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	border-style: none;
-	border-width: 1px;
-	border-color: rgba(27, 0, 51, 0.2);
 	border-radius: 3px;
-	background-color: #fff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 0, 51, 0.1)), to(rgba(27, 0, 51, 0.1)));
-	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.1), rgba(27, 0, 51, 0.1));
+	background-color: #e8e5ea;
 	box-shadow: none;
 	font-family: 'Source Sans Pro', sans-serif;
 	color: rgba(51, 51, 51, 0.75);
@@ -261,7 +256,7 @@
 .button-delete:hover {
 	border-style: none;
 	border-color: rgba(27, 0, 51, 0.15);
-	background-color: #e8e5ea;
+	background-color: #f3f2f4;
 	box-shadow: none;
 	color: #333;
 }
