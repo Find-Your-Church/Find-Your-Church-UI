@@ -11,6 +11,7 @@ import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
 import {SketchPicker} from "react-color";
 import community_config, {INIT_FILTERS} from "../../conf/community-conf";
+import Tooltip from "rmc-tooltip/es";
 
 class DashboardResults extends Component{
 	constructor(props){
@@ -50,7 +51,15 @@ class DashboardResults extends Component{
 
 			showed_details: true,
 
-			showed_color: false,
+			showed_header_bg_color: false,
+			showed_results_bg_color: false,
+			showed_buttons_color: false,
+			color_header_bg: '#f3f2f5',
+			color_results_bg: '#e8e5ea',
+			color_buttons: '#2e89fe',
+
+			showed_tooltip: false,
+			tooltip_content: community_config.TOOL_TIPS[""],
 		};
 
 		this.showSubDlg = this.showSubDlg.bind(this);
@@ -151,6 +160,27 @@ class DashboardResults extends Component{
 		this.setState({showed_details: isDetail});
 	}
 
+	onChange = e => {
+		if(e.target.id === 'category'){
+			this.setState({
+				tooltip_content: community_config.TOOL_TIPS[e.target.value],
+				showed_tooltip: true,
+			});
+
+			setTimeout(() => {
+				this.setState({showed_tooltip: true});
+			})
+		}
+
+		this.setState({[e.target.id]: e.target.value});
+	};
+
+	onBlurCategory = () => {
+		this.setState({
+			showed_tooltip: false,
+		});
+	};
+
 	render(){
 		/**
 		 * TODO: replace:
@@ -201,12 +231,12 @@ class DashboardResults extends Component{
 							<div className="tabs-menu-6 w-tab-menu" role="tablist">
 								<div data-w-tab="Tab 1"
 										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
-										 href="#" onClick={() => this.selectTabDetail(true)}>
+										 onClick={() => this.selectTabDetail(true)}>
 									<div>Details</div>
 								</div>
 								<div data-w-tab="Tab 2"
 										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}
-										 href="#" onClick={() => this.selectTabDetail(false)}>
+										 onClick={() => this.selectTabDetail(false)}>
 									<div>Preview</div>
 								</div>
 							</div>
@@ -227,14 +257,10 @@ class DashboardResults extends Component{
 												position={"left top"}>
 												<div>
 													If your organization has your own website, you can use the code below to display your
-													communities
-													on any page(s) or
-													section(s) of your website. The preview below is what your iframe will look like when
-													dispalyed on
-													your website, and only
-													displays the communities currently active on your dashboard. The search, filter, and view
-													technology is fully responsive
-													and is compatible with any device or browser.
+													communities on any page(s) or section(s) of your website. The preview below is what your
+													iframe will look like when displayed on your website, and only displays the communities
+													currently active on your dashboard. The search, filter, and view technology is fully
+													responsive and is compatible with any device or browser.
 												</div>
 											</Popup>
 										</div>
@@ -261,18 +287,24 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<select id="field-4" name="field-4"
-																					data-name="Field 4"
-																					className="iframe-dropdown w-select">
-																		<option value="">All Communities</option>
-																		<option value="">Churches</option>
-																		<option value="life_groups">Life Groups</option>
-																		<option value="Third">Young Adult Groups</option>
-																		<option value="Another Choice">Support Groups</option>
-																		<option value="Another Choice">Social Groups</option>
-																		<option value="Another Choice">Youth Groups</option>
-																		<option value="Another Choice">Focus Groups</option>
-																	</select>
+																	<Tooltip placement={"top"} overlay={this.state.tooltip_content}
+																					 align={{offset: [0, 2],}}
+																					 visible={this.state.showed_tooltip}
+																	>
+																		<select id="category" className="iframe-dropdown w-select"
+																						onChange={this.onChange} onBlur={this.onBlurCategory}
+																						style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
+																			<option value="">All Communities</option>
+																			{
+																				community_config.CATEGORIES.map(cat => {
+																					return (
+																						<option value={cat} key={cat}
+																										title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+																					);
+																				})
+																			}
+																		</select>
+																	</Tooltip>
 																</div>
 															</div>
 															<div className="forminput-div">
@@ -288,9 +320,9 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<select id="field-2" name="field-2"
-																					data-name="Field 2"
-																					className="iframe-dropdown w-select">
+																	<select id="radius" className="iframe-dropdown w-select"
+																					onChange={this.onChange}
+																					style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
 																		<option value="1">within 1 mile of</option>
 																		<option value="3">within 3 miles of</option>
 																		<option value="5">within 5 miles of</option>
@@ -314,10 +346,7 @@ class DashboardResults extends Component{
 																</div>
 																<div className="iframeinput-container">
 																	<input type="email"
-																				 className="iframe-input w-input"
-																				 maxLength="256" name="email-6"
-																				 data-name="Email 6" placeholder=""
-																				 id="email-6" required=""/>
+																				 className="iframe-input w-input" id="zipcode"/>
 																</div>
 															</div>
 															<div className="forminput-div">
@@ -333,21 +362,23 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="email"
+																	<input type="text" readOnly={true} id={"header_color"}
 																				 className="iframe-input w-input"
-																				 maxLength="256" name="email-6"
-																				 data-name="Email 6" placeholder="#f3f2f5"
-																				 id="email-6" required=""/>
-																	<a href="#" className="color-button base w-button" onClick={() => {
-																		this.setState({showed_color: true});
-																	}}>
-																	</a>
+																				 value={this.state.color_header_bg}/>
+																	<a className="color-button w-button" style={{
+																		backgroundColor: this.state.color_header_bg
+																	}} onClick={() => {
+																		this.setState({showed_header_bg_color: !this.state.showed_header_bg_color});
+																	}}/>
 																	{
-																		this.state.showed_color ? (
-																			<div style={{
-																				position: "absolute",
+																		this.state.showed_header_bg_color ? (
+																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																				this.setState({showed_header_bg_color: false});
 																			}}>
-																				<SketchPicker/>
+																				<SketchPicker disableAlpha={true} color={this.state.color_header_bg}
+																											onChange={(color, e) => {
+																												this.setState({color_header_bg: color.hex});
+																											}}/>
 																			</div>
 																		) : null
 																	}
@@ -367,13 +398,26 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="email"
+																	<input type="text" readOnly={true} id={"result_color"}
 																				 className="iframe-input w-input"
-																				 maxLength="256" name="email-6"
-																				 data-name="Email 6" placeholder="#e8e5ea"
-																				 id="email-6" required=""/>
-																	<a href="#" className="color-button white w-button">
-																	</a>
+																				 value={this.state.color_results_bg}/>
+																	<a className="color-button w-button" style={{
+																		backgroundColor: this.state.color_results_bg
+																	}} onClick={() => {
+																		this.setState({showed_results_bg_color: !this.state.showed_results_bg_color});
+																	}}/>
+																	{
+																		this.state.showed_results_bg_color ? (
+																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																				this.setState({showed_results_bg_color: false});
+																			}}>
+																				<SketchPicker disableAlpha={true} color={this.state.color_results_bg}
+																											onChange={(color, e) => {
+																												this.setState({color_results_bg: color.hex});
+																											}}/>
+																			</div>
+																		) : null
+																	}
 																</div>
 															</div>
 															<div className="forminput-div">
@@ -389,14 +433,26 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="email"
+																	<input type="text" readOnly={true} id={"button_color"}
 																				 className="iframe-input w-input"
-																				 maxLength="256" name="email-6"
-																				 data-name="Email 6" placeholder="#2e89fe"
-																				 id="email-6" required=""/>
-																	<a href="#"
-																		 className="color-button blue w-button">
-																	</a>
+																				 value={this.state.color_buttons}/>
+																	<a className="color-button w-button" style={{
+																		backgroundColor: this.state.color_buttons
+																	}} onClick={() => {
+																		this.setState({showed_buttons_color: !this.state.showed_buttons_color});
+																	}}/>
+																	{
+																		this.state.showed_buttons_color ? (
+																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																				this.setState({showed_buttons_color: false});
+																			}}>
+																				<SketchPicker disableAlpha={true} color={this.state.color_buttons}
+																											onChange={(color, e) => {
+																												this.setState({color_buttons: color.hex});
+																											}}/>
+																			</div>
+																		) : null
+																	}
 																</div>
 															</div>
 														</div>
