@@ -74,20 +74,20 @@ export const community_config = {
 };
 
 export const INIT_FILTERS = {
-	community_name: "",
-	days: "0".repeat(community_config.FILTERS.days.length),
-	times: "0".repeat(community_config.FILTERS.times.length),
-	frequency: "0".repeat(community_config.FILTERS.frequency.length),
-	hosting: "0".repeat(community_config.FILTERS.hosting.length),
-	ages: "0".repeat(community_config.FILTERS.ages.length),
-	gender: "0".repeat(community_config.FILTERS.gender.length),
-	kids_welcome: "0".repeat(community_config.FILTERS.kids_welcome.length),
-	parking: "0".repeat(community_config.FILTERS.parking.length),
-	ministries: "0".repeat(community_config.FILTERS.ministries.length),
-	other_services: "0".repeat(community_config.FILTERS.other_services.length),
-	ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-	event_type: "0".repeat(community_config.FILTERS.event_type.length),
-	support_type: "0".repeat(community_config.FILTERS.support_type.length),
+	community_name: '',
+	days: '0'.repeat(community_config.FILTERS.days.length),
+	times: '0'.repeat(community_config.FILTERS.times.length),
+	frequency: '0'.repeat(community_config.FILTERS.frequency.length),
+	hosting: '0'.repeat(community_config.FILTERS.hosting.length),
+	ages: '0'.repeat(community_config.FILTERS.ages.length),
+	gender: '0'.repeat(community_config.FILTERS.gender.length),
+	kids_welcome: '0'.repeat(community_config.FILTERS.kids_welcome.length),
+	parking: '0'.repeat(community_config.FILTERS.parking.length),
+	ministries: '0'.repeat(community_config.FILTERS.ministries.length),
+	other_services: '0'.repeat(community_config.FILTERS.other_services.length),
+	ambiance: '0'.repeat(community_config.FILTERS.ambiance.length),
+	event_type: '0'.repeat(community_config.FILTERS.event_type.length),
+	support_type: '0'.repeat(community_config.FILTERS.support_type.length),
 };
 
 export default community_config;
