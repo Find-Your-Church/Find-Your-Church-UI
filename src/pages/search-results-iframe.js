@@ -17,7 +17,6 @@ import {
 	setSortOrder
 } from "../actions/community-actions";
 import PublicThumbnail from "../components/public-thumbnail";
-import Popup from "reactjs-popup";
 import '../css/search-results-iframe.css';
 import sorters from "../actions/sorters";
 import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sorter_newest} from "../utils/sorter-func";
@@ -32,7 +31,6 @@ class SearchResultsIframe extends Component{
 
 		const {owner, category, radius, lat, lng, filter} = props.match.params;
 		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
-			this.category = null;
 			this.category = props.community.criteria.category;
 			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
 			this.lat = props.community.criteria.lat;
@@ -48,8 +46,6 @@ class SearchResultsIframe extends Component{
 			this.filter = filter === 'undefined' ? {...INIT_FILTERS} : this.url2filters(filter);
 		}
 
-		console.log(this.filter);
-
 		this.criteria = {
 			owner: this.owner.split("-").pop(),
 			category: this.category.replace(/-/g, " "),
@@ -63,7 +59,7 @@ class SearchResultsIframe extends Component{
 
 		this.state = {
 			showed_filter: false,
-
+			search_community_name: '',
 			...INIT_FILTERS,
 		};
 	}
@@ -115,7 +111,6 @@ class SearchResultsIframe extends Component{
 	}
 
 	componentDidMount(){
-//		this.props.doSearchCommunities({...this.props.community.criteria});
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
 	}
 
@@ -169,7 +164,7 @@ class SearchResultsIframe extends Component{
 	};
 
 	componentDidUpdate(prevProps, prevState, snapshot){
-		if(this.props.community.criteria !== prevProps.community.criteria){
+		if(this.props.community.criteria !== prevProps.community.criteria || this.state.showed_filter !== prevState.showed_filter){
 			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + this.filters2url();
 			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
@@ -181,10 +176,29 @@ class SearchResultsIframe extends Component{
 		this.props.setSortOrder(parseInt(e.target.value));
 	};
 
+	onChangeCommunityName = e => {
+		const escaped_keyword = e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '');
+		this.setState({search_community_name: escaped_keyword});
+	};
+
+	onKeyPressCommunityName = e => {
+		if(e.keyCode === 13){
+			this.filterByCommunityName(this.state.search_community_name);
+		}
+	};
+
+	onBlurCommunityName = e => {
+		this.filterByCommunityName(this.state.search_community_name);
+	};
+
 	toggleFilter = () => {
 		this.setState({showed_filter: !this.state.showed_filter});
 	};
 
+	filterByCommunityName = (keyword) => {
+		const obj = {community_name: keyword};
+		this.doSearchByFilter(obj);
+	};
 	getDaysInfo = (checks) => {
 		const obj = {days: checks};
 		this.doSearchByFilter(obj);
@@ -387,6 +401,10 @@ class SearchResultsIframe extends Component{
 									<input type={"text"} id={"filter_community_name"}
 												 className={"w-input search-filter-name"}
 												 placeholder={"Search by name"}
+												 value={this.state.search_community_name}
+												 onChange={this.onChangeCommunityName}
+												 onKeyDown={this.onKeyPressCommunityName}
+												 onBlur={this.onBlurCommunityName}
 									/>
 								</div>
 								{/* filters group */}

@@ -17,7 +17,6 @@ import {
 	setSortOrder
 } from "../actions/community-actions";
 import PublicThumbnail from "../components/public-thumbnail";
-import Popup from "reactjs-popup";
 import '../css/search-results.css';
 import sorters from "../actions/sorters";
 import {sorter_closest, sorter_farthest, sorter_name_asc, sorter_name_desc, sorter_newest} from "../utils/sorter-func";
@@ -47,8 +46,6 @@ class SearchResults extends Component{
 			this.filter = filter === 'undefined' ? {...INIT_FILTERS} : this.url2filters(filter);
 		}
 
-		console.log(this.filter);
-
 		this.criteria = {
 			category: this.category.replace(/-/g, " "),
 			radius: this.radius,
@@ -61,7 +58,7 @@ class SearchResults extends Component{
 
 		this.state = {
 			showed_filter: false,
-
+			search_community_name: '',
 			...INIT_FILTERS,
 		};
 	}
@@ -178,10 +175,29 @@ class SearchResults extends Component{
 		this.props.setSortOrder(parseInt(e.target.value));
 	};
 
+	onChangeCommunityName = e => {
+		const escaped_keyword = e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '');
+		this.setState({search_community_name: escaped_keyword});
+	};
+
+	onKeyPressCommunityName = e => {
+		if(e.keyCode === 13){
+			this.filterByCommunityName(this.state.search_community_name);
+		}
+	};
+
+	onBlurCommunityName = e => {
+		this.filterByCommunityName(this.state.search_community_name);
+	};
+
 	toggleFilter = () => {
 		this.setState({showed_filter: !this.state.showed_filter});
 	};
 
+	filterByCommunityName = (keyword) => {
+		const obj = {community_name: keyword};
+		this.doSearchByFilter(obj);
+	};
 	getDaysInfo = (checks) => {
 		const obj = {days: checks};
 		this.doSearchByFilter(obj);
@@ -385,6 +401,10 @@ class SearchResults extends Component{
 										<input type={"text"} id={"filter_community_name"}
 													 className={"w-input search-filter-name"}
 													 placeholder={"Search by name"}
+													 value={this.state.search_community_name}
+													 onChange={this.onChangeCommunityName}
+													 onKeyDown={this.onKeyPressCommunityName}
+													 onBlur={this.onBlurCommunityName}
 										/>
 									</div>
 									{/* filters group */}
