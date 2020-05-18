@@ -125,7 +125,7 @@ class MyCommunities extends Component{
 
 	render(){
 		return (
-				<div className="communities-body w3-animate-opacity" style={{display: this.props.showed ? "block" : "none"}}>
+				<div className="communities-body" style={{display: this.props.showed ? "block" : "none"}}>
 					<div className="dashboard-container">
 						<div className="containerheader-div underline">
 							<div className="flexdiv-left">

@@ -74,7 +74,10 @@ class Admin extends Component{
 						</div>
 					</div>
 					<main className="admin-body w3-row"
-								style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
+								style={{
+									filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none",
+									backgroundColor: "#e8e5eb",
+								}}>
 						<div className={"admin-wrapper"}>
 							<div className="div-block-213">
 								<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
