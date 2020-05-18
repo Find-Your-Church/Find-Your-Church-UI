@@ -103,7 +103,7 @@ class Admin extends Component{
 										*/}
 									<div className="div-block-215">
 										<Link to="/dashboard-results" className="link-6">
-											<em className="italic-text-7 gray"><i className="fas fa-map-marked-alt"/></em>
+											<em className="italic-text-7 gray"><i className="fas fa-code"/></em>
 										</Link></div>
 								</div>
 							</div>

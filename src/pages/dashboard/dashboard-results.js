@@ -278,7 +278,7 @@ class DashboardResults extends Component{
 									<div className="div-block-215 underline">
 										<Link to="/dashboard-results" className="link-6">
 											<em className="italic-text-7 current">
-												<i className="fas fa-map-marked-alt"/>
+												<i className="fas fa-code"/>
 											</em>
 										</Link>
 									</div>
