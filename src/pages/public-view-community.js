@@ -184,7 +184,7 @@ class PublicViewCommunity extends Component{
 														{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
-															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 														</Link>
 														<nav role="navigation"
 																 className="w3-animate-opacity listing-navmenu view w-nav-menu"

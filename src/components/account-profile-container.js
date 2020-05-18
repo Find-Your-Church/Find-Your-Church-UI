@@ -48,7 +48,7 @@ class AccountProfileContainer extends Component{
 							</h3>
 							{/*
 							<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
-								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 							</Link>
 							<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 								 onMouseLeave={this.hideMenu}

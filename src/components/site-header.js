@@ -47,7 +47,7 @@ class SiteHeader extends Component{
 						{this.props.auth.isAuthenticated ? null : (
 								<Link to="#" onClick={this.toggleAdminMenu}
 											className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
-									<i className="fas fa-bars"> </i>
+									<i className="fas fa-bars"/>
 								</Link>
 						)}
 						{this.props.auth.isAuthenticated ? (<>

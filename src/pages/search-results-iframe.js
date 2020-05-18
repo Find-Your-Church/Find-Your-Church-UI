@@ -329,12 +329,12 @@ class SearchResultsIframe extends Component{
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
 						<div className="w3-display-middle w3-text-white w3-jumbo">
-							<i className="fas fa-spinner fa-spin"> </i>
+							<i className="fas fa-spinner fa-spin"/>
 						</div>
 					</div>
 					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
 						<div id="search-results-header" className="w3-col s12">
-							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true}/>
+							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true} path={this.props.location.pathname}/>
 							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
@@ -371,7 +371,7 @@ class SearchResultsIframe extends Component{
 								{/*
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon w3-right"}> </i>}
+																	className={"fas fa-question-circle tooltip-icon w3-right"}/>}
 											position={"left top"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>

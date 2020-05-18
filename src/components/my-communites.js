@@ -141,14 +141,14 @@ class MyCommunities extends Component{
 													{this.props.community.subscription ?
 															formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
 															: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
+																	<i className="fas fa-spinner fa-spin"/>
 																	: "00")}
 												</div>
 											</div>
 									) : null}
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
-																	className={"communities-tooltip fas fa-question-circle tooltip-icon"}> </i>}
+																	className={"communities-tooltip fas fa-question-circle tooltip-icon"}/>}
 											position={this.props.status === "active" ? "left top" : "left bottom"}>
 										<div>
 											{this.props.status === "active" ? (

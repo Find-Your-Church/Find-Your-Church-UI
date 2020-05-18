@@ -67,7 +67,7 @@ class Admin extends Component{
 						<div id={"spinning-modal"} className={"w3-modal"}
 								 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
 							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"> </i>
+								<i className="fas fa-spinner fa-spin"/>
 							</div>
 						</div>
 						<main className="admin-body w3-row"
@@ -77,7 +77,7 @@ class Admin extends Component{
 									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
 										<div className="div-block-231"><Link to="/create-new-community"
 																												 className="button-create w-button"><i
-												className={"fas fa-users"}> </i><span className="text-span-3">New Community</span></Link>
+												className={"fas fa-users"}/><span className="text-span-3">New Community</span></Link>
 										</div>
 									</div>
 									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">Dashboard

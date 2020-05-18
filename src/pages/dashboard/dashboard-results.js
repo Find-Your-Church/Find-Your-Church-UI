@@ -12,6 +12,7 @@ import Popup from "reactjs-popup";
 import {SketchPicker} from "react-color";
 import community_config, {INIT_FILTERS} from "../../conf/community-conf";
 import Tooltip from "rmc-tooltip/es";
+import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 
 class DashboardResults extends Component{
 	constructor(props){
@@ -60,6 +61,11 @@ class DashboardResults extends Component{
 
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
+
+			iframe_category: 'undefined',
+			iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
+			zip_code: '',
+			showed_tooltip_zipcode: false,
 		};
 
 		this.showSubDlg = this.showSubDlg.bind(this);
@@ -90,10 +96,14 @@ class DashboardResults extends Component{
 			this.setState({iFrameHeight: this.refIframe.current.contentWindow.document.body.scrollHeight + 'px'});
 	}
 
-	onChangePreviewCategory = e => {
-		this.previewCriteria.category = e.target.value;
-		this.applyUpdatedCriteria();
-	};
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevState.iframe_category !== this.state.iframe_category ||
+			prevState.iframe_radius !== this.state.iframe_radius ||
+			prevState.user_lat !== this.state.user_lat ||
+			prevState.user_lng !== this.state.user_lng){
+			this.applyUpdatedCriteria();
+		}
+	}
 
 	copyDynamicUrl = () => {
 		if(this.state.showedCopyNotification)
@@ -138,9 +148,8 @@ class DashboardResults extends Component{
 	applyUpdatedCriteria = () => {
 		const lat = this.state.user_lat === null ? this.previewCriteria.lat : this.state.user_lat;
 		const lng = this.state.user_lng === null ? this.previewCriteria.lng : this.state.user_lng;
-		const radius_in_url = this.state.user_lat === null ? "null" : "30";
-		console.log(this.previewCriteria);
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/undefined/${radius_in_url}/${lat}/${lng}/${this.filters2url()}`;
+		const category = this.state.iframe_category.replace(/ /g, '-');
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
 
@@ -161,7 +170,7 @@ class DashboardResults extends Component{
 	}
 
 	onChange = e => {
-		if(e.target.id === 'category'){
+		if(e.target.id === 'iframe_category'){
 			this.setState({
 				tooltip_content: community_config.TOOL_TIPS[e.target.value],
 				showed_tooltip: true,
@@ -173,12 +182,45 @@ class DashboardResults extends Component{
 		}
 
 		this.setState({[e.target.id]: e.target.value});
+		this.applyUpdatedCriteria();
 	};
 
 	onBlurCategory = () => {
 		this.setState({
 			showed_tooltip: false,
 		});
+	};
+
+	onChangeAddress = val => {
+		this.setState({zip_code: val});
+	};
+
+	handleSelect = address => {
+		const self = this;
+
+		const matches = address.match(/(\d+)/);
+		const trimmed_address = address.replace(", USA", "");
+
+		self.setState({zip_code: trimmed_address /*matches[0]*/});
+
+		geocodeByAddress(address)
+			.then(results => getLatLng(results[0]))
+			.then(latLng => {
+				self.setState({
+					user_lat: latLng.lat,
+					user_lng: latLng.lng,
+					iframe_radius: 10,
+				});
+			})
+			.catch(error => console.error('Error', error));
+	};
+
+	onFocusZipCode = () => {
+		// this.setState({showed_tooltip: true});
+	};
+
+	onBlurZipCode = () => {
+		this.setState({showed_tooltip_zipcode: false});
 	};
 
 	render(){
@@ -253,7 +295,7 @@ class DashboardResults extends Component{
 											</h4>
 											<Popup
 												trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}> </i>}
+																		className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left top"}>
 												<div>
 													If your organization has your own website, you can use the code below to display your
@@ -279,7 +321,7 @@ class DashboardResults extends Component{
 																	<label htmlFor="email-7" className="field-label">Default category:</label>
 																	<Popup
 																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																								className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"right top"}>
 																		<div>
 																			...
@@ -291,10 +333,11 @@ class DashboardResults extends Component{
 																					 align={{offset: [0, 2],}}
 																					 visible={this.state.showed_tooltip}
 																	>
-																		<select id="category" className="iframe-dropdown w-select"
+																		<select id="iframe_category" className="iframe-dropdown w-select"
 																						onChange={this.onChange} onBlur={this.onBlurCategory}
+																						value={this.state.iframe_category}
 																						style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
-																			<option value="">All Communities</option>
+																			<option value="undefined">All Communities</option>
 																			{
 																				community_config.CATEGORIES.map(cat => {
 																					return (
@@ -312,7 +355,7 @@ class DashboardResults extends Component{
 																	<label htmlFor="email-7" className="field-label">Default radius:</label>
 																	<Popup
 																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																								className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
 																			...
@@ -320,24 +363,27 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<select id="radius" className="iframe-dropdown w-select"
+																	<select id="iframe_radius" className="iframe-dropdown w-select"
 																					onChange={this.onChange}
+																					value={this.state.iframe_radius}
 																					style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
-																		<option value="1">within 1 mile of</option>
-																		<option value="3">within 3 miles of</option>
-																		<option value="5">within 5 miles of</option>
-																		<option value="Another Choice">within 10 miles of</option>
-																		<option value="Another Choice">within 20 miles of</option>
-																		<option value="Another Choice">within 30 miles of</option>
+																		{
+																			community_config.SEARCH_RADIUS.map(r => {
+																				const pl = r > 1 ? "s" : "";
+																				return (
+																					<option value={r} key={"radius-" + r}>within {r} mile{pl} of</option>
+																				);
+																			})
+																		}
 																	</select>
 																</div>
 															</div>
-															<div className="forminput-div">
+															<div className="forminput-div" style={{position: "relative"}}>
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Address, city or zip code</label>
 																	<Popup
 																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																								className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
 																			...
@@ -345,8 +391,52 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="email"
-																				 className="iframe-input w-input" id="zipcode"/>
+																	<PlacesAutocomplete
+																		value={this.state.zip_code}
+																		onChange={this.onChangeAddress}
+																		onSelect={this.handleSelect}
+																	>
+																		{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+																			<>
+																				<Tooltip placement={"top"}
+																								 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
+																								 align={{offset: [0, 2],}}
+																								 visible={this.state.showed_tooltip_zipcode}
+																				>
+																					<input className="iframe-input w-input"
+																								 title={`Lat: ${this.state.user_lat}, Lng: ${this.state.user_lng}, ${this.state.zip_code}`}
+																								 {...getInputProps({
+																									 placeholder: "",
+																								 })}
+																								 onFocus={this.onFocusZipCode}
+																								 onBlur={this.onBlurZipCode}
+																								 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																								 required=""/>
+																				</Tooltip>
+																				<div className={"search-address-candidates"}
+																						 style={{right: "0", top: "72px"}}>
+																					{loading ?
+																						<div
+																							className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+																					{suggestions.map((suggestion) => {
+																						const style = {
+																							color: suggestion.active ? "#ffffff" : "#254184",
+																							backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
+																							backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																						};
+
+																						return (
+																							<div className={"address-item"}
+																									 onClick={() => alert(suggestion.terms)}
+																									 {...getSuggestionItemProps(suggestion, {style})}>
+																								{suggestion.description}
+																							</div>
+																						);
+																					})}
+																				</div>
+																			</>
+																		)}
+																	</PlacesAutocomplete>
 																</div>
 															</div>
 															<div className="forminput-div">
@@ -354,7 +444,7 @@ class DashboardResults extends Component{
 																	<label htmlFor="email-7" className="field-label">Header background:</label>
 																	<Popup
 																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																								className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"right top"}>
 																		<div>
 																			...
@@ -362,7 +452,7 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="text" readOnly={true} id={"header_color"}
+																	<input type="text" readOnly={true} id={"color_header_bg"}
 																				 className="iframe-input w-input"
 																				 value={this.state.color_header_bg}/>
 																	<a className="color-button w-button" style={{
@@ -390,7 +480,7 @@ class DashboardResults extends Component{
 																		background:</label>
 																	<Popup
 																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																								className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
 																			...
@@ -398,7 +488,7 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="text" readOnly={true} id={"result_color"}
+																	<input type="text" readOnly={true} id={"color_results_bg"}
 																				 className="iframe-input w-input"
 																				 value={this.state.color_results_bg}/>
 																	<a className="color-button w-button" style={{
@@ -425,7 +515,7 @@ class DashboardResults extends Component{
 																	<label htmlFor="email-7" className="field-label">Buttons:</label>
 																	<Popup
 																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}> </i>}
+																								className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
 																			...
@@ -433,7 +523,7 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<input type="text" readOnly={true} id={"button_color"}
+																	<input type="text" readOnly={true} id={"color_buttons"}
 																				 className="iframe-input w-input"
 																				 value={this.state.color_buttons}/>
 																	<a className="color-button w-button" style={{
@@ -471,7 +561,7 @@ class DashboardResults extends Component{
 												</h4>
 												<Popup
 													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}> </i>}
+																			className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left top"}>
 													<div>
 														If your organization has your own website, you can use the code below to display your
@@ -505,8 +595,7 @@ class DashboardResults extends Component{
 											<div className="_20top-div"
 													 style={{display: this.state.showedCopyNotification ? "inline-block" : "none"}}>
 												<h4 id="w-node-2d27cd761068-78e24ec3"
-														className="copied-message">Code has been copied to
-													clipboard.</h4>
+														className="copied-message">Code has been copied to clipboard.</h4>
 											</div>
 										</div>
 										<div className="dashboardheader-div" style={{
@@ -547,9 +636,20 @@ class DashboardResults extends Component{
 										</div>
 									</div>
 								) : (
-									<iframe id="preview-frame" className={"w3-animate-opacity"} src={this.state.frameUrl}
-													ref={this.refIframe}
-													style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
+									<>
+										<div className="div-block-184">
+											<div className="div-block-185"></div>
+											<h1 className="heading-28">Find a community near you.</h1>
+											<p className="paragraph-5">This could be a header on your communities page or a section above the
+												iframe that provides definitions of the community categories your ministry supports. The preview
+												below is exactly what your search results will look like when displayed on your own web page. If
+												you have any questions, please do not hesitate to contact our <a
+													href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
+											</p></div>
+										<iframe id="preview-frame" className={"w3-animate-opacity"} src={this.state.frameUrl}
+														ref={this.refIframe}
+														style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
+									</>
 								)
 							}
 						</div>

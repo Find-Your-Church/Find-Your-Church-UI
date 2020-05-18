@@ -108,7 +108,7 @@ class PublicThumbnail extends Component{
 								</Link>
 								{/*
 								<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
-									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 								</div>
 								<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 									 style={{display: this.state.is_show_menu ? "block" : "none"}}>
