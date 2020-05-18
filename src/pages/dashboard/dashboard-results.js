@@ -264,7 +264,7 @@ class DashboardResults extends Component{
 								</div>
 								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
 									<h1 className="heading-40">
-										Dashboard - iFrame
+										Iframe
 									</h1>
 								</div>
 								<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
@@ -428,7 +428,7 @@ class DashboardResults extends Component{
 																								 required=""/>
 																				</Tooltip>
 																				<div className={"search-address-candidates"}
-																						 style={{right: "0", top: "72px"}}>
+																						 style={{right: "0", top: "72px", minWidth: "100%", maxWidth: "100%"}}>
 																					{loading ?
 																						<div
 																							className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}

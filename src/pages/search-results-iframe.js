@@ -379,6 +379,17 @@ class SearchResultsIframe extends Component{
 									*/}
 							</div>
 							<div className={"filter-group-container"}>
+								{/* search by organization name */}
+								<div className={"filter-div"} style={{borderBottom: "none", marginBottom: "0"}}>
+									<div className="flexdiv-left labels">
+										<label className="filter-label">Organization name</label>
+									</div>
+									<input type={"text"} id={"filter_community_name"}
+												 className={"w-input search-filter-name"}
+												 placeholder={"Search by name"}
+									/>
+								</div>
+								{/* filters group */}
 								<SearchFilterCheck filterTitle="Day(s)" filterName="days"
 																	 send={this.getDaysInfo}
 																	 value={this.props.community.criteria.filter.days}

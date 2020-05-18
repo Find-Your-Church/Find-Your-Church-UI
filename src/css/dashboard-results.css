@@ -225,6 +225,7 @@
 	min-width: auto;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
+	border-left: 1px solid #ddd9e1;
 	cursor: pointer;
 }
 
