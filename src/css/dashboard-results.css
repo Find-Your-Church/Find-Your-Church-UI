@@ -41,6 +41,10 @@
 	background-color: #f3f2f5;
 }
 
+.iframe-tab > div {
+	line-height: 20px;
+}
+
 .iframe-tab.w--current {
 	border-bottom-color: #939394;
 	background-color: #f3f2f5;

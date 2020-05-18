@@ -107,6 +107,8 @@ class Account extends Component{
 
 			showedCopyNotification: false,
 			showed_tooltip: false,
+
+			showed_details: true,
 		};
 
 		this.changeUserName = this.changeUserName.bind(this);
@@ -433,6 +435,10 @@ class Account extends Component{
 		}, 3000);
 	};
 
+	selectTabDetails = isActive => {
+		this.setState({showed_details: isActive});
+	};
+
 	onChangePreviewCategory = e => {
 		this.previewCriteria.category = e.target.value;
 		this.applyUpdatedCriteria();
@@ -482,18 +488,30 @@ class Account extends Component{
 								</div>
 							</div>
 							<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">
-								Account Details
+								Account
 							</h1></div>
 						</div>
 						<div className="div-20bottom">
-							<div className="container-inline w3-row">
+							<div className="tabs-menu-6 w-tab-menu" role="tablist">
+								<div data-w-tab="Tab 1"
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
+										 onClick={() => this.selectTabDetails(true)}>
+									<div>Account Details</div>
+								</div>
+								<div data-w-tab="Tab 2"
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}
+										 onClick={() => this.selectTabDetails(false)}>
+									<div>Billing</div>
+								</div>
+							</div>
+							<div className="container-inline w3-row" style={{display: this.state.showed_details ? "block" : "none"}}>
 								<div className="flexdiv-leftright panel underline">
-									<h5 className="container-title">Account</h5>
+									<h5 className="container-title">Account Details</h5>
 								</div>
 								<div className={"sub-container w3-col m12 l6" + (user.email_verified ? " h-right" : " h-right")}>
 									<div className={"sub-content account"}>
 										<div className="flexdiv-leftright underline">
-											<h5 className="container-header">Admin Info</h5>
+											<h5 className="container-header">Admin Profile</h5>
 											<Popup
 													trigger={<i style={{cursor: "pointer"}}
 																			className={"fas fa-question-circle tooltip-icon"}/>}
@@ -898,7 +916,7 @@ class Account extends Component{
 								</div>
 							</div>
 							*/}
-							<div className="container-inline w3-row">
+							<div className="container-inline w3-row" style={{display: this.state.showed_details ? "none" : "block"}}>
 								<div className="flexdiv-leftright panel underline">
 									<h5 className="container-title">Billing</h5>
 								</div>
