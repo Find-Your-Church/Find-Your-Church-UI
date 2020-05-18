@@ -46,11 +46,13 @@
 }
 
 #w-node-2d27cd76105d-78e24ec3 {
+	max-width: 100%;
 	-webkit-align-self: auto;
 	-ms-flex-item-align: auto;
 	-ms-grid-row-align: auto;
 	align-self: auto;
 	font-weight: 400;
+	overflow: hidden;
 }
 
 .copied-message {
