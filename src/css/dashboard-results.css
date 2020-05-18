@@ -233,6 +233,7 @@
 	display: -ms-grid;
 	display: grid;
 	padding-top: 20px;
+	grid-auto-rows: 1fr;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
@@ -253,6 +254,7 @@
 	display: -ms-grid;
 	display: grid;
 	padding: 20px;
+	height: 100%;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 10px;
@@ -279,10 +281,7 @@
 }
 
 .div-block-269 a {
-	font-family: 'Source Sans Pro', sans-serif;
 	color: #2e89fe;
-	font-size: 16px;
-	line-height: 20px;
 	text-decoration: none;
 }
 
@@ -291,67 +290,32 @@
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
+	padding-top: 56.25%;
 	height: auto;
-	min-height: 150px;
+	background-position: 50% 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	-o-object-fit: fill;
+	object-fit: fill;
+}
+
+.div-block-270.t1 {
 	background-image: url("../img/iframe-shot0.jpg");
-	background-position: 50% 50%;
-	background-size: cover;
-	background-repeat: no-repeat;
-	-o-object-fit: fill;
-	object-fit: fill;
 }
 
-#w-node-48c15404bdc2-78e24ec3 {
-	-webkit-align-self: stretch;
-	-ms-flex-item-align: stretch;
-	-ms-grid-row-align: stretch;
-	align-self: stretch;
-	-ms-grid-column-align: stretch;
-	justify-self: stretch;
-}
-
-.div-block-270-copy {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	height: auto;
-	min-height: 150px;
+.div-block-270.t2 {
 	background-image: url("../img/iframe-shot1.jpg");
-	background-position: 50% 50%;
-	background-size: cover;
-	background-repeat: no-repeat;
-	-o-object-fit: fill;
-	object-fit: fill;
 }
 
-#w-node-eb84c39ce958-78e24ec3 {
-	-webkit-align-self: auto;
-	-ms-flex-item-align: auto;
-	-ms-grid-row-align: auto;
-	align-self: auto;
-}
-
-.div-block-270-copy-copy {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	height: auto;
-	min-height: 150px;
+.div-block-270.t3 {
 	background-image: url("../img/iframe-shot2.jpg");
-	background-position: 50% 50%;
-	background-size: cover;
-	background-repeat: no-repeat;
-	-o-object-fit: fill;
-	object-fit: fill;
 }
 
 .div-block-184 {
 	padding: 100px 200px;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(232, 229, 234, 0.95)), to(hsla(0, 0%, 100%, 0.8))), url("../img/iframe-header-bg.jpg");
 	background-image: linear-gradient(180deg, rgba(232, 229, 234, 0.95), hsla(0, 0%, 100%, 0.8)), url("../img/iframe-header-bg.jpg");
-	background-position: 0px 0px, 50% 0%;
+	background-position: 0 0, 50% 0;
 	background-size: auto, cover;
 	background-repeat: repeat, no-repeat;
 	background-attachment: scroll, fixed;
@@ -360,9 +324,9 @@
 
 .div-block-184 .div-block-185 {
 	position: absolute;
-	left: 0%;
-	top: 0%;
-	right: 0%;
+	left: 0;
+	top: 0;
+	right: 0;
 	bottom: auto;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -389,7 +353,5 @@
 
 .div-block-184 .link-10 {
 	color: #2e89fe;
-	font-size: 16px;
-	line-height: 20px;
 	text-decoration: none;
 }
