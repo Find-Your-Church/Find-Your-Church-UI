@@ -333,15 +333,16 @@ class SearchResultsIframe extends Component{
 						</div>
 					</div>
 					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
-						<div id="search-results-header" className="w3-col s12">
+						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: "var(--color-header-bg)"}}>
 							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true} path={this.props.location.pathname}/>
-							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
+							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: "var(--color-buttons)"}}>
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
 							<span className={"sort-group"}>
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
+											color: "var(--color-buttons)",
 											backgroundImage: "url('/img/icon-down3-blue.svg')",
 										}}
 						>
@@ -449,7 +450,7 @@ class SearchResultsIframe extends Component{
 									: null}
 							</div>
 						</div>
-						<div className={"communities-container communities-body communities search-results w3-row"}>
+						<div className={"communities-container communities-body communities search-results w3-row"} style={{backgroundColor: "var(--color-results-bg"}}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
