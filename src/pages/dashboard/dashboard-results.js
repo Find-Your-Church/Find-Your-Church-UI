@@ -381,6 +381,7 @@ class DashboardResults extends Component{
 																					onChange={this.onChange}
 																					value={this.state.iframe_radius}
 																					style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
+																		<option value="null">Radius...</option>
 																		{
 																			community_config.SEARCH_RADIUS.map(r => {
 																				const pl = r > 1 ? "s" : "";
@@ -594,7 +595,11 @@ class DashboardResults extends Component{
 												<h4 id="w-node-2d27cd76105d-78e24ec3"
 														className="table-header">
 													<div>{this.state.frameShortCode}</div>
-													<div>{this.state.frameStyleCode}<input id={"frame-url"} value={`${this.state.frameStyleCode}${this.state.frameCode}`} style={{opacity: "0", width: "8px"}}/></div>
+													<div>{this.state.frameStyleCode}
+														<input id={"frame-url"}
+																	 value={`${this.state.frameStyleCode}${this.state.frameCode}`}
+																	 style={{opacity: "0", width: "8px"}}/>
+													</div>
 												</h4>
 											</div>
 											<div className="_20right-div _20top-div">
@@ -622,38 +627,51 @@ class DashboardResults extends Component{
 										</div>
 										<div className="div-block-267">
 											<div>
-												<div className="div-block-269"><h4 className="heading-55">Add an HTML iframe element to the
-													page and/or section you wish to display your communities.</h4><h5
-													className="heading-60">Every website builder such as Wix, SquareSpace, or WordPress will
-													have the ability to embed an iframe code anywhere on your site. Contact our <a
-														href="mailto:support@findyourchurch.org">support team</a> if you're having trouble! </h5>
-													<div id="w-node-48c15404bdc2-78e24ec3" className="div-block-270"></div>
-												</div>
-											</div>
-											<div id="w-node-f4ddd54c6618-78e24ec3">
-												<div className="div-block-269"><h4 className="heading-55">Copy / paste the code above into the
-													HTML iframe element you just added and save your site.</h4><h5 className="heading-60">Your
-													search results should appear on your website after pasting / saving and be fully functional.
-													You may need to update or publish your site to refresh and display the iframe.</h5>
-													<div id="w-node-eb84c39ce958-78e24ec3" className="div-block-270-copy"></div>
+												<div className="div-block-269">
+													<h4 className="heading-55">
+														Add an HTML iframe element to the
+														page and/or section you wish to display your communities.
+													</h4>
+													<h5 className="heading-60">
+														Every website builder such as Wix, SquareSpace, or WordPress will have the ability to embed
+														an iframe code anywhere on your site. Contact our <a
+														href="mailto:support@findyourchurch.org">support team</a> if you're having trouble!
+													</h5>
+													<div className="div-block-270 t1"/>
 												</div>
 											</div>
 											<div>
-												<div className="div-block-269"><h4 className="heading-55">That's it! If you need any help
-													please do not hesitate to contact our <a href="mailto:support@findyourchurch.org"
-																																	 className="link-10">support team</a>. </h4><h5
-													className="heading-60">The iframe is automatically connected to your dashboard so anytime
-													you add, update, or remove a community - it will <strong>automatically</strong> update
-													anywhere you have your search results displayed. </h5>
-													<div className="div-block-270-copy-copy"></div>
+												<div className="div-block-269">
+													<h4 className="heading-55">
+														Copy / paste the code above into the HTML iframe element you just added and save your site.
+													</h4>
+													<h5 className="heading-60">
+														Your search results should appear on your website after pasting / saving and be fully
+														functional. You may need to update or publish your site to refresh and display the iframe.
+													</h5>
+													<div className="div-block-270 t2"/>
+												</div>
+											</div>
+											<div>
+												<div className="div-block-269">
+													<h4 className="heading-55">
+														That's it! If you need any help please do not hesitate to contact our <a
+														href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
+													</h4>
+													<h5 className="heading-60">
+														The iframe is automatically connected to your dashboard so anytime you add, update, or
+														remove a community - it will <b>automatically</b> update anywhere you have your search
+														results displayed.
+													</h5>
+													<div className="div-block-270 t3"/>
 												</div>
 											</div>
 										</div>
 									</div>
 								) : (
 									<>
-										<div className="div-block-184">
-											<div className="div-block-185"></div>
+										<div className="div-block-184 w3-animate-opacity">
+											<div className="div-block-185"/>
 											<h1 className="heading-28">Find a community near you.</h1>
 											<p className="paragraph-5">This could be a header on your communities page or a section above the
 												iframe that provides definitions of the community categories your ministry supports. The preview
@@ -661,7 +679,7 @@ class DashboardResults extends Component{
 												you have any questions, please do not hesitate to contact our <a
 													href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
 											</p></div>
-										<iframe id="preview-frame" className={"w3-animate-opacity"} src={this.state.frameUrl}
+										<iframe id="preview-frame" src={this.state.frameUrl}
 														ref={this.refIframe}
 														style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
 									</>
