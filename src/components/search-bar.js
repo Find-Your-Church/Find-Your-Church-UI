@@ -162,7 +162,6 @@ class SearchBar extends Component{
 		let category_in_path = "";
 		if(this.props.path !== undefined){
 			const params = this.props.path.split('/');
-			console.log(params);
 
 			if(params[1] === "search-results"){
 				category_in_path = params[2] === undefined ? "" : params[2].replace(/-/g, ' ');

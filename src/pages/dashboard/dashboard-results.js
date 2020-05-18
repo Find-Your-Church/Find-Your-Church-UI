@@ -100,8 +100,20 @@ class DashboardResults extends Component{
 		if(prevState.iframe_category !== this.state.iframe_category ||
 			prevState.iframe_radius !== this.state.iframe_radius ||
 			prevState.user_lat !== this.state.user_lat ||
-			prevState.user_lng !== this.state.user_lng){
+			prevState.user_lng !== this.state.user_lng ||
+			prevState.color_header_bg !== this.state.color_header_bg ||
+			prevState.color_results_bg !== this.state.color_results_bg ||
+			prevState.color_buttons !== this.state.color_buttons){
 			this.applyUpdatedCriteria();
+		}
+		else if(prevState.showed_details !== this.state.showed_details && !this.state.showed_details){
+			document.querySelector('iframe').contentWindow.onload = () => {
+				const stylePart = document.createElement("style");
+				stylePart.type = "text/css";
+				stylePart.innerText = `* {--color-header-bg: ${this.state.color_header_bg}; --color-results-bg: ${this.state.color_results_bg}; --color-buttons: ${this.state.color_buttons};}`;
+				console.log(stylePart);
+				document.querySelector('iframe').contentWindow.document.head.appendChild(stylePart);
+			}
 		}
 	}
 
@@ -152,11 +164,13 @@ class DashboardResults extends Component{
 		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
+		const iframe_style = `width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;
 
 		this.setState({
 			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"/>`,
-			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;"/>`,
+			frameShortCode: `<iframe src="${preview_url}" style="${iframe_style}"/>`,
+			frameCode: `<iframe src="${preview_url}" style="${iframe_style}"/>`,
+			frameStyleCode: `<style type="text/css">* {--color-header-bg: ${this.state.color_header_bg}; --color-results-bg: ${this.state.color_results_bg}; --color-buttons: ${this.state.color_buttons};}</style>`,
 			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
 	};
@@ -579,16 +593,17 @@ class DashboardResults extends Component{
 											<div className="div-block-182">
 												<h4 id="w-node-2d27cd76105d-78e24ec3"
 														className="table-header">
-													{this.state.frameShortCode}
-													<input id={"frame-url"} value={this.state.frameCode} style={{opacity: "0", width: "8px"}}/>
+													<div>{this.state.frameShortCode}</div>
+													<div>{this.state.frameStyleCode}<input id={"frame-url"} value={`${this.state.frameStyleCode}${this.state.frameCode}`} style={{opacity: "0", width: "8px"}}/></div>
 												</h4>
 											</div>
 											<div className="_20right-div _20top-div">
 												<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
-													<a href="#" className="link-3" style={{
+													<a className="link-3" style={{
 														color: "#8900fe",
 														fontWeight: "600",
-														textDecoration: "none"
+														textDecoration: "none",
+														cursor: "pointer"
 													}} onClick={this.copyDynamicUrl}>Copy Code</a>
 												</h4>
 											</div>
