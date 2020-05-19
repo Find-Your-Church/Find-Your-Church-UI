@@ -145,7 +145,7 @@ class MyCommunities extends Component{
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
 																	className={"communities-tooltip fas fa-question-circle tooltip-icon"}/>}
-											position={this.props.status === "active" ? "left top" : "left bottom"}>
+											position={"left top"}>
 										<div>
 											{this.props.status === "active" ? (
 													"These communities WILL be displayed on your website when you use the iFrame feature and will appear in public search\n" +

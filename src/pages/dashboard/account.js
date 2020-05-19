@@ -88,6 +88,7 @@ class Account extends Component{
 
 			is_invalid_phone: false,
 
+			user_is_organization: user.is_organization,
 			user_organization_name: user.organization_name,
 			user_admin_email: user.admin_email ? user.admin_email : user.email,
 			user_email: user.email,
@@ -355,6 +356,15 @@ class Account extends Component{
 		if(e.target.validity.valid)
 			return;
 		this.setState({[e.target.id]: `http://${e.target.value}`});
+	};
+
+	onChangeCheckOrganization = e => {
+		this.setState({user_is_organization: e.target.checked});
+
+		this.props.updateUserInfo({
+			id: this.props.auth.user.id,
+			is_organization: e.target.checked,
+		});
 	};
 
 	onFocusZipCode = () => {
@@ -1055,6 +1065,17 @@ class Account extends Component{
 													<i className={"fas fa-pen"}/>
 												)}
 											</Link>
+										</div>
+										<div className="table-row span-2">
+											<label className="w-checkbox checkbox-field-4">
+												<input type="checkbox" id="check_organization" className="w-checkbox-input checkbox-3"
+															 onClick={this.onChangeCheckOrganization}
+															 defaultChecked={this.props.auth.user.is_organization}
+												/>
+												<span className="checkbox-label-3-copy w-form-label">
+													I manage this account on behalf of an organization I'm authorized to represent.
+												</span>
+											</label>
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">

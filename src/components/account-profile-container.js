@@ -36,15 +36,18 @@ class AccountProfileContainer extends Component{
 								<img src={isEmpty(this.props.auth.user.pic) ?
 									"/img/default-user.png"
 									: this.props.auth.user.pic}
-									 alt="" className="image-4"/>
+										 alt="" className="image-4"/>
 							</div>
 						</div>
 					</div>
 					<div className="profile-info" style={{marginBottom: "0"}}>
 						<div data-collapse="all" data-animation="default" data-duration="400"
-							 className="w-nav profile-info-header">
+								 className="w-nav profile-info-header">
 							<h3 className="community-name">
-								{this.props.auth.user.fname} {this.props.auth.user.lname}
+								{
+									this.props.auth.user.is_organization ? this.props.auth.user.organization_name
+										: `${this.props.auth.user.fname} ${this.props.auth.user.lname}`
+								}
 							</h3>
 							{/*
 							<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
@@ -62,7 +65,7 @@ class AccountProfileContainer extends Component{
 						<div className="personal-info">
 							{isEmpty(this.props.auth.user.admin_email) ? null :
 								<Link to="#" className={"members email"} title={this.props.auth.user.admin_email}
-									  onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
+											onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
 								</Link>
 							}
 							{isEmpty(this.props.auth.user.phone) ? null :
