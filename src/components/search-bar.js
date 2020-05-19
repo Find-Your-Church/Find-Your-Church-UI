@@ -57,11 +57,16 @@ class SearchBar extends Component{
 		}
 
 		if(prevProps.auth.user !== this.props.auth.user){
-			this.setState({
-				my_address: this.props.auth.user.zip_code,
-				my_lat: this.props.auth.user.location.lat,
-				my_lng: this.props.auth.user.location.lng,
-			})
+			if(this.props.path !== undefined){
+				const params = this.props.path.split('/');
+				if(params[1] === "search-results-iframe"){
+					this.setState({
+						my_address: this.props.auth.user.zip_code,
+						my_lat: this.props.auth.user.location.lat,
+						my_lng: this.props.auth.user.location.lng,
+					})
+				}
+			}
 		}
 	}
 
