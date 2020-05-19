@@ -10,7 +10,7 @@ import SearchFilterRadio from "../components/search-filter-radio";
 import {Link} from "react-router-dom";
 import {
 	clearPicking,
-	doSearchCommunities, setBackUrl,
+	doSearchCommunities, getOrgNames, setBackUrl,
 	setPicking,
 	setSearchCriteria,
 	setSearchFilter,
@@ -178,6 +178,11 @@ class SearchResults extends Component{
 	onChangeCommunityName = e => {
 		const escaped_keyword = e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '');
 		this.setState({search_community_name: escaped_keyword});
+
+		// get names from BE API.
+		if(escaped_keyword.length > 0){
+			this.props.getOrgNames({keyword: escaped_keyword});
+		}
 	};
 
 	onKeyPressCommunityName = e => {
@@ -337,22 +342,22 @@ class SearchResults extends Component{
 		}
 
 		return (
-				<>
-					<SiteHeader/>
-					<main id="content-body" className="w3-row">
-						<div id={"spinning-modal"} className={"w3-modal"}
-								 style={{display: this.props.community.searching ? "block" : "none"}}>
-							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"/>
-							</div>
+			<>
+				<SiteHeader/>
+				<main id="content-body" className="w3-row">
+					<div id={"spinning-modal"} className={"w3-modal"}
+							 style={{display: this.props.community.searching ? "block" : "none"}}>
+						<div className="w3-display-middle w3-text-white w3-jumbo">
+							<i className="fas fa-spinner fa-spin"/>
 						</div>
-						<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
-							<div id="search-results-header" className="w3-col s12">
-								<SearchBar buttonTitle="Update" init={true} showedCategory={true} path={this.props.location.pathname}/>
-								<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
-									{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
-								</Link>
-								<span className={"sort-group"}>
+					</div>
+					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
+						<div id="search-results-header" className="w3-col s12">
+							<SearchBar buttonTitle="Update" init={true} showedCategory={true} path={this.props.location.pathname}/>
+							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}>
+								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
+							</Link>
+							<span className={"sort-group"}>
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
@@ -367,23 +372,23 @@ class SearchResults extends Component{
 							<option value={sorters.SORT_DIST_DESC}>Farthest</option>
 						</select>
 					</span>
+						</div>
+						<CommunityMap isMarkerShown criteria={this.props.criteria}
+													googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
+													loadingElement={<div/>}
+													containerElement={<div className="map-body"/>}
+													mapElement={<div className="map-content"/>}
+													results={results}
+													handleScroll={this.clickMarker}
+						/>
+						<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
+							<div className={"selected-filters"}>
+								<SelectedFilters filter={this.props.community.criteria.filter}
+																 handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
 							</div>
-							<CommunityMap isMarkerShown criteria={this.props.criteria}
-														googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
-														loadingElement={<div/>}
-														containerElement={<div className="map-body"/>}
-														mapElement={<div className="map-content"/>}
-														results={results}
-														handleScroll={this.clickMarker}
-							/>
-							<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
-								<div className={"selected-filters"}>
-									<SelectedFilters filter={this.props.community.criteria.filter}
-																	 handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
-								</div>
-								<div className={"filter-header-div"}>
-									<label className={"filter-label w3-large"}>Filters</label>
-									{/*
+							<div className={"filter-header-div"}>
+								<label className={"filter-label w3-large"}>Filters</label>
+								{/*
 									<Popup
 											trigger={<i style={{cursor: "pointer"}}
 																	className={"fas fa-question-circle tooltip-icon w3-right"}/>}
@@ -391,13 +396,14 @@ class SearchResults extends Component{
 										<div>Tell visitors more about your community...</div>
 									</Popup>
 									*/}
-								</div>
-								<div className={"filter-group-container"}>
-									{/* search by organization name */}
-									<div className={"filter-div"} style={{borderBottom: "none", marginBottom: "0"}}>
-										<div className="flexdiv-left labels">
-											<label className="filter-label">Organization name</label>
-										</div>
+							</div>
+							<div className={"filter-group-container"}>
+								{/* search by organization name */}
+								<div className={"filter-div"} style={{borderBottom: "none", marginBottom: "0"}}>
+									<div className="flexdiv-left labels">
+										<label className="filter-label">Organization name</label>
+									</div>
+									<div style={{position: "relative"}}>
 										<input type={"text"} id={"filter_community_name"}
 													 className={"w-input search-filter-name"}
 													 placeholder={"Search by name"}
@@ -405,142 +411,151 @@ class SearchResults extends Component{
 													 onChange={this.onChangeCommunityName}
 													 onKeyDown={this.onKeyPressCommunityName}
 													 onBlur={this.onBlurCommunityName}
+													 list={"names-list"}
 										/>
-									</div>
-									{/* filters group */}
-									<SearchFilterCheck filterTitle="Day(s)" filterName="days"
-																		 send={this.getDaysInfo}
-																		 value={this.props.community.criteria.filter.days}
-																		 items={community_config.FILTERS.days}/>
-									<SearchFilterCheck filterTitle="Time(s)" filterName="times"
-																		 send={this.getTimesInfo}
-																		 value={this.props.community.criteria.filter.times}
-																		 items={community_config.FILTERS.times}/>
-									<SearchFilterRadio filterTitle="Frequency" filterName="frequency"
-																		 send={this.getFrequencyInfo}
-																		 value={this.props.community.criteria.filter.frequency}
-																		 items={community_config.FILTERS.frequency}/>
-									{selectedChurches || selectedNone ? null : (
-											<>
-												<SearchFilterCheck filterTitle="Hosting" filterName="hosting"
-																					 send={this.getHostingInfo}
-																					 value={this.props.community.criteria.filter.hosting}
-																					 items={community_config.FILTERS.hosting}/>
-												<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
-																					 send={this.getAgesInfo}
-																					 value={this.props.community.criteria.filter.ages}
-																					 items={community_config.FILTERS.ages}/>
-												<SearchFilterRadio filterTitle="Gender" filterName="gender"
-																					 send={this.getGenderInfo}
-																					 value={this.props.community.criteria.filter.gender}
-																					 items={community_config.FILTERS.gender}/>
-												<SearchFilterRadio filterTitle="Kids Welcome" filterName="kids_welcome"
-																					 send={this.getKidsWelcomeInfo}
-																					 value={this.props.community.criteria.filter.kids_welcome}
-																					 items={community_config.FILTERS.kids_welcome}/>
-											</>
-									)}
-									<SearchFilterCheck filterTitle="Parking" filterName="parking"
-																		 send={this.getParkingInfo}
-																		 value={this.props.community.criteria.filter.parking}
-																		 items={community_config.FILTERS.parking}/>
-									{selectedChurches ?
-											<SearchFilterCheck filterTitle="Other Ministries"
-																				 filterName="ministries"
-																				 send={this.getMinistriesInfo}
-																				 value={this.props.community.criteria.filter.ministries}
-																				 items={community_config.FILTERS.ministries}/>
-											: null}
-									{selectedChurches ?
-											<SearchFilterCheck filterTitle="Other Services"
-																				 filterName="other_services"
-																				 send={this.getOtherServicesInfo}
-																				 value={this.props.community.criteria.filter.other_services}
-																				 items={community_config.FILTERS.other_services}/>
-											: null}
-									{selectedChurches ?
-											<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
-																				 send={this.getAmbianceInfo}
-																				 value={this.props.community.criteria.filter.ambiance}
-																				 items={community_config.FILTERS.ambiance}/>
-											: null}
-									{selectedEvents ?
-											<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
-																				 send={this.getEventTypeInfo}
-																				 value={this.props.community.criteria.filter.event_type}
-																				 items={community_config.FILTERS.event_type}/>
-											: null}
-									{selectedSupportGroups ?
-											<SearchFilterRadio filterTitle="Support Type"
-																				 filterName="support_type"
-																				 send={this.getSupportTypeInfo}
-																				 value={this.props.community.criteria.filter.support_type}
-																				 items={community_config.FILTERS.support_type}/>
-											: null}
-								</div>
-							</div>
-							<div className={"communities-container communities-body communities search-results w3-row"}>
-								{results.length > 0 ? (
-										<div className="listing-grid dashboard">
-											<div className={"w3-row search-result-headline"}>
-												<div className={"search-result-container-header w3-col m10"}>
-													<span style={{fontWeight: "bold"}}>
-														{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
-													</span>
-													&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
-													<span
-															style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `any location` : "any location") : this.props.criteria.address}</span>
-												</div>
-												<div className={"search-result-container-header-right w3-col m2"}>
-													Results ({results.length})
-												</div>
-											</div>
-											{results.map((item, index) => {
-												this.myref[index] = React.createRef();
+										<datalist id={"names-list"}>
+											{this.props.community.org_names.map(org => {
 												return (
-														<div
-																className={"w3-half" + (this.props.community.picking === index ? " selected-thumbnail" : "")}
-																key={"search" + index} ref={this.myref[index]}
-																onMouseEnter={() => this.hoverMarker(index)}
-																onMouseLeave={() => this.clearMarker()}>
-															<PublicThumbnail value={item.data}/>
-														</div>
-												)
+													<option key={`data-${org}`} value={org}/>
+												);
 											})}
-										</div>
-								) : (
-										<>
-											<div className={"search-result-headline empty"}
-													 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}>
-												<div>
-													We couldn't find
-													any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng && false) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}.
-												</div>
-												<div>
-													Try expanding your search radius.
-												</div>
-												{this.props.auth.isAuthenticated ? null : (
-														<>
-															<div>
-																Or join our mission and create the first one!
-															</div>
-															<div className="div-block-158">
-																<div className="div-navlink noresults">
-																	<Link to={"/register-popup"}
-																				className="link-headernav button-gradient w-button">
-																		Create an Account
-																	</Link>
-																</div>
-															</div>
-														</>
-												)}
-											</div>
-										</>
+										</datalist>
+									</div>
+								</div>
+								{/* filters group */}
+								<SearchFilterCheck filterTitle="Day(s)" filterName="days"
+																	 send={this.getDaysInfo}
+																	 value={this.props.community.criteria.filter.days}
+																	 items={community_config.FILTERS.days}/>
+								<SearchFilterCheck filterTitle="Time(s)" filterName="times"
+																	 send={this.getTimesInfo}
+																	 value={this.props.community.criteria.filter.times}
+																	 items={community_config.FILTERS.times}/>
+								<SearchFilterRadio filterTitle="Frequency" filterName="frequency"
+																	 send={this.getFrequencyInfo}
+																	 value={this.props.community.criteria.filter.frequency}
+																	 items={community_config.FILTERS.frequency}/>
+								{selectedChurches || selectedNone ? null : (
+									<>
+										<SearchFilterCheck filterTitle="Hosting" filterName="hosting"
+																			 send={this.getHostingInfo}
+																			 value={this.props.community.criteria.filter.hosting}
+																			 items={community_config.FILTERS.hosting}/>
+										<SearchFilterCheck filterTitle="Age(s)" filterName="ages"
+																			 send={this.getAgesInfo}
+																			 value={this.props.community.criteria.filter.ages}
+																			 items={community_config.FILTERS.ages}/>
+										<SearchFilterRadio filterTitle="Gender" filterName="gender"
+																			 send={this.getGenderInfo}
+																			 value={this.props.community.criteria.filter.gender}
+																			 items={community_config.FILTERS.gender}/>
+										<SearchFilterRadio filterTitle="Kids Welcome" filterName="kids_welcome"
+																			 send={this.getKidsWelcomeInfo}
+																			 value={this.props.community.criteria.filter.kids_welcome}
+																			 items={community_config.FILTERS.kids_welcome}/>
+									</>
 								)}
+								<SearchFilterCheck filterTitle="Parking" filterName="parking"
+																	 send={this.getParkingInfo}
+																	 value={this.props.community.criteria.filter.parking}
+																	 items={community_config.FILTERS.parking}/>
+								{selectedChurches ?
+									<SearchFilterCheck filterTitle="Other Ministries"
+																		 filterName="ministries"
+																		 send={this.getMinistriesInfo}
+																		 value={this.props.community.criteria.filter.ministries}
+																		 items={community_config.FILTERS.ministries}/>
+									: null}
+								{selectedChurches ?
+									<SearchFilterCheck filterTitle="Other Services"
+																		 filterName="other_services"
+																		 send={this.getOtherServicesInfo}
+																		 value={this.props.community.criteria.filter.other_services}
+																		 items={community_config.FILTERS.other_services}/>
+									: null}
+								{selectedChurches ?
+									<SearchFilterRadio filterTitle="Ambiance" filterName="ambiance"
+																		 send={this.getAmbianceInfo}
+																		 value={this.props.community.criteria.filter.ambiance}
+																		 items={community_config.FILTERS.ambiance}/>
+									: null}
+								{selectedEvents ?
+									<SearchFilterRadio filterTitle="Event Type" filterName="event_type"
+																		 send={this.getEventTypeInfo}
+																		 value={this.props.community.criteria.filter.event_type}
+																		 items={community_config.FILTERS.event_type}/>
+									: null}
+								{selectedSupportGroups ?
+									<SearchFilterRadio filterTitle="Support Type"
+																		 filterName="support_type"
+																		 send={this.getSupportTypeInfo}
+																		 value={this.props.community.criteria.filter.support_type}
+																		 items={community_config.FILTERS.support_type}/>
+									: null}
 							</div>
 						</div>
-					</main>
-				</>
+						<div className={"communities-container communities-body communities search-results w3-row"}>
+							{results.length > 0 ? (
+								<div className="listing-grid dashboard">
+									<div className={"w3-row search-result-headline"}>
+										<div className={"search-result-container-header w3-col m10"}>
+											<span style={{fontWeight: "bold"}}>
+											{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
+											</span>
+											&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
+											<span
+												style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `any location` : "any location") : this.props.criteria.address}</span>
+										</div>
+										<div className={"search-result-container-header-right w3-col m2"}>
+											Results ({results.length})
+										</div>
+									</div>
+									{results.map((item, index) => {
+										this.myref[index] = React.createRef();
+										return (
+											<div
+												className={"w3-half" + (this.props.community.picking === index ? " selected-thumbnail" : "")}
+												key={"search" + index} ref={this.myref[index]}
+												onMouseEnter={() => this.hoverMarker(index)}
+												onMouseLeave={() => this.clearMarker()}>
+												<PublicThumbnail value={item.data}/>
+											</div>
+										)
+									})}
+								</div>
+							) : (
+								<>
+									<div className={"search-result-headline empty"}
+											 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}>
+										<div>
+											We couldn't find
+											any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng && false) ? `Coordinate (${this.props.criteria.lat}, ${this.props.criteria.lng})` : "any location") : this.props.criteria.address}.
+										</div>
+										<div>
+											Try expanding your search radius.
+										</div>
+										{this.props.auth.isAuthenticated ? null : (
+											<>
+												<div>
+													Or join our mission and create the first one!
+												</div>
+												<div className="div-block-158">
+													<div className="div-navlink noresults">
+														<Link to={"/register-popup"}
+																	className="link-headernav button-gradient w-button">
+															Create an Account
+														</Link>
+													</div>
+												</div>
+											</>
+										)}
+									</div>
+								</>
+							)}
+						</div>
+					</div>
+				</main>
+			</>
 		);
 	}
 }
@@ -581,6 +596,15 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking, setBackUrl}
+	mapStateToProps,
+	{
+		setSearchCriteria,
+		setSearchFilter,
+		setSortOrder,
+		doSearchCommunities,
+		setPicking,
+		clearPicking,
+		setBackUrl,
+		getOrgNames
+	}
 )(SearchResults);
