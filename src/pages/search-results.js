@@ -176,12 +176,16 @@ class SearchResults extends Component{
 	};
 
 	onChangeCommunityName = e => {
-		const escaped_keyword = e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '');
+		const escaped_keyword = e.target.value.replace(/[.*?^${}()|[\]\\]/g, '');
 		this.setState({search_community_name: escaped_keyword});
 
 		// get names from BE API.
 		if(escaped_keyword.length > 0){
 			this.props.getOrgNames({keyword: escaped_keyword});
+		}
+
+		if(this.props.community.org_names.includes(escaped_keyword)){
+			this.filterByCommunityName(escaped_keyword);
 		}
 	};
 
