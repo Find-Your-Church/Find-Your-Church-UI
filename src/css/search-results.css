@@ -48,6 +48,7 @@ body {
 	padding: 20px;
 	background-color: #fff;
 	overflow-y: scroll;
+	z-index: 10;
 }
 
 .filter-panel::-webkit-scrollbar {
@@ -414,6 +415,7 @@ body {
 
 .communities-body.search-results {
 	margin-bottom: 0 !important;
+	box-shadow: 0 0 10px 0 #333;
 }
 
 .search-filter-name {
