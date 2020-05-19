@@ -41,7 +41,7 @@ class PreviewSearchResults extends Component{
 						</div>
 						<h1 className="heading-28">Preview {this.state.owner_name}'s Communities</h1>
 					</div>
-					<iframe className={"preview-frame"} src={this.state.frameUrl}/>
+					<iframe className={"preview-frame"} src={this.state.frameUrl} title={"preview communities"}/>
 				</div>
 		);
 	}

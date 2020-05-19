@@ -355,3 +355,11 @@
 	color: #2e89fe;
 	text-decoration: none;
 }
+
+.copy-code-link {
+	display: inline-block;
+	color: #2e89fe;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+}

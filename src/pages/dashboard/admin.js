@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import '../../css/dashboard.css';
 import '../../css/admin.css';
-import ProfileContainer from "../../components/profile-container";
 import MyCommunities from "../../components/my-communites";
 import SiteFooter from "../../components/site-footer";
 import StripeSubscription from "../../components/stripe-subscription";

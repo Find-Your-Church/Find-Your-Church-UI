@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link, withRouter, useLocation} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo, logoutUser} from "../actions/auth-actions";
@@ -53,7 +53,7 @@ class SiteHeader extends Component{
 						{this.props.auth.isAuthenticated ? (<>
 									<Link to="#" onClick={this.toggleAdminMenu}
 												className={"header-3lines-menu w3-bar-item w3-right"}>
-										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}}/>
+										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}} alt={"chevron for popup menu"}/>
 									</Link>
 									<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>
