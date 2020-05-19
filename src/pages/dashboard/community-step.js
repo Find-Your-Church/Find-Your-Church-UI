@@ -94,6 +94,8 @@ class CommunityStep extends Component{
 
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
+
+			right_min_height: 0,
 		};
 
 		this.selectTabDetails = this.selectTabDetails.bind(this);
@@ -104,13 +106,26 @@ class CommunityStep extends Component{
 		this.fixURL = this.fixURL.bind(this);
 	}
 
+	updateDimensions = () => {
+		this.setState({right_min_height: document.getElementById("community-info-container").clientHeight});
+	};
+
 	componentDidMount(){
+		window.addEventListener('resize', this.updateDimensions);
+		setTimeout(() => {
+			this.updateDimensions();
+		}, 1000);
+
 		geocodeByAddress(this.state.address)
 				.then(results => getLatLng(results[0]))
 				.then(latLng => {
 					this.setState({coordinate: latLng, passable: true});
 				})
 				.catch(error => console.error('Error', error));
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.updateDimensions);
 	}
 
 	getDaysInfo = (checks) => {
@@ -413,7 +428,7 @@ class CommunityStep extends Component{
 											: null}
 									<div className="info-body w3-row">
 										<div className="left-part w3-col s12 m5">
-											<div className={"community-info-container"}>
+											<div id={"community-info-container"} className={"community-info-container"}>
 												<div className={"slider-part"}>
 													{this.state.pictures.length > 1 ? (
 															<div id={"slider-frame"} className="slide-container">
@@ -543,7 +558,7 @@ class CommunityStep extends Component{
 												</div>
 											</div>
 										</div>
-										<div className="right-part w3-col s12 m7">
+										<div className="right-part w3-col s12 m7" style={{minHeight: `${this.state.right_min_height}px`}}>
 											<div className={"tab w3-row"}>
 												<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 														 onClick={this.selectTabDetails}>Details
