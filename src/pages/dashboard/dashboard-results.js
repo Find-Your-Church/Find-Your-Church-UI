@@ -45,7 +45,6 @@ class DashboardResults extends Component{
 			frameUrl: '',
 			frameShortCode: '',
 			frameCode: '',
-			previewUrl: '',
 
 			showedCopyNotification: false,
 
@@ -169,13 +168,13 @@ class DashboardResults extends Component{
 		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
-		const iframe_style = `width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;
+		const iframe_style = `display: block; width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;
 
 		this.setState({
 			frameUrl: preview_url,
 			frameShortCode: `<iframe id="iframe-community" src="${preview_url}" style="${iframe_style}"/>`,
 			frameCode: `<iframe id="iframe-community" src="${preview_url}" style="${iframe_style}"/>`,
-			previewUrl: `/preview-search-results/${iframe_param}`,
+			frameStyle: iframe_style,
 		});
 	};
 
@@ -677,7 +676,7 @@ class DashboardResults extends Component{
 											</p></div>
 										<iframe id="iframe-community" src={this.state.frameUrl}
 														ref={this.refIframe} title={"preview communities"}
-														style={{width: "100%", height: "100vh", outline: "none", border: "none", overflow: "hidden"}}/>
+														style={{display: "block", width: "100%", height: "100vh", outline: "none", border: "none", overflow: "hidden"}}/>
 									</>
 								)
 							}
