@@ -10,6 +10,7 @@ import {doSearchCommunities, setSearchCriteria} from "../actions/community-actio
 import community_config, {INIT_FILTERS} from "../conf/community-conf";
 import Tooltip from "rmc-tooltip";
 import 'rmc-tooltip/assets/bootstrap.css';
+import {getUserInfo} from "../actions/auth-actions";
 
 class SearchBar extends Component{
 	constructor(props){
@@ -21,10 +22,12 @@ class SearchBar extends Component{
 			}
 		};
 
+		this.props.getUserInfo({user_id: props.auth.user.id,});
+
 		this.state = {
 			search_category: this.props.community.criteria.category,
 			search_radius: this.props.community.criteria.radius,
-			my_address: this.props.community.criteria.address,
+			my_address: this.props.community.criteria.address === undefined || this.props.community.criteria.address === "" ? props.auth.user.zip_code : this.props.community.criteria.address,
 			my_lat: this.props.community.criteria.lat,
 			my_lng: this.props.community.criteria.lng,
 
@@ -51,6 +54,14 @@ class SearchBar extends Component{
 			}
 
 			this.setState({cats: cats});
+		}
+
+		if(prevProps.auth.user !== this.props.auth.user){
+			this.setState({
+				my_address: this.props.auth.user.zip_code,
+				my_lat: this.props.auth.user.location.lat,
+				my_lng: this.props.auth.user.location.lng,
+			})
 		}
 	}
 
@@ -299,10 +310,11 @@ SearchBar.propTypes = {
 
 const mapStateToProps = state => ({
 	errors: state.errors,
+	auth: state.auth,
 	community: state.communities,
 });
 
 export default connect(
 	mapStateToProps,
-	{setSearchCriteria, doSearchCommunities}
+	{getUserInfo, setSearchCriteria, doSearchCommunities}
 )(SearchBar);

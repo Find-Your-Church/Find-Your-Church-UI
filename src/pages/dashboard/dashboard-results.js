@@ -677,7 +677,7 @@ class DashboardResults extends Component{
 											</p></div>
 										<iframe id="iframe-community" src={this.state.frameUrl}
 														ref={this.refIframe} title={"preview communities"}
-														style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
+														style={{width: "100%", height: "100vh", outline: "none", border: "none", overflow: "hidden"}}/>
 									</>
 								)
 							}
