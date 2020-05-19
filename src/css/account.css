@@ -144,7 +144,7 @@
 	-webkit-align-items: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
-	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
+	/*border-bottom: 1px solid rgba(27, 0, 51, 0.1);*/
 }
 
 .flexdiv-leftright {
@@ -271,7 +271,42 @@
 	grid-template-columns: 1fr 1.4fr 32px;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
-	border-bottom: 1px solid rgba(27, 0, 51, 0.15);
+	border-bottom: 1px solid #e8e5ea;
+}
+
+.account-body .table-row.span-2 {
+	-ms-grid-columns: 1fr;
+	grid-template-columns: 1fr;
+}
+
+.checkbox-field-4 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin-bottom: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.checkbox-3 {
+	margin-top: 0;
+}
+
+.checkbox-label-3-copy {
+	margin-bottom: 0;
+	padding-left: 10px;
+	color: #333;
+	line-height: 20px;
+	cursor: pointer;
 }
 
 .account-body .table-row.pic {
@@ -555,7 +590,7 @@
 }
 
 .account-body .tooltip-icon {
-	color: #a1a1a1;
+	color: #c5c2c8;
 }
 
 .account-details-group {
