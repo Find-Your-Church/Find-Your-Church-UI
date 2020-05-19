@@ -42,11 +42,26 @@ class InvitedViewCommunity extends Component{
 			collapsedContactPart: true,
 			collapsedLinksPart: true,
 			collapsedMorePart: true,
+
+			right_min_height: 0,
 		};
 	}
 
+	updateDimensions = () => {
+		this.setState({right_min_height: document.getElementById("community-info-container").clientHeight});
+	};
+
 	componentDidMount(){
+		window.addEventListener('resize', this.updateDimensions);
+		setTimeout(() => {
+			this.updateDimensions();
+		}, 1000);
+
 		this.props.viewCommunity({id: this.community_id});
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.updateDimensions);
 	}
 
 	toggleMenu = () => {
@@ -121,7 +136,7 @@ class InvitedViewCommunity extends Component{
 									<div className="container-inline">
 										<div className="info-body w3-row">
 											<div className="left-part w3-col l4">
-												<div style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
+												<div id={"community-info-container"} style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
 													{this.props.community.view_community.pictures.length > 1 ? (
 																	<div className="slide-container">
 																		<Slide {...this.slide_options}>
@@ -189,7 +204,10 @@ class InvitedViewCommunity extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part view w3-col l8" style={{height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 142px)"}}>
+											<div className="right-part view w3-col l8" style={{
+												height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 138px)",
+												minHeight: `${this.state.right_min_height}px`,
+											}}>
 												<div className={"tab w3-row"}>
 													<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 															 onClick={this.selectTabDetails}>Details

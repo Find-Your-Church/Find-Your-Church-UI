@@ -39,7 +39,6 @@
 
 .steps-body {
 	margin-top: 70px;
-	min-height: calc(100vh - 148px);
 	padding: 0;
 	background-color: #f4f2f5;
 }
@@ -327,25 +326,24 @@
 }
 
 .info-body .right-part {
-	height: calc(100vh - var(--footer-height) - 140px);
-	min-height: 488px;
+	height: calc(100vh - var(--footer-height) - 142px);
 	overflow-y: auto;
 }
 
 .info-body .right-part::-webkit-scrollbar {
 	width: 6px;
-	background-color: #f8f8f8;
+	background-color: #e7e5e8;
 }
 
 .info-body .right-part::-webkit-scrollbar-thumb {
 	width: 6px;
 	border-radius: 6px;
-	background-color: #e6e6e6;
+	background-color: #f2f3f5;
 }
 
 .info-body .right-part.view {
-	height: calc(100vh - var(--footer-height) - 142px);
-	overflow-y: scroll;
+	height: calc(100vh - var(--footer-height) - 138px);
+	overflow-y: auto;
 }
 
 @media screen and (max-width: 979px) {

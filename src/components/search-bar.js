@@ -27,7 +27,7 @@ class SearchBar extends Component{
 		this.state = {
 			search_category: this.props.community.criteria.category,
 			search_radius: this.props.community.criteria.radius,
-			my_address: this.props.community.criteria.address === undefined || this.props.community.criteria.address === "" ? props.auth.user.zip_code : this.props.community.criteria.address,
+			my_address: this.props.community.criteria.address,
 			my_lat: this.props.community.criteria.lat,
 			my_lng: this.props.community.criteria.lng,
 

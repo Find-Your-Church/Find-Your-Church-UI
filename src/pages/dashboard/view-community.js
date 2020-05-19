@@ -74,12 +74,29 @@ class ViewCommunity extends Component{
 			collapsedContactPart: true,
 			collapsedLinksPart: true,
 			collapsedMorePart: true,
+
+			right_min_height: 0,
 		};
 
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
 		this.selectTabDetails = this.selectTabDetails.bind(this);
 		this.selectTabMembers = this.selectTabMembers.bind(this);
+	}
+
+	updateDimensions = () => {
+		this.setState({right_min_height: document.getElementById("community-info-container").clientHeight});
+	};
+
+	componentDidMount(){
+		window.addEventListener('resize', this.updateDimensions);
+		setTimeout(() => {
+			this.updateDimensions();
+		}, 1000);
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.updateDimensions);
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -168,7 +185,7 @@ class ViewCommunity extends Component{
 								<div className="container-inline">
 									<div className="info-body w3-row">
 										<div className="left-part w3-col l4">
-											<div style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
+											<div id={"community-info-container"} style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
 												{this.state.pictures.length > 1 ? (
 																<div className="slide-container">
 																	<Slide {...this.slide_options}>
@@ -236,7 +253,7 @@ class ViewCommunity extends Component{
 												</div>
 											</div>
 										</div>
-										<div className="right-part view w3-col l8">
+										<div className="right-part view w3-col l8" style={{minHeight: `${this.state.right_min_height}px`}}>
 											<div className={"tab w3-row"}>
 												<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 														 onClick={this.selectTabDetails}>Details
