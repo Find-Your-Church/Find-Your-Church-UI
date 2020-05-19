@@ -216,7 +216,7 @@ class DashboardResults extends Component{
 	handleSelect = address => {
 		const self = this;
 
-		const matches = address.match(/(\d+)/);
+		// const matches = address.match(/(\d+)/);
 		const trimmed_address = address.replace(", USA", "");
 
 		self.setState({zip_code: trimmed_address /*matches[0]*/});
@@ -252,7 +252,6 @@ class DashboardResults extends Component{
 	};
 
 	render(){
-		console.log(this.state.zip_code);
 		return (
 			<>
 				<SiteHeader/>
@@ -416,7 +415,7 @@ class DashboardResults extends Component{
 																</div>
 																<div className="iframeinput-container">
 																	<PlacesAutocomplete
-																		value={this.state.zip_code}
+																		value={this.state.zip_code === undefined ? "" : this.state.zip_code}
 																		onChange={this.onChangeAddress}
 																		onSelect={this.handleSelect}
 																	>
@@ -479,7 +478,7 @@ class DashboardResults extends Component{
 																	<input type="text" readOnly={true} id={"color_header_bg"}
 																				 className="iframe-input w-input"
 																				 value={this.state.color_header_bg}/>
-																	<a className="color-button w-button" style={{
+																	<div className="color-button w-button" style={{
 																		backgroundColor: this.state.color_header_bg
 																	}} onClick={() => {
 																		this.setState({showed_header_bg_color: !this.state.showed_header_bg_color});
@@ -515,7 +514,7 @@ class DashboardResults extends Component{
 																	<input type="text" readOnly={true} id={"color_results_bg"}
 																				 className="iframe-input w-input"
 																				 value={this.state.color_results_bg}/>
-																	<a className="color-button w-button" style={{
+																	<div className="color-button w-button" style={{
 																		backgroundColor: this.state.color_results_bg
 																	}} onClick={() => {
 																		this.setState({showed_results_bg_color: !this.state.showed_results_bg_color});
@@ -550,7 +549,7 @@ class DashboardResults extends Component{
 																	<input type="text" readOnly={true} id={"color_buttons"}
 																				 className="iframe-input w-input"
 																				 value={this.state.color_buttons}/>
-																	<a className="color-button w-button" style={{
+																	<div className="color-button w-button" style={{
 																		backgroundColor: this.state.color_buttons
 																	}} onClick={() => {
 																		this.setState({showed_buttons_color: !this.state.showed_buttons_color});
@@ -604,14 +603,8 @@ class DashboardResults extends Component{
 											</div>
 											<div className="_20right-div _20top-div">
 												<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
-													<a className="link-3" style={{
-														color: "#8900fe",
-														fontWeight: "600",
-														textDecoration: "none",
-														cursor: "pointer"
-													}} onClick={this.copyDynamicUrl}>Copy Code</a>
-													<input id={"frame-url"}
-																 value={`${this.state.frameCode}`}
+													<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>Copy Code</div>
+													<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {}}
 																 style={{opacity: "0", width: "8px", height: "8px"}}/>
 												</h4>
 											</div>
@@ -683,7 +676,7 @@ class DashboardResults extends Component{
 													href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
 											</p></div>
 										<iframe id="iframe-community" src={this.state.frameUrl}
-														ref={this.refIframe}
+														ref={this.refIframe} title={"preview communities"}
 														style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
 									</>
 								)

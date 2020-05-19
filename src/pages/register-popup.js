@@ -2,12 +2,11 @@ import React, {Component} from "react";
 import SiteFooter from "../components/site-footer";
 import "../css/login-register.css";
 import {Link, withRouter} from "react-router-dom";
-import {GoogleLogin} from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+// import {GoogleLogin} from 'react-google-login';
+// import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-actions";
-import config from "../conf/config";
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
@@ -115,7 +114,7 @@ class RegisterPopup extends Component{
 	handleSelect = address => {
 		const self = this;
 
-		const matches = address.match(/(\d+)/);
+		// const matches = address.match(/(\d+)/);
 		const trimmed_address = address.replace(", USA", "");
 
 		self.setState({my_address: address, zip_code: trimmed_address /*matches[0]*/});

@@ -21,7 +21,7 @@ import Popup from "reactjs-popup";
 import isEmpty from "../../utils/isEmpty";
 import FileBase from "react-file-base64";
 import config from "../../conf/config";
-import community_config, {INIT_FILTERS} from "../../conf/community-conf";
+import {INIT_FILTERS} from "../../conf/community-conf";
 import AccountProfileContainer from "../../components/account-profile-container";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import Tooltip from "rmc-tooltip/es";
@@ -100,24 +100,11 @@ class Account extends Component{
 
 			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
 
-			frameUrl: '',
-			frameShortCode: '',
-			frameCode: '',
-			previewUrl: '',
-
 			showedCopyNotification: false,
 			showed_tooltip: false,
 
 			showed_details: true,
 		};
-
-		this.changeUserName = this.changeUserName.bind(this);
-		this.changeAdminEmail = this.changeAdminEmail.bind(this);
-		this.changeEmail = this.changeEmail.bind(this);
-		this.changePassword = this.changePassword.bind(this);
-		this.changePhone = this.changePhone.bind(this);
-		this.changeRefCode = this.changeRefCode.bind(this);
-		this.clickEditCard = this.clickEditCard.bind(this);
 	}
 
 	componentDidMount(){
@@ -129,47 +116,7 @@ class Account extends Component{
 		this.props.getPlan();
 
 		this.previewCriteria.owner = this.props.auth.user.id;
-		this.applyUpdatedCriteria();
 	}
-
-	filters2url = () => {
-		const filter_keys = Object.keys(community_config.FILTERS4URL);
-
-		let url_result = '';
-		let is1st = true;
-		for(let key of filter_keys){
-			if(this.previewCriteria.filter[key] === undefined)
-				continue;
-
-			const key_value = this.previewCriteria.filter[key].split("");
-			for(let i = 0; i < key_value.length; i++){
-				if(key_value[i] === "1"){
-					url_result += (is1st ? "" : "-") + community_config.FILTERS4URL[key][i];
-					is1st = false;
-				}
-			}
-		}
-
-		return url_result === '' ? 'undefined' : url_result;
-	};
-
-	// TODO: old code to be removed
-	applyUpdatedCriteria = () => {
-		console.log(this.previewCriteria);
-		const striped_color_header_bg = this.state.color_header_bg.substring(1);
-		const striped_color_results_bg = this.state.color_results_bg.substring(1);
-		const striped_color_buttons = this.state.color_buttons.substring(1);
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/undefined/null/${this.previewCriteria.lat}/${this.previewCriteria.lng}/${this.filters2url()}`;
-
-		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
-
-		this.setState({
-			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"/>`,
-			frameCode: `<iframe src="${preview_url}" style="width: 100%; height: 100%; outline: none; border: none; overflow: hidden;"/>`,
-			previewUrl: `/preview-search-results/${iframe_param}`,
-		});
-	};
 
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
@@ -212,7 +159,7 @@ class Account extends Component{
 		this.props.updateUserInfo(userData);
 	}
 
-	changeUserName(){
+	changeUserName = () => {
 		// if editing, save the username via axios to BE API.
 		if(this.state.editingUserName){
 			const userData = {
@@ -231,9 +178,9 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingUserName: !this.state.editingUserName});
-	}
+	};
 
-	changeAdminEmail(){
+	changeAdminEmail = () => {
 		// if editing, save the username via axios to BE API.
 		if(this.state.editingAdminEmail){
 			const userData = {
@@ -250,9 +197,9 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingAdminEmail: !this.state.editingAdminEmail});
-	}
+	};
 
-	changeEmail(){
+	changeEmail = () => {
 		// if editing, save the username via axios to BE API.
 		if(this.state.editingEmail){
 			const userData = {
@@ -270,9 +217,9 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingEmail: !this.state.editingEmail});
-	}
+	};
 
-	changePassword(){
+	changePassword = () => {
 		if(this.state.editingPassword){
 			const userData = {
 				id: this.props.auth.user.id,
@@ -284,9 +231,9 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingPassword: !this.state.editingPassword, user_password: "", user_password2: ""});
-	}
+	};
 
-	changeRefCode(){
+	changeRefCode = () => {
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingRefCode){
 			const userData = {
@@ -303,9 +250,9 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingRefCode: !this.state.editingRefCode});
-	}
+	};
 
-	changePhone(){
+	changePhone = () => {
 		// if editing, save the referral code via axios to BE database.
 		if(this.state.editingPhone){
 			if(this.state.is_invalid_phone){
@@ -326,7 +273,7 @@ class Account extends Component{
 
 		// anyway switch display method.
 		this.setState({editingPhone: !this.state.editingPhone});
-	}
+	};
 
 	onFocusZipCode = () => {
 		// this.setState({showed_tooltip: true});
@@ -364,7 +311,7 @@ class Account extends Component{
 	handleSelect = address => {
 		const self = this;
 
-		const matches = address.match(/(\d+)/);
+		// const matches = address.match(/(\d+)/);
 		const trimmed_address = address.replace(", USA", "");
 
 		self.setState({my_address: address, user_zip_code: trimmed_address /*matches[0]*/});
@@ -389,7 +336,7 @@ class Account extends Component{
 		}, this.props.history);
 	};
 
-	async clickEditCard(){
+	clickEditCard = async () => {
 		if(this.state.editing_card){
 			const {token} = await this.props.stripe.createToken({name: this.state.name_on_card,});
 
@@ -414,38 +361,14 @@ class Account extends Component{
 		}
 
 		this.setState({editing_card: !this.state.editing_card});
-	}
+	};
 
 	cancelEditCard = () => {
 		this.setState({editing_card: false});
 	};
 
-	copyDynamicUrl = () => {
-		if(this.state.showedCopyNotification)
-			return;
-
-		const copyText = document.querySelector("#frame-url");
-		copyText.select();
-		document.execCommand("copy");
-
-		this.setState({
-			showedCopyNotification: true
-		});
-
-		setTimeout(() => {
-			this.setState({
-				showedCopyNotification: false
-			});
-		}, 3000);
-	};
-
 	selectTabDetails = isActive => {
 		this.setState({showed_details: isActive});
-	};
-
-	onChangePreviewCategory = e => {
-		this.previewCriteria.category = e.target.value;
-		this.applyUpdatedCriteria();
 	};
 
 	render(){
@@ -862,66 +785,6 @@ class Account extends Component{
 								</div>
 							</div>
 						</div>
-						{/*
-							<div className="container-inline w3-row">
-								<div className="flexdiv-leftright panel underline">
-									<h5 className="container-title">Developer Console</h5>
-								</div>
-								<div className={"sub-container w3-col m12 l6 search-preview"}>
-									<div className={"sub-content payment"}>
-										<div className="flexdiv-leftright underline">
-											<h5 className="container-header">
-												iFrame Code
-											</h5>
-											<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"left center"}>
-												<div>
-													This is a snapshot displaying: the number of communities currently active out of the
-													total number of communities you've paid for this billing cycle; the price you're paying per
-													active community; and a preview of your upcoming payments based on your current account
-													summary.
-												</div>
-											</Popup>
-										</div>
-										<div className="flexdiv-leftright">
-											<div style={{
-												minHeight: "64px",
-												wordBreak: "break-all",
-												paddingTop: "16px",
-											}}>
-												<div style={{float: "left", width: "50%", textAlign: "right"}}>
-												</div>
-												<div>
-													{this.state.frameShortCode}
-													<input id={"frame-url"} value={this.state.frameCode} style={{opacity: "0", width: "8px"}}/>
-												</div>
-											</div>
-										</div>
-										<div style={{marginTop: "10px"}}>
-											<div className={"purple-link"} onClick={this.copyDynamicUrl}>
-												Copy Code
-											</div>
-											<Link to={this.state.previewUrl} className={"purple-link"}>
-												Preview
-											</Link>
-										</div>
-										<div className={"copy-notification"}
-												 style={{display: this.state.showedCopyNotification ? "block" : "none"}}>
-											Code has been copied to the clipboard.
-										</div>
-									</div>
-								</div>
-								<div className={"sub-container w3-col m12 l6 search-preview"}>
-									<div className={"sub-content payment"}>
-										<img src={"/img/iframe-preview.png"} style={{
-											width: "100%",
-										}} alt={"preview panel"}/>
-									</div>
-								</div>
-							</div>
-							*/}
 						<div className="container-inline" style={{display: this.state.showed_details ? "none" : "block"}}>
 							<div className="flexdiv-leftright panel underline">
 								<h5 className="container-title">Billing</h5>

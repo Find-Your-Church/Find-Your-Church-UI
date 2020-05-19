@@ -7,7 +7,6 @@ import {
 	getBillingStatus,
 	registerCard,
 	clearLastInvoice,
-	activateCommunity,
 	hideActivateDlg,
 	verifyCoupon,
 	clearCouponVerified,
@@ -19,7 +18,6 @@ import {
 import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
 import "../css/stripe-style.css";
-import formatNumber from "../utils/formatNumber";
 import showAmount from "../utils/showAmount";
 import Popup from "reactjs-popup";
 

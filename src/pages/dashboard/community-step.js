@@ -651,20 +651,20 @@ class CommunityStep extends Component{
 																	<div className="input-div w3-row">
 																		{community_config.SOCIALS.map((item, index) => {
 																			const key_name = item.toLowerCase();
-																			let link_placeholder = `${item}`;
-																			switch(key_name){
-																				case 'facebook':
-																					link_placeholder += " page link";
-																					break;
-																				case 'instagram':
-																					link_placeholder += " username";
-																					break;
-																				case 'twitter':
-																					link_placeholder += " handle";
-																					break;
-																				default:
-																					link_placeholder += " link";
-																			}
+																			// let link_placeholder = `${item}`;
+																			// switch(key_name){
+																			// 	case 'facebook':
+																			// 		link_placeholder += " page link";
+																			// 		break;
+																			// 	case 'instagram':
+																			// 		link_placeholder += " username";
+																			// 		break;
+																			// 	case 'twitter':
+																			// 		link_placeholder += " handle";
+																			// 		break;
+																			// 	default:
+																			// 		link_placeholder += " link";
+																			// }
 
 																			return (
 																					<input type="url" key={key_name}

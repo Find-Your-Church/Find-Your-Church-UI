@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Popup from "reactjs-popup";
 import isEmpty from "../utils/isEmpty";
 import redirectURL from "../utils/redirectURL";
 

@@ -48,8 +48,6 @@ class MyCommunities extends Component{
 		}
 
 		this.setState({selected_count: this.selected_communities.length});
-
-		console.log("selected: ", this.selected_communities);
 	};
 
 	refresh = () => {
@@ -169,7 +167,7 @@ class MyCommunities extends Component{
 								<div className="form-block-5">
 									<form className="form-3">
 										<select
-												id="sel_category" name="sel_category" className="select-field w-select"
+												className="sel_category select-field w-select"
 												onChange={this.onChangeCategory}
 												style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
 										>
@@ -193,17 +191,17 @@ class MyCommunities extends Component{
 								</div>
 								{
 									this.props.status === "active" ? (
-											<a href="#" className="button-delete w-button" onClick={this.handleDeactivateMulti}>
+											<div className="button-delete w-button" onClick={this.handleDeactivateMulti}>
 												Deactivate ({this.state.selected_count})
-											</a>
+											</div>
 									) : (
 											<>
-												<a href="#" className="button-delete w-button" style={{color: "#2e89fe", marginRight: "10px"}} onClick={this.handleActivateMulti}>
+												<div className="button-delete w-button" style={{color: "#2e89fe", marginRight: "10px"}} onClick={this.handleActivateMulti}>
 													Activate ({this.state.selected_count})
-												</a>
-												<a href="#" className="button-delete w-button" onClick={this.handleDeleteMulti}>
+												</div>
+												<div className="button-delete w-button" onClick={this.handleDeleteMulti}>
 													Delete ({this.state.selected_count})
-												</a>
+												</div>
 											</>
 									)
 								}

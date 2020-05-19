@@ -174,7 +174,7 @@ class Thumbnail extends Component{
 										<div className="form-block-4">
 											<form id="email-form" name="email-form" data-name="Email Form"><label
 													className="w-checkbox checkbox-field">
-												<input type="checkbox" checked={this.state.checked}
+												<input type="checkbox" checked={this.state.checked} onChange={() => {}}
 															 className="w-checkbox-input checkbox" onClick={this.handleCheck}/>
 												<span
 														className="checkbox-label w-form-label">.</span></label></form>
