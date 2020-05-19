@@ -104,7 +104,7 @@ class ListMembers extends Component{
 																	  onClick={() => redirectURL("mailto:" + user.admin_email)}>
 																	<div
 																		title={user.admin_email}>
-																		<img src={"/img/icon/icon-email-fill.svg"}
+																		<img src={"/img/icon/account-email.svg"}
 																			 alt="" className="personal-pic"/>
 																	</div>
 																</Link>
@@ -114,7 +114,7 @@ class ListMembers extends Component{
 																	  onClick={() => redirectURL("tel:" + user.phone)}>
 																	<div className={"admin-info-members"}
 																		 title={user.phone}>
-																		<img src={"/img/icon/icon-phone-fill.svg"}
+																		<img src={"/img/icon/account-phone.svg"}
 																			 alt="" className="personal-pic"/>
 																	</div>
 																</Link>
