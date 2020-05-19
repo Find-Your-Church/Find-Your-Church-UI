@@ -167,7 +167,7 @@ class MyCommunities extends Component{
 						<div className="div-block-208">
 							<div id="w-node-d486187d7c74-44cf2aa3" className="div-block-216">
 								<div className="form-block-5">
-									<form id="email-form-2" name="email-form-2" data-name="Email Form 2" className="form-3">
+									<form className="form-3">
 										<select
 												id="sel_category" name="sel_category" className="select-field w-select"
 												onChange={this.onChangeCategory}

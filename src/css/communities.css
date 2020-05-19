@@ -348,20 +348,20 @@ a.w--current {
 }
 
 .italic-text-7 {
+	min-width: 20px;
+	height: 20px;
 	color: #1b0033;
-	font-size: 24px;
+	font-size: 16px;
+	font-weight: 400;
 	line-height: 24px;
-	font-style: normal;
 }
 
 .italic-text-7.current {
 	color: #333;
-	font-size: 20px;
 }
 
 .italic-text-7.gray {
 	color: rgba(14, 0, 25, 0.15);
-	font-size: 20px;
 }
 
 .communities-body .div-20top {

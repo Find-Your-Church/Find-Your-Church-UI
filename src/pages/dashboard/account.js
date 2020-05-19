@@ -153,8 +153,12 @@ class Account extends Component{
 		return url_result === '' ? 'undefined' : url_result;
 	};
 
+	// TODO: old code to be removed
 	applyUpdatedCriteria = () => {
 		console.log(this.previewCriteria);
+		const striped_color_header_bg = this.state.color_header_bg.substring(1);
+		const striped_color_results_bg = this.state.color_results_bg.substring(1);
+		const striped_color_buttons = this.state.color_buttons.substring(1);
 		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/undefined/null/${this.previewCriteria.lat}/${this.previewCriteria.lng}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
@@ -561,7 +565,7 @@ class Account extends Component{
 										</div>
 										<div className="table-row pic" style={{paddingBottom: "20px"}}>
 											<h4 className="table-header">Picture</h4>
-											<div className="profpic-div-small" style={{marginLeft: "auto"}}>
+											<div className="profpic-div-small" style={{marginRight: "auto"}}>
 												<img src={isEmpty(this.props.auth.user.pic) ?
 													"/img/default-user.png"
 													: this.props.auth.user.pic}
@@ -922,7 +926,7 @@ class Account extends Component{
 							<div className="flexdiv-leftright panel underline">
 								<h5 className="container-title">Billing</h5>
 							</div>
-							<div class={"account-details-group"}>
+							<div className={"account-details-group"}>
 							<div className={"sub-container"}>
 								<div className={"sub-content payment"}>
 									<div className="flexdiv-leftright underline">
@@ -959,11 +963,11 @@ class Account extends Component{
 											Upcoming Payments
 										</h4>
 										<h4 className={"table-item"}>
-											<div className={"upcoming-payment-table-row"}>
-												<div><b>Date</b></div>
-												<div><b>Active</b></div>
-												<div><b>Price</b></div>
-												<div><b>Total</b></div>
+											<div className={"upcoming-payment-table-row header"}>
+												<div>Date</div>
+												<div>Active</div>
+												<div>Price</div>
+												<div>Total</div>
 											</div>
 											<div className={"upcoming-payment-table-row"}>
 												<div>{this.props.community.subscription ? next_due_date.toLocaleDateString('en-US') : "-"}</div>

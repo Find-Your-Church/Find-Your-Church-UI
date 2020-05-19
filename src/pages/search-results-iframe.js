@@ -29,12 +29,15 @@ class SearchResultsIframe extends Component{
 
 		this.myref = [];
 
-		const {owner, category, radius, lat, lng, filter} = props.match.params;
-		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
+		const {owner, category, radius, lat, lng, color, filter} = props.match.params;
+		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || color === undefined || filter === undefined){
 			this.category = props.community.criteria.category;
 			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
 			this.lat = props.community.criteria.lat;
 			this.lng = props.community.criteria.lng;
+			this.color_header_bg = '#f3f2f5';
+			this.color_results_bg = '#e8e5ea';
+			this.color_buttons = '#2e89fe';
 			this.filter = {...props.community.criteria.filter};
 		}
 		else{
@@ -43,6 +46,11 @@ class SearchResultsIframe extends Component{
 			this.radius = radius === 'null' || radius === '' || isNaN(radius) ? null : parseInt(radius);
 			this.lat = parseFloat(lat);
 			this.lng = parseFloat(lng);
+			const colors = color.split('-');
+			this.color_header_bg = `#${colors[0]}`;
+			this.color_results_bg = `#${colors[1]}`;
+			this.color_buttons = `#${colors[2]}`;
+			console.log(color, colors);
 			this.filter = filter === 'undefined' ? {...INIT_FILTERS} : this.url2filters(filter);
 		}
 
@@ -165,7 +173,10 @@ class SearchResultsIframe extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria || this.state.showed_filter !== prevState.showed_filter){
-			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + this.filters2url();
+			const striped_color_header_bg = this.color_header_bg.substring(1);
+			const striped_color_results_bg = this.color_results_bg.substring(1);
+			const striped_color_buttons = this.color_buttons.substring(1);
+			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
 			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
 			this.props.setBackUrl(`/search-results-iframe/${param}`);
@@ -347,16 +358,16 @@ class SearchResultsIframe extends Component{
 						</div>
 					</div>
 					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
-						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: "var(--color-header-bg)"}}>
+						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: this.color_header_bg}}>
 							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true} path={this.props.location.pathname}/>
-							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: "var(--color-buttons)"}}>
+							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: this.color_buttons}}>
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
 							<span className={"sort-group"}>
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
-											color: "var(--color-buttons)",
+											color: this.color_buttons,
 											backgroundImage: "url('/img/icon-down3-blue.svg')",
 										}}
 						>
@@ -479,7 +490,7 @@ class SearchResultsIframe extends Component{
 									: null}
 							</div>
 						</div>
-						<div className={"communities-container communities-body communities search-results w3-row"} style={{backgroundColor: "var(--color-results-bg"}}>
+						<div className={"communities-container communities-body communities search-results w3-row"} style={{backgroundColor: this.color_results_bg}}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
