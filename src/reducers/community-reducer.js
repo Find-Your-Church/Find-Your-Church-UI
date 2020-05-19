@@ -30,7 +30,7 @@ import {
 	SEARCHING,
 	SET_BACK_URL,
 	ACTIVATE_MULTI_COMMUNITY,
-	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY
+	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY, GET_ORG_NAMES
 } from "../actions/action-types";
 import {INIT_FILTERS} from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -89,6 +89,8 @@ const initialState = {
 	searching: false,
 
 	back_url: '/search-results', // on the community view page, press back button
+
+	org_names: [],
 };
 
 export default function(state = initialState, action){
@@ -376,6 +378,11 @@ export default function(state = initialState, action){
 			return {
 				...state,
 				back_url: action.payload,
+			};
+		case GET_ORG_NAMES:
+			return {
+				...state,
+				org_names: action.payload,
 			};
 		default:
 			return state;
