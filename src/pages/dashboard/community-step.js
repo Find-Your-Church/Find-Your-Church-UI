@@ -412,7 +412,7 @@ class CommunityStep extends Component{
 											</div>
 											: null}
 									<div className="info-body w3-row">
-										<div className="left-part w3-half">
+										<div className="left-part w3-col s12 m5">
 											<div className={"community-info-container"}>
 												<div className={"slider-part"}>
 													{this.state.pictures.length > 1 ? (
@@ -543,7 +543,7 @@ class CommunityStep extends Component{
 												</div>
 											</div>
 										</div>
-										<div className="right-part w3-half">
+										<div className="right-part w3-col s12 m7">
 											<div className={"tab w3-row"}>
 												<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
 														 onClick={this.selectTabDetails}>Details
