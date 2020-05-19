@@ -176,7 +176,7 @@ class SearchResults extends Component{
 	};
 
 	onChangeCommunityName = e => {
-		const escaped_keyword = e.target.value.replace(/[.*?^${}()|[\]\\]/g, '');
+		const escaped_keyword = e.target.value; //.replace(/[.*?^${}()|[\]\\]/g, '');
 		this.setState({search_community_name: escaped_keyword});
 
 		// get names from BE API.

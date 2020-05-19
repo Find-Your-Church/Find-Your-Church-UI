@@ -10,7 +10,7 @@ import SearchFilterRadio from "../components/search-filter-radio";
 import {Link} from "react-router-dom";
 import {
 	clearPicking,
-	doSearchCommunities, setBackUrl,
+	doSearchCommunities, getOrgNames, setBackUrl,
 	setPicking,
 	setSearchCriteria,
 	setSearchFilter,
@@ -188,8 +188,17 @@ class SearchResultsIframe extends Component{
 	};
 
 	onChangeCommunityName = e => {
-		const escaped_keyword = e.target.value.replace(/[.*+?^${}()|[\]\\]/g, '');
+		const escaped_keyword = e.target.value; //.replace(/[.*?^${}()|[\]\\]/g, '');
 		this.setState({search_community_name: escaped_keyword});
+
+		// get names from BE API.
+		if(escaped_keyword.length > 0){
+			this.props.getOrgNames({keyword: escaped_keyword});
+		}
+
+		if(this.props.community.org_names.includes(escaped_keyword)){
+			this.filterByCommunityName(escaped_keyword);
+		}
 	};
 
 	onKeyPressCommunityName = e => {
@@ -416,7 +425,15 @@ class SearchResultsIframe extends Component{
 												 onChange={this.onChangeCommunityName}
 												 onKeyDown={this.onKeyPressCommunityName}
 												 onBlur={this.onBlurCommunityName}
+												 list={"names-list"}
 									/>
+									<datalist id={"names-list"}>
+										{this.props.community.org_names.map(org => {
+											return (
+												<option key={`data-${org}`} value={org}/>
+											);
+										})}
+									</datalist>
 								</div>
 								{/* filters group */}
 								<SearchFilterCheck filterTitle="Day(s)" filterName="days"
@@ -593,5 +610,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking, setBackUrl}
+	{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking, setBackUrl, getOrgNames}
 )(SearchResultsIframe);
