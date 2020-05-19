@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import "../css/account-profile-container.css";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import isEmpty from "../utils/isEmpty";
@@ -60,19 +61,38 @@ class AccountProfileContainer extends Component{
 						</div>
 						<div className="personal-info">
 							{isEmpty(this.props.auth.user.admin_email) ? null :
-								<Link to="#" className={"members"} title={this.props.auth.user.admin_email}
+								<Link to="#" className={"members email"} title={this.props.auth.user.admin_email}
 									  onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
-									<img src={"/img/icon/icon-email-fill.svg"}
-										 alt="" className="personal-pic"/>
 								</Link>
 							}
 							{isEmpty(this.props.auth.user.phone) ? null :
-								<Link to="#" className={"members"} title={this.props.auth.user.phone}
-									  onClick={() => redirectURL("tel:" + this.props.auth.user.phone)}>
-									<img src={"/img/icon/icon-phone-fill.svg"}
-										 alt="" className="personal-pic"/>
+								<Link to="#" className={"members phone"} title={this.props.auth.user.phone}
+											onClick={() => redirectURL("tel:" + this.props.auth.user.phone)}>
 								</Link>
 							}
+							{isEmpty(this.props.auth.user.website) ? null :
+								<Link to="#" className={"members website"} title={this.props.auth.user.website}
+											onClick={() => redirectURL(this.props.auth.user.website)}>
+								</Link>
+							}
+							{isEmpty(this.props.auth.user.facebook) ? null :
+								<Link to="#" className={"members facebook"} title={this.props.auth.user.facebook}
+											onClick={() => redirectURL(this.props.auth.user.facebook)}>
+								</Link>
+							}
+							{isEmpty(this.props.auth.user.twitter) ? null :
+								<Link to="#" className={"members twitter"} title={this.props.auth.user.twitter}
+											onClick={() => redirectURL(this.props.auth.user.twitter)}>
+								</Link>
+							}
+							{isEmpty(this.props.auth.user.instagram) ? null :
+								<Link to="#" className={"members instagram"} title={this.props.auth.user.instagram}
+											onClick={() => redirectURL(this.props.auth.user.instagram)}>
+								</Link>
+							}
+						</div>
+						<div className={"info-zipcode"} title={this.props.auth.user.zip_code}>
+							{this.props.auth.user.zip_code}
 						</div>
 					</div>
 				</div>
