@@ -328,7 +328,8 @@
 
 .info-body .right-part {
 	height: calc(100vh - var(--footer-height) - 140px);
-	overflow-y: scroll;
+	min-height: 488px;
+	overflow-y: auto;
 }
 
 .info-body .right-part::-webkit-scrollbar {
