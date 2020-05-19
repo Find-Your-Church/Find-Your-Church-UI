@@ -1,8 +1,7 @@
 .personal-info {
-	display: grid;
+	display: flex;
 	padding-top: 15px;
-	grid-column-gap: 10px;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	justify-content: center;
 }
 
 .personal-info .members {
@@ -11,6 +10,10 @@
 	height: 28px;
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+
+.personal-info .members:not(:last-child) {
+	margin-right: 10px;
 }
 
 .personal-info .members:hover {
