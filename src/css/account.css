@@ -125,7 +125,7 @@
 	min-height: 100%;
 }
 
-@media screen and (max-width: 979px){
+@media screen and (max-width: 979px) {
 	.sub-container .sub-content.account,
 	.sub-container .sub-content.payment,
 	.account-body .sub-container {
@@ -289,8 +289,8 @@
 .table-row-2 {
 	display: -ms-grid;
 	display: grid;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
@@ -325,6 +325,14 @@
 	border-bottom: 1px solid #e8e5ea;
 }
 
+.upcoming-payment-table-row.header {
+	padding-top: 0;
+}
+
+.upcoming-payment-table-row.header div {
+	font-weight: 600;
+}
+
 .account-body .table-header {
 	display: inline-block;
 	margin-top: 0;
@@ -349,7 +357,7 @@
 	font-size: 16px;
 	line-height: 22px;
 	font-weight: 400;
-	text-align: right;
+	text-align: left;
 }
 
 .table-item.right, .table-item.right div {
@@ -423,22 +431,22 @@
 .account-body .profpic-div-small {
 	overflow: hidden;
 	width: auto;
-	max-width: 54px;
-	max-height: 54px;
-	min-width: 54px;
-	min-height: 54px;
+	max-width: 100px;
+	max-height: 100px;
+	min-width: 100px;
+	min-height: 100px;
 	padding-top: 0;
 	border: 2px solid #fff;
 	border-radius: 50%;
 	background-position: 0 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
-	box-shadow: 0 1px 3px 0 #e8e5ea;
+	box-shadow: 1px 1px 3px 0 rgba(51, 51, 51, 0.5);
 }
 
-.account-body  .profpic-div-small .image-4 {
-	width: 50px;
-	height: 50px;
+.account-body .profpic-div-small .image-4 {
+	width: 94px;
+	height: 94px;
 }
 
 #w-node-cb8d7881b980-27fc25a8 {
@@ -544,7 +552,7 @@
 	text-align: right;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.account-body .profile-container {
 		padding: 0 !important;
 	}

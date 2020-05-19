@@ -67,11 +67,11 @@
 	text-align: center;
 }
 
-#preview-frame {
+#iframe-community {
 	min-height: 100vh;
 }
 
 @media screen and (max-width: 979px){
-	#preview-frame {
+	#iframe-community {
 	}
 }

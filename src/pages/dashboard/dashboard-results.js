@@ -4,7 +4,7 @@ import '../../css/dashboard-results.css';
 import '../../css/dashboard-iframe.css';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getUserInfo} from "../../actions/auth-actions";
+import {getUserInfo, updateUserInfo} from "../../actions/auth-actions";
 import {getBillingStatus, clearLastInvoice, showActivateDlg} from "../../actions/community-actions";
 import SiteHeader from "../../components/site-header";
 import {Link} from "react-router-dom";
@@ -17,6 +17,7 @@ import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-auto
 class DashboardResults extends Component{
 	constructor(props){
 		super(props);
+
 		let {user} = props.auth;
 
 		this.previewCriteria = {
@@ -48,7 +49,7 @@ class DashboardResults extends Component{
 
 			showedCopyNotification: false,
 
-			iFrameHeight: 'calc(100vw * 9 / 16',
+			iFrameHeight: 'calc(100vw * 9 / 16)',
 
 			showed_details: true,
 
@@ -64,7 +65,7 @@ class DashboardResults extends Component{
 
 			iframe_category: 'undefined',
 			iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
-			zip_code: '',
+			zip_code: user.zip_code,
 			showed_tooltip_zipcode: false,
 		};
 
@@ -106,14 +107,15 @@ class DashboardResults extends Component{
 			prevState.color_buttons !== this.state.color_buttons){
 			this.applyUpdatedCriteria();
 		}
-		else if(prevState.showed_details !== this.state.showed_details && !this.state.showed_details){
-			document.querySelector('iframe').contentWindow.onload = () => {
-				const stylePart = document.createElement("style");
-				stylePart.type = "text/css";
-				stylePart.innerText = `* {--color-header-bg: ${this.state.color_header_bg}; --color-results-bg: ${this.state.color_results_bg}; --color-buttons: ${this.state.color_buttons};}`;
-				console.log(stylePart);
-				document.querySelector('iframe').contentWindow.document.head.appendChild(stylePart);
-			}
+
+		if(prevProps.auth.user !== this.props.auth.user){
+			let {user} = this.props.auth;
+			this.setState({
+				user_lat: user.location ? user.location.lat : null,
+				user_lng: user.location ? user.location.lng : null,
+				iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
+				zip_code: user.zip_code,
+			});
 		}
 	}
 
@@ -161,16 +163,18 @@ class DashboardResults extends Component{
 		const lat = this.state.user_lat === null ? this.previewCriteria.lat : this.state.user_lat;
 		const lng = this.state.user_lng === null ? this.previewCriteria.lng : this.state.user_lng;
 		const category = this.state.iframe_category.replace(/ /g, '-');
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${this.filters2url()}`;
+		const striped_color_header_bg = this.state.color_header_bg.substring(1);
+		const striped_color_results_bg = this.state.color_results_bg.substring(1);
+		const striped_color_buttons = this.state.color_buttons.substring(1);
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
 		const iframe_style = `width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;
 
 		this.setState({
 			frameUrl: preview_url,
-			frameShortCode: `<iframe src="${preview_url}" style="${iframe_style}"/>`,
-			frameCode: `<iframe src="${preview_url}" style="${iframe_style}"/>`,
-			frameStyleCode: `<style type="text/css">* {--color-header-bg: ${this.state.color_header_bg}; --color-results-bg: ${this.state.color_results_bg}; --color-buttons: ${this.state.color_buttons};}</style>`,
+			frameShortCode: `<iframe id="iframe-community" src="${preview_url}" style="${iframe_style}"/>`,
+			frameCode: `<iframe id="iframe-community" src="${preview_url}" style="${iframe_style}"/>`,
 			previewUrl: `/preview-search-results/${iframe_param}`,
 		});
 	};
@@ -225,6 +229,16 @@ class DashboardResults extends Component{
 					user_lng: latLng.lng,
 					iframe_radius: 10,
 				});
+
+				// save zip_code and location to db.
+				this.props.updateUserInfo({
+					id: this.props.auth.user.id,
+					zip_code: trimmed_address,
+					location: {
+						lat: latLng.lat,
+						lng: latLng.lng,
+					},
+				});
 			})
 			.catch(error => console.error('Error', error));
 	};
@@ -238,12 +252,7 @@ class DashboardResults extends Component{
 	};
 
 	render(){
-		/**
-		 * TODO: replace:
-		 * style={{display: this.props.community.is_showing ? "block" : "block"}}
-		 * to
-		 * style={{display: this.props.community.is_showing ? "block" : "none"}}
-		 */
+		console.log(this.state.zip_code);
 		return (
 			<>
 				<SiteHeader/>
@@ -580,26 +589,17 @@ class DashboardResults extends Component{
 													position={"left top"}>
 													<div>
 														If your organization has your own website, you can use the code below to display your
-														communities
-														on any page(s) or
-														section(s) of your website. The preview below is what your iframe will look like when
-														dispalyed on
-														your website, and only
-														displays the communities currently active on your dashboard. The search, filter, and view
-														technology is fully responsive
-														and is compatible with any device or browser.
+														communities on any page(s) or section(s) of your website. The preview below is what your
+														iframe will look like when displayed on your website, and only displays the communities
+														currently active on your dashboard. The search, filter, and view technology is fully
+														responsive and is compatible with any device or browser.
 													</div>
 												</Popup>
 											</div>
 											<div className="div-block-182">
-												<h4 id="w-node-2d27cd76105d-78e24ec3"
-														className="table-header">
+												<h4 id="w-node-2d27cd76105d-78e24ec3" className="table-header"
+														title={"Parameters: /search-results-iframe/owner/category/radius/lat/lng/colors/filter"}>
 													<div>{this.state.frameShortCode}</div>
-													<div>{this.state.frameStyleCode}
-														<input id={"frame-url"}
-																	 value={`${this.state.frameStyleCode}${this.state.frameCode}`}
-																	 style={{opacity: "0", width: "8px"}}/>
-													</div>
 												</h4>
 											</div>
 											<div className="_20right-div _20top-div">
@@ -610,6 +610,9 @@ class DashboardResults extends Component{
 														textDecoration: "none",
 														cursor: "pointer"
 													}} onClick={this.copyDynamicUrl}>Copy Code</a>
+													<input id={"frame-url"}
+																 value={`${this.state.frameCode}`}
+																 style={{opacity: "0", width: "8px", height: "8px"}}/>
 												</h4>
 											</div>
 											<div className="_20top-div"
@@ -679,7 +682,7 @@ class DashboardResults extends Component{
 												you have any questions, please do not hesitate to contact our <a
 													href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
 											</p></div>
-										<iframe id="preview-frame" src={this.state.frameUrl}
+										<iframe id="iframe-community" src={this.state.frameUrl}
 														ref={this.refIframe}
 														style={{width: "100%", outline: "none", border: "none", overflow: "hidden"}}/>
 									</>
@@ -711,5 +714,11 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
+	{
+		getUserInfo,
+		updateUserInfo,
+		getBillingStatus,
+		clearLastInvoice,
+		showActivateDlg,
+	}
 )(DashboardResults);
