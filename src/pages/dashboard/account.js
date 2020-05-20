@@ -532,15 +532,12 @@ class Account extends Component{
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Admin Profile</h5>
 											<Popup
-												trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left top"}>
 												<div>
-													By default, you are the admin for any community that you create and are required to provide at
-													least one form of
-													communication. If you are not the primary point of contact for the community, you can assign a
-													'Community Contact' when
-													creating a new community.
+													Community admins are the users responsible for managing a community's information and may or
+													may not
+													be a community's primary point of contact; however, must provide at least one form of contact.
 												</div>
 											</Popup>
 										</div>
@@ -550,8 +547,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Name
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -593,8 +589,7 @@ class Account extends Component{
 										<div className="table-row pic" style={{paddingBottom: "20px"}}>
 											<h4 className="table-header">Picture
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -621,8 +616,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Contact Email
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -656,8 +650,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Contact Phone
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -698,8 +691,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Website
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -734,8 +726,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Facebook
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -770,8 +761,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Twitter
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -806,8 +796,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">Instagram
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -842,8 +831,7 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">City or zip code
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -930,11 +918,10 @@ class Account extends Component{
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">User Info</h5>
 											<Popup
-												trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left top"}>
 												<div>
-													This information is private and only viewable by you. Use this section to update your login
+													This information is private and only viewable by you. Use this section to update yoru login
 													credentials at any time.
 												</div>
 											</Popup>
@@ -943,8 +930,7 @@ class Account extends Component{
 											<h4 className="table-header">
 												Name
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -1081,8 +1067,7 @@ class Account extends Component{
 											<h4 className="table-header">
 												Referral Code
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"right center"}>
 													<div>
 														...
@@ -1138,14 +1123,11 @@ class Account extends Component{
 										<div className="flexdiv-leftright underline">
 											<h5 className="container-header">Billing Summary</h5>
 											<Popup
-												trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left center"}>
 												<div>
-													This is a snapshot showing you how many communities you have active out of the total amount
-													you've paid for this billing
-													cycle; as well as the upcoming payments you can expect based on your current number of active
-													communities.
+													This information is private and only viewable by you. Use this section to update yoru login credentials at
+													any time.
 												</div>
 											</Popup>
 										</div>

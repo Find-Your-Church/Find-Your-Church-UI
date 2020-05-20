@@ -40,13 +40,11 @@ class ListMembers extends Component{
 									<h3>Admin</h3>
 									{this.props.fromPublic ? null :
 										<Popup
-											trigger={<i style={{cursor: "pointer"}}
-														className={"fas fa-question-circle tooltip-icon"}/>}
+											trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 											position={"left top"}>
 											<div>
-												Community admins are the users who own and manage the community a user is viewing. You can edit the information
-												displayed on your Admin Profile from your "Account" page at any time. Admins must provide at least one form of contact
-												and have the ability to add or remove community members.
+												Community admins are the users responsible for managing a community's information and may or may not
+												be the community's primary point of contact; however, must provide at least one form of contact.
 											</div>
 										</Popup>
 									}
@@ -134,8 +132,7 @@ class ListMembers extends Component{
 								<div className="accordionheader-div">
 									<h3>Community</h3>
 									<Popup
-										trigger={<i style={{cursor: "pointer"}}
-													className={"fas fa-question-circle tooltip-icon"}/>}
+										trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 										position={"left bottom"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>

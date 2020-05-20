@@ -479,13 +479,13 @@ class CommunityStep extends Component{
 													<div className="community-info-title">
 														<h4>Community Info</h4>
 														<Popup
-																trigger={<i style={{cursor: "pointer"}}
-																						className={"fas fa-question-circle tooltip-icon"}/>}
+																trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																position={"left center"}>
 															<div>
-																This is the information that will be used as initial search criteria and displayed on
-																your community thumbnail. You can
-																update this information at any time.
+																This information will be used as initial search criteria when users look for communities in your area.<br/><b>If your
+																community is only hosted virtually</b>, you can use any address you would like since the address is not
+																part of the algorithm when users search for virtual communities since they are virtual. You can update this
+																information at any time.
 															</div>
 														</Popup>
 													</div>
@@ -582,14 +582,12 @@ class CommunityStep extends Component{
 																	<div className="flexdiv-left labels">
 																		<h4 className="form-header">About</h4>
 																		<Popup
-																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}/>}
+																				trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
-																				This is where you can tell users about your community, where they can go to
-																				learn more, how they can get involved,
-																				and/or anything else you'd like them to know about your community. You can edit
-																				and update this information at any time.
+																				This is where you can tell users about your community, where they can go to learn more, how they can get
+																				involved, and/or anything else you'd like them to know about your community. You can update this
+																				information at any time.
 																			</div>
 																		</Popup>
 																	</div>
@@ -606,17 +604,15 @@ class CommunityStep extends Component{
 																	<div className="flexdiv-left labels">
 																		<h4 className="form-header">Community Contact</h4>
 																		<Popup
-																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}/>}
+																				trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
-																				This is the primary point of contact for the community. Examples might include a
-																				leader, admin, office staff, support, etc.
-																				You can edit and update this information at any time. If you host your community
-																				in someone's home or office space, we
-																				strongly encourage connecting on social media or over coffee to make sure It's a
-																				good fit before sharing any additional
-																				personal information.
+																				This is the primary point of contact for the community such as a leader, admin, office staff, support
+																				personell, etc. You can edit and update this information at any time.<br/><br/>
+																				<b>Note</b>: Always remember to use caution when interacting with people you do not know on the internet. If
+																				your community is hosted in someone's home or office space, we strongly encourage you to first connect
+																				with interested members on social media or in a public setting such as a coffeeshop to make sure It's a
+																				good fit before sharing any additional personal information.
 																			</div>
 																		</Popup>
 																	</div>
@@ -654,15 +650,12 @@ class CommunityStep extends Component{
 																	<div className="flexdiv-left labels">
 																		<h4 className="form-header">Links and Resources</h4>
 																		<Popup
-																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}/>}
+																				trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
-																				These are the links and resources you can provide users for them to learn more
-																				about your community and/or connect
-																				online. Any links that you do not wish to include will be hidden from your
-																				public profile. You can edit and update these at
-																				any time.
+																				These are the links and resources you can provide users for them to learn more about your community
+																				and/or connect online. Any links that you do not wish to include will be hidden from your public profile. You
+																				can update these at any time.
 																			</div>
 																		</Popup>
 																	</div>
@@ -701,14 +694,12 @@ class CommunityStep extends Component{
 																	<div className="flexdiv-left labels">
 																		<h4 className="form-header">More Info</h4>
 																		<Popup
-																				trigger={<i style={{cursor: "pointer"}}
-																										className={"fas fa-question-circle tooltip-icon"}/>}
+																				trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																				position={"left center"}>
 																			<div>
-																				These are the filters that a user can apply to help them narrow down their
-																				search and are optional. You are welcome to
-																				provide as much or as little information as you feel comfortable with. You can
-																				edit and update these at any time.
+																				These are the filters that a user can apply to help them narrow down their search and are <b>optional</b>. You
+																				are welcome to provide as much or as little information as you feel comfortable with. You can update these
+																				at any time.
 																			</div>
 																		</Popup>
 																	</div>

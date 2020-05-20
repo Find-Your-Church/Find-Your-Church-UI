@@ -421,8 +421,7 @@ class SearchResults extends Component{
 								<label className={"filter-label w3-large"}>Filters</label>
 								{/*
 									<Popup
-											trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon w3-right"}/>}
+											trigger={<i className={"fas fa-question-circle tooltip-icon w3-right"}/>}
 											position={"left top"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>
