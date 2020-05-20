@@ -85,7 +85,10 @@ class ViewCommunity extends Component{
 	}
 
 	updateDimensions = () => {
-		this.setState({right_min_height: document.getElementById("community-info-container").clientHeight});
+		const obj = document.getElementById("community-info-container");
+		if(obj === undefined || obj === null)
+			return;
+		this.setState({right_min_height: obj.clientHeight});
 	};
 
 	componentDidMount(){
