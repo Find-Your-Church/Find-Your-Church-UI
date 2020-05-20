@@ -13,7 +13,7 @@ class SelectedFilters extends Component{
 	render(){
 		const filter_keys = Object.keys(community_config.FILTERS);
 		return (
-			<div>
+			<>
 				{filter_keys.map(key => {
 					if(key === "average_attendance")
 						return null;
@@ -42,7 +42,7 @@ class SelectedFilters extends Component{
 						return null;
 					});
 				})}
-			</div>
+			</>
 		);
 	}
 }

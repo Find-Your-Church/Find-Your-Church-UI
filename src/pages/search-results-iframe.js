@@ -74,9 +74,6 @@ class SearchResultsIframe extends Component{
 			keyword_organization: '',
 			...INIT_FILTERS,
 			showed_owners: false,
-			owner_id: '',
-			owner_title: '',
-			owner_contact: '',
 		};
 	}
 
@@ -309,22 +306,24 @@ class SearchResultsIframe extends Component{
 	 */
 	pickOwner = owner => {
 		this.setState({
+			showed_owners: false,
+		});
+		this.doSearchByFilter({
 			owner_id: owner.value,
 			owner_title: owner.title,
 			owner_contact: owner.contact,
-			showed_owners: false,
 		});
-		this.doSearchByFilter({owner_id: owner.value});
 	};
 
 	clearOwner = () => {
 		this.setState({
+			showed_owners: false,
+		});
+		this.doSearchByFilter({
 			owner_id: '',
 			owner_title: '',
 			owner_contact: '',
-			showed_owners: false,
 		});
-		this.doSearchByFilter({owner_id: ''});
 	};
 
 	render(){
@@ -418,10 +417,10 @@ class SearchResultsIframe extends Component{
 						/>
 						<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
 							<div className={"selected-filters"}>
-								{this.state.owner_id !== '' ? (
+								{this.props.community.criteria.filter.owner_id !== '' ? (
 									<div className={"selected-filter-item"}
-											 title={`${this.state.owner_title} (${this.state.owner_contact})`}>
-										{this.state.owner_title}&nbsp;
+											 title={`${this.props.community.criteria.filter.owner_title} (${this.props.community.criteria.filter.owner_contact})`}>
+										{this.props.community.criteria.filter.owner_title}&nbsp;
 										<i className={"far fa-times-circle"}
 											 style={{cursor: "pointer", color: "#333"}}
 											 onClick={this.clearOwner}/>
