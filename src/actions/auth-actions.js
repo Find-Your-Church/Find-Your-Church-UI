@@ -2,6 +2,8 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import {
+	CLEAR_OWNERS,
+	GET_OWNERS,
 	MESSAGE_FROM_API, RESET_MESSAGES,
 	SET_CURRENT_USER, SET_SENDING_STATUS, UPDATE_OWNER_INFO,
 	UPDATE_USER_INFO, WELCOME_MESSAGE,
@@ -397,5 +399,30 @@ export const hideWelcomeMessage = () => dispatch => {
 	return dispatch({
 		type: WELCOME_MESSAGE,
 		payload: false,
+	})
+};
+
+export const getOwners = (keyword) => dispatch => {
+	axios
+		.post(app_config.FYC_API_URL + "/api/users/getowners", keyword)
+		.then(res => {
+			dispatch({
+				type: GET_OWNERS,
+				payload: res.data,
+			});
+		})
+		.catch(err => {
+				dispatch({
+					type: MESSAGE_FROM_API,
+					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
+				});
+			}
+		);
+};
+
+export const clearOwners = () => dispatch => {
+	return dispatch({
+		type: CLEAR_OWNERS,
+		payload: null,
 	})
 };

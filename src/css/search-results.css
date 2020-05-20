@@ -444,3 +444,20 @@ body {
 	border-style: solid;
 	border-color: #00e8fe;
 }
+
+.owners-list {
+	position: absolute;
+	width: 100%;
+}
+
+.owner-item {
+	padding: 8px 14px;
+	background-color: #e8e5eb;
+	border-bottom: 1px solid #fff;
+	cursor: pointer;
+}
+
+.owner-item:hover {
+	color: #2e89fe;
+	background-color: #f2f3f5;
+}
