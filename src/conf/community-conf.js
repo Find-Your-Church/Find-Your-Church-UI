@@ -75,6 +75,8 @@ export const community_config = {
 
 export const INIT_FILTERS = {
 	owner_id: '',
+	owner_title: '',
+	owner_contact: '',
 	days: '0'.repeat(community_config.FILTERS.days.length),
 	times: '0'.repeat(community_config.FILTERS.times.length),
 	frequency: '0'.repeat(community_config.FILTERS.frequency.length),
