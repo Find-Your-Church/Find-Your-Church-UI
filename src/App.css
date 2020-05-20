@@ -384,7 +384,8 @@ a {
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
 	align-self: center;
-	color: rgba(14, 0, 25, 0.2);
+	color: #c5c2c8;
+	cursor: pointer;
 }
 
 .search-address-candidates {

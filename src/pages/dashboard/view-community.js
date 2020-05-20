@@ -275,8 +275,7 @@ class ViewCommunity extends Component{
 																	<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 																		<h4 className="form-header">About</h4>
 																		{/*<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
@@ -313,8 +312,7 @@ class ViewCommunity extends Component{
 																	<div className="flexdiv-left labels" onClick={this.toggleContactPart}>
 																		<h4 className="form-header">Community Contact</h4>
 																		{/*<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
@@ -348,8 +346,7 @@ class ViewCommunity extends Component{
 																	<div className="flexdiv-left labels" onClick={this.toggleLinksPart}>
 																		<h4 className="form-header">Links and Resources</h4>
 																		{/*<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
@@ -372,8 +369,7 @@ class ViewCommunity extends Component{
 																	<div className="flexdiv-left labels" onClick={this.toggleMorePart}>
 																		<h4 className="form-header">More Info</h4>
 																		{/*<Popup
-															trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}

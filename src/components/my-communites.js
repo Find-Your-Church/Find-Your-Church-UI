@@ -41,7 +41,7 @@ class MyCommunities extends Component{
 		else{
 			if(this.selected_communities.includes(community_id)){
 				const index = this.selected_communities.indexOf(community_id);
-				if (index > -1) {
+				if(index > -1){
 					this.selected_communities.splice(index, 1);
 				}
 			}
@@ -123,90 +123,93 @@ class MyCommunities extends Component{
 
 	render(){
 		return (
-				<div className="communities-body" style={{display: this.props.showed ? "block" : "none"}}>
-					<div className="dashboard-container">
-						<div className="containerheader-div underline">
-							<div className="flexdiv-left">
-								<div className="container-header">
-									Owner
-									{this.props.status === "active" ? (
-											<div className={"counter-part"}>
-												<div className={"counter-part-border"}>
-													{formatNumber(this.props.community.my_communities.active.length)}
-													&nbsp;/&nbsp;
-													{this.props.community.subscription ?
-															formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
-															: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"/>
-																	: "00")}
-												</div>
-											</div>
-									) : null}
-									<Popup
-											trigger={<i style={{cursor: "pointer"}}
-																	className={"communities-tooltip fas fa-question-circle tooltip-icon"}/>}
-											position={"left top"}>
-										<div>
-											{this.props.status === "active" ? (
-													"These communities WILL be displayed on your website when you use the iFrame feature and will appear in public search\n" +
-													"results when they match a users criteria."
-											) : (
-													"These communities WILL NOT be displayed on your website when you use the iFrame feature and WILL NOT appear in\n" +
-													"public search results if they match a users criteria. To activate a community, click the checkbox on the community or\n" +
-													"communities you wish to activate, and then click \"Activate\". New communities are inactive by default and must be\n" +
-													"manually activated."
-											)}
+			<div className="communities-body" style={{display: this.props.showed ? "block" : "none"}}>
+				<div className="dashboard-container">
+					<div className="containerheader-div underline">
+						<div className="flexdiv-left">
+							<div className="container-header">
+								Owner
+								{this.props.status === "active" ? (
+									<div className={"counter-part"}>
+										<div className={"counter-part-border"}>
+											{formatNumber(this.props.community.my_communities.active.length)}
+											&nbsp;/&nbsp;
+											{this.props.community.subscription ?
+												formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
+												: (this.props.community.is_sending ?
+													<i className="fas fa-spinner fa-spin"/>
+													: "00")}
 										</div>
-									</Popup>
-								</div>
+									</div>
+								) : null}
+								<Popup
+									trigger={<i className={"communities-tooltip fas fa-question-circle tooltip-icon"}/>}
+									position={"left top"}>
+									<div>
+										{this.props.status === "active" ? (
+											<>
+												<i>Active</i> communities will appear in search results when they match a users criteria. As the
+												community owner, you can edit the community information or deactivate the community at anytime.
+											</>
+										) : (
+											<>
+												<i>Inactive</i> communities will not appear in search results and are only viewable by you. <b><i>New
+												Communities</i> are inactive by default until you manually activate them.</b> As the community owner,
+												you can edit the community information or activate the community at anytime.
+											</>
+										)}
+									</div>
+								</Popup>
 							</div>
 						</div>
+					</div>
 
-						<div className="div-block-208">
-							<div id="w-node-d486187d7c74-44cf2aa3" className="div-block-216">
-								<div className="form-block-5">
-									<form className="form-3">
-										<select
-												className="sel_category select-field w-select"
-												onChange={this.onChangeCategory}
-												style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
-										>
-											<option value="">All Communities</option>
-											{
-												community_config.CATEGORIES.map(cat => {
-													return (
-															<option value={cat} key={"search-" + cat}
-																			title={community_config.TOOL_TIPS[cat]}
-															>{cat}</option>
-													);
-												})
-											}
-										</select></form>
-									<div className="w-form-done">
-										<div>Thank you! Your submission has been received!</div>
-									</div>
-									<div className="w-form-fail">
-										<div>Oops! Something went wrong while submitting the form.</div>
-									</div>
+					<div className="div-block-208">
+						<div id="w-node-d486187d7c74-44cf2aa3" className="div-block-216">
+							<div className="form-block-5">
+								<form className="form-3">
+									<select
+										className="sel_category select-field w-select"
+										onChange={this.onChangeCategory}
+										style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
+									>
+										<option value="">All Communities</option>
+										{
+											community_config.CATEGORIES.map(cat => {
+												return (
+													<option value={cat} key={"search-" + cat}
+																	title={community_config.TOOL_TIPS[cat]}
+													>{cat}</option>
+												);
+											})
+										}
+									</select></form>
+								<div className="w-form-done">
+									<div>Thank you! Your submission has been received!</div>
 								</div>
-								{
-									this.props.status === "active" ? (
-											<div className="button-delete w-button" onClick={this.handleDeactivateMulti}>
-												Deactivate ({this.state.selected_count})
-											</div>
-									) : (
-											<>
-												<div className="button-delete w-button" style={{color: "#2e89fe", marginRight: "10px"}} onClick={this.handleActivateMulti}>
-													Activate ({this.state.selected_count})
-												</div>
-												<div className="button-delete w-button" onClick={this.handleDeleteMulti}>
-													Delete ({this.state.selected_count})
-												</div>
-											</>
-									)
-								}
+								<div className="w-form-fail">
+									<div>Oops! Something went wrong while submitting the form.</div>
+								</div>
 							</div>
-							{/*
+							{
+								this.props.status === "active" ? (
+									<div className="button-delete w-button" onClick={this.handleDeactivateMulti}>
+										Deactivate ({this.state.selected_count})
+									</div>
+								) : (
+									<>
+										<div className="button-delete w-button" style={{color: "#2e89fe", marginRight: "10px"}}
+												 onClick={this.handleActivateMulti}>
+											Activate ({this.state.selected_count})
+										</div>
+										<div className="button-delete w-button" onClick={this.handleDeleteMulti}>
+											Delete ({this.state.selected_count})
+										</div>
+									</>
+								)
+							}
+						</div>
+						{/*
 							<div data-duration-in="300" data-duration-out="100" id="w-node-21585007d979-44cf2aa3" className="w-tabs">
 								<div className="tabs-menu-4 w-tab-menu" role="tablist">
 									<a data-w-tab="Tab 1"
@@ -224,32 +227,32 @@ class MyCommunities extends Component{
 									</a></div>
 							</div>
 							*/}
-						</div>
+					</div>
 
-						<div className="div-20top">
-							{this.props.communities[this.props.status].length > 0 ? (
-											<div className="listing-grid dashboard">
-												{this.props.communities[this.props.status].map((community, index) => {
-													if(this.state.selected_category === "" || community.category === this.state.selected_category)
-														return (
-																<Thumbnail key={this.props.status + community._id} status={this.props.status}
-																					 value={community} handleShowSubDlg={this.props.handleShowSubDlg}
-																					 handleSelect={this.selectCommunity}
-																/>
-														);
-													else
-														return null;
-												})}
-											</div>)
-									: (
-											<div className={"w3-normal w3-text-grey"}>
-												You are not the Admin for any {this.props.status} communities.
-											</div>
-									)
-							}
-						</div>
+					<div className="div-20top">
+						{this.props.communities[this.props.status].length > 0 ? (
+								<div className="listing-grid dashboard">
+									{this.props.communities[this.props.status].map((community, index) => {
+										if(this.state.selected_category === "" || community.category === this.state.selected_category)
+											return (
+												<Thumbnail key={this.props.status + community._id} status={this.props.status}
+																	 value={community} handleShowSubDlg={this.props.handleShowSubDlg}
+																	 handleSelect={this.selectCommunity}
+												/>
+											);
+										else
+											return null;
+									})}
+								</div>)
+							: (
+								<div className={"w3-normal w3-text-grey"}>
+									You are not the Admin for any {this.props.status} communities.
+								</div>
+							)
+						}
 					</div>
 				</div>
+			</div>
 		);
 	}
 }
@@ -278,16 +281,16 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{
-			getMyCommunities,
-			activateMultiCommunity,
-			deactivateMultiCommunity,
-			deleteMultiCommunity,
-			pickMultiCommunity,
-			clearActiveStatus,
-			clearCouponVerified,
-			clearCouponFailed,
-			getBillingStatus,
-		}
+	mapStateToProps,
+	{
+		getMyCommunities,
+		activateMultiCommunity,
+		deactivateMultiCommunity,
+		deleteMultiCommunity,
+		pickMultiCommunity,
+		clearActiveStatus,
+		clearCouponVerified,
+		clearCouponFailed,
+		getBillingStatus,
+	}
 )(MyCommunities);

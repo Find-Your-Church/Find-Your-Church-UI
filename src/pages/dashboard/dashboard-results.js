@@ -315,15 +315,15 @@ class DashboardResults extends Component{
 												Iframe embed code generator:
 											</h4>
 											<Popup
-												trigger={<i style={{cursor: "pointer"}}
-																		className={"fas fa-question-circle tooltip-icon"}/>}
+												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left top"}>
 												<div>
-													If your organization has your own website, you can use the code below to display your
-													communities on any page(s) or section(s) of your website. The preview below is what your
-													iframe will look like when displayed on your website, and only displays the communities
-													currently active on your dashboard. The search, filter, and view technology is fully
-													responsive and is compatible with any device or browser.
+													If your organization has your own website, you can use the section below to generate your custom iframe
+													embed code and display your communities on your own page(s) or section(s) of your site by simply
+													copying and pasting. The functionality of the search engine is fully responsive and compatible with any
+													website, device or browser.<br/><br/>
+													<b>Note</b>: If you make changes to your iframe preferences below, you will need to copy/paste the new code
+													into the page(s) and/or section(s) your iframe code is currently displayed to reflect the changes.
 												</div>
 											</Popup>
 										</div>
@@ -341,11 +341,10 @@ class DashboardResults extends Component{
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Default category:</label>
 																	<Popup
-																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}/>}
-																		position={"right top"}>
+																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
+																		position={"left top"}>
 																		<div>
-																			...
+																			Set the default category that will be displayed and applied on your iframe search results.
 																		</div>
 																	</Popup>
 																</div>
@@ -375,11 +374,10 @@ class DashboardResults extends Component{
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Default radius:</label>
 																	<Popup
-																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}/>}
+																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			...
+																			Set the default radius that will be displayed and applied on your iframe search results.
 																		</div>
 																	</Popup>
 																</div>
@@ -404,11 +402,10 @@ class DashboardResults extends Component{
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Address, city or zip code</label>
 																	<Popup
-																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}/>}
+																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			...
+																			deSet the center point for the radius on your iframe search results.
 																		</div>
 																	</Popup>
 																</div>
@@ -465,11 +462,10 @@ class DashboardResults extends Component{
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Header background:</label>
 																	<Popup
-																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}/>}
-																		position={"right top"}>
+																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
+																		position={"left top"}>
 																		<div>
-																			...
+																			Customize your iframe search results header background to match your own brand and website.
 																		</div>
 																	</Popup>
 																</div>
@@ -501,11 +497,10 @@ class DashboardResults extends Component{
 																	<label htmlFor="email-7" className="field-label">Results
 																		background:</label>
 																	<Popup
-																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}/>}
+																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			...
+																			Customize your iframe search results container background to match your own brand and website.
 																		</div>
 																	</Popup>
 																</div>
@@ -536,11 +531,10 @@ class DashboardResults extends Component{
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Buttons:</label>
 																	<Popup
-																		trigger={<i style={{cursor: "pointer"}}
-																								className={"fas fa-question-circle tooltip-icon"}/>}
+																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			...
+																			Customize your iframe action buttons to match your own brand and website.
 																		</div>
 																	</Popup>
 																</div>
@@ -582,15 +576,11 @@ class DashboardResults extends Component{
 													Copy your iframe code
 												</h4>
 												<Popup
-													trigger={<i style={{cursor: "pointer"}}
-																			className={"fas fa-question-circle tooltip-icon"}/>}
+													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left top"}>
 													<div>
-														If your organization has your own website, you can use the code below to display your
-														communities on any page(s) or section(s) of your website. The preview below is what your
-														iframe will look like when displayed on your website, and only displays the communities
-														currently active on your dashboard. The search, filter, and view technology is fully
-														responsive and is compatible with any device or browser.
+														Copy and paste this code into an iframe embed on your website. Look below for a quick 3-step tutorial and
+														don't hesitate to contact our support team if you run into any issues.
 													</div>
 												</Popup>
 											</div>

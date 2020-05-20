@@ -223,12 +223,11 @@ class StripeSubscription extends Component{
 								<div className="accordionheader-div nounderline">
 									<h3>Account Summary:</h3>
 									<Popup
-											trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon"}/>}
+											trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 											position={"left top"}>
 										<div>
-											This is a summary showing you how many communities you have active out of the total amount you've paid for this billing
-											cycle; as well as the quantity and price of the additional activations you're approving.
+											This is a summary showing you how many communities you have active out of the total amount you've
+											paid for this billing cycle; as well as the quantity and price of the additional activations you're approving.
 										</div>
 									</Popup>
 								</div>
@@ -309,14 +308,14 @@ class StripeSubscription extends Component{
 								<div className="accordionheader-div nounderline">
 									<h3>Billing Summary:</h3>
 									<Popup
-											trigger={<i style={{cursor: "pointer"}}
-																	className={"fas fa-question-circle tooltip-icon"}/>}
+											trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 											position={"left center"}>
 										<div>
-											This is a summary showing you the total dollar amount due today as well as the upcoming payments you can expect based
-											on your current number of active communities + the additional activations you're about to approve.
-											<br/>
-											<b>Upcoming Payments:</b><br/>(Total Active Communities) x (Monthly Price) = Upcoming Payment<br/>
+											This is a summary showing you the total dollar amount due today as well as the upcoming payments you
+											can expect based on your number of active communities.<br/><br/>
+											<b>Note</b>: Any communities deactivated between now and the end of your billing cycle will not be included in
+											upcoming payments. If you have 0 active communities at the end of your billing cycle, your upcoming
+											payment(s) will be $0.00.
 										</div>
 									</Popup>
 								</div>
