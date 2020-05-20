@@ -26,7 +26,7 @@ import {
 	CLEAR_FILTER_MASK,
 	SEARCHING,
 	SET_BACK_URL,
-	ACTIVATE_MULTI_COMMUNITY, PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY, GET_ORG_NAMES,
+	ACTIVATE_MULTI_COMMUNITY, PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -647,22 +647,4 @@ export const setBackUrl = (url) => dispatch => {
 		type: SET_BACK_URL,
 		payload: url,
 	});
-};
-
-export const getOrgNames = (keyword) => dispatch => {
-	axios
-		.post(app_config.FYC_API_URL + "/api/communities/getorgnames", keyword)
-		.then(res => {
-			dispatch({
-				type: GET_ORG_NAMES,
-				payload: res.data,
-			});
-		})
-		.catch(err => {
-				dispatch({
-					type: MESSAGE_FROM_API,
-					payload: err.response !== undefined ? err.response.data : {msg_search: "Unknown error"}
-				});
-			}
-		);
 };

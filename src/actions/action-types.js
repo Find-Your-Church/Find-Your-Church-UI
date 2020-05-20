@@ -59,4 +59,5 @@ export const CLEAR_FILTER_MASK = "CLEAR_FILTER_MASK";
 export const CLEAR_CRITERIA = "CLEAR_CRITERIA";
 export const SEARCHING = "SEARCHING";
 export const SET_BACK_URL = "SET_BACK_URL";
-export const GET_ORG_NAMES = "GET_ORG_NAMES";
+export const GET_OWNERS = "GET_OWNERS";
+export const CLEAR_OWNERS = "CLEAR_OWNERS";

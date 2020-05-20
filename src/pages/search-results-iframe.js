@@ -10,12 +10,16 @@ import SearchFilterRadio from "../components/search-filter-radio";
 import {Link} from "react-router-dom";
 import {
 	clearPicking,
-	doSearchCommunities, getOrgNames, setBackUrl,
+	doSearchCommunities, setBackUrl,
 	setPicking,
 	setSearchCriteria,
 	setSearchFilter,
 	setSortOrder
 } from "../actions/community-actions";
+import {
+	clearOwners,
+	getOwners,
+} from "../actions/auth-actions";
 import PublicThumbnail from "../components/public-thumbnail";
 import '../css/search-results-iframe.css';
 import sorters from "../actions/sorters";
@@ -67,8 +71,12 @@ class SearchResultsIframe extends Component{
 
 		this.state = {
 			showed_filter: false,
-			search_community_name: '',
+			keyword_organization: '',
 			...INIT_FILTERS,
+			showed_owners: false,
+			owner_id: '',
+			owner_title: '',
+			owner_contact: '',
 		};
 	}
 
@@ -189,36 +197,24 @@ class SearchResultsIframe extends Component{
 
 	onChangeCommunityName = e => {
 		const escaped_keyword = e.target.value; //.replace(/[.*?^${}()|[\]\\]/g, '');
-		this.setState({search_community_name: escaped_keyword});
+		this.setState({
+			keyword_organization: escaped_keyword,
+			showed_owners: true,
+		});
 
 		// get names from BE API.
 		if(escaped_keyword.length > 0){
-			this.props.getOrgNames({keyword: escaped_keyword});
+			this.props.getOwners({keyword: escaped_keyword});
 		}
-
-		if(this.props.community.org_names.includes(escaped_keyword)){
-			this.filterByCommunityName(escaped_keyword);
+		else{
+			this.props.clearOwners();
 		}
-	};
-
-	onKeyPressCommunityName = e => {
-		if(e.keyCode === 13){
-			this.filterByCommunityName(this.state.search_community_name);
-		}
-	};
-
-	onBlurCommunityName = e => {
-		this.filterByCommunityName(this.state.search_community_name);
 	};
 
 	toggleFilter = () => {
 		this.setState({showed_filter: !this.state.showed_filter});
 	};
 
-	filterByCommunityName = (keyword) => {
-		const obj = {community_name: keyword};
-		this.doSearchByFilter(obj);
-	};
 	getDaysInfo = (checks) => {
 		const obj = {days: checks};
 		this.doSearchByFilter(obj);
@@ -308,6 +304,29 @@ class SearchResultsIframe extends Component{
 		this.doSearchByFilter({[key]: vals.join("")});
 	};
 
+	/**
+	 * @param owner {{title: string, value: string}}
+	 */
+	pickOwner = owner => {
+		this.setState({
+			owner_id: owner.value,
+			owner_title: owner.title,
+			owner_contact: owner.contact,
+			showed_owners: false,
+		});
+		this.doSearchByFilter({owner_id: owner.value});
+	};
+
+	clearOwner = () => {
+		this.setState({
+			owner_id: '',
+			owner_title: '',
+			owner_contact: '',
+			showed_owners: false,
+		});
+		this.doSearchByFilter({owner_id: ''});
+	};
+
 	render(){
 		// sort this.props.community.search_results
 		const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
@@ -368,7 +387,8 @@ class SearchResultsIframe extends Component{
 					</div>
 					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
 						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: this.color_header_bg}}>
-							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true} path={this.props.location.pathname}/>
+							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true}
+												 path={this.props.location.pathname}/>
 							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: this.color_buttons}}>
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
@@ -398,6 +418,15 @@ class SearchResultsIframe extends Component{
 						/>
 						<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
 							<div className={"selected-filters"}>
+								{this.state.owner_id !== '' ? (
+									<div className={"selected-filter-item"}
+											 title={`${this.state.owner_title} (${this.state.owner_contact})`}>
+										{this.state.owner_title}&nbsp;
+										<i className={"far fa-times-circle"}
+											 style={{cursor: "pointer", color: "#333"}}
+											 onClick={this.clearOwner}/>
+									</div>
+								) : null}
 								<SelectedFilters filter={this.props.community.criteria.filter}
 																 handleRefresh={(key, i) => this.refreshComponent(key, i)}/>
 							</div>
@@ -418,22 +447,37 @@ class SearchResultsIframe extends Component{
 									<div className="flexdiv-left labels">
 										<label className="filter-label">Organization name</label>
 									</div>
-									<input type={"text"} id={"filter_community_name"}
-												 className={"w-input search-filter-name"}
-												 placeholder={"Search by name"}
-												 value={this.state.search_community_name}
-												 onChange={this.onChangeCommunityName}
-												 onKeyDown={this.onKeyPressCommunityName}
-												 onBlur={this.onBlurCommunityName}
-												 list={"names-list"}
-									/>
-									<datalist id={"names-list"}>
-										{this.props.community.org_names.map(org => {
-											return (
-												<option key={`data-${org}`} value={org}/>
-											);
-										})}
-									</datalist>
+									<div style={{position: "relative"}}>
+										<input type={"text"} id={"filter_community_name"}
+													 className={"w-input search-filter-name"}
+													 placeholder={"Search by name"}
+													 value={this.state.keyword_organization}
+													 onChange={this.onChangeCommunityName}
+													 onClick={() => {
+														 this.setState({showed_owners: true});
+													 }}
+													 onFocus={() => {
+														 this.setState({showed_owners: true});
+													 }}
+										/>
+										<div className={"owners-list"}
+												 onMouseLeave={() => {
+													 this.setState({showed_owners: false});
+												 }}
+												 style={{display: this.state.showed_owners ? "block" : "none"}}>
+											{this.props.auth.owners.map(org => {
+												return (
+													<div key={`owner-${org.value}`}
+															 className={"owner-item"}
+															 onClick={() => {
+																 this.pickOwner(org);
+															 }}>
+														{org.title} ({org.contact})
+													</div>
+												);
+											})}
+										</div>
+									</div>
 								</div>
 								{/* filters group */}
 								<SearchFilterCheck filterTitle="Day(s)" filterName="days"
@@ -507,7 +551,8 @@ class SearchResultsIframe extends Component{
 									: null}
 							</div>
 						</div>
-						<div className={"communities-container communities-body communities search-results w3-row"} style={{backgroundColor: this.color_results_bg}}>
+						<div className={"communities-container communities-body communities search-results w3-row"}
+								 style={{backgroundColor: this.color_results_bg}}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
@@ -610,5 +655,15 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{setSearchCriteria, setSearchFilter, setSortOrder, doSearchCommunities, setPicking, clearPicking, setBackUrl, getOrgNames}
+	{
+		setSearchCriteria,
+		setSearchFilter,
+		setSortOrder,
+		doSearchCommunities,
+		setPicking,
+		clearPicking,
+		setBackUrl,
+		getOwners,
+		clearOwners,
+	}
 )(SearchResultsIframe);
