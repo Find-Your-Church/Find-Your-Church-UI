@@ -259,14 +259,11 @@ class DashboardResults extends Component{
 								style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
 						<div className={"admin-wrapper"}>
 							<div className="page-header-container">
-								<div className={"page-header-sub-container wrap"}>
+								<div className={"page-header-sub-container"}>
 									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
 										<div className="div-block-231">
-											<Link to="/create-new-community"
-														className="button-create w-button">
-												<i
-													className={"fas fa-users"}/>
-												<span className="text-span-3">New Community</span>
+											<Link to="/create-new-community" className="button-create w-button">
+												<i className={"fas fa-users"}/>
 											</Link>
 										</div>
 									</div>

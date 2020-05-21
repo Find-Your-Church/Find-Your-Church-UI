@@ -108,6 +108,12 @@
 	background-color: #e8e5ea;
 }
 
+@media screen and (max-width: 768px){
+	.account-body .container-inline {
+		padding: 20px 10px;
+	}
+}
+
 .account-body .sub-container {
 	padding: 0;
 }
@@ -359,6 +365,10 @@
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
 	border-bottom: 1px solid #e8e5ea;
+}
+
+.upcoming-payment-table-row * {
+	text-align: right !important;
 }
 
 .upcoming-payment-table-row.header {

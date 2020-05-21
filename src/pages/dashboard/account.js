@@ -502,8 +502,9 @@ class Account extends Component{
 						<div className={"page-header-sub-container"}>
 							<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
 								<div className="div-block-231">
-									<Link to="/dashboard" className="button-create w-button">
-										<i className="fas fa-th"/><span className="text-span-3">Dashboard</span></Link>
+									<Link to="/dashboard" className="button-create dashboard w-button">
+										<i className="fas fa-th"/>
+									</Link>
 								</div>
 							</div>
 							<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
