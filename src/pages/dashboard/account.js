@@ -921,7 +921,7 @@ class Account extends Component{
 												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left top"}>
 												<div>
-													This information is private and only viewable by you. Use this section to update yoru login
+													This information is private and only viewable by you. Use this section to update your login
 													credentials at any time.
 												</div>
 											</Popup>
@@ -929,13 +929,6 @@ class Account extends Component{
 										<div className="table-row">
 											<h4 className="table-header">
 												Name
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingUserName ?
@@ -1126,8 +1119,7 @@ class Account extends Component{
 												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left center"}>
 												<div>
-													This information is private and only viewable by you. Use this section to update yoru login credentials at
-													any time.
+													This is a snapshot showing you how many communities you have active out of the total amount you've paid for this billing cycle; as well as the upcoming payments you can expect based on your current number of active communities.
 												</div>
 											</Popup>
 										</div>

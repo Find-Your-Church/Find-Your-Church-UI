@@ -405,7 +405,7 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			deSet the center point for the radius on your iframe search results.
+																			Set the center point for the radius on your iframe search results.
 																		</div>
 																	</Popup>
 																</div>
