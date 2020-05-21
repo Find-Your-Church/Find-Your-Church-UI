@@ -94,6 +94,7 @@ class CommunityMap extends Component{
 												"/img/icon/icon-address-marker-hover.svg"
 												: "/img/icon/icon-address-marker.svg"
 										}}
+										title={item.data.community_name}
 										zIndex={this.props.community.picking === index ? 1000 : 900}
 						/>
 					)
