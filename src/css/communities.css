@@ -245,7 +245,7 @@
 	cursor: pointer;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 992px) {
 	.button-delete {
 		display: -webkit-box;
 		display: -webkit-flex;

@@ -86,6 +86,12 @@
 }
 
 @media screen and (max-width: 768px){
+	.iframe-details {
+		padding: 20px 10px;
+	}
+}
+
+@media screen and (max-width: 768px){
 	.customiframe-grid {
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
@@ -317,6 +323,25 @@
 	background-repeat: repeat, no-repeat;
 	background-attachment: scroll, fixed;
 	text-align: center;
+	transition: ease 0.3s;
+}
+
+@media screen and (max-width: 992px){
+	.div-block-184 {
+		padding: 60px 100px;
+	}
+}
+
+@media screen and (max-width: 768px){
+	.div-block-184 {
+		padding: 40px 60px;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.div-block-184 {
+		padding: 40px 20px;
+	}
 }
 
 .div-block-184 .div-block-185 {
