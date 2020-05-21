@@ -248,6 +248,7 @@
 
 .info-body .left-part div {
 	background-color: #fff;
+	border-radius: 3px;
 }
 
 .info-body .left-part div.popup-overlay {
@@ -255,7 +256,7 @@
 }
 
 .info-body .left-part .community-info-container {
-	border: 1px solid rgba(27, 0, 51, 0.15);
+	border: 1px solid #ddd9e1;
 	border-radius: 3px;
 	background-color: #fff;
 }
@@ -544,19 +545,25 @@
 }
 
 .steps-body .flexdiv-left.labels {
+	height: 41px;
+	padding-bottom: 20px;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
 
+.steps-body .flexdiv-left.labels.collapsed {
+	height: 20px;
+	padding-bottom: 0;
+	border-bottom: none !important;
+}
+
 .steps-body .form-header {
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	margin: 0;
+	padding: 0;
 	color: #333;
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 20px;
 	font-weight: 600;
 }
@@ -583,15 +590,14 @@
 }
 
 .steps-body .input-div {
-	padding: 6px 10px 10px !important;
 	background-color: #fff;
 }
 
 .steps-body .view-paragraph {
 	margin-top: 20px;
-	padding: 0 10px 10px;
-	background-color: #ffffff;
-	border: 1px solid rgba(27, 0, 51, 0.15);
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd9e1;
 	border-radius: 3px;
 }
 
@@ -599,7 +605,7 @@
 .view-paragraph.edit .labels {
 	padding: 0;
 	height: 38px;
-	border-bottom: solid 1px #ccc;
+	border-bottom: solid 1px #e8e5eb;
 }
 
 .view-paragraph .labels {
@@ -611,7 +617,7 @@
 }
 
 .view-paragraph.edit .filter-div {
-	border-bottom: solid 1px #ccc;
+	border-bottom: solid 1px #e6e6e6;
 }
 
 .view-paragraph.edit .input-div .labels {
@@ -643,7 +649,7 @@
 }
 
 .steps-body .right-part .view-item {
-	padding: 8px 0;
+	padding: 15px 0;
 	min-height: 37px;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
@@ -651,13 +657,13 @@
 	background-size: 22px;
 	background-position: left center;
 	background-repeat: no-repeat;
-	border-bottom: solid 1px #ccc;
+	border-bottom: solid 1px #e8e5eb;
 }
 
 .steps-body .right-part .view-filter {
 	min-height: 48px;
 	padding: 8px 0 0 0;
-	border-bottom: solid 1px #ccc;
+	border-bottom: solid 1px #e8e5eb;
 }
 
 .steps-body .right-part .view-filter .filter-title {
@@ -785,8 +791,9 @@
 	background-color: transparent;
 }
 
+.steps-body .w-input:hover, .steps-body .w-select:hover,
 .steps-body .w-input:focus, .steps-body .w-select:focus {
-	border-color: #8900fe;
+	border-color: #3898EC;
 	outline: 0;
 }
 
@@ -839,12 +846,13 @@
 .steps-body .textarea {
 	padding: 10px;
 	height: auto !important;
-	min-height: 80px;
+	min-height: auto;
 	min-width: 100%;
 	max-width: 100%;
 	margin: 0;
 	font-size: 16px;
-	border: none;
+	border: 1px solid #ddd9e1;
+	border-radius: 3px;
 	color: #333;
 }
 

@@ -514,7 +514,7 @@ class Account extends Component{
 							<div data-w-tab="Tab 1"
 									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
 									 onClick={() => this.selectTabDetails(true)}>
-								<div>Account Details</div>
+								<div>Info</div>
 							</div>
 							<div data-w-tab="Tab 2"
 									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}

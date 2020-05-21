@@ -70,10 +70,10 @@ class ViewCommunity extends Component{
 			event_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.event_type.length) : p_obj.obj.event_type,
 			support_type: p_obj === undefined ? "0".repeat(community_config.FILTERS.support_type.length) : p_obj.obj.support_type,
 
-			collapsedAboutPart: true,
-			collapsedContactPart: true,
-			collapsedLinksPart: true,
-			collapsedMorePart: true,
+			collapsedAboutPart: false,
+			collapsedContactPart: false,
+			collapsedLinksPart: false,
+			collapsedMorePart: false,
 
 			right_min_height: 0,
 		};
@@ -164,63 +164,64 @@ class ViewCommunity extends Component{
 		}
 
 		return this.state.is_editing ? (
-				<Redirect to={{pathname: '/edit', state: {obj: this.state.community_obj.obj}}}/>
+			<Redirect to={{pathname: '/edit', state: {obj: this.state.community_obj.obj}}}/>
 		) : (
-				<>
-					<SiteHeader/>
-					<div>
-						<main className="steps-body">
-							<h3 className="header3 w3-bar">
-								<div className="create-menu w3-bar-item w3-left">
-									<Link to="/dashboard" className="w3-button cancel">Back</Link>
-								</div>
-								<div className="create-menu w3-bar-item w3-center">
-									{this.state.community_name}
-								</div>
-								<div className="create-menu w3-bar-item w3-right">
-									<Link to="#" className="w3-button w3-right edit"
-												onClick={this.onEditCommunity}>
-										Edit
-									</Link>
-								</div>
-							</h3>
-							<div className={"view-wrapper"}>
-								<div className="container-inline">
-									<div className="info-body w3-row">
-										<div className="left-part w3-col l4">
-											<div id={"community-info-container"} style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
-												{this.state.pictures.length > 1 ? (
-																<div className="slide-container">
-																	<Slide {...this.slide_options}>
-																		{this.state.pictures.map((pic, index) => {
-																			return (
-																					<div className="each-slide" key={index}>
-																						<div style={{backgroundImage: `url(${pic})`}}>
-																						</div>
-																					</div>
-																			);
-																		})}
-																	</Slide>
-																</div>
-														)
-														: (this.state.pictures.length > 0 ? (
-																<div className="slide-container">
-																	<div className="each-slide">
-																		<div
-																				style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+			<>
+				<SiteHeader/>
+				<div>
+					<main className="steps-body">
+						<h3 className="header3 w3-bar">
+							<div className="create-menu w3-bar-item w3-left">
+								<Link to="/dashboard" className="w3-button cancel">Back</Link>
+							</div>
+							<div className="create-menu w3-bar-item w3-center">
+								{this.state.community_name}
+							</div>
+							<div className="create-menu w3-bar-item w3-right">
+								<Link to="#" className="w3-button w3-right edit"
+											onClick={this.onEditCommunity}>
+									Edit
+								</Link>
+							</div>
+						</h3>
+						<div className={"view-wrapper"}>
+							<div className="container-inline">
+								<div className="info-body w3-row">
+									<div className="left-part w3-col l4">
+										<div id={"community-info-container"}
+												 style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
+											{this.state.pictures.length > 1 ? (
+													<div className="slide-container">
+														<Slide {...this.slide_options}>
+															{this.state.pictures.map((pic, index) => {
+																return (
+																	<div className="each-slide" key={index}>
+																		<div style={{backgroundImage: `url(${pic})`}}>
 																		</div>
 																	</div>
-																</div>
-														) : (
-																<img
-																		className={"community-picture"}
-																		alt="Community" title={this.state.community_name}
-																		src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
-														))}
-												<div className="basic-info view">
-													<div className="listingrow view" style={{position: "relative"}}>
-														<strong>{this.state.community_name}</strong>
-														{/*
+																);
+															})}
+														</Slide>
+													</div>
+												)
+												: (this.state.pictures.length > 0 ? (
+													<div className="slide-container">
+														<div className="each-slide">
+															<div
+																style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+															</div>
+														</div>
+													</div>
+												) : (
+													<img
+														className={"community-picture"}
+														alt="Community" title={this.state.community_name}
+														src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
+												))}
+											<div className="basic-info view">
+												<div className="listingrow view" style={{position: "relative"}}>
+													<strong>{this.state.community_name}</strong>
+													{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
 															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
@@ -246,202 +247,210 @@ class ViewCommunity extends Component{
 															</Link>
 														</nav>
 														*/}
-													</div>
-													<div className="listingrow view">
-														{this.state.category}
-													</div>
-													<div className="listingrow view">
-														{this.state.address}
-													</div>
+												</div>
+												<div className="listingrow view">
+													{this.state.category}
+												</div>
+												<div className="listingrow view">
+													{this.state.address}
 												</div>
 											</div>
 										</div>
-										<div className="right-part view w3-col l8" style={{minHeight: `${this.state.right_min_height}px`}}>
-											<div className={"tab w3-row"}>
-												<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
-														 onClick={this.selectTabDetails}>Details
-												</div>
-												<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-														 onClick={this.selectTabMembers}>Admin
-												</div>
+									</div>
+									<div className="right-part view w3-col l8" style={{minHeight: `${this.state.right_min_height}px`}}>
+										<div className={"tab w3-row"}>
+											<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
+													 onClick={this.selectTabDetails}>Details
 											</div>
-											{this.state.showedMembers ?
-													(
-															<ListMembers editable={false}/>
-													)
-													: (
-															<div className={"w3-animate-opacity"}>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
-																		<h4 className="form-header">About</h4>
-																		{/*<Popup
+											<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
+													 onClick={this.selectTabMembers}>Admin
+											</div>
+										</div>
+										{this.state.showedMembers ?
+											(
+												<ListMembers editable={false}/>
+											)
+											: (
+												<div className={"w3-animate-opacity"}>
+													<div className={"view-paragraph"}>
+														<div className={`flexdiv-left labels ${this.state.collapsedAboutPart ? "collapsed" : ""}`}
+																 onClick={this.toggleAboutPart}>
+															<h4 className="form-header">About</h4>
+															{/*<Popup
 															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
-																	</div>
-																	<div className="input-div about part-animation"
-																			 style={{display: this.state.collapsedAboutPart ? "block" : "none"}}>
-																		{this.state.showedAboutShort ? (
-																						<>
-																							<pre>
-																								{aboutShort}&nbsp;
-																							</pre>
-																							{isMore ? (
-																									<div className={"read-more"}
-																											 onClick={this.handleReadMore}>read more</div>
-																							) : null}
-																						</>
-																				)
-																				: (
-																						<>
-																							<pre>
-																								{this.state.about}
-																							</pre>
-																							{isMore ? (
-																									<div className={"read-more"}
-																											 onClick={this.handleReadMore}>show
-																										less</div>
-																							) : null}
-																						</>
-																				)
-																		}
-																	</div>
-																</div>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleContactPart}>
-																		<h4 className="form-header">Community Contact</h4>
-																		{/*<Popup
+														</div>
+														{this.state.collapsedAboutPart ? null : (
+															<div className="input-div about part-animation w3-animate-opacity">
+																{this.state.showedAboutShort ? (
+																		<>
+																			<pre>
+																				{aboutShort}&nbsp;
+																			</pre>
+																			{isMore ? (
+																				<div className={"read-more"}
+																						 onClick={this.handleReadMore}>read more</div>
+																			) : null}
+																		</>
+																	)
+																	: (
+																		<>
+																			<pre>
+																				{this.state.about}
+																			</pre>
+																			{isMore ? (
+																				<div className={"read-more"}
+																						 onClick={this.handleReadMore}>show
+																					less</div>
+																			) : null}
+																		</>
+																	)
+																}
+															</div>
+														)}
+													</div>
+													<div className={"view-paragraph"}>
+														<div className={`flexdiv-left labels ${this.state.collapsedContactPart ? "collapsed" : ""}`}
+																 onClick={this.toggleContactPart}>
+															<h4 className="form-header">Community Contact</h4>
+															{/*<Popup
 															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
+														</div>
+														{this.state.collapsedContactPart ? null : (
+															<div className="input-div w3-row part-animation w3-animate-opacity">
+																{this.state.community_contact ?
+																	<div className="view-item w3-col l12"
+																			 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
+																		{this.state.community_contact ||
+																		<span style={{color: "#aaa"}}>Contact name</span>}
 																	</div>
-																	<div className="input-div w3-row part-animation"
-																			 style={{display: this.state.collapsedContactPart ? "block" : "none"}}>
-																		{this.state.community_contact ?
-																				<div className="view-item w3-col l12"
-																						 style={{backgroundImage: "url('/img/icon/icon-contact.svg')"}}>
-																					{this.state.community_contact ||
-																					<span style={{color: "#aaa"}}>Contact name</span>}
-																				</div>
-																				: null}
-																		{this.state.phone ?
-																			<a href={"tel:" + this.state.phone} className="view-item w3-half"
-																				 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
-																				{this.state.phone ||
-																				<span style={{color: "#aaa"}}>Phone</span>}
-																			</a>
-																			: null}
-																		{this.state.email ?
-																				<a href={"mailto:" + this.state.email} className="view-item w3-half"
-																					 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
-																					{this.state.email ||
-																					<span style={{color: "#aaa"}}>Email</span>}
-																				</a>
-																				: null}
-																	</div>
-																</div>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleLinksPart}>
-																		<h4 className="form-header">Links and Resources</h4>
-																		{/*<Popup
+																	: null}
+																{this.state.phone ?
+																	<a href={"tel:" + this.state.phone} className="view-item w3-half"
+																		 style={{backgroundImage: "url('/img/icon/icon-phone.svg')"}}>
+																		{this.state.phone ||
+																		<span style={{color: "#aaa"}}>Phone</span>}
+																	</a>
+																	: null}
+																{this.state.email ?
+																	<a href={"mailto:" + this.state.email} className="view-item w3-half"
+																		 style={{backgroundImage: "url('/img/icon/icon-email.svg')"}}>
+																		{this.state.email ||
+																		<span style={{color: "#aaa"}}>Email</span>}
+																	</a>
+																	: null}
+															</div>
+														)}
+													</div>
+													<div className={"view-paragraph"}>
+														<div className={`flexdiv-left labels ${this.state.collapsedLinksPart ? "collapsed" : ""}`}
+																 onClick={this.toggleLinksPart}>
+															<h4 className="form-header">Links and Resources</h4>
+															{/*<Popup
 															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
-																	</div>
-																	<div className={"social-link-group part-animation"}
-																			 style={{display: this.state.collapsedLinksPart ? "block" : "none"}}>
-																		{community_config.SOCIALS.map(item => {
-																			const key_name = item.toLowerCase();
-																			return this.state[key_name] ? (
-																					<Link to="#" key={item}
-																								onClick={() => this.redirectURL(this.state[key_name])}
-																								className={"social-link"}>
-																						<div className={`view-link-icon ${key_name}`} title={item}/>
-																					</Link>
-																			) : null;
-																		})}
-																	</div>
-																</div>
-																<div className={"view-paragraph"}>
-																	<div className="flexdiv-left labels" onClick={this.toggleMorePart}>
-																		<h4 className="form-header">More Info</h4>
-																		{/*<Popup
+														</div>
+														{this.state.collapsedLinksPart ? null : (
+															<div className={"social-link-group part-animation w3-animation-opacity"}>
+																{community_config.SOCIALS.map(item => {
+																	const key_name = item.toLowerCase();
+																	return this.state[key_name] ? (
+																		<Link to="#" key={item}
+																					onClick={() => this.redirectURL(this.state[key_name])}
+																					className={"social-link"}>
+																			<div className={`view-link-icon ${key_name}`} title={item}/>
+																		</Link>
+																	) : null;
+																})}
+															</div>
+														)}
+													</div>
+													<div className={"view-paragraph"}>
+														<div className={`flexdiv-left labels ${this.state.collapsedMorePart ? "collapsed" : ""}`}
+																 onClick={this.toggleMorePart}>
+															<h4 className="form-header">More Info</h4>
+															{/*<Popup
 															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 															position={"left center"}>
 															<div>Tell visitors more about your community...</div>
 														</Popup>*/}
-																	</div>
-																	<div className="input-div part-animation"
-																			 style={{display: this.state.collapsedMorePart ? "block" : "none"}}>
-																		<FilterItemCheck filterTitle="Day(s)" filterName="days"
-																										 value={this.state.days}
-																										 items={community_config.FILTERS.days}/>
-																		<FilterItemCheck filterTitle="Time(s)" filterName="times"
-																										 value={this.state.times}
-																										 items={community_config.FILTERS.times}/>
-																		<FilterItemRadio filterTitle="Frequency" filterName="frequency"
-																										 value={this.state.frequency}
-																										 items={community_config.FILTERS.frequency}/>
-																		<FilterItemCheck filterTitle="Hosting" filterName="hosting"
-																										 value={this.state.hosting}
-																										 items={community_config.FILTERS.hosting}/>
-																		<FilterItemCheck filterTitle="Age(s)" filterName="ages"
-																										 value={this.state.ages}
-																										 items={community_config.FILTERS.ages}/>
-																		<FilterItemRadio filterTitle="Gender" filterName="gender"
-																										 value={this.state.gender}
-																										 items={community_config.FILTERS.gender}/>
-																		<FilterItemRadio filterTitle="Kids Welcome" filterName="kids_welcome"
-																										 value={this.state.kids_welcome}
-																										 items={community_config.FILTERS.kids_welcome}/>
-																		<FilterItemCheck filterTitle="Parking" filterName="parking"
-																										 value={this.state.parking}
-																										 items={community_config.FILTERS.parking}/>
-																		<FilterItemCheck filterTitle="Other Ministries"
-																										 filterName="ministries"
-																										 value={this.state.ministries}
-																										 items={community_config.FILTERS.ministries}/>
-																		<FilterItemCheck filterTitle="Other Services"
-																										 filterName="other_services"
-																										 value={this.state.other_services}
-																										 items={community_config.FILTERS.other_services}/>
-																		{this.state.average_attendance > 0 ?
-																				<div className="view-filter w3-row">
-																					<div className={"filter-title w3-col l4"}>
-																						Average Attendance
-																					</div>
-																					{this.state.average_attendance ?
-																							<span className={"filter-value-item"}>
+														</div>
+														{this.state.collapsedMorePart ? null : (
+															<div className="input-div part-animation w3-animate-opacity">
+																<FilterItemCheck filterTitle="Day(s)" filterName="days"
+																								 value={this.state.days}
+																								 items={community_config.FILTERS.days}/>
+																<FilterItemCheck filterTitle="Time(s)" filterName="times"
+																								 value={this.state.times}
+																								 items={community_config.FILTERS.times}/>
+																<FilterItemRadio filterTitle="Frequency" filterName="frequency"
+																								 value={this.state.frequency}
+																								 items={community_config.FILTERS.frequency}/>
+																<FilterItemCheck filterTitle="Hosting" filterName="hosting"
+																								 value={this.state.hosting}
+																								 items={community_config.FILTERS.hosting}/>
+																<FilterItemCheck filterTitle="Age(s)" filterName="ages"
+																								 value={this.state.ages}
+																								 items={community_config.FILTERS.ages}/>
+																<FilterItemRadio filterTitle="Gender" filterName="gender"
+																								 value={this.state.gender}
+																								 items={community_config.FILTERS.gender}/>
+																<FilterItemRadio filterTitle="Kids Welcome" filterName="kids_welcome"
+																								 value={this.state.kids_welcome}
+																								 items={community_config.FILTERS.kids_welcome}/>
+																<FilterItemCheck filterTitle="Parking" filterName="parking"
+																								 value={this.state.parking}
+																								 items={community_config.FILTERS.parking}/>
+																<FilterItemCheck filterTitle="Other Ministries"
+																								 filterName="ministries"
+																								 value={this.state.ministries}
+																								 items={community_config.FILTERS.ministries}/>
+																<FilterItemCheck filterTitle="Other Services"
+																								 filterName="other_services"
+																								 value={this.state.other_services}
+																								 items={community_config.FILTERS.other_services}/>
+																{this.state.average_attendance > 0 ?
+																	<div className="view-filter w3-row">
+																		<div className={"filter-title w3-col l4"}>
+																			Average Attendance
+																		</div>
+																		{this.state.average_attendance ?
+																			<span className={"filter-value-item"}>
 																								{this.state.average_attendance}
 																							</span>
-																							: null}
-																				</div>
-																				: null}
-																		<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
-																										 value={this.state.ambiance}
-																										 items={community_config.FILTERS.ambiance}/>
-																		<FilterItemRadio filterTitle="Event Type"
-																										 filterName="event_type"
-																										 value={this.state.event_type}
-																										 items={community_config.FILTERS.event_type}/>
-																		<FilterItemRadio filterTitle="Support Type"
-																										 filterName="support_type"
-																										 value={this.state.support_type}
-																										 items={community_config.FILTERS.support_type}/>
+																			: null}
 																	</div>
-																</div>
+																	: null}
+																<FilterItemRadio filterTitle="Ambiance" filterName="ambiance"
+																								 value={this.state.ambiance}
+																								 items={community_config.FILTERS.ambiance}/>
+																<FilterItemRadio filterTitle="Event Type"
+																								 filterName="event_type"
+																								 value={this.state.event_type}
+																								 items={community_config.FILTERS.event_type}/>
+																<FilterItemRadio filterTitle="Support Type"
+																								 filterName="support_type"
+																								 value={this.state.support_type}
+																								 items={community_config.FILTERS.support_type}/>
 															</div>
-													)}
-										</div>
+														)}
+													</div>
+												</div>
+											)}
 									</div>
 								</div>
 							</div>
-						</main>
-					</div>
-				</>
+						</div>
+					</main>
+				</div>
+			</>
 		);
 	}
 }

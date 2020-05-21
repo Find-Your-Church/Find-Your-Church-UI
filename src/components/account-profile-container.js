@@ -28,7 +28,7 @@ class AccountProfileContainer extends Component{
 
 	render(){
 		return (
-			<div className="profile-container" style={{padding: "0", border: "none"}}>
+			<div className="profile-container" style={{padding: "0"}}>
 				<div className={"profile-container-wrapper"}>
 					<div className="div-block-55" style={{marginTop: "0"}}>
 						<div className="profpic-container">
