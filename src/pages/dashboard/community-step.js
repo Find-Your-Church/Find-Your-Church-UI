@@ -165,7 +165,7 @@ class CommunityStep extends Component{
 			const self = this;
 			setTimeout(() => {
 				self.setState({showed_tooltip: true})
-			}, 500);
+			}, 10);
 
 			switch(e.target.value){
 				case 'Churches':

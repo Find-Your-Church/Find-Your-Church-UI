@@ -195,7 +195,7 @@ class DashboardResults extends Component{
 
 			setTimeout(() => {
 				this.setState({showed_tooltip: true});
-			})
+			}, 10);
 		}
 
 		this.setState({[e.target.id]: e.target.value});
