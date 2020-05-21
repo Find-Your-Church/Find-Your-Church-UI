@@ -79,7 +79,7 @@ class Admin extends Component{
 								}}>
 						<div className={"admin-wrapper"}>
 							<div className="page-header-container">
-								<div className={"page-header-sub-container"}>
+								<div className={"page-header-sub-container wrap"}>
 									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
 										<div className="div-block-231">
 											<Link to="/create-new-community" className="button-create w-button">
