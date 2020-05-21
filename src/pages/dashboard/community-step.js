@@ -439,7 +439,7 @@ class CommunityStep extends Component{
 								{this.state.showedDetails ?
 									(
 										<div className="info-body w3-row">
-											<div className="left-part w3-col s12 m5">
+											<div className="left-part w3-col s12 m4">
 												<div id={"profile-picture-container"} className={"community-info-container"}>
 													<div className="community-info-title">
 														<h4>Profile Picture</h4>
@@ -576,7 +576,7 @@ class CommunityStep extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part w3-col s12 m7" style={{minHeight: `${this.state.right_min_height}px`}}>
+											<div className="right-part w3-col s12 m8" style={{minHeight: `${this.state.right_min_height}px`}}>
 												<form
 													id="wf-form-New-Community" name="wf-form-New-Community"
 													data-name="New Community" className="form1 w3-animate-opacity">
