@@ -75,37 +75,40 @@ class Admin extends Component{
 					<main className="admin-body w3-row"
 								style={{
 									filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none",
-									backgroundColor: "#e8e5eb",
+									backgroundColor: "#e8e5ea",
 								}}>
 						<div className={"admin-wrapper"}>
-							<div className="div-block-213">
-								<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-									<div className="div-block-231">
-										<Link to="/create-new-community" className="button-create w-button">
-											<i className={"fas fa-users"}/> <span className="text-span-3">New Community</span>
-										</Link>
+							<div className="page-header-container">
+								<div className={"page-header-sub-container"}>
+									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
+										<div className="div-block-231">
+											<Link to="/create-new-community" className="button-create w-button">
+												<i className={"fas fa-users"}/> <span className="text-span-3">New Community</span>
+											</Link>
+										</div>
 									</div>
-								</div>
-								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
-									<h1 className="heading-40">Communities</h1>
-								</div>
-								<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
-									<div className="div-block-215 underline">
-										<Link to="/dashboard" className="link-6">
-											<em className="italic-text-7 current"><i className="fas fa-th"/></em>
-										</Link>
+									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
+										<h1 className="heading-40">Communities</h1>
 									</div>
-									{/*
+									<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
+										<div className="div-block-215 underline">
+											<Link to="/dashboard" className="link-6">
+												<em className="italic-text-7 current"><i className="fas fa-th"/></em>
+											</Link>
+										</div>
+										{/*
 										<div className="div-block-215">
 											<Link to="/dashboard-results" className="link-6">
 												<em className="italic-text-7 gray"><i className="fas fa-user-circle"/></em>
 											</Link>
 										</div>
 										*/}
-									<div className="div-block-215">
-										<Link to="/dashboard-results" className="link-6">
-											<em className="italic-text-7 gray"><i className="fas fa-code"/></em>
-										</Link></div>
+										<div className="div-block-215">
+											<Link to="/dashboard-results" className="link-6">
+												<em className="italic-text-7 gray"><i className="fas fa-code"/></em>
+											</Link>
+										</div>
+									</div>
 								</div>
 							</div>
 							{/*

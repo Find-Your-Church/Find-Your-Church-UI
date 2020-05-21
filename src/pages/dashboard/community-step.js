@@ -375,26 +375,27 @@ class CommunityStep extends Component{
 				<SiteHeader/>
 				<div>
 					<main className="steps-body">
-						<h3 className="header3 w3-bar">
-							<div className="create-menu w3-bar-item w3-left">
-								<Link to="/dashboard" className="w3-button cancel">
-									{this.state.is_editing ? ("Back") : "Cancel"}
-								</Link>
+						<div className="page-header-container">
+							<div className={"page-header-sub-container"}>
+								<div className="create-menu w3-bar-item w3-left">
+									<Link to="/dashboard" className="w3-button cancel">
+										{this.state.is_editing ? ("Back") : "Cancel"}
+									</Link>
+								</div>
+								<div className="create-menu w3-bar-item w3-center">
+									{this.state.is_editing ?
+										(<><span style={{color: "#858585"}}>Editing</span> {this.state.data.community_name}</>)
+										: "Create a New Community"
+									}
+								</div>
+								<div className="create-menu w3-bar-item w3-right">
+									<Link to="#" className="w3-button w3-right save"
+												onClick={this.onSubmitCommunity}>
+										{this.state.is_editing ? ("Save") : "Save"}
+									</Link>
+								</div>
 							</div>
-							<div className="create-menu w3-bar-item w3-center">
-								{this.state.is_editing ?
-									(<><span style={{color: "#858585"}}>Editing</span> {this.state.data.community_name}</>)
-									: "Create a New Community"
-								}
-
-							</div>
-							<div className="create-menu w3-bar-item w3-right">
-								<Link to="#" className="w3-button w3-right save"
-											onClick={this.onSubmitCommunity}>
-									{this.state.is_editing ? ("Save") : "Save"}
-								</Link>
-							</div>
-						</h3>
+						</div>
 						<div className="tabs-menu-6 w-tab-menu" role="tablist">
 							<div data-w-tab="Tab 1"
 									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "w--current" : ""}`}
@@ -488,7 +489,8 @@ class CommunityStep extends Component{
 														</label>
 													</div>
 												</div>
-												<div id={"community-info-container"} className="community-info-container basic-info" style={{marginTop: "20px"}}>
+												<div id={"community-info-container"} className="community-info-container basic-info"
+														 style={{marginTop: "20px"}}>
 													<div className="community-info-title">
 														<h4>Info</h4>
 														<Popup

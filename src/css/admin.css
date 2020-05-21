@@ -11,7 +11,7 @@
 .admin-body {
 	margin-top: 70px;
 	min-height: calc(100vh - var(--footer-height) - 70px);
-	background-color: #f3f2f4;
+	background-color: #f3f2f5;
 }
 
 .admin-body .admin-wrapper {
@@ -19,21 +19,32 @@
 	margin-right: auto;
 }
 
-.div-block-213 {
+.page-header-container {
+	padding: 20px 20px 0;
+	background-color: #f3f2f5;
+}
+
+.page-header-sub-container {
+	position: relative;
 	display: -ms-grid;
 	display: grid;
-	padding: 20px;
+	padding: 0 0 20px;
 	-ms-grid-row-align: stretch;
 	align-self: stretch;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 16px;
 	grid-row-gap: 16px;
-	-ms-grid-columns: 1fr 1fr 1fr;
-	grid-template-columns: 1fr 1fr 1fr;
+	-ms-grid-columns: 1fr 3fr 1fr;
+	grid-template-columns: 1fr 3fr 1fr;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
-	background-color: #f3f2f4;
-	background-image: none;
+	align-items: center;
+	border-bottom: 1px solid #ddd9e1;
+}
+
+.page-header-container * {
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 #w-node-5ba554098c6d-44cf2aa3 {
@@ -188,7 +199,7 @@
 	padding: 0;
 	height: auto; /* calc(100vh - var(--footer-height) - 154px); */
 	overflow-y: auto;
-	background-color: #e8e5eb;
+	background-color: #e8e5ea;
 }
 
 .admin-right::-webkit-scrollbar {
