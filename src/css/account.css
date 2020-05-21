@@ -114,8 +114,8 @@
 
 .sub-container .sub-content {
 	padding: 20px;
-	background-color: #f3f2f4;
-	border: solid 1px #ded9e1;
+	background-color: #fff;
+	border: solid 1px #ddd9e1;
 	border-radius: 3px;
 }
 
@@ -145,6 +145,7 @@
 	-webkit-align-items: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
+	border-bottom: 1px solid #e8e5ea;
 }
 
 .flexdiv-leftright {
@@ -336,6 +337,10 @@
 	border-bottom: 1px solid #e6e6e6;
 }
 
+.table-row-2:last-child {
+	padding-bottom: 0;
+}
+
 .table-row-2.upcoming {
 	-ms-grid-columns: auto 1fr;
 	grid-template-columns: auto 1fr;
@@ -344,8 +349,8 @@
 .upcoming-payment-table-row {
 	display: -ms-grid;
 	display: grid;
-	padding-top: 6px;
-	padding-bottom: 6px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 5px;
 	grid-row-gap: 5px;
