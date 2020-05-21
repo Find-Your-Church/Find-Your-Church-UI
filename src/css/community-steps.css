@@ -306,7 +306,6 @@
 }
 
 .info-body .right-part {
-	height: calc(100vh - 258px);
 	overflow-y: auto;
 }
 
@@ -322,7 +321,6 @@
 }
 
 .info-body .right-part.view {
-	height: calc(100vh - var(--footer-height) - 138px);
 	overflow-y: auto;
 }
 
