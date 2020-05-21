@@ -52,7 +52,7 @@ class CommunityStep extends Component{
 			data: p_obj === undefined ? {} : p_obj.obj,
 
 			is_editing: this.props.location.state !== undefined,
-			showedMembers: false,
+			showedDetails: true,
 			passable: this.props.location.state !== undefined,
 
 			community_id: p_obj === undefined ? -1 : p_obj.obj._id,
@@ -98,8 +98,6 @@ class CommunityStep extends Component{
 			right_min_height: 0,
 		};
 
-		this.selectTabDetails = this.selectTabDetails.bind(this);
-		this.selectTabMembers = this.selectTabMembers.bind(this);
 		this.onSubmitCommunity = this.onSubmitCommunity.bind(this);
 		this.removeSlide = this.removeSlide.bind(this);
 		this.onChangeAddress = this.onChangeAddress.bind(this);
@@ -107,10 +105,11 @@ class CommunityStep extends Component{
 	}
 
 	updateDimensions = () => {
-		const obj = document.getElementById("community-info-container");
-		if(obj === undefined || obj === null)
+		const obj1 = document.getElementById("profile-picture-container");
+		const obj2 = document.getElementById("community-info-container");
+		if(obj1 === undefined || obj1 === null || obj2 === undefined || obj2 === null)
 			return;
-		this.setState({right_min_height: obj.clientHeight});
+		this.setState({right_min_height: obj1.clientHeight + 20 + obj2.clientHeight});
 	};
 
 	componentDidMount(){
@@ -295,13 +294,9 @@ class CommunityStep extends Component{
 		});
 	}
 
-	selectTabDetails(){
-		this.setState({showedMembers: false});
-	}
-
-	selectTabMembers(){
-		this.setState({showedMembers: true});
-	}
+	selectTabDetails = isActive => {
+		this.setState({showedDetails: isActive});
+	};
 
 	fixURL(e){
 		if(e.target.validity.valid)
@@ -400,6 +395,18 @@ class CommunityStep extends Component{
 								</Link>
 							</div>
 						</h3>
+						<div className="tabs-menu-6 w-tab-menu" role="tablist">
+							<div data-w-tab="Tab 1"
+									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "w--current" : ""}`}
+									 onClick={() => this.selectTabDetails(true)}>
+								<div>Details</div>
+							</div>
+							<div data-w-tab="Tab 2"
+									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "" : "w--current"}`}
+									 onClick={() => this.selectTabDetails(false)}>
+								<div>Admin</div>
+							</div>
+						</div>
 						<div className={"container-wrapper"}>
 							<div className="container-inline">
 								<div className="w-form-done">
@@ -429,155 +436,147 @@ class CommunityStep extends Component{
 											"Community address is required" : null}</div>
 									</div>
 									: null}
-								<div className="info-body w3-row">
-									<div className="left-part w3-col s12 m5">
-										<div id={"community-info-container"} className={"community-info-container"}>
-											<div className={"slider-part"}>
-												{this.state.pictures.length > 1 ? (
-													<div id={"slider-frame"} className="slide-container">
-														<Slide {...this.slide_options}>
-															{this.state.pictures.map((pic, index) => {
-																return (
-																	<div className="each-slide" key={index}>
-																		<div style={{backgroundImage: `url(${pic})`}}>
+								{this.state.showedDetails ?
+									(
+										<div className="info-body w3-row">
+											<div className="left-part w3-col s12 m5">
+												<div id={"profile-picture-container"} className={"community-info-container"}>
+													<div className="community-info-title">
+														<h4>Profile Picture</h4>
+													</div>
+													<div className={"slider-part"}>
+														{this.state.pictures.length > 1 ? (
+															<div id={"slider-frame"} className="slide-container">
+																<Slide {...this.slide_options}>
+																	{this.state.pictures.map((pic, index) => {
+																		return (
+																			<div className="each-slide" key={index}>
+																				<div style={{backgroundImage: `url(${pic})`}}>
 																					<span className={"slide-remove w3-button w3-black w3-hover-white-black"}
 																								title={"Remove this picture"}
 																								onClick={() => this.removeSlide(index)}>&times;</span>
-																		</div>
-																	</div>
-																);
-															})}
-														</Slide>
-													</div>
-												) : (this.state.pictures.length > 0 ? (
-													<div id={"slider-frame"} className="slide-container">
-														<div className="each-slide">
-															<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
-																	<span className={"slide-remove w3-button"}
-																				title={"Remove this picture"}
-																				onClick={() => this.removeSlide(0)}>&times;</span>
-															</div>
-														</div>
-													</div>
-												) : (
-													<img id={"slider-frame"}
-															 className={"community-picture each-slide"}
-															 alt="Community" title="Community pictures"
-															 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
-															 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
-													/>
-												))}
-												<label className={"file-btn-container w3-button"}
-															 title={"The picture ratio should be 16:9."}>
-													Upload New Picture
-													<FileBase id="btn-upload" type="file" className="upload-button w-button"
-																		multiple={false} onDone={this.getBaseFile.bind(this)}
-																		height="38"/>
-												</label>
-											</div>
-											<div className="basic-info">
-												<div className="community-info-title">
-													<h4>Community Info</h4>
-													<Popup
-														trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-														position={"left center"}>
-														<div>
-															This information will be used as initial search criteria when users look for communities
-															in your area.<br/><b>If your
-															community is only hosted virtually</b>, you can use any address you would like since the
-															address is not
-															part of the algorithm when users search for virtual communities since they are virtual.
-															You can update this
-															information at any time.
-														</div>
-													</Popup>
-												</div>
-												<div className="community-info-body">
-													<input type="text" className="form-input communityname w-input"
-																 maxLength="50"
-																 onChange={this.onChange}
-																 placeholder="Community name"
-																 id="community_name"
-																 value={this.state.community_name}
-																 style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
-																 required=""/>
-													<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
-																	 visible={this.state.showed_tooltip}
-													>
-														<select className="form-select category w-select"
-																		onChange={this.onChange}
-																		onBlur={this.onBlurCategory}
-																		id="category"
-																		defaultValue={this.state.category}
-																		style={{
-																			backgroundImage: "url('/img/icon-down3-purple.svg')",
-																			backgroundSize: "10px",
-																			borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
-																		}}
-																		required="">
-															<option value="">Category...</option>
-															{
-																community_config.CATEGORIES.map(cat => {
-																	return (
-																		<option value={cat} key={cat}
-																						title={community_config.TOOL_TIPS[cat]}>{cat}</option>
-																	);
-																})
-															}
-														</select>
-													</Tooltip>
-													<PlacesAutocomplete
-														value={this.state.address}
-														class={"w3-input"}
-														onChange={this.onChangeAddress}
-														onSelect={this.handleSelect}
-													>
-														{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-															<>
-																<input className="form-input w-input address"
-																			 disabled={this.state.is_editing}
-																			 style={{borderBottom: this.state.error_community_address ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
-																			 title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
-																			 {...getInputProps({placeholder: "Address, City or Zip Code"})}
-																			 required=""/>
-																<div className={"address-candidates"}>
-																	{loading ? <div>...loading</div> : null}
-																	{suggestions.map((suggestion) => {
-																		const style = {
-																			backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
-																			backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-																		};
-
-																		return (
-																			<div className={"address-item"}
-																					 onClick={() => alert(suggestion.terms)}
-																					 {...getSuggestionItemProps(suggestion, {style})}>
-																				{suggestion.description}
+																				</div>
 																			</div>
 																		);
 																	})}
+																</Slide>
+															</div>
+														) : (this.state.pictures.length > 0 ? (
+															<div id={"slider-frame"} className="slide-container">
+																<div className="each-slide">
+																	<div style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+																	<span className={"slide-remove w3-button"}
+																				title={"Remove this picture"}
+																				onClick={() => this.removeSlide(0)}>&times;</span>
+																	</div>
 																</div>
-															</>
-														)}
-													</PlacesAutocomplete>
+															</div>
+														) : (
+															<img id={"slider-frame"}
+																	 className={"community-picture each-slide"}
+																	 alt="Community" title="Community pictures"
+																	 src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community.png"}
+																	 srcSet={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png 500w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-800.png 800w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1080.png 1080w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-1600.png 1600w, /img/default-community/5e2672d254abf8af5a1ec82c_Community-p-2000.png 2000w, /img/default-community/5e2672d254abf8af5a1ec82c_Community.png 2006w"}
+															/>
+														))}
+														<label className={"file-btn-container w3-button"}
+																	 title={"The picture ratio should be 16:9."}>
+															Upload New Picture
+															<FileBase id="btn-upload" type="file" className="upload-button w-button"
+																				multiple={false} onDone={this.getBaseFile.bind(this)}
+																				height="38"/>
+														</label>
+													</div>
+												</div>
+												<div id={"community-info-container"} className="community-info-container basic-info" style={{marginTop: "20px"}}>
+													<div className="community-info-title">
+														<h4>Info</h4>
+														<Popup
+															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
+															position={"left center"}>
+															<div>
+																This information will be used as initial search criteria when users look for communities
+																in your area.<br/><b>If your
+																community is only hosted virtually</b>, you can use any address you would like since the
+																address is not
+																part of the algorithm when users search for virtual communities since they are virtual.
+																You can update this
+																information at any time.
+															</div>
+														</Popup>
+													</div>
+													<div className="community-info-body">
+														<input type="text" className="form-input communityname w-input"
+																	 maxLength="50"
+																	 onChange={this.onChange}
+																	 placeholder="Community name"
+																	 id="community_name"
+																	 value={this.state.community_name}
+																	 style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+																	 required=""/>
+														<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
+																		 visible={this.state.showed_tooltip}
+														>
+															<select className="form-select category w-select"
+																			onChange={this.onChange}
+																			onBlur={this.onBlurCategory}
+																			id="category"
+																			defaultValue={this.state.category}
+																			style={{
+																				backgroundImage: "url('/img/icon-down3-purple.svg')",
+																				backgroundSize: "10px",
+																				borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
+																			}}
+																			required="">
+																<option value="">Category...</option>
+																{
+																	community_config.CATEGORIES.map(cat => {
+																		return (
+																			<option value={cat} key={cat}
+																							title={community_config.TOOL_TIPS[cat]}>{cat}</option>
+																		);
+																	})
+																}
+															</select>
+														</Tooltip>
+														<PlacesAutocomplete
+															value={this.state.address}
+															class={"w3-input"}
+															onChange={this.onChangeAddress}
+															onSelect={this.handleSelect}
+														>
+															{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+																<>
+																	<input className="form-input w-input address"
+																				 disabled={this.state.is_editing}
+																				 style={{borderBottom: this.state.error_community_address ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+																				 title={`Lat: ${this.state.coordinate.lat}, Lng: ${this.state.coordinate.lng}, ${this.state.address}`}
+																				 {...getInputProps({placeholder: "Address, City or Zip Code"})}
+																				 required=""/>
+																	<div className={"address-candidates"}>
+																		{loading ? <div>...loading</div> : null}
+																		{suggestions.map((suggestion) => {
+																			const style = {
+																				backgroundColor: suggestion.active ? "#41b6e6" : "#f8f8f8",
+																				backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+																			};
+
+																			return (
+																				<div className={"address-item"}
+																						 onClick={() => alert(suggestion.terms)}
+																						 {...getSuggestionItemProps(suggestion, {style})}>
+																					{suggestion.description}
+																				</div>
+																			);
+																		})}
+																	</div>
+																</>
+															)}
+														</PlacesAutocomplete>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div className="right-part w3-col s12 m7" style={{minHeight: `${this.state.right_min_height}px`}}>
-										<div className={"tab w3-row"}>
-											<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
-													 onClick={this.selectTabDetails}>Details
-											</div>
-											<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-													 onClick={this.selectTabMembers}>Admin
-											</div>
-										</div>
-										{this.state.showedMembers ?
-											(
-												<ListMembers editable={true}/>
-											)
-											: (
+											<div className="right-part w3-col s12 m7" style={{minHeight: `${this.state.right_min_height}px`}}>
 												<form
 													id="wf-form-New-Community" name="wf-form-New-Community"
 													data-name="New Community" className="form1 w3-animate-opacity">
@@ -809,9 +808,14 @@ class CommunityStep extends Component{
 																	 className="form-submit create w-button w3-hide"/>
 													</div>
 												</form>
-											)}
-									</div>
-								</div>
+											</div>
+										</div>
+									)
+									: (
+										<div className="info-body">
+											<ListMembers editable={true}/>
+										</div>
+									)}
 							</div>
 						</div>
 					</main>
