@@ -42,29 +42,11 @@ class InvitedViewCommunity extends Component{
 			collapsedContactPart: true,
 			collapsedLinksPart: true,
 			collapsedMorePart: true,
-
-			right_min_height: 0,
 		};
 	}
 
-	updateDimensions = () => {
-		const obj = document.getElementById("community-info-container");
-		if(obj === undefined || obj === null)
-			return;
-		this.setState({right_min_height: obj.clientHeight});
-	};
-
 	componentDidMount(){
-		window.addEventListener('resize', this.updateDimensions);
-		setTimeout(() => {
-			this.updateDimensions();
-		}, 1000);
-
 		this.props.viewCommunity({id: this.community_id});
-	}
-
-	componentWillUnmount(){
-		window.removeEventListener('resize', this.updateDimensions);
 	}
 
 	toggleMenu = () => {
@@ -145,7 +127,7 @@ class InvitedViewCommunity extends Component{
 								<div>Admin</div>
 							</div>
 						</div>
-						<div className={"view-wrapper"} style={{minHeight: in_frame ? "100vh" : "calc(100vh - 200px)"}}>
+						<div className={"view-wrapper"} style={{minHeight: in_frame ? "100vh" : "calc(100vh - 210px)"}}>
 							<div className="container-inline">
 								<div className="info-body w3-row">
 									<div className="left-part w3-col l4">
@@ -218,10 +200,7 @@ class InvitedViewCommunity extends Component{
 											</div>
 										</div>
 									</div>
-									<div className="right-part view w3-col l8" style={{
-										height: in_frame ? "calc(100vh - 120px)" : "calc(100vh - var(--footer-height) - 138px)",
-										minHeight: `${this.state.right_min_height}px`,
-									}}>
+									<div className="right-part view w3-col l8">
 										{!this.state.showedDetails ?
 											(
 												<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>

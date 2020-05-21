@@ -74,30 +74,10 @@ class ViewCommunity extends Component{
 			collapsedContactPart: false,
 			collapsedLinksPart: false,
 			collapsedMorePart: false,
-
-			right_min_height: 0,
 		};
 
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
-	}
-
-	updateDimensions = () => {
-		const obj = document.getElementById("community-info-container");
-		if(obj === undefined || obj === null)
-			return;
-		this.setState({right_min_height: obj.clientHeight});
-	};
-
-	componentDidMount(){
-		window.addEventListener('resize', this.updateDimensions);
-		setTimeout(() => {
-			this.updateDimensions();
-		}, 1000);
-	}
-
-	componentWillUnmount(){
-		window.removeEventListener('resize', this.updateDimensions);
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -264,7 +244,7 @@ class ViewCommunity extends Component{
 											</div>
 										</div>
 									</div>
-									<div className="right-part view w3-col l8" style={{minHeight: `${this.state.right_min_height}px`}}>
+									<div className="right-part view w3-col l8">
 										{!this.state.showedDetails ?
 											(
 												<ListMembers editable={false}/>

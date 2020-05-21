@@ -94,8 +94,6 @@ class CommunityStep extends Component{
 
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
-
-			right_min_height: 0,
 		};
 
 		this.onSubmitCommunity = this.onSubmitCommunity.bind(this);
@@ -104,30 +102,13 @@ class CommunityStep extends Component{
 		this.fixURL = this.fixURL.bind(this);
 	}
 
-	updateDimensions = () => {
-		const obj1 = document.getElementById("profile-picture-container");
-		const obj2 = document.getElementById("community-info-container");
-		if(obj1 === undefined || obj1 === null || obj2 === undefined || obj2 === null)
-			return;
-		this.setState({right_min_height: obj1.clientHeight + 20 + obj2.clientHeight});
-	};
-
 	componentDidMount(){
-		window.addEventListener('resize', this.updateDimensions);
-		setTimeout(() => {
-			this.updateDimensions();
-		}, 1000);
-
 		geocodeByAddress(this.state.address)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
 				this.setState({coordinate: latLng, passable: true});
 			})
 			.catch(error => console.error('Error', error));
-	}
-
-	componentWillUnmount(){
-		window.removeEventListener('resize', this.updateDimensions);
 	}
 
 	getDaysInfo = (checks) => {
@@ -578,7 +559,7 @@ class CommunityStep extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part w3-col s12 m8" style={{minHeight: `${this.state.right_min_height}px`}}>
+											<div className="right-part w3-col s12 m8">
 												<form
 													id="wf-form-New-Community" name="wf-form-New-Community"
 													data-name="New Community" className="form1 w3-animate-opacity">
