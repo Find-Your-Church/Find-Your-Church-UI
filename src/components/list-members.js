@@ -6,6 +6,7 @@ import isEmpty from "../utils/isEmpty";
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
 import redirectURL from "../utils/redirectURL";
+import AccountProfileContainer from "./account-profile-container";
 
 class ListMembers extends Component{
 	constructor(props){
@@ -28,8 +29,6 @@ class ListMembers extends Component{
 	}
 
 	render(){
-		const user = this.props.user ? this.props.user : this.props.auth.user;
-
 		return (
 			<div className={"w3-large w3-text-grey w3-animate-opacity"}>
 				<div className="members-container">
@@ -52,75 +51,7 @@ class ListMembers extends Component{
 								<div className="accordioncontent-div">
 									<div className="_10top-div">
 										<div className="listing-grid profile admin">
-											<div className="profile-container">
-												<div className="div-block-55">
-													<div className="profpic-container">
-														<div className="profpic-div">
-															<img src={isEmpty(user.pic) ?
-																"/img/default-user.png"
-																: user.pic}
-																 alt="" className="image-4"/>
-														</div>
-													</div>
-												</div>
-												<div className="div-block-56">
-													<div className="profile-info">
-														<div className="listingrow">
-															<div data-collapse="all" data-animation="default"
-																 data-duration="400" className="listing-nav w-nav">
-																<Link
-																	to="#" className="communityname">
-																	{user.fname} {user.lname}
-																</Link>
-																{this.props.editable && false ? (
-																	<>
-																		<div className="listingnav-button w-nav-button">
-																			<Link to="#" className={"w3-right"}
-																				  onClick={this.toggleMenu}>
-																				<i className={"fas fa-ellipsis-h"}
-																				   style={{color: "#a1a1a1"}}/>
-																			</Link>
-																		</div>
-																		<nav role="navigation"
-																			 className="listing-navmenu w-nav-menu"
-																			 onMouseLeave={this.hideMenu}
-																			 style={{display: this.state.is_show_menu ? "block" : "none"}}>
-																			<div>
-																				<Link to="/dashboard/account"
-																					  className="listing-navlink single w-nav-link">Edit</Link>
-																			</div>
-																		</nav>
-																	</>
-																) : null}
-																<div className="w-nav-overlay" data-wf-ignore="">
-																</div>
-															</div>
-														</div>
-														<div className="_10top-div icons">
-															{isEmpty(user.admin_email) ? null :
-																<Link to={"#"} className={"admin-info-members"}
-																	  onClick={() => redirectURL("mailto:" + user.admin_email)}>
-																	<div
-																		title={user.admin_email}>
-																		<img src={"/img/icon/account-email.svg"}
-																			 alt="" className="personal-pic"/>
-																	</div>
-																</Link>
-															}
-															{isEmpty(user.phone) ? null :
-																<Link to={"#"} className={"admin-info-members"}
-																	  onClick={() => redirectURL("tel:" + user.phone)}>
-																	<div className={"admin-info-members"}
-																		 title={user.phone}>
-																		<img src={"/img/icon/account-phone.svg"}
-																			 alt="" className="personal-pic"/>
-																	</div>
-																</Link>
-															}
-														</div>
-													</div>
-												</div>
-											</div>
+											<AccountProfileContainer owner={this.props.fromPublic ? this.props.user : null}/>
 										</div>
 									</div>
 								</div>

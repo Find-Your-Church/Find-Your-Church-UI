@@ -22,7 +22,6 @@ class Thumbnail extends Component{
 		};
 
 		this.goEdit = this.goEdit.bind(this);
-		this.goView = this.goView.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
 		this.onActivate = this.onActivate.bind(this);
@@ -37,12 +36,12 @@ class Thumbnail extends Component{
 		this.setState({is_editing: true});
 	}
 
-	goView(e){
+	goView = e => {
 		// redirect to community-step with this.props.value (community object with full info).
 		// console.log(this.props.value);
 
 		this.setState({is_viewing: true});
-	}
+	};
 
 	toggleMenu(e){
 		this.setState({is_show_menu: !this.state.is_show_menu});

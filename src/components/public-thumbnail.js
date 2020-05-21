@@ -19,7 +19,6 @@ class PublicThumbnail extends Component{
 			community_name_url: '',
 		};
 
-		this.goView = this.goView.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
 	}
@@ -31,7 +30,7 @@ class PublicThumbnail extends Component{
 		});
 	}
 
-	goView(e){
+	goView = e => {
 		// redirect to community-step with this.props.value (community object with full info).
 		// console.log(this.props.value);
 		this.props.getOwnerInfo({
@@ -39,7 +38,7 @@ class PublicThumbnail extends Component{
 		});
 
 		this.setState({is_viewing: true});
-	}
+	};
 
 	shareCommunity = () => {
 		if(this.props.auth.isAuthenticated){

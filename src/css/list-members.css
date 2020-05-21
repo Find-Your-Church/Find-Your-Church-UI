@@ -99,49 +99,6 @@
 	grid-template-columns: 1fr 1fr 1fr;
 }
 
-.members-container .profile-container {
-	min-width: 192px;
-	width: auto;
-	max-width: 194px;
-	padding: 0 !important;
-	border: 1px solid #ddd9e1;
-	border-radius: 3px;
-	background-color: #f3f2f5;
-}
-
-.members-container .profile-container .div-block-55 {
-	margin: 0;
-	-webkit-box-flex: 1;
-	-webkit-flex: 1;
-	-ms-flex: 1;
-	flex: 1;
-	border: 1px none #000;
-	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
-	opacity: 0.9;
-}
-
-.members-container .profpic-container {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	padding: 30px 0 0;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
-	border: 1px none #000;
-	border-radius: 0;
-	background-color: transparent;
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(65%, transparent), color-stop(0, #fff), color-stop(102%, #fff));
-	background-image: linear-gradient(180deg, transparent 65%, #fff 0, #fff 102%);
-	text-align: left;
-}
-
 .members-container .profpic-div {
 	overflow: hidden;
 	width: 100%;
@@ -164,17 +121,6 @@
 	padding: 0;
 	border: 1px none #000;
 	background-color: transparent;
-}
-
-.members-container .profile-info {
-	padding: 0;
-	margin: 0;
-	border-style: none;
-	border-width: 1px;
-	border-color: #e6e6e6;
-	border-radius: 0;
-	background-color: transparent;
-	box-shadow: none;
 }
 
 .members-container .listingrow {
