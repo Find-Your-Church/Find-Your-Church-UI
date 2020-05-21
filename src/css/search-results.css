@@ -8,7 +8,7 @@ body {
 	margin-top: 70px;
 	padding: 15px 20px;
 	line-height: 36px;
-	background-color: #f3f2f4;
+	background-color: #f3f2f5;
 	border-bottom: 1px solid #ddd9e1;
 	/*box-shadow: 0 1px 3px #888;*/
 	z-index: 100;
@@ -392,7 +392,7 @@ body {
 	display: inline-block;
 	padding: 3px 8px;
 	color: #333;
-	background-color: #e7e5ea;
+	background-color: #e8e5ea;
 	border-radius: 3px;
 }
 
@@ -451,12 +451,12 @@ body {
 
 .owner-item {
 	padding: 8px 14px;
-	background-color: #e8e5eb;
+	background-color: #e8e5ea;
 	border-bottom: 1px solid #fff;
 	cursor: pointer;
 }
 
 .owner-item:hover {
 	color: #2e89fe;
-	background-color: #f2f3f5;
+	background-color: #f3f2f5;
 }

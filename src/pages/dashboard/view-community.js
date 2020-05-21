@@ -34,7 +34,7 @@ class ViewCommunity extends Component{
 			is_editing: false,
 
 			is_show_menu: false,
-			showedMembers: false,
+			showedDetails: true,
 
 			community_name: p_obj === undefined ? "" : p_obj.obj.community_name,
 			category: p_obj === undefined ? "" : p_obj.obj.category,
@@ -80,8 +80,6 @@ class ViewCommunity extends Component{
 
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
-		this.selectTabDetails = this.selectTabDetails.bind(this);
-		this.selectTabMembers = this.selectTabMembers.bind(this);
 	}
 
 	updateDimensions = () => {
@@ -118,13 +116,9 @@ class ViewCommunity extends Component{
 		this.setState({is_show_menu: false});
 	}
 
-	selectTabDetails(e){
-		this.setState({showedMembers: false});
-	}
-
-	selectTabMembers(e){
-		this.setState({showedMembers: true});
-	}
+	selectTabDetails = isActive => {
+		this.setState({showedDetails: isActive});
+	};
 
 	redirectURL(url){
 		window.open(url, "_blank", "width=800, height=600, location=no, toolbar=no");
@@ -170,26 +164,39 @@ class ViewCommunity extends Component{
 				<SiteHeader/>
 				<div>
 					<main className="steps-body">
-						<h3 className="header3 w3-bar">
-							<div className="create-menu w3-bar-item w3-left">
-								<Link to="/dashboard" className="w3-button cancel">Back</Link>
+						<div className="page-header-container">
+							<div className={"page-header-sub-container"}>
+								<div className="create-menu w3-bar-item w3-left">
+									<Link to="/dashboard" className="w3-button cancel">Back</Link>
+								</div>
+								<div className="create-menu w3-bar-item w3-center">
+									{this.state.community_name}
+								</div>
+								<div className="create-menu w3-bar-item w3-right">
+									<Link to="#" className="w3-button w3-right edit"
+												onClick={this.onEditCommunity}>
+										Edit
+									</Link>
+								</div>
 							</div>
-							<div className="create-menu w3-bar-item w3-center">
-								{this.state.community_name}
+						</div>
+						<div className="tabs-menu-6 w-tab-menu" role="tablist">
+							<div data-w-tab="Tab 1"
+									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "w--current" : ""}`}
+									 onClick={() => this.selectTabDetails(true)}>
+								<div>Details</div>
 							</div>
-							<div className="create-menu w3-bar-item w3-right">
-								<Link to="#" className="w3-button w3-right edit"
-											onClick={this.onEditCommunity}>
-									Edit
-								</Link>
+							<div data-w-tab="Tab 2"
+									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "" : "w--current"}`}
+									 onClick={() => this.selectTabDetails(false)}>
+								<div>Admin</div>
 							</div>
-						</h3>
+						</div>
 						<div className={"view-wrapper"}>
 							<div className="container-inline">
 								<div className="info-body w3-row">
 									<div className="left-part w3-col l4">
-										<div id={"community-info-container"}
-												 style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
+										<div id={"community-info-container"} className={"community-info-container"} style={{padding: "0"}}>
 											{this.state.pictures.length > 1 ? (
 													<div className="slide-container">
 														<Slide {...this.slide_options}>
@@ -258,15 +265,7 @@ class ViewCommunity extends Component{
 										</div>
 									</div>
 									<div className="right-part view w3-col l8" style={{minHeight: `${this.state.right_min_height}px`}}>
-										<div className={"tab w3-row"}>
-											<div className={"w3-col s6" + (this.state.showedMembers ? "" : " tab-selected")}
-													 onClick={this.selectTabDetails}>Details
-											</div>
-											<div className={"w3-col s6" + (this.state.showedMembers ? " tab-selected" : "")}
-													 onClick={this.selectTabMembers}>Admin
-											</div>
-										</div>
-										{this.state.showedMembers ?
+										{!this.state.showedDetails ?
 											(
 												<ListMembers editable={false}/>
 											)

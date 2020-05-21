@@ -498,15 +498,17 @@ class Account extends Component{
 				</div>
 				<main className="account-body"
 							style={{filter: this.props.is_sending || this.props.community.is_setting_card ? "blur(4px)" : "none"}}>
-					<div className="div-block-213">
-						<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-							<div className="div-block-231">
-								<Link to="/dashboard" className="button-create w-button">
-									<i className="fas fa-th"/><span className="text-span-3">Dashboard</span></Link>
+					<div className="page-header-container">
+						<div className={"page-header-sub-container"}>
+							<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
+								<div className="div-block-231">
+									<Link to="/dashboard" className="button-create w-button">
+										<i className="fas fa-th"/><span className="text-span-3">Dashboard</span></Link>
+								</div>
 							</div>
-						</div>
-						<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
-							<h1 className="heading-40">Account</h1>
+							<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
+								<h1 className="heading-40">Account</h1>
+							</div>
 						</div>
 					</div>
 					<div className="div-20bottom">
@@ -1056,7 +1058,9 @@ class Account extends Component{
 												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left center"}>
 												<div>
-													This is a snapshot showing you how many communities you have active out of the total amount you've paid for this billing cycle; as well as the upcoming payments you can expect based on your current number of active communities.
+													This is a snapshot showing you how many communities you have active out of the total amount
+													you've paid for this billing cycle; as well as the upcoming payments you can expect based on
+													your current number of active communities.
 												</div>
 											</Popup>
 										</div>

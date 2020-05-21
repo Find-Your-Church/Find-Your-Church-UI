@@ -258,36 +258,38 @@ class DashboardResults extends Component{
 					<main className="admin-body dashboard-results w3-row"
 								style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
 						<div className={"admin-wrapper"}>
-							<div className="div-block-213">
-								<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-									<div className="div-block-231">
-										<Link to="/create-new-community"
-													className="button-create w-button">
-											<i
-												className={"fas fa-users"}/>
-											<span className="text-span-3">New Community</span>
-										</Link>
+							<div className="page-header-container">
+								<div className={"page-header-sub-container"}>
+									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
+										<div className="div-block-231">
+											<Link to="/create-new-community"
+														className="button-create w-button">
+												<i
+													className={"fas fa-users"}/>
+												<span className="text-span-3">New Community</span>
+											</Link>
+										</div>
 									</div>
-								</div>
-								<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
-									<h1 className="heading-40">
-										Iframe
-									</h1>
-								</div>
-								<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
-									<div className="div-block-215">
-										<Link to="/dashboard" className="link-6">
-											<em className="italic-text-7 gray">
-												<i className="fas fa-th"/>
-											</em>
-										</Link>
+									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
+										<h1 className="heading-40">
+											Iframe
+										</h1>
 									</div>
-									<div className="div-block-215 underline">
-										<Link to="/dashboard-results" className="link-6">
-											<em className="italic-text-7 current">
-												<i className="fas fa-code"/>
-											</em>
-										</Link>
+									<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
+										<div className="div-block-215">
+											<Link to="/dashboard" className="link-6">
+												<em className="italic-text-7 gray">
+													<i className="fas fa-th"/>
+												</em>
+											</Link>
+										</div>
+										<div className="div-block-215 underline">
+											<Link to="/dashboard-results" className="link-6">
+												<em className="italic-text-7 current">
+													<i className="fas fa-code"/>
+												</em>
+											</Link>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -318,12 +320,17 @@ class DashboardResults extends Component{
 												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 												position={"left top"}>
 												<div>
-													If your organization has your own website, you can use the section below to generate your custom iframe
-													embed code and display your communities on your own page(s) or section(s) of your site by simply
-													copying and pasting. The functionality of the search engine is fully responsive and compatible with any
+													If your organization has your own website, you can use the section below to generate your
+													custom iframe
+													embed code and display your communities on your own page(s) or section(s) of your site by
+													simply
+													copying and pasting. The functionality of the search engine is fully responsive and compatible
+													with any
 													website, device or browser.<br/><br/>
-													<b>Note</b>: If you make changes to your iframe preferences below, you will need to copy/paste the new code
-													into the page(s) and/or section(s) your iframe code is currently displayed to reflect the changes.
+													<b>Note</b>: If you make changes to your iframe preferences below, you will need to copy/paste
+													the new code
+													into the page(s) and/or section(s) your iframe code is currently displayed to reflect the
+													changes.
 												</div>
 											</Popup>
 										</div>
@@ -344,7 +351,8 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Set the default category that will be displayed and applied on your iframe search results.
+																			Set the default category that will be displayed and applied on your iframe search
+																			results.
 																		</div>
 																	</Popup>
 																</div>
@@ -377,7 +385,8 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Set the default radius that will be displayed and applied on your iframe search results.
+																			Set the default radius that will be displayed and applied on your iframe search
+																			results.
 																		</div>
 																	</Popup>
 																</div>
@@ -465,7 +474,8 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Customize your iframe search results header background to match your own brand and website.
+																			Customize your iframe search results header background to match your own brand and
+																			website.
 																		</div>
 																	</Popup>
 																</div>
@@ -500,7 +510,8 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Customize your iframe search results container background to match your own brand and website.
+																			Customize your iframe search results container background to match your own brand
+																			and website.
 																		</div>
 																	</Popup>
 																</div>
@@ -579,7 +590,8 @@ class DashboardResults extends Component{
 													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 													position={"left top"}>
 													<div>
-														Copy and paste this code into an iframe embed on your website. Look below for a quick 3-step tutorial and
+														Copy and paste this code into an iframe embed on your website. Look below for a quick 3-step
+														tutorial and
 														don't hesitate to contact our support team if you run into any issues.
 													</div>
 												</Popup>
@@ -593,7 +605,8 @@ class DashboardResults extends Component{
 											<div className="_20right-div _20top-div">
 												<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
 													<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>Copy Code</div>
-													<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {}}
+													<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {
+													}}
 																 style={{opacity: "0", width: "8px", height: "8px"}}/>
 												</h4>
 											</div>
@@ -666,7 +679,14 @@ class DashboardResults extends Component{
 											</p></div>
 										<iframe id="iframe-community" src={this.state.frameUrl}
 														ref={this.refIframe} title={"preview communities"}
-														style={{display: "block", width: "100%", height: "100vh", outline: "none", border: "none", overflow: "hidden"}}/>
+														style={{
+															display: "block",
+															width: "100%",
+															height: "100vh",
+															outline: "none",
+															border: "none",
+															overflow: "hidden"
+														}}/>
 									</>
 								)
 							}

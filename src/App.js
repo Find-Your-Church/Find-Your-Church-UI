@@ -27,7 +27,6 @@ import WelcomePage from "./pages/welcome-page";
 import MakeSuggestionPage from "./pages/make-suggestion-page";
 import TermsNConditionsPage from "./pages/terms-n-conditions-page";
 import PrivacyPolicy from "./pages/privacy-policy";
-import PublicViewCommunity from "./pages/public-view-community";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
@@ -98,7 +97,6 @@ class App extends Component{
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
 							<Route exact path="/view" component={ViewCommunity}/>
-							<Route exact path="/public-view" component={PublicViewCommunity}/>
 							<Route path="/view-community/:id" component={InvitedViewCommunity}/>
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
