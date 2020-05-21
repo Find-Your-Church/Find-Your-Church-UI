@@ -546,13 +546,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Name
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											{
 												this.props.auth.user.is_organization ? (
@@ -588,13 +581,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row pic" style={{paddingBottom: "20px"}}>
 											<h4 className="table-header">Picture
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<div className="profpic-div-small" style={{marginRight: "auto"}}>
 												<img src={isEmpty(this.props.auth.user.pic) ?
@@ -615,13 +601,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Contact Email
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingAdminEmail ?
@@ -649,13 +628,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Contact Phone
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingPhone ?
@@ -690,13 +662,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Website
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingWebsite ?
@@ -725,13 +690,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Facebook
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingFacebook ?
@@ -760,13 +718,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Twitter
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingTwitter ?
@@ -795,13 +746,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">Instagram
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingInstagram ?
@@ -830,13 +774,6 @@ class Account extends Component{
 										</div>
 										<div className="table-row">
 											<h4 className="table-header">City or zip code
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
 											</h4>
 											<h4 className="table-item">
 												{this.state.editingZipCode ?
