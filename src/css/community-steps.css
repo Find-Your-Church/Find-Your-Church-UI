@@ -39,8 +39,9 @@
 
 .steps-body {
 	margin-top: 70px;
+	min-height: calc(100vh - 70px);
 	padding: 0;
-	background-color: #f4f2f5;
+	background-color: #e8e5ea;
 }
 
 .steps-body .view-wrapper {
@@ -62,7 +63,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	padding: 20px;
-	background-color: #e7e5e8;
+	background-color: #e8e5ea;
 }
 
 .steps-body .container-inline {
@@ -93,13 +94,12 @@
 	margin-bottom: 0;
 	padding: 20px;
 	border-radius: 0 !important;
-	background-color: transparent;
+	background-color: #f4f2f5;
 	color: #323232;
 	font-size: 18px;
 	line-height: 24px;
 	font-weight: 600;
 	text-align: left;
-	border-bottom: solid 1px #d4ced8;
 }
 
 .steps-body .header3 .title {
@@ -256,6 +256,7 @@
 }
 
 .info-body .left-part .community-info-container {
+	padding: 20px;
 	border: 1px solid #ddd9e1;
 	border-radius: 3px;
 	background-color: #fff;
@@ -263,10 +264,7 @@
 
 .community-info-container .slider-part {
 	position: relative;
-}
-
-.community-info-body {
-	padding: 0 10px 10px;
+	padding-top: 20px;
 }
 
 .community-info-body * {
@@ -327,13 +325,13 @@
 }
 
 .info-body .right-part {
-	height: calc(100vh - var(--footer-height) - 142px);
+	height: calc(100vh - 258px);
 	overflow-y: auto;
 }
 
 .info-body .right-part::-webkit-scrollbar {
 	width: 6px;
-	background-color: #e7e5e8;
+	background-color: #e8e5ea;
 }
 
 .info-body .right-part::-webkit-scrollbar-thumb {
@@ -455,8 +453,8 @@
 
 .community-info-title {
 	display: flex;
-	padding: 0 0 10px 0;
-	height: 36px;
+	padding: 0 0 20px;
+	height: 41px;
 	flex: 0 1 auto;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 10px;
@@ -481,8 +479,7 @@
 }
 
 .community-info-title h4 {
-	font-size: 18px;
-	height: 18px;
+	font-size: 16px;
 	line-height: 18px;
 	padding: 4px 0 0;
 	color: #333;
@@ -601,6 +598,10 @@
 	border-radius: 3px;
 }
 
+.steps-body .view-paragraph:first-child {
+	margin-top: 0;
+}
+
 .view-paragraph .labels,
 .view-paragraph.edit .labels {
 	padding: 0;
@@ -693,7 +694,6 @@
 
 .steps-body .form-input.communityname {
 	margin-bottom: 0;
-	padding-left: 0;
 	border-bottom-style: none;
 }
 
@@ -779,7 +779,6 @@
 }
 
 .steps-body .form-input.address {
-	padding-left: 0;
 }
 
 .steps-body .form-input.view {
@@ -810,7 +809,7 @@
 }
 
 .steps-body .form-select.category {
-	padding: 12px 12px 12px 0;
+	padding: 12px 12px 12px 10px;
 	margin-bottom: 0;
 	margin-left: 0;
 	height: 48px;
