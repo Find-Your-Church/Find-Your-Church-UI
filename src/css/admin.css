@@ -42,9 +42,24 @@
 	border-bottom: 1px solid #ddd9e1;
 }
 
+@media screen and (max-width: 600px){
+	.page-header-sub-container.wrap {
+		-ms-grid-columns: 1fr;
+		grid-template-columns: 1fr;
+	}
+
+	.page-header-sub-container.wrap > * {
+		justify-self: center !important;
+	}
+}
+
 .page-header-container * {
 	white-space: nowrap;
-	overflow: hidden;
+	overflow: visible;
+}
+
+.page-header-container .w3-center {
+	white-space: normal;
 }
 
 #w-node-5ba554098c6d-44cf2aa3 {
