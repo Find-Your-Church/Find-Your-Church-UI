@@ -127,7 +127,8 @@
 	}
 
 	.button-create.dashboard::after {
-		content: "Dashboard";
+		padding-left: 0;
+		content: "";
 	}
 }
 
@@ -261,7 +262,6 @@
 }
 
 @media screen and (max-width: 768px) {
-	.profile-container,
 	.dashboard-container {
 		padding: 20px 10px !important;
 	}
