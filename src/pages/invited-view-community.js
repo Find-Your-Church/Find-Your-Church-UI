@@ -129,42 +129,48 @@ class InvitedViewCommunity extends Component{
 						</div>
 						<div className={"view-wrapper"} style={{minHeight: in_frame ? "100vh" : "calc(100vh - 210px)"}}>
 							<div className="container-inline">
-								<div className="info-body w3-row">
-									<div className="left-part w3-col l4">
-										<div id={"community-info-container"}
-												 style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
-											{this.props.community.view_community.pictures.length > 1 ? (
-													<div className="slide-container">
-														<Slide {...this.slide_options}>
-															{this.props.community.view_community.pictures.map((pic, index) => {
-																return (
-																	<div className="each-slide" key={index}>
-																		<div style={{backgroundImage: `url(${pic})`}}>
+								{!this.state.showedDetails ?
+									(
+										<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>
+									)
+									: (
+										<>
+											<div className="info-body w3-row">
+												<div className="left-part w3-col l4">
+													<div id={"community-info-container"}
+															 style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
+														{this.props.community.view_community.pictures.length > 1 ? (
+																<div className="slide-container">
+																	<Slide {...this.slide_options}>
+																		{this.props.community.view_community.pictures.map((pic, index) => {
+																			return (
+																				<div className="each-slide" key={index}>
+																					<div style={{backgroundImage: `url(${pic})`}}>
+																					</div>
+																				</div>
+																			);
+																		})}
+																	</Slide>
+																</div>
+															)
+															: (this.props.community.view_community.pictures.length > 0 ? (
+																<div className="slide-container">
+																	<div className="each-slide">
+																		<div
+																			style={{backgroundImage: `url(${this.props.community.view_community.pictures[0]})`}}>
 																		</div>
 																	</div>
-																);
-															})}
-														</Slide>
-													</div>
-												)
-												: (this.props.community.view_community.pictures.length > 0 ? (
-													<div className="slide-container">
-														<div className="each-slide">
-															<div
-																style={{backgroundImage: `url(${this.props.community.view_community.pictures[0]})`}}>
-															</div>
-														</div>
-													</div>
-												) : (
-													<img
-														className={"community-picture"}
-														alt="Community" title={this.props.community.view_community.community_name}
-														src={this.props.community.view_community.picture ? this.props.community.view_community.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
-												))}
-											<div className="basic-info view">
-												<div className="listingrow view" style={{position: "relative"}}>
-													<strong>{this.props.community.view_community.community_name}</strong>
-													{/*
+																</div>
+															) : (
+																<img
+																	className={"community-picture"}
+																	alt="Community" title={this.props.community.view_community.community_name}
+																	src={this.props.community.view_community.picture ? this.props.community.view_community.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
+															))}
+														<div className="basic-info view">
+															<div className="listingrow view" style={{position: "relative"}}>
+																<strong>{this.props.community.view_community.community_name}</strong>
+																{/*
 															<Link to="#" className={"menu-icon-3dot w3-right"}
 																		onClick={this.toggleMenu}>
 																<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
@@ -190,23 +196,17 @@ class InvitedViewCommunity extends Component{
 																</Link>
 															</nav>
 															*/}
+															</div>
+															<div className="listingrow view">
+																{this.props.community.view_community.category}
+															</div>
+															<div className="listingrow view">
+																{this.props.community.view_community.address}
+															</div>
+														</div>
+													</div>
 												</div>
-												<div className="listingrow view">
-													{this.props.community.view_community.category}
-												</div>
-												<div className="listingrow view">
-													{this.props.community.view_community.address}
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className="right-part view w3-col l8">
-										{!this.state.showedDetails ?
-											(
-												<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>
-											)
-											: (
-												<>
+												<div className="right-part view w3-col l8">
 													<div className={"view-paragraph"}>
 														<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 															<h4 className="form-header">About</h4>
@@ -350,10 +350,10 @@ class InvitedViewCommunity extends Component{
 																							 items={community_config.FILTERS.support_type}/>
 														</div>
 													</div>
-												</>
-											)}
-									</div>
-								</div>
+												</div>
+											</div>
+										</>
+									)}
 							</div>
 						</div>
 					</main>

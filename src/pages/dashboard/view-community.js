@@ -174,41 +174,47 @@ class ViewCommunity extends Component{
 						</div>
 						<div className={"view-wrapper"}>
 							<div className="container-inline">
-								<div className="info-body w3-row">
-									<div className="left-part w3-col l4">
-										<div id={"community-info-container"} className={"community-info-container"} style={{padding: "0"}}>
-											{this.state.pictures.length > 1 ? (
-													<div className="slide-container">
-														<Slide {...this.slide_options}>
-															{this.state.pictures.map((pic, index) => {
-																return (
-																	<div className="each-slide" key={index}>
-																		<div style={{backgroundImage: `url(${pic})`}}>
-																		</div>
-																	</div>
-																);
-															})}
-														</Slide>
-													</div>
-												)
-												: (this.state.pictures.length > 0 ? (
-													<div className="slide-container">
-														<div className="each-slide">
-															<div
-																style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+								{!this.state.showedDetails ?
+									(
+										<ListMembers editable={false}/>
+									)
+									: (
+										<div className="info-body w3-row">
+											<div className="left-part w3-col l4">
+												<div id={"community-info-container"} className={"community-info-container"}
+														 style={{padding: "0"}}>
+													{this.state.pictures.length > 1 ? (
+															<div className="slide-container">
+																<Slide {...this.slide_options}>
+																	{this.state.pictures.map((pic, index) => {
+																		return (
+																			<div className="each-slide" key={index}>
+																				<div style={{backgroundImage: `url(${pic})`}}>
+																				</div>
+																			</div>
+																		);
+																	})}
+																</Slide>
 															</div>
-														</div>
-													</div>
-												) : (
-													<img
-														className={"community-picture"}
-														alt="Community" title={this.state.community_name}
-														src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
-												))}
-											<div className="basic-info view">
-												<div className="listingrow view" style={{position: "relative"}}>
-													<strong>{this.state.community_name}</strong>
-													{/*
+														)
+														: (this.state.pictures.length > 0 ? (
+															<div className="slide-container">
+																<div className="each-slide">
+																	<div
+																		style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+																	</div>
+																</div>
+															</div>
+														) : (
+															<img
+																className={"community-picture"}
+																alt="Community" title={this.state.community_name}
+																src={this.state.picture ? this.state.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
+														))}
+													<div className="basic-info view">
+														<div className="listingrow view" style={{position: "relative"}}>
+															<strong>{this.state.community_name}</strong>
+															{/*
 														<Link to="#" className={"menu-icon-3dot w3-right"}
 																	onClick={this.toggleMenu}>
 															<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
@@ -234,22 +240,17 @@ class ViewCommunity extends Component{
 															</Link>
 														</nav>
 														*/}
-												</div>
-												<div className="listingrow view">
-													{this.state.category}
-												</div>
-												<div className="listingrow view">
-													{this.state.address}
+														</div>
+														<div className="listingrow view">
+															{this.state.category}
+														</div>
+														<div className="listingrow view">
+															{this.state.address}
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div className="right-part view w3-col l8">
-										{!this.state.showedDetails ?
-											(
-												<ListMembers editable={false}/>
-											)
-											: (
+											<div className="right-part view w3-col l8">
 												<div className={"w3-animate-opacity"}>
 													<div className={"view-paragraph"}>
 														<div className={`flexdiv-left labels ${this.state.collapsedAboutPart ? "collapsed" : ""}`}
@@ -422,9 +423,9 @@ class ViewCommunity extends Component{
 														)}
 													</div>
 												</div>
-											)}
-									</div>
-								</div>
+											</div>
+										</div>
+									)}
 							</div>
 						</div>
 					</main>
