@@ -55,9 +55,9 @@ class DashboardResults extends Component{
 			showed_header_bg_color: false,
 			showed_results_bg_color: false,
 			showed_buttons_color: false,
-			color_header_bg: '#f3f2f5',
-			color_results_bg: '#e8e5ea',
-			color_buttons: '#2e89fe',
+			color_header_bg: user.colors === null || user.colors === undefined ? '#f3f2f5' : user.colors[0],
+			color_results_bg: user.colors === null || user.colors === undefined ? '#e8e5ea' : user.colors[1],
+			color_buttons: user.colors === null || user.colors === undefined ? '#2e89fe' : user.colors[2],
 
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
@@ -114,6 +114,20 @@ class DashboardResults extends Component{
 				user_lng: user.location ? user.location.lng : null,
 				iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
 				zip_code: user.zip_code,
+				color_header_bg: user.colors === null || user.colors === undefined ? '#f3f2f5' : user.colors[0],
+				color_results_bg: user.colors === null || user.colors === undefined ? '#e8e5ea' : user.colors[1],
+				color_buttons: user.colors === null || user.colors === undefined ? '#2e89fe' : user.colors[2],
+			});
+		}
+
+		if(prevState.color_header_bg !== this.state.color_header_bg || prevState.color_results_bg !== this.state.color_results_bg || prevState.color_buttons !== this.state.color_buttons){
+			this.props.updateUserInfo({
+				id: this.props.auth.user.id,
+				colors: [
+					this.state.color_header_bg,
+					this.state.color_results_bg,
+					this.state.color_buttons,
+				],
 			});
 		}
 	}
