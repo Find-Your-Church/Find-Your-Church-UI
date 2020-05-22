@@ -544,7 +544,7 @@ class Account extends Component{
 												</div>
 											</Popup>
 										</div>
-										<div className="table-row pic" style={{borderBottom: "none"}}>
+										<div className="table-row profile" style={{borderBottom: "none"}}>
 											<AccountProfileContainer/>
 										</div>
 										<div className="table-row">

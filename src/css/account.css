@@ -317,6 +317,10 @@
 	cursor: pointer;
 }
 
+.account-body .table-row.profile {
+	grid-template-columns: 1fr;
+}
+
 .account-body .table-row.pic {
 	padding-bottom: 0;
 }

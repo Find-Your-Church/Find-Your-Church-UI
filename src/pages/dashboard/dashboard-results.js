@@ -354,7 +354,8 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<Tooltip placement={"top"} overlay={this.state.tooltip_content}
+																	<Tooltip placement={"top"}
+																					 overlay={this.state.tooltip_content}
 																					 align={{offset: [0, 2],}}
 																					 visible={this.state.showed_tooltip}
 																	>

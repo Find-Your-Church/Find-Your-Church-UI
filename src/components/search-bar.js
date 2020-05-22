@@ -89,8 +89,13 @@ class SearchBar extends Component{
 		if(e.target.id === 'search_category'){
 			this.setState({
 				tooltip_content: community_config.TOOL_TIPS[e.target.value],
-				showed_tooltip: true,
 			});
+
+			setTimeout(() => {
+				this.setState({
+					showed_tooltip: true,
+				})
+			}, 10);
 
 			this.props.setSearchCriteria({
 				category: e.target.value,
@@ -211,7 +216,9 @@ class SearchBar extends Component{
 								</select>
 							)
 							: (
-								<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
+								<Tooltip placement={"top"}
+												 overlay={this.state.tooltip_content}
+												 align={{offset: [0, 2],}}
 												 visible={this.state.tooltip_content === '' || this.state.tooltip_content === undefined ? false : this.state.showed_tooltip}
 								>
 									<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}

@@ -36,6 +36,8 @@ class CommunityStep extends Component{
 			}
 		};
 
+		this.cat_ref = React.createRef();
+
 		const p_obj = this.props.location.state;
 
 		this.state = {
@@ -94,6 +96,8 @@ class CommunityStep extends Component{
 
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
+
+			tooltip_width: 0,
 		};
 
 		this.onSubmitCommunity = this.onSubmitCommunity.bind(this);
@@ -102,13 +106,25 @@ class CommunityStep extends Component{
 		this.fixURL = this.fixURL.bind(this);
 	}
 
+	onResizeWindow = () => {
+		if(this.cat_ref.current !== null && this.cat_ref.current !== undefined)
+			this.setState({tooltip_width: this.cat_ref.current.clientWidth});
+	};
+
 	componentDidMount(){
+		window.addEventListener('resize', this.onResizeWindow);
+		this.onResizeWindow();
+
 		geocodeByAddress(this.state.address)
 			.then(results => getLatLng(results[0]))
 			.then(latLng => {
 				this.setState({coordinate: latLng, passable: true});
 			})
 			.catch(error => console.error('Error', error));
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.onResizeWindow);
 	}
 
 	getDaysInfo = (checks) => {
@@ -497,12 +513,17 @@ class CommunityStep extends Component{
 																	 value={this.state.community_name}
 																	 style={{borderBottom: this.state.error_community_name ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
 																	 required=""/>
-														<Tooltip placement={"top"} overlay={this.state.tooltip_content} align={{offset: [0, 2],}}
+														<Tooltip id={"create-category-tooltip"}
+																		 placement={"top"}
+																		 overlay={this.state.tooltip_content}
+																		 align={{offset: [0, 2],}}
 																		 visible={this.state.showed_tooltip}
+																		 overlayStyle={{maxWidth: this.state.tooltip_width}}
 														>
 															<select className="form-select category w-select"
 																			onChange={this.onChange}
 																			onBlur={this.onBlurCategory}
+																			ref={this.cat_ref}
 																			id="category"
 																			defaultValue={this.state.category}
 																			style={{
