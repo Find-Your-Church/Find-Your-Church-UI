@@ -374,18 +374,19 @@ class CommunityStep extends Component{
 					<main className="steps-body">
 						<div className="page-header-container">
 							<div className={"page-header-sub-container"}>
-								<div className="create-menu w3-bar-item w3-left">
+								<div className="create-menu w3-left">
 									<Link to="/dashboard" className="w3-button cancel">
 										{this.state.is_editing ? ("Back") : "Cancel"}
 									</Link>
 								</div>
-								<div className="create-menu w3-bar-item w3-center">
-									{this.state.is_editing ?
-										(<><span style={{color: "#858585"}}>Editing</span> {this.state.data.community_name}</>)
-										: "Create a New Community"
-									}
+								<div className="page-header-title">
+									{this.state.is_editing ? (
+										<>
+											<span style={{color: "#858585"}}>Editing</span> {this.state.data.community_name}
+										</>
+									) : "Create a New Community"}
 								</div>
-								<div className="create-menu w3-bar-item w3-right">
+								<div className="create-menu w3-right">
 									<Link to="#" className="w3-button w3-right save"
 												onClick={this.onSubmitCommunity}>
 										{this.state.is_editing ? ("Save") : "Save"}

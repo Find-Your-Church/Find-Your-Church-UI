@@ -267,10 +267,8 @@ class DashboardResults extends Component{
 											</Link>
 										</div>
 									</div>
-									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210">
-										<h1 className="heading-40">
-											Iframe
-										</h1>
+									<div className="page-header-title">
+										Iframe
 									</div>
 									<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
 										<div className="div-block-215">

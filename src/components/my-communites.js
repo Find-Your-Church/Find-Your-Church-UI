@@ -198,7 +198,7 @@ class MyCommunities extends Component{
 									</div>
 								) : (
 									<>
-										<div className="button-delete w-button" style={{color: "#2e89fe", marginRight: "10px"}}
+										<div className="button-delete w-button" style={{color: "#2e89fe"}}
 												 onClick={this.handleActivateMulti}>
 											Activate ({this.state.selected_count})
 										</div>

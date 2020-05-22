@@ -146,13 +146,13 @@ class ViewCommunity extends Component{
 					<main className="steps-body">
 						<div className="page-header-container">
 							<div className={"page-header-sub-container"}>
-								<div className="create-menu w3-bar-item w3-left">
+								<div className="create-menu w3-left">
 									<Link to="/dashboard" className="w3-button cancel">Back</Link>
 								</div>
-								<div className="create-menu w3-bar-item w3-center">
+								<div className="page-header-title">
 									{this.state.community_name}
 								</div>
-								<div className="create-menu w3-bar-item w3-right">
+								<div className="create-menu w3-right">
 									<Link to="#" className="w3-button w3-right edit"
 												onClick={this.onEditCommunity}>
 										Edit

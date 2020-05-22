@@ -107,10 +107,10 @@ class InvitedViewCommunity extends Component{
 					<main className="steps-body" style={{marginTop: in_frame ? "0" : "70px"}}>
 						<div className="page-header-container">
 							<div className={"page-header-sub-container"}>
-								<div className="create-menu w3-bar-item w3-left">
+								<div className="create-menu w3-left">
 									<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
 								</div>
-								<div className="create-menu w3-bar-item w3-center">
+								<div className="page-header-title">
 									{this.props.community.view_community.community_name}
 								</div>
 							</div>
