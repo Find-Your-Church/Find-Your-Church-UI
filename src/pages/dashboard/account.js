@@ -1165,7 +1165,7 @@ class Account extends Component{
 												</div>
 												{this.state.editing_card ? (
 													<div className="form-row">
-														<CardElement className="CardInfoStyle" style={cardStyle}
+														<CardElement className="CardInfoStyleOnAccount" style={cardStyle}
 																				 disabled={!this.state.editing_card}/>
 													</div>
 												) : (
