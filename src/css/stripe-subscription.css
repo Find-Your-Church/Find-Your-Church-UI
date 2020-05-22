@@ -454,7 +454,7 @@ h4 {
 
 .pay-info-row {
 	width: 100%;
-	padding: 6px 0;
+	padding: 20px 0;
 	color: #aaaaaa;
 }
 
@@ -576,10 +576,6 @@ h4 {
 
 .card-detail-item div {
 	color: #999999;
-}
-
-.card-detail-item .w3-col:not(:first-child) {
-	margin-top: 5px;
 }
 
 .stripe-label {
