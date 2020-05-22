@@ -556,8 +556,6 @@
 
 .account-body .table-link input[type="file"] {
 	display: block;
-	position: absolute;
-	font-size: 999px;
 	right: 0;
 	top: 0;
 	filter: alpha(opacity=0);
