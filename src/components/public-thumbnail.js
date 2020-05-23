@@ -86,7 +86,7 @@ class PublicThumbnail extends Component{
 	render(){
 		return (
 			this.state.is_viewing ? (
-				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value}}}/>
+				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value, colorTheme: this.props.colorTheme}}}/>
 			) : (
 				<div className={"listing-container1"} onMouseLeave={this.hideMenu}>
 					<div onClick={this.goView}>
@@ -102,7 +102,10 @@ class PublicThumbnail extends Component{
 						<div className="listingrow">
 							<div data-collapse="all" data-animation="default" data-duration="400"
 								 className="listing-nav w-nav">
-								<Link to="#" className="communityname" onClick={this.goView}>
+								<Link to="#" className="communityname" onClick={this.goView}
+											style={this.props.isSelected !== undefined ? {
+												color: this.props.isSelected ? this.props.colorTheme.buttons : "#333",
+											} : null}>
 									{this.props.value.community_name}
 								</Link>
 								{/*

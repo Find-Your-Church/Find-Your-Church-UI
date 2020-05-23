@@ -105,7 +105,8 @@ class InvitedViewCommunity extends Component{
 						<SiteHeader/>
 					)}
 					<main className="steps-body" style={{marginTop: in_frame ? "0" : "70px"}}>
-						<div className="page-header-container">
+						<div className="page-header-container"
+								 style={this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? {backgroundColor: this.props.location.state.colorTheme.header_bg} : null}>
 							<div className={"page-header-sub-container"}>
 								<div className="create-menu w3-left">
 									<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
@@ -115,19 +116,25 @@ class InvitedViewCommunity extends Component{
 								</div>
 							</div>
 						</div>
-						<div className="tabs-menu-6 w-tab-menu" role="tablist">
+						<div className="tabs-menu-6 w-tab-menu" role="tablist"
+								 style={this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? {backgroundColor: this.props.location.state.colorTheme.header_bg} : null}>
 							<div data-w-tab="Tab 1"
 									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "w--current" : ""}`}
-									 onClick={() => this.selectTabDetails(true)}>
+									 onClick={() => this.selectTabDetails(true)}
+									 style={this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? {backgroundColor: this.props.location.state.colorTheme.header_bg} : null}>
 								<div>Details</div>
 							</div>
 							<div data-w-tab="Tab 2"
 									 className={`iframe-tab w-inline-block w-tab-link ${this.state.showedDetails ? "" : "w--current"}`}
-									 onClick={() => this.selectTabDetails(false)}>
+									 onClick={() => this.selectTabDetails(false)}
+									 style={this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? {backgroundColor: this.props.location.state.colorTheme.header_bg} : null}>
 								<div>Admin</div>
 							</div>
 						</div>
-						<div className={"view-wrapper"} style={{minHeight: in_frame ? "100vh" : "calc(100vh - 210px)"}}>
+						<div className={"view-wrapper"} style={{
+							minHeight: in_frame ? "100vh" : "calc(100vh - 210px)",
+							backgroundColor: this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? this.props.location.state.colorTheme.results_bg : "initial"
+						}}>
 							<div className="container-inline">
 								{!this.state.showedDetails ?
 									(

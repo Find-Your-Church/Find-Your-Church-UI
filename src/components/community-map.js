@@ -69,6 +69,14 @@ class CommunityMap extends Component{
 
 	render(){
 		const zoom = this.radiusToZoom(this.props.criteria.radius);
+		const hover_icon = {
+			path: "M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z",
+			fillColor: this.props.colorTheme === undefined ? "#8900fe" : this.props.colorTheme,
+			fillOpacity: 1,
+			anchor: {x: 12, y: 24},
+			strokeWeight: 0,
+			scale: 1
+		};
 
 		return (
 			<GoogleMap defaultZoom={zoom} zoom={zoom}
@@ -86,15 +94,11 @@ class CommunityMap extends Component{
 				{this.props.results.map((item, index) => {
 					const lat = parseFloat(item.data.coordinate.lat);
 					const lng = parseFloat(item.data.coordinate.lng);
-					const hover_icon = {
-						path: "M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z",
-						fillColor: this.props.colorTheme === undefined ? "#8900fe" : this.props.colorTheme,
-					};
 					return (
 						<Marker key={"marker" + index} onClick={() => this.onClickMarker(index)}
 										position={{lat: lat, lng: lng}}
-										icon={
-												{url: this.props.community.picking === index ? "/img/icon/icon-address-marker-hover.svg" : "/img/icon/icon-address-marker.svg"}
+										icon={this.props.community.picking === index ? hover_icon
+											: {url: "/img/icon/icon-address-marker.svg"}
 										}
 										title={item.data.community_name}
 										zIndex={this.props.community.picking === index ? 1000 : 900}

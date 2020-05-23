@@ -575,7 +575,7 @@ class SearchResultsIframe extends Component{
 												key={"search" + index} ref={this.myref[index]}
 												onMouseEnter={() => this.hoverMarker(index)}
 												onMouseLeave={() => this.clearMarker()}>
-												<PublicThumbnail value={item.data}/>
+												<PublicThumbnail value={item.data} isSelected={this.props.community.picking === index} colorTheme={{header_bg: this.color_header_bg, results_bg: this.color_results_bg, buttons: this.color_buttons}}/>
 											</div>
 										)
 									})}
