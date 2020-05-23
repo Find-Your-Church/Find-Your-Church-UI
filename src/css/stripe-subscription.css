@@ -760,7 +760,8 @@ h4 {
 	padding-bottom: 0;
 	border: 1px none #000;
 	font-family: 'Source Sans Pro', sans-serif;
-	line-height: 16px;
+	font-size: 16px;
+	line-height: 20px;
 }
 
 .free-trial-text {
