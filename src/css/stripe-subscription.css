@@ -31,8 +31,9 @@
 	background-color: #cccccc;
 }
 
-.w3-modal {
+#stripe-modal {
 	padding: 40px 0 0;
+	overflow: hidden;
 	z-index: 3000;
 }
 
