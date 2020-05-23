@@ -1,5 +1,6 @@
 .subscriptioncontainer-div {
 	padding: 0;
+	max-height: calc(100vh - 80px);
 	max-width: 1200px;
 	-ms-flex: 0 auto;
 	flex: 0 auto;
@@ -15,6 +16,12 @@
 	text-align: left;
 	border-radius: 3px;
 	animation: zoom_in ease 1s;
+	overflow: auto;
+}
+
+.w3-modal {
+	padding: 40px 0 0;
+	z-index: 3000;
 }
 
 .header1-div.gradient.shadow {
@@ -586,8 +593,8 @@ h4 {
 
 .activate-dlg-close {
 	position: fixed;
-	right: 20px;
-	top: 78px;
+	right: 10px;
+	top: 10px;
 	width: 42px;
 	height: 42px;
 	color: #70716d;
@@ -742,4 +749,10 @@ h4 {
 	border: 1px none #000;
 	font-family: 'Source Sans Pro', sans-serif;
 	line-height: 16px;
+}
+
+.free-trial-text {
+	padding-top: 10px;
+	color: #3db639;
+	font-weight: 400;
 }

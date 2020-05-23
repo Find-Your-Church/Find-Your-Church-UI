@@ -414,6 +414,7 @@ class SearchResultsIframe extends Component{
 													mapElement={<div className="map-content"/>}
 													results={results}
 													handleScroll={this.clickMarker}
+													colorTheme={this.color_buttons}
 						/>
 						<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
 							<div className={"selected-filters"}>

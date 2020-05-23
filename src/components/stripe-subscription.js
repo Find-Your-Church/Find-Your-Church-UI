@@ -383,14 +383,13 @@ class StripeSubscription extends Component{
 									<div className="filtersheader-div" style={{display: "block"}}>
 										<h4 className="table-header">Due Today</h4>
 										{this.props.community.subscription ? (this.props.community.trialing ? (
-												<h4 className={"w3-small w3-text-green"}>
-													<br/>
+												<h4 className={"free-trial-text"}>
 													Free trial
 													through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
 												</h4>) : null)
 											: (
 												this.props.community.trial_period_days > 0 ? (
-														<h4 className={"w3-small w3-text-green"} style={{paddingTop: "10px"}}>
+														<h4 className={"free-trial-text"} style={{paddingTop: "10px"}}>
 															Free trial through {upcoming_duedate.toLocaleDateString('en-US')}
 														</h4>)
 													: null)}

@@ -60,12 +60,14 @@ class Admin extends Component{
 			<>
 				<SiteHeader/>
 				<div>
-					<div id={"stripe-modal"} className={"w3-modal"}
-							 style={{display: this.props.community.showing ? "block" : "none"}}>
-						<Elements>
-							<StripeSubscription second={!!this.props.community.subscription}/>
-						</Elements>
-					</div>
+					{this.props.community.showing ? (
+						<div id={"stripe-modal"} className={"w3-modal"}
+								 style={{display: "block"}}>
+							<Elements>
+								<StripeSubscription second={!!this.props.community.subscription}/>
+							</Elements>
+						</div>
+					) : null}
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
 						<div className="w3-display-middle w3-text-white w3-jumbo">
