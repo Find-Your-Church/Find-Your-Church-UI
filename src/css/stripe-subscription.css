@@ -19,6 +19,18 @@
 	overflow: auto;
 }
 
+.subscriptioncontainer-div::-webkit-scrollbar {
+	width: 6px;
+	border-radius: 0 3px 3px 0;
+	background-color: #e6e6e6;
+}
+
+.subscriptioncontainer-div::-webkit-scrollbar-thumb {
+	width: 6px;
+	border-radius: 6px;
+	background-color: #cccccc;
+}
+
 .w3-modal {
 	padding: 40px 0 0;
 	z-index: 3000;
