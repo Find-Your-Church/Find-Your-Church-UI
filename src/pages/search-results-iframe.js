@@ -182,9 +182,9 @@ class SearchResultsIframe extends Component{
 			const striped_color_results_bg = this.color_results_bg.substring(1);
 			const striped_color_buttons = this.color_buttons.substring(1);
 			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
-			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${param}`;
+			const search_results_url = `${window.location.protocol}//${window.location.host}/iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
-			this.props.setBackUrl(`/search-results-iframe/${param}`);
+			this.props.setBackUrl(`/iframe/${param}`);
 		}
 	}
 

@@ -83,7 +83,7 @@ class App extends Component{
 							<Route exact path="/" component={Home}/>
 							<Route exact path="/search-results" component={SearchResults}/>
 							<Route path="/search-results/:category/:radius/:lat/:lng/:filter" component={SearchResults}/>
-							<Route path="/search-results-iframe/:owner/:category/:radius/:lat/:lng/:color/:filter" component={SearchResultsIframe}/>
+							<Route path="/iframe/:owner/:category/:radius/:lat/:lng/:color/:filter" component={SearchResultsIframe}/>
 							<Route path="/preview-search-results/:owner/:category/:radius/:lat/:lng/:color/:filter" component={PreviewSearchResults}/>
 
 							<Route exact path="/login-popup" component={LoginPopup}/>

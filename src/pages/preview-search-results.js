@@ -24,7 +24,7 @@ class PreviewSearchResults extends Component{
 	}
 
 	componentDidMount(){
-		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${this.owner}/${this.category}/${this.radius}/${this.lat}/${this.lng}/${this.color}/${this.filter}`;
+		const preview_url = `${window.location.protocol}//${window.location.host}/iframe/${this.owner}/${this.category}/${this.radius}/${this.lat}/${this.lng}/${this.color}/${this.filter}`;
 
 		this.setState({
 			frameUrl: preview_url,

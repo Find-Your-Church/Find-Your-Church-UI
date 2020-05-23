@@ -59,7 +59,7 @@ class SearchBar extends Component{
 		if(prevProps.auth.user !== this.props.auth.user){
 			if(this.props.path !== undefined){
 				const params = this.props.path.split('/');
-				if(params[1] === "search-results-iframe"){
+				if(params[1] === "iframe"){
 					this.setState({
 						my_address: this.props.auth.user.zip_code,
 						my_lat: this.props.auth.user.location.lat,
@@ -187,7 +187,7 @@ class SearchBar extends Component{
 			if(params[1] === "search-results"){
 				category_in_path = params[2] === undefined ? "" : params[2].replace(/-/g, ' ');
 			}
-			else if(params[1] === "search-results-iframe"){
+			else if(params[1] === "iframe"){
 				category_in_path = params[3] === undefined ? "" : params[3].replace(/-/g, ' ');
 			}
 		}

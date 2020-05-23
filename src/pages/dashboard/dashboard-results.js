@@ -181,7 +181,7 @@ class DashboardResults extends Component{
 		const striped_color_buttons = this.state.color_buttons.substring(1);
 		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
 
-		const preview_url = `${window.location.protocol}//${window.location.host}/search-results-iframe/${iframe_param}`;
+		const preview_url = `${window.location.protocol}//${window.location.host}/iframe/${iframe_param}`;
 		const iframe_style = `display: block; width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;
 
 		this.setState({
@@ -608,7 +608,7 @@ class DashboardResults extends Component{
 											</div>
 											<div className="div-block-182">
 												<h4 id="w-node-2d27cd76105d-78e24ec3" className="table-header"
-														title={"Parameters: /search-results-iframe/owner/category/radius/lat/lng/colors/filter"}>
+														title={"Parameters: /iframe/owner/category/radius/lat/lng/colors/filter"}>
 													<div>{this.state.frameShortCode}</div>
 												</h4>
 											</div>
