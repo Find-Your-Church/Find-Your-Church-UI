@@ -735,14 +735,13 @@ class DashboardResults extends Component{
 														<h4 id="w-node-2d27cd76105d-78e24ec3" className="table-header"
 																title={"Parameters: /iframe/owner/category/radius/lat/lng/colors/filter"}>
 															<div>{this.state.frameShortCode}</div>
+															<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {
+															}} style={{opacity: "0", width: "8px", height: "8px"}}/>
 														</h4>
 													</div>
-													<div className="_20right-div _20top-div">
-														<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
+													<div className="">
+														<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27">
 															<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>Copy Code</div>
-															<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {
-															}}
-																		 style={{opacity: "0", width: "8px", height: "8px"}}/>
 														</h4>
 													</div>
 													<div className="_20top-div"
@@ -750,6 +749,11 @@ class DashboardResults extends Component{
 														<h4 id="w-node-2d27cd761068-78e24ec3"
 																className="copied-message">Code has been copied to clipboard.</h4>
 													</div>
+													<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
+														<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>
+															Send code and instructions to your developer
+														</div>
+													</h4>
 												</div>
 												<div className="dashboardheader-div" style={{
 													padding: "20px 0 10px",
