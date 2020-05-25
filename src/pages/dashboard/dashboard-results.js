@@ -13,12 +13,17 @@ import {SketchPicker} from "react-color";
 import community_config, {INIT_FILTERS} from "../../conf/community-conf";
 import Tooltip from "rmc-tooltip/es";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import imgPoweredBy from "../../img/powered_by.png";
+import SiteFooter from "../../components/site-footer";
+import FaqItem from "../../components/faq-item";
 
 class DashboardResults extends Component{
 	constructor(props){
 		super(props);
 
 		let {user} = props.auth;
+
+		this.cat_ref = React.createRef();
 
 		this.previewCriteria = {
 			owner: null,
@@ -50,7 +55,7 @@ class DashboardResults extends Component{
 
 			iFrameHeight: 'calc(100vw * 9 / 16)',
 
-			showed_details: true,
+			showed_tab: 0,
 
 			showed_header_bg_color: false,
 			showed_results_bg_color: false,
@@ -66,10 +71,17 @@ class DashboardResults extends Component{
 			iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
 			zip_code: user.zip_code,
 			showed_tooltip_zipcode: false,
+
+			tooltip_width: 0,
 		};
 
 		this.showSubDlg = this.showSubDlg.bind(this);
 	}
+
+	onResizeWindow = () => {
+		if(this.cat_ref.current !== null && this.cat_ref.current !== undefined)
+			this.setState({tooltip_width: this.cat_ref.current.clientWidth});
+	};
 
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
@@ -80,6 +92,9 @@ class DashboardResults extends Component{
 	}
 
 	componentDidMount(){
+		window.addEventListener('resize', this.onResizeWindow);
+		this.onResizeWindow();
+
 		const customer_info = {
 			user_id: this.props.auth.user.id,
 		};
@@ -92,8 +107,12 @@ class DashboardResults extends Component{
 		this.previewCriteria.owner = this.props.auth.user.id;
 		this.applyUpdatedCriteria();
 
-		if(!this.state.showed_details)
+		if(this.state.showed_tab === 1)
 			this.setState({iFrameHeight: this.refIframe.current.contentWindow.document.body.scrollHeight + 'px'});
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.onResizeWindow);
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot){
@@ -196,8 +215,8 @@ class DashboardResults extends Component{
 		this.props.showActivateDlg();
 	}
 
-	selectTabDetail = isDetail => {
-		this.setState({showed_details: isDetail});
+	selectTabDetail = tab_num => {
+		this.setState({showed_tab: tab_num});
 	}
 
 	onChange = e => {
@@ -304,49 +323,36 @@ class DashboardResults extends Component{
 							</div>
 							<div className="tabs-menu-6 w-tab-menu" role="tablist">
 								<div data-w-tab="Tab 1"
-										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "w--current" : ""}`}
-										 onClick={() => this.selectTabDetail(true)}>
-									<div>Details</div>
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_tab === 0 ? "w--current" : ""}`}
+										 onClick={() => this.selectTabDetail(0)}>
+									<div>Customize</div>
 								</div>
 								<div data-w-tab="Tab 2"
-										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_details ? "" : "w--current"}`}
-										 onClick={() => this.selectTabDetail(false)}>
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_tab === 1 ? "w--current" : ""}`}
+										 onClick={() => this.selectTabDetail(1)}>
 									<div>Preview</div>
+								</div>
+								<div data-w-tab="Tab 3"
+										 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_tab === 2 ? "w--current" : ""}`}
+										 onClick={() => this.selectTabDetail(2)}>
+									<div>Instructions</div>
 								</div>
 							</div>
 							{
-								this.state.showed_details ? (
+								this.state.showed_tab === 0 ? (
 									<div className={"iframe-details w3-animate-opacity"}>
 										<div className="accordionheader-div" style={{
-											paddingBottom: "20px",
 											borderBottom: "1px solid #d3ced7",
 											color: "#333",
 										}}>
 											<h4 className="accountcontainer-header">
-												Iframe embed code generator:
+												Customize your iframe search engine and community profiles:
 											</h4>
-											<Popup
-												trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-												position={"left top"}>
-												<div>
-													If your organization has your own website, you can use the section below to generate your
-													custom iframe
-													embed code and display your communities on your own page(s) or section(s) of your site by
-													simply
-													copying and pasting. The functionality of the search engine is fully responsive and compatible
-													with any
-													website, device or browser.<br/><br/>
-													<b>Note</b>: If you make changes to your iframe preferences below, you will need to copy/paste
-													the new code
-													into the page(s) and/or section(s) your iframe code is currently displayed to reflect the
-													changes.
-												</div>
-											</Popup>
 										</div>
 										<div className="div-block-239">
 											<div className="accordionheader-div">
 												<h4 className="accountcontainer-header">
-													Customize your iframe search results display
+													Default search values:
 												</h4>
 											</div>
 											<div className="iframe-container">
@@ -370,9 +376,11 @@ class DashboardResults extends Component{
 																					 overlay={this.state.tooltip_content}
 																					 align={{offset: [0, 2],}}
 																					 visible={this.state.showed_tooltip}
+																					 overlayStyle={{maxWidth: this.state.tooltip_width}}
 																	>
 																		<select id="iframe_category" className="iframe-dropdown w-select"
 																						onChange={this.onChange} onBlur={this.onBlurCategory}
+																						ref={this.cat_ref}
 																						value={this.state.iframe_category}
 																						style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
 																			<option value="undefined">All Communities</option>
@@ -440,6 +448,7 @@ class DashboardResults extends Component{
 																								 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
 																								 align={{offset: [0, 2],}}
 																								 visible={this.state.showed_tooltip_zipcode}
+																								 overlayStyle={{maxWidth: this.state.tooltip_width}}
 																				>
 																					<input className="iframe-input w-input"
 																								 title={`Lat: ${this.state.user_lat}, Lng: ${this.state.user_lng}, ${this.state.zip_code}`}
@@ -477,6 +486,21 @@ class DashboardResults extends Component{
 																	</PlacesAutocomplete>
 																</div>
 															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										<div className="div-block-239">
+											<div className="accordionheader-div">
+												<h4 className="accountcontainer-header">
+													Theme colors:
+												</h4>
+											</div>
+											<div className="iframe-container">
+												<div className="form-block-6 w-form">
+													<form id="email-form" name="email-form" data-name="Email Form">
+														<div className="customiframe-grid">
 															<div className="forminput-div">
 																<div className="div-block-285">
 																	<label htmlFor="email-7" className="field-label">Header background:</label>
@@ -489,28 +513,34 @@ class DashboardResults extends Component{
 																		</div>
 																	</Popup>
 																</div>
-																<div className="iframeinput-container">
-																	<input type="text" readOnly={true} id={"color_header_bg"}
-																				 className="iframe-input w-input"
-																				 value={this.state.color_header_bg}/>
-																	<div className="color-button w-button" style={{
-																		backgroundColor: this.state.color_header_bg
-																	}} onClick={() => {
-																		this.setState({showed_header_bg_color: !this.state.showed_header_bg_color});
-																	}}/>
-																	{
-																		this.state.showed_header_bg_color ? (
-																			<div style={{position: "absolute"}} onMouseLeave={() => {
-																				this.setState({showed_header_bg_color: false});
-																			}}>
-																				<SketchPicker disableAlpha={true} color={this.state.color_header_bg}
-																											onChange={(color, e) => {
-																												this.setState({color_header_bg: color.hex});
-																											}}/>
-																			</div>
-																		) : null
-																	}
-																</div>
+																<Tooltip placement={"top"}
+																				 overlay={`This will change the color of the search results header and profile headers.`}
+																				 align={{offset: [0, 2],}}
+																				 overlayStyle={{maxWidth: this.state.tooltip_width}}
+																>
+																	<div className="iframeinput-container">
+																		<input type="text" readOnly={true} id={"color_header_bg"}
+																					 className="iframe-input w-input"
+																					 value={this.state.color_header_bg}/>
+																		<div className="color-button w-button" style={{
+																			backgroundColor: this.state.color_header_bg
+																		}} onClick={() => {
+																			this.setState({showed_header_bg_color: !this.state.showed_header_bg_color});
+																		}}/>
+																		{
+																			this.state.showed_header_bg_color ? (
+																				<div style={{position: "absolute"}} onMouseLeave={() => {
+																					this.setState({showed_header_bg_color: false});
+																				}}>
+																					<SketchPicker disableAlpha={true} color={this.state.color_header_bg}
+																												onChange={(color, e) => {
+																													this.setState({color_header_bg: color.hex});
+																												}}/>
+																				</div>
+																			) : null
+																		}
+																	</div>
+																</Tooltip>
 															</div>
 															<div className="forminput-div">
 																<div className="div-block-285">
@@ -525,28 +555,34 @@ class DashboardResults extends Component{
 																		</div>
 																	</Popup>
 																</div>
-																<div className="iframeinput-container">
-																	<input type="text" readOnly={true} id={"color_results_bg"}
-																				 className="iframe-input w-input"
-																				 value={this.state.color_results_bg}/>
-																	<div className="color-button w-button" style={{
-																		backgroundColor: this.state.color_results_bg
-																	}} onClick={() => {
-																		this.setState({showed_results_bg_color: !this.state.showed_results_bg_color});
-																	}}/>
-																	{
-																		this.state.showed_results_bg_color ? (
-																			<div style={{position: "absolute"}} onMouseLeave={() => {
-																				this.setState({showed_results_bg_color: false});
-																			}}>
-																				<SketchPicker disableAlpha={true} color={this.state.color_results_bg}
-																											onChange={(color, e) => {
-																												this.setState({color_results_bg: color.hex});
-																											}}/>
-																			</div>
-																		) : null
-																	}
-																</div>
+																<Tooltip placement={"top"}
+																				 overlay={`This will change the color of the search results and profile pages.`}
+																				 align={{offset: [0, 2],}}
+																				 overlayStyle={{maxWidth: this.state.tooltip_width}}
+																>
+																	<div className="iframeinput-container">
+																		<input type="text" readOnly={true} id={"color_results_bg"}
+																					 className="iframe-input w-input"
+																					 value={this.state.color_results_bg}/>
+																		<div className="color-button w-button" style={{
+																			backgroundColor: this.state.color_results_bg
+																		}} onClick={() => {
+																			this.setState({showed_results_bg_color: !this.state.showed_results_bg_color});
+																		}}/>
+																		{
+																			this.state.showed_results_bg_color ? (
+																				<div style={{position: "absolute"}} onMouseLeave={() => {
+																					this.setState({showed_results_bg_color: false});
+																				}}>
+																					<SketchPicker disableAlpha={true} color={this.state.color_results_bg}
+																												onChange={(color, e) => {
+																													this.setState({color_results_bg: color.hex});
+																												}}/>
+																				</div>
+																			) : null
+																		}
+																	</div>
+																</Tooltip>
 															</div>
 															<div className="forminput-div">
 																<div className="div-block-285">
@@ -559,145 +595,198 @@ class DashboardResults extends Component{
 																		</div>
 																	</Popup>
 																</div>
-																<div className="iframeinput-container">
-																	<input type="text" readOnly={true} id={"color_buttons"}
-																				 className="iframe-input w-input"
-																				 value={this.state.color_buttons}/>
-																	<div className="color-button w-button" style={{
-																		backgroundColor: this.state.color_buttons
-																	}} onClick={() => {
-																		this.setState({showed_buttons_color: !this.state.showed_buttons_color});
-																	}}/>
-																	{
-																		this.state.showed_buttons_color ? (
-																			<div style={{position: "absolute"}} onMouseLeave={() => {
-																				this.setState({showed_buttons_color: false});
-																			}}>
-																				<SketchPicker disableAlpha={true} color={this.state.color_buttons}
-																											onChange={(color, e) => {
-																												this.setState({color_buttons: color.hex});
-																											}}/>
-																			</div>
-																		) : null
-																	}
-																</div>
+																<Tooltip placement={"top"}
+																				 overlay={`This will change the color of the links, buttons, community names and map pins.`}
+																				 align={{offset: [0, 2],}}
+																				 overlayStyle={{maxWidth: this.state.tooltip_width}}
+																>
+																	<div className="iframeinput-container">
+																		<input type="text" readOnly={true} id={"color_buttons"}
+																					 className="iframe-input w-input"
+																					 value={this.state.color_buttons}/>
+																		<div className="color-button w-button" style={{
+																			backgroundColor: this.state.color_buttons
+																		}} onClick={() => {
+																			this.setState({showed_buttons_color: !this.state.showed_buttons_color});
+																		}}/>
+																		{
+																			this.state.showed_buttons_color ? (
+																				<div style={{position: "absolute"}} onMouseLeave={() => {
+																					this.setState({showed_buttons_color: false});
+																				}}>
+																					<SketchPicker disableAlpha={true} color={this.state.color_buttons}
+																												onChange={(color, e) => {
+																													this.setState({color_buttons: color.hex});
+																												}}/>
+																				</div>
+																			) : null
+																		}
+																	</div>
+																</Tooltip>
 															</div>
 														</div>
 													</form>
-													<div className="w-form-done">
-														<div>Thank you! Your submission has been received!</div>
-													</div>
-													<div className="w-form-fail">
-														<div>Oops! Something went wrong while submitting the form.</div>
-													</div>
-												</div>
-											</div>
-											<div className="accordionheader-div">
-												<h4 className="accountcontainer-header">
-													Copy your iframe code
-												</h4>
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"left top"}>
-													<div>
-														Copy and paste this code into an iframe embed on your website. Look below for a quick 3-step
-														tutorial and
-														don't hesitate to contact our support team if you run into any issues.
-													</div>
-												</Popup>
-											</div>
-											<div className="div-block-182">
-												<h4 id="w-node-2d27cd76105d-78e24ec3" className="table-header"
-														title={"Parameters: /iframe/owner/category/radius/lat/lng/colors/filter"}>
-													<div>{this.state.frameShortCode}</div>
-												</h4>
-											</div>
-											<div className="_20right-div _20top-div">
-												<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
-													<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>Copy Code</div>
-													<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {
-													}}
-																 style={{opacity: "0", width: "8px", height: "8px"}}/>
-												</h4>
-											</div>
-											<div className="_20top-div"
-													 style={{display: this.state.showedCopyNotification ? "inline-block" : "none"}}>
-												<h4 id="w-node-2d27cd761068-78e24ec3"
-														className="copied-message">Code has been copied to clipboard.</h4>
-											</div>
-										</div>
-										<div className="dashboardheader-div" style={{
-											padding: "20px 0",
-											borderBottom: "1px solid #d3ced7",
-											color: "#333",
-										}}>
-											<h4 className="accountcontainer-header">How to display your communities on your own site:</h4>
-										</div>
-										<div className="div-block-267">
-											<div>
-												<div className="div-block-269">
-													<h4 className="heading-55">
-														Add an HTML iframe element to the
-														page and/or section you wish to display your communities.
-													</h4>
-													<h5 className="heading-60">
-														Every website builder such as Wix, SquareSpace, or WordPress will have the ability to embed
-														an iframe code anywhere on your site. Contact our <a
-														href="mailto:support@findyourchurch.org">support team</a> if you're having trouble!
-													</h5>
-													<div className="div-block-270 t1"/>
-												</div>
-											</div>
-											<div>
-												<div className="div-block-269">
-													<h4 className="heading-55">
-														Copy / paste the code above into the HTML iframe element you just added and save your site.
-													</h4>
-													<h5 className="heading-60">
-														Your search results should appear on your website after pasting / saving and be fully
-														functional. You may need to update or publish your site to refresh and display the iframe.
-													</h5>
-													<div className="div-block-270 t2"/>
-												</div>
-											</div>
-											<div>
-												<div className="div-block-269">
-													<h4 className="heading-55">
-														That's it! If you need any help please do not hesitate to contact our <a
-														href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
-													</h4>
-													<h5 className="heading-60">
-														The iframe is automatically connected to your dashboard so anytime you add, update, or
-														remove a community - it will <b>automatically</b> update anywhere you have your search
-														results displayed.
-													</h5>
-													<div className="div-block-270 t3"/>
 												</div>
 											</div>
 										</div>
 									</div>
 								) : (
-									<>
-										<div className="div-block-184 w3-animate-opacity">
-											<div className="div-block-185"/>
-											<h1 className="heading-28">Find a community near you.</h1>
-											<p className="paragraph-5">This could be a header on your communities page or a section above the
-												iframe that provides definitions of the community categories your ministry supports. The preview
-												below is exactly what your search results will look like when displayed on your own web page. If
-												you have any questions, please do not hesitate to contact our <a
-													href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
-											</p></div>
-										<iframe id="iframe-community" src={this.state.frameUrl}
-														ref={this.refIframe} title={"preview communities"}
-														style={{
-															display: "block",
-															width: "100%",
-															height: "100vh",
-															outline: "none",
-															border: "none",
-															overflow: "hidden"
-														}}/>
-									</>
+									this.state.showed_tab === 1 ? (
+										<>
+											<div className="div-block-184 w3-animate-opacity">
+												<div className="div-block-185"/>
+												<h1 className="heading-28">Find a community near you.</h1>
+												<p className="paragraph-5">This could be a header on your communities page or a section above
+													the
+													iframe that provides definitions of the community categories your ministry supports. The
+													preview
+													below is exactly what your search results will look like when displayed on your own web page.
+													If
+													you have any questions, please do not hesitate to contact our <a
+														href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
+												</p></div>
+											<iframe id="iframe-community" src={this.state.frameUrl}
+															ref={this.refIframe} title={"preview communities"}
+															style={{
+																display: "block",
+																width: "100%",
+																height: "100vh",
+																outline: "none",
+																border: "none",
+																overflow: "hidden"
+															}}/>
+											<div className="div-block-295">
+												<img src={imgPoweredBy} alt="" className="image-13"/>
+											</div>
+											<SiteFooter/>
+										</>
+									) : (
+										<>
+											<div className={"iframe-details w3-animate-opacity"}>
+												<div className="dashboardheader-div" style={{
+													paddingBottom: "10px",
+													borderBottom: "1px solid #d3ced7",
+													color: "#333",
+												}}>
+													<h4 className="accountcontainer-header">How to display your communities on your own site:</h4>
+												</div>
+												<div className="div-block-267">
+													<div>
+														<div className="div-block-269">
+															<h4 className="heading-55">
+																Add an HTML iframe element to the
+																page and/or section you wish to display your communities.
+															</h4>
+															<h5 className="heading-60">
+																Every website builder such as Wix, SquareSpace, or WordPress will have the ability to
+																embed
+																an iframe code anywhere on your site. Contact our <a
+																href="mailto:support@findyourchurch.org">support team</a> if you're having trouble!
+															</h5>
+															<div className="div-block-270 t1"/>
+														</div>
+													</div>
+													<div>
+														<div className="div-block-269">
+															<h4 className="heading-55">
+																Copy / paste the code above into the HTML iframe element you just added and save your
+																site.
+															</h4>
+															<h5 className="heading-60">
+																Your search results should appear on your website after pasting / saving and be fully
+																functional. You may need to update or publish your site to refresh and display the
+																iframe.
+															</h5>
+															<div className="div-block-270 t2"/>
+														</div>
+													</div>
+													<div>
+														<div className="div-block-269">
+															<h4 className="heading-55">
+																That's it! If you need any help please do not hesitate to contact our <a
+																href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
+															</h4>
+															<h5 className="heading-60">
+																The iframe is automatically connected to your dashboard so anytime you add, update, or
+																remove a community - it will <b>automatically</b> update anywhere you have your search
+																results displayed.
+															</h5>
+															<div className="div-block-270 t3"/>
+														</div>
+													</div>
+												</div>
+												<div className="div-block-239">
+													<div className="accordionheader-div">
+														<h4 className="accountcontainer-header">
+															Copy your iframe code
+														</h4>
+														<Popup
+															trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
+															position={"left top"}>
+															<div>
+																Copy and paste this code into an iframe embed on your website. Look below for a quick
+																3-step
+																tutorial and
+																don't hesitate to contact our support team if you run into any issues.
+															</div>
+														</Popup>
+													</div>
+													<div className="div-block-182">
+														<h4 id="w-node-2d27cd76105d-78e24ec3" className="table-header"
+																title={"Parameters: /iframe/owner/category/radius/lat/lng/colors/filter"}>
+															<div>{this.state.frameShortCode}</div>
+														</h4>
+													</div>
+													<div className="_20right-div _20top-div">
+														<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
+															<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>Copy Code</div>
+															<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {
+															}}
+																		 style={{opacity: "0", width: "8px", height: "8px"}}/>
+														</h4>
+													</div>
+													<div className="_20top-div"
+															 style={{display: this.state.showedCopyNotification ? "inline-block" : "none"}}>
+														<h4 id="w-node-2d27cd761068-78e24ec3"
+																className="copied-message">Code has been copied to clipboard.</h4>
+													</div>
+												</div>
+												<div className="dashboardheader-div" style={{
+													padding: "20px 0 10px",
+													borderBottom: "1px solid #d3ced7",
+													color: "#333",
+												}}>
+													<h4 className="accountcontainer-header">Frequently asked questions:</h4>
+												</div>
+												<div>
+													<div className="_20top-div">
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+														<FaqItem content={
+															`Lorem ipsum dolor sit amet, consectetur adipiscing telit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.`
+														}/>
+													</div>
+												</div>
+											</div>
+											<SiteFooter/>
+										</>
+									)
 								)
 							}
 						</div>
