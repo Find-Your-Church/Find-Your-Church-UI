@@ -389,7 +389,7 @@ class StripeSubscription extends Component{
 												</h4>) : null)
 											: (
 												this.props.community.trial_period_days > 0 ? (
-														<h4 className={"free-trial-text"} style={{paddingTop: "10px"}}>
+														<h4 className={"free-trial-text"} style={{paddingTop: "5px"}}>
 															Free trial through {upcoming_duedate.toLocaleDateString('en-US')}
 														</h4>)
 													: null)}
@@ -502,13 +502,14 @@ class StripeSubscription extends Component{
 									<div className="invoice-div">
 										{!this.props.second || this.state.editing_card ? (
 											<input type="text" className="card-holder-name"
-														 style={{paddingTop: "10px", borderTop: "1px solid #ddd9e1"}}
+														 style={{paddingTop: "20px", paddingBottom: "10px", borderTop: "1px solid #ddd9e1"}}
 														 title="Name on card" placeholder="Name on card"
 														 id="name_on_card" onChange={this.onChange}
-														 value={this.state.name_on_card} autoFocus/>
+														 value={this.state.name_on_card}/>
 										) : (
 											<div className={"grey"} style={{
-												paddingTop: "10px",
+												paddingTop: "20px",
+												paddingBottom: "10px",
 												width: "100%",
 												borderTop: "1px solid #e8e5ea",
 											}}>
@@ -517,7 +518,7 @@ class StripeSubscription extends Component{
 										)}
 									</div>
 									{!this.props.second || this.state.editing_card ? (
-										<div className="form-row">
+										<div className="form-row" style={{padding: "10px 0"}}>
 											<CardElement className="CardInfoStyle" style={cardStyle}
 																	 disabled={!this.state.editing_card && this.props.second}/>
 										</div>
@@ -534,18 +535,18 @@ class StripeSubscription extends Component{
 															<img alt={"Payment card"}
 																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
 														</div>
-														<div className={"w3-col s5"} title={"Card number"}>
+														<div className={"w3-col s5"} style={{lineHeight: "24px"}} title={"Card number"}>
 															**** **** ****&nbsp;
 															{customer.sources.data[0].last4}
 														</div>
-														<div className={"w3-col s3"} title={"Expiration"}>
+														<div className={"w3-col s3"} style={{lineHeight: "24px"}} title={"Expiration"}>
 															{customer.sources.data[0].exp_month}/{customer.sources.data[0].exp_year}
 														</div>
-														<div className={"w3-col s1"}
+														<div className={"w3-col s1"} style={{lineHeight: "24px"}}
 																 title={customer.sources.data[0].cvc_check}>
 															***
 														</div>
-														<div className={"w3-col s2"}
+														<div className={"w3-col s2"} style={{lineHeight: "24px"}}
 																 title={`Zip code: ${customer.sources.data[0].address_zip_check}`}>
 															{customer.sources.data[0].address_zip}
 														</div>
@@ -610,11 +611,10 @@ class StripeSubscription extends Component{
 										this.setState({accordion_collapsed1: !this.state.accordion_collapsed1});
 									}}>
 										<div className="accordionheader-div"
-												 style={{borderBottomStyle: this.state.accordion_collapsed1 ? "" : "solid"}}
 										>
 											<h3 className="accordion-header">What happens when I click
 												activate?&nbsp;</h3></div>
-										<div style={{height: this.state.accordion_collapsed1 ? "0px" : "initial"}}
+										<div style={{maxHeight: this.state.accordion_collapsed1 ? "0px" : "100vh"}}
 												 className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>A metaphorical lantern is lit and the technology goes to
 												work. But actually, the community or communities you’ve selected to activate will automatically
@@ -628,11 +628,10 @@ class StripeSubscription extends Component{
 										this.setState({accordion_collapsed2: !this.state.accordion_collapsed2});
 									}}>
 										<div className="accordionheader-div"
-												 style={{borderBottomStyle: this.state.accordion_collapsed2 ? "" : "solid"}}
 										>
 											<h3 className="accordion-header">What if I change my mind and
 											want to deactivate one or all of them?&nbsp;</h3></div>
-										<div style={{height: this.state.accordion_collapsed2 ? "0px" : "initial"}} className="accordioncontent-div">
+										<div style={{maxHeight: this.state.accordion_collapsed2 ? "0px" : "100vh"}} className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>Of course. Simply deactivate one or all of them before the
 												end of your free trial or billing cycle if you wish to reduce or cancel any upcoming payments.
 												If you do not have any active communities, your upcoming payments on your Account page will show
@@ -645,11 +644,10 @@ class StripeSubscription extends Component{
 										this.setState({accordion_collapsed3: !this.state.accordion_collapsed3});
 									}}>
 										<div className="accordionheader-div"
-												 style={{borderBottomStyle: this.state.accordion_collapsed3 ? "" : "solid"}}
 										>
 											<h3 className="accordion-header">Will I be charged again if I
 											deactivate a community and activate a new one in its place?&nbsp;</h3></div>
-										<div style={{height: this.state.accordion_collapsed3 ? "0px" : "initial"}} className="accordioncontent-div">
+										<div style={{maxHeight: this.state.accordion_collapsed3 ? "0px" : "100vh"}} className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>No. You can deactivativate a community and activate a new one
 												in its place at no charge. If you do not activate a new one in its place, you will not be
 												charged for an active community on the upcoming billing cycle and your upcoming payments tab on
@@ -662,11 +660,10 @@ class StripeSubscription extends Component{
 										this.setState({accordion_collapsed4: !this.state.accordion_collapsed4});
 									}}>
 										<div className="accordionheader-div"
-												 style={{borderBottomStyle: this.state.accordion_collapsed4 ? "" : "solid"}}
 										>
 											<h3 className="accordion-header">Will I still be charged my
 											upcoming payment if I deactivate all of my communities?&nbsp;</h3></div>
-										<div style={{height: this.state.accordion_collapsed4 ? "0px" : "initial"}} className="accordioncontent-div">
+										<div style={{maxHeight: this.state.accordion_collapsed4 ? "0px" : "100vh"}} className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>No. If you do not have any active communities, your upcoming
 												payments will show $0.00 and you will not be charged.&nbsp;</p></div>
 										</div>
@@ -677,11 +674,10 @@ class StripeSubscription extends Component{
 										this.setState({accordion_collapsed5: !this.state.accordion_collapsed5});
 									}}>
 										<div className="accordionheader-div"
-												 style={{borderBottomStyle: this.state.accordion_collapsed5 ? "" : "solid"}}
 										>
 											<h3 className="accordion-header">Can I edit, update, or delete
 											a community after I activate it?&nbsp;</h3></div>
-										<div style={{height: this.state.accordion_collapsed5 ? "0px" : "initial"}} className="accordioncontent-div">
+										<div style={{maxHeight: this.state.accordion_collapsed5 ? "0px" : "100vh"}} className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>Absolutely. As a community owner, you have complete control
 												over the information provided and can update or deactivate it at any time.</p></div>
 										</div>

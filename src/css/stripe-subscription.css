@@ -20,15 +20,15 @@
 }
 
 .subscriptioncontainer-div::-webkit-scrollbar {
-	width: 6px;
+	width: 4px;
 	border-radius: 0 3px 3px 0;
-	background-color: #e6e6e6;
+	background-color: transparent;
 }
 
 .subscriptioncontainer-div::-webkit-scrollbar-thumb {
-	width: 6px;
-	border-radius: 6px;
-	background-color: #cccccc;
+	width: 4px;
+	border-radius: 4px;
+	background-color: transparent;
 }
 
 #stripe-modal {
@@ -144,7 +144,7 @@
 
 .subscriptioncontainer-div .accordionheader-div {
 	height: 40px;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 }
 
 .edit-card a {
@@ -467,7 +467,7 @@ h4 {
 
 .card-holder-name {
 	width: 100%;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 22px;
 	outline: none;
 	border-style: none;
@@ -556,7 +556,6 @@ h4 {
 	border-bottom: 1px none #ccc;
 	font-family: 'PT Serif', serif;
 	font-size: 14px;
-	font-style: italic;
 	line-height: 16px;
 	font-weight: 400;
 }
@@ -589,7 +588,7 @@ h4 {
 }
 
 .card-detail-item {
-	padding: 6px 0;
+	padding: 10px 0 20px;
 	height: auto;
 	font-size: 14px;
 	color: #999999;
@@ -600,8 +599,8 @@ h4 {
 }
 
 .stripe-label {
-	color: rgba(46, 137, 254, 0.75);
-	font-weight: 600;
+	font-style: italic;
+	color: #2e89fe;
 }
 
 .activate-dlg-close {
@@ -691,7 +690,7 @@ h4 {
 
 .div-block-308 {
 	padding-top: 20px;
-	border-top: 1px solid #ddd9e1;
+	/*border-top: 1px solid #ddd9e1;*/
 	text-align: center;
 }
 
@@ -725,7 +724,9 @@ h4 {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	padding-bottom: 20px;
+	height: 32px;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
@@ -738,7 +739,7 @@ h4 {
 	-webkit-flex: 0 auto;
 	-ms-flex: 0 auto;
 	flex: 0 auto;
-	border-bottom: 1px none #e8e5ea;
+	border-bottom: 1px solid #e8e5ea;
 	background-color: transparent;
 	color: #333;
 }
@@ -759,10 +760,16 @@ h4 {
 	overflow: hidden;
 	padding-top: 0;
 	padding-bottom: 0;
+	max-height: 0;
 	border: 1px none #000;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
 	line-height: 20px;
+	transition: max-height 0.2s ease;
+}
+
+.subscriptioncontainer-div .accordioncontent-div p {
+	margin-top: 0;
 }
 
 .free-trial-text {
