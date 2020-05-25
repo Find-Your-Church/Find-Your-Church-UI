@@ -180,7 +180,7 @@ class ViewCommunity extends Component{
 									)
 									: (
 										<div className="info-body w3-row">
-											<div className="left-part w3-col l4">
+											<div className="left-part w3-col s4 m4">
 												<div id={"community-info-container"} className={"community-info-container"}
 														 style={{padding: "0"}}>
 													{this.state.pictures.length > 1 ? (
@@ -250,7 +250,7 @@ class ViewCommunity extends Component{
 													</div>
 												</div>
 											</div>
-											<div className="right-part view w3-col l8">
+											<div className="right-part view w3-col s8 m8">
 												<div className={"w3-animate-opacity"}>
 													<div className={"view-paragraph"}>
 														<div className={`flexdiv-left labels ${this.state.collapsedAboutPart ? "collapsed" : ""}`}

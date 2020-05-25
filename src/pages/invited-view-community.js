@@ -143,7 +143,7 @@ class InvitedViewCommunity extends Component{
 									: (
 										<>
 											<div className="info-body w3-row">
-												<div className="left-part w3-col l4">
+												<div className="left-part w3-col s4 m4">
 													<div id={"community-info-container"}
 															 style={{border: "1px solid rgba(14, 0, 25, 0.15)", borderRadius: "3px"}}>
 														{this.props.community.view_community.pictures.length > 1 ? (
@@ -213,7 +213,7 @@ class InvitedViewCommunity extends Component{
 														</div>
 													</div>
 												</div>
-												<div className="right-part view w3-col l8">
+												<div className="right-part view w3-col s8 m8">
 													<div className={"view-paragraph"}>
 														<div className="flexdiv-left labels" onClick={this.toggleAboutPart}>
 															<h4 className="form-header">About</h4>
