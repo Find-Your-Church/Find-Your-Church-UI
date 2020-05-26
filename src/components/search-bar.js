@@ -43,18 +43,18 @@ class SearchBar extends Component{
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot){
-		if(prevProps.community.search_results !== this.props.community.search_results){
-			const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
-			let cats = [];
-			for(let i = 0; i < results.length; i++){
-				const cat = results[i].data.category;
-				if(cats.includes(cat))
-					continue;
-				cats.push(cat);
-			}
-
-			this.setState({cats: cats});
-		}
+		// if(prevProps.community.search_results !== this.props.community.search_results){
+		// 	const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
+		// 	let cats = [];
+		// 	for(let i = 0; i < results.length; i++){
+		// 		const cat = results[i].data.category;
+		// 		if(cats.includes(cat))
+		// 			continue;
+		// 		cats.push(cat);
+		// 	}
+		//
+		// 	this.setState({cats: cats});
+		// }
 
 		if(prevProps.auth.user !== this.props.auth.user){
 			if(this.props.path !== undefined){
@@ -196,10 +196,11 @@ class SearchBar extends Component{
 												className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
 									<option value="">All Communities</option>
 									{
-										community_config.CATEGORIES.map(cat => {
+										//community_config.CATEGORIES.map(cat => {
 											// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
 											// 	<option value={cat} key={"search-" + cat}>{cat}</option>
 											// ) : null;
+										this.props.community.categories.map(cat => {
 											return  (
 												<option value={cat} key={"search-" + cat}>{cat}</option>
 											);

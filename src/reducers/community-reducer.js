@@ -84,6 +84,7 @@ const initialState = {
 	sort_order: sorters.SORT_NEWEST,
 	search_results: [],
 	counts: {},
+	categories: [],
 	picking: -1, // index of the results
 	view_community: null, // community info to be viewed on public view page.
 	searching: false,
@@ -326,6 +327,7 @@ export default function(state = initialState, action){
 				...state,
 				search_results: action.payload.results,
 				counts: action.payload.counts,
+				categories: action.payload.categories,
 			};
 		case SORT_ORDER:
 			return {
