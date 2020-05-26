@@ -468,7 +468,7 @@
 }
 
 .iframe-details .accordioncontent-div {
-	height: 0;
+	max-height: 0;
 	overflow: hidden;
 	padding-top: 0;
 	padding-bottom: 20px;
@@ -477,7 +477,7 @@
 	border-color: #ddd9e1 #000 #000;
 	font-family: 'Source Sans Pro', sans-serif;
 	line-height: 16px;
-	transition: height 0.3s ease-out;
+	transition: max-height 0.4s ease-out;
 }
 
 .iframe-details ._20topbottom-div {

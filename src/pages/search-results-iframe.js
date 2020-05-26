@@ -74,6 +74,7 @@ class SearchResultsIframe extends Component{
 			keyword_organization: '',
 			...INIT_FILTERS,
 			showed_owners: false,
+			showed_organization_name: false,
 		};
 	}
 
@@ -125,6 +126,8 @@ class SearchResultsIframe extends Component{
 
 	componentDidMount(){
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
+
+		this.props.getOwners({keyword: ""});
 	}
 
 	filters2url = () => {
@@ -200,12 +203,12 @@ class SearchResultsIframe extends Component{
 		});
 
 		// get names from BE API.
-		if(escaped_keyword.length > 0){
-			this.props.getOwners({keyword: escaped_keyword});
-		}
-		else{
-			this.props.clearOwners();
-		}
+		//if(escaped_keyword.length > 0){
+		this.props.getOwners({keyword: escaped_keyword});
+		// }
+		// else{
+		// 	this.props.clearOwners();
+		// }
 	};
 
 	toggleFilter = () => {
@@ -326,6 +329,12 @@ class SearchResultsIframe extends Component{
 		});
 	};
 
+	toggleOrganizationName = () => {
+		this.setState({
+			showed_organization_name: !this.state.showed_organization_name,
+		})
+	};
+
 	render(){
 		// sort this.props.community.search_results
 		const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
@@ -443,10 +452,17 @@ class SearchResultsIframe extends Component{
 							<div className={"filter-group-container"}>
 								{/* search by organization name */}
 								<div className={"filter-div"} style={{borderBottom: "none", marginBottom: "0"}}>
-									<div className="flexdiv-left labels">
-										<label className="filter-label">Organization name</label>
+									<div className="flexdiv-left labels" onClick={this.toggleOrganizationName}
+											 style={this.state.showed_organization_name ? null : {
+												 paddingBottom: "10px",
+												 height: "36px",
+												 lineHeight: "20px",
+												 borderBottom: "1px solid #ddd9e1",
+											 }}>
+										<label className={`filter-label ${this.state.showed_organization_name ? "" : "collapsed"}`}>Organization
+											name</label>
 									</div>
-									<div style={{position: "relative"}}>
+									<div style={{position: "relative", display: this.state.showed_organization_name ? "block" : "none"}}>
 										<input type={"text"} id={"filter_community_name"}
 													 className={"w-input search-filter-name"}
 													 placeholder={"Search by name"}
@@ -465,15 +481,21 @@ class SearchResultsIframe extends Component{
 												 }}
 												 style={{display: this.state.showed_owners ? "block" : "none"}}>
 											{this.props.auth.owners.map(org => {
-												return (
+												let cnt = 0;
+												for(let i = 0; i < results.length; i++){
+													if(results[i].data.owner_id === org.value){
+														cnt++;
+													}
+												}
+												return cnt > 0 ? (
 													<div key={`owner-${org.value}`}
 															 className={"owner-item"}
 															 onClick={() => {
 																 this.pickOwner(org);
 															 }}>
-														{org.title} ({org.contact})
+														{org.title}, {org.contact}: ({cnt})
 													</div>
-												);
+												) : null;
 											})}
 										</div>
 									</div>
@@ -575,7 +597,12 @@ class SearchResultsIframe extends Component{
 												key={"search" + index} ref={this.myref[index]}
 												onMouseEnter={() => this.hoverMarker(index)}
 												onMouseLeave={() => this.clearMarker()}>
-												<PublicThumbnail value={item.data} isSelected={this.props.community.picking === index} colorTheme={{header_bg: this.color_header_bg, results_bg: this.color_results_bg, buttons: this.color_buttons}}/>
+												<PublicThumbnail value={item.data} isSelected={this.props.community.picking === index}
+																				 colorTheme={{
+																					 header_bg: this.color_header_bg,
+																					 results_bg: this.color_results_bg,
+																					 buttons: this.color_buttons
+																				 }}/>
 											</div>
 										)
 									})}

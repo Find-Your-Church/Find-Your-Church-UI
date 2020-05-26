@@ -65,6 +65,7 @@ class SearchResults extends Component{
 			keyword_organization: '',
 			...INIT_FILTERS,
 			showed_owners: false,
+			showed_organization_name: false,
 		};
 	}
 
@@ -116,6 +117,8 @@ class SearchResults extends Component{
 
 	componentDidMount(){
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
+
+		this.props.getOwners({keyword: ""});
 	}
 
 	filters2url = () => {
@@ -188,12 +191,12 @@ class SearchResults extends Component{
 		});
 
 		// get names from BE API.
-		if(escaped_keyword.length > 0){
-			this.props.getOwners({keyword: escaped_keyword});
-		}
-		else{
-			this.props.clearOwners();
-		}
+		//if(escaped_keyword.length > 0){
+		this.props.getOwners({keyword: escaped_keyword});
+		// }
+		// else{
+		// 	this.props.clearOwners();
+		// }
 	};
 
 	toggleFilter = () => {
@@ -314,6 +317,12 @@ class SearchResults extends Component{
 		});
 	};
 
+	toggleOrganizationName = () => {
+		this.setState({
+			showed_organization_name: !this.state.showed_organization_name,
+		})
+	};
+
 	render(){
 		// sort this.props.community.search_results
 		const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
@@ -430,10 +439,17 @@ class SearchResults extends Component{
 							<div className={"filter-group-container"}>
 								{/* search by organization name */}
 								<div className={"filter-div"} style={{borderBottom: "none", marginBottom: "0"}}>
-									<div className="flexdiv-left labels">
-										<label className="filter-label">Organization name</label>
+									<div className="flexdiv-left labels" onClick={this.toggleOrganizationName}
+											 style={this.state.showed_organization_name ? null : {
+												 paddingBottom: "10px",
+												 height: "36px",
+												 lineHeight: "20px",
+												 borderBottom: "1px solid #ddd9e1",
+											 }}>
+										<label className={`filter-label ${this.state.showed_organization_name ? "" : "collapsed"}`}>Organization
+											name</label>
 									</div>
-									<div style={{position: "relative"}}>
+									<div style={{position: "relative", display: this.state.showed_organization_name ? "block" : "none"}}>
 										<input type={"text"} id={"filter_community_name"}
 													 className={"w-input search-filter-name"}
 													 placeholder={"Search by name"}
@@ -446,23 +462,29 @@ class SearchResults extends Component{
 														 this.setState({showed_owners: true});
 													 }}
 										/>
-											<div className={"owners-list"}
-													 onMouseLeave={() => {
-													 	this.setState({showed_owners: false});
-													 }}
-													 style={{display: this.state.showed_owners ? "block" : "none"}}>
-												{this.props.auth.owners.map(org => {
-													return (
-														<div key={`owner-${org.value}`}
-																 className={"owner-item"}
-																 onClick={() => {
-																	 this.pickOwner(org);
-																 }}>
-															{org.title} ({org.contact})
-														</div>
-													);
-												})}
-											</div>
+										<div className={"owners-list"}
+												 onMouseLeave={() => {
+													 this.setState({showed_owners: false});
+												 }}
+												 style={{display: this.state.showed_owners ? "block" : "none"}}>
+											{this.props.auth.owners.map(org => {
+												let cnt = 0;
+												for(let i = 0; i < results.length; i++){
+													if(results[i].data.owner_id === org.value){
+														cnt++;
+													}
+												}
+												return cnt > 0 ? (
+													<div key={`owner-${org.value}`}
+															 className={"owner-item"}
+															 onClick={() => {
+																 this.pickOwner(org);
+															 }}>
+														{org.title}, {org.contact}: ({cnt})
+													</div>
+												) : null;
+											})}
+										</div>
 									</div>
 								</div>
 								{/* filters group */}
