@@ -130,8 +130,8 @@ class DashboardResults extends Component{
 				color_header_bg: user.colors === null || user.colors === undefined ? '#f3f2f5' : user.colors[0],
 				color_results_bg: user.colors === null || user.colors === undefined ? '#e8e5ea' : user.colors[1],
 				color_buttons: user.colors === null || user.colors === undefined ? '#2e89fe' : user.colors[2],
-				iframe_category: user.default_radius === undefined ? 'undefined' : user.default_category,
-				iframe_radius: user.default_radius === null || user.default_radius === undefined ? (user.location && user.location.lat !== null ? 10 : 30) : user.default_radius,
+				iframe_category: user.default_category === undefined ? 'undefined' : user.default_category,
+				iframe_radius: user.default_radius === null || user.default_radius === undefined ? 'null' : user.default_radius,
 			});
 		}
 
@@ -263,7 +263,6 @@ class DashboardResults extends Component{
 				self.setState({
 					user_lat: latLng.lat,
 					user_lng: latLng.lng,
-					iframe_radius: 10,
 				});
 
 				// save zip_code and location to db.
