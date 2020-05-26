@@ -436,7 +436,10 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Set the center point for the radius on your iframe search results.
+																			This coordinate is used as the point of origin for the search results displaying
+																			your active communities on your own website. If you or your organization does not
+																			have a website, or you have communities located in more than one state - you can
+																			leave this field blank.
 																		</div>
 																	</Popup>
 																</div>
@@ -448,22 +451,15 @@ class DashboardResults extends Component{
 																	>
 																		{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 																			<>
-																				<Tooltip placement={"top"}
-																								 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
-																								 align={{offset: [0, 2],}}
-																								 visible={this.state.showed_tooltip_zipcode}
-																								 overlayStyle={{maxWidth: this.state.tooltip_width}}
-																				>
-																					<input className="iframe-input w-input"
-																								 title={`Lat: ${this.state.user_lat}, Lng: ${this.state.user_lng}, ${this.state.zip_code}`}
-																								 {...getInputProps({
-																									 placeholder: "",
-																								 })}
-																								 onFocus={this.onFocusZipCode}
-																								 onBlur={this.onBlurZipCode}
-																								 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																								 required=""/>
-																				</Tooltip>
+																				<input className="iframe-input w-input"
+																							 title={`Lat: ${this.state.user_lat}, Lng: ${this.state.user_lng}, ${this.state.zip_code}`}
+																							 {...getInputProps({
+																								 placeholder: "",
+																							 })}
+																							 onFocus={this.onFocusZipCode}
+																							 onBlur={this.onBlurZipCode}
+																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																							 required=""/>
 																				<div className={"search-address-candidates"}
 																						 style={{right: "0", top: "72px", minWidth: "100%", maxWidth: "100%"}}>
 																					{loading ?
