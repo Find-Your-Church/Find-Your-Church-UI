@@ -490,6 +490,7 @@ a.w--current {
 	text-overflow: ellipsis;
 }
 
+.communities-body .listing-container1:hover .communityname,
 .communities-body .communityname:hover {
 	color: #8900fe;
 }

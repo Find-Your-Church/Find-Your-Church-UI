@@ -54,6 +54,10 @@
 }
 
 .page-header-container .page-header-title {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, calc(-50% - 10px));
 	font-size: 24px;
 	font-weight: 600;
 	text-align: center;
