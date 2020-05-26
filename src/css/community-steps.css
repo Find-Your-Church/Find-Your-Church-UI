@@ -692,7 +692,8 @@
 }
 
 .right-part .social-link-group {
-	padding: 14px 10px 8px;
+	padding: 14px 0 0;
+	height: 38px;
 	background-color: #fff;
 }
 
