@@ -705,7 +705,7 @@ class CommunityStep extends Component{
 														</div>
 													</div>
 													<div className={"view-paragraph edit"}>
-														<div className="flexdiv-left labels" style={{paddingBottom: "20px"}}>
+														<div className="flexdiv-left labels" style={{height: "30px", paddingBottom: "10px"}}>
 															<h4 className="form-header">More Info</h4>
 															<Popup
 																trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}

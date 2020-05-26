@@ -411,8 +411,8 @@
 
 .community-info-title {
 	display: flex;
-	padding: 0 0 20px;
-	height: 41px;
+	padding: 0 0 10px;
+	height: 31px;
 	flex: 0 1 auto;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 10px;
@@ -439,7 +439,7 @@
 .community-info-title h4 {
 	font-size: 16px;
 	line-height: 18px;
-	padding: 4px 0 0;
+	padding: 0;
 	color: #333;
 	font-weight: 600;
 }
