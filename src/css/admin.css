@@ -41,7 +41,7 @@
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 	-ms-grid-columns: auto 1fr auto;
-	grid-template-columns: auto 1fr auto;
+	grid-template-columns: auto 1fr;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
 	align-items: center;
