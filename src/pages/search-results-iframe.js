@@ -607,12 +607,13 @@ class SearchResultsIframe extends Component{
 												key={"search" + index} ref={this.myref[index]}
 												onMouseEnter={() => this.hoverMarker(index)}
 												onMouseLeave={() => this.clearMarker()}>
-												<PublicThumbnail value={item.data} isSelected={this.props.community.picking === index}
-																				 colorTheme={{
-																					 header_bg: this.state.color_header_bg,
-																					 results_bg: this.state.color_results_bg,
-																					 buttons: this.state.color_buttons
-																				 }}/>
+												<PublicThumbnail
+													value={item.data} isSelected={this.props.community.picking === index}
+													colorTheme={{
+														header_bg: this.state.color_header_bg,
+														results_bg: this.state.color_results_bg,
+														buttons: this.state.color_buttons
+													}}/>
 											</div>
 										)
 									})}

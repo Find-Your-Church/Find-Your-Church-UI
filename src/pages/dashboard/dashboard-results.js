@@ -13,6 +13,7 @@ import {SketchPicker} from "react-color";
 import community_config, {INIT_FILTERS} from "../../conf/community-conf";
 import Tooltip from "rmc-tooltip/es";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import SiteFooter from "../../components/site-footer";
 // import imgPoweredBy from "../../img/powered_by.png";
 // import SiteFooter from "../../components/site-footer";
 // import FaqItem from "../../components/faq-item";
@@ -779,6 +780,7 @@ class DashboardResults extends Component{
 						</div>
 					</main>
 				</div>
+				<SiteFooter/>
 			</>
 		);
 	}
