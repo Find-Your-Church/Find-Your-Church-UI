@@ -512,39 +512,32 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Customize your iframe search results header background to match your own brand and
-																			website.
+																			This will change the color of the search results header and profile headers.
 																		</div>
 																	</Popup>
 																</div>
-																<Tooltip placement={"top"}
-																				 overlay={`This will change the color of the search results header and profile headers.`}
-																				 align={{offset: [0, 2],}}
-																				 overlayStyle={{maxWidth: this.state.tooltip_width}}
-																>
-																	<div className="iframeinput-container">
-																		<input type="text" readOnly={true} id={"color_header_bg"}
-																					 className="iframe-input w-input"
-																					 value={this.state.color_header_bg}/>
-																		<div className="color-button w-button" style={{
-																			backgroundColor: this.state.color_header_bg
-																		}} onClick={() => {
-																			this.setState({showed_header_bg_color: !this.state.showed_header_bg_color});
-																		}}/>
-																		{
-																			this.state.showed_header_bg_color ? (
-																				<div style={{position: "absolute"}} onMouseLeave={() => {
-																					this.setState({showed_header_bg_color: false});
-																				}}>
-																					<SketchPicker disableAlpha={true} color={this.state.color_header_bg}
-																												onChange={(color, e) => {
-																													this.setState({color_header_bg: color.hex});
-																												}}/>
-																				</div>
-																			) : null
-																		}
-																	</div>
-																</Tooltip>
+																<div className="iframeinput-container">
+																	<input type="text" readOnly={true} id={"color_header_bg"}
+																				 className="iframe-input w-input"
+																				 value={this.state.color_header_bg}/>
+																	<div className="color-button w-button" style={{
+																		backgroundColor: this.state.color_header_bg
+																	}} onClick={() => {
+																		this.setState({showed_header_bg_color: !this.state.showed_header_bg_color});
+																	}}/>
+																	{
+																		this.state.showed_header_bg_color ? (
+																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																				this.setState({showed_header_bg_color: false});
+																			}}>
+																				<SketchPicker disableAlpha={true} color={this.state.color_header_bg}
+																											onChange={(color, e) => {
+																												this.setState({color_header_bg: color.hex});
+																											}}/>
+																			</div>
+																		) : null
+																	}
+																</div>
 															</div>
 															<div className="forminput-div">
 																<div className="div-block-285">
@@ -553,39 +546,32 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Customize your iframe search results container background to match your own brand
-																			and website.
+																			This will change the color of the search results and profile pages.
 																		</div>
 																	</Popup>
 																</div>
-																<Tooltip placement={"top"}
-																				 overlay={`This will change the color of the search results and profile pages.`}
-																				 align={{offset: [0, 2],}}
-																				 overlayStyle={{maxWidth: this.state.tooltip_width}}
-																>
-																	<div className="iframeinput-container">
-																		<input type="text" readOnly={true} id={"color_results_bg"}
-																					 className="iframe-input w-input"
-																					 value={this.state.color_results_bg}/>
-																		<div className="color-button w-button" style={{
-																			backgroundColor: this.state.color_results_bg
-																		}} onClick={() => {
-																			this.setState({showed_results_bg_color: !this.state.showed_results_bg_color});
-																		}}/>
-																		{
-																			this.state.showed_results_bg_color ? (
-																				<div style={{position: "absolute"}} onMouseLeave={() => {
-																					this.setState({showed_results_bg_color: false});
-																				}}>
-																					<SketchPicker disableAlpha={true} color={this.state.color_results_bg}
-																												onChange={(color, e) => {
-																													this.setState({color_results_bg: color.hex});
-																												}}/>
-																				</div>
-																			) : null
-																		}
-																	</div>
-																</Tooltip>
+																<div className="iframeinput-container">
+																	<input type="text" readOnly={true} id={"color_results_bg"}
+																				 className="iframe-input w-input"
+																				 value={this.state.color_results_bg}/>
+																	<div className="color-button w-button" style={{
+																		backgroundColor: this.state.color_results_bg
+																	}} onClick={() => {
+																		this.setState({showed_results_bg_color: !this.state.showed_results_bg_color});
+																	}}/>
+																	{
+																		this.state.showed_results_bg_color ? (
+																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																				this.setState({showed_results_bg_color: false});
+																			}}>
+																				<SketchPicker disableAlpha={true} color={this.state.color_results_bg}
+																											onChange={(color, e) => {
+																												this.setState({color_results_bg: color.hex});
+																											}}/>
+																			</div>
+																		) : null
+																	}
+																</div>
 															</div>
 															<div className="forminput-div">
 																<div className="div-block-285">
@@ -594,38 +580,32 @@ class DashboardResults extends Component{
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
 																		<div>
-																			Customize your iframe action buttons to match your own brand and website.
+																			This will change the color of the links, buttons, community names and map pins.
 																		</div>
 																	</Popup>
 																</div>
-																<Tooltip placement={"top"}
-																				 overlay={`This will change the color of the links, buttons, community names and map pins.`}
-																				 align={{offset: [0, 2],}}
-																				 overlayStyle={{maxWidth: this.state.tooltip_width}}
-																>
-																	<div className="iframeinput-container">
-																		<input type="text" readOnly={true} id={"color_buttons"}
-																					 className="iframe-input w-input"
-																					 value={this.state.color_buttons}/>
-																		<div className="color-button w-button" style={{
-																			backgroundColor: this.state.color_buttons
-																		}} onClick={() => {
-																			this.setState({showed_buttons_color: !this.state.showed_buttons_color});
-																		}}/>
-																		{
-																			this.state.showed_buttons_color ? (
-																				<div style={{position: "absolute"}} onMouseLeave={() => {
-																					this.setState({showed_buttons_color: false});
-																				}}>
-																					<SketchPicker disableAlpha={true} color={this.state.color_buttons}
-																												onChange={(color, e) => {
-																													this.setState({color_buttons: color.hex});
-																												}}/>
-																				</div>
-																			) : null
-																		}
-																	</div>
-																</Tooltip>
+																<div className="iframeinput-container">
+																	<input type="text" readOnly={true} id={"color_buttons"}
+																				 className="iframe-input w-input"
+																				 value={this.state.color_buttons}/>
+																	<div className="color-button w-button" style={{
+																		backgroundColor: this.state.color_buttons
+																	}} onClick={() => {
+																		this.setState({showed_buttons_color: !this.state.showed_buttons_color});
+																	}}/>
+																	{
+																		this.state.showed_buttons_color ? (
+																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																				this.setState({showed_buttons_color: false});
+																			}}>
+																				<SketchPicker disableAlpha={true} color={this.state.color_buttons}
+																											onChange={(color, e) => {
+																												this.setState({color_buttons: color.hex});
+																											}}/>
+																			</div>
+																		) : null
+																	}
+																</div>
 															</div>
 														</div>
 													</form>
