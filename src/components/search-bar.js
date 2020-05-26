@@ -240,7 +240,8 @@ class SearchBar extends Component{
 							)
 					) : null}
 					<select id="search_radius" onChange={this.onChange}
-									defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
+									defaultValue={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
+									value={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
 									style={{
 										backgroundImage: "url('/img/icon-down3-purple.svg')",
 									}}

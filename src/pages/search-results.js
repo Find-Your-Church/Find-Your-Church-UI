@@ -217,7 +217,25 @@ class SearchResults extends Component{
 	};
 	getHostingInfo = (checks) => {
 		const obj = {hosting: checks};
-		this.doSearchByFilter(obj);
+
+		if(this.props.community.criteria.filter.hosting[1] === '0' && checks[1] === '1'){
+			this.props.setSearchCriteria({
+				radius: null,
+			});
+			this.props.setSearchFilter(obj);
+			this.setState(obj);
+			this.props.doSearchCommunities({
+				...this.props.community.criteria,
+				radius: null,
+				filter: {
+					...this.props.community.criteria.filter,
+					...obj,
+				}
+			});
+		}
+		else{
+			this.doSearchByFilter(obj);
+		}
 	};
 	getAgesInfo = (checks) => {
 		const obj = {ages: checks};
