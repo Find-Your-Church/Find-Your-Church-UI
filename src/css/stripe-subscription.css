@@ -200,9 +200,25 @@ h3 {
 	border-bottom: none;
 }
 
+.invoice-div.discount {
+	padding-bottom: 5px;
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+}
+
+.discount-input-part {
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: right;
+}
+
 .invoice-div #coupon {
+	padding: 4px 8px;
+	float: right;
+	line-height: 26px;
 	background-repeat: no-repeat;
-	background-position: right center;
+	background-position: calc(100% - 4px) center;
+	background-size: 20px;
 }
 
 .apply-button {
@@ -210,8 +226,8 @@ h3 {
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	margin: -4px 0;
-	padding: 8px 16px !important;
+	margin: 0 0 4px;
+	padding: 10px 16px !important;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
@@ -228,6 +244,7 @@ h3 {
 	background-image: none;
 	box-shadow: none;
 	font-family: 'Source Sans Pro', sans-serif;
+	line-height: 18px;
 	color: #2e89fe;
 	font-weight: 600;
 }
@@ -239,6 +256,16 @@ h3 {
 	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.05), rgba(27, 0, 51, 0.05));
 	box-shadow: none;
 	color: #2e89fe !important;
+}
+
+.discount-status {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+	text-align: right;
+	grid-column: 2 / span 2;
+	color: #3db639;
 }
 
 .subscriptioncontainer-div h4.value {
@@ -663,11 +690,12 @@ h4 {
 	outline: none;
 	border: none;
 	border-bottom: 1px solid rgba(27, 0, 51, 0.05);
+	text-align: left;
 }
 
 .subscription-discount-input:hover,
 .subscription-discount-input:focus {
-	border-bottom-color: #3898EC;
+	border-bottom-color: #2e89fe;
 }
 
 .div-block-205 {

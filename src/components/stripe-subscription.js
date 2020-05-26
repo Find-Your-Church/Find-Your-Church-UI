@@ -305,25 +305,31 @@ class StripeSubscription extends Component{
 									</div>
 								</div>
 								{this.props.second || this.props.community.is_sending ? null :
-									<div className="invoice-div">
+									<div className="invoice-div discount">
 										<div className="filtersheader-div">
 											<h4 className="table-header">Discount code</h4>
 										</div>
-										<input type="text"
-													 className="subscription-discount-input w3-half w3-center w3-normal"
-													 style={{
-														 backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : (
-															 this.props.community.coupon_failed ? "url(/img/icon/icon-warning.svg)" : "none"
-														 )
-													 }}
-													 title={this.props.community.coupon_verified ? "Discount code verified" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
-													 placeholder="Enter discount code here"
-													 id="coupon" onChange={this.onChange}
-													 value={this.state.coupon} autoFocus/>
+										<div className={"discount-input-part"}>
+											<input type="text"
+														 className="subscription-discount-input w3-half w3-normal"
+														 style={{
+															 backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : (
+																 this.props.community.coupon_failed ? "url(/img/icon/icon-warning.svg)" : "none"
+															 )
+														 }}
+														 title={this.props.community.coupon_verified ? "Discount code verified" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
+														 placeholder="Enter discount code here"
+														 id="coupon" onChange={this.onChange}
+														 value={this.state.coupon} autoFocus/>
+										</div>
 										<button onClick={this.verifyCoupon}
 														className={"w3-button w3-padding-small apply-button"}>
 											Apply
 										</button>
+										<div/>
+										<div className={"discount-status"}>
+											{this.props.community.coupon_verified ? "Discount code applied" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
+										</div>
 									</div>
 								}
 							</div>
@@ -345,24 +351,24 @@ class StripeSubscription extends Component{
 								</Popup>
 							</div>
 							<div className="subscribe-container">
-								{this.props.community.trialing ? null : (
-									<div className="invoice-div">
-										<div>
-											<div className="filtersheader-div">
-												<h4
-													className="table-header">Subtotal</h4>
-											</div>
-										</div>
-										<div>
-											<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
-												{this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
-													: (this.props.community.is_sending ?
-														<i className="fas fa-spinner fa-spin"/>
-														: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))}
-											</h4>
+								<div className="invoice-div">
+									<div>
+										<div className="filtersheader-div">
+											<h4
+												className="table-header">Subtotal</h4>
 										</div>
 									</div>
-								)}
+									<div>
+										<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
+											{this.props.community.trialing ? '$0.00' : (
+												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
+													: (this.props.community.is_sending ?
+													<i className="fas fa-spinner fa-spin"/>
+													: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))
+											)}
+										</h4>
+									</div>
+								</div>
 								{this.props.community.subscription !== "1" ? null :
 									<div className="invoice-row">
 										<div className="invoice-div">
@@ -630,8 +636,9 @@ class StripeSubscription extends Component{
 										<div className="accordionheader-div"
 										>
 											<h3 className="accordion-header">What if I change my mind and
-											want to deactivate one or all of them?&nbsp;</h3></div>
-										<div style={{maxHeight: this.state.accordion_collapsed2 ? "0px" : "100vh"}} className="accordioncontent-div">
+												want to deactivate one or all of them?&nbsp;</h3></div>
+										<div style={{maxHeight: this.state.accordion_collapsed2 ? "0px" : "100vh"}}
+												 className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>Of course. Simply deactivate one or all of them before the
 												end of your free trial or billing cycle if you wish to reduce or cancel any upcoming payments.
 												If you do not have any active communities, your upcoming payments on your Account page will show
@@ -646,8 +653,9 @@ class StripeSubscription extends Component{
 										<div className="accordionheader-div"
 										>
 											<h3 className="accordion-header">Will I be charged again if I
-											deactivate a community and activate a new one in its place?&nbsp;</h3></div>
-										<div style={{maxHeight: this.state.accordion_collapsed3 ? "0px" : "100vh"}} className="accordioncontent-div">
+												deactivate a community and activate a new one in its place?&nbsp;</h3></div>
+										<div style={{maxHeight: this.state.accordion_collapsed3 ? "0px" : "100vh"}}
+												 className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>No. You can deactivativate a community and activate a new one
 												in its place at no charge. If you do not activate a new one in its place, you will not be
 												charged for an active community on the upcoming billing cycle and your upcoming payments tab on
@@ -662,8 +670,9 @@ class StripeSubscription extends Component{
 										<div className="accordionheader-div"
 										>
 											<h3 className="accordion-header">Will I still be charged my
-											upcoming payment if I deactivate all of my communities?&nbsp;</h3></div>
-										<div style={{maxHeight: this.state.accordion_collapsed4 ? "0px" : "100vh"}} className="accordioncontent-div">
+												upcoming payment if I deactivate all of my communities?&nbsp;</h3></div>
+										<div style={{maxHeight: this.state.accordion_collapsed4 ? "0px" : "100vh"}}
+												 className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>No. If you do not have any active communities, your upcoming
 												payments will show $0.00 and you will not be charged.&nbsp;</p></div>
 										</div>
@@ -676,8 +685,9 @@ class StripeSubscription extends Component{
 										<div className="accordionheader-div"
 										>
 											<h3 className="accordion-header">Can I edit, update, or delete
-											a community after I activate it?&nbsp;</h3></div>
-										<div style={{maxHeight: this.state.accordion_collapsed5 ? "0px" : "100vh"}} className="accordioncontent-div">
+												a community after I activate it?&nbsp;</h3></div>
+										<div style={{maxHeight: this.state.accordion_collapsed5 ? "0px" : "100vh"}}
+												 className="accordioncontent-div">
 											<div className="_20topbottom-div"><p>Absolutely. As a community owner, you have complete control
 												over the information provided and can update or deactivate it at any time.</p></div>
 										</div>
