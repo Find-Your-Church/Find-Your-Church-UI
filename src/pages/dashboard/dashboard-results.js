@@ -13,9 +13,9 @@ import {SketchPicker} from "react-color";
 import community_config, {INIT_FILTERS} from "../../conf/community-conf";
 import Tooltip from "rmc-tooltip/es";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import imgPoweredBy from "../../img/powered_by.png";
-import SiteFooter from "../../components/site-footer";
-import FaqItem from "../../components/faq-item";
+// import imgPoweredBy from "../../img/powered_by.png";
+// import SiteFooter from "../../components/site-footer";
+// import FaqItem from "../../components/faq-item";
 
 class DashboardResults extends Component{
 	constructor(props){
@@ -67,8 +67,8 @@ class DashboardResults extends Component{
 			showed_tooltip: false,
 			tooltip_content: community_config.TOOL_TIPS[""],
 
-			iframe_category: 'undefined',
-			iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
+			iframe_category: user.default_radius === undefined ? 'undefined' : user.default_category,
+			iframe_radius: user.default_radius === null || user.default_radius === undefined ? (user.location && user.location.lat !== null ? 10 : 30) : user.default_radius,
 			zip_code: user.zip_code,
 			showed_tooltip_zipcode: false,
 
@@ -131,11 +131,12 @@ class DashboardResults extends Component{
 			this.setState({
 				user_lat: user.location ? user.location.lat : null,
 				user_lng: user.location ? user.location.lng : null,
-				iframe_radius: user.location && user.location.lat !== null ? 10 : 30,
 				zip_code: user.zip_code,
 				color_header_bg: user.colors === null || user.colors === undefined ? '#f3f2f5' : user.colors[0],
 				color_results_bg: user.colors === null || user.colors === undefined ? '#e8e5ea' : user.colors[1],
 				color_buttons: user.colors === null || user.colors === undefined ? '#2e89fe' : user.colors[2],
+				iframe_category: user.default_radius === undefined ? 'undefined' : user.default_category,
+				iframe_radius: user.default_radius === null || user.default_radius === undefined ? (user.location && user.location.lat !== null ? 10 : 30) : user.default_radius,
 			});
 		}
 
@@ -147,6 +148,20 @@ class DashboardResults extends Component{
 					this.state.color_results_bg,
 					this.state.color_buttons,
 				],
+			});
+		}
+
+		if(prevState.iframe_category !== this.state.iframe_category){
+			this.props.updateUserInfo({
+				id: this.props.auth.user.id,
+				default_category: this.state.iframe_category,
+			});
+		}
+
+		if(prevState.iframe_radius !== this.state.iframe_radius){
+			this.props.updateUserInfo({
+				id: this.props.auth.user.id,
+				default_radius: this.state.iframe_radius,
 			});
 		}
 	}
@@ -195,10 +210,7 @@ class DashboardResults extends Component{
 		const lat = this.state.user_lat === null ? this.previewCriteria.lat : this.state.user_lat;
 		const lng = this.state.user_lng === null ? this.previewCriteria.lng : this.state.user_lng;
 		const category = this.state.iframe_category.replace(/ /g, '-');
-		const striped_color_header_bg = this.state.color_header_bg.substring(1);
-		const striped_color_results_bg = this.state.color_results_bg.substring(1);
-		const striped_color_buttons = this.state.color_buttons.substring(1);
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/iframe/${iframe_param}`;
 		const iframe_style = `display: block; width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;
@@ -503,7 +515,7 @@ class DashboardResults extends Component{
 														<div className="customiframe-grid">
 															<div className="forminput-div">
 																<div className="div-block-285">
-																	<label htmlFor="email-7" className="field-label">Header background:</label>
+																	<label htmlFor="email-7" className="field-label">Header backgrounds:</label>
 																	<Popup
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
@@ -544,8 +556,7 @@ class DashboardResults extends Component{
 															</div>
 															<div className="forminput-div">
 																<div className="div-block-285">
-																	<label htmlFor="email-7" className="field-label">Results
-																		background:</label>
+																	<label htmlFor="email-7" className="field-label">Page backgrounds:</label>
 																	<Popup
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>
@@ -586,7 +597,7 @@ class DashboardResults extends Component{
 															</div>
 															<div className="forminput-div">
 																<div className="div-block-285">
-																	<label htmlFor="email-7" className="field-label">Buttons:</label>
+																	<label htmlFor="email-7" className="field-label">Links and buttons:</label>
 																	<Popup
 																		trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 																		position={"left top"}>

@@ -18,7 +18,7 @@ import {
 } from "../actions/community-actions";
 import {
 	clearOwners,
-	getOwners,
+	getOwners, getUserInfo,
 } from "../actions/auth-actions";
 import PublicThumbnail from "../components/public-thumbnail";
 import '../css/search-results-iframe.css';
@@ -33,15 +33,12 @@ class SearchResultsIframe extends Component{
 
 		this.myref = [];
 
-		const {owner, category, radius, lat, lng, color, filter} = props.match.params;
-		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || color === undefined || filter === undefined){
+		const {owner, category, radius, lat, lng, filter} = props.match.params;
+		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
 			this.category = props.community.criteria.category;
 			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
 			this.lat = props.community.criteria.lat;
 			this.lng = props.community.criteria.lng;
-			this.color_header_bg = '#f3f2f5';
-			this.color_results_bg = '#e8e5ea';
-			this.color_buttons = '#2e89fe';
 			this.filter = {...props.community.criteria.filter};
 		}
 		else{
@@ -50,11 +47,6 @@ class SearchResultsIframe extends Component{
 			this.radius = radius === 'null' || radius === '' || isNaN(radius) ? null : parseInt(radius);
 			this.lat = parseFloat(lat);
 			this.lng = parseFloat(lng);
-			const colors = color.split('-');
-			this.color_header_bg = `#${colors[0]}`;
-			this.color_results_bg = `#${colors[1]}`;
-			this.color_buttons = `#${colors[2]}`;
-			console.log(color, colors);
 			this.filter = filter === 'undefined' ? {...INIT_FILTERS} : this.url2filters(filter);
 		}
 
@@ -75,6 +67,9 @@ class SearchResultsIframe extends Component{
 			...INIT_FILTERS,
 			showed_owners: false,
 			showed_organization_name: false,
+			color_header_bg: '#f3f2f5',
+			color_results_bg: '#e8e5ea',
+			color_buttons: '#2e89fe',
 		};
 	}
 
@@ -125,8 +120,11 @@ class SearchResultsIframe extends Component{
 	}
 
 	componentDidMount(){
-		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
+		this.props.getUserInfo({
+			user_id: this.owner.split("-").pop(),
+		});
 
+		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
 		this.props.getOwners({keyword: ""});
 	}
 
@@ -181,13 +179,19 @@ class SearchResultsIframe extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria || this.state.showed_filter !== prevState.showed_filter){
-			const striped_color_header_bg = this.color_header_bg.substring(1);
-			const striped_color_results_bg = this.color_results_bg.substring(1);
-			const striped_color_buttons = this.color_buttons.substring(1);
-			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/${striped_color_header_bg}-${striped_color_results_bg}-${striped_color_buttons}/${this.filters2url()}`;
+			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/${this.filters2url()}`;
 			const search_results_url = `${window.location.protocol}//${window.location.host}/iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
 			this.props.setBackUrl(`/iframe/${param}`);
+		}
+
+		if(prevProps.auth.user !== this.props.auth.user){
+			console.log(this.props.auth.user);
+			this.setState({
+				color_header_bg: this.props.auth.user.colors[0],
+				color_results_bg: this.props.auth.user.colors[1],
+				color_buttons: this.props.auth.user.colors[2],
+			})
 		}
 	}
 
@@ -412,17 +416,17 @@ class SearchResultsIframe extends Component{
 						</div>
 					</div>
 					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
-						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: this.color_header_bg}}>
+						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: this.state.color_header_bg}}>
 							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true}
 												 path={this.props.location.pathname}/>
-							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: this.color_buttons}}>
+							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: this.state.color_buttons}}>
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
 							<span className={"sort-group"}>
 						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
 						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
 										style={{
-											color: this.color_buttons,
+											color: this.state.color_buttons,
 											backgroundImage: "url('/img/icon-down3-blue.svg')",
 										}}
 						>
@@ -441,7 +445,7 @@ class SearchResultsIframe extends Component{
 													mapElement={<div className="map-content"/>}
 													results={results}
 													handleScroll={this.clickMarker}
-													colorTheme={this.color_buttons}
+													colorTheme={this.state.color_buttons}
 						/>
 						<div className={"filter-panel"} style={{display: this.state.showed_filter ? "block" : "none"}}>
 							<div className={"selected-filters"}>
@@ -591,7 +595,7 @@ class SearchResultsIframe extends Component{
 							</div>
 						</div>
 						<div className={"communities-container communities-body communities search-results w3-row"}
-								 style={{backgroundColor: this.color_results_bg}}>
+								 style={{backgroundColor: this.state.color_results_bg}}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
@@ -617,9 +621,9 @@ class SearchResultsIframe extends Component{
 												onMouseLeave={() => this.clearMarker()}>
 												<PublicThumbnail value={item.data} isSelected={this.props.community.picking === index}
 																				 colorTheme={{
-																					 header_bg: this.color_header_bg,
-																					 results_bg: this.color_results_bg,
-																					 buttons: this.color_buttons
+																					 header_bg: this.state.color_header_bg,
+																					 results_bg: this.state.color_results_bg,
+																					 buttons: this.state.color_buttons
 																				 }}/>
 											</div>
 										)
@@ -700,6 +704,7 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{
+		getUserInfo,
 		setSearchCriteria,
 		setSearchFilter,
 		setSortOrder,
