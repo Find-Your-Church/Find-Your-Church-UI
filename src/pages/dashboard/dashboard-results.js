@@ -349,7 +349,7 @@ class DashboardResults extends Component{
 												Customize your iframe search engine and community profiles:
 											</h4>
 										</div>
-										<div className="div-block-239">
+										<div className="div-block-239" style={{marginTop: "20px"}}>
 											<div className="accordionheader-div">
 												<h4 className="accountcontainer-header">
 													Default search values:
@@ -655,10 +655,12 @@ class DashboardResults extends Component{
 																border: "none",
 																overflow: "hidden"
 															}}/>
+											{/*
 											<div className="div-block-295">
 												<img src={imgPoweredBy} alt="" className="image-13"/>
 											</div>
 											<SiteFooter/>
+											*/}
 										</>
 									) : (
 										<>
@@ -749,12 +751,15 @@ class DashboardResults extends Component{
 														<h4 id="w-node-2d27cd761068-78e24ec3"
 																className="copied-message">Code has been copied to clipboard.</h4>
 													</div>
+													{/*
 													<h4 id="w-node-2d27cd761060-78e24ec3" className="heading-27" style={{paddingTop: "20px"}}>
 														<div className={"copy-code-link"} onClick={this.copyDynamicUrl}>
 															Send code and instructions to your developer
 														</div>
 													</h4>
+													*/}
 												</div>
+												{/*
 												<div className="dashboardheader-div" style={{
 													padding: "20px 0 10px",
 													borderBottom: "1px solid #d3ced7",
@@ -787,8 +792,8 @@ class DashboardResults extends Component{
 														}/>
 													</div>
 												</div>
+											*/}
 											</div>
-											<SiteFooter/>
 										</>
 									)
 								)
