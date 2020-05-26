@@ -173,6 +173,7 @@ class SearchResultsIframe extends Component{
 				radius: this.props.auth.user.default_radius === undefined ? this.props.community.criteria.radius : this.props.auth.user.default_radius,
 				lat: this.props.auth.user.location === undefined ? this.props.community.criteria.lat : this.props.auth.user.location.lat,
 				lng: this.props.auth.user.location === undefined ? this.props.community.criteria.lng : this.props.auth.user.location.lng,
+				address: this.props.auth.user.zip_code === undefined ? this.props.community.criteria.address : this.props.auth.user.zip_code,
 				filter: {...this.filter},
 			};
 
