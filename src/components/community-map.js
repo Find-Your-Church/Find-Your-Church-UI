@@ -10,26 +10,28 @@ class CommunityMap extends Component{
 	constructor(props){
 		super(props);
 
+		this.refMap = React.createRef();
+
 		this.state = {
-			lat: 0,
-			lng: 0,
+			lat: this.props.criteria.lat,
+			lng: this.props.criteria.lng,
 		}
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot){
-		if(this.props.criteria.lat !== prevProps.criteria.lat){
-			this.setState({lat: this.props.criteria.lat});
-		}
-		if(this.props.criteria.lng !== prevProps.criteria.lng){
-			this.setState({lng: this.props.criteria.lng});
+		if(prevProps.criteria.lat !== this.props.criteria.lat || prevProps.criteria.lng !== this.props.criteria.lng){
+				this.setState({
+					lat: this.props.criteria.lat,
+					lng: this.props.criteria.lng,
+				});
 		}
 
-		if(this.props.community.picking !== -1 && this.props.community.picking !== prevProps.community.picking){
-			this.setState({
-				lat: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lat),
-				lng: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lng),
-			});
-		}
+		// if(this.props.community.picking !== -1 && this.props.community.picking !== prevProps.community.picking){
+		// 	this.setState({
+		// 		lat: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lat),
+		// 		lng: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lng),
+		// 	});
+		// }
 	}
 
 	radiusToZoom(radius){
@@ -67,6 +69,14 @@ class CommunityMap extends Component{
 		this.props.handleScroll(index);
 	};
 
+	onMovedMap = () => {
+		const center_pos = this.refMap.current.getCenter();
+		this.setState({
+			lat: center_pos.lat(),
+			lng: center_pos.lng(),
+		});
+	};
+
 	render(){
 		const zoom = this.radiusToZoom(this.props.criteria.radius);
 		const hover_icon = {
@@ -79,14 +89,13 @@ class CommunityMap extends Component{
 		};
 
 		return (
-			<GoogleMap defaultZoom={zoom} zoom={zoom}
+			<GoogleMap ref={this.refMap} defaultZoom={zoom} zoom={zoom}
 								 mapOptions={{mapTypeControl: false}}
-								 defaultCenter={this.props.results.length === 0 ?
-									 {lat: this.props.community.criteria.lat, lng: this.props.community.criteria.lng}
-									 : {
-										 lat: parseFloat(this.props.results[0].data.coordinate.lat),
-										 lng: parseFloat(this.props.results[0].data.coordinate.lng),
+								 center={{
+										 lat: this.state.lat,
+										 lng: this.state.lng,
 									 }}
+								 onCenterChanged={this.onMovedMap}
 			>
 				{/*
 					GoogleMap's attribute removed: center={{lat: this.props.community.criteria.lat, lng: this.props.community.criteria.lng}}

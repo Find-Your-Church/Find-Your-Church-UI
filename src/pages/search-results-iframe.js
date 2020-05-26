@@ -33,33 +33,9 @@ class SearchResultsIframe extends Component{
 
 		this.myref = [];
 
-		const {owner, category, radius, lat, lng, filter} = props.match.params;
-		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
-			this.category = props.community.criteria.category;
-			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
-			this.lat = props.community.criteria.lat;
-			this.lng = props.community.criteria.lng;
-			this.filter = {...props.community.criteria.filter};
-		}
-		else{
-			this.owner = owner;
-			this.category = category === 'undefined' ? '' : category;
-			this.radius = radius === 'null' || radius === '' || isNaN(radius) ? null : parseInt(radius);
-			this.lat = parseFloat(lat);
-			this.lng = parseFloat(lng);
-			this.filter = filter === 'undefined' ? {...INIT_FILTERS} : this.url2filters(filter);
-		}
-
-		this.criteria = {
-			owner: this.owner.split("-").pop(),
-			category: this.category.replace(/-/g, " "),
-			radius: this.radius,
-			lat: this.lat,
-			lng: this.lng,
-			filter: {...this.filter},
-		};
-
-		props.setSearchCriteria(this.criteria);
+		const {owner, filter} = props.match.params;
+		this.owner = owner;
+		this.filter = filter === 'undefined' || filter === undefined ? {...INIT_FILTERS} : this.url2filters(filter);
 
 		this.state = {
 			showed_filter: false,
@@ -124,7 +100,6 @@ class SearchResultsIframe extends Component{
 			user_id: this.owner.split("-").pop(),
 		});
 
-		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
 		this.props.getOwners({keyword: ""});
 	}
 
@@ -179,19 +154,30 @@ class SearchResultsIframe extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria || this.state.showed_filter !== prevState.showed_filter){
-			const param = `${this.owner}/${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/${this.filters2url()}`;
+			const param = `${this.owner}/${this.filters2url()}`;
 			const search_results_url = `${window.location.protocol}//${window.location.host}/iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
 			this.props.setBackUrl(`/iframe/${param}`);
 		}
 
 		if(prevProps.auth.user !== this.props.auth.user){
-			console.log(this.props.auth.user);
 			this.setState({
 				color_header_bg: this.props.auth.user.colors[0],
 				color_results_bg: this.props.auth.user.colors[1],
 				color_buttons: this.props.auth.user.colors[2],
-			})
+			});
+
+			this.criteria = {
+				owner: this.owner.split("-").pop(),
+				category: this.props.auth.user.default_category === undefined || this.props.auth.user.default_category === 'undefined' ? this.props.community.criteria.category : this.props.auth.user.default_category,
+				radius: this.props.auth.user.default_radius === undefined ? this.props.community.criteria.radius : this.props.auth.user.default_radius,
+				lat: this.props.auth.user.location === undefined ? this.props.community.criteria.lat : this.props.auth.user.location.lat,
+				lng: this.props.auth.user.location === undefined ? this.props.community.criteria.lng : this.props.auth.user.location.lng,
+				filter: {...this.filter},
+			};
+
+			this.props.setSearchCriteria(this.criteria);
+			this.props.doSearchCommunities(this.criteria);
 		}
 	}
 
@@ -416,10 +402,12 @@ class SearchResultsIframe extends Component{
 						</div>
 					</div>
 					<div style={{filter: this.props.community.searching ? "blur(4px)" : "none"}}>
-						<div id="search-results-header" className="w3-col s12" style={{backgroundColor: this.state.color_header_bg}}>
+						<div id="search-results-header" className="w3-col s12"
+								 style={{backgroundColor: this.state.color_header_bg}}>
 							<SearchBar buttonTitle="Update" init={true} showedCategory={results.length > 0 || true}
 												 path={this.props.location.pathname}/>
-							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"} style={{color: this.state.color_buttons}}>
+							<Link to={"#"} onClick={this.toggleFilter} className={"filter-link"}
+										style={{color: this.state.color_buttons}}>
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
 							<span className={"sort-group"}>

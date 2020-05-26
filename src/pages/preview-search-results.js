@@ -7,13 +7,9 @@ class PreviewSearchResults extends Component{
 	constructor(props){
 		super(props);
 
-		const {owner, category, radius, lat, lng, filter} = props.match.params;
+		const {owner, filter} = props.match.params;
 		let owner_pcs = owner.split("-");
 		this.owner = owner_pcs.pop(); // owner id
-		this.category = category;
-		this.radius = radius;
-		this.lat = lat;
-		this.lng = lng;
 		this.filter = filter;
 
 		this.state = {
@@ -23,7 +19,7 @@ class PreviewSearchResults extends Component{
 	}
 
 	componentDidMount(){
-		const preview_url = `${window.location.protocol}//${window.location.host}/iframe/${this.owner}/${this.category}/${this.radius}/${this.lat}/${this.lng}/${this.filter}`;
+		const preview_url = `${window.location.protocol}//${window.location.host}/iframe/${this.owner}/${this.filter}`;
 
 		this.setState({
 			frameUrl: preview_url,

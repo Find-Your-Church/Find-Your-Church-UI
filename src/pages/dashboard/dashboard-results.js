@@ -27,11 +27,6 @@ class DashboardResults extends Component{
 
 		this.previewCriteria = {
 			owner: null,
-			category: '',
-			radius: 30,
-			address: '',
-			lat: 44.989999,
-			lng: -93.256088,
 			filter: {
 				...INIT_FILTERS,
 			}
@@ -207,10 +202,7 @@ class DashboardResults extends Component{
 	};
 
 	applyUpdatedCriteria = () => {
-		const lat = this.state.user_lat === null ? this.previewCriteria.lat : this.state.user_lat;
-		const lng = this.state.user_lng === null ? this.previewCriteria.lng : this.state.user_lng;
-		const category = this.state.iframe_category.replace(/ /g, '-');
-		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${category}/${this.state.iframe_radius}/${lat}/${lng}/${this.filters2url()}`;
+		const iframe_param = `${this.state.user_fname}-${this.state.user_lname}-${this.previewCriteria.owner}/${this.filters2url()}`;
 
 		const preview_url = `${window.location.protocol}//${window.location.host}/iframe/${iframe_param}`;
 		const iframe_style = `display: block; width: 100%; height: 100vh; outline: none; border: none; overflow: hidden;`;

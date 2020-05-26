@@ -64,7 +64,7 @@ class SearchBar extends Component{
 						my_address: this.props.auth.user.zip_code,
 						my_lat: this.props.auth.user.location.lat,
 						my_lng: this.props.auth.user.location.lng,
-					})
+					});
 				}
 			}
 		}
@@ -180,18 +180,6 @@ class SearchBar extends Component{
 	render(){
 		const searchable = !isNaN(this.state.my_lat) && !isNaN(this.state.my_lng);
 
-		let category_in_path = "";
-		if(this.props.path !== undefined){
-			const params = this.props.path.split('/');
-
-			if(params[1] === "search-results"){
-				category_in_path = params[2] === undefined ? "" : params[2].replace(/-/g, ' ');
-			}
-			else if(params[1] === "iframe"){
-				category_in_path = params[3] === undefined ? "" : params[3].replace(/-/g, ' ');
-			}
-		}
-
 		return this.state.ready2go && !this.props.init ? (
 			<Redirect to={"/search-results"}/>
 		) : (
@@ -201,6 +189,7 @@ class SearchBar extends Component{
 						this.props.buttonTitle === "Update" ? (
 								<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
 												defaultValue={this.props.community.criteria.category}
+												value={this.props.community.criteria.category}
 												style={{
 													backgroundImage: "url('/img/icon-down3-purple.svg')",
 												}}
@@ -209,7 +198,7 @@ class SearchBar extends Component{
 									{
 										community_config.CATEGORIES.map(cat => {
 											return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
-												<option value={cat} key={"search-" + cat} selected={cat === category_in_path}>{cat}</option>
+												<option value={cat} key={"search-" + cat}>{cat}</option>
 											) : null;
 										})
 									}
@@ -223,6 +212,7 @@ class SearchBar extends Component{
 								>
 									<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
 													defaultValue={this.props.community.criteria.category}
+													value={this.props.community.criteria.category}
 													style={{
 														backgroundImage: "url('/img/icon-down3-purple.svg')",
 													}}

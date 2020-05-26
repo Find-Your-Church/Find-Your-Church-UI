@@ -74,6 +74,7 @@ body {
 	font-size: 18px;
 	line-height: 18px;
 	font-weight: 600;
+	border-bottom: 1px solid #ddd9e1;
 }
 
 #content-body-iframe .filter-group-container {
