@@ -393,6 +393,8 @@ class SearchResultsIframe extends Component{
 			selectedNone = true;
 		}
 
+		console.log(this.props.criteria.radius);
+
 		return (
 			<>
 				<main id="content-body-iframe" className="w3-row">
@@ -594,7 +596,15 @@ class SearchResultsIframe extends Component{
 									</span>
 											&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
 											<span
-												style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}</span>
+												style={{fontWeight: "bold"}}>
+												{
+													isEmpty(this.props.criteria.address) ||
+													isEmpty(this.props.criteria.radius) ||
+													isNaN(this.props.criteria.radius) ||
+													this.props.criteria.radius === 'null' ?
+														"any location" : this.props.criteria.address
+												}
+											</span>
 										</div>
 										<div className={"search-result-container-header-right w3-col m2"}>
 											Results ({results.length})

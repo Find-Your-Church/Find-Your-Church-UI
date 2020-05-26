@@ -587,7 +587,7 @@ class SearchResults extends Component{
 											</span>
 											&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
 											<span
-												style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `any location` : "any location") : this.props.criteria.address}</span>
+												style={{fontWeight: "bold"}}>{isEmpty(this.props.criteria.address) || isEmpty(this.props.criteria.radius) || isNaN(this.props.criteria.radius) || this.props.criteria.radius === 'null' ? (!isNaN(this.props.criteria.lat) && !isNaN(this.props.criteria.lng) ? `any location` : "any location") : this.props.criteria.address}</span>
 										</div>
 										<div className={"search-result-container-header-right w3-col m2"}>
 											Results ({results.length})

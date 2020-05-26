@@ -243,7 +243,7 @@ class SearchBar extends Component{
 										backgroundImage: "url('/img/icon-down3-purple.svg')",
 									}}
 									className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select">
-						<option value="">Radius...</option>
+						<option value=''>Radius...</option>
 						{
 							community_config.SEARCH_RADIUS.map(r => {
 								const pl = r > 1 ? "s" : "";
