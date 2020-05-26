@@ -197,9 +197,12 @@ class SearchBar extends Component{
 									<option value="">All Communities</option>
 									{
 										community_config.CATEGORIES.map(cat => {
-											return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+											// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+											// 	<option value={cat} key={"search-" + cat}>{cat}</option>
+											// ) : null;
+											return  (
 												<option value={cat} key={"search-" + cat}>{cat}</option>
-											) : null;
+											);
 										})
 									}
 								</select>
@@ -220,9 +223,12 @@ class SearchBar extends Component{
 										<option value="">All Communities</option>
 										{
 											community_config.CATEGORIES.map(cat => {
-												return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+												// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+												// 	<option value={cat} key={"search-" + cat}>{cat}</option>
+												// ) : null;
+												return (
 													<option value={cat} key={"search-" + cat}>{cat}</option>
-												) : null;
+												);
 											})
 										}
 									</select>
