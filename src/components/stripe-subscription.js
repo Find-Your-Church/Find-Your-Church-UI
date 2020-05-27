@@ -384,9 +384,7 @@ class StripeSubscription extends Component{
 										</div>
 									</div>
 									<div>
-										<h4 className={`value ${this.props.community.subscription ? "" : ""}`} style={{
-											textDecoration: this.props.community.trialing ? "line-through" : "",
-										}}>
+										<h4 className={`value ${this.props.community.subscription ? "" : ""}`}>
 											{
 												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
