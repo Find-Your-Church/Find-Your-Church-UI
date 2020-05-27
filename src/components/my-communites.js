@@ -31,7 +31,7 @@ class MyCommunities extends Component{
 		this.refresh();
 	}
 
-	selectCommunity = (community_id, selected = true) => {
+	selectCommunity = (community_id, selected = false) => {
 		if(selected){
 			if(!this.selected_communities.includes(community_id)){
 				this.selected_communities.push(community_id);

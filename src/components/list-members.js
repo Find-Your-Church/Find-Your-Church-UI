@@ -2,10 +2,7 @@ import React, {Component} from "react";
 import "../css/list-members.css";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import isEmpty from "../utils/isEmpty";
-import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
-import redirectURL from "../utils/redirectURL";
 import AccountProfileContainer from "./account-profile-container";
 
 class ListMembers extends Component{

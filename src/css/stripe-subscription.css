@@ -466,11 +466,11 @@ h4 {
 }
 
 .div10-bottom.right {
+	font-size: 16px;
 	text-align: right;
 }
 
 .div10-bottom.right .strike {
-	font-size: 16px;
 	text-decoration: line-through;
 }
 
