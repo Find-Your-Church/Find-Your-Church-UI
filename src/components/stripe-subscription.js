@@ -26,8 +26,8 @@ const cardStyle = {
 		color: "#333",
 		"::placeholder": {
 			fontFamily: "sans-serif",
-			fontSize: "16px",
-			fontWeight: "500",
+			fontSize: "15px",
+			fontWeight: "400",
 			color: "#aab7c4",
 		}
 	},
