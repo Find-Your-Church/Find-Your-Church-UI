@@ -23,9 +23,12 @@ import FaqAccordion from "./faq-accordion";
 
 const cardStyle = {
 	base: {
-		color: "#32325d",
+		color: "#333",
 		"::placeholder": {
-			color: "#aab7c4"
+			fontFamily: "sans-serif",
+			fontSize: "16px",
+			fontWeight: "500",
+			color: "#aab7c4",
 		}
 	},
 	invalid: {
