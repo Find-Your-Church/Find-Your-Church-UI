@@ -470,6 +470,7 @@ h4 {
 }
 
 .div10-bottom.right .strike {
+	font-size: 16px;
 	text-decoration: line-through;
 }
 
@@ -719,8 +720,8 @@ h4 {
 	display: grid;
 	padding-bottom: 20px;
 	grid-auto-columns: 1fr;
-	grid-column-gap: 16px;
-	grid-row-gap: 16px;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
 	-ms-grid-columns: 1fr;
 	grid-template-columns: 1fr;
 	-ms-grid-rows: auto auto auto auto auto;
@@ -728,7 +729,7 @@ h4 {
 }
 
 .div-block-308 {
-	padding-top: 20px;
+	padding: 20px 0 10px;
 	/*border-top: 1px solid #ddd9e1;*/
 	text-align: center;
 }

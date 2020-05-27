@@ -384,7 +384,9 @@ class StripeSubscription extends Component{
 										</div>
 									</div>
 									<div>
-										<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
+										<h4 className={`value ${this.props.community.subscription ? "" : ""}`} style={{
+											textDecoration: this.props.community.trialing ? "line-through" : "",
+										}}>
 											{
 												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
@@ -540,23 +542,21 @@ class StripeSubscription extends Component{
 									<div className="invoice-div">
 										{!this.props.second || this.state.editing_card ? (
 											<input type="text" className="card-holder-name"
-														 style={{paddingTop: "20px", paddingBottom: "10px", borderTop: "1px solid #ddd9e1"}}
+														 style={{padding: "5px 10px"}}
 														 title="Name on card" placeholder="Name on card"
 														 id="name_on_card" onChange={this.onChange}
 														 value={this.state.name_on_card}/>
 										) : (
 											<div className={"grey"} style={{
-												paddingTop: "20px",
-												paddingBottom: "10px",
+												padding: "5px 0",
 												width: "100%",
-												borderTop: "1px solid #e8e5ea",
 											}}>
 												{customer ? customer.sources.data[0].name : "(Card holder name)"}
 											</div>
 										)}
 									</div>
 									{!this.props.second || this.state.editing_card ? (
-										<div className="form-row" style={{padding: "10px 0"}}>
+										<div className="form-row" style={{padding: "8px 0 6px"}}>
 											<CardElement className="CardInfoStyle" style={cardStyle}
 																	 disabled={!this.state.editing_card && this.props.second}/>
 										</div>
@@ -568,7 +568,9 @@ class StripeSubscription extends Component{
 										) : (
 											customer ? (
 												<div className={"form-row"}>
-													<div className={"card-detail-item w3-row w3-text-grey"}>
+													<div className={"card-detail-item w3-row w3-text-grey"} style={{
+														padding: "6px 0 11px",
+													}}>
 														<div className={"w3-col s1"}>
 															<img alt={"Payment card"}
 																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
