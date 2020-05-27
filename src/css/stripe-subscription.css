@@ -512,6 +512,13 @@ h4 {
 	border-style: none;
 }
 
+.card-holder-name::placeholder {
+	font-family: sans-serif;
+	font-size: 14px;
+	color: #aab7c4;
+	opacity: 1;
+}
+
 .pay-info-row {
 	width: 100%;
 	padding: 20px 0;
