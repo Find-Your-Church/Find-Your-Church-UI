@@ -515,6 +515,7 @@ h4 {
 .card-holder-name::placeholder {
 	font-family: sans-serif;
 	font-size: 14px;
+	font-weight: 500;
 	color: #aab7c4;
 	opacity: 1;
 }
