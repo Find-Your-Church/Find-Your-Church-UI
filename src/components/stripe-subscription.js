@@ -384,12 +384,12 @@ class StripeSubscription extends Component{
 									</div>
 									<div>
 										<h4 className={"value" + (this.props.community.subscription ? "" : " ")}>
-											{this.props.community.trialing ? '$0.00' : (
+											{
 												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
 													<i className="fas fa-spinner fa-spin"/>
 													: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))
-											)}
+											}
 										</h4>
 									</div>
 								</div>
@@ -425,13 +425,15 @@ class StripeSubscription extends Component{
 													: null)}
 									</div>
 									<div>
-										<div className="div10-bottom right">
-											{this.props.community.trialing ? '$0.00' : (
-												this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
-													: (this.props.community.is_sending ?
-													<i className="fas fa-spinner fa-spin"/>
-													: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
-											)}
+										<div className={`div10-bottom right`}>
+											<div className={this.props.community.trialing ? "strike" : ""}>
+												{
+													this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
+														: (this.props.community.is_sending ?
+														<i className="fas fa-spinner fa-spin"/>
+														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
+												}
+											</div>
 											{/*this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
 												<h4
 													className={"value " + (this.props.community.trialing ? "strikethrough" : "") + (this.props.community.subscription ? "" : " ")}>
@@ -443,10 +445,9 @@ class StripeSubscription extends Component{
 												</h4>
 											)*/}
 											{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? (
-												<h4 className="value w3-text-green right">
+												<h4 className="value w3-text-green right" style={{paddingTop: "10px"}}>
 													{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
-														showAmount(prorated * this.props.community.subscription.plan.amount)
-														: this.props.community.trial_period_days > 0 ? "$0.00" : this.props.community.plan_price)}
+														"" : this.props.community.trial_period_days > 0 ? "$0.00" : "")}
 												</h4>
 											) : null}
 										</div>
