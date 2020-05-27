@@ -207,18 +207,24 @@ h3 {
 }
 
 .discount-input-part {
+	margin-bottom: 4px;
 	padding-left: 20px;
 	padding-right: 20px;
+	height: 40px;
 	text-align: right;
 }
 
 .invoice-div #coupon {
-	padding: 4px 8px;
+	padding: 0 8px;
 	float: right;
-	line-height: 26px;
+	line-height: 38px;
 	background-repeat: no-repeat;
 	background-position: calc(100% - 4px) center;
 	background-size: 20px;
+}
+
+.invoice-div #coupon.verified {
+	background-image: url("../img/icon-verified.svg") !important;
 }
 
 .apply-button {

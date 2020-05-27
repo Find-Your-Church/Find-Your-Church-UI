@@ -6,8 +6,7 @@ import {connect} from "react-redux";
 import {
 	activateMultiCommunity,
 	clearActiveStatus,
-	clearCouponFailed,
-	clearCouponVerified,
+	clearCouponStatus,
 	deactivateMultiCommunity,
 	deleteMultiCommunity,
 	getBillingStatus,
@@ -61,8 +60,7 @@ class MyCommunities extends Component{
 	handleActivateMulti = () => {
 		if(this.selected_communities.length > 0){
 			this.props.clearActiveStatus();
-			this.props.clearCouponVerified();
-			this.props.clearCouponFailed();
+			this.props.clearCouponStatus(false);
 			this.props.getBillingStatus({
 				user_id: this.props.auth.user.id,
 			}, this.props.history);
@@ -268,8 +266,7 @@ MyCommunities.propTypes = {
 	deleteMultiCommunity: PropTypes.func.isRequired,
 	pickMultiCommunity: PropTypes.func.isRequired,
 	clearActiveStatus: PropTypes.func.isRequired,
-	clearCouponVerified: PropTypes.func.isRequired,
-	clearCouponFailed: PropTypes.func.isRequired,
+	clearCouponStatus: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 };
 
@@ -289,8 +286,7 @@ export default connect(
 		deleteMultiCommunity,
 		pickMultiCommunity,
 		clearActiveStatus,
-		clearCouponVerified,
-		clearCouponFailed,
+		clearCouponStatus,
 		getBillingStatus,
 	}
 )(MyCommunities);

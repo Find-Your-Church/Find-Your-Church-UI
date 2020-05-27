@@ -17,7 +17,6 @@ import {
 	DEACTIVATING,
 	ACTIVATING,
 	SHOW_ACT_DLG,
-	COUPON_FAILED,
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
@@ -26,7 +25,11 @@ import {
 	CLEAR_FILTER_MASK,
 	SEARCHING,
 	SET_BACK_URL,
-	ACTIVATE_MULTI_COMMUNITY, PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY,
+	ACTIVATE_MULTI_COMMUNITY,
+	PICK_MULTI_COMMUNITY,
+	DEACTIVATE_MULTI_COMMUNITY,
+	DELETE_MULTI_COMMUNITY,
+	CLEAR_COUPON_STATUS,
 } from "./action-types";
 import axios from "axios";
 import app_config from "../conf/config";
@@ -449,44 +452,30 @@ export const hideActivateDlg = () => dispatch => {
 	});
 };
 
-export const clearCouponVerified = (info) => dispatch => {
-	dispatch({
-		type: COUPON_VERIFIED,
-		payload: false,
-	});
-};
-
-export const clearCouponFailed = () => dispatch => {
-	dispatch({
-		type: COUPON_FAILED,
-		payload: false,
-	});
-};
-
 // info = {code: 'coupon_id'}
 export const verifyCoupon = (info) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/verifycoupon", info)
 		.then(res => {
+			console.log(res.data);
 			dispatch({
 				type: COUPON_VERIFIED,
-				payload: res.data.verified,
-			});
-			dispatch({
-				type: COUPON_FAILED,
-				payload: !res.data.verified,
+				payload: res.data, // {verified = true, amount_off, percent_off}
 			});
 		})
 		.catch(err => {
 			dispatch({
 				type: COUPON_VERIFIED,
-				payload: false,
-			});
-			dispatch({
-				type: COUPON_FAILED,
-				payload: true,
+				payload: err.response.data, // {verified = false, message}
 			});
 		});
+};
+
+export const clearCouponStatus = (only_message = true) => dispatch => {
+	dispatch({
+		type: CLEAR_COUPON_STATUS,
+		payload: only_message,
+	});
 };
 
 export const getPlan = () => dispatch => {

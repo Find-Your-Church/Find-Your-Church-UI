@@ -19,7 +19,6 @@ import {
 	DEACTIVATING,
 	ACTIVATING,
 	SHOW_ACT_DLG,
-	COUPON_FAILED,
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
@@ -30,7 +29,7 @@ import {
 	SEARCHING,
 	SET_BACK_URL,
 	ACTIVATE_MULTI_COMMUNITY,
-	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY,
+	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY, CLEAR_COUPON_STATUS,
 } from "../actions/action-types";
 import {INIT_FILTERS} from "../conf/community-conf";
 import sorters from "../actions/sorters";
@@ -63,8 +62,10 @@ const initialState = {
 	activating: false,
 	active_status: 0, // 0 - init, 1 - success, 2 - failed
 	deactivating: false,
+	coupon_message: '',
 	coupon_verified: false,
-	coupon_failed: false,
+	coupon_amount_off: 0,
+	coupon_percent_off: 0,
 	plan_price: 0,
 	trial_period_days: 0,
 
@@ -288,14 +289,27 @@ export default function(state = initialState, action){
 				deactivating: action.payload,
 			};
 		case COUPON_VERIFIED:
-			return {
+			return action.payload.verified ? {
 				...state,
-				coupon_verified: action.payload, // true or false
+				coupon_verified: true,
+				coupon_amount_off: action.payload.amount_off,
+				coupon_percent_off: action.payload.percent_off,
+				coupon_message: "Discount code verified",
+			} : {
+				...state,
+				coupon_verified: false,
+				coupon_message: action.payload.message,
 			};
-		case COUPON_FAILED:
-			return {
+		case CLEAR_COUPON_STATUS:
+			return action.payload ? {
 				...state,
-				coupon_failed: action.payload, // true or false
+				coupon_message: '',
+			} : {
+				...state,
+				coupon_verified: false,
+				coupon_amount_off: 0,
+				coupon_percent_off: 0,
+				coupon_message: '',
 			};
 		case GET_PLAN:
 			return {

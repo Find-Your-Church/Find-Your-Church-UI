@@ -9,11 +9,9 @@ import {
 	clearLastInvoice,
 	hideActivateDlg,
 	verifyCoupon,
-	clearCouponVerified,
-	clearCouponFailed,
 	clearActiveStatus,
 	getPlan,
-	activateMultiCommunity
+	activateMultiCommunity, clearCouponStatus
 } from "../actions/community-actions";
 import getNextMonth from "../utils/getNextMonth";
 import "../css/stripe-subscription.css";
@@ -47,6 +45,7 @@ class StripeSubscription extends Component{
 			editing_card: false,
 			name_on_card: this.props.auth.user.billing_info ? this.props.auth.user.billing_info.sources.data[0].name : "",
 
+			showed_coupon_error: false,
 			showedModal: false,
 
 			accordion_collapsed1: true,
@@ -56,6 +55,8 @@ class StripeSubscription extends Component{
 			accordion_collapsed5: true,
 		};
 
+		this.timer4coupon = null;
+
 		this.verifyCoupon = this.verifyCoupon.bind(this);
 		this.clickEditCard = this.clickEditCard.bind(this);
 		this.hideActivationDialog = this.hideActivationDialog.bind(this);
@@ -64,26 +65,39 @@ class StripeSubscription extends Component{
 
 	componentDidMount(){
 		this.props.clearActiveStatus();
-		this.props.clearCouponVerified();
-		this.props.clearCouponFailed();
+		this.props.clearCouponStatus(false);
 		this.props.getBillingStatus({
 			user_id: this.props.auth.user.id,
 		}, this.props.history);
 		this.props.getPlan();
 	}
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.community.coupon_message !== this.props.community.coupon_message && this.props.community.coupon_message.length > 0){
+			this.setState({showed_coupon_error: true});
+			clearTimeout(this.timer4coupon);
+			this.timer4coupon = setTimeout(() => {
+				this.props.clearCouponStatus();
+				this.setState({showed_coupon_error: false});
+			}, 3000);
+		}
+	}
+
 	onChange = e => {
 		if(e.target.id === 'coupon'){
-			this.props.clearCouponVerified();
-			this.props.clearCouponFailed();
+			this.props.clearCouponStatus(false);
 		}
 		this.setState({[e.target.id]: e.target.value});
 	};
 
 	verifyCoupon(){
-		this.props.verifyCoupon({
-			code: this.state.coupon,
-		});
+		const trimmed_coupon_code = this.state.coupon.trim();
+
+		if(trimmed_coupon_code.length > 0){
+			this.props.verifyCoupon({
+				code: this.state.coupon.trim(),
+			});
+		}
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -179,6 +193,22 @@ class StripeSubscription extends Component{
 		this.setState({showedModal: false})
 	};
 
+	getDiscountedAmount = (value) => {
+		let ret_val = value;
+
+		if(this.props.community.coupon_verified){
+			ret_val = this.props.community.coupon_amount_off !== null ?
+				value - this.props.community.coupon_amount_off
+				: (
+					this.props.community.coupon_percent_off !== null ?
+						value * (100 - this.props.community.coupon_percent_off) / 100
+						: value
+				);
+		}
+
+		return ret_val;
+	}
+
 	/**
 	 * this.props.community.subscription ? <- 2nd, or 1st.
 	 * @returns {*}
@@ -209,7 +239,7 @@ class StripeSubscription extends Component{
 			due_reminder = this.getDateDiff(to_date, next_due_date);
 			prorated = due_reminder / due_duration;
 
-			console.log(init_date, due_reminder, due_duration);
+			// console.log(init_date, due_reminder, due_duration);
 		}
 
 		const due_amount = this.props.community.subscription ?
@@ -304,34 +334,28 @@ class StripeSubscription extends Component{
 										</h4>
 									</div>
 								</div>
-								{this.props.second || this.props.community.is_sending ? null :
-									<div className="invoice-div discount">
-										<div className="filtersheader-div">
-											<h4 className="table-header">Discount code</h4>
-										</div>
-										<div className={"discount-input-part"}>
-											<input type="text"
-														 className="subscription-discount-input w3-half w3-normal"
-														 style={{
-															 backgroundImage: this.props.community.coupon_verified ? "url(/img/icon/icon-verified.svg)" : (
-																 this.props.community.coupon_failed ? "url(/img/icon/icon-warning.svg)" : "none"
-															 )
-														 }}
-														 title={this.props.community.coupon_verified ? "Discount code verified" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
-														 placeholder="Enter discount code here"
-														 id="coupon" onChange={this.onChange}
-														 value={this.state.coupon} autoFocus/>
-										</div>
-										<button onClick={this.verifyCoupon}
-														className={"w3-button w3-padding-small apply-button"}>
-											Apply
-										</button>
-										<div/>
-										<div className={"discount-status"}>
-											{this.props.community.coupon_verified ? "Discount code applied" : (this.props.community.coupon_failed ? "Invalid discount code" : "")}
-										</div>
+								<div className="invoice-div discount">
+									<div className="filtersheader-div">
+										<h4 className="table-header">Discount code</h4>
 									</div>
-								}
+									<div className={`discount-input-part`}>
+										<input type="text"
+													 className={`subscription-discount-input w3-half w3-normal ${this.props.community.coupon_verified ? "verified" : ""}`}
+													 title={this.props.community.coupon_verified ? "Discount code verified" : ""}
+													 placeholder="Enter discount code here"
+													 id="coupon" onChange={this.onChange}
+													 value={this.state.coupon} readOnly={this.props.community.is_sending} autoFocus/>
+									</div>
+									<button onClick={this.verifyCoupon}
+													className={"w3-button w3-padding-small apply-button"}>
+										Apply
+									</button>
+									<div/>
+									<div className={"discount-status"}
+											 style={{display: this.state.showed_coupon_error ? "block" : "none"}}>
+										{this.props.community.coupon_message}
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className="div-block-147">
@@ -402,7 +426,13 @@ class StripeSubscription extends Component{
 									</div>
 									<div>
 										<div className="div10-bottom right">
-											{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
+											{this.props.community.trialing ? '$0.00' : (
+												this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
+													: (this.props.community.is_sending ?
+													<i className="fas fa-spinner fa-spin"/>
+													: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
+											)}
+											{/*this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
 												<h4
 													className={"value " + (this.props.community.trialing ? "strikethrough" : "") + (this.props.community.subscription ? "" : " ")}>
 													{this.props.community.subscription ?
@@ -411,7 +441,7 @@ class StripeSubscription extends Component{
 															<i className="fas fa-spinner fa-spin"/>
 															: "$0.00")}
 												</h4>
-											)}
+											)*/}
 											{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? (
 												<h4 className="value w3-text-green right">
 													{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
@@ -712,8 +742,7 @@ StripeSubscription.propTypes = {
 	getPlan: PropTypes.func.isRequired,
 	verifyCoupon: PropTypes.func.isRequired,
 	clearActiveStatus: PropTypes.func.isRequired,
-	clearCouponVerified: PropTypes.func.isRequired,
-	clearCouponFailed: PropTypes.func.isRequired,
+	clearCouponStatus: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 	registerCard: PropTypes.func.isRequired,
 	clearLastInvoice: PropTypes.func.isRequired,
@@ -733,8 +762,7 @@ export default connect(
 		getPlan,
 		verifyCoupon,
 		clearActiveStatus,
-		clearCouponVerified,
-		clearCouponFailed,
+		clearCouponStatus,
 		getBillingStatus,
 		registerCard,
 		clearLastInvoice,

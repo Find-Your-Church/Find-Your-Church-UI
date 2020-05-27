@@ -424,6 +424,10 @@ a {
 	}
 }
 
+#spinning-modal {
+	z-index: 3500;
+}
+
 #spinning-modal i.fas {
 	position: relative;
 	background-color: #2e89fe;

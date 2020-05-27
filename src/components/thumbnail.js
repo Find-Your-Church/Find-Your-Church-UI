@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {
-	activateCommunity, clearActiveStatus, clearCouponFailed, clearCouponVerified,
+	activateCommunity, clearActiveStatus, clearCouponStatus,
 	deactivateCommunity,
 	deleteCommunity,
 	getBillingStatus,
@@ -53,8 +53,7 @@ class Thumbnail extends Component{
 
 	onActivate(e){
 		this.props.clearActiveStatus();
-		this.props.clearCouponVerified();
-		this.props.clearCouponFailed();
+		this.props.clearCouponStatus(false);
 		this.props.getBillingStatus({
 			user_id: this.props.auth.user.id,
 		}, this.props.history);
@@ -150,10 +149,12 @@ class Thumbnail extends Component{
 													<Link to="#" className="listing-navlink w-nav-link" onClick={this.goEdit}>
 														Edit
 													</Link>
+													{/*
 													<Link to="#" className="listing-navlink w-nav-link"
 																onClick={this.props.value.activated ? this.onDeactivate : this.onActivate}>
 														{this.props.value.activated ? "Deactivate" : "Activate"}
 													</Link>
+													*/}
 													{this.props.status === "inactive" ? (
 															<Link to="#" className="listing-navlink w-nav-link" onClick={this.onDelete}>
 																Delete
@@ -195,8 +196,7 @@ Thumbnail.propTypes = {
 	deleteCommunity: PropTypes.func.isRequired,
 	pickCommunity: PropTypes.func.isRequired,
 	clearActiveStatus: PropTypes.func.isRequired,
-	clearCouponVerified: PropTypes.func.isRequired,
-	clearCouponFailed: PropTypes.func.isRequired,
+	clearCouponStatus: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 };
 
@@ -214,8 +214,7 @@ export default connect(
 			deleteCommunity,
 			pickCommunity,
 			clearActiveStatus,
-			clearCouponVerified,
-			clearCouponFailed,
+			clearCouponStatus,
 			getBillingStatus,
 		}
 )(Thumbnail);
