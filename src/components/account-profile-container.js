@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import "../css/account-profile-container.css";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Popup from "reactjs-popup";
 import isEmpty from "../utils/isEmpty";
 import redirectURL from "../utils/redirectURL";
 
@@ -13,42 +13,44 @@ class AccountProfileContainer extends Component{
 		this.state = {
 			is_show_menu: false,
 		};
-
-		this.toggleMenu = this.toggleMenu.bind(this);
-		this.hideMenu = this.hideMenu.bind(this);
 	}
 
-	toggleMenu(){
+	toggleMenu = () => {
 		this.setState({is_show_menu: !this.state.is_show_menu});
 	}
 
-	hideMenu(){
+	hideMenu = () => {
 		this.setState({is_show_menu: false});
 	}
 
 	render(){
+		const user = this.props.owner === undefined || this.props.owner === null ? this.props.auth.user : this.props.owner;
+
 		return (
-			<div className="profile-container" style={{padding: "0", border: "none"}}>
+			<div className="profile-container" style={{padding: "0"}}>
 				<div className={"profile-container-wrapper"}>
 					<div className="div-block-55" style={{marginTop: "0"}}>
 						<div className="profpic-container">
 							<div className="profpic-div">
-								<img src={isEmpty(this.props.auth.user.pic) ?
+								<img src={isEmpty(user.pic) ?
 									"/img/default-user.png"
-									: this.props.auth.user.pic}
-									 alt="" className="image-4"/>
+									: user.pic}
+										 alt="" className="image-4"/>
 							</div>
 						</div>
 					</div>
 					<div className="profile-info" style={{marginBottom: "0"}}>
 						<div data-collapse="all" data-animation="default" data-duration="400"
-							 className="w-nav profile-info-header">
+								 className="w-nav profile-info-header">
 							<h3 className="community-name">
-								{this.props.auth.user.fname} {this.props.auth.user.lname}
+								{
+									user.is_organization ? user.organization_name
+										: `${user.fname} ${user.lname}`
+								}
 							</h3>
 							{/*
 							<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
-								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+								<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 							</Link>
 							<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 								 onMouseLeave={this.hideMenu}
@@ -60,20 +62,39 @@ class AccountProfileContainer extends Component{
 							*/}
 						</div>
 						<div className="personal-info">
-							{isEmpty(this.props.auth.user.admin_email) ? null :
-								<Link to="#" className={"members"} title={this.props.auth.user.admin_email}
-									  onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
-									<img src={"/img/icon/icon-email-fill.svg"}
-										 alt="" className="personal-pic"/>
+							{isEmpty(user.admin_email) ? null :
+								<Link to="#" className={"members email"} title={user.admin_email}
+											onClick={() => redirectURL("mailto:" + user.admin_email)}>
 								</Link>
 							}
-							{isEmpty(this.props.auth.user.phone) ? null :
-								<Link to="#" className={"members"} title={this.props.auth.user.phone}
-									  onClick={() => redirectURL("tel:" + this.props.auth.user.phone)}>
-									<img src={"/img/icon/icon-phone-fill.svg"}
-										 alt="" className="personal-pic"/>
+							{isEmpty(user.phone) ? null :
+								<Link to="#" className={"members phone"} title={user.phone}
+											onClick={() => redirectURL("tel:" + user.phone)}>
 								</Link>
 							}
+							{isEmpty(user.website) ? null :
+								<Link to="#" className={"members website"} title={user.website}
+											onClick={() => redirectURL(user.website)}>
+								</Link>
+							}
+							{isEmpty(user.facebook) ? null :
+								<Link to="#" className={"members facebook"} title={user.facebook}
+											onClick={() => redirectURL(user.facebook)}>
+								</Link>
+							}
+							{isEmpty(user.twitter) ? null :
+								<Link to="#" className={"members twitter"} title={user.twitter}
+											onClick={() => redirectURL(user.twitter)}>
+								</Link>
+							}
+							{isEmpty(user.instagram) ? null :
+								<Link to="#" className={"members instagram"} title={user.instagram}
+											onClick={() => redirectURL(user.instagram)}>
+								</Link>
+							}
+						</div>
+						<div className={"info-zipcode"} title={user.zip_code}>
+							{user.zip_code}
 						</div>
 					</div>
 				</div>

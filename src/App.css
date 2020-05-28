@@ -70,6 +70,15 @@ a {
 	z-index: 1000;
 }
 
+.site-header.shadow {
+	border-bottom: none;
+	box-shadow: 0 2px 5px 0 rgba(51, 51, 51, 0.2);
+}
+
+.site-header * {
+	font-family: "Source Sans Pro", sans-serif !important;
+}
+
 @media screen and (max-width: 600px){
 	.site-header {
 		padding: 16px 10px 0;
@@ -143,6 +152,7 @@ a {
 }
 
 .header-3lines-menu i {
+	font-family: 'Font Awesome 5 Free', sans-serif !important;
 	font-size: 22px;
 	color: #2e89fe;
 }
@@ -318,6 +328,10 @@ a {
 	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 }
 
+.footer-div * {
+	font-family: "Source Sans Pro", sans-serif !important;
+}
+
 .footer-link, .footer-logo {
 	display: block;
 	color: #e6e6e6;
@@ -384,7 +398,8 @@ a {
 	-webkit-align-self: center;
 	-ms-grid-row-align: center;
 	align-self: center;
-	color: rgba(14, 0, 25, 0.2);
+	color: #c5c2c8;
+	cursor: pointer;
 }
 
 .search-address-candidates {
@@ -423,6 +438,10 @@ a {
 	}
 }
 
+#spinning-modal {
+	z-index: 3500;
+}
+
 #spinning-modal i.fas {
 	position: relative;
 	background-color: #2e89fe;
@@ -435,8 +454,11 @@ i.fas.fa-ellipsis-h {
 	font-size: 20px;
 }
 
+.rmc-tooltip {
+	opacity: 0.95 !important;
+}
+
 .rmc-tooltip-inner {
 	font-size: 16px;
 	max-width: 480px;
-	opacity: 0.9;
 }

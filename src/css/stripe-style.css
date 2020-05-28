@@ -5,7 +5,8 @@
 	margin: 0;
 	width: 100%;
 	height: auto;
-	padding: 10px 0;
+	padding-bottom: 10px;
+	font-size: 15px;
 	color: #32325d;
 	border-radius: 4px;
 }
@@ -21,4 +22,27 @@
 
 .CardInfoStyle--webkit-autofill {
 	background-color: #fefde5 !important;
+}
+
+.CardInfoStyleOnAccount {
+	margin: 0;
+	width: 100%;
+	height: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #32325d;
+	border-radius: 4px;
+}
+
+.CardInfoStyleOnAccount--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+	outline: solid 1px #2e89fe;
+}
+
+.CardInfoStyleOnAccount--invalid {
+	border-color: #fa755a;
+}
+
+.CardInfoStyle--webkit-autofill {
+	CardInfoStyleOnAccount: #fefde5 !important;
 }

@@ -19,7 +19,6 @@ import {
 	DEACTIVATING,
 	ACTIVATING,
 	SHOW_ACT_DLG,
-	COUPON_FAILED,
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
@@ -30,9 +29,9 @@ import {
 	SEARCHING,
 	SET_BACK_URL,
 	ACTIVATE_MULTI_COMMUNITY,
-	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY
+	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY, CLEAR_COUPON_STATUS,
 } from "../actions/action-types";
-import community_config from "../conf/community-conf";
+import {INIT_FILTERS} from "../conf/community-conf";
 import sorters from "../actions/sorters";
 
 const initialState = {
@@ -63,8 +62,10 @@ const initialState = {
 	activating: false,
 	active_status: 0, // 0 - init, 1 - success, 2 - failed
 	deactivating: false,
+	coupon_message: '',
 	coupon_verified: false,
-	coupon_failed: false,
+	coupon_amount_off: 0,
+	coupon_percent_off: 0,
 	plan_price: 0,
 	trial_period_days: 0,
 
@@ -77,23 +78,14 @@ const initialState = {
 		lat: 44.989999,
 		lng: -93.256088,
 		filter: {
-			days: "0".repeat(community_config.FILTERS.days.length),
-			times: "0".repeat(community_config.FILTERS.times.length),
-			frequency: "0".repeat(community_config.FILTERS.frequency.length),
-			ages: "0".repeat(community_config.FILTERS.ages.length),
-			gender: "0".repeat(community_config.FILTERS.gender.length),
-			parking: "0".repeat(community_config.FILTERS.parking.length),
-			ministries: "0".repeat(community_config.FILTERS.ministries.length),
-			other_services: "0".repeat(community_config.FILTERS.other_services.length),
-			ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-			event_type: "0".repeat(community_config.FILTERS.event_type.length),
-			support_type: "0".repeat(community_config.FILTERS.support_type.length)
+			...INIT_FILTERS,
 		}
 	},
 
 	sort_order: sorters.SORT_NEWEST,
 	search_results: [],
 	counts: {},
+	categories: [],
 	picking: -1, // index of the results
 	view_community: null, // community info to be viewed on public view page.
 	searching: false,
@@ -297,14 +289,27 @@ export default function(state = initialState, action){
 				deactivating: action.payload,
 			};
 		case COUPON_VERIFIED:
-			return {
+			return action.payload.verified ? {
 				...state,
-				coupon_verified: action.payload, // true or false
+				coupon_verified: true,
+				coupon_amount_off: action.payload.amount_off,
+				coupon_percent_off: action.payload.percent_off,
+				coupon_message: "Discount code verified",
+			} : {
+				...state,
+				coupon_verified: false,
+				coupon_message: action.payload.message,
 			};
-		case COUPON_FAILED:
-			return {
+		case CLEAR_COUPON_STATUS:
+			return action.payload ? {
 				...state,
-				coupon_failed: action.payload, // true or false
+				coupon_message: '',
+			} : {
+				...state,
+				coupon_verified: false,
+				coupon_amount_off: 0,
+				coupon_percent_off: 0,
+				coupon_message: '',
 			};
 		case GET_PLAN:
 			return {
@@ -336,6 +341,7 @@ export default function(state = initialState, action){
 				...state,
 				search_results: action.payload.results,
 				counts: action.payload.counts,
+				categories: action.payload.categories,
 			};
 		case SORT_ORDER:
 			return {
@@ -373,17 +379,7 @@ export default function(state = initialState, action){
 				criteria: {
 					...state.criteria,
 					filter: {
-						days: "0".repeat(community_config.FILTERS.days.length),
-						times: "0".repeat(community_config.FILTERS.times.length),
-						frequency: "0".repeat(community_config.FILTERS.frequency.length),
-						ages: "0".repeat(community_config.FILTERS.ages.length),
-						gender: "0".repeat(community_config.FILTERS.gender.length),
-						parking: "0".repeat(community_config.FILTERS.parking.length),
-						ministries: "0".repeat(community_config.FILTERS.ministries.length),
-						other_services: "0".repeat(community_config.FILTERS.other_services.length),
-						ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-						event_type: "0".repeat(community_config.FILTERS.event_type.length),
-						support_type: "0".repeat(community_config.FILTERS.support_type.length),
+						...INIT_FILTERS,
 					}
 				}
 			};

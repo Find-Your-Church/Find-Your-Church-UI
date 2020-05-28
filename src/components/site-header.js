@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link, withRouter, useLocation} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo, logoutUser} from "../actions/auth-actions";
@@ -37,11 +37,9 @@ class SiteHeader extends Component{
 	};
 
 	render(){
-		console.log(this.props.location.pathname);
-
 		return (
 				<div id={"main-header"}>
-					<header className="site-header w3-bar">
+					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}>
 						<Link to="/">
 							<img className="site-logo" src={"/img/logo.svg"}
 									 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
@@ -49,13 +47,13 @@ class SiteHeader extends Component{
 						{this.props.auth.isAuthenticated ? null : (
 								<Link to="#" onClick={this.toggleAdminMenu}
 											className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
-									<i className="fas fa-bars"> </i>
+									<i className="fas fa-bars"/>
 								</Link>
 						)}
 						{this.props.auth.isAuthenticated ? (<>
 									<Link to="#" onClick={this.toggleAdminMenu}
 												className={"header-3lines-menu w3-bar-item w3-right"}>
-										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}}/>
+										<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}} alt={"chevron for popup menu"}/>
 									</Link>
 									<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>

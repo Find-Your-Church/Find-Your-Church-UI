@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import '../../css/dashboard.css';
 import '../../css/admin.css';
-import ProfileContainer from "../../components/profile-container";
 import MyCommunities from "../../components/my-communites";
 import SiteFooter from "../../components/site-footer";
 import StripeSubscription from "../../components/stripe-subscription";
@@ -19,10 +18,13 @@ class Admin extends Component{
 
 		this.state = {
 			errors: {},
+			showed_active: true,
 		};
-
-		this.showSubDlg = this.showSubDlg.bind(this);
 	}
+
+	selectTabActive = isActive => {
+		this.setState({showed_active: isActive});
+	};
 
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
@@ -43,9 +45,9 @@ class Admin extends Component{
 		this.props.getBillingStatus(customer_info, this.props.history);
 	}
 
-	showSubDlg(){
+	showSubDlg = () => {
 		this.props.showActivateDlg();
-	}
+	};
 
 	render(){
 		/**
@@ -55,66 +57,90 @@ class Admin extends Component{
 		 * style={{display: this.props.community.is_showing ? "block" : "none"}}
 		 */
 		return (
-				<>
-					<SiteHeader/>
-					<div>
+			<>
+				<SiteHeader/>
+				<div>
+					{this.props.community.showing ? (
 						<div id={"stripe-modal"} className={"w3-modal"}
-								 style={{display: this.props.community.showing ? "block" : "none"}}>
+								 style={{display: "block"}}>
 							<Elements>
 								<StripeSubscription second={!!this.props.community.subscription}/>
 							</Elements>
 						</div>
-						<div id={"spinning-modal"} className={"w3-modal"}
-								 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
-							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"> </i>
-							</div>
+					) : null}
+					<div id={"spinning-modal"} className={"w3-modal"}
+							 style={{display: (this.props.community.activating || this.props.community.deactivating) ? "block" : "none"}}>
+						<div className="w3-display-middle w3-text-white w3-jumbo">
+							<i className="fas fa-spinner fa-spin"/>
 						</div>
-						<main className="admin-body w3-row"
-									style={{filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none"}}>
-							<div className={"admin-wrapper"}>
-								<div className="div-block-213">
+					</div>
+					<main className="admin-body w3-row"
+								style={{
+									filter: (this.props.community.activating || this.props.community.deactivating || this.props.community.showing) ? "blur(4px)" : "none",
+									backgroundColor: "#e8e5ea",
+								}}>
+						<div className={"admin-wrapper"}>
+							<div className="page-header-container">
+								<div className={"page-header-sub-container"}>
 									<div id="w-node-5ba554098c6d-44cf2aa3" className="div-block-171">
-										<div className="div-block-231"><Link to="/create-new-community"
-																												 className="button-create w-button"><i
-												className={"fas fa-users"}> </i><span className="text-span-3">New Community</span></Link>
+										<div className="div-block-231">
+											<Link to="/create-new-community" className="button-create w-button">
+												<i className={"fas fa-users"}/>
+											</Link>
 										</div>
 									</div>
-									<div id="w-node-5ba554098c6a-44cf2aa3" className="div-block-210"><h1 className="heading-40">Dashboard
-										-
-										Communities</h1></div>
+									<div className="page-header-title">
+										Communities
+									</div>
 									<div id="w-node-5ba554098c5f-44cf2aa3" className="div-block-210">
 										<div className="div-block-215 underline">
 											<Link to="/dashboard" className="link-6">
-												<em className="italic-text-7 current"><i className="fas fa-th"></i></em>
-											</Link></div>
+												<em className="italic-text-7 current"><i className="fas fa-th"/></em>
+											</Link>
+										</div>
 										{/*
 										<div className="div-block-215">
 											<Link to="/dashboard-results" className="link-6">
-												<em className="italic-text-7 gray"><i className="fas fa-user-circle"></i></em>
+												<em className="italic-text-7 gray"><i className="fas fa-user-circle"/></em>
 											</Link>
 										</div>
 										*/}
 										<div className="div-block-215">
 											<Link to="/dashboard-results" className="link-6">
-												<em className="italic-text-7 gray"><i className="fas fa-map-marked-alt"></i></em>
-											</Link></div>
+												<em className="italic-text-7 gray"><i className="fas fa-code"/></em>
+											</Link>
+										</div>
 									</div>
 								</div>
-								{/*
+							</div>
+							{/*
 								<div className="admin-left w3-col">
 									<ProfileContainer/>
 								</div>
 								*/}
-								<div className="admin-right w3-rest">
-									<MyCommunities status="active" handleShowSubDlg={this.showSubDlg}/>
-									<MyCommunities status="inactive" handleShowSubDlg={this.showSubDlg}/>
+							<div className="admin-right w3-rest">
+								<div className="tabs-menu-6 w-tab-menu" role="tablist">
+									<div data-w-tab="Tab 1"
+											 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_active ? "w--current" : ""}`}
+											 onClick={() => this.selectTabActive(true)}>
+										<div>Active</div>
+									</div>
+									<div data-w-tab="Tab 2"
+											 className={`iframe-tab w-inline-block w-tab-link ${this.state.showed_active ? "" : "w--current"}`}
+											 onClick={() => this.selectTabActive(false)}>
+										<div>Inactive</div>
+									</div>
 								</div>
+								<MyCommunities status={this.state.showed_active ? "active" : "inactive"}
+															 handleShowSubDlg={this.showSubDlg} showed={true}/>
+								<MyCommunities status={this.state.showed_active ? "inactive" : "active"}
+															 handleShowSubDlg={this.showSubDlg} showed={false}/>
 							</div>
-						</main>
-						<SiteFooter/>
-					</div>
-				</>
+						</div>
+					</main>
+					<SiteFooter/>
+				</div>
+			</>
 		);
 	}
 }
@@ -136,6 +162,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
+	mapStateToProps,
+	{getUserInfo, getBillingStatus, clearLastInvoice, showActivateDlg}
 )(Admin);

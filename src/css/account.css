@@ -19,8 +19,8 @@
 		font-size: 20px !important;
 	}
 
-	.account-body .container-inline {
-		padding: 10px 0 !important;
+	.account-details-group {
+		grid-template-columns: 1fr !important;
 	}
 }
 
@@ -56,9 +56,8 @@
 }
 
 .div-20bottom {
-	border-top: 1px solid rgba(27, 0, 51, 0.15);
 	padding-bottom: 20px;
-	background-color: #f3f2f5;
+	background-color: #e8e5ea;
 }
 
 .div-20top._1080 {
@@ -87,8 +86,8 @@
 	width: auto;
 	margin-right: auto;
 	margin-left: auto;
-	margin-bottom: 20px;
-	padding: 10px;
+	margin-bottom: 0;
+	padding: 20px;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
@@ -109,34 +108,21 @@
 	background-color: #e8e5ea;
 }
 
-.account-body .container-inline:last-child {
-	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
+@media screen and (max-width: 768px){
+	.account-body .container-inline,
+	.account-body .container-inline .sub-content {
+		padding: 20px 10px;
+	}
 }
 
 .account-body .sub-container {
-	padding: 10px;
-}
-
-.account-body .sub-container.h-left {
-	height: 298px;
-}
-
-.account-body .sub-container.h-right {
-	height: 710px;
-}
-
-.account-body .sub-container.bottom {
-	height: 278px;
-}
-
-.account-body .sub-container.search-preview {
-	height: 320px;
+	padding: 0;
 }
 
 .sub-container .sub-content {
 	padding: 20px;
-	background-color: #f3f2f4;
-	border: solid 1px #ded9e1;
+	background-color: #fff;
+	border: solid 1px #ddd9e1;
 	border-radius: 3px;
 }
 
@@ -146,7 +132,7 @@
 	min-height: 100%;
 }
 
-@media screen and (max-width: 979px){
+@media screen and (max-width: 979px) {
 	.sub-container .sub-content.account,
 	.sub-container .sub-content.payment,
 	.account-body .sub-container {
@@ -156,16 +142,17 @@
 }
 
 .flexdiv-leftright.panel.underline {
-	margin: 10px;
+	margin: 0;
+	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
 }
 
 .flexdiv-leftright.underline {
-	padding-bottom: 10px;
+	padding-bottom: 20px;
 	-webkit-box-align: stretch;
 	-webkit-align-items: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
-	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
+	border-bottom: 1px solid #e8e5ea;
 }
 
 .flexdiv-leftright {
@@ -258,12 +245,10 @@
 
 .container-title {
 	display: inline-block;
-	margin-top: 3px;
-	margin-bottom: 10px;
-	padding-top: 0;
-	padding-bottom: 0;
+	margin: 0;
+	padding: 0;
 	font-size: 18px;
-	line-height: 20px;
+	line-height: 18px;
 	font-weight: 600;
 }
 
@@ -294,15 +279,50 @@
 	grid-template-columns: 1fr 1.4fr 32px;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
-	border-bottom: 1px solid rgba(27, 0, 51, 0.15);
+	border-bottom: 1px solid #e8e5ea;
+}
+
+.account-body .table-row.span-2 {
+	-ms-grid-columns: 1fr;
+	grid-template-columns: 1fr;
+}
+
+.checkbox-field-4 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin-bottom: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.checkbox-3 {
+	margin-top: 0;
+}
+
+.checkbox-label-3-copy {
+	margin-bottom: 0;
+	padding-left: 10px;
+	color: #333;
+	line-height: 20px;
+	cursor: pointer;
+}
+
+.account-body .table-row.profile {
+	grid-template-columns: 1fr;
 }
 
 .account-body .table-row.pic {
 	padding-bottom: 0;
-}
-
-.account-body .table-row.pic h4 {
-	line-height: 56px;
 }
 
 .account-body .table-row.pic .table-link {
@@ -312,8 +332,8 @@
 .table-row-2 {
 	display: -ms-grid;
 	display: grid;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
@@ -328,6 +348,10 @@
 	border-bottom: 1px solid #e6e6e6;
 }
 
+.table-row-2:last-child {
+	padding-bottom: 0;
+}
+
 .table-row-2.upcoming {
 	-ms-grid-columns: auto 1fr;
 	grid-template-columns: auto 1fr;
@@ -336,8 +360,8 @@
 .upcoming-payment-table-row {
 	display: -ms-grid;
 	display: grid;
-	padding-top: 6px;
-	padding-bottom: 6px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 5px;
 	grid-row-gap: 5px;
@@ -346,6 +370,18 @@
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
 	border-bottom: 1px solid #e8e5ea;
+}
+
+.upcoming-payment-table-row * {
+	text-align: right !important;
+}
+
+.upcoming-payment-table-row.header {
+	padding-top: 0;
+}
+
+.upcoming-payment-table-row.header div {
+	font-weight: 600;
 }
 
 .account-body .table-header {
@@ -372,7 +408,7 @@
 	font-size: 16px;
 	line-height: 22px;
 	font-weight: 400;
-	text-align: right;
+	text-align: left;
 }
 
 .table-item.right, .table-item.right div {
@@ -446,22 +482,22 @@
 .account-body .profpic-div-small {
 	overflow: hidden;
 	width: auto;
-	max-width: 54px;
-	max-height: 54px;
-	min-width: 54px;
-	min-height: 54px;
+	max-width: 100px;
+	max-height: 100px;
+	min-width: 100px;
+	min-height: 100px;
 	padding-top: 0;
 	border: 2px solid #fff;
 	border-radius: 50%;
 	background-position: 0 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
-	box-shadow: 0 1px 3px 0 #e8e5ea;
+	box-shadow: 1px 1px 3px 0 rgba(51, 51, 51, 0.5);
 }
 
-.account-body  .profpic-div-small .image-4 {
-	width: 50px;
-	height: 50px;
+.account-body .profpic-div-small .image-4 {
+	width: 96px;
+	height: 96px;
 }
 
 #w-node-cb8d7881b980-27fc25a8 {
@@ -481,23 +517,6 @@
 	overflow: scroll;
 	padding-right: 20px;
 	padding-left: 20px;
-}
-
-.account-body .invoice-row {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	-ms-flex-direction: row;
-	flex-direction: row;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	border-bottom: 1px solid #eaeaea;
 }
 
 .invoice-item {
@@ -537,10 +556,9 @@
 
 .account-body .table-link input[type="file"] {
 	display: block;
-	position: absolute;
-	font-size: 999px;
 	right: 0;
 	top: 0;
+	width: 48px;
 	filter: alpha(opacity=0);
 	opacity: 0;
 	text-align: right;
@@ -567,12 +585,16 @@
 	text-align: right;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.account-body .profile-container {
 		padding: 0 !important;
 	}
 }
 
-.account-body .tooltip-icon {
-	color: #a1a1a1;
+.account-details-group {
+	display: grid;
+	padding-top: 20px;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	grid-template-columns: 1fr 1fr;
 }

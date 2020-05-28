@@ -27,7 +27,6 @@ import WelcomePage from "./pages/welcome-page";
 import MakeSuggestionPage from "./pages/make-suggestion-page";
 import TermsNConditionsPage from "./pages/terms-n-conditions-page";
 import PrivacyPolicy from "./pages/privacy-policy";
-import PublicViewCommunity from "./pages/public-view-community";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
@@ -84,8 +83,8 @@ class App extends Component{
 							<Route exact path="/" component={Home}/>
 							<Route exact path="/search-results" component={SearchResults}/>
 							<Route path="/search-results/:category/:radius/:lat/:lng/:filter" component={SearchResults}/>
-							<Route path="/search-results-iframe/:owner/:category/:radius/:lat/:lng/:filter" component={SearchResultsIframe}/>
-							<Route path="/preview-search-results/:owner/:category/:radius/:lat/:lng/:filter" component={PreviewSearchResults}/>
+							<Route path="/iframe/:owner/:filter" component={SearchResultsIframe}/>
+							<Route path="/preview-search-results/:owner/:filter" component={PreviewSearchResults}/>
 
 							<Route exact path="/login-popup" component={LoginPopup}/>
 							<Route exact path="/register-popup" component={RegisterPopup}/>
@@ -98,7 +97,6 @@ class App extends Component{
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
 							<Route exact path="/view" component={ViewCommunity}/>
-							<Route exact path="/public-view" component={PublicViewCommunity}/>
 							<Route path="/view-community/:id" component={InvitedViewCommunity}/>
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 

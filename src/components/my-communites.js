@@ -6,8 +6,7 @@ import {connect} from "react-redux";
 import {
 	activateMultiCommunity,
 	clearActiveStatus,
-	clearCouponFailed,
-	clearCouponVerified,
+	clearCouponStatus,
 	deactivateMultiCommunity,
 	deleteMultiCommunity,
 	getBillingStatus,
@@ -29,12 +28,10 @@ class MyCommunities extends Component{
 
 		this.selected_communities = []; // array of community IDs
 
-		this.refresh = this.refresh.bind(this);
-
 		this.refresh();
 	}
 
-	selectCommunity = (community_id, selected = true) => {
+	selectCommunity = (community_id, selected = false) => {
 		if(selected){
 			if(!this.selected_communities.includes(community_id)){
 				this.selected_communities.push(community_id);
@@ -43,20 +40,18 @@ class MyCommunities extends Component{
 		else{
 			if(this.selected_communities.includes(community_id)){
 				const index = this.selected_communities.indexOf(community_id);
-				if (index > -1) {
+				if(index > -1){
 					this.selected_communities.splice(index, 1);
 				}
 			}
 		}
 
 		this.setState({selected_count: this.selected_communities.length});
-
-		console.log("selected: ", this.selected_communities);
 	};
 
-	refresh(){
+	refresh = () => {
 		this.props.getMyCommunities(this.props.auth.user.id, this.props.status === "active");
-	}
+	};
 
 	onChangeCategory = e => {
 		this.setState({selected_category: e.target.value});
@@ -65,8 +60,7 @@ class MyCommunities extends Component{
 	handleActivateMulti = () => {
 		if(this.selected_communities.length > 0){
 			this.props.clearActiveStatus();
-			this.props.clearCouponVerified();
-			this.props.clearCouponFailed();
+			this.props.clearCouponStatus(false);
 			this.props.getBillingStatus({
 				user_id: this.props.auth.user.id,
 			}, this.props.history);
@@ -127,133 +121,136 @@ class MyCommunities extends Component{
 
 	render(){
 		return (
-				<div className="communities-body">
-					<div className="dashboard-container">
-						<div className="containerheader-div underline">
-							<div className="flexdiv-left">
-								<div className="container-header">
-									{this.props.status.replace(/^\w/, c => c.toUpperCase())} Communities
-									{this.props.status === "active" ? (
-											<div className={"counter-part"}>
-												<div className={"counter-part-border"}>
-													{formatNumber(this.props.community.my_communities.active.length)}
-													&nbsp;/&nbsp;
-													{this.props.community.subscription ?
-															formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
-															: (this.props.community.is_sending ?
-																	<i className="fas fa-spinner fa-spin"> </i>
-																	: "00")}
-												</div>
-											</div>
-									) : null}
-									<Popup
-											trigger={<i style={{cursor: "pointer"}}
-																	className={"communities-tooltip fas fa-question-circle tooltip-icon"}> </i>}
-											position={this.props.status === "active" ? "left top" : "left bottom"}>
-										<div>
-											{this.props.status === "active" ? (
-													"These communities WILL be displayed on your website when you use the iFrame feature and will appear in public search\n" +
-													"results when they match a users criteria."
-											) : (
-													"These communities WILL NOT be displayed on your website when you use the iFrame feature and WILL NOT appear in\n" +
-													"public search results if they match a users criteria. To activate a community, click the checkbox on the community or\n" +
-													"communities you wish to activate, and then click \"Activate\". New communities are inactive by default and must be\n" +
-													"manually activated."
-											)}
+			<div className="communities-body" style={{display: this.props.showed ? "block" : "none"}}>
+				<div className="dashboard-container">
+					<div className="containerheader-div underline">
+						<div className="flexdiv-left">
+							<div className="container-header">
+								Owner
+								{this.props.status === "active" ? (
+									<div className={"counter-part"}>
+										<div className={"counter-part-border"}>
+											{formatNumber(this.props.community.my_communities.active.length)}
+											&nbsp;/&nbsp;
+											{this.props.community.subscription ?
+												formatNumber(this.props.community.subscription.quantity + this.props.community.tickets)
+												: (this.props.community.is_sending ?
+													<i className="fas fa-spinner fa-spin"/>
+													: "00")}
 										</div>
-									</Popup>
-								</div>
+									</div>
+								) : null}
+								<Popup
+									trigger={<i className={"communities-tooltip fas fa-question-circle tooltip-icon"}/>}
+									position={"left top"}>
+									<div>
+										{this.props.status === "active" ? (
+											<>
+												<i>Active</i> communities will appear in search results when they match a users criteria. As the
+												community owner, you can edit the community information or deactivate the community at anytime.
+											</>
+										) : (
+											<>
+												<i>Inactive</i> communities will not appear in search results and are only viewable by you. <b><i>New
+												Communities</i> are inactive by default until you manually activate them.</b> As the community owner,
+												you can edit the community information or activate the community at anytime.
+											</>
+										)}
+									</div>
+								</Popup>
 							</div>
 						</div>
+					</div>
 
-						<div className="div-block-208">
-							<div id="w-node-d486187d7c74-44cf2aa3" className="div-block-216">
-								<div className="form-block-5">
-									<form id="email-form-2" name="email-form-2" data-name="Email Form 2" className="form-3">
-										<select
-												id="sel_category" name="sel_category" className="select-field w-select"
-												onChange={this.onChangeCategory}
-												style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
-										>
-											<option value="">All Communities</option>
-											{
-												community_config.CATEGORIES.map(cat => {
-													return (
-															<option value={cat} key={"search-" + cat}
-																			title={community_config.TOOL_TIPS[cat]}
-															>{cat}</option>
-													);
-												})
-											}
-										</select></form>
-									<div className="w-form-done">
-										<div>Thank you! Your submission has been received!</div>
-									</div>
-									<div className="w-form-fail">
-										<div>Oops! Something went wrong while submitting the form.</div>
-									</div>
+					<div className="div-block-208">
+						<div id="w-node-d486187d7c74-44cf2aa3" className="div-block-216">
+							<div className="form-block-5">
+								<form className="form-3">
+									<select
+										className="sel_category select-field w-select"
+										onChange={this.onChangeCategory}
+										style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
+									>
+										<option value="">All Communities</option>
+										{
+											community_config.CATEGORIES.map(cat => {
+												return (
+													<option value={cat} key={"search-" + cat}
+																	title={community_config.TOOL_TIPS[cat]}
+													>{cat}</option>
+												);
+											})
+										}
+									</select></form>
+								<div className="w-form-done">
+									<div>Thank you! Your submission has been received!</div>
 								</div>
-								{
-									this.props.status === "active" ? (
-											<a href="#" className="button-delete w-button" onClick={this.handleDeactivateMulti}>
-												Deactivate ({this.state.selected_count})
-											</a>
-									) : (
-											<>
-												<a href="#" className="button-delete w-button" style={{color: "#2e89fe"}} onClick={this.handleActivateMulti}>
-													Activate ({this.state.selected_count})
-												</a>
-												<a href="#" className="button-delete w-button" onClick={this.handleDeleteMulti}>
-													Delete ({this.state.selected_count})
-												</a>
-											</>
-									)
-								}
+								<div className="w-form-fail">
+									<div>Oops! Something went wrong while submitting the form.</div>
+								</div>
 							</div>
-							{/*
+							{
+								this.props.status === "active" ? (
+									<div className="button-delete w-button" onClick={this.handleDeactivateMulti}>
+										Deactivate ({this.state.selected_count})
+									</div>
+								) : (
+									<>
+										<div className="button-delete w-button" style={{color: "#2e89fe"}}
+												 onClick={this.handleActivateMulti}>
+											Activate ({this.state.selected_count})
+										</div>
+										<div className="button-delete w-button" onClick={this.handleDeleteMulti}>
+											Delete ({this.state.selected_count})
+										</div>
+									</>
+								)
+							}
+						</div>
+						{/*
 							<div data-duration-in="300" data-duration-out="100" id="w-node-21585007d979-44cf2aa3" className="w-tabs">
 								<div className="tabs-menu-4 w-tab-menu" role="tablist">
 									<a data-w-tab="Tab 1"
 										 className="dashboard-tab w-inline-block w-tab-link w--current"
 										 tabIndex="-1" id="w-tabs-1-data-w-tab-0">
 										<div className="text-block-3"><em className="italic-text-7 current">
-											<i className="fas fa-portrait"></i></em></div>
+											<i className="fas fa-portrait"/></em></div>
 									</a>
 									<a data-w-tab="Tab 2" className="dashboard-tab w-inline-block w-tab-link" tabIndex="-1">
 										<div className="text-block-4">
 											<em className="italic-text-7 gray">
-												<i className="fas fa-list"></i>
+												<i className="fas fa-list"/>
 											</em>
 										</div>
 									</a></div>
 							</div>
 							*/}
-						</div>
+					</div>
 
-						<div className="div-20top">
-							{this.props.communities[this.props.status].length > 0 ? (
-											<div className="listing-grid dashboard">
-												{this.props.communities[this.props.status].map((community, index) => {
-													if(this.state.selected_category === "" || community.category === this.state.selected_category)
-														return (
-																<Thumbnail key={this.props.status + community._id} status={this.props.status}
-																					 value={community} handleShowSubDlg={this.props.handleShowSubDlg}
-																					 handleSelect={this.selectCommunity}
-																/>
-														);
-													else
-														return null;
-												})}
-											</div>)
-									: (
-											<div className={"w3-normal w3-text-grey"}>
-												You are not the Admin for any {this.props.status} communities.
-											</div>
-									)
-							}
-						</div>
+					<div className="div-20top">
+						{this.props.communities[this.props.status].length > 0 ? (
+								<div className="listing-grid dashboard">
+									{this.props.communities[this.props.status].map((community, index) => {
+										if(this.state.selected_category === "" || community.category === this.state.selected_category)
+											return (
+												<Thumbnail key={this.props.status + community._id} status={this.props.status}
+																	 value={community} handleShowSubDlg={this.props.handleShowSubDlg}
+																	 handleSelect={this.selectCommunity}
+												/>
+											);
+										else
+											return null;
+									})}
+								</div>)
+							: (
+								<div className={"w3-normal w3-text-grey"}>
+									You are not the Admin for any {this.props.status} communities.
+								</div>
+							)
+						}
 					</div>
 				</div>
+			</div>
 		);
 	}
 }
@@ -269,8 +266,7 @@ MyCommunities.propTypes = {
 	deleteMultiCommunity: PropTypes.func.isRequired,
 	pickMultiCommunity: PropTypes.func.isRequired,
 	clearActiveStatus: PropTypes.func.isRequired,
-	clearCouponVerified: PropTypes.func.isRequired,
-	clearCouponFailed: PropTypes.func.isRequired,
+	clearCouponStatus: PropTypes.func.isRequired,
 	getBillingStatus: PropTypes.func.isRequired,
 };
 
@@ -282,16 +278,15 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{
-			getMyCommunities,
-			activateMultiCommunity,
-			deactivateMultiCommunity,
-			deleteMultiCommunity,
-			pickMultiCommunity,
-			clearActiveStatus,
-			clearCouponVerified,
-			clearCouponFailed,
-			getBillingStatus,
-		}
+	mapStateToProps,
+	{
+		getMyCommunities,
+		activateMultiCommunity,
+		deactivateMultiCommunity,
+		deleteMultiCommunity,
+		pickMultiCommunity,
+		clearActiveStatus,
+		clearCouponStatus,
+		getBillingStatus,
+	}
 )(MyCommunities);

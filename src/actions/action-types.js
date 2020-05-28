@@ -43,7 +43,7 @@ export const ACTIVE_STATUS = "ACTIVE_STATUS";
 export const DEACTIVATING = "DEACTIVATING";
 
 export const COUPON_VERIFIED = "COUPON_VERIFIED";
-export const COUPON_FAILED = "COUPON_FAILED";
+export const CLEAR_COUPON_STATUS = "CLEAR_COUPON_STATUS";
 export const GET_PLAN = "GET_PLAN";
 
 /**
@@ -59,3 +59,5 @@ export const CLEAR_FILTER_MASK = "CLEAR_FILTER_MASK";
 export const CLEAR_CRITERIA = "CLEAR_CRITERIA";
 export const SEARCHING = "SEARCHING";
 export const SET_BACK_URL = "SET_BACK_URL";
+export const GET_OWNERS = "GET_OWNERS";
+export const CLEAR_OWNERS = "CLEAR_OWNERS";

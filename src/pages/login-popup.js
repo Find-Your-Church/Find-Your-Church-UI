@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import {GoogleLogin} from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+// import {GoogleLogin} from 'react-google-login';
+// import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {loginUser, loginGoogleUser, clearErrors, hideWelcomeMessage} from "../actions/auth-actions";
-import config from "../conf/config";
 import SiteFooter from "../components/site-footer";
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";

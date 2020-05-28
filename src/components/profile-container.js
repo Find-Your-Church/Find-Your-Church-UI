@@ -34,8 +34,7 @@ class ProfileContainer extends Component{
 							<h5 className="profile-header">Admin Profile</h5>
 							<Popup
 									className={"profile-tooltip"}
-									trigger={<i style={{cursor: "pointer"}}
-															className={"fas fa-question-circle tooltip-icon"}> </i>}
+									trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 									position={"left top"}>
 								<div>This is the information that will be displayed on each of the communities you are an admin of. You
 									can update the information on your Admin Profile from your "Account" page.
@@ -62,7 +61,7 @@ class ProfileContainer extends Component{
 								</h3>
 								{/*
 								<Link to="#" className={"profile-3dot w3-right"} onClick={this.toggleMenu}>
-									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 								</Link>
 								<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 									 onMouseLeave={this.hideMenu}
@@ -77,14 +76,14 @@ class ProfileContainer extends Component{
 								{isEmpty(this.props.auth.user.admin_email) ? null :
 										<Link to="#" className={"members"} title={this.props.auth.user.admin_email}
 													onClick={() => redirectURL("mailto:" + this.props.auth.user.admin_email)}>
-											<img src={"/img/icon/icon-email-fill.svg"}
+											<img src={"/img/icon/account-email.svg"}
 													 alt="" className="personal-pic"/>
 										</Link>
 								}
 								{isEmpty(this.props.auth.user.phone) ? null :
 										<Link to="#" className={"members"} title={this.props.auth.user.phone}
 													onClick={() => redirectURL("tel:" + this.props.auth.user.phone)}>
-											<img src={"/img/icon/icon-phone-fill.svg"}
+											<img src={"/img/icon/account-phone.svg"}
 													 alt="" className="personal-pic"/>
 										</Link>
 								}

@@ -52,14 +52,6 @@
 	font-weight: 700;
 }
 
-@media screen and (max-width: 979px){
-	.heading-28 {
-		padding-top: 40px;
-		font-size: 26px;
-		line-height: 32px;
-	}
-}
-
 .preview-frame {
 	box-sizing: border-box;
 	width: 100%;

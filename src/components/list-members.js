@@ -2,10 +2,8 @@ import React, {Component} from "react";
 import "../css/list-members.css";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import isEmpty from "../utils/isEmpty";
-import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
-import redirectURL from "../utils/redirectURL";
+import AccountProfileContainer from "./account-profile-container";
 
 class ListMembers extends Component{
 	constructor(props){
@@ -28,8 +26,6 @@ class ListMembers extends Component{
 	}
 
 	render(){
-		const user = this.props.user ? this.props.user : this.props.auth.user;
-
 		return (
 			<div className={"w3-large w3-text-grey w3-animate-opacity"}>
 				<div className="members-container">
@@ -40,13 +36,11 @@ class ListMembers extends Component{
 									<h3>Admin</h3>
 									{this.props.fromPublic ? null :
 										<Popup
-											trigger={<i style={{cursor: "pointer"}}
-														className={"fas fa-question-circle tooltip-icon"}> </i>}
+											trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 											position={"left top"}>
 											<div>
-												Community admins are the users who own and manage the community a user is viewing. You can edit the information
-												displayed on your Admin Profile from your "Account" page at any time. Admins must provide at least one form of contact
-												and have the ability to add or remove community members.
+												Community admins are the users responsible for managing a community's information and may or may not
+												be the community's primary point of contact; however, must provide at least one form of contact.
 											</div>
 										</Popup>
 									}
@@ -54,75 +48,7 @@ class ListMembers extends Component{
 								<div className="accordioncontent-div">
 									<div className="_10top-div">
 										<div className="listing-grid profile admin">
-											<div className="profile-container">
-												<div className="div-block-55">
-													<div className="profpic-container">
-														<div className="profpic-div">
-															<img src={isEmpty(user.pic) ?
-																"/img/default-user.png"
-																: user.pic}
-																 alt="" className="image-4"/>
-														</div>
-													</div>
-												</div>
-												<div className="div-block-56">
-													<div className="profile-info">
-														<div className="listingrow">
-															<div data-collapse="all" data-animation="default"
-																 data-duration="400" className="listing-nav w-nav">
-																<Link
-																	to="#" className="communityname">
-																	{user.fname} {user.lname}
-																</Link>
-																{this.props.editable && false ? (
-																	<>
-																		<div className="listingnav-button w-nav-button">
-																			<Link to="#" className={"w3-right"}
-																				  onClick={this.toggleMenu}>
-																				<i className={"fas fa-ellipsis-h"}
-																				   style={{color: "#a1a1a1"}}> </i>
-																			</Link>
-																		</div>
-																		<nav role="navigation"
-																			 className="listing-navmenu w-nav-menu"
-																			 onMouseLeave={this.hideMenu}
-																			 style={{display: this.state.is_show_menu ? "block" : "none"}}>
-																			<div>
-																				<Link to="/dashboard/account"
-																					  className="listing-navlink single w-nav-link">Edit</Link>
-																			</div>
-																		</nav>
-																	</>
-																) : null}
-																<div className="w-nav-overlay" data-wf-ignore="">
-																</div>
-															</div>
-														</div>
-														<div className="_10top-div icons">
-															{isEmpty(user.admin_email) ? null :
-																<Link to={"#"} className={"admin-info-members"}
-																	  onClick={() => redirectURL("mailto:" + user.admin_email)}>
-																	<div
-																		title={user.admin_email}>
-																		<img src={"/img/icon/icon-email-fill.svg"}
-																			 alt="" className="personal-pic"/>
-																	</div>
-																</Link>
-															}
-															{isEmpty(user.phone) ? null :
-																<Link to={"#"} className={"admin-info-members"}
-																	  onClick={() => redirectURL("tel:" + user.phone)}>
-																	<div className={"admin-info-members"}
-																		 title={user.phone}>
-																		<img src={"/img/icon/icon-phone-fill.svg"}
-																			 alt="" className="personal-pic"/>
-																	</div>
-																</Link>
-															}
-														</div>
-													</div>
-												</div>
-											</div>
+											<AccountProfileContainer owner={this.props.fromPublic ? this.props.user : null}/>
 										</div>
 									</div>
 								</div>
@@ -134,8 +60,7 @@ class ListMembers extends Component{
 								<div className="accordionheader-div">
 									<h3>Community</h3>
 									<Popup
-										trigger={<i style={{cursor: "pointer"}}
-													className={"fas fa-question-circle tooltip-icon"}> </i>}
+										trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
 										position={"left bottom"}>
 										<div>Tell visitors more about your community...</div>
 									</Popup>

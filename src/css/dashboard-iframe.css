@@ -1,7 +1,8 @@
 .div-block-239 {
-	padding: 20px;
-	border-top: 1px solid #ddd9e1;
-	border-bottom: 1px solid #ddd9e1;
+	margin-top: 10px;
+	padding: 0 20px 20px;
+	border: 1px solid #ddd9e1;
+	border-radius: 3px;
 	background-color: #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 0, 51, 0.01)), to(rgba(27, 0, 51, 0.01)));
 	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.01), rgba(27, 0, 51, 0.01));
@@ -12,7 +13,7 @@
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	padding-bottom: 10px;
+	padding: 20px 0 10px;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	-ms-flex-pack: justify;
@@ -45,14 +46,16 @@
 }
 
 #w-node-2d27cd76105d-78e24ec3 {
+	max-width: 100%;
 	-webkit-align-self: auto;
 	-ms-flex-item-align: auto;
 	-ms-grid-row-align: auto;
 	align-self: auto;
+	font-weight: 400;
+	overflow: hidden;
 }
 
 .copied-message {
-	margin-top: 20px;
 	display: inline-block;
 	padding: 4px 8px;
 	background-color: rgba(9, 255, 0, 0.26);
@@ -63,11 +66,11 @@
 	text-align: center;
 }
 
-#preview-frame {
+#iframe-community {
 	min-height: 100vh;
 }
 
 @media screen and (max-width: 979px){
-	#preview-frame {
+	#iframe-community {
 	}
 }

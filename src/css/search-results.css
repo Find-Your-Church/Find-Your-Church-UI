@@ -8,7 +8,7 @@ body {
 	margin-top: 70px;
 	padding: 15px 20px;
 	line-height: 36px;
-	background-color: #f3f2f4;
+	background-color: #f3f2f5;
 	border-bottom: 1px solid #ddd9e1;
 	/*box-shadow: 0 1px 3px #888;*/
 	z-index: 100;
@@ -48,6 +48,7 @@ body {
 	padding: 20px;
 	background-color: #fff;
 	overflow-y: scroll;
+	z-index: 10;
 }
 
 .filter-panel::-webkit-scrollbar {
@@ -73,7 +74,7 @@ body {
 	font-size: 18px;
 	line-height: 18px;
 	font-weight: 600;
-	border-bottom: solid 1px #e6e6e6;
+	border-bottom: 1px solid #ddd9e1;
 }
 
 .filter-group-container {
@@ -118,7 +119,7 @@ body {
 	height: calc(100vh - 70px - var(--results-header-height));
 	padding: 10px;
 	background-color: #e8e5ea;
-	overflow-y: scroll;
+	overflow-y: auto;
 	border-left: 1px solid #ddd9e1;
 }
 
@@ -176,7 +177,7 @@ body {
 	padding-right: 2px;
 }
 
-#search-results-header .sort-part{
+#search-results-header .sort-part {
 	margin-left: 12px;
 	height: 36px;
 	line-height: 24px;
@@ -253,9 +254,8 @@ body {
 	color: #333;
 }
 
-.selected-thumbnail .listing-container1 {
-	background-color: #fff;
-	box-shadow: 0 1px 3px #8900fe;
+.selected-thumbnail .communityname {
+	color: #8900fe;
 }
 
 .div-block-158 {
@@ -346,7 +346,7 @@ body {
 		padding-bottom: 0;
 		top: 336px;
 		width: 100vw;
-		height: auto;
+		height: calc(100vh - 336px);
 		z-index: 101;
 	}
 
@@ -392,7 +392,7 @@ body {
 	display: inline-block;
 	padding: 3px 8px;
 	color: #333;
-	background-color: #e7e5ea;
+	background-color: #e8e5ea;
 	border-radius: 3px;
 }
 
@@ -414,4 +414,49 @@ body {
 
 .communities-body.search-results {
 	margin-bottom: 0 !important;
+	box-shadow: 0 0 10px 0 #333;
+}
+
+.search-filter-name {
+	padding: 8px 12px;
+	width: 100%;
+	min-height: 45px;
+	margin: 10px 0 0;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgba(27, 0, 51, 0.15);
+	border-radius: 3px;
+	background-color: #fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 0, 51, 0.01)), to(rgba(27, 0, 51, 0.01)));
+	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.01), rgba(27, 0, 51, 0.01));
+	box-shadow: none;
+	font-size: 18px;
+	line-height: 18px;
+}
+
+.search-filter-name:hover {
+	border-style: solid;
+	border-color: #2e89fe;
+}
+
+.search-filter-name:focus {
+	border-style: solid;
+	border-color: #00e8fe;
+}
+
+.owners-list {
+	position: absolute;
+	width: 100%;
+}
+
+.owner-item {
+	padding: 8px 14px;
+	background-color: #e8e5ea;
+	border-bottom: 1px solid #fff;
+	cursor: pointer;
+}
+
+.owner-item:hover {
+	color: #2e89fe;
+	background-color: #f3f2f5;
 }
