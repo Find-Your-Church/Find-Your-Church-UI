@@ -7,7 +7,7 @@
 .lp1-div {
 	display: -ms-grid;
 	display: grid;
-	min-height: calc(70px + 85vh);
+	min-height: calc(70px + 95vh);
 	padding: 70px 100px 60px;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
@@ -580,7 +580,7 @@
 	}
 
 	.lp1-div {
-		min-height: 75vh;
+		min-height: calc(70px + 90vh);
 		padding: 130px 20px 140px;
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
@@ -667,7 +667,7 @@
 	}
 
 	.lp1-div {
-		min-height: 70vh;
+		min-height: calc(70px + 85vh);
 		padding-right: 10px;
 		padding-left: 10px;
 	}
