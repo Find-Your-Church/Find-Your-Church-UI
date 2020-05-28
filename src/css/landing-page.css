@@ -7,7 +7,7 @@
 .lp1-div {
 	display: -ms-grid;
 	display: grid;
-	min-height: 90vh;
+	min-height: calc(70px + 85vh);
 	padding: 70px 100px 60px;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
