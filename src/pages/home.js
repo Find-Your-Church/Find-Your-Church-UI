@@ -29,8 +29,6 @@ class Home extends Component{
 			this.setState({
 				tab_width: this.refTab.current.clientWidth,
 			});
-
-			console.log(this.refTab.current.clientWidth);
 		}
 	};
 
@@ -181,7 +179,7 @@ class Home extends Component{
 											maxWidth: this.state.iframe_width,
 											height: this.state.iframe_height,
 										}}>
-											<iframe src="https://develop.findyourchurch.org"
+											<iframe src="https://develop.findyourchurch.org/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
 															style={{
 																width: this.state.iframe_screen_width,
 																height: this.state.iframe_screen_height,
