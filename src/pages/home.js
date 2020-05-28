@@ -87,7 +87,7 @@ class Home extends Component{
 	render(){
 		return (
 			<div className={"landing-body"}>
-				<SiteHeader/>
+				<SiteHeader for1st={true}/>
 				<main className="home-main">
 					<div className="lp1-div">
 						<div className="fadein-page">

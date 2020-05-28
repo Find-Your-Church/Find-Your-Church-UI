@@ -39,7 +39,7 @@ class SiteHeader extends Component{
 	render(){
 		return (
 				<div id={"main-header"}>
-					<header className="site-header w3-bar">
+					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}>
 						<Link to="/">
 							<img className="site-logo" src={"/img/logo.svg"}
 									 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
