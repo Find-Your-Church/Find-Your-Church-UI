@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
+import community_config from "../conf/community-conf";
 
 class Home extends Component{
 	constructor(props){
@@ -34,8 +35,61 @@ class Home extends Component{
 			iframe_height: 1,
 			iframe_screen_width: 1,
 			iframe_screen_height: 1,
+
+			ani_text: '',
+			ani_selected: false,
 		};
+
+		this.ani_labels = [];
+		for(const cat of community_config.CATEGORIES){
+			this.ani_labels.push(cat.toLowerCase().substr(0, cat.length - (cat === 'Churches' ? 2 : 1)));
+		}
+		this.ani_index = 0;
+		this.char_index = 0;
+		this.ani_status = 0; // 0 - empty, 1 - typing, 2 - full, 3 - selected
 	}
+
+	typingAnimation = () => {
+		let timeout = 150;
+		switch(this.ani_status){
+			case 0: // empty
+				this.setState({
+					ani_selected: false,
+					ani_text: '',
+				});
+				this.ani_status = 1;
+				timeout  = 500;
+				break;
+			case 1: // typing
+				this.setState({
+					ani_text: this.ani_labels[this.ani_index].substring(0, this.char_index),
+				});
+
+				this.char_index++;
+				if(this.char_index > this.ani_labels[this.ani_index].length){
+					this.ani_status = 2;
+				}
+				break;
+			case 2: // full
+				this.ani_status = 3;
+				timeout  = 3000;
+				break;
+			case 3: // selected
+				this.setState({
+					ani_selected: true,
+				});
+				this.ani_index++;
+				if(this.ani_index === this.ani_labels.length){
+					this.ani_index = 0;
+				}
+				this.char_index = 0;
+				this.ani_status = 0;
+				timeout  = 500;
+				break;
+		}
+
+		setTimeout(this.typingAnimation, timeout);
+	};
 
 	onResizeWindow = () => {
 		if(this.refTab.current !== null && this.refTab.current !== undefined){
@@ -81,6 +135,8 @@ class Home extends Component{
 		});
 
 		this.props.getUserInfo({user_id: this.props.auth.user.id,});
+
+		this.typingAnimation();
 	}
 
 	componentWillUnmount(){
@@ -133,38 +189,41 @@ class Home extends Component{
 				<main className="home-main">
 					<div className="lp1-div">
 						<div className="fadein-page">
-							<div style={{position: "relative"}}>
-								<div className="section1-grid">
-									<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">From
-										international conferences to basement small groups, <span className="text-span-5"><br/>we are the church. </span>
-									</h1>
-									<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
-										enterprise technology<br/>
-										<br/>reach more of His people so that we can collectively as a body make more
-										and maturing disciples of Jesus while strengthening our herd as we strive to reach those being
-										tossed by the winds and waves of the sea.<br/>
-									</p>
-									<div id="w-node-8c49888ab37b-5ad274e5" className="div-block-321">
-										<Link id="w-node-665fc2586de7-5ad274e5"
-													to="/search-results/undefined/null/44.989999/-93.256088/undefined"
-													className="lp-button purple w-button">
-											Find a community</Link>
-										<Link to="/register-popup" className="lp-button white w-button">
-											Create a free account
-										</Link>
-									</div>
+							<div className="section1-grid">
+								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">From
+									international conferences to basement small groups, <span className="text-span-5"><br/>we are the church. </span>
+								</h1>
+								<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
+									enterprise technology<br/>
+									<br/>reach more of His people so that we can collectively as a body make more
+									and maturing disciples of Jesus while strengthening our herd as we strive to reach those being
+									tossed by the winds and waves of the sea.<br/>
+								</p>
+								<div id="w-node-8c49888ab37b-5ad274e5" className="div-block-321">
+									<Link id="w-node-665fc2586de7-5ad274e5"
+												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
+												className="lp-button purple w-button">
+										Find a community</Link>
+									<Link to="/register-popup" className="lp-button white w-button">
+										Create a free account
+									</Link>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className="lp2-div">
 						<div className="fadein-scroll">
+							{/*
 							<h1 id="w-node-2c02e75c52e0-5ad274e5"
 									data-w-id="1a4127ed-5c94-7113-f8c1-2c02e75c52e0"
 									className="lp-header3">We're
 								striving to equip organizations and everyday believers alike, with enterprise technology engineered to
 								empower and further their own ministries; while glorifying and fortifying His kingdom.
 							</h1>
+							*/}
+							<div className={"animation-text"}>
+								<span className={"find-your"}>Find your</span> <span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>{this.state.ani_text}</span>
+							</div>
 						</div>
 					</div>
 				</main>
@@ -324,7 +383,7 @@ class Home extends Component{
 						</div>
 					</div>
 				</div>
-				<div className="div-block-298-copy opacity-transition">
+				<div className="div-block-298-copy">
 					<div id="w-node-99ff29a3cf9c-5ad274e5" className="div-block-341">
 						<Link id="w-node-99ff29a3cf9d-5ad274e5"
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"

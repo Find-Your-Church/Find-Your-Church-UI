@@ -6,18 +6,18 @@
 
 @keyframes lp-animation {
 	from {
-		margin-left: -25px;
-		margin-top: 50px;
+		/*margin-left: -25px;*/
+		padding-top: 50px;
 	}
 
 	to {
-		margin-left: 0;
-		margin-top: 0;
+		/*margin-left: 0;*/
+		padding-top: 0;
 	}
 }
 
 .fadein-page {
-	animation: lp-animation 1s ease;
+	animation: lp-animation 0.7s ease;
 }
 
 .lp1-div {
@@ -197,7 +197,7 @@
 	display: -ms-flexbox;
 	display: flex;
 	min-height: auto;
-	padding: 100px;
+	padding: 76px;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
@@ -546,6 +546,7 @@
 	border-top: 1px none #000;
 	background-color: hsla(0, 0%, 100%, 0.95);
 	background-image: linear-gradient(280deg, #8900fe, #8900fe 50%, #fff 0);
+	opacity: 0.95;
 }
 
 .div-block-341 {
@@ -905,4 +906,24 @@
 
 .opacity-transition {
 	transition: opacity 1s ease;
+}
+
+.animation-text {
+	font-size: 54px;
+	font-weight: 700;
+	line-height: 64px;
+	letter-spacing: -2.24px;
+}
+
+.animation-text .find-your {
+	color: #00e8fe;
+}
+
+.animation-text .community-category {
+	display: inline-block;
+	color: #fff;
+}
+
+.animation-text .community-category.selected {
+	background-color: #000;
 }
