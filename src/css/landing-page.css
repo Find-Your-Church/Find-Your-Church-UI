@@ -909,6 +909,7 @@
 }
 
 .animation-text {
+	height: 64px;
 	font-size: 54px;
 	font-weight: 700;
 	line-height: 64px;
@@ -926,4 +927,26 @@
 
 .animation-text .community-category.selected {
 	background-color: #000;
+}
+
+@keyframes cursor-blinking {
+	0% {
+		border-left-color: transparent;
+	}
+	50% {
+		border-left-color: #000;
+	}
+	100% {
+		border-left-color: transparent;
+	}
+}
+
+.animation-text .cursor {
+	display: inline;
+	margin-left: 4px;
+	width: 2px;
+	font-size: 48px;
+	line-height: 40px;
+	border-left: 2px solid #000;
+	animation: cursor-blinking 0.5s infinite;
 }

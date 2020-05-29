@@ -38,6 +38,7 @@ class Home extends Component{
 
 			ani_text: '',
 			ani_selected: false,
+			ani_cursor: true,
 		};
 
 		this.ani_labels = [];
@@ -56,6 +57,7 @@ class Home extends Component{
 				this.setState({
 					ani_selected: false,
 					ani_text: '',
+					ani_cursor: true,
 				});
 				this.ani_status = 1;
 				timeout  = 500;
@@ -77,6 +79,7 @@ class Home extends Component{
 			case 3: // selected
 				this.setState({
 					ani_selected: true,
+					ani_cursor: false,
 				});
 				this.ani_index++;
 				if(this.ani_index === this.ani_labels.length){
@@ -223,6 +226,9 @@ class Home extends Component{
 							*/}
 							<div className={"animation-text"}>
 								<span className={"find-your"}>Find your</span> <span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>{this.state.ani_text}</span>
+								{this.state.ani_cursor ? (
+									<span className={"cursor"}>&nbsp;</span>
+								) : null}
 							</div>
 						</div>
 					</div>
