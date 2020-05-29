@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import Popup from "reactjs-popup";
 import AccountProfileContainer from "./account-profile-container";
+import {getOwnerInfo} from "../actions/auth-actions";
 
 class ListMembers extends Component{
 	constructor(props){
@@ -15,6 +16,12 @@ class ListMembers extends Component{
 
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
+	}
+
+	componentDidMount(){
+		this.props.getOwnerInfo({
+			user_id: this.props.user,
+		});
 	}
 
 	toggleMenu(){
@@ -48,7 +55,7 @@ class ListMembers extends Component{
 								<div className="accordioncontent-div">
 									<div className="_10top-div">
 										<div className="listing-grid profile admin">
-											<AccountProfileContainer owner={this.props.fromPublic ? this.props.user : null}/>
+											<AccountProfileContainer owner={this.props.fromPublic ? this.props.auth.owner : null}/>
 										</div>
 									</div>
 								</div>
@@ -335,5 +342,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{}
+	{getOwnerInfo}
 )(ListMembers);
