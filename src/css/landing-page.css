@@ -920,11 +920,12 @@
 }
 
 .animation-text .find-your {
+	display: inline-block;
 	color: #00e8fe;
 }
 
 .animation-text .community-category {
-	display: inline-block;
+	display: inline;
 	color: #fff;
 }
 
@@ -946,8 +947,8 @@
 
 .animation-text .cursor {
 	display: inline;
-	margin-left: 4px;
-	width: 2px;
+	margin-left: 3px;
+	width: 1px;
 	font-size: 48px;
 	line-height: 40px;
 	border-left: 2px solid #000;

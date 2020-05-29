@@ -60,7 +60,7 @@ class Home extends Component{
 					ani_cursor: true,
 				});
 				this.ani_status = 1;
-				timeout  = 500;
+				timeout = 500;
 				break;
 			case 1: // typing
 				this.setState({
@@ -74,7 +74,7 @@ class Home extends Component{
 				break;
 			case 2: // full
 				this.ani_status = 3;
-				timeout  = 3000;
+				timeout = 3000;
 				break;
 			case 3: // selected
 				this.setState({
@@ -87,7 +87,7 @@ class Home extends Component{
 				}
 				this.char_index = 0;
 				this.ani_status = 0;
-				timeout  = 500;
+				timeout = 500;
 				break;
 		}
 
@@ -226,11 +226,13 @@ class Home extends Component{
 							*/}
 							<div className={"animation-text"}>
 								<span className={"find-your"}>Find your</span>&nbsp;
-								<span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>
-									{this.state.ani_text}
-									{this.state.ani_cursor ? (
-										<span className={"cursor"}>&nbsp;</span>
-									) : null}
+								<span>
+									<span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>
+										{this.state.ani_text}
+										{this.state.ani_cursor ? (
+											<span className={"cursor"}>&nbsp;</span>
+										) : null}
+									</span>
 								</span>
 							</div>
 						</div>
