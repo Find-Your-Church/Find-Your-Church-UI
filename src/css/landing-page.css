@@ -677,6 +677,10 @@
 		-ms-flex-order: 9999;
 		order: 9999;
 	}
+
+	.animation-text {
+		text-align: center;
+	}
 }
 
 @media screen and (max-width: 768px) {
