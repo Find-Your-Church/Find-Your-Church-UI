@@ -225,10 +225,13 @@ class Home extends Component{
 							</h1>
 							*/}
 							<div className={"animation-text"}>
-								<span className={"find-your"}>Find your</span> <span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>{this.state.ani_text}</span>
-								{this.state.ani_cursor ? (
-									<span className={"cursor"}>&nbsp;</span>
-								) : null}
+								<span className={"find-your"}>Find your</span>&nbsp;
+								<span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>
+									{this.state.ani_text}
+									{this.state.ani_cursor ? (
+										<span className={"cursor"}>&nbsp;</span>
+									) : null}
+								</span>
 							</div>
 						</div>
 					</div>
