@@ -74,7 +74,7 @@ class Home extends Component{
 				break;
 			case 2: // full
 				this.ani_status = 3;
-				timeout = 3000;
+				timeout = 2000;
 				break;
 			case 3: // selected
 				this.setState({

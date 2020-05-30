@@ -7,17 +7,18 @@
 @keyframes lp-animation {
 	0% {
 		/*margin-left: -25px;*/
+		/*padding-top: 100px;*/
 		opacity: 0;
-		padding-top: 100px;
 	}
 
 	30% {
-		opacity: 1;
+		opacity: 0;
 	}
 
 	100% {
 		/*margin-left: 0;*/
-		padding-top: 0;
+		/*padding-top: 0;*/
+		opacity: 1;
 	}
 }
 
