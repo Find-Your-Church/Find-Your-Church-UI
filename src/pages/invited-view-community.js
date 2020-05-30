@@ -138,7 +138,7 @@ class InvitedViewCommunity extends Component{
 							<div className="container-inline">
 								{!this.state.showedDetails ?
 									(
-										<ListMembers editable={false} user={this.props.auth.owner} fromPublic={true}/>
+										<ListMembers editable={false} user={this.props.community.view_community.owner_id} fromPublic={true}/>
 									)
 									: (
 										<>
