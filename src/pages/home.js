@@ -207,7 +207,7 @@ class Home extends Component{
 												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 												className="lp-button purple w-button">
 										Find a community</Link>
-									<Link to="/register-popup" className="lp-button white w-button">
+									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"} className="lp-button white w-button">
 										Create a free account
 									</Link>
 								</div>
@@ -399,7 +399,7 @@ class Home extends Component{
 						<Link id="w-node-99ff29a3cf9d-5ad274e5"
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 									className="lp-button purple w-button">Find a community</Link>
-						<Link id="w-node-99ff29a3cf9f-5ad274e5" to="/register-popup" className="lp-button white margin w-button">
+						<Link id="w-node-99ff29a3cf9f-5ad274e5" to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"} className="lp-button white margin w-button">
 							Create a free account</Link>
 					</div>
 				</div>

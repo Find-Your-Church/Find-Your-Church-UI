@@ -244,9 +244,8 @@
 
 .lp-div.lp3 {
 	padding-top: 100px;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e8e5ea));
-	background-image: linear-gradient(180deg, #fff, #e8e5ea);
-	opacity: 0.95;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.95)), to(#e8e5ea));
+	background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.95), #e8e5ea);
 }
 
 ._20bottom-div {
@@ -398,7 +397,8 @@
 .lp-div.lp4 {
 	padding-bottom: 100px;
 	border-top: 1px solid #ddd9e1;
-	opacity: 0.95;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e5ea), to(hsla(0, 0%, 100%, 0.95)));
+	background-image: linear-gradient(180deg, #e8e5ea, hsla(0, 0%, 100%, 0.95));
 }
 
 .lpheader-div {
