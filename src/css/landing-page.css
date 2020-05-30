@@ -11,6 +11,10 @@
 		padding-top: 100px;
 	}
 
+	30% {
+		opacity: 1;
+	}
+
 	100% {
 		/*margin-left: 0;*/
 		padding-top: 0;
@@ -18,7 +22,7 @@
 }
 
 .fadein-page {
-	animation: lp-animation 1.8s ease;
+	animation: lp-animation 1.6s ease;
 }
 
 .lp1-div {
