@@ -207,7 +207,8 @@ class Home extends Component{
 												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 												className="lp-button purple w-button">
 										Find a community</Link>
-									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"} className="lp-button white w-button">
+									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
+												className="lp-button white w-button">
 										Create a free account
 									</Link>
 								</div>
@@ -241,14 +242,16 @@ class Home extends Component{
 				<div className="lp-div lp3">
 					<div className="_20bottom-div opacity-transition" ref={this.refLp31}
 							 style={{opacity: this.state.lp31_opacity}}>
-						<h1 data-w-id="a5851cf8-b2e4-fa22-7bd7-af6a508bbfb7"
-								className="lp-header2">Scale your community ecosystem with a simple
-							dashboard and powerful search engine. </h1>
+						<h1 data-w-id="a5851cf8-b2e4-fa22-7bd7-af6a508bbfb7" className="lp-header2">
+							Whether it be one or one-million, every community creates a beacon of light for someone to find and
+							navigate towards. <br/>
+							We want to help them shine brighter.
+						</h1>
 					</div>
 					<div className="_20top-div topborder opacity-transition" ref={this.refLp32}
 							 style={{opacity: this.state.lp32_opacity}}>
-						<h1 data-w-id="e8a8a1ad-a79a-7812-40e8-2a63b00abef5"
-								className="lp-paragraph">Below is a preview of what your communities
+						<h1 data-w-id="e8a8a1ad-a79a-7812-40e8-2a63b00abef5" className="lp-paragraph">
+							Below is a preview of what your communities
 							would look like if you chose to use our technology to feature them on your website. The functionality is
 							fully responsive and compatible on any device or browser, and the display itself can be customized to
 							match
@@ -399,7 +402,9 @@ class Home extends Component{
 						<Link id="w-node-99ff29a3cf9d-5ad274e5"
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 									className="lp-button purple w-button">Find a community</Link>
-						<Link id="w-node-99ff29a3cf9f-5ad274e5" to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"} className="lp-button white margin w-button">
+						<Link id="w-node-99ff29a3cf9f-5ad274e5"
+									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
+									className="lp-button white margin w-button">
 							Create a free account</Link>
 					</div>
 				</div>
