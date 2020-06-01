@@ -930,6 +930,28 @@
 	color: #00e8fe;
 }
 
+@media screen and (max-width: 768px){
+	.animation-text, .animation-text .cursor {
+		font-size: 48px !important;
+		line-height: 56px !important;
+	}
+
+	.animation-text .find-your {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 600px){
+	.animation-text, .animation-text .cursor {
+		font-size: 32px !important;
+		line-height: 42px !important;
+	}
+
+	.animation-text .find-your {
+		display: block;
+	}
+}
+
 .animation-text .community-category {
 	display: inline;
 	color: #fff;
