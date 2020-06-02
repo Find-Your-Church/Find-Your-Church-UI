@@ -527,7 +527,7 @@ export const doSearchCommunities = (criteria) => dispatch => {
 	});
 
 	axios
-		.post(app_config.FYC_API_URL + "/api/communities/search", criteria)
+		.post(app_config.FYC_API_URL + "/api/pub/search", criteria)
 		.then(res => {
 			dispatch({
 				type: SET_SEARCH_RESULTS,
@@ -580,7 +580,7 @@ export const clearPicking = () => dispatch => {
 
 export const shareCommunity = (info) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/sharecommunity", info)
+		.post(app_config.FYC_API_URL + "/api/pub/sharecommunity", info)
 		.then(res => {
 		})
 		.catch(err => {
@@ -594,7 +594,7 @@ export const shareCommunity = (info) => dispatch => {
 
 export const reportCommunity = (info) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/reportcommunity", info)
+		.post(app_config.FYC_API_URL + "/api/pub/reportcommunity", info)
 		.then(res => {
 		})
 		.catch(err => {
@@ -608,7 +608,7 @@ export const reportCommunity = (info) => dispatch => {
 
 export const viewCommunity = (info) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/communities/viewCommunity", info)
+		.post(app_config.FYC_API_URL + "/api/pub/viewCommunity", info)
 		.then(res => {
 			dispatch({
 				type: VIEW_COMMUNITY,
