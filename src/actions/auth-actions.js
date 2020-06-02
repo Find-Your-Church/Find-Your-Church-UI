@@ -19,7 +19,7 @@ import app_config from "../conf/config";
  */
 export const registerUser = (userData, history) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/register", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/register", userData)
 		.then(res => {
 			dispatch({
 				type: WELCOME_MESSAGE,
@@ -45,7 +45,7 @@ export const registerUser = (userData, history) => dispatch => {
  */
 export const registerGoogleUser = (userData, history) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/googleregister", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/googleregister", userData)
 		.then(res => history.push("/welcome")) // re-direct to welcome page on successful register
 		.catch(err =>
 			dispatch({
@@ -72,7 +72,7 @@ export const loginUser = (userData, history) => dispatch => {
 		payload: true,
 	});
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/login", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/login", userData)
 		.then(res => {
 			// Save to localStorage
 			// Set token to localStorage
@@ -112,7 +112,7 @@ export const loginUser = (userData, history) => dispatch => {
 
 export const getUserInfo = (user_id) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/userinfo", user_id)
+		.post(app_config.FYC_API_URL + "/api/pub/userinfo", user_id)
 		.then(res => {
 			return dispatch({
 				type: UPDATE_USER_INFO,
@@ -126,7 +126,7 @@ export const getUserInfo = (user_id) => dispatch => {
 
 export const getOwnerInfo = (user_id) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/userinfo", user_id)
+		.post(app_config.FYC_API_URL + "/api/pub/userinfo", user_id)
 		.then(res => {
 			return dispatch({
 				type: UPDATE_OWNER_INFO,
@@ -149,7 +149,7 @@ export const getOwnerInfo = (user_id) => dispatch => {
  */
 export const loginGoogleUser = userData => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/googlelogin", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/googlelogin", userData)
 		.then(res => {
 			// Save token to localStorage
 			const {token} = res.data;
@@ -210,7 +210,7 @@ export const logoutUser = (history) => dispatch => {
  */
 export const resetPassword = (userData, history) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/resetpassword", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/resetpassword", userData)
 		.then(res => history.push("/login-popup"))
 		.catch(err =>
 			dispatch({
@@ -230,7 +230,7 @@ export const changePassword = (userData) => dispatch => {
 		payload: true,
 	});
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/changepassword", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/changepassword", userData)
 		.then(res => {
 			dispatch({
 				type: SET_SENDING_STATUS,
@@ -263,7 +263,7 @@ export const verifyEmail = (userData) => dispatch => {
 		payload: true,
 	});
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/verifyemail", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/verifyemail", userData)
 		.then(res => {
 			dispatch({
 				type: SET_SENDING_STATUS,
@@ -296,7 +296,7 @@ export const verifyEmail = (userData) => dispatch => {
  */
 export const doResetPassword = (userData, history) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/doresetpassword", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/doresetpassword", userData)
 		.then(res => history.push("/reset"))
 		.catch(err =>
 			dispatch({
@@ -316,7 +316,7 @@ export const doChangePassword = (userData, history) => dispatch => {
 		payload: true,
 	});
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/dochangepassword", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/dochangepassword", userData)
 		.then(res => {
 			dispatch({
 				type: SET_SENDING_STATUS,
@@ -342,7 +342,7 @@ export const doChangePassword = (userData, history) => dispatch => {
 
 export const doVerifyEmail = (userData, history) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/doverifyemail", userData)
+		.post(app_config.FYC_API_URL + "/api/pub/doverifyemail", userData)
 		.then(res => {
 			dispatch({
 				type: MESSAGE_FROM_API,
@@ -404,7 +404,7 @@ export const hideWelcomeMessage = () => dispatch => {
 
 export const getOwners = (keyword) => dispatch => {
 	axios
-		.post(app_config.FYC_API_URL + "/api/users/getowners", keyword)
+		.post(app_config.FYC_API_URL + "/api/pub/getowners", keyword)
 		.then(res => {
 			dispatch({
 				type: GET_OWNERS,
