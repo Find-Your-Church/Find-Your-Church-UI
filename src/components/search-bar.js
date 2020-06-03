@@ -62,8 +62,8 @@ class SearchBar extends Component{
 				if(params[1] === "iframe"){
 					this.setState({
 						my_address: this.props.auth.user.zip_code,
-						my_lat: this.props.auth.user.location.lat,
-						my_lng: this.props.auth.user.location.lng,
+						my_lat: this.props.auth.user.location === undefined ? this.props.community.criteria.lat : this.props.auth.user.location.lat,
+						my_lng: this.props.auth.user.location === undefined ? this.props.community.criteria.lng : this.props.auth.user.location.lng,
 					});
 				}
 			}
