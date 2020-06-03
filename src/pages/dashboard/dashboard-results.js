@@ -624,7 +624,7 @@ class DashboardResults extends Component{
 													you have any questions, please do not hesitate to contact our <a
 														href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
 												</p></div>
-											<iframe id="iframe-community" src={this.state.frameUrl}
+											<iframe id="iframe-community" src={this.state.frameUrl} title={"preview communities"}
 															ref={this.refIframe} title={"preview communities"}
 															style={{
 																display: "block",
