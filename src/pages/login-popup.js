@@ -1,11 +1,10 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Link} from "react-router-dom";
-import {GoogleLogin} from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
+import {Link} from "react-router-dom";
+// import {GoogleLogin} from 'react-google-login';
+// import FacebookLogin from 'react-facebook-login';
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {loginUser, loginGoogleUser, clearErrors, hideWelcomeMessage} from "../actions/auth-actions";
-import config from "../conf/config";
 import SiteFooter from "../components/site-footer";
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
@@ -70,15 +69,14 @@ class LoginPopup extends Component{
 					<main>
 						<div className="sign-body">
 							<div className="div-block-63">
-								<div className="div-block-38">
+								<div className="div-block-38 login">
 									{this.props.auth.show_welcome ? (
 											<h3 className={"welcome-message"}>
-												Congrats! Your account was successfully created.<br/>
-												Login now to access your dashboard!
+												Account created successfully.
 											</h3>
 									) : null}
 									<div className="header1-div gradient shadow">
-										<h3 className="header3 center">Welcome back! Sign in to your dashboard.</h3>
+										<h3 className="header3 center">Sign in to your dashboard.</h3>
 									</div>
 									<div>
 										<div className="form-div1">
@@ -86,32 +84,43 @@ class LoginPopup extends Component{
 												<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 															name="wf-form-Registration"
 															data-name="Registration" className="form1 w3-row">
-													<div className="form-row">
-														<div className="input-div gradient">
+													<div className={"input-group"}>
+														<div className={"forminput-div span-2"}>
+															<label htmlFor={"email"} className={"form-label"}>Email</label>
 															<input type="email"
 																		 className="form-input center w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.email}
 																		 id="email"
-																		 placeholder="Email"
-																		 style={{borderBottom: this.props.errors.msg_login_email ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_login_email ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
+														</div>
+														<div className={"forminput-div span-2"}>
+															<div className={"label-span-2"}>
+																<label htmlFor={"email"} className={"form-label"}>
+																	Password
+																</label>
+																<Link to="/forgot-password" class={"lost-password"}>
+																	<span className="form-link termsofuse">Lost Password</span>
+																</Link>
+															</div>
 															<input type="password"
 																		 className="form-input center w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password}
 																		 id="password"
-																		 placeholder="Password"
-																		 style={{borderBottom: this.props.errors.msg_login_password ? "solid 1px #f00" : "solid 1px #e6e6e6"}}
+																		 style={{borderColor: this.props.errors.msg_login_password ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																		 required=""/>
 														</div>
-													</div>
-													<div className="submit-row">
-														<input type="submit" value="Sign In"
-																	 data-wait="Please wait..."
-																	 className="form-submit round w-button-sign"/>
+														<div className="submit-row forminput-div span-2">
+															<input type="submit" value="Sign In"
+																		 data-wait="Please wait..."
+																		 className="form-submit round w-button-sign"
+																		 style={{marginTop: "0"}}
+															/>
+														</div>
 													</div>
 												</form>
 												<div className="w-form-done">
@@ -126,13 +135,13 @@ class LoginPopup extends Component{
 													<div>{this.props.errors.msg_login_password}</div>
 												</div>
 											</div>
-											<div className="div-block-58"><p className="fineprint">
-												<Link
-														to="/forgot-password"><span
-														className="form-link termsofuse">Lost Password</span></Link></p>
-											</div>
 										</div>
 									</div>
+									<div style={{height: "20px"}}></div>
+									<div className="strikethrough-div">
+										<div className="or-div"></div>
+									</div>
+									{/*
 									<div>
 										<div className="strikethrough-div">
 											<div className="or-div"><h4 className="or-text">or</h4></div>
@@ -152,13 +161,17 @@ class LoginPopup extends Component{
 											</div>
 										</div>
 									</div>
-								</div>
-								<div className="div-block-46">
-									<h1 className="heading-11">
-										<Link to="/register-popup" className="link-5">
-											Don't have an account yet? <strong>Create one for free!</strong>
-										</Link>
-									</h1>
+									*/}
+									<div className="div-block-46">
+										<h1 className="heading-11">
+											<Link to="/register-popup" className="link-5">
+												<div style={{display: "inline-block", marginRight: "4px"}}>Don't have an account yet?</div>
+												<div style={{display: "inline-block", fontWeight: "600", color: "#2e89fe"}}>
+													Create one for free
+												</div>
+											</Link>
+										</h1>
+									</div>
 								</div>
 							</div>
 						</div>

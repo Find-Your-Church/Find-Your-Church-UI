@@ -19,7 +19,6 @@ class PublicThumbnail extends Component{
 			community_name_url: '',
 		};
 
-		this.goView = this.goView.bind(this);
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
 	}
@@ -31,7 +30,7 @@ class PublicThumbnail extends Component{
 		});
 	}
 
-	goView(e){
+	goView = e => {
 		// redirect to community-step with this.props.value (community object with full info).
 		// console.log(this.props.value);
 		this.props.getOwnerInfo({
@@ -39,7 +38,7 @@ class PublicThumbnail extends Component{
 		});
 
 		this.setState({is_viewing: true});
-	}
+	};
 
 	shareCommunity = () => {
 		if(this.props.auth.isAuthenticated){
@@ -87,7 +86,7 @@ class PublicThumbnail extends Component{
 	render(){
 		return (
 			this.state.is_viewing ? (
-				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value}}}/>
+				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value, colorTheme: this.props.colorTheme}}}/>
 			) : (
 				<div className={"listing-container1"} onMouseLeave={this.hideMenu}>
 					<div onClick={this.goView}>
@@ -103,11 +102,15 @@ class PublicThumbnail extends Component{
 						<div className="listingrow">
 							<div data-collapse="all" data-animation="default" data-duration="400"
 								 className="listing-nav w-nav">
-								<Link to="#" className="communityname" onClick={this.goView}>
+								<Link to="#" className="communityname" onClick={this.goView}
+											style={this.props.isSelected !== undefined ? {
+												color: this.props.isSelected ? this.props.colorTheme.buttons : "#333",
+											} : null}>
 									{this.props.value.community_name}
 								</Link>
+								{/*
 								<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
-									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}> </i>
+									<i className={"fas fa-ellipsis-h"} style={{color: "#a1a1a1"}}/>
 								</div>
 								<nav role="navigation" className="w3-animate-opacity listing-navmenu w-nav-menu"
 									 style={{display: this.state.is_show_menu ? "block" : "none"}}>
@@ -120,6 +123,7 @@ class PublicThumbnail extends Component{
 								</nav>
 								<div className="w-nav-overlay" data-wf-ignore="">
 								</div>
+								*/}
 							</div>
 						</div>
 						<div className="listingrow">

@@ -1,104 +1,415 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import '../css/home.css';
-import SearchBar from "../components/search-bar";
+import '../css/landing-page.css';
 import SiteFooter from "../components/site-footer";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
-import {BrowserRouter as Router} from "react-router-dom";
+import community_config from "../conf/community-conf";
 
-/**
- *
- */
 class Home extends Component{
-	componentDidMount(){
-		this.props.getUserInfo({user_id: this.props.auth.user.id,});
+	constructor(props){
+		super(props);
+
+		this.refTab = React.createRef();
+		this.refLp31 = React.createRef();
+		this.refLp32 = React.createRef();
+		this.refLp33 = React.createRef();
+		this.refLp41 = React.createRef();
+		this.refLp42 = React.createRef();
+		this.refLp43 = React.createRef();
+		this.refLp44 = React.createRef();
+		this.refLp45 = React.createRef();
+		this.refLp46 = React.createRef();
+		this.refLp47 = React.createRef();
+
+		this.area_height = 1;
+		this.red_line = 1;
+
+		this.state = {
+			selected_tab: -1,
+			tab_width: 1,
+			iframe_width: 1,
+			iframe_height: 1,
+			iframe_screen_width: 1,
+			iframe_screen_height: 1,
+
+			ani_text: '',
+			ani_selected: false,
+			ani_cursor: true,
+		};
+
+		this.ani_labels = [];
+		for(const cat of community_config.CATEGORIES){
+			this.ani_labels.push(cat.toLowerCase().substr(0, cat.length - (cat === 'Churches' ? 2 : 1)));
+		}
+		this.ani_index = 0;
+		this.char_index = 0;
+		this.ani_status = 0; // 0 - empty, 1 - typing, 2 - full, 3 - selected
 	}
+
+	typingAnimation = () => {
+		let timeout = 150;
+		switch(this.ani_status){
+			case 0: // empty
+				this.setState({
+					ani_selected: false,
+					ani_text: '',
+					ani_cursor: true,
+				});
+				this.ani_status = 1;
+				timeout = 500;
+				break;
+			case 1: // typing
+				this.setState({
+					ani_text: this.ani_labels[this.ani_index].substring(0, this.char_index),
+				});
+
+				this.char_index++;
+				if(this.char_index > this.ani_labels[this.ani_index].length){
+					this.ani_status = 2;
+				}
+				break;
+			case 2: // full
+				this.ani_status = 3;
+				timeout = 2000;
+				break;
+			case 3: // selected
+				this.setState({
+					ani_selected: true,
+					ani_cursor: false,
+				});
+				this.ani_index++;
+				if(this.ani_index === this.ani_labels.length){
+					this.ani_index = 0;
+				}
+				this.char_index = 0;
+				this.ani_status = 0;
+				timeout = 500;
+				break;
+		}
+
+		setTimeout(this.typingAnimation, timeout);
+	};
+
+	onResizeWindow = () => {
+		if(this.refTab.current !== null && this.refTab.current !== undefined){
+			this.setState({
+				tab_width: this.refTab.current.clientWidth,
+			});
+		}
+
+		this.area_height = window.innerHeight / 3;
+		this.red_line = this.area_height * 2;
+	};
+
+	getOpacityOnScroll = pos => {
+		let opacity = (pos - this.red_line) / this.area_height;
+		if(opacity < 0.5) // 0
+			opacity = 0;
+		else if(opacity >= 0.5) // 1
+			opacity = 1;
+
+		return opacity;
+	}
+
+	onScrollWindow = () => {
+		this.setState({lp31_opacity: 1 - this.getOpacityOnScroll(this.refLp31.current.getBoundingClientRect().top)});
+		this.setState({lp32_opacity: 1 - this.getOpacityOnScroll(this.refLp32.current.getBoundingClientRect().top)});
+		this.setState({lp33_opacity: 1 - this.getOpacityOnScroll(this.refLp33.current.getBoundingClientRect().top)});
+		this.setState({lp41_opacity: 1 - this.getOpacityOnScroll(this.refLp41.current.getBoundingClientRect().top)});
+		this.setState({lp42_opacity: 1 - this.getOpacityOnScroll(this.refLp42.current.getBoundingClientRect().top)});
+		this.setState({lp43_opacity: 1 - this.getOpacityOnScroll(this.refLp43.current.getBoundingClientRect().top)});
+		this.setState({lp44_opacity: 1 - this.getOpacityOnScroll(this.refLp44.current.getBoundingClientRect().top)});
+		this.setState({lp45_opacity: 1 - this.getOpacityOnScroll(this.refLp45.current.getBoundingClientRect().top)});
+		this.setState({lp46_opacity: 1 - this.getOpacityOnScroll(this.refLp46.current.getBoundingClientRect().top)});
+		this.setState({lp47_opacity: 1 - this.getOpacityOnScroll(this.refLp47.current.getBoundingClientRect().top)});
+	};
+
+	componentDidMount(){
+		window.addEventListener('resize', this.onResizeWindow);
+		this.onResizeWindow();
+		window.addEventListener('scroll', this.onScrollWindow);
+
+		this.setState({
+			selected_tab: 0,
+		});
+
+		this.props.getUserInfo({user_id: this.props.auth.user.id,});
+
+		this.typingAnimation();
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.onResizeWindow);
+		window.removeEventListener('scroll', this.onScrollWindow);
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevState.selected_tab !== this.state.selected_tab || prevState.tab_width !== this.state.tab_width){
+			switch(this.state.selected_tab){
+				case 1: // tablet
+					this.setState({
+						iframe_width: this.state.tab_width * 0.421875,
+						iframe_height: this.state.tab_width * 0.5625,
+						iframe_screen_width: 768,
+						iframe_screen_height: 1024,
+					});
+					break;
+				case 2: // mobile
+					this.setState({
+						iframe_width: this.state.tab_width * 0.26,
+						iframe_height: this.state.tab_width * 0.5625,
+						iframe_screen_width: 375,
+						iframe_screen_height: 812,
+					});
+					break;
+				case 0: // desktop
+				default:
+					this.setState({
+						iframe_width: this.state.tab_width,
+						iframe_height: this.state.tab_width * 0.5625,
+						iframe_screen_width: 1366,
+						iframe_screen_height: 768,
+					});
+					break;
+			}
+		}
+	}
+
+	selectTab = index => {
+		this.setState({
+			selected_tab: index,
+		});
+	};
 
 	render(){
 		return (
-				<>
-					<SiteHeader/>
-					<main className="home-main">
-						<div className="block-48 w3-display-container">
-							<div className="search-container w3-display-middle">
-								<h1 className="search-form-header">What kind of community are you looking for?</h1>
-								<SearchBar buttonTitle="Search"/>
-							</div>
-						</div>
-						{/*
-				<div className="block-50">
-					<div className="block-60">
-						<iframe className="embedly-embed"
-								src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2F8rwsuXHA7RA%3Ffeature%3Doembed&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D8rwsuXHA7RA&amp;image=https%3A%2F%2Fi.ytimg.com%2Fvi%2F8rwsuXHA7RA%2Fhqdefault.jpg&amp;key=96f1f04c5f4143bcb0f2e68c87d65feb&amp;type=text%2Fhtml&amp;schema=youtube"
-								scrolling="no" frameBorder="0" allow="autoplay; fullscreen"
-								allowFullScreen={true} title="site main video">
-						</iframe>
-					</div>
-				</div>
-				<div className="block-51">
-					<div className="div-block-84">
-						<div className="div-block-85">
-							<div className="div-block-86">
-								<div>
-									<img
-										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
-										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
+			<div className={"landing-body"}>
+				<SiteHeader for1st={true}/>
+				<main className="home-main">
+					<div className="lp1-div">
+						<div className="fadein-page">
+							<div className="section1-grid">
+								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">From
+									international conferences to basement small groups, <span className="text-span-5"><br/>we are the church. </span>
+								</h1>
+								<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
+									enterprise technology<br/>
+									<br/>reach more of His people so that we can collectively as a body make more
+									and maturing disciples of Jesus while strengthening our herd as we strive to reach those being
+									tossed by the winds and waves of the sea.<br/>
+								</p>
+								<div id="w-node-8c49888ab37b-5ad274e5" className="div-block-321">
+									<Link id="w-node-665fc2586de7-5ad274e5"
+												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
+												className="lp-button purple w-button">
+										Find a community</Link>
+									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
+												className="lp-button white w-button">
+										Create a free account
+									</Link>
 								</div>
-								<div className="div-20top center"><h2>Search</h2></div>
-								<div className="div-20top"><h4 className="paragraph">Browse local communities near you
-									on one platform, from any device. </h4></div>
-							</div>
-						</div>
-						<div className="div-block-85">
-							<div className="div-block-86">
-								<div>
-									<img
-										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
-										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
-								</div>
-								<div className="div-20top center"><h2>Search</h2></div>
-								<div className="div-20top"><h4 className="paragraph">Browse local communities near you
-									on one platform, from any device. </h4></div>
-							</div>
-						</div>
-						<div className="div-block-85">
-							<div className="div-block-86">
-								<div>
-									<img
-										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
-										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
-								</div>
-								<div className="div-20top center"><h2>Search</h2></div>
-								<div className="div-20top"><h4 className="paragraph">Browse local communities near you
-									on one platform, from any device. </h4></div>
-							</div>
-						</div>
-						<div className="div-block-85">
-							<div className="div-block-86">
-								<div>
-									<img
-										src="https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png"
-										srcSet={"https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-500.png 500w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic-p-1600.png 1600w, https://uploads-ssl.webflow.com/5d8507ee478ff0afbe1aa918/5dfc418bef0cf979c4b6c141_Community%20Graphic.png 1884w"}
-										sizes="(max-width: 479px) 53vw, (max-width: 767px) 254px, 14vw" alt=""/>
-								</div>
-								<div className="div-20top center"><h2>Search</h2></div>
-								<div className="div-20top"><h4 className="paragraph">Browse local communities near you
-									on one platform, from any device. </h4></div>
 							</div>
 						</div>
 					</div>
+					<div className="lp2-div">
+						<div className="fadein-scroll">
+							{/*
+							<h1 id="w-node-2c02e75c52e0-5ad274e5"
+									data-w-id="1a4127ed-5c94-7113-f8c1-2c02e75c52e0"
+									className="lp-header3">We're
+								striving to equip organizations and everyday believers alike, with enterprise technology engineered to
+								empower and further their own ministries; while glorifying and fortifying His kingdom.
+							</h1>
+							*/}
+							<div className={"animation-text"}>
+								<span className={"find-your"}>Find your</span>&nbsp;
+								<span>
+									<span className={`community-category ${this.state.ani_selected ? "selected" : ""}`}>
+										{this.state.ani_text}
+										{this.state.ani_cursor ? (
+											<span className={"cursor"}>&nbsp;</span>
+										) : null}
+									</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</main>
+				<div className="lp-div lp3">
+					<div className="_20bottom-div opacity-transition" ref={this.refLp31}
+							 style={{opacity: this.state.lp31_opacity}}>
+						<h1 data-w-id="a5851cf8-b2e4-fa22-7bd7-af6a508bbfb7" className="lp-header2">
+							Whether it be one or one-million, every community creates a beacon of light for someone to find and
+							navigate towards. <br/>
+							We want to help them shine brighter.
+						</h1>
+					</div>
+					<div className="_20top-div topborder opacity-transition" ref={this.refLp32}
+							 style={{opacity: this.state.lp32_opacity}}>
+						<h1 data-w-id="e8a8a1ad-a79a-7812-40e8-2a63b00abef5" className="lp-paragraph">
+							Below is a preview of what your communities
+							would look like if you chose to use our technology to feature them on your website. The functionality is
+							fully responsive and compatible on any device or browser, and the display itself can be customized to
+							match
+							your brand or personality. Best part?&nbsp;It only takes three clicks to install. Go ahead, try it
+							out! </h1>
+					</div>
+					<div className={" opacity-transition"} ref={this.refLp33} style={{opacity: this.state.lp33_opacity}}>
+						<div data-duration-in="300" data-duration-out="100" data-w-id="b4f3efd6-7373-d185-48b1-4a4456eb9d02"
+								 className="w-tabs">
+							<div className="lp-tabsmenu w-tab-menu" role="tablist" ref={this.refTab}>
+								<div data-w-tab="Tab 1"
+										 className={`demo-tab w-inline-block ${this.state.selected_tab === 0 ? "w--current" : ""}`}
+										 id="w-tabs-0-data-w-tab-0">
+									<div className={"iframe-demo-link"} onClick={() => {
+										this.selectTab(0);
+									}}>
+										<i className="fas fa-desktop"/>
+									</div>
+								</div>
+								<div data-w-tab="Tab 2"
+										 className={`demo-tab w-inline-block ${this.state.selected_tab === 1 ? "w--current" : ""}`}
+										 id="w-tabs-0-data-w-tab-1">
+									<div className={"iframe-demo-link"} onClick={() => {
+										this.selectTab(1);
+									}}>
+										<i className="fas fa-tablet-alt"/>
+									</div>
+								</div>
+								<div data-w-tab="Tab 3"
+										 className={`demo-tab w-inline-block ${this.state.selected_tab === 2 ? "w--current" : ""}`}
+										 id="w-tabs-0-data-w-tab-2">
+									<div className={"iframe-demo-link"} onClick={() => {
+										this.selectTab(2);
+									}}>
+										<i className="fas fa-mobile-alt"/>
+									</div>
+								</div>
+							</div>
+							<div className="w-tab-content">
+								<div data-w-tab="Tab 1" className="w-tab-pane w--tab-active" id="w-tabs-0-data-w-pane-0" role="tabpanel"
+										 aria-labelledby="w-tabs-0-data-w-tab-0">
+									<div className="div-block-337">
+										<div className="html-embed-12 w-embed w-iframe" style={{
+											maxWidth: this.state.iframe_width,
+											height: this.state.iframe_height,
+										}}>
+											<iframe
+												src="https://develop.findyourchurch.org/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
+												style={{
+													width: this.state.iframe_screen_width,
+													height: this.state.iframe_screen_height,
+													transform: `scale(${this.state.iframe_width / this.state.iframe_screen_width})`,
+													transformOrigin: "0 0",
+													border: "none", outline: "none",
+												}}
+												__idm_frm__="459"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div className="block-52 teal">
+				<div className="lp-div lp4">
+					<div>
+						<div className="lpheader-div opacity-transition" ref={this.refLp41}
+								 style={{opacity: this.state.lp41_opacity}}>
+							<h1 id="w-node-be2a72e708b0-5ad274e5" className="lp-header2">How does it
+								work? </h1>
+						</div>
+						<div className="lp4-grid">
+							<div className="fadein-scroll">
+								<div className="lp-grid">
+									<div className="lp-grid1 opacity-transition" ref={this.refLp42}
+											 style={{opacity: this.state.lp42_opacity}}>
+										<h2 className="lp-header4">Create one to one-million communities.</h2>
+										<p className="lp-paragraph">
+											It doesn't matter if you're an international ministry reaching the globe or
+											a two-person bible study in your parents basement. Every single community creates another light in
+											this world as we strive to mobilize and strengthen everyday believers through community. Once
+											you've
+											logged in, you will notice that the dashboards and profiles are set up similar to websites you
+											likely already use, making them quick and easy to navigate. We'll also help you get all of your
+											existing communities loaded so you can have your online ecosystem up and running in just a few
+											minutes. <br/>
+										</p>
+									</div>
+									<div>
+										<img
+											src={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png"}
+											srcSet={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-500.png 500w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-800.png 800w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-1080.png 1080w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png 1584w"}
+											sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3683px) 43vw, 1584px"
+											alt="" className="lp-thumbnail opacity-transition" ref={this.refLp43}
+											style={{opacity: this.state.lp43_opacity}}/>
+									</div>
+								</div>
+							</div>
+							<div className="fadein-scroll">
+								<div className="lp-grid">
+									<div className="lp-grid1 opacity-transition" ref={this.refLp44}
+											 style={{opacity: this.state.lp44_opacity}}>
+										<h2 className="lp-header4">Customize, copy, and paste.</h2>
+										<p
+											className="lp-paragraph">When you activate a new community, it is automatically added to the
+											international community database that anyone can search for and <Link
+												to="/search-results/undefined/null/44.989999/-93.256088/undefined" className="link-13">find a
+												community</Link> through. In addition, your communities can also be displayed on any page or
+											section
+											of your website in just three clicks. It's really that easy and only your communities will be
+											displayed. You can also customize the headers, backgrounds, and buttons of your search engine so
+											that the presets and theme colors reflect you or your organization's brand and website. </p>
+									</div>
+									<img
+										src={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png"}
+										srcSet={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-500.png 500w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-800.png 800w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-1080.png 1080w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png 1444w"}
+										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3438px) 42vw, 1444px"
+										id="w-node-576db9485deb-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
+										ref={this.refLp45} style={{opacity: this.state.lp45_opacity}}/>
+								</div>
+							</div>
+							<div className="fadein-scroll">
+								<div className="lp-grid">
+									<div className="lp-grid1 opacity-transition" ref={this.refLp46}
+											 style={{opacity: this.state.lp46_opacity}}>
+										<h2 className="lp-header4">That's it. </h2>
+										<p className="lp-paragraph">You
+											can display your communities on as many pages or sections as you'd like; and anytime you add,
+											remove, or update a community from your dashboard - your changes will instantly be reflected
+											everywhere your communities are displayed the moment you click 'Save'. Our goal here is to
+											increase
+											the accessibility of information to both everyday and non believers, while streamlining internal
+											operations with the purpose of scaling yours and the kingdoms community ecosystems and making His
+											light shine ever brighter beyond the confines of the 'church'. </p>
+									</div>
+									<img
+										src={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png"}
+										srcSet={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-800.png 800w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-1080.png 1080w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png 1582w"}
+										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3679px) 43vw, 1582px"
+										id="w-node-576db9485de5-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
+										ref={this.refLp47} style={{opacity: this.state.lp47_opacity}}/>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				*/}
-						<SiteFooter/>
-					</main>
-				</>
+				<div className="div-block-298-copy">
+					<div id="w-node-99ff29a3cf9c-5ad274e5" className="div-block-341">
+						<Link id="w-node-99ff29a3cf9d-5ad274e5"
+									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
+									className="lp-button purple w-button">Find a community</Link>
+						<Link id="w-node-99ff29a3cf9f-5ad274e5"
+									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
+									className="lp-button white margin w-button">
+							Create a free account</Link>
+					</div>
+				</div>
+				<SiteFooter/>
+			</div>
 		);
 	}
 }
@@ -111,6 +422,6 @@ const mapStateToProps = state => ({
 	auth: state.auth
 });
 export default connect(
-		mapStateToProps,
-		{getUserInfo}
+	mapStateToProps,
+	{getUserInfo}
 )(Home);

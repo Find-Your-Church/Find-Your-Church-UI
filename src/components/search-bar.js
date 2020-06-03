@@ -7,7 +7,10 @@ import PlacesAutocomplete, {
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {doSearchCommunities, setSearchCriteria} from "../actions/community-actions";
-import community_config from "../conf/community-conf";
+import community_config, {INIT_FILTERS} from "../conf/community-conf";
+import Tooltip from "rmc-tooltip";
+import 'rmc-tooltip/assets/bootstrap.css';
+import {getUserInfo} from "../actions/auth-actions";
 
 class SearchBar extends Component{
 	constructor(props){
@@ -15,19 +18,11 @@ class SearchBar extends Component{
 
 		this.clear_obj = {
 			filter: {
-				days: "0".repeat(community_config.FILTERS.days.length),
-				times: "0".repeat(community_config.FILTERS.times.length),
-				frequency: "0".repeat(community_config.FILTERS.frequency.length),
-				ages: "0".repeat(community_config.FILTERS.ages.length),
-				gender: "0".repeat(community_config.FILTERS.gender.length),
-				parking: "0".repeat(community_config.FILTERS.parking.length),
-				ministries: "0".repeat(community_config.FILTERS.ministries.length),
-				other_services: "0".repeat(community_config.FILTERS.other_services.length),
-				ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-				event_type: "0".repeat(community_config.FILTERS.event_type.length),
-				support_type: "0".repeat(community_config.FILTERS.support_type.length),
+				...INIT_FILTERS,
 			}
 		};
+
+		this.props.getUserInfo({user_id: props.auth.user.id,});
 
 		this.state = {
 			search_category: this.props.community.criteria.category,
@@ -37,9 +32,42 @@ class SearchBar extends Component{
 			my_lng: this.props.community.criteria.lng,
 
 			ready2go: false,
+
+			showed_tooltip: false,
+			tooltip_content: community_config.TOOL_TIPS[""],
+
+			cats: [],
 		};
 
 		this.onChangeAddress = this.onChangeAddress.bind(this);
+	}
+
+	componentDidUpdate(prevProps, prevState, snapshot){
+		// if(prevProps.community.search_results !== this.props.community.search_results){
+		// 	const results = this.props.community.search_results ? [...this.props.community.search_results] : [];
+		// 	let cats = [];
+		// 	for(let i = 0; i < results.length; i++){
+		// 		const cat = results[i].data.category;
+		// 		if(cats.includes(cat))
+		// 			continue;
+		// 		cats.push(cat);
+		// 	}
+		//
+		// 	this.setState({cats: cats});
+		// }
+
+		if(prevProps.auth.user !== this.props.auth.user){
+			if(this.props.path !== undefined){
+				const params = this.props.path.split('/');
+				if(params[1] === "iframe"){
+					this.setState({
+						my_address: this.props.auth.user.zip_code,
+						my_lat: this.props.auth.user.location.lat,
+						my_lng: this.props.auth.user.location.lng,
+					});
+				}
+			}
+		}
 	}
 
 	onChange = e => {
@@ -59,6 +87,16 @@ class SearchBar extends Component{
 			});
 		}
 		if(e.target.id === 'search_category'){
+			this.setState({
+				tooltip_content: community_config.TOOL_TIPS[e.target.value],
+			});
+
+			setTimeout(() => {
+				this.setState({
+					showed_tooltip: true,
+				})
+			}, 10);
+
 			this.props.setSearchCriteria({
 				category: e.target.value,
 			});
@@ -77,6 +115,12 @@ class SearchBar extends Component{
 			this.setState({[e.target.id]: e.target.value});
 	};
 
+	onBlurCategory = () => {
+		this.setState({
+			showed_tooltip: false,
+		});
+	};
+
 	onChangeAddress = val => {
 		this.setState({my_address: val, searchable: false});
 	};
@@ -88,24 +132,24 @@ class SearchBar extends Component{
 		self.setState({my_address: trimmed_address});
 
 		geocodeByAddress(address)
-				.then(results => getLatLng(results[0]))
-				.then(latLng => {
-					self.setState({my_lat: latLng.lat, my_lng: latLng.lng});
-					this.props.setSearchCriteria({
-						address: trimmed_address,
-						lat: latLng.lat,
-						lng: latLng.lng,
-						...this.clear_obj,
-					});
-					this.props.doSearchCommunities({
-						...this.props.community.criteria,
-						address: trimmed_address,
-						lat: latLng.lat,
-						lng: latLng.lng,
-						...this.clear_obj,
-					});
-				})
-				.catch(error => console.error('Error', error));
+			.then(results => getLatLng(results[0]))
+			.then(latLng => {
+				self.setState({my_lat: latLng.lat, my_lng: latLng.lng});
+				this.props.setSearchCriteria({
+					address: trimmed_address,
+					lat: latLng.lat,
+					lng: latLng.lng,
+					...this.clear_obj,
+				});
+				this.props.doSearchCommunities({
+					...this.props.community.criteria,
+					address: trimmed_address,
+					lat: latLng.lat,
+					lng: latLng.lng,
+					...this.clear_obj,
+				});
+			})
+			.catch(error => console.error('Error', error));
 	};
 
 	handleSearch = () => {
@@ -137,80 +181,116 @@ class SearchBar extends Component{
 		const searchable = !isNaN(this.state.my_lat) && !isNaN(this.state.my_lng);
 
 		return this.state.ready2go && !this.props.init ? (
-				<Redirect to={"/search-results"}/>
+			<Redirect to={"/search-results"}/>
 		) : (
-				<div className="search-form-container w-form">
-					<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
-						<div className={"criteria-group w3-row"}>
-							<select id="search_category" onChange={this.onChange}
-											defaultValue={this.props.community.criteria.category}
-											style={{
-												backgroundImage: "url('/img/icon-down3-purple.svg')",
-											}}
-											className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select w3-col s6">
-								<option value="">Category...</option>
-								{
-									community_config.CATEGORIES.map(cat => {
-										return (
+			<div className="search-form-container w-form">
+				<form id="search-form" name="email-form" data-name="Email Form" className="search-form">
+					{this.props.showedCategory ? (
+						this.props.buttonTitle === "Update" ? (
+								<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
+												defaultValue={this.props.community.criteria.category}
+												value={this.props.community.criteria.category}
+												style={{
+													backgroundImage: "url('/img/icon-down3-purple.svg')",
+												}}
+												className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+									<option value="">All Communities</option>
+									{
+										//community_config.CATEGORIES.map(cat => {
+											// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+											// 	<option value={cat} key={"search-" + cat}>{cat}</option>
+											// ) : null;
+										this.props.community.categories.map(cat => {
+											return  (
 												<option value={cat} key={"search-" + cat}>{cat}</option>
-										);
-									})
-								}
-							</select>
-							<select id="search_radius" onChange={this.onChange}
-											defaultValue={isNaN(this.props.community.criteria.radius) ? "" : this.props.community.criteria.radius}
-											style={{
-												backgroundImage: "url('/img/icon-down3-purple.svg')",
-											}}
-											className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select w3-col s6">
-								<option value="">Radius...</option>
-								{
-									community_config.SEARCH_RADIUS.map(r => {
-										const pl = r > 1 ? "s" : "";
-										return (
-												<option value={r} key={"search-" + r}>within {r} mile{pl} of</option>
-										);
-									})
-								}
-							</select>
-						</div>
-						<PlacesAutocomplete
-								style={{position: "relative"}}
-								value={this.state.my_address}
-								onChange={this.onChangeAddress}
-								onSelect={this.handleSelect}
-						>
-							{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-									<>
-										<input className="search-form-input w-node-5cf6ee0e50f3-ddb46e0f w-input"
-													 title={`Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.my_address}`}
-													 {...getInputProps({
-														 placeholder: this.props.community.criteria.address || "Address, City or Zip Code",
-													 })}
-													 required=""/>
-										<div className={"search-address-candidates"}>
-											{loading ?
-													<div
-															className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
-											{suggestions.map((suggestion) => {
-												const style = {
-													color: suggestion.active ? "#ffffff" : "#254184",
-													backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
-													backgroundImage: "url('/img/icon/icon-address-fill.svg')",
-												};
-
+											);
+										})
+									}
+								</select>
+							)
+							: (
+								<Tooltip placement={"top"}
+												 overlay={this.state.tooltip_content}
+												 align={{offset: [0, 2],}}
+												 visible={this.state.tooltip_content === '' || this.state.tooltip_content === undefined ? false : this.state.showed_tooltip}
+								>
+									<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
+													defaultValue={this.props.community.criteria.category}
+													value={this.props.community.criteria.category}
+													style={{
+														backgroundImage: "url('/img/icon-down3-purple.svg')",
+													}}
+													className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
+										<option value="">All Communities</option>
+										{
+											community_config.CATEGORIES.map(cat => {
+												// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
+												// 	<option value={cat} key={"search-" + cat}>{cat}</option>
+												// ) : null;
 												return (
-														<div className={"address-item"}
-																 onClick={() => alert(suggestion.terms)}
-																 {...getSuggestionItemProps(suggestion, {style})}>
-															{suggestion.description}
-														</div>
+													<option value={cat} key={"search-" + cat}>{cat}</option>
 												);
-											})}
-										</div>
-									</>
-							)}
-						</PlacesAutocomplete>
+											})
+										}
+									</select>
+								</Tooltip>
+							)
+					) : null}
+					<select id="search_radius" onChange={this.onChange}
+									defaultValue={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
+									value={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
+									style={{
+										backgroundImage: "url('/img/icon-down3-purple.svg')",
+									}}
+									className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select">
+						<option value=''>Radius...</option>
+						{
+							community_config.SEARCH_RADIUS.map(r => {
+								const pl = r > 1 ? "s" : "";
+								return (
+									<option value={r} key={"search-" + r}>within {r} mile{pl} of</option>
+								);
+							})
+						}
+					</select>
+					<PlacesAutocomplete
+						style={{position: "relative"}}
+						value={this.state.my_address}
+						onChange={this.onChangeAddress}
+						onSelect={this.handleSelect}
+					>
+						{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+							<>
+								<input className="search-form-input w-node-5cf6ee0e50f3-ddb46e0f w-input"
+											 title={`Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.my_address}`}
+											 {...getInputProps({
+												 placeholder: this.props.community.criteria.address || "Address, City or Zip Code",
+											 })}
+											 required=""/>
+								<div className={"search-address-candidates"}>
+									{loading ?
+										<div
+											className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+									{suggestions.map((suggestion) => {
+										const style = {
+											color: suggestion.active ? "#ffffff" : "#254184",
+											backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
+											backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+										};
+
+										return (
+											<div className={"address-item"}
+													 onClick={() => alert(suggestion.terms)}
+													 {...getSuggestionItemProps(suggestion, {style})}>
+												{suggestion.description}
+											</div>
+										);
+									})}
+								</div>
+							</>
+						)}
+					</PlacesAutocomplete>
+					{this.props.buttonTitle === "Update" ? null : (
 						<Link to={"#"}
 									onClick={searchable ? this.handleSearch : null}
 									className={"search-form-button w-button"}
@@ -218,14 +298,15 @@ class SearchBar extends Component{
 						>
 							{this.props.buttonTitle}
 						</Link>
-					</form>
-					<div className="w-form-done" style={{display: "none"}}>
-						<div>Thank you! Your submission has been received!</div>
-					</div>
-					<div className="w-form-fail" style={{display: "none"}}>
-						<div>Oops! Something went wrong while submitting the form.</div>
-					</div>
+					)}
+				</form>
+				<div className="w-form-done" style={{display: "none"}}>
+					<div>Thank you! Your submission has been received!</div>
 				</div>
+				<div className="w-form-fail" style={{display: "none"}}>
+					<div>Oops! Something went wrong while submitting the form.</div>
+				</div>
+			</div>
 		);
 	}
 }
@@ -239,10 +320,11 @@ SearchBar.propTypes = {
 
 const mapStateToProps = state => ({
 	errors: state.errors,
+	auth: state.auth,
 	community: state.communities,
 });
 
 export default connect(
-		mapStateToProps,
-		{setSearchCriteria, doSearchCommunities}
+	mapStateToProps,
+	{getUserInfo, setSearchCriteria, doSearchCommunities}
 )(SearchBar);

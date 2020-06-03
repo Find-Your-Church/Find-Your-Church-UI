@@ -13,10 +13,14 @@ class SelectedFilters extends Component{
 	render(){
 		const filter_keys = Object.keys(community_config.FILTERS);
 		return (
-			<div>
+			<>
 				{filter_keys.map(key => {
 					if(key === "average_attendance")
 						return null;
+
+					if(this.props.filter[key] === undefined)
+						return null;
+
 					const key_value = this.props.filter[key].split("");
 					const criteria_value = this.props.community.criteria.filter[key].split("");
 					return key_value.map((val, i) => {
@@ -27,9 +31,9 @@ class SelectedFilters extends Component{
 									{this.props.handleRefresh ? (
 										<>
 											&nbsp;&nbsp;&nbsp;&nbsp;
-											<i className={"fas fa-times-circle"}
-											   style={{cursor: "pointer"}}
-											   onClick={() => this.clearFilterValue(key, i)}> </i>
+											<i className={"far fa-times-circle"}
+											   style={{cursor: "pointer", color: "#333"}}
+											   onClick={() => this.clearFilterValue(key, i)}/>
 										</>
 									) : null}
 								</div>
@@ -38,7 +42,7 @@ class SelectedFilters extends Component{
 						return null;
 					});
 				})}
-			</div>
+			</>
 		);
 	}
 }

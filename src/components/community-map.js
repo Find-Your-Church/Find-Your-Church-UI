@@ -10,26 +10,28 @@ class CommunityMap extends Component{
 	constructor(props){
 		super(props);
 
+		this.refMap = React.createRef();
+
 		this.state = {
-			lat: 0,
-			lng: 0,
+			lat: this.props.criteria.lat,
+			lng: this.props.criteria.lng,
 		}
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot){
-		if(this.props.criteria.lat !== prevProps.criteria.lat){
-			this.setState({lat: this.props.criteria.lat});
-		}
-		if(this.props.criteria.lng !== prevProps.criteria.lng){
-			this.setState({lng: this.props.criteria.lng});
+		if(prevProps.criteria.lat !== this.props.criteria.lat || prevProps.criteria.lng !== this.props.criteria.lng){
+				this.setState({
+					lat: this.props.criteria.lat,
+					lng: this.props.criteria.lng,
+				});
 		}
 
-		if(this.props.community.picking !== -1 && this.props.community.picking !== prevProps.community.picking){
-			this.setState({
-				lat: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lat),
-				lng: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lng),
-			});
-		}
+		// if(this.props.community.picking !== -1 && this.props.community.picking !== prevProps.community.picking){
+		// 	this.setState({
+		// 		lat: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lat),
+		// 		lng: parseFloat(this.props.results[this.props.community.picking].data.coordinate.lng),
+		// 	});
+		// }
 	}
 
 	radiusToZoom(radius){
@@ -67,38 +69,52 @@ class CommunityMap extends Component{
 		this.props.handleScroll(index);
 	};
 
+	onMovedMap = () => {
+		const center_pos = this.refMap.current.getCenter();
+		this.setState({
+			lat: center_pos.lat(),
+			lng: center_pos.lng(),
+		});
+	};
+
 	render(){
 		const zoom = this.radiusToZoom(this.props.criteria.radius);
+		const hover_icon = {
+			path: "M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z",
+			fillColor: this.props.colorTheme === undefined ? "#8900fe" : this.props.colorTheme,
+			fillOpacity: 1,
+			anchor: {x: 12, y: 24},
+			strokeWeight: 0,
+			scale: 1
+		};
 
 		return (
-				<GoogleMap defaultZoom={zoom} zoom={zoom}
-									 mapOptions={{mapTypeControl: false}}
-									 center={this.state.lat === 0 ?
-											 {lat: this.props.community.criteria.lat, lng: this.props.community.criteria.lng}
-											 : {lat: this.state.lat, lng: this.state.lng}}
-									 defaultCenter={this.props.results.length === 0 ?
-											 {lat: this.props.community.criteria.lat, lng: this.props.community.criteria.lng}
-											 : {
-												 lat: parseFloat(this.props.results[0].data.coordinate.lat),
-												 lng: parseFloat(this.props.results[0].data.coordinate.lng),
-											 }}
-				>
-					{this.props.results.map((item, index) => {
-						const lat = parseFloat(item.data.coordinate.lat);
-						const lng = parseFloat(item.data.coordinate.lng);
-						return (
-								<Marker key={"marker" + index} onClick={() => this.onClickMarker(index)}
-												position={{lat: lat, lng: lng}}
-												icon={{
-													url: this.props.community.picking === index ?
-															"/img/icon/icon-address-marker-hover.svg"
-															: "/img/icon/icon-address-marker.svg"
-												}}
-												zIndex={this.props.community.picking === index ? 1000 : 900}
-								/>
-						)
-					})}
-				</GoogleMap>
+			<GoogleMap ref={this.refMap} defaultZoom={zoom} zoom={zoom}
+								 mapOptions={{mapTypeControl: false}}
+								 center={{
+										 lat: this.state.lat,
+										 lng: this.state.lng,
+									 }}
+								 onCenterChanged={this.onMovedMap}
+			>
+				{/*
+					GoogleMap's attribute removed: center={{lat: this.props.community.criteria.lat, lng: this.props.community.criteria.lng}}
+				*/}
+				{this.props.results.map((item, index) => {
+					const lat = parseFloat(item.data.coordinate.lat);
+					const lng = parseFloat(item.data.coordinate.lng);
+					return (
+						<Marker key={"marker" + index} onClick={() => this.onClickMarker(index)}
+										position={{lat: lat, lng: lng}}
+										icon={this.props.community.picking === index ? hover_icon
+											: {url: "/img/icon/icon-address-marker.svg"}
+										}
+										title={item.data.community_name}
+										zIndex={this.props.community.picking === index ? 1000 : 900}
+						/>
+					)
+				})}
+			</GoogleMap>
 		);
 	}
 }
@@ -113,6 +129,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-		mapStateToProps,
-		{setPicking}
+	mapStateToProps,
+	{setPicking}
 )(withGoogleMap(CommunityMap));

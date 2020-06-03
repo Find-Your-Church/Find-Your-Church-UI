@@ -19,13 +19,19 @@ import {
 	DEACTIVATING,
 	ACTIVATING,
 	SHOW_ACT_DLG,
-	COUPON_FAILED,
 	ACTIVE_STATUS,
 	SORT_ORDER,
 	SET_PICKING,
-	VIEW_COMMUNITY, GET_PLAN, CLEAR_FILTER_MASK, CLEAR_CRITERIA, SEARCHING, SET_BACK_URL
+	VIEW_COMMUNITY,
+	GET_PLAN,
+	CLEAR_FILTER_MASK,
+	CLEAR_CRITERIA,
+	SEARCHING,
+	SET_BACK_URL,
+	ACTIVATE_MULTI_COMMUNITY,
+	PICK_MULTI_COMMUNITY, DEACTIVATE_MULTI_COMMUNITY, DELETE_MULTI_COMMUNITY, CLEAR_COUPON_STATUS,
 } from "../actions/action-types";
-import community_config from "../conf/community-conf";
+import {INIT_FILTERS} from "../conf/community-conf";
 import sorters from "../actions/sorters";
 
 const initialState = {
@@ -38,6 +44,7 @@ const initialState = {
 
 	// for stripe
 	community_activated: null,
+	communities_activated: [],
 	is_setting_card: false,
 	is_showing: false,
 	is_sending: false,
@@ -55,8 +62,10 @@ const initialState = {
 	activating: false,
 	active_status: 0, // 0 - init, 1 - success, 2 - failed
 	deactivating: false,
+	coupon_message: '',
 	coupon_verified: false,
-	coupon_failed: false,
+	coupon_amount_off: 0,
+	coupon_percent_off: 0,
 	plan_price: 0,
 	trial_period_days: 0,
 
@@ -64,28 +73,19 @@ const initialState = {
 	criteria: {
 		owner: null,
 		category: '',
-		radius: 5, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
+		radius: 10, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
 		address: "",
 		lat: 44.989999,
 		lng: -93.256088,
 		filter: {
-			days: "0".repeat(community_config.FILTERS.days.length),
-			times: "0".repeat(community_config.FILTERS.times.length),
-			frequency: "0".repeat(community_config.FILTERS.frequency.length),
-			ages: "0".repeat(community_config.FILTERS.ages.length),
-			gender: "0".repeat(community_config.FILTERS.gender.length),
-			parking: "0".repeat(community_config.FILTERS.parking.length),
-			ministries: "0".repeat(community_config.FILTERS.ministries.length),
-			other_services: "0".repeat(community_config.FILTERS.other_services.length),
-			ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-			event_type: "0".repeat(community_config.FILTERS.event_type.length),
-			support_type: "0".repeat(community_config.FILTERS.support_type.length)
+			...INIT_FILTERS,
 		}
 	},
 
 	sort_order: sorters.SORT_NEWEST,
 	search_results: [],
 	counts: {},
+	categories: [],
 	picking: -1, // index of the results
 	view_community: null, // community info to be viewed on public view page.
 	searching: false,
@@ -135,6 +135,25 @@ export default function(state = initialState, action){
 			}
 			else
 				return state;
+		case ACTIVATE_MULTI_COMMUNITY:
+			const inactives_ = state.my_communities.inactive.filter(item => !action.payload.includes(item._id));
+			let picked_ = state.my_communities.inactive.filter(item => action.payload.includes(item._id));
+			if(picked_.length > 0){
+				for(let i = 0; i < picked_.length; i++){
+					picked_[i].activated = true;
+				}
+				const actives_ = [...state.my_communities.active, ...picked_];
+
+				return {
+					...state,
+					my_communities: {
+						active: actives_,
+						inactive: inactives_,
+					}
+				};
+			}
+			else
+				return state;
 		case DEACTIVATE_COMMUNITY:
 			const actives_1 = state.my_communities.active.filter(item => action.payload !== item._id);
 			let picked_1 = state.my_communities.active.filter(item => action.payload === item._id);
@@ -152,6 +171,25 @@ export default function(state = initialState, action){
 			}
 			else
 				return state;
+		case DEACTIVATE_MULTI_COMMUNITY:
+			const actives_1_ = state.my_communities.active.filter(item => !action.payload.includes(item._id));
+			let picked_1_ = state.my_communities.active.filter(item => action.payload.includes(item._id));
+			if(picked_1_.length > 0){
+				for(let i = 0; i < picked_1_.length; i++){
+					picked_1_[i].activated = false;
+				}
+				const inactives_1_ = [...state.my_communities.inactive, ...picked_1_];
+
+				return {
+					...state,
+					my_communities: {
+						active: actives_1_,
+						inactive: inactives_1_,
+					}
+				};
+			}
+			else
+				return state;
 		case DELETE_COMMUNITY:
 			const new_actives = state.my_communities.active.filter(item => action.payload !== item._id);
 			const new_inactives = state.my_communities.inactive.filter(item => action.payload !== item._id);
@@ -163,10 +201,26 @@ export default function(state = initialState, action){
 					inactive: new_inactives,
 				}
 			};
+		case DELETE_MULTI_COMMUNITY:
+			const new_actives_ = state.my_communities.active.filter(item => !action.payload.includes(item._id));
+			const new_inactives_ = state.my_communities.inactive.filter(item => !action.payload.includes(item._id));
+
+			return {
+				...state,
+				my_communities: {
+					active: new_actives_,
+					inactive: new_inactives_,
+				}
+			};
 		case PICK_COMMUNITY:
 			return {
 				...state,
 				community_activated: action.payload,
+			};
+		case PICK_MULTI_COMMUNITY:
+			return {
+				...state,
+				communities_activated: action.payload,
 			};
 		case SET_BILLING_INFO:
 			return {
@@ -235,14 +289,27 @@ export default function(state = initialState, action){
 				deactivating: action.payload,
 			};
 		case COUPON_VERIFIED:
-			return {
+			return action.payload.verified ? {
 				...state,
-				coupon_verified: action.payload, // true or false
+				coupon_verified: true,
+				coupon_amount_off: action.payload.amount_off,
+				coupon_percent_off: action.payload.percent_off,
+				coupon_message: "Discount code verified",
+			} : {
+				...state,
+				coupon_verified: false,
+				coupon_message: action.payload.message,
 			};
-		case COUPON_FAILED:
-			return {
+		case CLEAR_COUPON_STATUS:
+			return action.payload ? {
 				...state,
-				coupon_failed: action.payload, // true or false
+				coupon_message: '',
+			} : {
+				...state,
+				coupon_verified: false,
+				coupon_amount_off: 0,
+				coupon_percent_off: 0,
+				coupon_message: '',
 			};
 		case GET_PLAN:
 			return {
@@ -274,6 +341,7 @@ export default function(state = initialState, action){
 				...state,
 				search_results: action.payload.results,
 				counts: action.payload.counts,
+				categories: action.payload.categories,
 			};
 		case SORT_ORDER:
 			return {
@@ -311,17 +379,7 @@ export default function(state = initialState, action){
 				criteria: {
 					...state.criteria,
 					filter: {
-						days: "0".repeat(community_config.FILTERS.days.length),
-						times: "0".repeat(community_config.FILTERS.times.length),
-						frequency: "0".repeat(community_config.FILTERS.frequency.length),
-						ages: "0".repeat(community_config.FILTERS.ages.length),
-						gender: "0".repeat(community_config.FILTERS.gender.length),
-						parking: "0".repeat(community_config.FILTERS.parking.length),
-						ministries: "0".repeat(community_config.FILTERS.ministries.length),
-						other_services: "0".repeat(community_config.FILTERS.other_services.length),
-						ambiance: "0".repeat(community_config.FILTERS.ambiance.length),
-						event_type: "0".repeat(community_config.FILTERS.event_type.length),
-						support_type: "0".repeat(community_config.FILTERS.support_type.length),
+						...INIT_FILTERS,
 					}
 				}
 			};

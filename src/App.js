@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import {Provider} from "react-redux";
 import 'w3-css/w3.css';
 import './App.css';
-import SiteHeader from "./components/site-header";
 import Home from "./pages/home";
 import SearchResults from "./pages/search-results";
 import LoginPopup from "./pages/login-popup";
@@ -28,10 +27,10 @@ import WelcomePage from "./pages/welcome-page";
 import MakeSuggestionPage from "./pages/make-suggestion-page";
 import TermsNConditionsPage from "./pages/terms-n-conditions-page";
 import PrivacyPolicy from "./pages/privacy-policy";
-import PublicViewCommunity from "./pages/public-view-community";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
+import DashboardResults from "./pages/dashboard/dashboard-results";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -84,8 +83,8 @@ class App extends Component{
 							<Route exact path="/" component={Home}/>
 							<Route exact path="/search-results" component={SearchResults}/>
 							<Route path="/search-results/:category/:radius/:lat/:lng/:filter" component={SearchResults}/>
-							<Route path="/search-results-iframe/:owner/:category/:radius/:lat/:lng/:filter" component={SearchResultsIframe}/>
-							<Route path="/preview-search-results/:owner/:category/:radius/:lat/:lng/:filter" component={PreviewSearchResults}/>
+							<Route path="/iframe/:owner/:filter" component={SearchResultsIframe}/>
+							<Route path="/preview-search-results/:owner/:filter" component={PreviewSearchResults}/>
 
 							<Route exact path="/login-popup" component={LoginPopup}/>
 							<Route exact path="/register-popup" component={RegisterPopup}/>
@@ -98,11 +97,11 @@ class App extends Component{
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
 							<Route exact path="/view" component={ViewCommunity}/>
-							<Route exact path="/public-view" component={PublicViewCommunity}/>
 							<Route path="/view-community/:id" component={InvitedViewCommunity}/>
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
 							<PrivateRoute exact path="/dashboard" component={Admin}/>
+							<PrivateRoute exact path="/dashboard-results" component={DashboardResults}/>
 							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/account" component={AccountWrapper}/>
 							<Route exact path="/make-suggestion" component={MakeSuggestionPage}/>
