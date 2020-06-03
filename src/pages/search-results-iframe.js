@@ -162,9 +162,9 @@ class SearchResultsIframe extends Component{
 
 		if(prevProps.auth.user !== this.props.auth.user){
 			this.setState({
-				color_header_bg: this.props.auth.user.colors[0],
-				color_results_bg: this.props.auth.user.colors[1],
-				color_buttons: this.props.auth.user.colors[2],
+				color_header_bg: this.props.auth.user.colors === null ? '#f3f2f5' : this.props.auth.user.colors[0],
+				color_results_bg: this.props.auth.user.colors === null ? '#e8e5ea' : this.props.auth.user.colors[1],
+				color_buttons: this.props.auth.user.colors === null ? '#2e89fe' : this.props.auth.user.colors[2],
 			});
 
 			this.criteria = {

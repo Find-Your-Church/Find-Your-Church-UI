@@ -298,7 +298,7 @@ class Home extends Component{
 											maxWidth: this.state.iframe_width,
 											height: this.state.iframe_height,
 										}}>
-											<iframe
+											<iframe title={"preview communities"}
 												src="https://develop.findyourchurch.org/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
 												style={{
 													width: this.state.iframe_screen_width,
