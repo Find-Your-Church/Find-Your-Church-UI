@@ -489,10 +489,10 @@ input.w-button {
 
 .sign-body .w-form-fail {
 	display: none;
-	margin-top: 10px;
-	padding: 20px;
+	margin-top: 20px;
+	padding: 10px;
 	background-color: #ffdede;
-	font-size: 14px;
+	font-size: 16px;
 	color: brown;
 }
 
