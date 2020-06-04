@@ -256,13 +256,13 @@ class RegisterPopup extends Component{
 																>
 																	{({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
 																		<>
-																			<Tooltip placement={"top"}
-																							 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}
-																							 align={{offset: [0, 2],}}
-																							 visible={this.state.showed_tooltip}
-																			>
+																			{/*<Tooltip placement={"top"}*/}
+																			{/*				 overlay={`This coordinate is used as the point of origin for the search results displaying your active communities on your own website. If you or your organization does not have a website, or you have communities located in more than one state - you can leave this field blank.`}*/}
+																			{/*				 align={{offset: [0, 2],}}*/}
+																			{/*				 visible={this.state.showed_tooltip}*/}
+																			{/*>*/}
 																				<input className="form-input center  w-input-sign"
-																							 title={`Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.zip_code}`}
+																							 title={this.state.my_lat === undefined ? '' : `Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.zip_code}`}
 																							 {...getInputProps({
 																								 placeholder: "",
 																							 })}
@@ -270,7 +270,7 @@ class RegisterPopup extends Component{
 																							 onBlur={this.onBlurZipCode}
 																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																							 required=""/>
-																			</Tooltip>
+																			{/*</Tooltip>*/}
 																			<div className={"search-address-candidates"}
 																					 style={{left: "0", top: "unset", bottom: "48px"}}>
 																				{loading ?
