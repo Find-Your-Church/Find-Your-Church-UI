@@ -73,7 +73,7 @@ const initialState = {
 	criteria: {
 		owner: null,
 		category: '',
-		radius: 10, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
+		radius: null, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
 		address: "",
 		lat: 44.989999,
 		lng: -93.256088,

@@ -383,8 +383,9 @@
 	min-width: 100px;
 	min-height: 100px;
 	padding-top: 0;
-	border: 3px solid #fff;
+	border: 2px solid #fff;
 	border-radius: 50%;
+	background-color: #fff;
 	background-position: 0 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -392,8 +393,8 @@
 }
 
 .profpic-div .image-4 {
-	width: 94px;
-	height: 94px;
+	width: 96px;
+	height: 96px;
 }
 
 .image-4 {
@@ -635,6 +636,7 @@
 }
 
 .profile-info .profile-info-header {
+	padding-top: 5px;
 	line-height: 16px;
 	text-align: center;
 }
