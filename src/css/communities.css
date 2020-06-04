@@ -82,7 +82,7 @@
 	-webkit-align-items: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
-	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
+	border-bottom: 1px solid #ddd9e1;
 }
 
 .communities-body .flexdiv-left {
