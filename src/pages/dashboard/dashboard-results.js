@@ -780,7 +780,9 @@ class DashboardResults extends Component{
 						</div>
 					</main>
 				</div>
-				<SiteFooter/>
+				{this.state.showed_tab === 1 ? null : (
+					<SiteFooter/>
+				)}
 			</>
 		);
 	}
