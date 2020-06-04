@@ -382,12 +382,13 @@ class StripeSubscription extends Component{
 								<div className="invoice-div">
 									<div>
 										<div className="filtersheader-div">
-											<h4
-												className="table-header">Subtotal</h4>
+											<h4 className="table-header" style={{height: this.props.community.coupon_verified ? "54px" : "22px"}}>
+												Subtotal
+											</h4>
 										</div>
 									</div>
 									<div>
-										<h4 className={`value ${this.props.community.subscription ? "" : ""}`}>
+										<h4 className={`value ${this.props.community.subscription ? "" : ""}`} style={{textAlign: "right"}}>
 											{
 												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
@@ -395,6 +396,15 @@ class StripeSubscription extends Component{
 													: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))
 											}
 										</h4>
+										{this.props.community.coupon_verified ? (
+											<h4 className={`value right`} style={{paddingTop: "10px", textAlign: "right"}}>
+												{
+												this.props.community.coupon_amount_off !== null ?
+													`Amount off: ${showAmount(this.props.community.coupon_amount_off)}`
+													: `Percent off: ${this.props.community.coupon_percent_off} %`
+											}
+											</h4>
+										) : null}
 									</div>
 								</div>
 								{this.props.community.subscription !== "1" ? null :
