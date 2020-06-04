@@ -416,21 +416,23 @@ class StripeSubscription extends Component{
 								<div className="invoice-div top">
 									<div className="filtersheader-div" style={{display: "block"}}>
 										<h4 className="table-header">Due Today</h4>
-										{this.props.community.subscription ? (this.props.community.trialing ? (
-												<h4 className={"free-trial-text"}>
+										{this.props.community.subscription ? (
+											this.props.community.trialing ? (
+												<h4 className={"free-trial-text"} style={{paddingTop: "10px"}}>
 													Free trial
 													through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
-												</h4>) : null)
-											: (
-												this.props.community.trial_period_days > 0 ? (
-														<h4 className={"free-trial-text"} style={{paddingTop: "5px"}}>
-															Free trial through {upcoming_duedate.toLocaleDateString('en-US')}
-														</h4>)
-													: null)}
+												</h4>) : null
+										) : (
+											this.props.community.trial_period_days > 0 ? (
+												<h4 className={"free-trial-text"} style={{paddingTop: "10px"}}>
+													Free trial through {upcoming_duedate.toLocaleDateString('en-US')}
+												</h4>) : null
+										)}
 									</div>
 									<div>
 										<div className={`div10-bottom right`}>
-											<div className={this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? "strike" : ""}>
+											<div
+												className={this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? "strike" : ""}>
 												{
 													this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
 														: (this.props.community.is_sending ?
