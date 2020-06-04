@@ -473,9 +473,6 @@
 	grid-template-columns: 1fr 1fr;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
-	border-style: solid none none;
-	border-width: 1px;
-	border-color: #f3f2f5 #ddd9e1 #ddd9e1;
 	border-radius: 3px;
 	background-color: transparent;
 	box-shadow: none;
