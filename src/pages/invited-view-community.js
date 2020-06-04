@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Slide} from 'react-slideshow-image';
+import {Helmet} from 'react-helmet';
 import "../css/community-steps.css";
 import FilterItemCheck from "../components/filter-item-check";
 import FilterItemRadio from "../components/filter-item-radio";
@@ -101,6 +102,10 @@ class InvitedViewCommunity extends Component{
 
 			return (
 				<>
+					<Helmet>
+						<title>{this.props.community.view_community.community_name}</title>
+						<meta name={"description"} content={this.props.community.view_community.about}/>
+					</Helmet>
 					{in_frame ? null : (
 						<SiteHeader/>
 					)}
