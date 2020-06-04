@@ -107,6 +107,11 @@
 	color: #2e89fe;
 }
 
+.button-create.first {
+	display: inline-block;
+	width: auto;
+}
+
 .button-create::after {
 	padding-left: 6px;
 	content: "New Community";
@@ -114,6 +119,10 @@
 	font-weight: 600;
 	line-height: 18px;
 	color: #2e89fe;
+}
+
+.button-create.first::after {
+	content: "Add your first community";
 }
 
 .button-create.dashboard::after {
