@@ -247,8 +247,8 @@ class StripeSubscription extends Component{
 		}
 
 		const due_amount = this.props.community.subscription ?
-			showAmount((this.props.community.my_communities.active.length + this.props.community.communities_activated.length) * this.props.community.plan_price)
-			: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price);
+			showAmount(this.getDiscountedAmount((this.props.community.my_communities.active.length + this.props.community.communities_activated.length) * this.props.community.plan_price))
+			: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price));
 
 		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days);
 		const upcoming_duedate1 = getNextMonth(upcoming_duedate, 1);
@@ -261,6 +261,12 @@ class StripeSubscription extends Component{
 			: (this.props.community.is_sending ? (
 				<i className="fas fa-spinner fa-spin"/>
 			) : showAmount(this.props.community.plan_price));
+
+		const discount_price = this.props.community.subscription ?
+			showAmount(this.getDiscountedAmount(this.props.community.subscription.plan.amount))
+			: (this.props.community.is_sending ? (
+				<i className="fas fa-spinner fa-spin"/>
+			) : showAmount(this.getDiscountedAmount(this.props.community.plan_price)));
 
 		return (
 			<>
@@ -493,7 +499,7 @@ class StripeSubscription extends Component{
 											<div>
 												{this.props.community.my_communities.active.length + this.props.community.communities_activated.length}
 											</div>
-											<div>{subscription_price}</div>
+											<div>{discount_price}</div>
 											<div>{due_amount}</div>
 										</div>
 										<div className={"upcoming-payment-table-row"}>
@@ -507,7 +513,7 @@ class StripeSubscription extends Component{
 											<div>
 												{this.props.community.my_communities.active.length + this.props.community.communities_activated.length}
 											</div>
-											<div>{subscription_price}</div>
+											<div>{discount_price}</div>
 											<div>{due_amount}</div>
 										</div>
 										<div className={"upcoming-payment-table-row"}>
@@ -521,7 +527,7 @@ class StripeSubscription extends Component{
 											<div>
 												{this.props.community.my_communities.active.length + this.props.community.communities_activated.length}
 											</div>
-											<div>{subscription_price}</div>
+											<div>{discount_price}</div>
 											<div>{due_amount}</div>
 										</div>
 									</div>
