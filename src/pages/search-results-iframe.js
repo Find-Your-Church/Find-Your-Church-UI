@@ -635,7 +635,7 @@ class SearchResultsIframe extends Component{
 											 style={{backgroundImage: "url(/img/icon/icon-warning.svg)"}}>
 										<div>
 											We couldn't find
-											any {isEmpty(this.props.criteria.category) ? "community" : this.props.criteria.category} within {criteria_radius} mile{pl} of {isEmpty(this.props.criteria.address) ? "any location" : this.props.criteria.address}.
+											any {isEmpty(this.props.criteria.category) ? "communities" : this.props.criteria.category} near {isEmpty(this.props.criteria.address) ? "this location" : this.props.criteria.address}.
 										</div>
 										<div>
 											Try expanding your search radius.
