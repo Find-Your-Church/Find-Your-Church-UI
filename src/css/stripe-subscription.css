@@ -530,6 +530,7 @@ h4 {
 }
 
 .pay-info-row input {
+	font-weight: 600;
 	border: none;
 	color: #333;
 }

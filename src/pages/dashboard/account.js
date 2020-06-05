@@ -32,6 +32,9 @@ const cardStyle = {
 		fontWeight: "400",
 		color: "#333",
 		"::placeholder": {
+			fontFamily: "sans-serif",
+			fontSize: "14px",
+			fontWeight: "400",
 			color: "#858585",
 			opacity: 1,
 		}
