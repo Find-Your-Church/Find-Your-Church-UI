@@ -536,6 +536,7 @@ h4 {
 
 .pay-info-row input::placeholder{
 	color: #858585;
+	opacity: 1;
 }
 
 .submit-row {
