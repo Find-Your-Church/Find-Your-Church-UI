@@ -248,7 +248,7 @@ class MyCommunities extends Component{
 							: (
 								<>
 									<div className={"you-are-not-admin-text"}>
-										You are not the admin for any {this.props.status} communities.
+										You are not the owner of any {this.props.status} communities.
 									</div>
 									{this.props.communities['active'].length > 0 || this.props.communities['inactive'].length > 0 ? null : (
 										<div className={"div-20top"}>
