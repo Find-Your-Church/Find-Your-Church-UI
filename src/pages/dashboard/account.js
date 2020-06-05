@@ -28,11 +28,11 @@ import Tooltip from "rmc-tooltip/es";
 
 const cardStyle = {
 	base: {
+		fontFamily: "sans-serif",
 		fontSize: "16px",
 		fontWeight: "400",
 		color: "#333",
 		"::placeholder": {
-			fontFamily: "sans-serif",
 			fontSize: "14px",
 			fontWeight: "400",
 			color: "#858585",
