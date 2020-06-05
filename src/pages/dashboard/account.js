@@ -28,9 +28,12 @@ import Tooltip from "rmc-tooltip/es";
 
 const cardStyle = {
 	base: {
-		color: "#32325d",
+		fontSize: "16px",
+		fontWeight: "400",
+		color: "#333",
 		"::placeholder": {
-			color: "#aab7c4"
+			color: "#858585",
+			opacity: 1,
 		}
 	},
 	invalid: {
@@ -1157,9 +1160,9 @@ class Account extends Component{
 																			 value={this.state.name_on_card} autoFocus/>
 															</div>
 														) : (
-															<span className={"w3-center grey"}>
-														{customer ? customer.sources.data[0].name : "(Card holder name)"}
-													</span>
+															<span>
+																{customer ? customer.sources.data[0].name : "(Card holder name)"}
+															</span>
 														)}
 													</div>
 												</div>
