@@ -515,7 +515,7 @@ h4 {
 
 .card-holder-name::placeholder {
 	font-family: sans-serif !important;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 500;
 	color: #aab7c4;
 	opacity: 1;
@@ -523,12 +523,19 @@ h4 {
 
 .pay-info-row {
 	width: 100%;
+	font-size: 16px;
+	font-weight: 400;
 	padding: 20px 0;
-	color: #aaaaaa;
+	color: #333;
 }
 
 .pay-info-row input {
 	border: none;
+	color: #333;
+}
+
+.pay-info-row input::placeholder{
+	color: #858585;
 }
 
 .submit-row {
@@ -638,12 +645,14 @@ h4 {
 .card-detail-item {
 	padding: 10px 0 20px;
 	height: auto;
-	font-size: 14px;
-	color: #999999;
+	font-size: 16px;
+	line-height: 22px;
+	color: #333;
 }
 
 .card-detail-item div {
-	color: #999999;
+	font-size: 16px;
+	color: #333;
 }
 
 .stripe-label {
