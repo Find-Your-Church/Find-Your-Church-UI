@@ -456,7 +456,7 @@
 	-webkit-flex: 0 auto;
 	-ms-flex: 0 auto;
 	flex: 0 auto;
-	border-bottom: 1px none #e8e5ea;
+	border-bottom: 1px solid #ddd9e1;
 	background-color: transparent;
 	color: #333;
 }
