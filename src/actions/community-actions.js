@@ -460,7 +460,7 @@ export const verifyCoupon = (info) => dispatch => {
 			// console.log(res.data);
 			dispatch({
 				type: COUPON_VERIFIED,
-				payload: res.data, // {verified = true, amount_off, percent_off}
+				payload: res.data, // {verified = true, name, amount_off, percent_off}
 			});
 		})
 		.catch(err => {
