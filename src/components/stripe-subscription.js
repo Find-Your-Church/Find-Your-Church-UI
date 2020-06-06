@@ -353,28 +353,30 @@ class StripeSubscription extends Component{
 										</h4>
 									</div>
 								</div>
-								<div className="invoice-div discount">
-									<div className="filtersheader-div">
-										<h4 className="table-header">Discount code</h4>
+								{this.props.community.subscription || this.props.community.coupon_verified ? null : (
+									<div className="invoice-div discount">
+										<div className="filtersheader-div">
+											<h4 className="table-header">Discount code</h4>
+										</div>
+										<div className={`discount-input-part`}>
+											<input type="text"
+														 className={`subscription-discount-input w3-half w3-normal ${this.props.community.coupon_verified ? "verified" : ""}`}
+														 title={this.props.community.coupon_verified ? "Discount code verified" : ""}
+														 placeholder="Enter discount code here"
+														 id="coupon" onChange={this.onChange}
+														 value={this.state.coupon} readOnly={this.props.community.is_sending} autoFocus/>
+										</div>
+										<button onClick={this.verifyCoupon}
+														className={"w3-button w3-padding-small apply-button"}>
+											Apply
+										</button>
+										<div/>
+										<div className={"discount-status"}
+												 style={{display: this.state.showed_coupon_error ? "block" : "none"}}>
+											{this.props.community.coupon_message}
+										</div>
 									</div>
-									<div className={`discount-input-part`}>
-										<input type="text"
-													 className={`subscription-discount-input w3-half w3-normal ${this.props.community.coupon_verified ? "verified" : ""}`}
-													 title={this.props.community.coupon_verified ? "Discount code verified" : ""}
-													 placeholder="Enter discount code here"
-													 id="coupon" onChange={this.onChange}
-													 value={this.state.coupon} readOnly={this.props.community.is_sending} autoFocus/>
-									</div>
-									<button onClick={this.verifyCoupon}
-													className={"w3-button w3-padding-small apply-button"}>
-										Apply
-									</button>
-									<div/>
-									<div className={"discount-status"}
-											 style={{display: this.state.showed_coupon_error ? "block" : "none"}}>
-										{this.props.community.coupon_message}
-									</div>
-								</div>
+								)}
 							</div>
 						</div>
 						<div className="div-block-147">
@@ -397,7 +399,7 @@ class StripeSubscription extends Component{
 								<div className="invoice-div">
 									<div>
 										<div className="filtersheader-div">
-											<h4 className="table-header" style={{height: this.props.community.coupon_verified ? "54px" : "22px"}}>
+											<h4 className="table-header">
 												Subtotal
 											</h4>
 										</div>
@@ -411,17 +413,32 @@ class StripeSubscription extends Component{
 													: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))
 											}
 										</h4>
-										{this.props.community.coupon_verified ? (
-											<h4 className={`value right`} style={{paddingTop: "10px", textAlign: "right"}}>
-												{
-												this.props.community.coupon_amount_off !== null ?
-													`Amount off: ${showAmount(this.props.community.coupon_amount_off)}`
-													: `Percent off: ${this.props.community.coupon_percent_off} %`
-											}
-											</h4>
-										) : null}
 									</div>
 								</div>
+								{(this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid) || this.props.community.coupon_verified ? (
+									<div className="invoice-div">
+										<div>
+											<div className="filtersheader-div">
+												<h4 className="table-header">
+													Discount
+												</h4>
+											</div>
+										</div>
+										<div>
+											<h4 className={`value right`} style={{textAlign: "right"}}>
+												{this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid ? (
+													this.props.community.upcoming_invoice.discount.coupon.amount_off !== null ?
+														`${this.props.community.upcoming_invoice.discount.coupon.id} (${showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off)} off)`
+														: `${this.props.community.upcoming_invoice.discount.coupon.id} (${this.props.community.upcoming_invoice.discount.coupon.percent_off}% off)`
+												) : (this.props.community.coupon_verified ? (
+													this.props.community.coupon_amount_off !== null ?
+														`${this.state.coupon} (${showAmount(this.props.community.coupon_amount_off)} off)`
+														: `${this.state.coupon} (${this.props.community.coupon_percent_off}% off)`
+												) : null)}
+											</h4>
+										</div>
+									</div>
+								) : null}
 								{this.props.community.subscription !== "1" ? null :
 									<div className="invoice-row">
 										<div className="invoice-div">
