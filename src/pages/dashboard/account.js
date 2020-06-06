@@ -1091,7 +1091,7 @@ class Account extends Component{
 													<h4 className="table-header">Discount applied</h4>
 												</div>
 												<h4 className={"table-item right grey"}>
-													{this.props.community.upcoming_invoice.discount.coupon.id}
+													{this.props.community.upcoming_invoice.discount.coupon.name ? this.props.community.upcoming_invoice.discount.coupon.name : "Discount"}
 													&nbsp;
 													({this.props.community.upcoming_invoice.discount.coupon.amount_off ?
 													showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off) + " off"
