@@ -457,6 +457,22 @@ class StripeSubscription extends Component{
 								}
 								<div className="invoice-div top">
 									<div className="filtersheader-div" style={{display: "block"}}>
+										<h4 className="table-header">Total</h4>
+									</div>
+									<div>
+										<div className={`div10-bottom right`}>
+											<div>
+												{this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
+													: (this.props.community.is_sending ?
+														<i className="fas fa-spinner fa-spin"/>
+														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="invoice-div top">
+									<div className="filtersheader-div" style={{display: "block"}}>
 										<h4 className="table-header">Due Today</h4>
 										{this.props.community.subscription ? (
 											this.props.community.trialing ? (
@@ -482,16 +498,6 @@ class StripeSubscription extends Component{
 														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
 												}
 											</div>
-											{/*this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
-												<h4
-													className={"value " + (this.props.community.trialing ? "strikethrough" : "") + (this.props.community.subscription ? "" : " ")}>
-													{this.props.community.subscription ?
-														showAmount(prorated * this.props.community.communities_activated.length * this.props.community.subscription.plan.amount)
-														: (this.props.community.is_sending ?
-															<i className="fas fa-spinner fa-spin"/>
-															: "$0.00")}
-												</h4>
-											)*/}
 											{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? (
 												<h4 className="value right" style={{paddingTop: "10px", color: "#3db639"}}>
 													{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
