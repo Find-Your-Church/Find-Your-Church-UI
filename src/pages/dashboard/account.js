@@ -1085,6 +1085,20 @@ class Account extends Component{
 														: "00")}
 											</h4>
 										</div>
+										{this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid ? (
+											<div className="table-row-2">
+												<div className="flexdiv-left">
+													<h4 className="table-header">Discount applied</h4>
+												</div>
+												<h4 className={"table-item right grey"}>
+													{this.props.community.upcoming_invoice.discount.coupon.id}
+													&nbsp;
+													({this.props.community.upcoming_invoice.discount.coupon.amount_off ?
+													showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off) + " off"
+													: this.props.community.upcoming_invoice.discount.coupon.amount_off + "% off"})
+												</h4>
+											</div>
+										) : null}
 										<div className="table-row-2 upcoming" style={{borderBottom: "none"}}>
 											<h4 className="table-header">
 												Upcoming Payments
