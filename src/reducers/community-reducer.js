@@ -63,6 +63,7 @@ const initialState = {
 	active_status: 0, // 0 - init, 1 - success, 2 - failed
 	deactivating: false,
 	coupon_message: '',
+	coupon_name: null,
 	coupon_verified: false,
 	coupon_amount_off: 0,
 	coupon_percent_off: 0,
@@ -292,6 +293,7 @@ export default function(state = initialState, action){
 			return action.payload.verified ? {
 				...state,
 				coupon_verified: true,
+				coupon_name: action.payload.name,
 				coupon_amount_off: action.payload.amount_off,
 				coupon_percent_off: action.payload.percent_off,
 				coupon_message: "Discount code verified",

@@ -428,12 +428,12 @@ class StripeSubscription extends Component{
 											<h4 className={`value right`} style={{textAlign: "right"}}>
 												{this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid ? (
 													this.props.community.upcoming_invoice.discount.coupon.amount_off !== null ?
-														`${this.props.community.upcoming_invoice.discount.coupon.id} (${showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off)} off)`
-														: `${this.props.community.upcoming_invoice.discount.coupon.id} (${this.props.community.upcoming_invoice.discount.coupon.percent_off}% off)`
+														`${this.props.community.upcoming_invoice.discount.coupon.name ? this.props.community.upcoming_invoice.discount.coupon.name : "Discount"} (${showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off)} off)`
+														: `${this.props.community.upcoming_invoice.discount.coupon.name ? this.props.community.upcoming_invoice.discount.coupon.name : "Discount"} (${this.props.community.upcoming_invoice.discount.coupon.percent_off}% off)`
 												) : (this.props.community.coupon_verified ? (
 													this.props.community.coupon_amount_off !== null ?
-														`${this.state.coupon} (${showAmount(this.props.community.coupon_amount_off)} off)`
-														: `${this.state.coupon} (${this.props.community.coupon_percent_off}% off)`
+														`${this.props.community.coupon_name ? this.props.community.coupon_name : "Discount"} (${showAmount(this.props.community.coupon_amount_off)} off)`
+														: `${this.props.community.coupon_name ? this.props.community.coupon_name : "Discount"} (${this.props.community.coupon_percent_off}% off)`
 												) : null)}
 											</h4>
 										</div>
