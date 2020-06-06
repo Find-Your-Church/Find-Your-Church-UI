@@ -258,7 +258,7 @@ class CommunityStep extends Component{
 
 		total_size += img_buf.length;
 
-		console.log(total_size);
+		// console.log(total_size);
 
 		if(total_size >= app_config.MAX_TOTAL_SIZE){
 			this.setState({showTotalSizeError: true});

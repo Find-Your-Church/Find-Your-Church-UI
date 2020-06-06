@@ -76,7 +76,6 @@ class RegisterPopup extends Component{
 		};
 
 		this.props.registerUser(newUser, this.props.history);
-		console.log(newUser.location);
 	};
 
 	onFailure = (error) => {
