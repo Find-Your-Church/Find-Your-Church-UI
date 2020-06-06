@@ -200,7 +200,16 @@ class StripeSubscription extends Component{
 	getDiscountedAmount = (value) => {
 		let ret_val = value;
 
-		if(this.props.community.coupon_verified){
+		if(this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid){
+			ret_val = this.props.community.upcoming_invoice.discount.coupon.amount_off !== null ?
+				value - this.props.community.upcoming_invoice.discount.coupon.amount_off
+				: (
+					this.props.community.upcoming_invoice.discount.coupon.percent_off !== null ?
+						value * (100 - this.props.community.upcoming_invoice.discount.coupon.percent_off) / 100
+						: value
+				);
+		}
+		else if(this.props.community.coupon_verified){
 			ret_val = this.props.community.coupon_amount_off !== null ?
 				value - this.props.community.coupon_amount_off
 				: (
