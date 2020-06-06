@@ -488,11 +488,10 @@ class Account extends Component{
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
 
-		const uc_amount = this.props.community.subscription ?
-			showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
-			: (this.props.community.is_sending ?
-				<i className="fas fa-spinner fa-spin"/>
-				: "");
+		const uc_amount = this.props.community.upcoming_invoice ?
+			showAmount(this.props.community.upcoming_invoice.total) : "-";
+
+		const uc_price = this.props.community.upcoming_invoice && this.props.community.my_communities.active.length > 0 ? showAmount(this.props.community.upcoming_invoice.total / this.props.community.my_communities.active.length) : "-";
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
@@ -1102,22 +1101,19 @@ class Account extends Component{
 												<div className={"upcoming-payment-table-row"}>
 													<div>{this.props.community.subscription ? next_due_date.toLocaleDateString('en-US') : "-"}</div>
 													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_price}</div>
 													<div>{uc_amount}</div>
 												</div>
 												<div className={"upcoming-payment-table-row"}>
 													<div>{this.props.community.subscription ? next_month1.toLocaleDateString('en-US') : "-"}</div>
 													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_price}</div>
 													<div>{uc_amount}</div>
 												</div>
 												<div className={"upcoming-payment-table-row"}>
 													<div>{this.props.community.subscription ? next_month2.toLocaleDateString('en-US') : "-"}</div>
 													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_price}</div>
 													<div>{uc_amount}</div>
 												</div>
 											</h4>
