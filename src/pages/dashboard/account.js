@@ -472,6 +472,8 @@ class Account extends Component{
 	render(){
 		const {user} = this.props.auth;
 
+		console.log(this.props.community.upcoming_invoice);
+
 		let next_due_date = "", next_month1 = "", next_month2 = "";
 		if(this.props.community.subscription){
 			const init_date = new Date(this.props.community.subscription.billing_cycle_anchor * 1000);
@@ -1163,7 +1165,7 @@ class Account extends Component{
 																			 value={this.state.name_on_card} autoFocus/>
 															</div>
 														) : (
-															<span>
+															<span className={{height: "18px"}}>
 																{customer ? customer.sources.data[0].name : "(Card holder name)"}
 															</span>
 														)}
