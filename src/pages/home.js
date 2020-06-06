@@ -320,7 +320,7 @@ class Home extends Component{
 					<div className="_20top-div topborder opacity-transition" ref={this.refLp32}
 							 style={{opacity: this.state.lp32_opacity}}>
 						<h1 data-w-id="e8a8a1ad-a79a-7812-40e8-2a63b00abef5" className="lp-paragraph">
-							Below is a preview of what your communities would look like if you chose to use our technology to feature them on your website. The functionality is fully responsive and compatible on any device or browser, and the display itself can be customized to match your brand or personality. Best part? It only takes three clicks to install. Go ahead, try it out!
+							In addition to making it easier for others to find and plug into your communities, you can also feature yours on your own website using our enterprise search engine technology. The display itself is fully customizable to match your brand or personality, and the functionality is compatible on any device or browser. In addition, you can embed it on as many different pages as you would like in just three clicks, with the added peace of mind of knowing you have our incredible community support team behind you every step of the way.
 						</h1>
 					</div>
 					<div className={" opacity-transition"} ref={this.refLp33} style={{opacity: this.state.lp33_opacity}}>
