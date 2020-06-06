@@ -393,8 +393,6 @@ class SearchResultsIframe extends Component{
 			selectedNone = true;
 		}
 
-		console.log(this.props.criteria.radius);
-
 		return (
 			<>
 				<main id="content-body-iframe" className="w3-row">
