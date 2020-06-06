@@ -152,7 +152,7 @@ class Account extends Component{
 	changeUserPic(files){
 		const file_size = parseInt(files.size);
 
-		console.log(file_size);
+		// console.log(file_size);
 
 		if(file_size > config.MAX_PIC_SIZE){
 			this.setState({showSizeError: true});
@@ -307,7 +307,7 @@ class Account extends Component{
 
 	changeWebsite = () => {
 		if(this.state.editingWebsite){
-			console.log(this.state.user_website);
+			// console.log(this.state.user_website);
 			this.props.updateUserInfo({
 				id: this.props.auth.user.id,
 				website: this.state.user_website,
