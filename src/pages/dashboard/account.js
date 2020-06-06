@@ -1095,7 +1095,7 @@ class Account extends Component{
 													&nbsp;
 													({this.props.community.upcoming_invoice.discount.coupon.amount_off ?
 													showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off) + " off"
-													: this.props.community.upcoming_invoice.discount.coupon.amount_off + "% off"})
+													: this.props.community.upcoming_invoice.discount.coupon.percent_off + "% off"})
 												</h4>
 											</div>
 										) : null}
