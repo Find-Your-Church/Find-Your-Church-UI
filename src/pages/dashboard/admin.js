@@ -26,6 +26,12 @@ class Admin extends Component{
 		this.setState({showed_active: isActive});
 	};
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevProps.community.my_communities !== this.props.community.my_communities){
+			this.setState({showed_active: true});
+		}
+	}
+
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
 			return {errors: nextProps.errors};

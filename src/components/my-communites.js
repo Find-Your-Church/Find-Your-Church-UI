@@ -16,6 +16,7 @@ import {
 import formatNumber from "../utils/formatNumber";
 import Popup from "reactjs-popup";
 import community_config from "../conf/community-conf";
+import {Link} from "react-router-dom";
 
 class MyCommunities extends Component{
 	constructor(props){
@@ -151,8 +152,10 @@ class MyCommunities extends Component{
 											</>
 										) : (
 											<>
-												<i>Inactive</i> communities will not appear in search results and are only viewable by you. <b><i>New
-												Communities</i> are inactive by default until you manually activate them.</b> As the community owner,
+												<i>Inactive</i> communities will not appear in search results and are only viewable by
+												you. <b><i>New
+												Communities</i> are inactive by default until you manually activate them.</b> As the community
+												owner,
 												you can edit the community information or activate the community at anytime.
 											</>
 										)}
@@ -243,9 +246,18 @@ class MyCommunities extends Component{
 									})}
 								</div>)
 							: (
-								<div className={"w3-normal w3-text-grey"}>
-									You are not the Admin for any {this.props.status} communities.
-								</div>
+								<>
+									<div className={"you-are-not-admin-text"}>
+										You are not the owner of any {this.props.status} communities.
+									</div>
+									{this.props.communities['active'].length > 0 || this.props.communities['inactive'].length > 0 ? null : (
+										<div className={"div-20top"}>
+											<Link to="/create-new-community" className="button-create w-button first">
+												<i className={"fas fa-users"}/>
+											</Link>
+										</div>
+									)}
+								</>
 							)
 						}
 					</div>

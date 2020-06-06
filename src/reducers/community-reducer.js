@@ -63,6 +63,7 @@ const initialState = {
 	active_status: 0, // 0 - init, 1 - success, 2 - failed
 	deactivating: false,
 	coupon_message: '',
+	coupon_name: null,
 	coupon_verified: false,
 	coupon_amount_off: 0,
 	coupon_percent_off: 0,
@@ -73,7 +74,7 @@ const initialState = {
 	criteria: {
 		owner: null,
 		category: '',
-		radius: 10, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
+		radius: null, // 1, 3, and 5 miles -> zoom: 14(1 mile), 12(4 miles), 11(8 miles)
 		address: "",
 		lat: 44.989999,
 		lng: -93.256088,
@@ -292,6 +293,7 @@ export default function(state = initialState, action){
 			return action.payload.verified ? {
 				...state,
 				coupon_verified: true,
+				coupon_name: action.payload.name,
 				coupon_amount_off: action.payload.amount_off,
 				coupon_percent_off: action.payload.percent_off,
 				coupon_message: "Discount code verified",

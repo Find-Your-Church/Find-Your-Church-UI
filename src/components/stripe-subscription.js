@@ -200,7 +200,16 @@ class StripeSubscription extends Component{
 	getDiscountedAmount = (value) => {
 		let ret_val = value;
 
-		if(this.props.community.coupon_verified){
+		if(this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid){
+			ret_val = this.props.community.upcoming_invoice.discount.coupon.amount_off !== null ?
+				value - this.props.community.upcoming_invoice.discount.coupon.amount_off
+				: (
+					this.props.community.upcoming_invoice.discount.coupon.percent_off !== null ?
+						value * (100 - this.props.community.upcoming_invoice.discount.coupon.percent_off) / 100
+						: value
+				);
+		}
+		else if(this.props.community.coupon_verified){
 			ret_val = this.props.community.coupon_amount_off !== null ?
 				value - this.props.community.coupon_amount_off
 				: (
@@ -247,8 +256,8 @@ class StripeSubscription extends Component{
 		}
 
 		const due_amount = this.props.community.subscription ?
-			showAmount((this.props.community.my_communities.active.length + this.props.community.communities_activated.length) * this.props.community.plan_price)
-			: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price);
+			showAmount(this.getDiscountedAmount((this.props.community.my_communities.active.length + this.props.community.communities_activated.length) * this.props.community.plan_price))
+			: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price));
 
 		const upcoming_duedate = new Date(to_date.getFullYear(), to_date.getMonth(), to_date.getDate() + this.props.community.trial_period_days);
 		const upcoming_duedate1 = getNextMonth(upcoming_duedate, 1);
@@ -261,6 +270,12 @@ class StripeSubscription extends Component{
 			: (this.props.community.is_sending ? (
 				<i className="fas fa-spinner fa-spin"/>
 			) : showAmount(this.props.community.plan_price));
+
+		const discount_price = this.props.community.subscription ?
+			showAmount(this.getDiscountedAmount(this.props.community.subscription.plan.amount))
+			: (this.props.community.is_sending ? (
+				<i className="fas fa-spinner fa-spin"/>
+			) : showAmount(this.getDiscountedAmount(this.props.community.plan_price)));
 
 		return (
 			<>
@@ -338,28 +353,30 @@ class StripeSubscription extends Component{
 										</h4>
 									</div>
 								</div>
-								<div className="invoice-div discount">
-									<div className="filtersheader-div">
-										<h4 className="table-header">Discount code</h4>
+								{this.props.community.subscription || this.props.community.coupon_verified ? null : (
+									<div className="invoice-div discount">
+										<div className="filtersheader-div">
+											<h4 className="table-header">Discount code</h4>
+										</div>
+										<div className={`discount-input-part`}>
+											<input type="text"
+														 className={`subscription-discount-input w3-half w3-normal ${this.props.community.coupon_verified ? "verified" : ""}`}
+														 title={this.props.community.coupon_verified ? "Discount code verified" : ""}
+														 placeholder="Enter discount code here"
+														 id="coupon" onChange={this.onChange}
+														 value={this.state.coupon} readOnly={this.props.community.is_sending} autoFocus/>
+										</div>
+										<button onClick={this.verifyCoupon}
+														className={"w3-button w3-padding-small apply-button"}>
+											Apply
+										</button>
+										<div/>
+										<div className={"discount-status"}
+												 style={{display: this.state.showed_coupon_error ? "block" : "none"}}>
+											{this.props.community.coupon_message}
+										</div>
 									</div>
-									<div className={`discount-input-part`}>
-										<input type="text"
-													 className={`subscription-discount-input w3-half w3-normal ${this.props.community.coupon_verified ? "verified" : ""}`}
-													 title={this.props.community.coupon_verified ? "Discount code verified" : ""}
-													 placeholder="Enter discount code here"
-													 id="coupon" onChange={this.onChange}
-													 value={this.state.coupon} readOnly={this.props.community.is_sending} autoFocus/>
-									</div>
-									<button onClick={this.verifyCoupon}
-													className={"w3-button w3-padding-small apply-button"}>
-										Apply
-									</button>
-									<div/>
-									<div className={"discount-status"}
-											 style={{display: this.state.showed_coupon_error ? "block" : "none"}}>
-										{this.props.community.coupon_message}
-									</div>
-								</div>
+								)}
 							</div>
 						</div>
 						<div className="div-block-147">
@@ -382,12 +399,13 @@ class StripeSubscription extends Component{
 								<div className="invoice-div">
 									<div>
 										<div className="filtersheader-div">
-											<h4
-												className="table-header">Subtotal</h4>
+											<h4 className="table-header">
+												Subtotal
+											</h4>
 										</div>
 									</div>
 									<div>
-										<h4 className={`value ${this.props.community.subscription ? "" : ""}`}>
+										<h4 className={`value ${this.props.community.subscription ? "" : ""}`} style={{textAlign: "right"}}>
 											{
 												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
@@ -397,6 +415,30 @@ class StripeSubscription extends Component{
 										</h4>
 									</div>
 								</div>
+								{(this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid) || this.props.community.coupon_verified ? (
+									<div className="invoice-div">
+										<div>
+											<div className="filtersheader-div">
+												<h4 className="table-header">
+													Discount
+												</h4>
+											</div>
+										</div>
+										<div>
+											<h4 className={`value right`} style={{textAlign: "right"}}>
+												{this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid ? (
+													this.props.community.upcoming_invoice.discount.coupon.amount_off !== null ?
+														`${this.props.community.upcoming_invoice.discount.coupon.name ? this.props.community.upcoming_invoice.discount.coupon.name : "Discount"} (${showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off)} off)`
+														: `${this.props.community.upcoming_invoice.discount.coupon.name ? this.props.community.upcoming_invoice.discount.coupon.name : "Discount"} (${this.props.community.upcoming_invoice.discount.coupon.percent_off}% off)`
+												) : (this.props.community.coupon_verified ? (
+													this.props.community.coupon_amount_off !== null ?
+														`${this.props.community.coupon_name ? this.props.community.coupon_name : "Discount"} (${showAmount(this.props.community.coupon_amount_off)} off)`
+														: `${this.props.community.coupon_name ? this.props.community.coupon_name : "Discount"} (${this.props.community.coupon_percent_off}% off)`
+												) : null)}
+											</h4>
+										</div>
+									</div>
+								) : null}
 								{this.props.community.subscription !== "1" ? null :
 									<div className="invoice-row">
 										<div className="invoice-div">
@@ -415,22 +457,40 @@ class StripeSubscription extends Component{
 								}
 								<div className="invoice-div top">
 									<div className="filtersheader-div" style={{display: "block"}}>
-										<h4 className="table-header">Due Today</h4>
-										{this.props.community.subscription ? (this.props.community.trialing ? (
-												<h4 className={"free-trial-text"}>
-													Free trial
-													through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
-												</h4>) : null)
-											: (
-												this.props.community.trial_period_days > 0 ? (
-														<h4 className={"free-trial-text"} style={{paddingTop: "5px"}}>
-															Free trial through {upcoming_duedate.toLocaleDateString('en-US')}
-														</h4>)
-													: null)}
+										<h4 className="table-header">Total</h4>
 									</div>
 									<div>
 										<div className={`div10-bottom right`}>
-											<div className={this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? "strike" : ""}>
+											<div>
+												{this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
+													: (this.props.community.is_sending ?
+														<i className="fas fa-spinner fa-spin"/>
+														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
+												}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="invoice-div top">
+									<div className="filtersheader-div" style={{display: "block"}}>
+										<h4 className="table-header">Due Today</h4>
+										{this.props.community.subscription ? (
+											this.props.community.trialing ? (
+												<h4 className={"free-trial-text"} style={{paddingTop: "10px"}}>
+													Free trial
+													through {new Date(this.props.community.subscription.trial_end * 1000).toLocaleDateString('en-US')}
+												</h4>) : null
+										) : (
+											this.props.community.trial_period_days > 0 ? (
+												<h4 className={"free-trial-text"} style={{paddingTop: "10px"}}>
+													Free trial through {upcoming_duedate.toLocaleDateString('en-US')}
+												</h4>) : null
+										)}
+									</div>
+									<div>
+										<div className={`div10-bottom right`}>
+											<div
+												className={this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? "strike" : ""}>
 												{
 													this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
 														: (this.props.community.is_sending ?
@@ -438,16 +498,6 @@ class StripeSubscription extends Component{
 														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
 												}
 											</div>
-											{/*this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? null : (
-												<h4
-													className={"value " + (this.props.community.trialing ? "strikethrough" : "") + (this.props.community.subscription ? "" : " ")}>
-													{this.props.community.subscription ?
-														showAmount(prorated * this.props.community.communities_activated.length * this.props.community.subscription.plan.amount)
-														: (this.props.community.is_sending ?
-															<i className="fas fa-spinner fa-spin"/>
-															: "$0.00")}
-												</h4>
-											)*/}
 											{this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? (
 												<h4 className="value right" style={{paddingTop: "10px", color: "#3db639"}}>
 													{this.props.community.trialing ? "$0.00" : (this.props.community.subscription ?
@@ -481,7 +531,7 @@ class StripeSubscription extends Component{
 											<div>
 												{this.props.community.my_communities.active.length + this.props.community.communities_activated.length}
 											</div>
-											<div>{subscription_price}</div>
+											<div>{discount_price}</div>
 											<div>{due_amount}</div>
 										</div>
 										<div className={"upcoming-payment-table-row"}>
@@ -495,7 +545,7 @@ class StripeSubscription extends Component{
 											<div>
 												{this.props.community.my_communities.active.length + this.props.community.communities_activated.length}
 											</div>
-											<div>{subscription_price}</div>
+											<div>{discount_price}</div>
 											<div>{due_amount}</div>
 										</div>
 										<div className={"upcoming-payment-table-row"}>
@@ -509,7 +559,7 @@ class StripeSubscription extends Component{
 											<div>
 												{this.props.community.my_communities.active.length + this.props.community.communities_activated.length}
 											</div>
-											<div>{subscription_price}</div>
+											<div>{discount_price}</div>
 											<div>{due_amount}</div>
 										</div>
 									</div>

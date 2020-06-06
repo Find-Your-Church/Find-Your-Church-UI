@@ -346,7 +346,6 @@ class DashboardResults extends Component{
 								this.state.showed_tab === 0 ? (
 									<div className={"iframe-details w3-animate-opacity"}>
 										<div className="accordionheader-div" style={{
-											borderBottom: "1px solid #d3ced7",
 											color: "#333",
 										}}>
 											<h4 className="accountcontainer-header">
@@ -646,7 +645,7 @@ class DashboardResults extends Component{
 											<div className={"iframe-details w3-animate-opacity"}>
 												<div className="dashboardheader-div" style={{
 													paddingBottom: "10px",
-													borderBottom: "1px solid #d3ced7",
+													borderBottom: "1px solid #ddd9e1",
 													color: "#333",
 												}}>
 													<h4 className="accountcontainer-header">How to display your communities on your own site:</h4>
@@ -780,7 +779,9 @@ class DashboardResults extends Component{
 						</div>
 					</main>
 				</div>
-				<SiteFooter/>
+				{this.state.showed_tab === 1 ? null : (
+					<SiteFooter/>
+				)}
 			</>
 		);
 	}

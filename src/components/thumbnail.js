@@ -111,6 +111,10 @@ class Thumbnail extends Component{
 		if(this.props.status === "inactive" && prevProps.community.communities_activated !== this.props.community.communities_activated && this.props.community.communities_activated.length === 0){
 			this.setState({checked: false});
 		}
+
+		if(prevProps.community.showing !== this.props.community.showing && !this.props.community.showing){
+			this.setState({checked: false});
+		}
 	}
 
 	render(){

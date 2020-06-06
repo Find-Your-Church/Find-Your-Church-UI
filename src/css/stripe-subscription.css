@@ -413,7 +413,6 @@ h4 {
 	padding: 20px 20px 0;
 	border: 1px none #fff;
 	background-color: #e8e5ea;
-	border-radius: 0 0 4px 4px;
 	box-shadow: none;
 }
 
@@ -516,7 +515,7 @@ h4 {
 
 .card-holder-name::placeholder {
 	font-family: sans-serif !important;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 500;
 	color: #aab7c4;
 	opacity: 1;
@@ -524,12 +523,22 @@ h4 {
 
 .pay-info-row {
 	width: 100%;
+	font-size: 16px;
+	font-weight: 400;
 	padding: 20px 0;
-	color: #aaaaaa;
+	color: #333;
 }
 
 .pay-info-row input {
+	line-height: 20px;
+	font-weight: 600;
 	border: none;
+	color: #333;
+}
+
+.pay-info-row input::placeholder{
+	color: #858585;
+	opacity: 1;
 }
 
 .submit-row {
@@ -639,12 +648,14 @@ h4 {
 .card-detail-item {
 	padding: 10px 0 20px;
 	height: auto;
-	font-size: 14px;
-	color: #999999;
+	font-size: 16px;
+	line-height: 22px;
+	color: #333;
 }
 
 .card-detail-item div {
-	color: #999999;
+	font-size: 16px;
+	color: #333;
 }
 
 .stripe-label {
@@ -708,10 +719,12 @@ h4 {
 }
 
 .subscription-discount-input {
+	font-size: 16px;
 	line-height: 24px;
 	outline: none;
 	border: none;
 	border-bottom: 1px solid rgba(27, 0, 51, 0.05);
+	color: #333;
 	text-align: left;
 }
 
@@ -823,6 +836,7 @@ h4 {
 
 .free-trial-text {
 	padding-top: 10px;
-	color: #3db639;
+	line-height: 22px;
 	font-weight: 400;
+	color: #3db639;
 }

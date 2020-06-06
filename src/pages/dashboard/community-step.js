@@ -98,6 +98,8 @@ class CommunityStep extends Component{
 			tooltip_content: community_config.TOOL_TIPS[""],
 
 			tooltip_width: 0,
+
+			saving: false,
 		};
 
 		this.onSubmitCommunity = this.onSubmitCommunity.bind(this);
@@ -121,6 +123,8 @@ class CommunityStep extends Component{
 				this.setState({coordinate: latLng, passable: true});
 			})
 			.catch(error => console.error('Error', error));
+
+		this.setState({saving: false});
 	}
 
 	componentWillUnmount(){
@@ -254,7 +258,7 @@ class CommunityStep extends Component{
 
 		total_size += img_buf.length;
 
-		console.log(total_size);
+		// console.log(total_size);
 
 		if(total_size >= app_config.MAX_TOTAL_SIZE){
 			this.setState({showTotalSizeError: true});
@@ -321,6 +325,8 @@ class CommunityStep extends Component{
 		if(!this.state.passable || this.state.error_community_name || this.state.error_community_category || this.state.error_community_address)
 			return;
 
+		this.setState({saving: true});
+
 		// saved the information into local storage to be submitted on to server.
 		const info_1 = {
 			community_name: this.state.community_name,
@@ -372,6 +378,12 @@ class CommunityStep extends Component{
 				<SiteHeader/>
 				<div>
 					<main className="steps-body">
+						<div id={"spinning-modal"} className={"w3-modal"}
+								 style={{display: this.state.saving ? "block" : "none"}}>
+							<div className="w3-display-middle w3-text-white w3-jumbo">
+								<i className="fas fa-spinner fa-spin"/>
+							</div>
+						</div>
 						<div className="page-header-container">
 							<div className={"page-header-sub-container"}>
 								<div className="create-menu w3-left">
