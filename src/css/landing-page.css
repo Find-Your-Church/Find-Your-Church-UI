@@ -261,7 +261,7 @@
 .lp-header2 {
 	margin-top: 0px;
 	margin-bottom: 0px;
-	font-size: 28px;
+	font-size: 32px;
 	font-weight: 700;
 	font-family: Poppins, sans-serif;
 	color: #1b0033;
@@ -402,29 +402,12 @@
 
 .lp-div.lp4 {
 	padding-bottom: 100px;
-	border-top: 1px solid #ddd9e1;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e5ea), to(hsla(0, 0%, 100%, 0.95)));
 	background-image: linear-gradient(180deg, #e8e5ea, hsla(0, 0%, 100%, 0.95));
 }
 
 .lpheader-div {
 	padding-bottom: 20px;
-}
-
-.lp-header2 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	font-size: 28px;
-	font-weight: 700;
-	font-family: Poppins, sans-serif;
-	color: #1b0033;
-	line-height: 1.4em;
-}
-
-.lp-header2 {
-	font-family: Poppins, sans-serif;
-	color: #1b0033;
-	line-height: 1.4em;
 }
 
 #w-node-be2a72e708b0-5ad274e5 {
@@ -447,14 +430,14 @@
 	grid-template-columns: 1fr;
 	-ms-grid-rows: auto auto;
 	grid-template-rows: auto auto;
-	border-top: 1px none #ddd9e1;
+	border-top: 1px solid #f3f2f5;
 	background-color: transparent;
 }
 
 .lp-grid {
 	display: -ms-grid;
 	display: grid;
-	padding: 20px 0px 0px;
+	padding: 40px 0 0;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
 	-ms-flex-align: center;
@@ -473,9 +456,6 @@
 	grid-template-columns: 1fr 1fr;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
-	border-style: solid none none;
-	border-width: 1px;
-	border-color: #f3f2f5 #ddd9e1 #ddd9e1;
 	border-radius: 3px;
 	background-color: transparent;
 	box-shadow: none;
@@ -494,12 +474,12 @@
 }
 
 .lp-header4 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	padding-bottom: 0px;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
 	font-family: Poppins, sans-serif;
 	color: #1b0033;
-	font-size: 22px;
+	font-size: 24px;
 	line-height: 1.3em;
 	font-weight: 600;
 }

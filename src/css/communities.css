@@ -82,7 +82,7 @@
 	-webkit-align-items: stretch;
 	-ms-flex-align: stretch;
 	align-items: stretch;
-	border-bottom: 1px solid rgba(27, 0, 51, 0.1);
+	border-bottom: 1px solid #ddd9e1;
 }
 
 .communities-body .flexdiv-left {
@@ -708,4 +708,9 @@ a.w--current {
 	color: transparent;
 	font-size: 1px;
 	line-height: 1px;
+}
+
+.you-are-not-admin-text {
+	font-size: 16px;
+	color: #5c5c5c;
 }

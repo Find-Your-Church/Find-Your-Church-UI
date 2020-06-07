@@ -193,8 +193,8 @@ class Home extends Component{
 					<div className="lp1-div">
 						<div className="fadein-page">
 							<div className="section1-grid">
-								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">From
-									international conferences to basement small groups, <span className="text-span-5"><br/>we are the church. </span>
+								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
+									From international ministries to neighborhood barbecues, <span className="text-span-5"><br/>we are the church.</span>
 								</h1>
 								<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
 									enterprise technology<br/>
@@ -240,23 +240,88 @@ class Home extends Component{
 					</div>
 				</main>
 				<div className="lp-div lp3">
+					<div>
+						<div className="_20bottom-div opacity-transition" ref={this.refLp41}
+								 style={{opacity: this.state.lp41_opacity, borderBottom: "1px solid #fff"}}>
+							<h1 data-w-id="a5851cf8-b2e4-fa22-7bd7-af6a508bbfb7" className="lp-header2">
+								Whether it be one or one-million, every community creates a beacon of light. We want to help them shine
+								brighter.
+							</h1>
+						</div>
+						<div className="lp4-grid">
+							<div className="fadein-scroll">
+								<div className="lp-grid">
+									<div className="lp-grid1 opacity-transition" ref={this.refLp42}
+											 style={{opacity: this.state.lp42_opacity}}>
+										<h2 className="lp-header4">Add one to infinity.</h2>
+										<p className="lp-paragraph">
+											It doesn't matter if you're an international ministry reaching the globe, or an individual sitting
+											in your parents basement hosting a weekly small group - we are the church. When you add your
+											community or communities to the global database, you create a beacon of light for someone that's
+											new, lost, or wandering to find and navigate towards. Whether it be a casual neighborhood bbq, or
+											a weekly deep dive into scripture - we want there to be a community of everyday believers for
+											anyone and everyone to plug into, lean on, and walk with.
+										</p>
+									</div>
+									<div>
+										<img
+											src={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png"}
+											srcSet={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-500.png 500w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-800.png 800w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-1080.png 1080w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png 1584w"}
+											sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3683px) 43vw, 1584px"
+											alt="" className="lp-thumbnail opacity-transition" ref={this.refLp43}
+											style={{opacity: this.state.lp43_opacity}}/>
+									</div>
+								</div>
+							</div>
+							<div className="fadein-scroll">
+								<div className="lp-grid">
+									<div className="lp-grid1 opacity-transition" ref={this.refLp44}
+											 style={{opacity: this.state.lp44_opacity}}>
+										<h2 className="lp-header4">Showcase your community ecosystem.</h2>
+										<p className="lp-paragraph">
+											In addition to making it easier for others to find and plug into your communities, you can also feature yours on your own website using our enterprise search engine technology. The display itself is fully customizable to match your brand or personality, and the functionality is compatible on any device or browser. In addition, you can embed it on as many different pages as you would like in just three clicks, with the added peace of mind of knowing you have our incredible community support team behind you every step of the way.
+										</p>
+									</div>
+									<img
+										src={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png"}
+										srcSet={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-500.png 500w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-800.png 800w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-1080.png 1080w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png 1444w"}
+										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3438px) 42vw, 1444px"
+										id="w-node-576db9485deb-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
+										ref={this.refLp45} style={{opacity: this.state.lp45_opacity}}/>
+								</div>
+							</div>
+							<div className="fadein-scroll">
+								<div className="lp-grid">
+									<div className="lp-grid1 opacity-transition" ref={this.refLp46}
+											 style={{opacity: this.state.lp46_opacity}}>
+										<h2 className="lp-header4">Manage your communities.</h2>
+										<p className="lp-paragraph">
+											You can add, remove or edit any community anytime you would like from your simple, yet robust dashboard. Any changes you make will instantly be reflected anywhere and everywhere your communities are displayed the moment you click 'Save'. We're hoping that by increasing the accessibility of information to both everyday and non believers, while streamlining internal operations - we can scale both yours and the kingdoms community ecosystems and make His light shine ever brighter beyond the confines of the 'church'.
+										</p>
+									</div>
+									<img
+										src={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png"}
+										srcSet={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-800.png 800w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-1080.png 1080w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png 1582w"}
+										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3679px) 43vw, 1582px"
+										id="w-node-576db9485de5-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
+										ref={this.refLp47} style={{opacity: this.state.lp47_opacity}}/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="lp-div lp4">
 					<div className="_20bottom-div opacity-transition" ref={this.refLp31}
 							 style={{opacity: this.state.lp31_opacity}}>
 						<h1 data-w-id="a5851cf8-b2e4-fa22-7bd7-af6a508bbfb7" className="lp-header2">
-							Whether it be one or one-million, every community creates a beacon of light for someone to find and
-							navigate towards. <br/>
-							We want to help them shine brighter.
+							Showcase your communities on our own website.
 						</h1>
 					</div>
 					<div className="_20top-div topborder opacity-transition" ref={this.refLp32}
 							 style={{opacity: this.state.lp32_opacity}}>
 						<h1 data-w-id="e8a8a1ad-a79a-7812-40e8-2a63b00abef5" className="lp-paragraph">
-							Below is a preview of what your communities
-							would look like if you chose to use our technology to feature them on your website. The functionality is
-							fully responsive and compatible on any device or browser, and the display itself can be customized to
-							match
-							your brand or personality. Best part?&nbsp;It only takes three clicks to install. Go ahead, try it
-							out! </h1>
+							Below is a preview of what your communities would look like if you chose to use our technology to feature them on your website. The functionality is fully responsive and compatible on any device or browser, and the display itself can be customized to match your brand or personality. Best part? It only takes three clicks to install. Go ahead, try it out!
+						</h1>
 					</div>
 					<div className={" opacity-transition"} ref={this.refLp33} style={{opacity: this.state.lp33_opacity}}>
 						<div data-duration-in="300" data-duration-out="100" data-w-id="b4f3efd6-7373-d185-48b1-4a4456eb9d02"
@@ -299,99 +364,17 @@ class Home extends Component{
 											height: this.state.iframe_height,
 										}}>
 											<iframe title={"preview communities"}
-												src="https://develop.findyourchurch.org/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
-												style={{
-													width: this.state.iframe_screen_width,
-													height: this.state.iframe_screen_height,
-													transform: `scale(${this.state.iframe_width / this.state.iframe_screen_width})`,
-													transformOrigin: "0 0",
-													border: "none", outline: "none",
-												}}
-												__idm_frm__="459"/>
+															src="https://develop.findyourchurch.org/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
+															style={{
+																width: this.state.iframe_screen_width,
+																height: this.state.iframe_screen_height,
+																transform: `scale(${this.state.iframe_width / this.state.iframe_screen_width})`,
+																transformOrigin: "0 0",
+																border: "none", outline: "none",
+															}}
+															__idm_frm__="459"/>
 										</div>
 									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="lp-div lp4">
-					<div>
-						<div className="lpheader-div opacity-transition" ref={this.refLp41}
-								 style={{opacity: this.state.lp41_opacity}}>
-							<h1 id="w-node-be2a72e708b0-5ad274e5" className="lp-header2">How does it
-								work? </h1>
-						</div>
-						<div className="lp4-grid">
-							<div className="fadein-scroll">
-								<div className="lp-grid">
-									<div className="lp-grid1 opacity-transition" ref={this.refLp42}
-											 style={{opacity: this.state.lp42_opacity}}>
-										<h2 className="lp-header4">Create one to one-million communities.</h2>
-										<p className="lp-paragraph">
-											It doesn't matter if you're an international ministry reaching the globe or
-											a two-person bible study in your parents basement. Every single community creates another light in
-											this world as we strive to mobilize and strengthen everyday believers through community. Once
-											you've
-											logged in, you will notice that the dashboards and profiles are set up similar to websites you
-											likely already use, making them quick and easy to navigate. We'll also help you get all of your
-											existing communities loaded so you can have your online ecosystem up and running in just a few
-											minutes. <br/>
-										</p>
-									</div>
-									<div>
-										<img
-											src={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png"}
-											srcSet={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-500.png 500w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-800.png 800w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-1080.png 1080w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png 1584w"}
-											sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3683px) 43vw, 1584px"
-											alt="" className="lp-thumbnail opacity-transition" ref={this.refLp43}
-											style={{opacity: this.state.lp43_opacity}}/>
-									</div>
-								</div>
-							</div>
-							<div className="fadein-scroll">
-								<div className="lp-grid">
-									<div className="lp-grid1 opacity-transition" ref={this.refLp44}
-											 style={{opacity: this.state.lp44_opacity}}>
-										<h2 className="lp-header4">Customize, copy, and paste.</h2>
-										<p
-											className="lp-paragraph">When you activate a new community, it is automatically added to the
-											international community database that anyone can search for and <Link
-												to="/search-results/undefined/null/44.989999/-93.256088/undefined" className="link-13">find a
-												community</Link> through. In addition, your communities can also be displayed on any page or
-											section
-											of your website in just three clicks. It's really that easy and only your communities will be
-											displayed. You can also customize the headers, backgrounds, and buttons of your search engine so
-											that the presets and theme colors reflect you or your organization's brand and website. </p>
-									</div>
-									<img
-										src={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png"}
-										srcSet={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-500.png 500w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-800.png 800w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-1080.png 1080w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png 1444w"}
-										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3438px) 42vw, 1444px"
-										id="w-node-576db9485deb-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
-										ref={this.refLp45} style={{opacity: this.state.lp45_opacity}}/>
-								</div>
-							</div>
-							<div className="fadein-scroll">
-								<div className="lp-grid">
-									<div className="lp-grid1 opacity-transition" ref={this.refLp46}
-											 style={{opacity: this.state.lp46_opacity}}>
-										<h2 className="lp-header4">That's it. </h2>
-										<p className="lp-paragraph">You
-											can display your communities on as many pages or sections as you'd like; and anytime you add,
-											remove, or update a community from your dashboard - your changes will instantly be reflected
-											everywhere your communities are displayed the moment you click 'Save'. Our goal here is to
-											increase
-											the accessibility of information to both everyday and non believers, while streamlining internal
-											operations with the purpose of scaling yours and the kingdoms community ecosystems and making His
-											light shine ever brighter beyond the confines of the 'church'. </p>
-									</div>
-									<img
-										src={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png"}
-										srcSet={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-800.png 800w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-1080.png 1080w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png 1582w"}
-										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3679px) 43vw, 1582px"
-										id="w-node-576db9485de5-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
-										ref={this.refLp47} style={{opacity: this.state.lp47_opacity}}/>
 								</div>
 							</div>
 						</div>

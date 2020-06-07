@@ -457,10 +457,10 @@ export const verifyCoupon = (info) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/stripe/verifycoupon", info)
 		.then(res => {
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch({
 				type: COUPON_VERIFIED,
-				payload: res.data, // {verified = true, amount_off, percent_off}
+				payload: res.data, // {verified = true, name, amount_off, percent_off}
 			});
 		})
 		.catch(err => {

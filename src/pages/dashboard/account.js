@@ -28,9 +28,15 @@ import Tooltip from "rmc-tooltip/es";
 
 const cardStyle = {
 	base: {
-		color: "#32325d",
+		fontFamily: "sans-serif",
+		fontSize: "16px",
+		fontWeight: "400",
+		color: "#333",
 		"::placeholder": {
-			color: "#aab7c4"
+			fontSize: "14px",
+			fontWeight: "400",
+			color: "#858585",
+			opacity: 1,
 		}
 	},
 	invalid: {
@@ -146,7 +152,7 @@ class Account extends Component{
 	changeUserPic(files){
 		const file_size = parseInt(files.size);
 
-		console.log(file_size);
+		// console.log(file_size);
 
 		if(file_size > config.MAX_PIC_SIZE){
 			this.setState({showSizeError: true});
@@ -301,7 +307,7 @@ class Account extends Component{
 
 	changeWebsite = () => {
 		if(this.state.editingWebsite){
-			console.log(this.state.user_website);
+			// console.log(this.state.user_website);
 			this.props.updateUserInfo({
 				id: this.props.auth.user.id,
 				website: this.state.user_website,
@@ -480,11 +486,10 @@ class Account extends Component{
 			next_month2 = getNextMonth(init_date, i + 1);
 		}
 
-		const uc_amount = this.props.community.subscription ?
-			showAmount(this.props.community.subscription.plan.amount * this.props.community.my_communities.active.length)
-			: (this.props.community.is_sending ?
-				<i className="fas fa-spinner fa-spin"/>
-				: "");
+		const uc_amount = this.props.community.upcoming_invoice ?
+			showAmount(this.props.community.upcoming_invoice.total) : "-";
+
+		const uc_price = this.props.community.upcoming_invoice && this.props.community.my_communities.active.length > 0 ? showAmount(this.props.community.upcoming_invoice.total / this.props.community.my_communities.active.length) : "-";
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
 
@@ -1080,6 +1085,20 @@ class Account extends Component{
 														: "00")}
 											</h4>
 										</div>
+										{this.props.community.upcoming_invoice && this.props.community.upcoming_invoice.discount && this.props.community.upcoming_invoice.discount.coupon.valid ? (
+											<div className="table-row-2">
+												<div className="flexdiv-left">
+													<h4 className="table-header">Discount applied</h4>
+												</div>
+												<h4 className={"table-item right grey"}>
+													{this.props.community.upcoming_invoice.discount.coupon.name ? this.props.community.upcoming_invoice.discount.coupon.name : "Discount"}
+													&nbsp;
+													({this.props.community.upcoming_invoice.discount.coupon.amount_off ?
+													showAmount(this.props.community.upcoming_invoice.discount.coupon.amount_off) + " off"
+													: this.props.community.upcoming_invoice.discount.coupon.percent_off + "% off"})
+												</h4>
+											</div>
+										) : null}
 										<div className="table-row-2 upcoming" style={{borderBottom: "none"}}>
 											<h4 className="table-header">
 												Upcoming Payments
@@ -1094,22 +1113,19 @@ class Account extends Component{
 												<div className={"upcoming-payment-table-row"}>
 													<div>{this.props.community.subscription ? next_due_date.toLocaleDateString('en-US') : "-"}</div>
 													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_price}</div>
 													<div>{uc_amount}</div>
 												</div>
 												<div className={"upcoming-payment-table-row"}>
 													<div>{this.props.community.subscription ? next_month1.toLocaleDateString('en-US') : "-"}</div>
 													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_price}</div>
 													<div>{uc_amount}</div>
 												</div>
 												<div className={"upcoming-payment-table-row"}>
 													<div>{this.props.community.subscription ? next_month2.toLocaleDateString('en-US') : "-"}</div>
 													<div>{this.props.community.my_communities.active.length}</div>
-													<div>{this.props.community.subscription ?
-														showAmount(this.props.community.subscription.plan.amount) : "-"}</div>
+													<div>{uc_price}</div>
 													<div>{uc_amount}</div>
 												</div>
 											</h4>
@@ -1157,9 +1173,9 @@ class Account extends Component{
 																			 value={this.state.name_on_card} autoFocus/>
 															</div>
 														) : (
-															<span className={"w3-center grey"}>
-														{customer ? customer.sources.data[0].name : "(Card holder name)"}
-													</span>
+															<span className={{height: "18px"}}>
+																{customer ? customer.sources.data[0].name : "(Card holder name)"}
+															</span>
 														)}
 													</div>
 												</div>
