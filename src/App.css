@@ -76,7 +76,7 @@ a {
 }
 
 .site-header * {
-	font-family: "Source Sans Pro", sans-serif !important;
+	font-family: Poppins, sans-serif !important;
 }
 
 @media screen and (max-width: 600px){
@@ -137,9 +137,9 @@ a {
 }
 
 .site-header a {
-	line-height: 22px;
+	line-height: 24px;
+	font-weight: 500;
 	color: #adadad;
-	font-weight: 600;
 }
 
 .site-header a.current {
