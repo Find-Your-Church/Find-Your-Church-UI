@@ -70,7 +70,7 @@ class SiteFooter extends Component{
 					</Link>
 				</div>
 				<div className={"footer-logo"}>
-					&copy; <Link to="#" onClick={this.showModalAboutCompany}>FindYourChurch.org {new Date().getFullYear()}</Link>
+					&copy; <Link to="#" onClick={this.showModalAboutCompany}>everydaybelievers.com {new Date().getFullYear()}</Link>
 				</div>
 			</footer>
 		);
