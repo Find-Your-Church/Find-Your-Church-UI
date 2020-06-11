@@ -598,9 +598,10 @@ class StripeSubscription extends Component{
 														 id="name_on_card" onChange={this.onChange}
 														 value={this.state.name_on_card}/>
 										) : (
-											<div className={"grey"} style={{
+											<div style={{
 												padding: "5px 0",
 												width: "100%",
+												color: "#333",
 											}}>
 												{customer ? customer.sources.data[0].name : "(Card holder name)"}
 											</div>
