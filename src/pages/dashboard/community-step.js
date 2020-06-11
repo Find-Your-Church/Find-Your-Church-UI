@@ -316,7 +316,7 @@ class CommunityStep extends Component{
 				error_community_category: true,
 			});
 		}
-		if(isEmpty(this.state.address)){
+		if(isEmpty(this.state.address) || isEmpty(this.state.coordinate.lat) || isEmpty(this.state.coordinate.lng)){
 			this.setState({
 				error_community_address: true,
 			});
@@ -444,7 +444,7 @@ class CommunityStep extends Component{
 										<div>{this.state.error_community_category ?
 											"Category is required" : null}</div>
 										<div>{this.state.error_community_address ?
-											"Community address is required" : null}</div>
+											"Valid community address is required" : null}</div>
 									</div>
 									: null}
 								{this.state.showedDetails ?
