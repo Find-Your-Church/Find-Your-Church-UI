@@ -49,13 +49,13 @@ class SiteFooter extends Component{
 				</div>
 				<div className={"footer-link"}>
 					<Link to="#"
-						  onClick={() => redirectURL("mailto:support@findyourchurch.org")}>
+						  onClick={() => redirectURL("mailto:support@everydaybelievers.com")}>
 						Support
 					</Link>
 				</div>
 				<div className={"footer-link"}>
 					<Link to="#"
-						  onClick={() => redirectURL("mailto:hello@findyourchurch.org")}>
+						  onClick={() => redirectURL("mailto:hello@everydaybelievers.com")}>
 						Get in Touch
 					</Link>
 				</div>
@@ -70,7 +70,7 @@ class SiteFooter extends Component{
 					</Link>
 				</div>
 				<div className={"footer-logo"}>
-					&copy; <Link to="#" onClick={this.showModalAboutCompany}>FindYourChurch.org {new Date().getFullYear()}</Link>
+					&copy; <Link to="#" onClick={this.showModalAboutCompany}>everydaybelievers.com {new Date().getFullYear()}</Link>
 				</div>
 			</footer>
 		);
