@@ -784,10 +784,10 @@ class CommunityStep extends Component{
 																								 value={this.state.other_services}
 																								 items={community_config.FILTERS.other_services}/>
 																: null}
-															<div className="filter-div">
-																<div className="flexdiv-left labels">
-																	<label className="filter-label">Average
-																		Attendance</label>
+															<div className="filter-div" style={{paddingBottom: "10px"}}>
+																<div className="flexdiv-left labels"
+																		 style={{height: "32px", padding: "10px 0 5px", cursor: "pointer"}}>
+																	<label className="filter-label">Average Attendance</label>
 																</div>
 																<input type="number" className="attendance-input w-input"
 																			 id="average_attendance"
