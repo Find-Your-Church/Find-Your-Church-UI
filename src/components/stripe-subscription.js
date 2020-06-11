@@ -264,6 +264,14 @@ class StripeSubscription extends Component{
 		const upcoming_duedate2 = getNextMonth(upcoming_duedate, 2);
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
+		let card_type;
+		if(customer){
+			card_type = customer.sources.data[0].brand.toLowerCase();
+			const card_types = ['2co', 'amazon', 'amex', 'discover', 'jcb', 'mastercard', 'paypal', 'stripe', 'visa'];
+			if(!card_types.includes(card_type)){
+				card_type = 'card';
+			}
+		}
 
 		const subscription_price = this.props.community.subscription ?
 			showAmount(this.props.community.subscription.plan.amount)
@@ -625,7 +633,7 @@ class StripeSubscription extends Component{
 													}}>
 														<div className={"w3-col s1"}>
 															<img alt={"Payment card"}
-																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+																	 src={`/img/card/icon-${card_type}.svg`}/>
 														</div>
 														<div className={"w3-col s5"} style={{lineHeight: "24px"}} title={"Card number"}>
 															**** **** ****&nbsp;
