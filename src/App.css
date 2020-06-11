@@ -99,7 +99,7 @@ a {
 }
 
 @media screen and (max-width: 600px) {
-	.sign-up-link, .sign-in-link, .home-link {
+	.sign-up-link, .sign-in-link, .home-link, .header-link-sep {
 		display: none !important;
 	}
 
@@ -132,7 +132,7 @@ a {
 }
 
 .site-logo {
-	margin: 7px 0 4px 3px;
+	margin: 7px 0;
 	max-height: 25px;
 }
 
