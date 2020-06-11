@@ -47,7 +47,7 @@ class FilterItemRadio extends Component{
 		return this.props.send ?
 			(
 				<div className="filter-div">
-					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse} style={{cursor: "pointer"}}>
+					<div className={"flexdiv-left labels"} onClick={this.toggleCollapse} style={{height: this.state.collapsed ? "40px" : "32px", padding: this.state.collapsed ? "10px 0" : "10px 0 5px", cursor: "pointer"}}>
 						<label className={"filter-label" + (this.state.collapsed ? " collapsed" : "")}
 						>{this.props.filterTitle}</label>
 					</div>
