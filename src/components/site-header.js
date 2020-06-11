@@ -41,7 +41,7 @@ class SiteHeader extends Component{
 				<div id={"main-header"}>
 					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}>
 						<Link to="/">
-							<img className="site-logo" src={"/img/logo.svg"}
+							<img className="site-logo" src={"/img/logo.png"}
 									 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
 						</Link>
 						{this.props.auth.isAuthenticated ? null : (
