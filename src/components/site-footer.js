@@ -60,13 +60,13 @@ class SiteFooter extends Component{
 					</Link>
 				</div>
 				<div className={"footer-link"}>
-					<Link to="#" onClick={this.showModalTermsConditions}>
-						Content Policy
+					<Link to="#" onClick={this.showModalPrivacyPolicy}>
+						Privacy Policy
 					</Link>
 				</div>
 				<div className={"footer-link"}>
-					<Link to="#" onClick={this.showModalPrivacyPolicy}>
-						Privacy Policy
+					<Link to="#" onClick={this.showModalTermsConditions}>
+						Content Policy
 					</Link>
 				</div>
 				<div className={"footer-logo"}>
