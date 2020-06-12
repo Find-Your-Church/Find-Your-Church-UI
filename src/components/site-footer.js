@@ -17,7 +17,7 @@ class SiteFooter extends Component{
 	}
 
 	showModalTermsConditions = () => {
-		this.setState({showedModal: true, title: 'Terms and Conditions', content: terms_conditions});
+		this.setState({showedModal: true, title: 'Content and Posting Policy', content: terms_conditions});
 	};
 
 	showModalPrivacyPolicy = () => {
@@ -61,7 +61,7 @@ class SiteFooter extends Component{
 				</div>
 				<div className={"footer-link"}>
 					<Link to="#" onClick={this.showModalTermsConditions}>
-						Terms and Conditions
+						Content Policy
 					</Link>
 				</div>
 				<div className={"footer-link"}>

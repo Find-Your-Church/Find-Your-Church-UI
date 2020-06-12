@@ -292,7 +292,7 @@ class StripeSubscription extends Component{
 					<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
 						<header className={"w3-container w3-border-bottom"}>
 							<span onClick={this.hideModal} className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
-							<div className={"terms-title"}>Terms and Conditions</div>
+							<div className={"terms-title"}>Content and Posting Policy</div>
 						</header>
 						<div className={"w3-container terms-conditions-content"}
 								 dangerouslySetInnerHTML={{__html: terms_conditions}}>
@@ -674,7 +674,7 @@ class StripeSubscription extends Component{
 								<div className="div-block-205">
 									<span className="fineprint">By completing this activation, you are agreeing to our</span>
 									<Link to="#" onClick={this.showModal} className="fineprint link">
-										Terms and Conditions
+										Content Policy
 									</Link>
 								</div>
 								{
