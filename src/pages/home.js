@@ -194,7 +194,13 @@ class Home extends Component{
 						<div className="fadein-page">
 							<div className="section1-grid">
 								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
-									From international ministries to neighborhood barbecues, <span className="text-span-5"><br/>we are the church.</span>
+									From international ministries<span className="text-span-5"/>
+								</h1>
+								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
+									to neighborhood bbq's, <span className="text-span-5"/>
+								</h1>
+								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1 italic">
+									we are the church.<span className="text-span-5"/>
 								</h1>
 								<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
 									enterprise technology<br/>
