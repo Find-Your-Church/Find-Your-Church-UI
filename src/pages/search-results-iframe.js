@@ -647,7 +647,7 @@ class SearchResultsIframe extends Component{
 													<div className="div-navlink noresults">
 														<Link to={"/register-popup"}
 																	className="link-headernav button-gradient w-button">
-															Create an Account
+															Create an account
 														</Link>
 													</div>
 												</div>

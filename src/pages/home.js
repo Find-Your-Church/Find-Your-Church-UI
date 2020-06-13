@@ -197,11 +197,11 @@ class Home extends Component{
 									From international ministries<span className="text-span-5"/>
 								</h1>
 								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
-									to neighborhood bbq's, <span className="text-span-5"/>
+									to neighborhood bbq's.<span className="text-span-5"/>
 								</h1>
-								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1 italic">
-									we are the church.<span className="text-span-5"/>
-								</h1>
+								{/*<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1 italic">*/}
+								{/*	we are the church.<span className="text-span-5"/>*/}
+								{/*</h1>*/}
 								<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
 									enterprise technology<br/>
 									<br/>reach more of His people so that we can collectively as a body make more
@@ -212,7 +212,7 @@ class Home extends Component{
 									<Link id="w-node-665fc2586de7-5ad274e5"
 												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 												className="lp-button purple w-button">
-										Find a community</Link>
+										Find your community</Link>
 									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
 												className="lp-button white w-button">
 										Create an account
@@ -390,7 +390,7 @@ class Home extends Component{
 					<div id="w-node-99ff29a3cf9c-5ad274e5" className="div-block-341">
 						<Link id="w-node-99ff29a3cf9d-5ad274e5"
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
-									className="lp-button purple w-button">Find a community</Link>
+									className="lp-button purple w-button">Find your community</Link>
 						<Link id="w-node-99ff29a3cf9f-5ad274e5"
 									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
 									className="lp-button white margin w-button">
