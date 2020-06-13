@@ -341,11 +341,11 @@ a {
 	text-decoration: none;
 }
 
-.footer-link:hover {
+.footer-link:hover, .footer-logo:hover {
 	color: #fff;
 }
 
-@media screen and (max-width: 979px) {
+@media screen and (max-width: 992px) {
 	.footer-div {
 		padding-top: 10px;
 		min-height: 64px;
@@ -366,7 +366,7 @@ a {
 	}
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 768px) {
 	.footer-div {
 		display: block;
 		text-align: center;
@@ -388,6 +388,20 @@ a {
 		padding: 8px 16px !important;
 		line-height: 22px;
 		display: block !important;
+	}
+}
+
+@media screen and (max-width: 469px){
+	.footer-link {
+		display: block !important;
+		float: none !important;
+		padding: 2px 16px !important;
+		line-height: 22px;
+		text-align: center;
+	}
+
+	.footer-logo {
+		padding: 2px !important;
 	}
 }
 
