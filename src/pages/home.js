@@ -197,7 +197,7 @@ class Home extends Component{
 									From international ministries<span className="text-span-5"/>
 								</h1>
 								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
-									to neighborhood bbq's, <span className="text-span-5"/>
+									to neighborhood bbq's.<span className="text-span-5"/>
 								</h1>
 								{/*<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1 italic">*/}
 								{/*	we are the church.<span className="text-span-5"/>*/}
