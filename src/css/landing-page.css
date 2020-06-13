@@ -60,7 +60,7 @@
 	align-items: center;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 15px;
-	grid-row-gap: 15px;
+	grid-row-gap: 20px;
 	-ms-grid-columns: 790px;
 	grid-template-columns: 790px;
 	-ms-grid-rows: auto auto;
@@ -72,7 +72,7 @@
 	width: auto;
 	font-family: Poppins, sans-serif;
 	font-size: 48px;
-	line-height: 58px;
+	line-height: 80px;
 	font-weight: 700;
 	border-radius: 3px;
 	color: #fff;
@@ -178,7 +178,7 @@
 }
 
 .lp-button.purple {
-	height: 60px;
+	height: 80px;
 	max-width: none;
 	min-width: 300px;
 	padding-top: 10px;
@@ -200,7 +200,7 @@
 }
 
 .lp-button.white {
-	height: 60px;
+	height: 80px;
 	max-width: none;
 	min-width: 300px;
 	padding-top: 10px;
