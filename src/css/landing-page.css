@@ -60,7 +60,7 @@
 	align-items: center;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 15px;
-	grid-row-gap: 15px;
+	grid-row-gap: 20px;
 	-ms-grid-columns: 790px;
 	grid-template-columns: 790px;
 	-ms-grid-rows: auto auto;
