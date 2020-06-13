@@ -180,7 +180,7 @@
 .lp-button.purple {
 	height: 80px;
 	max-width: none;
-	min-width: 300px;
+	min-width: 315px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	-webkit-box-flex: 0;
@@ -202,7 +202,7 @@
 .lp-button.white {
 	height: 80px;
 	max-width: none;
-	min-width: 300px;
+	min-width: 315px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	-webkit-box-flex: 0;
@@ -734,11 +734,6 @@
 		font-size: 36px;
 		line-height: 50px;
 		text-align: left;
-	}
-
-	.lp-header1:first-child {
-		-ms-grid-column-align: stretch !important;
-		justify-self: stretch !important;
 	}
 
 	#w-node-8c49888ab37b-5ad274e5 {
