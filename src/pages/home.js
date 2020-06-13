@@ -215,7 +215,7 @@ class Home extends Component{
 										Find a community</Link>
 									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
 												className="lp-button white w-button">
-										Create a free account
+										Create an account
 									</Link>
 								</div>
 							</div>
@@ -394,7 +394,7 @@ class Home extends Component{
 						<Link id="w-node-99ff29a3cf9f-5ad274e5"
 									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
 									className="lp-button white margin w-button">
-							Create a free account</Link>
+							Create an account</Link>
 					</div>
 				</div>
 				<SiteFooter/>
