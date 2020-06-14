@@ -672,9 +672,9 @@ class StripeSubscription extends Component{
 									</button>
 								</div>
 								<div className="div-block-205">
-									<span className="fineprint">By completing this activation, you are agreeing to our</span>
+									<span className="fineprint">By completing this activation, you are agreeing to our</span><br/>
 									<Link to="#" onClick={this.showModal} className="fineprint link">
-										Content Policy
+										Content Policy <span style={{fontWeight: "400"}}>and</span> Terms and Conditions
 									</Link>
 								</div>
 								{
