@@ -89,6 +89,7 @@ class Home extends Component{
 				this.ani_status = 0;
 				timeout = 500;
 				break;
+			default:
 		}
 
 		setTimeout(this.typingAnimation, timeout);
