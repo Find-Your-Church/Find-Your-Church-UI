@@ -101,7 +101,7 @@ class LoginPopup extends Component{
 																<label htmlFor={"email"} className={"form-label"}>
 																	Password
 																</label>
-																<Link to="/forgot-password" class={"lost-password"}>
+																<Link to="/forgot-password" className={"lost-password"}>
 																	<span className="form-link termsofuse">Lost Password</span>
 																</Link>
 															</div>

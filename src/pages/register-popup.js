@@ -348,9 +348,9 @@ class RegisterPopup extends Component{
 										</div>
 									</div>
 									<div className="terms-conditions">
-										<span className="fineprint">By registering you are agreeing to our</span>
+										<span className="fineprint">By registering you are agreeing to our</span><br/>
 										<Link to="#" onClick={this.showModal} className="fineprint link">
-											Content Policy
+											Content Policy <span style={{fontWeight: "400"}}>and</span> Terms and Conditions
 										</Link>
 									</div>
 								</div>
