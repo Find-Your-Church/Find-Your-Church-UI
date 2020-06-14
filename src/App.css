@@ -346,11 +346,6 @@ a {
 }
 
 @media screen and (max-width: 992px) {
-	.footer-div {
-		padding-top: 10px;
-		min-height: 64px;
-	}
-
 	.footer-link {
 		display: inline !important;
 		float: none !important;
@@ -369,6 +364,8 @@ a {
 @media screen and (max-width: 768px) {
 	.footer-div {
 		display: block;
+		padding-top: 10px;
+		min-height: 64px;
 		text-align: center;
 		height: auto;
 	}
