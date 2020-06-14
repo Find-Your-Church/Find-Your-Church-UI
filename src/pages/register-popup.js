@@ -11,7 +11,7 @@ import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import terms_conditions from "../terms-conditions";
-import Tooltip from "rmc-tooltip";
+// import Tooltip from "rmc-tooltip";
 import 'rmc-tooltip/assets/bootstrap.css';
 
 class RegisterPopup extends Component{
@@ -52,7 +52,6 @@ class RegisterPopup extends Component{
 	}
 
 	onChange = e => {
-		console.log(e.target.id, e.target.value);
 		this.setState({[e.target.id]: e.target.value});
 	};
 
