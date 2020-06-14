@@ -17,6 +17,7 @@ import SiteFooter from "../../components/site-footer";
 // import imgPoweredBy from "../../img/powered_by.png";
 // import SiteFooter from "../../components/site-footer";
 // import FaqItem from "../../components/faq-item";
+import app_config from "../../conf/config";
 
 class DashboardResults extends Component{
 	constructor(props){
@@ -621,7 +622,7 @@ class DashboardResults extends Component{
 													below is exactly what your search results will look like when displayed on your own web page.
 													If
 													you have any questions, please do not hesitate to contact our <a
-														href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
+														href={`mailto:${app_config.SUPPORT_TEAM_LINK}`} className="link-10">support team</a>.
 												</p></div>
 											<iframe id="iframe-community" src={this.state.frameUrl}
 															ref={this.refIframe} title={"preview communities"}
@@ -661,7 +662,7 @@ class DashboardResults extends Component{
 																Every website builder such as Wix, SquareSpace, or WordPress will have the ability to
 																embed
 																an iframe code anywhere on your site. Contact our <a
-																href="mailto:support@findyourchurch.org">support team</a> if you're having trouble!
+																href={`mailto:${app_config.SUPPORT_TEAM_LINK}`}>support team</a> if you're having trouble!
 															</h5>
 															<div className="div-block-270 t1"/>
 														</div>
@@ -684,7 +685,7 @@ class DashboardResults extends Component{
 														<div className="div-block-269">
 															<h4 className="heading-55">
 																That's it! If you need any help please do not hesitate to contact our <a
-																href="mailto:support@findyourchurch.org" className="link-10">support team</a>.
+																href={`mailto:${app_config.SUPPORT_TEAM_LINK}`} className="link-10">support team</a>.
 															</h4>
 															<h5 className="heading-60">
 																The iframe is automatically connected to your dashboard so anytime you add, update, or

@@ -4,6 +4,7 @@ import redirectURL from "../utils/redirectURL";
 import terms_conditions from "../terms-conditions";
 import privacy_policy from "../privacy-policy";
 import about_company from "../about-company";
+import app_config from "../conf/config";
 
 class SiteFooter extends Component{
 	constructor(props){
@@ -49,7 +50,7 @@ class SiteFooter extends Component{
 				</div>
 				<div className={"footer-link"}>
 					<Link to="#"
-						  onClick={() => redirectURL("mailto:support@everydaybelievers.com")}>
+						  onClick={() => redirectURL(`mailto:${app_config.SUPPORT_TEAM_LINK}`)}>
 						Support
 					</Link>
 				</div>
