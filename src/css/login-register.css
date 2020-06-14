@@ -785,3 +785,11 @@ input.w-button {
 	color: #333;
 	cursor: pointer;
 }
+
+.sign-body select {
+	padding-right: 22px;
+	-webkit-appearance: none;
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: right center;
+}
