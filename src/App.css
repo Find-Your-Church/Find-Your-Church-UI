@@ -79,7 +79,7 @@ a {
 	font-family: Poppins, sans-serif !important;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.site-header {
 		padding: 16px 10px 0;
 	}
@@ -388,7 +388,7 @@ a {
 	}
 }
 
-@media screen and (max-width: 469px){
+@media screen and (max-width: 469px) {
 	.footer-link {
 		display: block !important;
 		float: none !important;
@@ -472,4 +472,13 @@ i.fas.fa-ellipsis-h {
 .rmc-tooltip-inner {
 	font-size: 16px;
 	max-width: 480px;
+}
+
+.modal-terms-conditions {
+	padding: 20px 0;
+	z-index: 3000;
+}
+
+.modal-terms-conditions * {
+	font-family: Poppins, sans-serif !important;
 }
