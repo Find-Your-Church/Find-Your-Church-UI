@@ -24,11 +24,11 @@ import FaqAccordion from "./faq-accordion";
 
 const cardStyle = {
 	base: {
+		fontFamily: "Arial, sans-serif",
+		fontSize: "16px",
+		fontWeight: "400",
 		color: "#333",
 		"::placeholder": {
-			fontFamily: "sans-serif",
-			fontSize: "14px",
-			fontWeight: "400",
 			color: "#aab7c4",
 		}
 	},
