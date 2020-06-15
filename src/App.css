@@ -2,8 +2,15 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body::-webkit-scrollbar {
+	display: none;
 	width: 6px;
 	background-color: #ddd;
+}
+
+@media screen and (min-width: 768px){
+	body::-webkit-scrollbar {
+		/*display: initial;*/
+	}
 }
 
 body::-webkit-scrollbar-thumb {
@@ -143,8 +150,8 @@ a {
 }
 
 .site-header a.current {
-	color: #2e89fe;
-	border-bottom: none !important;
+	/*color: #2e89fe;*/
+	/*border-bottom: none !important;*/
 }
 
 .name-on-header {
