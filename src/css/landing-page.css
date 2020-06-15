@@ -578,7 +578,7 @@
 
 	.lp1-div {
 		min-height: calc(75vh + 70px);
-		padding: 130px 20px 60px;
+		padding: 70px 20px 60px;
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
 	}
