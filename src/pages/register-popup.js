@@ -187,15 +187,15 @@ class RegisterPopup extends Component{
 															you:</label>
 														<select id={"is_organization"} className="form-input center w-input-sign"
 																		onChange={this.onCheckOrganization} value={this.state.is_organization}
-																		style={{fontSize: "15px", backgroundImage: "url('/img/icon-down3-purple.svg')"}}>
+																		style={{backgroundImage: "url('/img/icon-down3-purple.svg')"}}>
 															<option value={''}>
 																Select one...
 															</option>
 															<option value={'false'}>
-																Creating an account for myself
+																Creating an account for myself.
 															</option>
 															<option value={'true'}>
-																Creating an account for an organization I'm authorized to represent
+																Creating an account for an organization.
 															</option>
 														</select>
 													</div>
