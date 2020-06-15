@@ -10,6 +10,7 @@ import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-act
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import content_policy from "../content-policy";
 import terms_conditions from "../terms-conditions";
 // import Tooltip from "rmc-tooltip";
 import 'rmc-tooltip/assets/bootstrap.css';
@@ -19,6 +20,8 @@ class RegisterPopup extends Component{
 		super(props);
 		this.state = {
 			showedModal: false,
+			modal_title: '',
+			modal_content: '',
 			showed_tooltip: false,
 
 			fname: "",
@@ -98,8 +101,16 @@ class RegisterPopup extends Component{
 		this.props.registerGoogleUser(userData, this.props.history);
 	};
 
-	showModal = () => {
-		this.setState({showedModal: true})
+	/**
+	 *
+	 * @param n 0 - content policy, 1 - terms and conditions
+	 */
+	showModal = (n) => {
+		this.setState({
+			modal_title: n === 0 ? 'Content and Posting Policy' : 'Terms and Conditions',
+			modal_content: n === 0 ? content_policy : terms_conditions,
+			showedModal: true,
+		})
 	};
 
 	hideModal = () => {
@@ -152,10 +163,10 @@ class RegisterPopup extends Component{
 							<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
 								<header className={"w3-container w3-border-bottom"}>
 									<span onClick={this.hideModal} className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
-									<div className={"terms-title"}>Content and Posting Policy</div>
+									<div className={"terms-title"}>{this.state.modal_title}</div>
 								</header>
 								<div className={"w3-container terms-conditions-content"}
-										 dangerouslySetInnerHTML={{__html: terms_conditions}}>
+										 dangerouslySetInnerHTML={{__html: this.state.modal_content}}>
 								</div>
 							</div>
 						</div>
@@ -176,7 +187,7 @@ class RegisterPopup extends Component{
 															you:</label>
 														<select id={"is_organization"} className="form-input center w-input-sign"
 																		onChange={this.onCheckOrganization} value={this.state.is_organization}
-														style={{fontSize: "14px", backgroundImage: "url('/img/icon-down3-purple.svg')"}}>
+																		style={{fontSize: "15px", backgroundImage: "url('/img/icon-down3-purple.svg')"}}>
 															<option value={''}>
 																Select one...
 															</option>
@@ -349,9 +360,11 @@ class RegisterPopup extends Component{
 									</div>
 									<div className="terms-conditions">
 										<span className="fineprint">By registering you are agreeing to our</span><br/>
-										<Link to="#" onClick={this.showModal} className="fineprint link">
-											Content Policy <span style={{fontWeight: "400"}}>and</span> Terms and Conditions
-										</Link>
+										<Link to="#" onClick={() => {this.showModal(0)}} className="fineprint link">
+											Content Policy
+										</Link> <span className="fineprint">and</span> <Link to="#" onClick={() => {this.showModal(1)}} className="fineprint link">
+										Terms and Conditions
+									</Link>
 									</div>
 								</div>
 								<div className="strikethrough-div">

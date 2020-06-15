@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import redirectURL from "../utils/redirectURL";
-import terms_conditions from "../terms-conditions";
+import content_policy from "../content-policy";
 import privacy_policy from "../privacy-policy";
 import about_company from "../about-company";
 import app_config from "../conf/config";
@@ -18,7 +18,7 @@ class SiteFooter extends Component{
 	}
 
 	showModalTermsConditions = () => {
-		this.setState({showedModal: true, title: 'Content and Posting Policy', content: terms_conditions});
+		this.setState({showedModal: true, title: 'Content and Posting Policy', content: content_policy});
 	};
 
 	showModalPrivacyPolicy = () => {
