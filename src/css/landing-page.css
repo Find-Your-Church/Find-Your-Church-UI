@@ -29,7 +29,7 @@
 .lp1-div {
 	display: -ms-grid;
 	display: grid;
-	min-height: 92vh;
+	min-height: calc(85vh + 70px);
 	padding: 70px 100px 60px;
 	-webkit-box-align: center;
 	-webkit-align-items: center;
@@ -51,38 +51,31 @@
 .section1-grid {
 	display: -ms-grid;
 	display: grid;
-	min-height: auto;
-	padding-right: 0px;
-	padding-left: 0px;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
+	padding-bottom: 0;
 	grid-auto-columns: 1fr;
-	grid-column-gap: 15px;
+	grid-column-gap: 20px;
 	grid-row-gap: 20px;
-	-ms-grid-columns: 790px;
-	grid-template-columns: 790px;
-	-ms-grid-rows: auto auto;
-	grid-template-rows: auto auto;
+	-ms-grid-columns: 1fr;
+	grid-template-columns: 1fr;
+	-ms-grid-rows: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
 }
 
 .lp-header1 {
-	padding: 0 3px;
+	padding: 10px 5px;
 	width: auto;
 	font-family: Poppins, sans-serif;
-	font-size: 48px;
-	line-height: 80px;
+	font-size: 4vw;
+	line-height: 100%;
 	font-weight: 700;
 	border-radius: 3px;
 	color: #fff;
-	background-color: hsla(0, 0%, 100%, 0.9);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(51, 51, 51, 0.5)), to(rgba(51, 51, 51, 0.5))), url("../img/main-bg.jpg");
-	background-image: linear-gradient(180deg, rgba(51, 51, 51, 0.5), rgba(51, 51, 51, 0.5)), url("../img/main-bg.jpg");
-	background-position: 0 0, 0 100%;
-	background-size: auto, 1080px;
-	background-repeat: repeat, repeat;
-	background-attachment: scroll, fixed;
+	background-image: -webkit-gradient(linear, left top, right top, from(rgba(137, 0, 254, 0.75)), color-stop(50%, rgba(46, 137, 254, 0.5)), to(rgba(0, 232, 254, 0.25))), -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.25)), to(rgba(0, 0, 0, 0.25))), url("../img/main-bg.jpg");
+	background-image: linear-gradient(90deg, rgba(137, 0, 254, 0.75), rgba(46, 137, 254, 0.5) 50%, rgba(0, 232, 254, 0.25)), linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../img/main-bg.jpg");
+	background-position: 0 0, 0 0, 0 100%;
+	background-size: auto, auto, 1080px;
+	background-repeat: repeat, repeat, repeat;
+	background-attachment: scroll, scroll, fixed;
 	overflow: visible;
 }
 
@@ -124,16 +117,12 @@
 .div-block-321 {
 	display: -ms-grid;
 	display: grid;
-	padding-top: 0;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
+	width: 55vw;
 	grid-auto-columns: 1fr;
 	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-	-ms-grid-columns: auto auto;
-	grid-template-columns: auto auto;
+	grid-row-gap: 16px;
+	-ms-grid-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
 	-ms-grid-rows: auto;
 	grid-template-rows: auto;
 }
@@ -148,9 +137,7 @@
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	max-width: 300px;
-	min-height: auto;
-	padding: 20px 40px;
+	padding: 9px 15px;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
@@ -167,59 +154,39 @@
 	border-width: 1px;
 	border-color: rgba(137, 0, 254, 0.49);
 	border-radius: 3px;
-	background-color: transparent;
-	background-image: linear-gradient(180deg, rgba(243, 242, 245, 0.1), rgba(243, 242, 245, 0.1)), linear-gradient(45deg, rgba(137, 0, 254, 0.9), rgba(46, 137, 254, 0.9) 50%, rgba(0, 232, 254, 0.9));
-	box-shadow: 1px 1px 3px 0 rgba(14, 0, 25, 0.25);
+	background-color: #8900fe;
+	background-image: linear-gradient(180deg, #8900fe, #8900fe), url("../img/main-bg.jpg");
+	background-position: 0 0, 0 100%;
+	background-size: auto, 1080px;
+	background-attachment: scroll, fixed;
+	box-shadow: 1px 1px 5px 0 rgba(51, 51, 51, 0.5);
 	font-family: Poppins, sans-serif;
 	color: #fff;
-	font-size: 18px;
-	line-height: 24px;
+	font-size: 1.5vw;
+	line-height: inherit;
 	font-weight: 600;
 }
 
-.lp-button.purple {
-	height: 80px;
-	max-width: none;
-	min-width: 315px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	-webkit-box-flex: 0;
-	-webkit-flex: 0 auto;
-	-ms-flex: 0 auto;
-	flex: 0 auto;
-	background-color: rgba(137, 0, 254, 0.9);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(243, 242, 245, 0.1)), to(rgba(243, 242, 245, 0.1)));
-	background-image: linear-gradient(180deg, rgba(243, 242, 245, 0.1), rgba(243, 242, 245, 0.1));
-	box-shadow: 1px 1px 5px 0 rgba(14, 0, 25, 0.3);
-	font-family: Poppins, sans-serif;
-	font-size: 18px;
-}
-
-.lp-button.purple:hover {
-	color: #00e8fe;
+.lp-button:hover {
+	background-color: rgba(137, 0, 254, 0.8);
+	background-image: linear-gradient(180deg, rgba(137, 0, 254, 0.85), rgba(137, 0, 254, 0.85)), url("../img/main-bg.jpg");
 }
 
 .lp-button.white {
-	height: 80px;
-	max-width: none;
-	min-width: 315px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	-webkit-box-flex: 0;
-	-webkit-flex: 0 auto;
-	-ms-flex: 0 auto;
-	flex: 0 auto;
-	background-color: hsla(0, 0%, 100%, 0.9);
-	background-image: none;
-	box-shadow: 1px 1px 5px 0 rgba(14, 0, 25, 0.3);
-	font-family: Poppins, sans-serif;
+	background-color: #fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fff)), url("../img/main-bg.jpg");
+	background-image: linear-gradient(180deg, #fff, #fff), url("../img/main-bg.jpg");
+	background-position: 0 0, 0 100%;
+	background-size: auto, 1080px;
+	background-attachment: scroll, fixed;
+	box-shadow: 1px 1px 5px 0 rgba(51, 51, 51, 0.3);
 	color: #8900fe;
-	font-size: 18px;
 }
 
 .lp-button.white:hover {
-	background-color: #fff;
-	color: #00e8fe;
+	background-color: hsla(0, 0%, 100%, 0.85);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, 0.85)), to(hsla(0, 0%, 100%, 0.85))), url("../img/main-bg.jpg");
+	background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.85), hsla(0, 0%, 100%, 0.85)), url("../img/main-bg.jpg");
 }
 
 .lp2-div {
@@ -610,46 +577,31 @@
 	}
 
 	.lp1-div {
-		min-height: 75vh;
-		padding: 130px 20px 140px;
+		min-height: calc(75vh + 70px);
+		padding: 130px 20px 60px;
 		-ms-grid-columns: 1fr;
 		grid-template-columns: 1fr;
 	}
 
 	.section1-grid {
-		display: -ms-grid;
-		display: grid;
-		padding: 20px 20px 30px;
-		justify-items: stretch;
-		grid-auto-columns: 1fr;
-		grid-column-gap: 10px;
-		grid-row-gap: 15px;
-		-ms-grid-columns: 1fr;
-		grid-template-columns: 1fr;
-		-ms-grid-rows: auto auto auto auto;
-		grid-template-rows: auto auto auto auto;
-		border: 1px none #000;
-		border-radius: 3px;
-		background-color: transparent;
-		background-image: none;
-		box-shadow: none;
+
 	}
 
 	.lp-header1 {
-		background-color: hsla(0, 0%, 100%, 0.99);
-		background-image: none;
-		box-shadow: 1px 1px 5px 0 rgba(51, 51, 51, 0.3);
-		color: #1b0033;
-		font-size: 42px;
-		line-height: 54px;
-		font-style: normal;
+		background-image: -webkit-gradient(linear, left top, right top, from(rgba(137, 0, 254, 0.9)), color-stop(50%, rgba(46, 137, 254, 0.6)), to(rgba(0, 232, 254, 0.3))), -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5)));
+		background-image: linear-gradient(90deg, rgba(137, 0, 254, 0.9), rgba(46, 137, 254, 0.6) 50%, rgba(0, 232, 254, 0.3)), linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+		background-position: 0 0, 0 0;
+		background-size: auto, auto;
+		background-attachment: scroll, scroll;
+		box-shadow: 1px 1px 5px 0 rgba(51, 51, 51, 0.5);
+		font-size: 6vw;
 	}
 
 	#w-node-b317dca94991-5ad274e5 {
 	}
 
 	.div-block-321 {
-		grid-column-gap: 15px;
+		width: 85vw;
 	}
 
 	.lp2-div {
@@ -701,18 +653,11 @@
 
 	.lp-button.purple,
 	.lp-button.white {
-		height: 54px;
-		min-width: 250px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		font-size: 2vw;
 	}
 
 	.lp-button.purple {
-		background-color: rgba(137, 0, 254, 0.99);
-	}
-
-	.lp-button.white {
-		background-color: hsla(0, 0%, 100%, 0.99);
+		color: #fff;
 	}
 
 	.animation-text {
@@ -727,21 +672,37 @@
 	}
 
 	.lp1-div {
-		min-height: 75vh;
+		min-height: calc(70vh + 70px);
 		padding-right: 10px;
 		padding-left: 10px;
 	}
 
 	.section1-grid {
-		padding: 10px 0 20px;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		-ms-grid-rows: auto auto auto;
+		grid-template-rows: auto auto auto;
 	}
 
 	.lp-header1 {
-		padding-top: 0;
-		padding-bottom: 0;
-		font-size: 36px;
-		line-height: 50px;
-		text-align: left;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		height: 60px;
+		min-height: auto;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		background-image: -webkit-gradient(linear, left top, right top, from(rgba(137, 0, 254, 0.9)), color-stop(50%, rgba(46, 137, 254, 0.6)), to(rgba(0, 232, 254, 0.3))), -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5)));
+		background-image: linear-gradient(90deg, rgba(137, 0, 254, 0.9), rgba(46, 137, 254, 0.6) 50%, rgba(0, 232, 254, 0.3)), linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+		background-position: 0 0, 0 0;
+		background-size: auto, auto;
+		background-attachment: scroll, scroll;
+		font-size: 6vw;
 	}
 
 	#w-node-8c49888ab37b-5ad274e5 {
@@ -750,15 +711,21 @@
 	}
 
 	.div-block-321 {
-		padding-top: 0;
-		grid-row-gap: 15px;
-		-ms-grid-columns: auto;
-		grid-template-columns: auto;
+		width: auto;
+		grid-column-gap: 10px;
+		grid-row-gap: 10px;
+		-ms-grid-columns: 1fr;
+		grid-template-columns: 1fr;
+		-ms-grid-rows: auto auto;
+		grid-template-rows: auto auto;
 	}
 
-	.lp-button.purple {
-		width: auto;
-		margin-bottom: 0px;
+	.lp-button.purple,
+	.lp-button.white {
+		height: 60px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		font-size: 3vw;
 	}
 
 	#w-node-665fc2586de7-5ad274e5 {
@@ -768,11 +735,6 @@
 		-webkit-order: 9999;
 		-ms-flex-order: 9999;
 		order: 9999;
-	}
-
-	.lp-button {
-		padding-right: 20px;
-		padding-left: 20px;
 	}
 
 	.lp2-div {
@@ -832,13 +794,6 @@
 		padding-left: 20px;
 	}
 
-	.lp-button.purple,
-	.lp-button.white {
-		width: auto;
-		height: 50px;
-		margin-bottom: 0;
-	}
-
 	.lp-button.white.margin {
 		margin-top: 40px;
 	}
@@ -863,15 +818,9 @@
 	}
 
 	.lp-header1 {
-		padding-top: 0;
-		padding-bottom: 0;
-		background-color: hsla(0, 0%, 100%, 0.99);
-		background-image: none;
-		background-position: 0 0;
-		background-size: auto;
-		background-repeat: repeat;
-		font-size: 22px;
-		line-height: 50px;
+		height: 60px;
+		padding-top: 15px;
+		padding-bottom: 15px;
 	}
 
 	.section1-grid {
@@ -947,14 +896,11 @@
 
 	.lp-button.purple,
 	.lp-button.white {
-		min-width: auto;
-		padding-top: 15px;
-		padding-bottom: 15px;
-		font-size: 18px;
+		font-size: 4vw;
 	}
 
 	.lp-button.white.margin {
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: 40px;
 		padding-top: 20px;
 		padding-bottom: 20px;
