@@ -18,6 +18,7 @@ import "../css/stripe-subscription.css";
 import "../css/stripe-style.css";
 import showAmount from "../utils/showAmount";
 import Popup from "reactjs-popup";
+import content_policy from "../content-policy";
 import terms_conditions from "../terms-conditions";
 import FaqAccordion from "./faq-accordion";
 
@@ -51,6 +52,8 @@ class StripeSubscription extends Component{
 
 			showed_coupon_error: false,
 			showedModal: false,
+			modal_title: '',
+			modal_content: '',
 
 			accordion_collapsed1: true,
 			accordion_collapsed2: true,
@@ -189,8 +192,16 @@ class StripeSubscription extends Component{
 		return (next.getTime() - prev.getTime()) / 86400000; // i day in milliseconds
 	}
 
-	showModal = () => {
-		this.setState({showedModal: true})
+	/**
+	 *
+	 * @param n 0 - content policy, 1 - terms and conditions
+	 */
+	showModal = (n) => {
+		this.setState({
+			modal_title: n === 0 ? 'Content and Posting Policy' : 'Terms and Conditions',
+			modal_content: n === 0 ? content_policy : terms_conditions,
+			showedModal: true,
+		})
 	};
 
 	hideModal = () => {
@@ -292,10 +303,10 @@ class StripeSubscription extends Component{
 					<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
 						<header className={"w3-container w3-border-bottom"}>
 							<span onClick={this.hideModal} className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
-							<div className={"terms-title"}>Content and Posting Policy</div>
+							<div className={"terms-title"}>{this.state.modal_title}</div>
 						</header>
 						<div className={"w3-container terms-conditions-content"}
-								 dangerouslySetInnerHTML={{__html: terms_conditions}}>
+								 dangerouslySetInnerHTML={{__html: this.state.modal_content}}>
 						</div>
 					</div>
 				</div>
@@ -673,7 +684,14 @@ class StripeSubscription extends Component{
 								</div>
 								<div className="div-block-205">
 									<span className="fineprint">By completing this activation, you are agreeing to our</span><br/>
-									<Link to="#" onClick={this.showModal} className="fineprint link">
+									<Link to="#" onClick={() => {
+										this.showModal(0)
+									}} className="fineprint link">
+										Content Policy
+									</Link> <span className="fineprint">and</span>
+									<Link to="#" onClick={() => {
+										this.showModal(1)
+									}} className="fineprint link">
 										Terms and Conditions
 									</Link>
 								</div>
