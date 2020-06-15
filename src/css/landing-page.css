@@ -667,6 +667,11 @@
 		font-size: 2vw;
 	}
 
+	.lp-button.purple.bottom,
+	.lp-button.white.bottom {
+		max-width: 275px;
+	}
+
 	.lp-button.purple {
 		color: #fff;
 	}
@@ -804,6 +809,10 @@
 	.lp-button.white {
 		padding-right: 20px;
 		padding-left: 20px;
+	}
+
+	.lp-button.purple.bottom,
+	.lp-button.white.bottom {
 		max-width: none;
 	}
 
