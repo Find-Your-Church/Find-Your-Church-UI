@@ -43,6 +43,7 @@
 
 @media screen and (max-width: 600px) {
 	.sign-body {
+		padding-top: 80px;
 		--header-height: 96px;
 	}
 }
@@ -287,11 +288,13 @@
 
 @media screen and (max-width: 600px) {
 	.sign-body {
+		padding-top: 80px;
 		height: auto;
 		min-height: calc(100vh - 134px);
 	}
 
 	.sign-body.register {
+		padding-top: 80px;
 		min-height: auto;
 		max-height: none;
 	}
@@ -331,6 +334,8 @@
 
 @media screen and (max-width: 600px) {
 	.sign-body .div-block-38 {
+		margin-top: 0;
+		margin-bottom: 0;
 		padding: 10px;
 	}
 }
