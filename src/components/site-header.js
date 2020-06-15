@@ -72,7 +72,7 @@ class SiteHeader extends Component{
 
 						{!this.props.auth.isAuthenticated ? (
 										<>
-											<Link to="/register-popup" className="sign-up-link w3-bar-item w3-right w3-text-white">
+											<Link to="/register-popup" className="sign-up-link w3-bar-item w3-right">
 												Create an account
 											</Link>
 											< Link to="/login-popup"
