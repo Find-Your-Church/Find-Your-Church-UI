@@ -644,7 +644,7 @@ class SearchResultsIframe extends Component{
 												</div>
 												<div className="div-block-158">
 													<div className="div-navlink noresults">
-														<Link to={"/register-popup"}
+														<Link to={"/register-popup"} target={"_new"}
 																	className="link-headernav button-gradient w-button">
 															Create an account
 														</Link>
