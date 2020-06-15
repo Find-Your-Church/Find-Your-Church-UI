@@ -169,11 +169,18 @@
 
 .lp-button.bottom {
 	max-width: 335px;
+	height: 60px;
 }
 
 .lp-button:hover {
 	background-color: rgba(137, 0, 254, 0.8);
 	background-image: linear-gradient(180deg, rgba(137, 0, 254, 0.85), rgba(137, 0, 254, 0.85)), url("../img/main-bg.jpg");
+}
+
+@media screen and (min-width: 1400px){
+	.lp-button.bottom {
+		font-size: 24px;
+	}
 }
 
 .lp-button.white {
