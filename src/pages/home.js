@@ -391,10 +391,10 @@ class Home extends Component{
 					<div id="w-node-99ff29a3cf9c-5ad274e5" className="div-block-341">
 						<Link id="w-node-99ff29a3cf9d-5ad274e5"
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
-									className="lp-button purple w-button">Find your community</Link>
+									className="lp-button purple w-button bottom">Find your community</Link>
 						<Link id="w-node-99ff29a3cf9f-5ad274e5"
 									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
-									className="lp-button white margin w-button">
+									className="lp-button white margin w-button bottom">
 							Create an account</Link>
 					</div>
 				</div>
