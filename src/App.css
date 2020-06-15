@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,500,600,700&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
+* {
+	font-size: 16px;
+}
+
+body {
+	font-size: 16px;
+}
+
 body::-webkit-scrollbar {
 	display: none;
 	width: 6px;

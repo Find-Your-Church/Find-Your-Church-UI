@@ -715,8 +715,7 @@ class StripeSubscription extends Component{
 								</div>
 								<p className="fineprint subscription">
 									Payments are processed by <span className="stripe-label">Stripe</span> and secured by
-									a
-									256-bit SSL&nbsp;encryption.
+									a 256-bit SSL&nbsp;encryption.
 								</p>
 							</div>
 							<div className="strikethrough-div" style={{paddingTop: "20px"}}>

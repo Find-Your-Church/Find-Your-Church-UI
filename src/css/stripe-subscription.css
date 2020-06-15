@@ -701,17 +701,20 @@ h4 {
 .subscription-lock-icon {
 	position: relative;
 	color: #adadad;
-	font-size: 28px;
 	font-style: normal;
 	text-align: center;
 	line-height: 48px;
+}
+
+.subscription-lock-icon i {
+	font-size: 28px;
 }
 
 .subscription-lock-icon::after {
 	content: " ";
 	position: absolute;
 	left: 50%;
-	top: 57%;
+	top: 48%;
 	transform: translateX(-50%);
 	width: 5px;
 	height: 5px;
