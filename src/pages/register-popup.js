@@ -360,11 +360,16 @@ class RegisterPopup extends Component{
 									</div>
 									<div className="terms-conditions">
 										<span className="fineprint">By registering you are agreeing to our</span><br/>
-										<Link to="#" onClick={() => {this.showModal(0)}} className="fineprint link">
+										<Link to="#" onClick={() => {
+											this.showModal(0)
+										}} className="fineprint link">
 											Content Policy
-										</Link> <span className="fineprint">and</span> <Link to="#" onClick={() => {this.showModal(1)}} className="fineprint link">
-										Terms and Conditions
-									</Link>
+										</Link> <span className="fineprint">and</span>
+										<Link to="#" onClick={() => {
+											this.showModal(1)
+										}} className="fineprint link">
+											Terms and Conditions
+										</Link>
 									</div>
 								</div>
 								<div className="strikethrough-div">
