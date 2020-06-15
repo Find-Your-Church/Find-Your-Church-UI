@@ -832,7 +832,8 @@
 
 .steps-body .w-form-fail {
 	display: none;
-	margin-top: 10px;
+	margin-top: 0;
+	margin-bottom: 20px;
 	padding: 10px;
 	color: #b00;
 	background-color: #ffdede;
