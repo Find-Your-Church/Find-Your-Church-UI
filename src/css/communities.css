@@ -477,6 +477,11 @@ a.w--current {
 	font-size: 16px;
 }
 
+.info-body .left-part .listingrow.view strong {
+	font-family: Poppins, sans-serif;
+	font-weight: 600;
+}
+
 .communities-body .communityname {
 	display: inline-block;
 	-webkit-box-flex: 1;
