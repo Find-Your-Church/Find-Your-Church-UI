@@ -53,7 +53,7 @@ export const community_config = {
 		average_attendance: 0,
 		ambiance: ["Contemporary", "Traditional", "Both-Separate", "Both-Combined"],
 		event_type: ["Social", "Worship", "Guest Speaker", "Concert", "Fundraiser", "Conference", "Community Outreach", "Recreational Sports"],
-		support_type: ["Divorce", "Addiction", "Death / Grief", "LGBTQ", "Marriage"]
+		support_type: ["Divorce", "Addiction", "Death / Grief", "LGBTQ", "Marriage", "Parenting"]
 	},
 
 	FILTERS4URL: {
@@ -69,7 +69,7 @@ export const community_config = {
 		other_services: ["child_care", "first_communion", "wedding_ceremony_s", "marriage_counseling", "financial_consult", "event_space_rental"],
 		ambiance: ["contemporary", "traditional", "both_separate", "both_combined"],
 		event_type: ["social", "worship", "guest_speaker", "concert", "fundraiser", "conference", "community_outreach", "recreational_sports"],
-		support_type: ["divorce", "addiction", "death_grief", "lgbtq", "marriage"]
+		support_type: ["divorce", "addiction", "death_grief", "lgbtq", "marriage", "parenting"]
 	},
 };
 
