@@ -1001,41 +1001,41 @@ class Account extends Component{
 												</span>
 											</label>
 										</div>
-										<div className="table-row">
-											<h4 className="table-header">
-												Referral Code
-												<Popup
-													trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}
-													position={"right center"}>
-													<div>
-														...
-													</div>
-												</Popup>
-											</h4>
-											<h4 className="table-item">
-												{this.state.editingRefCode ?
-													<div className="w3-row">
-														<input type="text" className="w3-col"
-																	 title="Referral code" placeholder="Referral code"
-																	 id="user_ref_code" onChange={this.onChange}
-																	 value={this.state.user_ref_code} autoFocus/>
-													</div>
-													: user.ref_code
-												}
-												{this.state.errors.msg_ref_code !== undefined ?
-													<div className="error-item">
-														{this.state.errors.msg_ref_code}
-													</div>
-													: null}
-											</h4>
-											<Link to="#" className="table-link" onClick={this.changeRefCode}>
-												{this.state.editingRefCode ? (
-													<i className={"fas fa-save"}/>
-												) : (
-													<i className={"fas fa-pen"}/>
-												)}
-											</Link>
-										</div>
+										{/*<div className="table-row">*/}
+										{/*	<h4 className="table-header">*/}
+										{/*		Referral Code*/}
+										{/*		<Popup*/}
+										{/*			trigger={<i className={"fas fa-question-circle tooltip-icon"}/>}*/}
+										{/*			position={"right center"}>*/}
+										{/*			<div>*/}
+										{/*				...*/}
+										{/*			</div>*/}
+										{/*		</Popup>*/}
+										{/*	</h4>*/}
+										{/*	<h4 className="table-item">*/}
+										{/*		{this.state.editingRefCode ?*/}
+										{/*			<div className="w3-row">*/}
+										{/*				<input type="text" className="w3-col"*/}
+										{/*							 title="Referral code" placeholder="Referral code"*/}
+										{/*							 id="user_ref_code" onChange={this.onChange}*/}
+										{/*							 value={this.state.user_ref_code} autoFocus/>*/}
+										{/*			</div>*/}
+										{/*			: user.ref_code*/}
+										{/*		}*/}
+										{/*		{this.state.errors.msg_ref_code !== undefined ?*/}
+										{/*			<div className="error-item">*/}
+										{/*				{this.state.errors.msg_ref_code}*/}
+										{/*			</div>*/}
+										{/*			: null}*/}
+										{/*	</h4>*/}
+										{/*	<Link to="#" className="table-link" onClick={this.changeRefCode}>*/}
+										{/*		{this.state.editingRefCode ? (*/}
+										{/*			<i className={"fas fa-save"}/>*/}
+										{/*		) : (*/}
+										{/*			<i className={"fas fa-pen"}/>*/}
+										{/*		)}*/}
+										{/*	</Link>*/}
+										{/*</div>*/}
 										<div className="table-row">
 											<h4 className="table-header">Registration</h4>
 											<h4 className="table-item">

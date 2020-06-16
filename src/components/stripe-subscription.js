@@ -18,16 +18,18 @@ import "../css/stripe-subscription.css";
 import "../css/stripe-style.css";
 import showAmount from "../utils/showAmount";
 import Popup from "reactjs-popup";
+import content_policy from "../content-policy";
 import terms_conditions from "../terms-conditions";
 import FaqAccordion from "./faq-accordion";
 
 const cardStyle = {
 	base: {
+		fontFamily: "Arial, sans-serif",
+		fontSize: "16px",
+		lineHeight: "22px",
+		fontWeight: "400",
 		color: "#333",
 		"::placeholder": {
-			fontFamily: "sans-serif",
-			fontSize: "14px",
-			fontWeight: "400",
 			color: "#aab7c4",
 		}
 	},
@@ -51,6 +53,8 @@ class StripeSubscription extends Component{
 
 			showed_coupon_error: false,
 			showedModal: false,
+			modal_title: '',
+			modal_content: '',
 
 			accordion_collapsed1: true,
 			accordion_collapsed2: true,
@@ -189,8 +193,16 @@ class StripeSubscription extends Component{
 		return (next.getTime() - prev.getTime()) / 86400000; // i day in milliseconds
 	}
 
-	showModal = () => {
-		this.setState({showedModal: true})
+	/**
+	 *
+	 * @param n 0 - content policy, 1 - terms and conditions
+	 */
+	showModal = (n) => {
+		this.setState({
+			modal_title: n === 0 ? 'Content and Posting Policy' : 'Terms and Conditions',
+			modal_content: n === 0 ? content_policy : terms_conditions,
+			showedModal: true,
+		})
 	};
 
 	hideModal = () => {
@@ -264,6 +276,14 @@ class StripeSubscription extends Component{
 		const upcoming_duedate2 = getNextMonth(upcoming_duedate, 2);
 
 		const customer = this.props.community.customer ? this.props.community.customer : this.props.auth.user.billing_info;
+		let card_type;
+		if(customer){
+			card_type = customer.sources.data[0].brand.toLowerCase();
+			const card_types = ['2co', 'amazon', 'amex', 'discover', 'jcb', 'mastercard', 'paypal', 'stripe', 'visa'];
+			if(!card_types.includes(card_type)){
+				card_type = 'card';
+			}
+		}
 
 		const subscription_price = this.props.community.subscription ?
 			showAmount(this.props.community.subscription.plan.amount)
@@ -284,10 +304,10 @@ class StripeSubscription extends Component{
 					<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
 						<header className={"w3-container w3-border-bottom"}>
 							<span onClick={this.hideModal} className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
-							<div className={"terms-title"}>Terms and Conditions</div>
+							<div className={"terms-title"}>{this.state.modal_title}</div>
 						</header>
 						<div className={"w3-container terms-conditions-content"}
-								 dangerouslySetInnerHTML={{__html: terms_conditions}}>
+								 dangerouslySetInnerHTML={{__html: this.state.modal_content}}>
 						</div>
 					</div>
 				</div>
@@ -598,9 +618,10 @@ class StripeSubscription extends Component{
 														 id="name_on_card" onChange={this.onChange}
 														 value={this.state.name_on_card}/>
 										) : (
-											<div className={"grey"} style={{
+											<div style={{
 												padding: "5px 0",
 												width: "100%",
+												color: "#333",
 											}}>
 												{customer ? customer.sources.data[0].name : "(Card holder name)"}
 											</div>
@@ -624,7 +645,7 @@ class StripeSubscription extends Component{
 													}}>
 														<div className={"w3-col s1"}>
 															<img alt={"Payment card"}
-																	 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
+																	 src={`/img/card/icon-${card_type}.svg`}/>
 														</div>
 														<div className={"w3-col s5"} style={{lineHeight: "24px"}} title={"Card number"}>
 															**** **** ****&nbsp;
@@ -663,8 +684,15 @@ class StripeSubscription extends Component{
 									</button>
 								</div>
 								<div className="div-block-205">
-									<span className="fineprint">By completing this activation, you are agreeing to our</span>
-									<Link to="#" onClick={this.showModal} className="fineprint link">
+									<span className="fineprint">By completing this activation, you are agreeing to our</span><br/>
+									<Link to="#" onClick={() => {
+										this.showModal(0)
+									}} className="fineprint link">
+										Content Policy
+									</Link> <span className="fineprint">and</span>
+									<Link to="#" onClick={() => {
+										this.showModal(1)
+									}} className="fineprint link">
 										Terms and Conditions
 									</Link>
 								</div>
@@ -687,8 +715,7 @@ class StripeSubscription extends Component{
 								</div>
 								<p className="fineprint subscription">
 									Payments are processed by <span className="stripe-label">Stripe</span> and secured by
-									a
-									256-bit SSL&nbsp;encryption.
+									a 256-bit SSL&nbsp;encryption.
 								</p>
 							</div>
 							<div className="strikethrough-div" style={{paddingTop: "20px"}}>

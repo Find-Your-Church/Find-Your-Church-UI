@@ -38,9 +38,9 @@ class SiteHeader extends Component{
 	render(){
 		return (
 				<div id={"main-header"}>
-					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}>
+					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`} style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
 						<Link to="/">
-							<img className="site-logo" src={"/img/logo.svg"}
+							<img className="site-logo" src={"/img/logo.png"}
 									 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
 						</Link>
 						{this.props.auth.isAuthenticated ? null : (
@@ -71,8 +71,8 @@ class SiteHeader extends Component{
 
 						{!this.props.auth.isAuthenticated ? (
 										<>
-											<Link to="/register-popup" className="sign-up-link w3-bar-item w3-right w3-text-white">
-												Create an Account
+											<Link to="/register-popup" className="sign-up-link w3-bar-item w3-right">
+												Create an account
 											</Link>
 											< Link to="/login-popup"
 														 className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/login-popup" ? "current" : "")}>
@@ -112,7 +112,7 @@ class SiteHeader extends Component{
 									Sign In</Link>
 								<Link to="/register-popup"
 											className="header-navlink w-nav-link w--nav-link-open">
-									Create an Account</Link>
+									Create an account</Link>
 							</>)}
 						</nav>
 					</div>

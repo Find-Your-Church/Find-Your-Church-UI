@@ -1,9 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,500,600,700&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
+body {
+	font-size: 16px;
+}
+
+body * {
+	font-size: inherit;
+}
+
 body::-webkit-scrollbar {
+	display: none;
 	width: 6px;
 	background-color: #ddd;
+}
+
+@media screen and (min-width: 768px){
+	body::-webkit-scrollbar {
+		/*display: initial;*/
+	}
 }
 
 body::-webkit-scrollbar-thumb {
@@ -38,7 +53,7 @@ a {
 	}
 
 	to {
-		padding-top: 0;
+		padding-top: 10px;
 	}
 }
 
@@ -76,10 +91,10 @@ a {
 }
 
 .site-header * {
-	font-family: "Source Sans Pro", sans-serif !important;
+	font-family: Poppins, sans-serif !important;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 	.site-header {
 		padding: 16px 10px 0;
 	}
@@ -99,7 +114,7 @@ a {
 }
 
 @media screen and (max-width: 600px) {
-	.sign-up-link, .sign-in-link, .home-link {
+	.sign-up-link, .sign-in-link, .home-link, .header-link-sep {
 		display: none !important;
 	}
 
@@ -121,7 +136,7 @@ a {
 .site-header .sign-in-link:hover,
 .site-header .home-link:hover {
 	color: #2e89fe;
-	border-bottom: 1px solid #2e89fe;
+	/*border-bottom: 1px solid #2e89fe;*/
 }
 
 .site-header .sign-in-link {
@@ -132,19 +147,19 @@ a {
 }
 
 .site-logo {
-	margin: 7px 0 4px 3px;
-	max-height: 29px;
+	margin: 7px 0;
+	max-height: 25px;
 }
 
 .site-header a {
-	line-height: 22px;
-	color: #adadad;
+	line-height: 26px;
 	font-weight: 600;
+	color: rgba(51, 51, 51, 0.5);
 }
 
 .site-header a.current {
-	color: #2e89fe;
-	border-bottom: none !important;
+	/*color: #2e89fe;*/
+	/*border-bottom: none !important;*/
 }
 
 .name-on-header {
@@ -165,23 +180,23 @@ a {
 	color: #e6e6e6;
 }
 
-.sign-up-link {
+.sign-up-link.w3-bar-item {
 	padding: 12px 15px !important;
 	margin: 0 !important;
-	height: 38px;
+	height: 40px;
 	font-size: 16px !important;
+	border: 1px solid #8900fe;
 	border-radius: 3px;
-	background-color: #00e8fe;
-	background-image: linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
-	color: #e6e6e6;
+	background-color: transparent;
+	background-image: none;
+	color: #8900fe;
 	text-decoration: none;
 	line-height: 15px !important;
-	opacity: 0.9;
 }
 
 .sign-up-link:hover {
-	box-shadow: 1px 1px 3px 0 rgba(14, 0, 25, 0.25);
-	opacity: 1;
+	color: #fff;
+	background-color: rgba(137, 0, 254, 0.8);
 }
 
 .headerprofpic-div {
@@ -269,7 +284,7 @@ a {
 	-webkit-box-ordinal-group: 1;
 	-ms-flex-order: 0;
 	order: 0;
-	opacity: 0.8;
+	opacity: 0.95;
 }
 
 .admin-menu .header-navlink {
@@ -324,33 +339,28 @@ a {
 	-ms-flex: 0 auto;
 	flex: 0 auto;
 	border: 0 none #000;
-	background-color: transparent;
-	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.85), rgba(27, 0, 51, 0.85)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
+	background-color: #fff;
+	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.9), rgba(27, 0, 51, 0.9)), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
 }
 
 .footer-div * {
-	font-family: "Source Sans Pro", sans-serif !important;
+	font-family: Poppins, sans-serif !important;
 }
 
 .footer-link, .footer-logo {
 	display: block;
-	color: #e6e6e6;
+	color: #adadad;
 	font-size: 14px;
 	line-height: 26px;
 	text-align: left;
 	text-decoration: none;
 }
 
-.footer-link:hover {
+.footer-link:hover, .footer-logo:hover {
 	color: #fff;
 }
 
-@media screen and (max-width: 979px) {
-	.footer-div {
-		padding-top: 10px;
-		min-height: 64px;
-	}
-
+@media screen and (max-width: 992px) {
 	.footer-link {
 		display: inline !important;
 		float: none !important;
@@ -366,9 +376,11 @@ a {
 	}
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 768px) {
 	.footer-div {
 		display: block;
+		padding-top: 10px;
+		min-height: 64px;
 		text-align: center;
 		height: auto;
 	}
@@ -388,6 +400,20 @@ a {
 		padding: 8px 16px !important;
 		line-height: 22px;
 		display: block !important;
+	}
+}
+
+@media screen and (max-width: 469px) {
+	.footer-link {
+		display: block !important;
+		float: none !important;
+		padding: 2px 16px !important;
+		line-height: 22px;
+		text-align: center;
+	}
+
+	.footer-logo {
+		padding: 2px !important;
 	}
 }
 
@@ -461,4 +487,13 @@ i.fas.fa-ellipsis-h {
 .rmc-tooltip-inner {
 	font-size: 16px;
 	max-width: 480px;
+}
+
+.modal-terms-conditions {
+	padding: 20px 0;
+	z-index: 3000;
+}
+
+.modal-terms-conditions * {
+	font-family: Poppins, sans-serif !important;
 }
