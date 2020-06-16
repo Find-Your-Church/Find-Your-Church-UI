@@ -39,7 +39,7 @@ class SiteHeader extends Component{
 	render(){
 		return (
 				<div id={"main-header"}>
-					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}>
+					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`} style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
 						<Link to="/">
 							<img className="site-logo" src={"/img/logo.png"}
 									 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
