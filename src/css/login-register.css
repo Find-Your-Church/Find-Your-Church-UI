@@ -2,6 +2,11 @@
 	--footer-height: 46px;
 }
 
+.sign-body.verify {
+	min-height: calc(100vh - var(--footer-height));
+	max-height: calc(100vh - var(--footer-height));
+}
+
 @media screen and (max-width: 979px) {
 	.sign-body {
 		--footer-height: 68px;

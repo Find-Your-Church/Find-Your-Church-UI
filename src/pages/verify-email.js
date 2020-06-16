@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {doVerifyEmail} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
+import {Redirect} from "react-router-dom";
 
 class VerifyEmail extends Component{
 	constructor(props){
@@ -12,7 +13,8 @@ class VerifyEmail extends Component{
 		this.key = props.location.pathname.substr(14); // 14 - length of "/verify-email/", which is URL prefix for reset.
 
 		this.state = {
-			errors: {}
+			errors: {},
+			redirect_dashboard: false,
 		};
 	}
 
@@ -24,6 +26,14 @@ class VerifyEmail extends Component{
 		this.props.doVerifyEmail(userData, this.props.history);
 	};
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevState.errors !== this.state.errors){
+			if(this.state.errors.msg_verify.startsWith('Success')){
+				this.setState({redirect_dashboard: true});
+			}
+		}
+	}
+
 	static getDerivedStateFromProps(nextProps, prevState){
 		if(nextProps.errors){
 			return {errors: nextProps.errors};
@@ -33,11 +43,13 @@ class VerifyEmail extends Component{
 	}
 
 	render(){
-		return (
+		return this.state.redirect_dashboard ? (
+			<Redirect to={"/dashboard"}/>
+		) : (
 				<>
 					<SiteHeader/>
 					<main>
-						<div className="sign-body">
+						<div className="sign-body verify">
 							<h4 className="w3-display-middle w3-text-grey">
 								{this.state.errors.msg_verify}
 							</h4>
