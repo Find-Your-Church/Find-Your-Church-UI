@@ -35,7 +35,7 @@ class SiteFooter extends Component{
 
 	render(){
 		return (
-			<footer className="footer-div">
+			<footer className="footer-div" style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
 				<div className={"w3-modal modal-terms-conditions"}
 						 style={{display: this.state.showedModal ? "block" : "none"}}>
 					<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>

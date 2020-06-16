@@ -375,15 +375,16 @@ class CommunityStep extends Component{
 	render(){
 		return (
 			<>
-				<SiteHeader/>
+				<SiteHeader overlayed={this.state.saving}/>
 				<div>
-					<main className="steps-body">
-						<div id={"spinning-modal"} className={"w3-modal"}
-								 style={{display: this.state.saving ? "block" : "none"}}>
-							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"/>
-							</div>
+					<div id={"spinning-modal"} className={"w3-modal"}
+							 style={{display: this.state.saving ? "block" : "none"}}>
+						<div className="w3-display-middle w3-text-white w3-jumbo">
+							<i className="fas fa-spinner fa-spin"/>
 						</div>
+					</div>
+					<main className="steps-body"
+								style={{filter: this.state.saving ? "blur(4px)" : "none"}}>
 						<div className="page-header-container">
 							<div className={"page-header-sub-container"}>
 								<div className="create-menu w3-left">

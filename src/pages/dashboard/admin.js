@@ -64,7 +64,7 @@ class Admin extends Component{
 		 */
 		return (
 			<>
-				<SiteHeader/>
+				<SiteHeader overlayed={this.props.community.activating || this.props.community.deactivating || this.props.community.showing}/>
 				<div>
 					{this.props.community.showing ? (
 						<div id={"stripe-modal"} className={"w3-modal"}
@@ -144,7 +144,7 @@ class Admin extends Component{
 							</div>
 						</div>
 					</main>
-					<SiteFooter/>
+					<SiteFooter overlayed={this.props.community.activating || this.props.community.deactivating || this.props.community.showing}/>
 				</div>
 			</>
 		);

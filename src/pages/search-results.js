@@ -391,7 +391,7 @@ class SearchResults extends Component{
 
 		return (
 			<>
-				<SiteHeader/>
+				<SiteHeader overlayed={this.props.community.searching}/>
 				<main id="content-body" className="w3-row">
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
