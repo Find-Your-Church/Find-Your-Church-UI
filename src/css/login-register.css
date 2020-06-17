@@ -1,4 +1,5 @@
 .sign-body {
+	--header-height: 70px;
 	--footer-height: 46px;
 }
 
@@ -7,9 +8,9 @@
 	max-height: calc(100vh - var(--footer-height));
 }
 
-@media screen and (max-width: 979px) {
+@media screen and (max-width: 768px) {
 	.sign-body {
-		--footer-height: 68px;
+		--footer-height: 116px;
 	}
 }
 
@@ -42,14 +43,10 @@
 	}
 }
 
-.sign-body {
-	--header-height: 70px;
-}
-
 @media screen and (max-width: 600px) {
 	.sign-body {
 		padding-top: 80px;
-		--header-height: 96px;
+		--header-height: 116px;
 	}
 }
 
