@@ -52,6 +52,7 @@ body {
 }
 
 .filter-panel::-webkit-scrollbar {
+	display: none;
 	width: 6px;
 	background-color: #fff;
 }
@@ -344,6 +345,8 @@ body {
 
 	.filter-panel {
 		padding-bottom: 0;
+		padding-left: 10px;
+		padding-right: 10px;
 		top: 336px;
 		width: 100vw;
 		height: calc(100vh - 336px);
