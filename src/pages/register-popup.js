@@ -10,8 +10,9 @@ import {registerUser, registerGoogleUser, clearErrors} from "../actions/auth-act
 import isEmpty from "../utils/isEmpty";
 import SiteHeader from "../components/site-header";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import content_policy from "../content-policy";
 import terms_conditions from "../terms-conditions";
-import Tooltip from "rmc-tooltip";
+// import Tooltip from "rmc-tooltip";
 import 'rmc-tooltip/assets/bootstrap.css';
 
 class RegisterPopup extends Component{
@@ -19,6 +20,8 @@ class RegisterPopup extends Component{
 		super(props);
 		this.state = {
 			showedModal: false,
+			modal_title: '',
+			modal_content: '',
 			showed_tooltip: false,
 
 			fname: "",
@@ -98,8 +101,16 @@ class RegisterPopup extends Component{
 		this.props.registerGoogleUser(userData, this.props.history);
 	};
 
-	showModal = () => {
-		this.setState({showedModal: true})
+	/**
+	 *
+	 * @param n 0 - content policy, 1 - terms and conditions
+	 */
+	showModal = (n) => {
+		this.setState({
+			modal_title: n === 0 ? 'Content and Posting Policy' : 'Terms and Conditions',
+			modal_content: n === 0 ? content_policy : terms_conditions,
+			showedModal: true,
+		})
 	};
 
 	hideModal = () => {
@@ -134,9 +145,9 @@ class RegisterPopup extends Component{
 		this.setState({showed_tooltip: false});
 	};
 
-	onCheckOrganization = () => {
+	onCheckOrganization = e => {
 		this.setState({
-			is_organization: !this.state.is_organization,
+			is_organization: e.target.value === 'true',
 		})
 	};
 
@@ -152,17 +163,17 @@ class RegisterPopup extends Component{
 							<div className={"w3-modal-content w3-card-4 w3-animate-zoom"}>
 								<header className={"w3-container w3-border-bottom"}>
 									<span onClick={this.hideModal} className={"w3-button w3-xxlarge w3-display-topright"}>&times;</span>
-									<div className={"terms-title"}>Terms and Conditions</div>
+									<div className={"terms-title"}>{this.state.modal_title}</div>
 								</header>
 								<div className={"w3-container terms-conditions-content"}
-										 dangerouslySetInnerHTML={{__html: terms_conditions}}>
+										 dangerouslySetInnerHTML={{__html: this.state.modal_content}}>
 								</div>
 							</div>
 						</div>
 						<div className="div-block-63" style={{filter: this.state.showedModal ? "blur(5px)" : "none"}}>
 							<div className="div-block-38">
 								<div className="header1-div gradient shadow">
-									<h3 className="header3 center">Create a free account to access your dashboard.</h3>
+									<h3 className="header3 center">Create a free account.</h3>
 								</div>
 								<div>
 									<div className="form-div1">
@@ -171,6 +182,23 @@ class RegisterPopup extends Component{
 														name="wf-form-Registration"
 														data-name="Registration" className="form1">
 												<div className={"input-group"}>
+													<div className={"forminput-div span-2"}>
+														<label htmlFor={"email"} className={"form-label"}>Which of the following best describes
+															you:</label>
+														<select id={"is_organization"} className="form-input center w-input-sign"
+																		onChange={this.onCheckOrganization} value={this.state.is_organization}
+																		style={{backgroundImage: "url('/img/icon-down3-purple.svg')"}}>
+															<option value={''}>
+																Select one...
+															</option>
+															<option value={'false'}>
+																Creating an account for myself.
+															</option>
+															<option value={'true'}>
+																Creating an account for an organization.
+															</option>
+														</select>
+													</div>
 													<div className={"forminput-div"}>
 														<label htmlFor={"fname"} className={"form-label"}>First name</label>
 														<input type="text"
@@ -226,6 +254,7 @@ class RegisterPopup extends Component{
 																	 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
 																	 required=""/>
 													</div>
+													{/*
 													<div className={"forminput-div span-2"}>
 														<label className={"checkbox-organization"}>
 															<input type={"checkbox"} id={"is_organization"} onClick={this.onCheckOrganization}
@@ -233,6 +262,7 @@ class RegisterPopup extends Component{
 															<span className={"checkbox-label-organization"}>I'm creating an account for an organization I'm authorized to represent</span>
 														</label>
 													</div>
+													*/}
 													{this.state.is_organization ? (
 														<>
 															<div className={"forminput-div w3-animate-opacity"}>
@@ -260,15 +290,15 @@ class RegisterPopup extends Component{
 																			{/*				 align={{offset: [0, 2],}}*/}
 																			{/*				 visible={this.state.showed_tooltip}*/}
 																			{/*>*/}
-																				<input className="form-input center  w-input-sign"
-																							 title={this.state.my_lat === undefined ? '' : `Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.zip_code}`}
-																							 {...getInputProps({
-																								 placeholder: "",
-																							 })}
-																							 onFocus={this.onFocusZipCode}
-																							 onBlur={this.onBlurZipCode}
-																							 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																							 required=""/>
+																			<input className="form-input center  w-input-sign"
+																						 title={this.state.my_lat === undefined ? '' : `Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.zip_code}`}
+																						 {...getInputProps({
+																							 placeholder: "",
+																						 })}
+																						 onFocus={this.onFocusZipCode}
+																						 onBlur={this.onBlurZipCode}
+																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																						 required=""/>
 																			{/*</Tooltip>*/}
 																			<div className={"search-address-candidates"}
 																					 style={{left: "0", top: "unset", bottom: "48px"}}>
@@ -299,7 +329,7 @@ class RegisterPopup extends Component{
 													) : null}
 												</div>
 												<div className="submit-row">
-													<input type="submit" value="Create Account"
+													<input type="submit" value="Create account"
 																 data-wait="Please wait..."
 																 className="form-submit round w-button-sign"/>
 												</div>
@@ -329,8 +359,15 @@ class RegisterPopup extends Component{
 										</div>
 									</div>
 									<div className="terms-conditions">
-										<span className="fineprint">By registering you are agreeing to our</span>
-										<Link to="#" onClick={this.showModal} className="fineprint link">
+										<span className="fineprint">By registering you are agreeing to our</span><br/>
+										<Link to="#" onClick={() => {
+											this.showModal(0)
+										}} className="fineprint link">
+											Content Policy
+										</Link> <span className="fineprint">and</span>
+										<Link to="#" onClick={() => {
+											this.showModal(1)
+										}} className="fineprint link">
 											Terms and Conditions
 										</Link>
 									</div>

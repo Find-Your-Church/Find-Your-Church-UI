@@ -316,7 +316,7 @@ class CommunityStep extends Component{
 				error_community_category: true,
 			});
 		}
-		if(isEmpty(this.state.address)){
+		if(isEmpty(this.state.address) || isEmpty(this.state.coordinate.lat) || isEmpty(this.state.coordinate.lng)){
 			this.setState({
 				error_community_address: true,
 			});
@@ -375,15 +375,16 @@ class CommunityStep extends Component{
 	render(){
 		return (
 			<>
-				<SiteHeader/>
+				<SiteHeader overlayed={this.state.saving}/>
 				<div>
-					<main className="steps-body">
-						<div id={"spinning-modal"} className={"w3-modal"}
-								 style={{display: this.state.saving ? "block" : "none"}}>
-							<div className="w3-display-middle w3-text-white w3-jumbo">
-								<i className="fas fa-spinner fa-spin"/>
-							</div>
+					<div id={"spinning-modal"} className={"w3-modal"}
+							 style={{display: this.state.saving ? "block" : "none"}}>
+						<div className="w3-display-middle w3-text-white w3-jumbo">
+							<i className="fas fa-spinner fa-spin"/>
 						</div>
+					</div>
+					<main className="steps-body"
+								style={{filter: this.state.saving ? "blur(4px)" : "none"}}>
 						<div className="page-header-container">
 							<div className={"page-header-sub-container"}>
 								<div className="create-menu w3-left">
@@ -444,7 +445,7 @@ class CommunityStep extends Component{
 										<div>{this.state.error_community_category ?
 											"Category is required" : null}</div>
 										<div>{this.state.error_community_address ?
-											"Community address is required" : null}</div>
+											"Valid community address is required" : null}</div>
 									</div>
 									: null}
 								{this.state.showedDetails ?
@@ -784,10 +785,10 @@ class CommunityStep extends Component{
 																								 value={this.state.other_services}
 																								 items={community_config.FILTERS.other_services}/>
 																: null}
-															<div className="filter-div">
-																<div className="flexdiv-left labels">
-																	<label className="filter-label">Average
-																		Attendance</label>
+															<div className="filter-div" style={{paddingBottom: "10px"}}>
+																<div className="flexdiv-left labels"
+																		 style={{height: "32px", padding: "10px 0 5px", cursor: "pointer"}}>
+																	<label className="filter-label">Average Attendance</label>
 																</div>
 																<input type="number" className="attendance-input w-input"
 																			 id="average_attendance"

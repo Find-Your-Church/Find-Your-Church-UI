@@ -89,6 +89,7 @@ class Home extends Component{
 				this.ani_status = 0;
 				timeout = 500;
 				break;
+			default:
 		}
 
 		setTimeout(this.typingAnimation, timeout);
@@ -194,8 +195,14 @@ class Home extends Component{
 						<div className="fadein-page">
 							<div className="section1-grid">
 								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
-									From international ministries to neighborhood barbecues, <span className="text-span-5"><br/>we are the church.</span>
+									From international ministries<span className="text-span-5"/>
 								</h1>
+								<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1">
+									to neighborhood bbq's.<span className="text-span-5"/>
+								</h1>
+								{/*<h1 id="w-node-b317dca94991-5ad274e5" className="lp-header1 italic">*/}
+								{/*	we are the church.<span className="text-span-5"/>*/}
+								{/*</h1>*/}
 								<p className="paragraph-6">BeTheChurch.io is a platform engineered to equip ministries with
 									enterprise technology<br/>
 									<br/>reach more of His people so that we can collectively as a body make more
@@ -206,10 +213,10 @@ class Home extends Component{
 									<Link id="w-node-665fc2586de7-5ad274e5"
 												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 												className="lp-button purple w-button">
-										Find a community</Link>
+										Find your community</Link>
 									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
 												className="lp-button white w-button">
-										Create a free account
+										Create an account
 									</Link>
 								</div>
 							</div>
@@ -364,7 +371,7 @@ class Home extends Component{
 											height: this.state.iframe_height,
 										}}>
 											<iframe title={"preview communities"}
-															src="https://develop.findyourchurch.org/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
+															src="https://develop.everydaybelievers.com/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
 															style={{
 																width: this.state.iframe_screen_width,
 																height: this.state.iframe_screen_height,
@@ -384,11 +391,11 @@ class Home extends Component{
 					<div id="w-node-99ff29a3cf9c-5ad274e5" className="div-block-341">
 						<Link id="w-node-99ff29a3cf9d-5ad274e5"
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
-									className="lp-button purple w-button">Find a community</Link>
+									className="lp-button purple w-button bottom">Find your community</Link>
 						<Link id="w-node-99ff29a3cf9f-5ad274e5"
 									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
-									className="lp-button white margin w-button">
-							Create a free account</Link>
+									className="lp-button white margin w-button bottom">
+							Create an account</Link>
 					</div>
 				</div>
 				<SiteFooter/>

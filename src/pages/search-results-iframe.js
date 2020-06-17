@@ -372,9 +372,8 @@ class SearchResultsIframe extends Component{
 
 		results.sort(fnSort);
 
-		const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
-
-		const pl = criteria_radius > 1 ? "s" : "";
+		// const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
+		// const pl = criteria_radius > 1 ? "s" : "";
 
 		let selectedChurches = false;
 		let selectedEvents = false;
@@ -645,9 +644,9 @@ class SearchResultsIframe extends Component{
 												</div>
 												<div className="div-block-158">
 													<div className="div-navlink noresults">
-														<Link to={"/register-popup"}
+														<Link to={"/register-popup"} target={"_new"}
 																	className="link-headernav button-gradient w-button">
-															Create an Account
+															Create an account
 														</Link>
 													</div>
 												</div>

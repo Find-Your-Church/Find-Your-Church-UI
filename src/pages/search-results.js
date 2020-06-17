@@ -369,9 +369,8 @@ class SearchResults extends Component{
 
 		results.sort(fnSort);
 
-		const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
-
-		const pl = criteria_radius > 1 ? "s" : "";
+		// const criteria_radius = isEmpty(this.props.criteria.radius) ? this.props.community.criteria.radius : this.props.criteria.radius;
+		// const pl = criteria_radius > 1 ? "s" : "";
 
 		let selectedChurches = false;
 		let selectedEvents = false;
@@ -392,7 +391,7 @@ class SearchResults extends Component{
 
 		return (
 			<>
-				<SiteHeader/>
+				<SiteHeader overlayed={this.props.community.searching}/>
 				<main id="content-body" className="w3-row">
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
@@ -626,7 +625,7 @@ class SearchResults extends Component{
 													<div className="div-navlink noresults">
 														<Link to={"/register-popup"}
 																	className="link-headernav button-gradient w-button">
-															Create an Account
+															Create an account
 														</Link>
 													</div>
 												</div>
