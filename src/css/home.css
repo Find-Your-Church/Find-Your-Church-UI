@@ -151,6 +151,9 @@ button:focus {
 	line-height: 18px;
 	font-weight: 500;
 	border-radius: 0 !important;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 #search-results-header .search-form-button {
