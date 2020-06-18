@@ -272,9 +272,7 @@ class Home extends Component{
 									</div>
 									<div>
 										<img
-											src={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png"}
-											srcSet={"/img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-500.png 500w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-800.png 800w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM-p-1080.png 1080w, /img/5ec919d2107e4666d5215cf7_Screen%20Shot%202020-05-23%20at%207.38.25%20AM.png 1584w"}
-											sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3683px) 43vw, 1584px"
+											src={"/img/landing-1.png"}
 											alt="" className="lp-thumbnail opacity-transition" ref={this.refLp43}
 											style={{opacity: this.state.lp43_opacity}}/>
 									</div>
@@ -290,9 +288,7 @@ class Home extends Component{
 										</p>
 									</div>
 									<img
-										src={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png"}
-										srcSet={"/img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-500.png 500w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-800.png 800w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM-p-1080.png 1080w, /img/5ec81fc21cebeb48fa4ec7a3_Screen%20Shot%202020-05-22%20at%201.52.35%20PM.png 1444w"}
-										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3438px) 42vw, 1444px"
+										src={"/img/landing-2.png"}
 										id="w-node-576db9485deb-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
 										ref={this.refLp45} style={{opacity: this.state.lp45_opacity}}/>
 								</div>
@@ -307,9 +303,7 @@ class Home extends Component{
 										</p>
 									</div>
 									<img
-										src={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png"}
-										srcSet={"/img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-800.png 800w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM-p-1080.png 1080w, /img/5ec919c8a391aa56b673b661_Screen%20Shot%202020-05-23%20at%207.39.02%20AM.png 1582w"}
-										sizes="(max-width: 479px) 96vw, (max-width: 767px) 97vw, (max-width: 991px) 96vw, (max-width: 3679px) 43vw, 1582px"
+										src={"/img/landing-3.png"}
 										id="w-node-576db9485de5-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
 										ref={this.refLp47} style={{opacity: this.state.lp47_opacity}}/>
 								</div>
