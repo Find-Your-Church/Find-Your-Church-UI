@@ -101,7 +101,7 @@ class SearchResultsIframe extends Component{
 		this.setState({
 			opacityMain: 0,
 		});
-		
+
 		this.props.getUserInfo({
 			user_id: this.owner.split("-").pop(),
 		});
@@ -401,7 +401,7 @@ class SearchResultsIframe extends Component{
 		}
 
 		return (
-			<>
+			<div style={{backgroundColor: "#fff"}}>
 				<main id="content-body-iframe" className="w3-row" style={{opacity: this.state.opacityMain, transition: "0.3s ease"}}>
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
@@ -666,7 +666,7 @@ class SearchResultsIframe extends Component{
 						</div>
 					</div>
 				</main>
-			</>
+			</div>
 		);
 	}
 }
