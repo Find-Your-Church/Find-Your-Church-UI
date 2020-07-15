@@ -272,7 +272,7 @@ class Home extends Component{
 									</div>
 									<div>
 										<img
-											src={"/img/landing-1.png"}
+											src={"/img/landing-thumbnail-1.png"}
 											alt="" className="lp-thumbnail opacity-transition" ref={this.refLp43}
 											style={{opacity: this.state.lp43_opacity}}/>
 									</div>
@@ -288,7 +288,7 @@ class Home extends Component{
 										</p>
 									</div>
 									<img
-										src={"/img/landing-2.png"}
+										src={"/img/landing-thumbnail-2.png"}
 										id="w-node-576db9485deb-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
 										ref={this.refLp45} style={{opacity: this.state.lp45_opacity}}/>
 								</div>
@@ -303,7 +303,7 @@ class Home extends Component{
 										</p>
 									</div>
 									<img
-										src={"/img/landing-3.png"}
+										src={"/img/landing-thumbnail-3.png"}
 										id="w-node-576db9485de5-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
 										ref={this.refLp47} style={{opacity: this.state.lp47_opacity}}/>
 								</div>
