@@ -43,13 +43,6 @@
 	}
 }
 
-@media screen and (max-width: 600px) {
-	.sign-body {
-		padding-top: 80px;
-		--header-height: 116px;
-	}
-}
-
 .sign-body {
 	padding: var(--header-height) 5px 5px;
 	min-height: 586px;
@@ -290,9 +283,11 @@
 
 @media screen and (max-width: 600px) {
 	.sign-body {
-		padding: 80px 0 40px;
+		--header-height: 116px;
+		padding: 100px 0 10px;
 		height: auto;
-		min-height: auto;
+		min-height: 100vh;
+		max-height: unset;
 	}
 
 	.sign-body.register {
