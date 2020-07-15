@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
 import community_config from "../conf/community-conf";
+import {setSearchCriteria} from "../actions/community-actions";
 
 class Home extends Component{
 	constructor(props){
@@ -130,6 +131,14 @@ class Home extends Component{
 	};
 
 	componentDidMount(){
+		// clear address value when unmount search result, added at 07/15/2020
+		this.props.setSearchCriteria({
+			address: "",
+			lat: 44.989999,
+			lng: -93.256088,
+			...this.clear_obj,
+		});
+
 		window.addEventListener('resize', this.onResizeWindow);
 		this.onResizeWindow();
 		window.addEventListener('scroll', this.onScrollWindow);
@@ -401,11 +410,12 @@ class Home extends Component{
 Home.propTypes = {
 	auth: PropTypes.object.isRequired,
 	getUserInfo: PropTypes.func.isRequired,
+	setSearchCriteria: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
 	auth: state.auth
 });
 export default connect(
 	mapStateToProps,
-	{getUserInfo}
+	{getUserInfo, setSearchCriteria}
 )(Home);
