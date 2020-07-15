@@ -420,6 +420,10 @@ body {
 	box-shadow: 0 0 10px 0 #858585;
 }
 
+.communities-body.search-results::-webkit-scrollbar {
+	display: none;
+}
+
 .search-filter-name {
 	padding: 8px 12px;
 	width: 100%;

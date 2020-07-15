@@ -419,3 +419,7 @@ body {
 	margin-bottom: 0 !important;
 	box-shadow: 0 0 10px 0 #858585;
 }
+
+#content-body-iframe .communities-body.search-results::-webkit-scrollbar {
+	display: none;
+}
