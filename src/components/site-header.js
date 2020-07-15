@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getUserInfo, logoutUser} from "../actions/auth-actions";
 import isEmpty from "../utils/isEmpty";
+import {Helmet} from "react-helmet";
 
 class SiteHeader extends Component{
 	constructor(props){
@@ -37,8 +38,16 @@ class SiteHeader extends Component{
 	};
 
 	render(){
+		const is_view = this.props.location.pathname.startsWith("/view-community/");
+
 		return (
 				<div id={"main-header"}>
+					{is_view ? null : (
+						<Helmet>
+							<title>Find your community.</title>
+							<meta name={"description"} content={"Whether it be one or one-million, every community creates a beacon of light for someone to find and navigate towards. We want to help them shine brighter."}/>
+						</Helmet>
+					)}
 					<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`} style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
 						<Link to="/">
 							<img className="site-logo" src={"/img/logo.png"}
