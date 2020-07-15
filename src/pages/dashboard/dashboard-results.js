@@ -167,8 +167,9 @@ class DashboardResults extends Component{
 		if(this.state.showedCopyNotification)
 			return;
 
-		const copyText = document.querySelector("#frame-url");
+		const copyText = document.getElementById("frame-url");
 		copyText.select();
+		copyText.setSelectionRange(0, 99999);
 		document.execCommand("copy");
 
 		this.setState({
@@ -717,7 +718,7 @@ class DashboardResults extends Component{
 																title={"Parameters: /iframe/owner/category/radius/lat/lng/colors/filter"}>
 															<div>{this.state.frameShortCode}</div>
 															<input id={"frame-url"} value={`${this.state.frameCode}`} onChange={() => {
-															}} style={{opacity: "0", width: "8px", height: "8px"}}/>
+															}} style={{opacity: "0", height: "8px"}}/>
 														</h4>
 													</div>
 													<div className="">
