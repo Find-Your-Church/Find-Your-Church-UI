@@ -46,6 +46,8 @@ class SearchResultsIframe extends Component{
 			color_header_bg: '#f3f2f5',
 			color_results_bg: '#e8e5ea',
 			color_buttons: '#2e89fe',
+
+			opacityMain: 0,
 		};
 	}
 
@@ -96,6 +98,10 @@ class SearchResultsIframe extends Component{
 	}
 
 	componentDidMount(){
+		this.setState({
+			opacityMain: 0,
+		});
+		
 		this.props.getUserInfo({
 			user_id: this.owner.split("-").pop(),
 		});
@@ -179,6 +185,8 @@ class SearchResultsIframe extends Component{
 
 			this.props.setSearchCriteria(this.criteria);
 			this.props.doSearchCommunities(this.criteria);
+
+			this.setState({opacityMain: 1});
 		}
 	}
 
@@ -394,7 +402,7 @@ class SearchResultsIframe extends Component{
 
 		return (
 			<>
-				<main id="content-body-iframe" className="w3-row">
+				<main id="content-body-iframe" className="w3-row" style={{opacity: this.state.opacityMain, transition: "0.3s ease"}}>
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
 						<div className="w3-display-middle w3-text-white w3-jumbo">
