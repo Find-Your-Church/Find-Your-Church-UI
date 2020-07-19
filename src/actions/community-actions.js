@@ -529,10 +529,12 @@ export const doSearchCommunities = (criteria) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/pub/search", criteria)
 		.then(res => {
-			dispatch({
-				type: SET_SEARCH_RESULTS,
-				payload: res.data,
-			});
+			if(res.data.results.length > 0){
+				dispatch({
+					type: SET_SEARCH_RESULTS,
+					payload: res.data,
+				});
+			}
 
 			dispatch({
 				type: SEARCHING,
@@ -540,6 +542,8 @@ export const doSearchCommunities = (criteria) => dispatch => {
 			});
 		})
 		.catch(err => {
+			console.log(err);
+
 			dispatch({
 				type: SET_SEARCH_RESULTS,
 				payload: [],

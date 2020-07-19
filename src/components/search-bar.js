@@ -78,12 +78,14 @@ class SearchBar extends Component{
 			this.props.setSearchCriteria({
 				radius: rad,
 				...this.clear_obj,
+				skip: 0,
 			});
 
 			this.props.doSearchCommunities({
 				...this.props.community.criteria,
 				radius: rad,
 				...this.clear_obj,
+				skip: 0,
 			});
 		}
 		if(e.target.id === 'search_category'){
@@ -104,11 +106,13 @@ class SearchBar extends Component{
 			this.props.setSearchCriteria({
 				category: e.target.value,
 				...this.clear_obj,
+				skip: 0,
 			});
 			this.props.doSearchCommunities({
 				...this.props.community.criteria,
 				category: e.target.value,
 				...this.clear_obj,
+				skip: 0,
 			});
 		}
 		else
@@ -140,6 +144,7 @@ class SearchBar extends Component{
 					lat: latLng.lat,
 					lng: latLng.lng,
 					...this.clear_obj,
+					skip: 0,
 				});
 				this.props.doSearchCommunities({
 					...this.props.community.criteria,
@@ -147,6 +152,7 @@ class SearchBar extends Component{
 					lat: latLng.lat,
 					lng: latLng.lng,
 					...this.clear_obj,
+					skip: 0,
 				});
 			})
 			.catch(error => console.error('Error', error));
@@ -161,6 +167,7 @@ class SearchBar extends Component{
 			lat: this.state.my_lat,
 			lng: this.state.my_lng,
 			...this.clear_obj,
+			skip: 0,
 		});
 
 		this.props.doSearchCommunities({
@@ -171,6 +178,7 @@ class SearchBar extends Component{
 			lat: this.state.my_lat,
 			lng: this.state.my_lng,
 			...this.clear_obj,
+			skip: 0,
 		});
 
 		// go to the search results!
@@ -188,7 +196,6 @@ class SearchBar extends Component{
 					{this.props.showedCategory ? (
 						this.props.buttonTitle === "Update" ? (
 								<select id="search_category" onChange={this.onChange} onBlur={this.onBlurCategory}
-												defaultValue={this.props.community.criteria.category}
 												value={this.props.community.criteria.category}
 												style={{
 													backgroundImage: "url('/img/icon-down3-purple.svg')",
@@ -200,11 +207,12 @@ class SearchBar extends Component{
 											// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
 											// 	<option value={cat} key={"search-" + cat}>{cat}</option>
 											// ) : null;
+										this.props.community.categories ?
 										this.props.community.categories.map(cat => {
 											return  (
 												<option value={cat} key={"search-" + cat}>{cat}</option>
 											);
-										})
+										}) : null
 									}
 								</select>
 							)
@@ -237,7 +245,6 @@ class SearchBar extends Component{
 							)
 					) : null}
 					<select id="search_radius" onChange={this.onChange}
-									defaultValue={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
 									value={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
 									style={{
 										backgroundImage: "url('/img/icon-down3-purple.svg')",
