@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {viewCommunity} from "../actions/community-actions";
 import SiteHeader from "../components/site-header";
+import app_config from "../conf/config";
 
 class InvitedViewCommunity extends Component{
 	constructor(props){
@@ -161,7 +162,7 @@ class InvitedViewCommunity extends Component{
 																		{this.props.community.view_community.pictures.map((pic, index) => {
 																			return (
 																				<div className="each-slide" key={index}>
-																					<div style={{backgroundImage: `url(${pic})`}}>
+																					<div style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-${index}.${pic})`}}>
 																					</div>
 																				</div>
 																			);
