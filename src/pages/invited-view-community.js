@@ -174,7 +174,7 @@ class InvitedViewCommunity extends Component{
 																<div className="slide-container">
 																	<div className="each-slide">
 																		<div
-																			style={{backgroundImage: `url(${this.props.community.view_community.pictures[0]})`}}>
+																			style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-0.${this.props.community.view_community.pictures[0]})`}}>
 																		</div>
 																	</div>
 																</div>
