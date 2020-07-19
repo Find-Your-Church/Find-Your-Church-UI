@@ -421,6 +421,12 @@ body {
 	box-shadow: 0 0 10px 0 #858585;
 }
 
+#content-body-iframe #bottom-element {
+	float: left;
+	width: 2px;
+	height: 1px;
+}
+
 #content-body-iframe .communities-body.search-results::-webkit-scrollbar {
 	display: none;
 }
