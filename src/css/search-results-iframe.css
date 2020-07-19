@@ -349,7 +349,8 @@ body {
 		padding-right: 10px;
 		top: 266px;
 		width: 100vw;
-		height: calc(100vh - 266px);
+		min-height: calc(100vh - 266px);
+		max-height: calc(100vh - 266px);
 		z-index: 101;
 	}
 
