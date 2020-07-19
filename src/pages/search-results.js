@@ -124,7 +124,8 @@ class SearchResults extends Component{
 		const scrollElement = document.getElementById('bottom-element');
 
 		if(scrollElement && this.isBottom(scrollElement)){
-			this.props.doSearchCommunities(this.props.community.criteria);
+			if(!this.props.community.searching)
+				this.props.doSearchCommunities(this.props.community.criteria);
 		}
 	};
 

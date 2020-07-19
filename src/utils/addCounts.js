@@ -5,8 +5,8 @@ const addCounts = (counts1, counts2) => {
 		ret_obj[cnt1] = [...counts1[cnt1]];
 	}
 
-	console.log(ret_obj);
-	console.log(counts2);
+	console.log("1:", ret_obj);
+	console.log("2:", counts2);
 
 	for(const cnt2 of Object.keys(counts2)){
 		if(ret_obj[cnt2]){
@@ -14,10 +14,10 @@ const addCounts = (counts1, counts2) => {
 				ret_obj[cnt2][i] += counts2[cnt2][i];
 		}
 		else{
-			ret_obj[cnt2] = [...counts1[cnt2]];
+			ret_obj[cnt2] = [...counts2[cnt2]];
 		}
 	}
-	console.log(ret_obj);
+	console.log("->", ret_obj);
 
 	return ret_obj;
 };

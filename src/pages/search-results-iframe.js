@@ -105,7 +105,8 @@ class SearchResultsIframe extends Component{
 		const scrollElement = document.getElementById('bottom-element');
 
 		if(scrollElement && this.isBottom(scrollElement)){
-			this.props.doSearchCommunities(this.props.community.criteria);
+			if(!this.props.community.searching)
+				this.props.doSearchCommunities(this.props.community.criteria);
 		}
 	};
 
@@ -428,7 +429,8 @@ class SearchResultsIframe extends Component{
 
 		return (
 			<div style={{backgroundColor: "#fff"}}>
-				<main id="content-body-iframe" className="w3-row" style={{opacity: this.state.opacityMain, transition: "0.3s ease"}}>
+				<main id="content-body-iframe" className="w3-row"
+							style={{opacity: this.state.opacityMain, transition: "0.3s ease"}}>
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
 						<div className="w3-display-middle w3-text-white w3-jumbo">
@@ -616,7 +618,8 @@ class SearchResultsIframe extends Component{
 									: null}
 							</div>
 						</div>
-						<div id={"communities-list"} className={"communities-container communities-body communities search-results w3-row"}
+						<div id={"communities-list"}
+								 className={"communities-container communities-body communities search-results w3-row"}
 								 style={{backgroundColor: this.state.color_results_bg}} onScroll={this.detectScrolledBottom}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
