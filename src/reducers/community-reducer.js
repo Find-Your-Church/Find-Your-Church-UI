@@ -343,14 +343,17 @@ export default function(state = initialState, action){
 				}
 			};
 		case SET_SEARCH_RESULTS:
-			console.log(action.payload);
 			if(action.payload.continued){
-				console.log('some added by scrolling');
+				let updated_categories = [...state.categories];
+				for(const cat of action.payload.categories){
+					if(!updated_categories.includes(cat))
+						updated_categories.push(cat);
+				}
 				return {
 					...state,
 					search_results: [...state.search_results, ...action.payload.results],
 					counts: addCounts(state.counts, action.payload.counts),
-					categories: [...state.categories, ...action.payload.categories],
+					categories: updated_categories,
 					criteria: {
 						...state.criteria,
 						skip: action.payload.skipped,
@@ -358,7 +361,6 @@ export default function(state = initialState, action){
 				};
 			}
 			else{
-				console.log('first, 20 searched');
 				return {
 					...state,
 					search_results: action.payload.results,
