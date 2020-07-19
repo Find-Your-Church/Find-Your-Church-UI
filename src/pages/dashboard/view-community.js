@@ -201,7 +201,7 @@ class ViewCommunity extends Component{
 															<div className="slide-container">
 																<div className="each-slide">
 																	<div
-																		style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+																		style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-0.${this.state.pictures[0]})`}}>
 																	</div>
 																</div>
 															</div>
