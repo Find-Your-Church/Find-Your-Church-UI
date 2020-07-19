@@ -56,7 +56,6 @@ class SearchResults extends Component{
 			lat: this.lat,
 			lng: this.lng,
 			filter: {...this.filter},
-			skip: 0,
 		};
 
 		props.setSearchCriteria(this.criteria);
@@ -116,30 +115,10 @@ class SearchResults extends Component{
 		return state_obj;
 	}
 
-	isBottom = el => {
-		return el.getBoundingClientRect().bottom <= window.innerHeight - 9;
-	}
-
-	detectScrolledBottom = () => {
-		const scrollElement = document.getElementById('bottom-element');
-
-		if(scrollElement && this.isBottom(scrollElement)){
-			if(!this.props.community.searching)
-				this.props.doSearchCommunities(this.props.community.criteria);
-		}
-	};
-
 	componentDidMount(){
-		// detect scrolled to bottom of the search results list
-		window.addEventListener('scroll', this.detectScrolledBottom);
-
 		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
 
 		this.props.getOwners({keyword: ""});
-	}
-
-	componentWillUnmount(){
-		window.removeEventListener('scroll', this.detectScrolledBottom);
 	}
 
 	filters2url = () => {
@@ -242,7 +221,6 @@ class SearchResults extends Component{
 		if(this.props.community.criteria.filter.hosting[1] === '0' && checks[1] === '1'){
 			this.props.setSearchCriteria({
 				radius: null,
-				skip: 0,
 			});
 			this.props.setSearchFilter(obj);
 			this.setState(obj);
@@ -252,8 +230,7 @@ class SearchResults extends Component{
 				filter: {
 					...this.props.community.criteria.filter,
 					...obj,
-				},
-				skip: 0,
+				}
 			});
 		}
 		else{
@@ -298,9 +275,6 @@ class SearchResults extends Component{
 	};
 
 	doSearchByFilter = (obj) => {
-		this.props.setSearchCriteria({
-			skip: 0,
-		});
 		this.props.setSearchFilter(obj);
 		this.setState(obj);
 		this.props.doSearchCommunities({
@@ -308,8 +282,7 @@ class SearchResults extends Component{
 			filter: {
 				...this.props.community.criteria.filter,
 				...obj,
-			},
-			skip: 0,
+			}
 		});
 	};
 
@@ -603,7 +576,7 @@ class SearchResults extends Component{
 									: null}
 							</div>
 						</div>
-						<div id={"communities-list"} className={"communities-container communities-body communities search-results w3-row"} onScroll={this.detectScrolledBottom}>
+						<div className={"communities-container communities-body communities search-results w3-row"}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
@@ -631,7 +604,6 @@ class SearchResults extends Component{
 											</div>
 										)
 									})}
-									<div id={"bottom-element"}/>
 								</div>
 							) : (
 								<>

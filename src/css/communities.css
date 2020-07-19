@@ -432,8 +432,14 @@ a.w--current {
 	flex: 0 auto;
 	border: 1px solid rgba(14, 0, 25, 0.15);
 	border-radius: 3px;
-	overflow: hidden;
 	background-color: #fff;
+	overflow: hidden;
+}
+
+.communities-body .listing-container1:hover .listingprofilepic-div {
+	transition: ease-in .3s, ease-out 1.6s;
+	-webkit-transform: scale(1.00);
+	transform: scale(1.00);
 }
 
 .communities-body .listingprofilepic-div {
@@ -442,17 +448,27 @@ a.w--current {
 	display: -ms-flexbox;
 	display: flex;
 	padding-top: 56.25%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	overflow: hidden;
 	min-height: auto;
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	-ms-flex-pack: center;
 	justify-content: center;
-	overflow: hidden;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
+	border: 1px none #000;
+	border-radius: 0;
 	cursor: pointer;
 }
+
+/*
+.communities-body .listingprofilepic-div:hover {
+	-webkit-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	transform: scale(1.2);
+}
+*/
 
 .communities-body .listinginfo-div {
 	padding: 10px;
