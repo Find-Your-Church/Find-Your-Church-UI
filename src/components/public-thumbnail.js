@@ -8,6 +8,7 @@ import SelectedFilters from "./selected-filters";
 import isEmpty from "../utils/isEmpty";
 import {getOwnerInfo} from "../actions/auth-actions";
 import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
+import {getThumbnail} from "../utils/common-api";
 
 class PublicThumbnail extends Component{
 	constructor(props){
@@ -17,6 +18,7 @@ class PublicThumbnail extends Component{
 			is_viewing: false,
 			is_show_menu: false,
 			community_name_url: '',
+			pic: '',
 		};
 
 		this.toggleMenu = this.toggleMenu.bind(this);
@@ -27,6 +29,10 @@ class PublicThumbnail extends Component{
 		const name4url = this.props.value.community_name.split(" ").join("-");
 		this.setState({
 			community_name_url: name4url
+		});
+
+		getThumbnail({id: this.props.value._id}).then(r => {
+			this.setState({pic: r});
 		});
 	}
 
@@ -93,8 +99,9 @@ class PublicThumbnail extends Component{
 						<div
 							className={"listingprofilepic-div"}
 							style={{
-								backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
-									: "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
+								backgroundImage: `url('${this.state.pic.length > 0 ? this.state.pic: "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`,
+								// backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0]
+								// : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`,
 							}}>
 						</div>
 					</div>
