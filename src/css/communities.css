@@ -433,6 +433,7 @@ a.w--current {
 	border: 1px solid rgba(14, 0, 25, 0.15);
 	border-radius: 3px;
 	background-color: #fff;
+	overflow: hidden;
 }
 
 .communities-body .listing-container1:hover .listingprofilepic-div {
