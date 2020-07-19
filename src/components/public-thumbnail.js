@@ -8,6 +8,7 @@ import SelectedFilters from "./selected-filters";
 import isEmpty from "../utils/isEmpty";
 import {getOwnerInfo} from "../actions/auth-actions";
 import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
+import app_config from "../conf/config";
 
 class PublicThumbnail extends Component{
 	constructor(props){
@@ -94,8 +95,7 @@ class PublicThumbnail extends Component{
 						<div
 							className={"listingprofilepic-div"}
 							style={{
-								//backgroundImage: `url('${this.state.pic.length > 0 ? this.state.pic: "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`,
-								backgroundImage: `url('${this.props.value.pictures.length > 0 ? this.props.value.pictures[0] : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`,
+								backgroundImage: `url('${this.props.value.pictures.length > 0 ? `${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}` : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
 							}}>
 						</div>
 					</div>

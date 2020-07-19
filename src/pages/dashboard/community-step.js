@@ -65,7 +65,7 @@ class CommunityStep extends Component{
 				lat: p_obj === undefined ? null : p_obj.obj.coordinate.lat,
 				lng: p_obj === undefined ? null : p_obj.obj.coordinate.lng,
 			},
-			pictures: p_obj === undefined ? [] : p_obj.obj.pictures,
+			pictures: [],
 			community_contact: p_obj === undefined ? "" : p_obj.obj.community_contact,
 			phone: p_obj === undefined ? "" : p_obj.obj.phone,
 			email: p_obj === undefined ? "" : p_obj.obj.email,
@@ -102,11 +102,40 @@ class CommunityStep extends Component{
 			saving: false,
 		};
 
+		if(p_obj){
+			this.getImageArray(p_obj.obj._id, p_obj.obj.pictures);
+		}
+
 		this.onSubmitCommunity = this.onSubmitCommunity.bind(this);
 		this.removeSlide = this.removeSlide.bind(this);
 		this.onChangeAddress = this.onChangeAddress.bind(this);
 		this.fixURL = this.fixURL.bind(this);
 	}
+
+	getImageArray = (id, names) => {
+		const canvas = document.createElement("canvas");
+		for(let i = 0; i < names.length; i++){
+			if(names[i].length > 300){
+				const arr = [...this.state.pictures];
+				arr[i] = names[i];
+				this.setState({pictures: arr});
+			}
+			else{
+				const img = new Image();
+				img.crossOrigin = "anonymous";
+				img.onload = () => {
+					canvas.width = img.width;
+					canvas.height = img.height;
+					const ctx = canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0);
+					const arr = [...this.state.pictures];
+					arr[i] = canvas.toDataURL();
+					this.setState({pictures: arr});
+				};
+				img.src = `${app_config.FYC_API_URL}/static/pictures/${id}-${i}.${names[i]}`;
+			}
+		}
+	};
 
 	onResizeWindow = () => {
 		if(this.cat_ref.current !== null && this.cat_ref.current !== undefined)
