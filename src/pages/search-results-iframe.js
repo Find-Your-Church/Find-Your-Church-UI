@@ -97,23 +97,7 @@ class SearchResultsIframe extends Component{
 		return state_obj;
 	}
 
-	isBottom = el => {
-		return el.getBoundingClientRect().bottom <= window.innerHeight - 9;
-	}
-
-	detectScrolledBottom = () => {
-		const scrollElement = document.getElementById('bottom-element');
-
-		if(scrollElement && this.isBottom(scrollElement)){
-			if(!this.props.community.searching)
-				this.props.doSearchCommunities(this.props.community.criteria);
-		}
-	};
-
 	componentDidMount(){
-		// detect scrolled to bottom of the search results list
-		window.addEventListener('scroll', this.detectScrolledBottom);
-
 		this.setState({
 			opacityMain: 0,
 		});
@@ -123,10 +107,6 @@ class SearchResultsIframe extends Component{
 		});
 
 		this.props.getOwners({keyword: ""});
-	}
-
-	componentWillUnmount(){
-		window.removeEventListener('scroll', this.detectScrolledBottom);
 	}
 
 	filters2url = () => {
@@ -201,7 +181,6 @@ class SearchResultsIframe extends Component{
 				lng: this.props.auth.user.location === undefined ? this.props.community.criteria.lng : this.props.auth.user.location.lng,
 				address: this.props.auth.user.zip_code === undefined ? this.props.community.criteria.address : this.props.auth.user.zip_code,
 				filter: {...this.filter},
-				skip: 0,
 			};
 
 			this.props.setSearchCriteria(this.criteria);
@@ -253,7 +232,6 @@ class SearchResultsIframe extends Component{
 		if(this.props.community.criteria.filter.hosting[1] === '0' && checks[1] === '1'){
 			this.props.setSearchCriteria({
 				radius: null,
-				skip: 0,
 			});
 			this.props.setSearchFilter(obj);
 			this.setState(obj);
@@ -263,8 +241,7 @@ class SearchResultsIframe extends Component{
 				filter: {
 					...this.props.community.criteria.filter,
 					...obj,
-				},
-				skip: 0,
+				}
 			});
 		}
 		else{
@@ -309,9 +286,6 @@ class SearchResultsIframe extends Component{
 	};
 
 	doSearchByFilter = (obj) => {
-		this.props.setSearchCriteria({
-			skip: 0,
-		});
 		this.props.setSearchFilter(obj);
 		this.setState(obj);
 		this.props.doSearchCommunities({
@@ -319,8 +293,7 @@ class SearchResultsIframe extends Component{
 			filter: {
 				...this.props.community.criteria.filter,
 				...obj,
-			},
-			skip: 0,
+			}
 		});
 	};
 
@@ -429,8 +402,7 @@ class SearchResultsIframe extends Component{
 
 		return (
 			<div style={{backgroundColor: "#fff"}}>
-				<main id="content-body-iframe" className="w3-row"
-							style={{opacity: this.state.opacityMain, transition: "0.3s ease"}}>
+				<main id="content-body-iframe" className="w3-row" style={{opacity: this.state.opacityMain, transition: "0.3s ease"}}>
 					<div id={"spinning-modal"} className={"w3-modal"}
 							 style={{display: this.props.community.searching ? "block" : "none"}}>
 						<div className="w3-display-middle w3-text-white w3-jumbo">
@@ -618,9 +590,8 @@ class SearchResultsIframe extends Component{
 									: null}
 							</div>
 						</div>
-						<div id={"communities-list"}
-								 className={"communities-container communities-body communities search-results w3-row"}
-								 style={{backgroundColor: this.state.color_results_bg}} onScroll={this.detectScrolledBottom}>
+						<div className={"communities-container communities-body communities search-results w3-row"}
+								 style={{backgroundColor: this.state.color_results_bg}}>
 							{results.length > 0 ? (
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
@@ -662,7 +633,6 @@ class SearchResultsIframe extends Component{
 											</div>
 										)
 									})}
-									<div id={"bottom-element"}/>
 								</div>
 							) : (
 								<>

@@ -33,7 +33,6 @@ import {
 } from "../actions/action-types";
 import {INIT_FILTERS} from "../conf/community-conf";
 import sorters from "../actions/sorters";
-import addCounts from "../utils/addCounts";
 
 const initialState = {
 	// community
@@ -81,8 +80,7 @@ const initialState = {
 		lng: -93.256088,
 		filter: {
 			...INIT_FILTERS,
-		},
-		skip: 0,
+		}
 	},
 
 	sort_order: sorters.SORT_NEWEST,
@@ -327,8 +325,7 @@ export default function(state = initialState, action){
 				criteria: {
 					...state.criteria,
 					...action.payload,
-					skip: 0,
-				},
+				}
 			};
 		case SET_SEARCH_FILTER:
 			return {
@@ -338,40 +335,16 @@ export default function(state = initialState, action){
 					filter: {
 						...state.criteria.filter,
 						...action.payload,
-					},
-					skip: 0,
+					}
 				}
 			};
 		case SET_SEARCH_RESULTS:
-			if(action.payload.continued){
-				let updated_categories = [...state.categories];
-				for(const cat of action.payload.categories){
-					if(!updated_categories.includes(cat))
-						updated_categories.push(cat);
-				}
-				return {
-					...state,
-					search_results: [...state.search_results, ...action.payload.results],
-					counts: addCounts(state.counts, action.payload.counts),
-					categories: updated_categories,
-					criteria: {
-						...state.criteria,
-						skip: action.payload.skipped,
-					},
-				};
-			}
-			else{
-				return {
-					...state,
-					search_results: action.payload.results,
-					counts: action.payload.counts,
-					categories: action.payload.categories,
-					criteria: {
-						...state.criteria,
-						skip: action.payload.skipped,
-					},
-				};
-			}
+			return {
+				...state,
+				search_results: action.payload.results,
+				counts: action.payload.counts,
+				categories: action.payload.categories,
+			};
 		case SORT_ORDER:
 			return {
 				...state,
