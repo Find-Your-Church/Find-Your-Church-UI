@@ -427,7 +427,7 @@ class StripeSubscription extends Component{
 									<div>
 										<h4 className={`value ${this.props.community.subscription ? "" : ""}`} style={{textAlign: "right"}}>
 											{
-												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
+												this.props.community.subscription ? (showAmount(prorated * (this.props.community.communities_activated.length - this.props.community.tickets) * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
 													<i className="fas fa-spinner fa-spin"/>
 													: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))
