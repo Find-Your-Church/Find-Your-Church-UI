@@ -175,7 +175,7 @@ class Thumbnail extends Component{
 							<div className="listingrow">
 								<h5 className="communityaddress">{this.props.value.address}</h5>
 							</div>
-							<div className="form-block-4">
+							<label className="form-block-4">
 								<label
 									className="w-checkbox checkbox-field">
 									<input type="checkbox" checked={this.state.checked} onChange={() => {
@@ -184,7 +184,7 @@ class Thumbnail extends Component{
 									<span
 										className="checkbox-label w-form-label">.</span>
 								</label>
-							</div>
+							</label>
 						</div>
 					</div>
 				)
