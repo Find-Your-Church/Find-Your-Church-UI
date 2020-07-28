@@ -199,7 +199,7 @@ export const logoutUser = (history) => dispatch => {
 	// Set current user to empty object {} which will set isAuthenticated to false
 	dispatch(setCurrentUser({}));
 
-	history.push("/goto-url/everydaybelievers.com");
+	history.push(`/goto-url/${app_config.FYC_HOME_URL}`);
 };
 
 /**
