@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {getUserInfo, logoutUser} from "../actions/auth-actions";
 import isEmpty from "../utils/isEmpty";
 import {Helmet} from "react-helmet";
+import app_config from "../conf/config";
 
 class SiteHeader extends Component{
 	constructor(props){
@@ -51,7 +52,7 @@ class SiteHeader extends Component{
 				)}
 				<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}
 								style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
-					<Link to="/goto-url/everydaybelievers.com">
+					<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}>
 						<img className="site-logo" src={"/img/logo.png"}
 								 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
 					</Link>
@@ -91,7 +92,7 @@ class SiteHeader extends Component{
 									Sign In
 								</Link>
 								<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "0"}}>&nbsp;</div>
-								<Link to="/goto-url/everydaybelievers.com"
+								<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}
 											className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}
 											style={{marginRight: "7px"}}
 								>
@@ -106,7 +107,7 @@ class SiteHeader extends Component{
 							 display: this.state.showedAdminMenu ? "block" : "none",
 						 }}>
 					<nav role="navigation" className="global-navcontainer w-nav-menu w--nav-menu-open">
-						<Link to="/goto-url/everydaybelievers.com" className="header-navlink w-nav-link w--nav-link-open">
+						<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className="header-navlink w-nav-link w--nav-link-open">
 							Home</Link>
 						{this.props.auth.isAuthenticated ? (<>
 							<Link to="/dashboard" className="header-navlink w-nav-link w--nav-link-open">
