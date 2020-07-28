@@ -26,7 +26,7 @@ export const registerUser = (userData, history) => dispatch => {
 				payload: true,
 			});
 
-			history.push("/login-popup");
+			history.push("/sign-in");
 		}) // re-direct to welcome page on successful register
 		.catch(err =>
 			dispatch({
@@ -199,7 +199,7 @@ export const logoutUser = (history) => dispatch => {
 	// Set current user to empty object {} which will set isAuthenticated to false
 	dispatch(setCurrentUser({}));
 
-	history.push("/");
+	history.push("/goto-url/everydaybelievers.com");
 };
 
 /**
@@ -211,7 +211,7 @@ export const logoutUser = (history) => dispatch => {
 export const resetPassword = (userData, history) => dispatch => {
 	axios
 		.post(app_config.FYC_API_URL + "/api/pub/resetpassword", userData)
-		.then(res => history.push("/login-popup"))
+		.then(res => history.push("/sign-in"))
 		.catch(err =>
 			dispatch({
 				type: MESSAGE_FROM_API,
@@ -326,7 +326,7 @@ export const doChangePassword = (userData, history) => dispatch => {
 				type: MESSAGE_FROM_API,
 				payload: res.data,
 			});
-			history.push("/login-popup");
+			history.push("/sign-in");
 		})
 		.catch(err => {
 			dispatch({

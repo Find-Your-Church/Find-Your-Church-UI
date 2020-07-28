@@ -101,7 +101,7 @@ class ChangePassword extends Component{
 									</div>
 									<div className="div-block-46">
 										<h1 className="heading-11">
-											<Link to="/login-popup" className="link-5">
+											<Link to="/sign-in" className="link-5">
 												Back to <span style={{fontWeight: "600", color: "#2e89fe"}}>Sign In</span>
 											</Link>
 										</h1>

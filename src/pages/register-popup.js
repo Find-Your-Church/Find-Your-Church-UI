@@ -398,7 +398,7 @@ class RegisterPopup extends Component{
 									*/}
 								<div className="div-block-46">
 									<h1 className="heading-11">
-										<Link to="/login-popup" className="link-5">
+										<Link to="/sign-in" className="link-5">
 											Already have an account? <strong>Sign In</strong>
 										</Link>
 									</h1>
