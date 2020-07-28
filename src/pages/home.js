@@ -374,7 +374,7 @@ class Home extends Component{
 											height: this.state.iframe_height,
 										}}>
 											<iframe title={"preview communities"}
-															src="https://develop.everydaybelievers.com/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
+															src="https://develop-app.everydaybelievers.com/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
 															style={{
 																width: this.state.iframe_screen_width,
 																height: this.state.iframe_screen_height,
