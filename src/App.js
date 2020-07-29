@@ -80,7 +80,7 @@ class App extends Component{
 				<StripeProvider stripe={this.state.stripe}>
 					<Router>
 						<Switch>
-							<Route exact path="/" component={Home}/>
+							<Route exact path="/" component={LoginPopup}/>
 							<Route exact path="/search-results" component={SearchResults}/>
 							<Route path="/search-results/:category/:radius/:lat/:lng/:filter" component={SearchResults}/>
 							<Route path="/iframe/:owner/:filter" component={SearchResultsIframe}/>
