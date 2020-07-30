@@ -433,6 +433,7 @@ a.w--current {
 	border: 1px solid rgba(14, 0, 25, 0.15);
 	border-radius: 3px;
 	background-color: #fff;
+	overflow: hidden;
 }
 
 .communities-body .listing-container1:hover .listingprofilepic-div {
@@ -664,6 +665,7 @@ a.w--current {
 	background-color: #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(27, 0, 51, 0.05)), to(rgba(27, 0, 51, 0.05)));
 	background-image: linear-gradient(180deg, rgba(27, 0, 51, 0.05), rgba(27, 0, 51, 0.05));
+	cursor: pointer;
 }
 
 .checkbox-field {

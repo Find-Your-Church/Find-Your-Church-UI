@@ -349,12 +349,13 @@ body {
 		padding-right: 10px;
 		top: 266px;
 		width: 100vw;
-		height: calc(100vh - 266px);
+		min-height: calc(100vh - 266px);
+		max-height: calc(100vh - 266px);
 		z-index: 101;
 	}
 
 	#content-body-iframe .communities-container.search-results {
-		padding: 8px 5px;
+		padding: 8px 5px 10px;
 		left: 0;
 		z-index: 0;
 	}
@@ -418,4 +419,8 @@ body {
 #content-body-iframe .communities-body.search-results {
 	margin-bottom: 0 !important;
 	box-shadow: 0 0 10px 0 #858585;
+}
+
+#content-body-iframe .communities-body.search-results::-webkit-scrollbar {
+	display: none;
 }

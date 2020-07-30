@@ -427,7 +427,7 @@ class StripeSubscription extends Component{
 									<div>
 										<h4 className={`value ${this.props.community.subscription ? "" : ""}`} style={{textAlign: "right"}}>
 											{
-												this.props.community.subscription ? (showAmount(prorated * this.props.community.subscription.plan.amount))
+												this.props.community.subscription ? (showAmount(prorated * (this.props.community.communities_activated.length - this.props.community.tickets) * this.props.community.subscription.plan.amount))
 													: (this.props.community.is_sending ?
 													<i className="fas fa-spinner fa-spin"/>
 													: showAmount(this.props.community.communities_activated.length * this.props.community.plan_price))
@@ -482,7 +482,7 @@ class StripeSubscription extends Component{
 									<div>
 										<div className={`div10-bottom right`}>
 											<div>
-												{this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
+												{this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * (this.props.community.communities_activated.length - this.props.community.tickets) * this.props.community.subscription.plan.amount)))
 													: (this.props.community.is_sending ?
 														<i className="fas fa-spinner fa-spin"/>
 														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))
@@ -512,7 +512,7 @@ class StripeSubscription extends Component{
 											<div
 												className={this.props.community.trialing || (!this.props.community.subscription && this.props.community.trial_period_days > 0) ? "strike" : ""}>
 												{
-													this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * this.props.community.subscription.plan.amount)))
+													this.props.community.subscription ? (showAmount(this.getDiscountedAmount(prorated * (this.props.community.communities_activated.length - this.props.community.tickets) * this.props.community.subscription.plan.amount)))
 														: (this.props.community.is_sending ?
 														<i className="fas fa-spinner fa-spin"/>
 														: showAmount(this.getDiscountedAmount(this.props.community.communities_activated.length * this.props.community.plan_price)))

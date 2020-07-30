@@ -7,6 +7,7 @@ import {Link, Redirect} from "react-router-dom";
 import community_config from "../../conf/community-conf";
 import ListMembers from "../../components/list-members";
 import SiteHeader from "../../components/site-header";
+import app_config from "../../conf/config";
 
 // import Popup from "reactjs-popup";
 
@@ -129,7 +130,6 @@ class ViewCommunity extends Component{
 	};
 
 	render(){
-		// console.log(this.state.picture);
 		let aboutShort = this.state.about.substr(0, this.aboutLimit);
 		let isMore = false;
 		if(aboutShort.length !== this.state.about.length){
@@ -189,7 +189,7 @@ class ViewCommunity extends Component{
 																	{this.state.pictures.map((pic, index) => {
 																		return (
 																			<div className="each-slide" key={index}>
-																				<div style={{backgroundImage: `url(${pic})`}}>
+																				<div style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-${index}.${pic})`}}>
 																				</div>
 																			</div>
 																		);
@@ -201,7 +201,7 @@ class ViewCommunity extends Component{
 															<div className="slide-container">
 																<div className="each-slide">
 																	<div
-																		style={{backgroundImage: `url(${this.state.pictures[0]})`}}>
+																		style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-0.${this.state.pictures[0]})`}}>
 																	</div>
 																</div>
 															</div>

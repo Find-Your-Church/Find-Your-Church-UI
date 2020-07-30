@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {viewCommunity} from "../actions/community-actions";
 import SiteHeader from "../components/site-header";
+import app_config from "../conf/config";
 
 class InvitedViewCommunity extends Component{
 	constructor(props){
@@ -86,6 +87,10 @@ class InvitedViewCommunity extends Component{
 		this.setState({collapsedMorePart: !this.state.collapsedMorePart});
 	};
 
+	goBack = () => {
+		this.props.history.goBack();
+	};
+
 	render(){
 		if(this.props.community.view_community === null){
 			return null;
@@ -114,7 +119,7 @@ class InvitedViewCommunity extends Component{
 								 style={this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? {backgroundColor: this.props.location.state.colorTheme.header_bg} : null}>
 							<div className={"page-header-sub-container"}>
 								<div className="create-menu w3-left">
-									<Link to={this.props.community.back_url} className="w3-button cancel">Back</Link>
+									<Link to={"#"} className="w3-button cancel" onClick={this.goBack}>Back</Link>
 								</div>
 								<div className="page-header-title">
 									{this.props.community.view_community.community_name}
@@ -157,7 +162,7 @@ class InvitedViewCommunity extends Component{
 																		{this.props.community.view_community.pictures.map((pic, index) => {
 																			return (
 																				<div className="each-slide" key={index}>
-																					<div style={{backgroundImage: `url(${pic})`}}>
+																					<div style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-${index}.${pic})`}}>
 																					</div>
 																				</div>
 																			);
@@ -169,7 +174,7 @@ class InvitedViewCommunity extends Component{
 																<div className="slide-container">
 																	<div className="each-slide">
 																		<div
-																			style={{backgroundImage: `url(${this.props.community.view_community.pictures[0]})`}}>
+																			style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-0.${this.props.community.view_community.pictures[0]})`}}>
 																		</div>
 																	</div>
 																</div>

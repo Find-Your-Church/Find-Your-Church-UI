@@ -80,14 +80,14 @@ class App extends Component{
 				<StripeProvider stripe={this.state.stripe}>
 					<Router>
 						<Switch>
-							<Route exact path="/" component={Home}/>
+							<Route exact path="/" component={LoginPopup}/>
 							<Route exact path="/search-results" component={SearchResults}/>
 							<Route path="/search-results/:category/:radius/:lat/:lng/:filter" component={SearchResults}/>
 							<Route path="/iframe/:owner/:filter" component={SearchResultsIframe}/>
 							<Route path="/preview-search-results/:owner/:filter" component={PreviewSearchResults}/>
 
-							<Route exact path="/login-popup" component={LoginPopup}/>
-							<Route exact path="/register-popup" component={RegisterPopup}/>
+							<Route exact path="/sign-in" component={LoginPopup}/>
+							<Route exact path="/create-an-account" component={RegisterPopup}/>
 							<Route exact path="/welcome" component={WelcomePage}/>
 							<Route exact path="/forgot-password" component={ForgotPassword}/>
 							<Route path="/reset-password/:id?" component={ResetPassword}/>
@@ -107,6 +107,8 @@ class App extends Component{
 							<Route exact path="/make-suggestion" component={MakeSuggestionPage}/>
 							<Route exact path="/terms-n-conditions" component={TermsNConditionsPage}/>
 							<Route exact path="/privacy-policy" component={PrivacyPolicy}/>
+
+							<Route exact path="/goto-url/:url" render={(props) => (window.location = `https://${props.match.params.url}`)}/>
 
 							<Route component={Notfound}/>
 						</Switch>

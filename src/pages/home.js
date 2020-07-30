@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {getUserInfo} from "../actions/auth-actions";
 import SiteHeader from "../components/site-header";
 import community_config from "../conf/community-conf";
+import {setSearchCriteria} from "../actions/community-actions";
 
 class Home extends Component{
 	constructor(props){
@@ -130,6 +131,14 @@ class Home extends Component{
 	};
 
 	componentDidMount(){
+		// clear address value when unmount search result, added at 07/15/2020
+		this.props.setSearchCriteria({
+			address: "",
+			lat: 44.989999,
+			lng: -93.256088,
+			...this.clear_obj,
+		});
+
 		window.addEventListener('resize', this.onResizeWindow);
 		this.onResizeWindow();
 		window.addEventListener('scroll', this.onScrollWindow);
@@ -214,7 +223,7 @@ class Home extends Component{
 												to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 												className="lp-button purple w-button">
 										Find your community</Link>
-									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
+									<Link to={this.props.auth.isAuthenticated ? "/dashboard" : "/create-an-account"}
 												className="lp-button white w-button">
 										Create an account
 									</Link>
@@ -272,7 +281,7 @@ class Home extends Component{
 									</div>
 									<div>
 										<img
-											src={"/img/landing-1.png"}
+											src={"/img/landing-thumbnail-1.png"}
 											alt="" className="lp-thumbnail opacity-transition" ref={this.refLp43}
 											style={{opacity: this.state.lp43_opacity}}/>
 									</div>
@@ -288,7 +297,7 @@ class Home extends Component{
 										</p>
 									</div>
 									<img
-										src={"/img/landing-2.png"}
+										src={"/img/landing-thumbnail-2.png"}
 										id="w-node-576db9485deb-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
 										ref={this.refLp45} style={{opacity: this.state.lp45_opacity}}/>
 								</div>
@@ -303,7 +312,7 @@ class Home extends Component{
 										</p>
 									</div>
 									<img
-										src={"/img/landing-3.png"}
+										src={"/img/landing-thumbnail-3.png"}
 										id="w-node-576db9485de5-5ad274e5" alt="" className="lp-thumbnail opacity-transition"
 										ref={this.refLp47} style={{opacity: this.state.lp47_opacity}}/>
 								</div>
@@ -365,7 +374,7 @@ class Home extends Component{
 											height: this.state.iframe_height,
 										}}>
 											<iframe title={"preview communities"}
-															src="https://develop.everydaybelievers.com/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
+															src="https://develop-app.everydaybelievers.com/iframe/John-Smith-5ebe7354f9f9970e0c327de5/undefined"
 															style={{
 																width: this.state.iframe_screen_width,
 																height: this.state.iframe_screen_height,
@@ -387,7 +396,7 @@ class Home extends Component{
 									to="/search-results/undefined/null/44.989999/-93.256088/undefined"
 									className="lp-button purple w-button bottom">Find your community</Link>
 						<Link id="w-node-99ff29a3cf9f-5ad274e5"
-									to={this.props.auth.isAuthenticated ? "/dashboard" : "/register-popup"}
+									to={this.props.auth.isAuthenticated ? "/dashboard" : "/create-an-account"}
 									className="lp-button white margin w-button bottom">
 							Create an account</Link>
 					</div>
@@ -401,11 +410,12 @@ class Home extends Component{
 Home.propTypes = {
 	auth: PropTypes.object.isRequired,
 	getUserInfo: PropTypes.func.isRequired,
+	setSearchCriteria: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
 	auth: state.auth
 });
 export default connect(
 	mapStateToProps,
-	{getUserInfo}
+	{getUserInfo, setSearchCriteria}
 )(Home);
