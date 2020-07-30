@@ -178,50 +178,50 @@ export const activateCommunity = (info) => dispatch => {
 		payload: 0,
 	});
 	axios
-			.post(app_config.FYC_API_URL + "/api/communities/activate", info)
-			.then(res => {
-				dispatch({
-					type: ACTIVATE_COMMUNITY,
-					payload: info.community_id,
-				});
-				dispatch({
-					type: SET_BILLING_INFO,
-					payload: res.data,
-				});
-				getBillingStatus({user_id: info.id});
-				dispatch({
-					type: ACTIVE_STATUS,
-					payload: 1,
-				});
-				dispatch({
-					type: ACTIVATING,
-					payload: false,
-				});
-
-				setTimeout(() => dispatch({
-					type: SHOW_ACT_DLG,
-					payload: false,
-				}), 2000);
-			})
-			.catch(err => {
-				dispatch({
-					type: MESSAGE_FROM_API,
-					payload: err.response !== undefined ? err.response.data : {errors: ""}
-				});
-				dispatch({
-					type: ACTIVE_STATUS,
-					payload: 2,
-				});
-				dispatch({
-					type: ACTIVATING,
-					payload: false,
-				});
-
-				setTimeout(() => dispatch({
-					type: SHOW_ACT_DLG,
-					payload: false,
-				}), 2000);
+		.post(app_config.FYC_API_URL + "/api/communities/activate", info)
+		.then(res => {
+			dispatch({
+				type: ACTIVATE_COMMUNITY,
+				payload: info.community_id,
 			});
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			getBillingStatus({user_id: info.id});
+			dispatch({
+				type: ACTIVE_STATUS,
+				payload: 1,
+			});
+			dispatch({
+				type: ACTIVATING,
+				payload: false,
+			});
+
+			setTimeout(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
+		})
+		.catch(err => {
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
+			});
+			dispatch({
+				type: ACTIVE_STATUS,
+				payload: 2,
+			});
+			dispatch({
+				type: ACTIVATING,
+				payload: false,
+			});
+
+			setTimeout(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
+		});
 };
 
 /**
@@ -239,54 +239,54 @@ export const activateMultiCommunity = (info) => dispatch => {
 		payload: 0,
 	});
 	axios
-			.post(app_config.FYC_API_URL + "/api/communities/activatemulti", info)
-			.then(res => {
-				dispatch({
-					type: ACTIVATE_MULTI_COMMUNITY,
-					payload: info.community_ids,
-				});
-				dispatch({
-					type: PICK_MULTI_COMMUNITY,
-					payload: [],
-				});
-				dispatch({
-					type: SET_BILLING_INFO,
-					payload: res.data,
-				});
-				getBillingStatus({user_id: info.id});
-				dispatch({
-					type: ACTIVE_STATUS,
-					payload: 1,
-				});
-				dispatch({
-					type: ACTIVATING,
-					payload: false,
-				});
-
-				setTimeout(() => dispatch({
-					type: SHOW_ACT_DLG,
-					payload: false,
-				}), 2000);
-			})
-			.catch(err => {
-				dispatch({
-					type: MESSAGE_FROM_API,
-					payload: err.response !== undefined ? err.response.data : {errors: ""}
-				});
-				dispatch({
-					type: ACTIVE_STATUS,
-					payload: 2,
-				});
-				dispatch({
-					type: ACTIVATING,
-					payload: false,
-				});
-
-				setTimeout(() => dispatch({
-					type: SHOW_ACT_DLG,
-					payload: false,
-				}), 2000);
+		.post(app_config.FYC_API_URL + "/api/communities/activatemulti", info)
+		.then(res => {
+			dispatch({
+				type: ACTIVATE_MULTI_COMMUNITY,
+				payload: info.community_ids,
 			});
+			dispatch({
+				type: PICK_MULTI_COMMUNITY,
+				payload: [],
+			});
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			getBillingStatus({user_id: info.id});
+			dispatch({
+				type: ACTIVE_STATUS,
+				payload: 1,
+			});
+			dispatch({
+				type: ACTIVATING,
+				payload: false,
+			});
+
+			setTimeout(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
+		})
+		.catch(err => {
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
+			});
+			dispatch({
+				type: ACTIVE_STATUS,
+				payload: 2,
+			});
+			dispatch({
+				type: ACTIVATING,
+				payload: false,
+			});
+
+			setTimeout(() => dispatch({
+				type: SHOW_ACT_DLG,
+				payload: false,
+			}), 2000);
+		});
 };
 
 export const clearActiveStatus = () => dispatch => {
@@ -307,32 +307,32 @@ export const deactivateCommunity = (info) => dispatch => {
 		payload: true,
 	});
 	axios
-			.post(app_config.FYC_API_URL + "/api/communities/deactivate", info)
-			.then(res => {
-				dispatch({
-					type: DEACTIVATE_COMMUNITY,
-					payload: info.community_id,
-				});
-				dispatch({
-					type: SET_BILLING_INFO,
-					payload: res.data,
-				});
-				getBillingStatus({user_id: info.id});
-				dispatch({
-					type: DEACTIVATING,
-					payload: false,
-				});
-			})
-			.catch(err => {
-				dispatch({
-					type: MESSAGE_FROM_API,
-					payload: err.response !== undefined ? err.response.data : {errors: ""}
-				});
-				dispatch({
-					type: SET_STT_HIDE,
-					payload: {},
-				});
+		.post(app_config.FYC_API_URL + "/api/communities/deactivate", info)
+		.then(res => {
+			dispatch({
+				type: DEACTIVATE_COMMUNITY,
+				payload: info.community_id,
 			});
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			getBillingStatus({user_id: info.id});
+			dispatch({
+				type: DEACTIVATING,
+				payload: false,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
+			});
+			dispatch({
+				type: SET_STT_HIDE,
+				payload: {},
+			});
+		});
 	dispatch({
 		type: ACTIVE_STATUS,
 		payload: 0,
@@ -345,32 +345,32 @@ export const deactivateMultiCommunity = (info) => dispatch => {
 		payload: true,
 	});
 	axios
-			.post(app_config.FYC_API_URL + "/api/communities/deactivatemulti", info)
-			.then(res => {
-				dispatch({
-					type: DEACTIVATE_MULTI_COMMUNITY,
-					payload: info.community_ids,
-				});
-				dispatch({
-					type: SET_BILLING_INFO,
-					payload: res.data,
-				});
-				getBillingStatus({user_id: info.id});
-				dispatch({
-					type: DEACTIVATING,
-					payload: false,
-				});
-			})
-			.catch(err => {
-				dispatch({
-					type: MESSAGE_FROM_API,
-					payload: err.response !== undefined ? err.response.data : {errors: ""}
-				});
-				dispatch({
-					type: SET_STT_HIDE,
-					payload: {},
-				});
+		.post(app_config.FYC_API_URL + "/api/communities/deactivatemulti", info)
+		.then(res => {
+			dispatch({
+				type: DEACTIVATE_MULTI_COMMUNITY,
+				payload: info.community_ids,
 			});
+			dispatch({
+				type: SET_BILLING_INFO,
+				payload: res.data,
+			});
+			getBillingStatus({user_id: info.id});
+			dispatch({
+				type: DEACTIVATING,
+				payload: false,
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
+			});
+			dispatch({
+				type: SET_STT_HIDE,
+				payload: {},
+			});
+		});
 	dispatch({
 		type: ACTIVE_STATUS,
 		payload: 0,
@@ -385,36 +385,36 @@ export const deactivateMultiCommunity = (info) => dispatch => {
  */
 export const deleteCommunity = (info, history) => dispatch => {
 	axios
-			.post(app_config.FYC_API_URL + "/api/communities/delete", info)
-			.then(res => {
-				dispatch({
-					type: DELETE_COMMUNITY,
-					payload: info.community_id,
-				});
+		.post(app_config.FYC_API_URL + "/api/communities/delete", info)
+		.then(res => {
+			dispatch({
+				type: DELETE_COMMUNITY,
+				payload: info.community_id,
+			});
+		})
+		.catch(err =>
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
-			.catch(err =>
-					dispatch({
-						type: MESSAGE_FROM_API,
-						payload: err.response !== undefined ? err.response.data : {errors: ""}
-					})
-			);
+		);
 };
 
 export const deleteMultiCommunity = (info, history) => dispatch => {
 	axios
-			.post(app_config.FYC_API_URL + "/api/communities/deletemulti", info)
-			.then(res => {
-				dispatch({
-					type: DELETE_MULTI_COMMUNITY,
-					payload: info.community_ids,
-				});
+		.post(app_config.FYC_API_URL + "/api/communities/deletemulti", info)
+		.then(res => {
+			dispatch({
+				type: DELETE_MULTI_COMMUNITY,
+				payload: info.community_ids,
+			});
+		})
+		.catch(err =>
+			dispatch({
+				type: MESSAGE_FROM_API,
+				payload: err.response !== undefined ? err.response.data : {errors: ""}
 			})
-			.catch(err =>
-					dispatch({
-						type: MESSAGE_FROM_API,
-						payload: err.response !== undefined ? err.response.data : {errors: ""}
-					})
-			);
+		);
 };
 
 export const getBillingStatus = (info, history) => dispatch => {

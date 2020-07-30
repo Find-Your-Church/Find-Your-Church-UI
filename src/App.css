@@ -437,7 +437,7 @@ a {
 	width: 457px;
 	min-width: 457px;
 	max-width: 457px;
-	z-index: 1000;
+	z-index: 3000;
 }
 
 .search-address-candidates .address-item {
