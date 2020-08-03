@@ -156,7 +156,7 @@ a {
 .site-header .w3-bar-item {
 	margin: 15px 10px;
 	padding: 7px 0;
-	font-size: 16px;
+	font-size: 1.3vw;
 }
 
 .site-header .sign-in-link:hover,
