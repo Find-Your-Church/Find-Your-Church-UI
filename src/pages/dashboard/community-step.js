@@ -570,7 +570,7 @@ class CommunityStep extends Component{
 																			id="category"
 																			defaultValue={this.state.category}
 																			style={{
-																				backgroundImage: "url('/img/icon-down3-purple.svg')",
+																				backgroundImage: "url('/img/icon-down3-black.svg')",
 																				backgroundSize: "10px",
 																				borderBottom: this.state.error_community_category ? "solid 1px #f00" : "solid 1px #e6e6e6"
 																			}}
