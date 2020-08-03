@@ -184,7 +184,7 @@ a {
 }
 
 .name-on-header {
-	color: #2e89fe;
+	color: #8900fe;
 }
 
 .header-3lines-menu i {
@@ -199,7 +199,7 @@ a {
 }
 
 .header-3lines-menu i:hover {
-	color: #e6e6e6;
+	/*color: #e6e6e6;*/
 }
 
 .sign-up-link.w3-bar-item {
