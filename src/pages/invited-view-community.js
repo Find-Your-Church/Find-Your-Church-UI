@@ -119,7 +119,7 @@ class InvitedViewCommunity extends Component{
 								 style={this.props.location.state !== undefined && this.props.location.state.colorTheme !== undefined ? {backgroundColor: this.props.location.state.colorTheme.header_bg} : null}>
 							<div className={"page-header-sub-container"}>
 								<div className="create-menu w3-left">
-									<Link to={"#"} className="w3-button cancel" onClick={this.goBack}>Back</Link>
+									<div className="w3-button cancel" onClick={this.goBack}>Back</div>
 								</div>
 								<div className="page-header-title">
 									{this.props.community.view_community.community_name}
