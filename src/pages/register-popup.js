@@ -187,7 +187,7 @@ class RegisterPopup extends Component{
 															you:</label>
 														<select id={"is_organization"} className="form-input center w-input-sign"
 																		onChange={this.onCheckOrganization} value={this.state.is_organization}
-																		style={{backgroundImage: "url('/img/icon-down3-purple.svg')"}}>
+																		style={{backgroundImage: "url('/img/icon-down3-black.svg')"}}>
 															<option value={''}>
 																Select one...
 															</option>

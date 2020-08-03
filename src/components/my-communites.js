@@ -172,7 +172,7 @@ class MyCommunities extends Component{
 									<select
 										className="sel_category select-field w-select"
 										onChange={this.onChangeCategory}
-										style={{backgroundImage: "url('../img/icon-down3-purple.svg')"}}
+										style={{backgroundImage: "url('../img/icon-down3-black.svg')"}}
 									>
 										<option value="">All Communities</option>
 										{

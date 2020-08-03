@@ -116,9 +116,14 @@ class SearchResults extends Component{
 	}
 
 	componentDidMount(){
-		this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
+		if(this.props.community.search_results && this.props.community.search_results.length > 0){
 
-		this.props.getOwners({keyword: ""});
+		}
+		else{
+			this.props.doSearchCommunities(this.criteria === undefined ? {...this.props.community.criteria} : {...this.criteria});
+
+			this.props.getOwners({keyword: ""});
+		}
 	}
 
 	filters2url = () => {
@@ -175,6 +180,7 @@ class SearchResults extends Component{
 			const param = `${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + this.filters2url();
 			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
+			this.props.history.push(`/search-results/${param}`);
 			this.props.setBackUrl(`/search-results/${param}`);
 		}
 	}
