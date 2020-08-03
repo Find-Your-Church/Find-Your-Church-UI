@@ -94,7 +94,7 @@ class SiteHeader extends Component{
 											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
 									Sign In
 								</Link>
-								<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0"}}>&nbsp;</div>
+								<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>
 								<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}
 											className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}
 											style={{marginRight: "7px"}}
