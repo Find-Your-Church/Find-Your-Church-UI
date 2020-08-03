@@ -24,6 +24,12 @@ class SiteHeader extends Component{
 			this.props.getUserInfo({user_id: this.props.auth.user.id,});
 	}
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevState.showedAdminMenu !== this.state.showedAdminMenu){
+			this.props.history.goBack();
+		}
+	}
+
 	toggleAdminMenu(){
 		this.setState({showedAdminMenu: !this.state.showedAdminMenu});
 	}

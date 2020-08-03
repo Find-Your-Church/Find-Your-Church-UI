@@ -92,6 +92,8 @@ class InvitedViewCommunity extends Component{
 	};
 
 	render(){
+		console.log(this.props.history);
+
 		if(this.props.community.view_community === null){
 			return null;
 		}
