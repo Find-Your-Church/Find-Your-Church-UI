@@ -191,6 +191,7 @@ a {
 	font-family: 'Font Awesome 5 Free', sans-serif !important;
 	font-size: 28px;
 	color: #8900fe;
+	transition: ease 0.3s;
 }
 
 .header-3lines-menu i.fa-angle-down {
@@ -305,6 +306,7 @@ a {
 	-webkit-box-ordinal-group: 1;
 	-ms-flex-order: 0;
 	order: 0;
+	border-top: 1px solid #8900fe;
 	border-bottom: 1px solid #8900fe;
 }
 
