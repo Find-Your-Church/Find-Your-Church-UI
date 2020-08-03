@@ -191,7 +191,7 @@ class SearchBar extends Component{
 												defaultValue={this.props.community.criteria.category}
 												value={this.props.community.criteria.category}
 												style={{
-													backgroundImage: "url('/img/icon-down3-purple.svg')",
+													backgroundImage: "url('/img/icon-down3-black.svg')",
 												}}
 												className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
 									<option value="">All Communities</option>
@@ -219,7 +219,7 @@ class SearchBar extends Component{
 													defaultValue={this.props.community.criteria.category}
 													value={this.props.community.criteria.category}
 													style={{
-														backgroundImage: "url('/img/icon-down3-purple.svg')",
+														backgroundImage: "url('/img/icon-down3-black.svg')",
 													}}
 													className="search-form-dropdown w-node-5cf6ee0e50f1-ddb46e0f w-select">
 										<option value="">All Communities</option>
@@ -241,7 +241,7 @@ class SearchBar extends Component{
 									defaultValue={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
 									value={isNaN(this.props.community.criteria.radius) || this.props.community.criteria.radius === null ? "" : this.props.community.criteria.radius}
 									style={{
-										backgroundImage: "url('/img/icon-down3-purple.svg')",
+										backgroundImage: "url('/img/icon-down3-black.svg')",
 									}}
 									className="search-form-dropdown w-node-5cf6ee0e50f2-ddb46e0f w-select">
 						<option value=''>Radius...</option>

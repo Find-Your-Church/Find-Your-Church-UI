@@ -387,7 +387,7 @@ class DashboardResults extends Component{
 																						onChange={this.onChange} onBlur={this.onBlurCategory}
 																						ref={this.cat_ref}
 																						value={this.state.iframe_category}
-																						style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
+																						style={{backgroundImage: `url("/img/icon-down3-black.svg")`}}>
 																			<option value="undefined">All Communities</option>
 																			{
 																				community_config.CATEGORIES.map(cat => {
@@ -417,7 +417,7 @@ class DashboardResults extends Component{
 																	<select id="iframe_radius" className="iframe-dropdown w-select"
 																					onChange={this.onChange}
 																					value={this.state.iframe_radius}
-																					style={{backgroundImage: `url("/img/icon-down3-purple.svg")`}}>
+																					style={{backgroundImage: `url("/img/icon-down3-black.svg")`}}>
 																		<option value="null">Radius...</option>
 																		{
 																			community_config.SEARCH_RADIUS.map(r => {
