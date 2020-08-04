@@ -23,6 +23,12 @@ class SiteHeader extends Component{
 			this.props.getUserInfo({user_id: this.props.auth.user.id,});
 	}
 
+	componentDidUpdate(prevProps, prevState, snapshot){
+		if(prevState.showedAdminMenu !== this.state.showedAdminMenu){
+			this.props.history.goBack();
+		}
+	}
+
 	toggleAdminMenu(){
 		this.setState({showedAdminMenu: !this.state.showedAdminMenu});
 	}
@@ -51,20 +57,23 @@ class SiteHeader extends Component{
 				)}
 				<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}
 								style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
-					<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}>
-						<img className="site-logo" src={"/img/logo.png"}
-								 sizes="(max-width: 479px) 144.546875px, 216.8125px" alt="site logo"/>
+					<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className={"header-logo"}>
+						<img className="site-logo" src={"/img/logo.png"} alt="site logo"/>
 					</Link>
 					{this.props.auth.isAuthenticated ? null : (
 						<Link to="#" onClick={this.toggleAdminMenu}
 									className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
-							<i className="fas fa-bars"/>
+							{this.state.showedAdminMenu ? (
+								<i className="fas fa-times"/>
+							) : (
+								<i className="fas fa-bars"/>
+							)}
 						</Link>
 					)}
 					{this.props.auth.isAuthenticated ? (<>
 							<Link to="#" onClick={this.toggleAdminMenu}
 										className={"header-3lines-menu w3-bar-item w3-right"}>
-								<img src={"/img/icon-down3-blue.svg"} style={{width: "10px"}} alt={"chevron for popup menu"}/>
+								<img src={"/img/icon-down3-purple.svg"} style={{width: "10px"}} alt={"chevron for popup menu"}/>
 							</Link>
 							<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right">
 								<span className={"headerprofpic-welcome"}>
@@ -90,7 +99,7 @@ class SiteHeader extends Component{
 											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
 									Sign In
 								</Link>
-								<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "0"}}>&nbsp;</div>
+								<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>
 								<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}
 											className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}
 											style={{marginRight: "7px"}}
