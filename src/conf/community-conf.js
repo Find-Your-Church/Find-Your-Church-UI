@@ -5,7 +5,7 @@ export const community_config = {
 	],
 
 	SOCIAL_PLACEHOLDERS: [
-		/* Website */ "https://findyourchurch.org",
+		/* Website */ "https://everydaybelievers.com",
 		/* Facebook */ "https://facebook.com/findyourchurch",
 		/* Instagram */ "https://instagram.com/findyourchurch",
 		/* Vimeo */ "https://vimeo.com/findyourchurch123",
