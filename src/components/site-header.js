@@ -93,20 +93,30 @@ class SiteHeader extends Component{
 
 					{!this.props.auth.isAuthenticated ? (
 							<>
-								<Link to="/create-an-account" className="sign-up-link w3-bar-item w3-right">
+								<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
+									Churches and ministries
+								</Link>
+								<Link to="/search-results"
+											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
+									Search communities
+								</Link>
+								{/*<Link to="/create-an-account" className="sign-up-link w3-bar-item w3-right">*/}
+								<Link to="/create-an-account"
+											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
 									Create an account
 								</Link>
 								<Link to="/sign-in"
 											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
 									Sign In
 								</Link>
-								<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>
-								<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}
-											className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}
-											style={{marginRight: "7px"}}
-								>
-									Home
-								</Link>
+								{/*<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>*/}
+								{/*<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}*/}
+								{/*			className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}*/}
+								{/*			style={{marginRight: "7px"}}*/}
+								{/*>*/}
+								{/*	Home*/}
+								{/*</Link>*/}
 							</>
 						)
 						: null}
@@ -116,17 +126,14 @@ class SiteHeader extends Component{
 							 display: this.state.showedAdminMenu ? "block" : "none",
 						 }}>
 					<nav role="navigation" className="global-navcontainer w-nav-menu w--nav-menu-open">
-						<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className="header-navlink w-nav-link w--nav-link-open">
-							Home</Link>
+						{/*<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className="header-navlink w-nav-link w--nav-link-open">*/}
+						{/*	Home</Link>*/}
 						{this.props.auth.isAuthenticated ? (<>
 							<Link to="/dashboard" className="header-navlink w-nav-link w--nav-link-open">
 								Dashboard</Link>
 							<Link to="/dashboard/account"
 										className="header-navlink w-nav-link w--nav-link-open">
 								Account</Link>
-							<Link to="#" onClick={this.onLogoutClick}
-										className="header-navlink w-nav-link w--nav-link-open">
-								Sign Out</Link>
 						</>) : null}
 						{this.props.auth.isAuthenticated ? null : (<>
 							<Link to="/sign-in"
@@ -136,6 +143,17 @@ class SiteHeader extends Component{
 										className="header-navlink w-nav-link w--nav-link-open">
 								Create an account</Link>
 						</>)}
+						<Link to="/search-results"
+									className="header-navlink w-nav-link w--nav-link-open">
+							Search communities</Link>
+						<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+									className="header-navlink w-nav-link w--nav-link-open">
+							Churches and ministries</Link>
+						{this.props.auth.isAuthenticated ? (<>
+							<Link to="#" onClick={this.onLogoutClick}
+										className="header-navlink w-nav-link w--nav-link-open">
+								Sign Out</Link>
+						</>) : null}
 					</nav>
 				</div>
 			</div>

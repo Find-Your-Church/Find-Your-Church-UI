@@ -108,8 +108,8 @@ class App extends Component{
 							<Route exact path="/terms-n-conditions" component={TermsNConditionsPage}/>
 							<Route exact path="/privacy-policy" component={PrivacyPolicy}/>
 
-							<Route exact path="/goto-url/:url" render={(props) => {
-								window.location = `https://${props.match.params.url}`;
+							<Route exact path="/goto-url/:url/:path?" render={(props) => {
+								window.location = `https://${props.match.params.url}/${props.match.params.path || ''}`;
 								return (
 									<div style={{position: "fixed", left: 0, top: 0, width: '100vw', height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: '#0004'}}>
 										<div style={{color: '#fff'}}>Please wait...</div>
