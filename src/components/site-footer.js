@@ -100,7 +100,7 @@ class SiteFooter extends Component{
 							</Link>
 						</div>
 						<div className={"footer-link"}>
-							<Link to="/goto-url/everydaybelievers.com/churches-and-ministries">
+							<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}>
 								Churches and ministries
 							</Link>
 						</div>
@@ -108,24 +108,24 @@ class SiteFooter extends Component{
 					<div className={"right-part"}>
 						<div className={"footer-link"}>
 							{/*<Link to="#" onClick={this.showModalPrivacyPolicy}>*/}
-							<Link to="/goto-url2/everydaybelievers.com/2020/08/21/privacy-policy">
+							<Link to={`/goto-url2/${app_config.FYC_HOME_URL}/2020/08/21/privacy-policy`}>
 								{/*<Link to="#" onClick={this.showModalPrivacyPolicy}>*/}
 								Privacy Policy
 							</Link>
 						</div>
 						<div className={"footer-link"}>
 							{/*<Link to="#" onClick={this.showModalTermsConditions}>*/}
-							<Link to="/goto-url2/everydaybelievers.com/2020/08/21/content-policy">
+							<Link to={`/goto-url2/${app_config.FYC_HOME_URL}/2020/08/21/content-policy`}>
 								Content Policy
 							</Link>
 						</div>
 						<div className={"footer-link"}>
-							<Link to="/goto-url2/everydaybelievers.com/2020/08/21/terms-and-conditions">
+							<Link to={`/goto-url2/${app_config.FYC_HOME_URL}/2020/08/21/terms-and-conditions`}>
 								Terms and Conditions
 							</Link>
 						</div>
 						<div className={"footer-link"}>
-							<Link to="/goto-url/everydaybelievers.com">
+							<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}>
 								{/*<Link to="#"										onClick={this.showModalAboutCompany}>*/}
 								everydaybelievers.com
 							</Link>
