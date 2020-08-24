@@ -1,6 +1,6 @@
 .sign-body {
 	--header-height: 70px;
-	--footer-height: 46px;
+	--footer-height: 160px;
 }
 
 .sign-body.verify {
@@ -94,7 +94,7 @@
 	display: -webkit-flex;
 	display: -ms-flexbox;
 	display: flex;
-	min-height: calc(100vh - 121px);
+	min-height: calc(100vh - 235px);
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: column;
