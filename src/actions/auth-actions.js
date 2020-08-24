@@ -26,7 +26,8 @@ export const registerUser = (userData, history) => dispatch => {
 				payload: true,
 			});
 
-			history.push("/sign-in");
+			history.push("/dashboard");
+//			history.push("/sign-in");
 		}) // re-direct to welcome page on successful register
 		.catch(err =>
 			dispatch({
