@@ -26,7 +26,7 @@ class SiteHeader extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(prevState.showedAdminMenu !== this.state.showedAdminMenu){
-			this.props.history.goBack();
+			// this.props.history.goBack();
 		}
 	}
 
@@ -146,7 +146,7 @@ class SiteHeader extends Component{
 						<Link to="/search-results"
 									className="header-navlink w-nav-link w--nav-link-open">
 							Search communities</Link>
-						<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+						<Link to={"/goto-url/everydaybelievers.com/churches-and-ministries"}
 									className="header-navlink w-nav-link w--nav-link-open">
 							Churches and ministries</Link>
 						{this.props.auth.isAuthenticated ? (<>
