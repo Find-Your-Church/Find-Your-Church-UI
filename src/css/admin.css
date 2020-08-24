@@ -1,10 +1,10 @@
 .admin-body {
-	--footer-height: 46px;
+	--footer-height: 160px;
 }
 
 @media screen and (max-width: 979px) {
 	.admin-body {
-		--footer-height: 64px;
+		--footer-height: 160px;
 	}
 }
 
