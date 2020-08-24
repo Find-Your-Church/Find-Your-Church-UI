@@ -1,7 +1,7 @@
 
 const app_config = {
 	FYC_API_URL: process.env.REACT_APP_API_URL,
-	FYC_HOME_URL: process.env.REACT_APP_HOME_URL.replace("https://", ""),
+	FYC_HOME_URL: process.env.REACT_APP_HOME_URL.replace("https://", "").replace("/", ""),
 	SUPPORT_TEAM_LINK: process.env.REACT_APP_SUPPORT_TEAM_LINK,
 
 	US_PHONE_PATTERN: "[(]?[0-9]{2,3}[)-]?[ ]?[0-9]{3}[ -]?[0-9]{4}",
