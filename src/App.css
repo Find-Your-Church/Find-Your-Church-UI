@@ -168,7 +168,9 @@ a {
 }
 
 .site-header .sign-in-link {
-	margin-right: 20px;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 30px;
 }
 
 .site-header .w3-bar-item:hover {
@@ -337,7 +339,10 @@ a {
 }
 
 .footer-head {
-	height: 10px;
+	height: 70px;
+	display: flex;
+	align-items: flex-end;
+	background-color: #e8e5ea;
 }
 
 .footer-head svg {
