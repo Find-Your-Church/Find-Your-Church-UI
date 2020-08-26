@@ -410,6 +410,7 @@
 	line-height: 22px;
 	font-weight: 400;
 	text-align: left;
+	word-break: break-all;
 }
 
 .table-item.right, .table-item.right div {
