@@ -358,6 +358,12 @@
 	grid-template-columns: auto 1fr;
 }
 
+@media screen and (max-width: 600px){
+	.table-row-2.upcoming {
+		grid-template-columns: 1fr;
+	}
+}
+
 .upcoming-payment-table-row {
 	display: -ms-grid;
 	display: grid;
