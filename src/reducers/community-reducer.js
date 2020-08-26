@@ -343,7 +343,7 @@ export default function(state = initialState, action){
 				...state,
 				search_results: action.payload.results,
 				counts: action.payload.counts,
-				categories: action.payload.categories,
+				categories: action.payload.categories || state.categories,
 			};
 		case SORT_ORDER:
 			return {
