@@ -1,10 +1,10 @@
 .account-body {
-	--footer-height: 160px;
+	--footer-height: 220px;
 }
 
 @media screen and (max-width: 979px) {
 	.account-body {
-		--footer-height: 160px;
+		--footer-height: 220px;
 	}
 
 	.div-20top._1080 {
