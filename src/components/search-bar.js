@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
+import "../css/home.css";
 import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng
@@ -206,6 +207,11 @@ class SearchBar extends Component{
 												<option value={cat} key={"search-" + cat}>{cat}</option>
 											);
 										}) : null
+										// community_config.CATEGORIES.map(cat => {
+										// 	return  (
+										// 		<option value={cat} key={"search-" + cat}>{cat}</option>
+										// 	);
+										// })
 									}
 								</select>
 							)

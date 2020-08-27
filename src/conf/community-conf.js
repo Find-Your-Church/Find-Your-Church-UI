@@ -5,13 +5,13 @@ export const community_config = {
 	],
 
 	SOCIAL_PLACEHOLDERS: [
-		/* Website */ "https://findyourchurch.org",
-		/* Facebook */ "https://facebook.com/findyourchurch",
-		/* Instagram */ "https://instagram.com/findyourchurch",
-		/* Vimeo */ "https://vimeo.com/findyourchurch123",
-		/* Youtube */ "https://youtube.com/findyourchurch",
-		/* Twitter */ "https://twitter.com/findyourchurch",
-		/* Podcast */ "https://spotify.com/findyourchurch",
+		/* Website */ "https://everydaybelievers.com",
+		/* Facebook */ "https://facebook.com/everydaybelievers1",
+		/* Instagram */ "https://instagram.com/everyday.believers",
+		/* Vimeo */ "https://vimeo.com/everydaybelievers",
+		/* Youtube */ "https://youtube.com/everydaybelievers",
+		/* Twitter */ "https://twitter.com/everydaybelievers",
+		/* Podcast */ "https://spotify.com/everydaybelievers",
 		/* Zoom */ "https://zoom.com/8233451842",
 	],
 

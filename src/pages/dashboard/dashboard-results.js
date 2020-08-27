@@ -524,7 +524,7 @@ class DashboardResults extends Component{
 																	}}/>
 																	{
 																		this.state.showed_header_bg_color ? (
-																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																			<div style={{position: "absolute", zIndex: 3000}} onMouseLeave={() => {
 																				this.setState({showed_header_bg_color: false});
 																			}}>
 																				<SketchPicker disableAlpha={true} color={this.state.color_header_bg}
@@ -558,7 +558,7 @@ class DashboardResults extends Component{
 																	}}/>
 																	{
 																		this.state.showed_results_bg_color ? (
-																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																			<div style={{position: "absolute", zIndex: 3000}} onMouseLeave={() => {
 																				this.setState({showed_results_bg_color: false});
 																			}}>
 																				<SketchPicker disableAlpha={true} color={this.state.color_results_bg}
@@ -592,7 +592,7 @@ class DashboardResults extends Component{
 																	}}/>
 																	{
 																		this.state.showed_buttons_color ? (
-																			<div style={{position: "absolute"}} onMouseLeave={() => {
+																			<div style={{position: "absolute", zIndex: 3000}} onMouseLeave={() => {
 																				this.setState({showed_buttons_color: false});
 																			}}>
 																				<SketchPicker disableAlpha={true} color={this.state.color_buttons}
