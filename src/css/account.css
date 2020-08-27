@@ -425,6 +425,7 @@
 
 .table-item input {
 	margin: -2px 0 -3px 0;
+	padding: 1px 2px;
 	height: 24px;
 	border: none;
 	font-size: 16px;
