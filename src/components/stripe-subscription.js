@@ -529,7 +529,7 @@ class StripeSubscription extends Component{
 								</div>
 								<div className="invoice-div top upcoming">
 									<div className="filtersheader-div">
-										<h4 className="table-header">
+										<h4 className="table-header upcoming">
 											Upcoming Payments
 										</h4>
 									</div>
@@ -643,11 +643,11 @@ class StripeSubscription extends Component{
 													<div className={"card-detail-item w3-row w3-text-grey"} style={{
 														padding: "6px 0 11px",
 													}}>
-														<div className={"w3-col s1"}>
-															<img alt={"Payment card"}
-																	 src={`/img/card/icon-${card_type}.svg`}/>
-														</div>
-														<div className={"w3-col s5"} style={{lineHeight: "24px"}} title={"Card number"}>
+														{/*<div className={"w3-col s1"}>*/}
+														{/*	<img alt={"Payment card"}*/}
+														{/*			 src={`/img/card/icon-${card_type}.svg`}/>*/}
+														{/*</div>*/}
+														<div className={"w3-col s6"} style={{lineHeight: "24px"}} title={"Card number"}>
 															**** **** ****&nbsp;
 															{customer.sources.data[0].last4}
 														</div>
