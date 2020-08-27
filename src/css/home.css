@@ -21,7 +21,7 @@
 }
 
 .home-main .block-48 {
-	min-height: calc(100vh - 46px); /* calc(70vh + 60px); */
+	min-height: calc(100vh - 220px); /* calc(70vh + 60px); */
 	padding-top: 20px;
 }
 

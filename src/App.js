@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import {Provider} from "react-redux";
 import 'w3-css/w3.css';
 import './App.css';
-import Home from "./pages/home";
+// import Home from "./pages/home";
 import SearchResults from "./pages/search-results";
 import LoginPopup from "./pages/login-popup";
 import RegisterPopup from "./pages/register-popup";
@@ -31,6 +31,7 @@ import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
 import DashboardResults from "./pages/dashboard/dashboard-results";
+import AuthToDashboard from "./components/auth-to-dashboard";
 
 if(localStorage.jwtToken){
 	// Set auth token header auth
@@ -86,8 +87,10 @@ class App extends Component{
 							<Route path="/iframe/:owner/:filter" component={SearchResultsIframe}/>
 							<Route path="/preview-search-results/:owner/:filter" component={PreviewSearchResults}/>
 
-							<Route exact path="/sign-in" component={LoginPopup}/>
-							<Route exact path="/create-an-account" component={RegisterPopup}/>
+							{/*<Route exact path="/sign-in" component={LoginPopup}/>*/}
+							<AuthToDashboard exact path="/sign-in" component={LoginPopup}/>
+							{/*<Route exact path="/create-an-account" component={RegisterPopup}/>*/}
+							<AuthToDashboard exact path="/create-an-account" component={RegisterPopup}/>
 							<Route exact path="/welcome" component={WelcomePage}/>
 							<Route exact path="/forgot-password" component={ForgotPassword}/>
 							<Route path="/reset-password/:id?" component={ResetPassword}/>
@@ -108,7 +111,22 @@ class App extends Component{
 							<Route exact path="/terms-n-conditions" component={TermsNConditionsPage}/>
 							<Route exact path="/privacy-policy" component={PrivacyPolicy}/>
 
-							<Route exact path="/goto-url/:url" render={(props) => (window.location = `https://${props.match.params.url}`)}/>
+							<Route exact path="/goto-url/:url/:path?" render={(props) => {
+								window.location = `https://${props.match.params.url}/${props.match.params.path || ''}`;
+								return (
+									<div style={{position: "fixed", left: 0, top: 0, width: '100vw', height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: '#0004'}}>
+										<div style={{color: '#fff'}}>Please wait...</div>
+									</div>
+								);
+							}}/>
+							<Route exact path="/goto-url2/:url/:year/:month/:day/:path" render={(props) => {
+								window.location = `https://${props.match.params.url}/${props.match.params.year}/${props.match.params.month}/${props.match.params.day}/${props.match.params.path || ''}`;
+								return (
+									<div style={{position: "fixed", left: 0, top: 0, width: '100vw', height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: '#0004'}}>
+										<div style={{color: '#fff'}}>Please wait...</div>
+									</div>
+								);
+							}}/>
 
 							<Route component={Notfound}/>
 						</Switch>

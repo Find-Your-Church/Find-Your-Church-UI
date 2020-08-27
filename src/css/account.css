@@ -1,10 +1,10 @@
 .account-body {
-	--footer-height: 46px;
+	--footer-height: 220px;
 }
 
 @media screen and (max-width: 979px) {
 	.account-body {
-		--footer-height: 64px;
+		--footer-height: 220px;
 	}
 
 	.div-20top._1080 {
@@ -358,6 +358,12 @@
 	grid-template-columns: auto 1fr;
 }
 
+@media screen and (max-width: 600px){
+	.table-row-2.upcoming {
+		grid-template-columns: 1fr;
+	}
+}
+
 .upcoming-payment-table-row {
 	display: -ms-grid;
 	display: grid;
@@ -410,6 +416,7 @@
 	line-height: 22px;
 	font-weight: 400;
 	text-align: left;
+	word-break: break-all;
 }
 
 .table-item.right, .table-item.right div {
@@ -418,6 +425,7 @@
 
 .table-item input {
 	margin: -2px 0 -3px 0;
+	padding: 1px 2px;
 	height: 24px;
 	border: none;
 	font-size: 16px;
