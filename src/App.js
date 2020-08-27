@@ -114,16 +114,20 @@ class App extends Component{
 							<Route exact path="/goto-url/:url/:path?" render={(props) => {
 								window.location = `https://${props.match.params.url}/${props.match.params.path || ''}`;
 								return (
-									<div style={{position: "fixed", left: 0, top: 0, width: '100vw', height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: '#0004'}}>
-										<div style={{color: '#fff'}}>Please wait...</div>
+									<div id="spinning-modal" className="w3-modal" style={{display: 'block'}}>
+										<div className="w3-display-middle w3-text-white w3-jumbo">
+											<i className="fas fa-spinner fa-spin"/>
+										</div>
 									</div>
 								);
 							}}/>
 							<Route exact path="/goto-url2/:url/:year/:month/:day/:path" render={(props) => {
 								window.location = `https://${props.match.params.url}/${props.match.params.year}/${props.match.params.month}/${props.match.params.day}/${props.match.params.path || ''}`;
 								return (
-									<div style={{position: "fixed", left: 0, top: 0, width: '100vw', height: '100vh', display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: '#0004'}}>
-										<div style={{color: '#fff'}}>Please wait...</div>
+									<div id="spinning-modal" className="w3-modal" style={{display: 'block'}}>
+										<div className="w3-display-middle w3-text-white w3-jumbo">
+											<i className="fas fa-spinner fa-spin"/>
+										</div>
 									</div>
 								);
 							}}/>

@@ -1189,13 +1189,13 @@ class Account extends Component{
 														{customer ? (
 															<div className={"card-detail-item w3-row w3-text-grey"}
 																	 style={{width: "100%", padding: "20px 0"}}>
-																<div className={"w3-col s1"}>
-																	<img alt={"Credit card"} style={{
-																		width: "24px", height: "20px", objectFit: "cover"
-																	}}
-																			 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>
-																</div>
-																<div className={"w3-col s5"} title={"Card number"}>
+																{/*<div className={"w3-col s1"}>*/}
+																{/*	<img alt={"Credit card"} style={{*/}
+																{/*		width: "24px", height: "20px", objectFit: "cover"*/}
+																{/*	}}*/}
+																{/*			 src={`/img/card/icon-${customer.sources.data[0].brand.toLowerCase()}.svg`}/>*/}
+																{/*</div>*/}
+																<div className={"w3-col s6"} title={"Card number"}>
 																	**** **** ****&nbsp;
 																	{customer.sources.data[0].last4}
 																</div>

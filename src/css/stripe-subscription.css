@@ -200,6 +200,12 @@ h3 {
 	border-bottom: none;
 }
 
+@media screen and (max-width: 600px){
+	.invoice-div.upcoming {
+		grid-template-columns: 1fr;
+	}
+}
+
 .invoice-div.discount {
 	padding-bottom: 5px;
 	display: grid;
@@ -313,6 +319,10 @@ h3 {
 	font-size: 16px;
 	line-height: 22px;
 	font-weight: 600;
+}
+
+.subscriptioncontainer-div .table-header.upcoming {
+	padding-bottom: 10px;
 }
 
 h4 {

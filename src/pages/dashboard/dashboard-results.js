@@ -377,12 +377,12 @@ class DashboardResults extends Component{
 																	</Popup>
 																</div>
 																<div className="iframeinput-container">
-																	<Tooltip placement={"top"}
-																					 overlay={this.state.tooltip_content}
-																					 align={{offset: [0, 2],}}
-																					 visible={this.state.showed_tooltip}
-																					 overlayStyle={{maxWidth: this.state.tooltip_width}}
-																	>
+																	{/*<Tooltip placement={"top"}*/}
+																	{/*				 overlay={this.state.tooltip_content}*/}
+																	{/*				 align={{offset: [0, 2],}}*/}
+																	{/*				 visible={this.state.showed_tooltip}*/}
+																	{/*				 overlayStyle={{maxWidth: this.state.tooltip_width}}*/}
+																	{/*>*/}
 																		<select id="iframe_category" className="iframe-dropdown w-select"
 																						onChange={this.onChange} onBlur={this.onBlurCategory}
 																						ref={this.cat_ref}
@@ -398,7 +398,7 @@ class DashboardResults extends Component{
 																				})
 																			}
 																		</select>
-																	</Tooltip>
+																	{/*</Tooltip>*/}
 																</div>
 															</div>
 															<div className="forminput-div">
