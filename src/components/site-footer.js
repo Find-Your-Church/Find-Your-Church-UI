@@ -60,6 +60,11 @@ class SiteFooter extends Component{
 				</div>
 				<footer className="footer-div" style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
 					<div className={"left-part"}>
+						<div className={"footer-part-title"}>
+							<div className={"title"}>
+								CONNECT
+							</div>
+						</div>
 						<div className={"footer-link"}>
 							<Link to="#"
 										onClick={() => redirectURL(`mailto:${app_config.SUPPORT_TEAM_LINK}`)}>
@@ -84,6 +89,11 @@ class SiteFooter extends Component{
 						</div>
 					</div>
 					<div className={"center-part"}>
+						<div className={"footer-part-title"}>
+							<div className={"title"}>
+								NAVIGATE
+							</div>
+						</div>
 						<div className={"footer-link"}>
 							<Link to="/sign-in">
 								Sign in
@@ -106,6 +116,11 @@ class SiteFooter extends Component{
 						</div>
 					</div>
 					<div className={"right-part"}>
+						<div className={"footer-part-title"}>
+							<div className={"title"}>
+								LEGAL
+							</div>
+						</div>
 						<div className={"footer-link"}>
 							{/*<Link to="#" onClick={this.showModalPrivacyPolicy}>*/}
 							<Link to={`/goto-url2/${app_config.FYC_HOME_URL}/2020/08/21/privacy-policy`}>

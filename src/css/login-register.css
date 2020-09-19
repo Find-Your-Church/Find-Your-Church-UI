@@ -1,6 +1,6 @@
 .sign-body {
 	--header-height: 70px;
-	--footer-height: 220px;
+	--footer-height: 310px;
 }
 
 .sign-body.verify {
@@ -10,7 +10,7 @@
 
 @media screen and (max-width: 768px) {
 	.sign-body {
-		--footer-height: 176px;
+		--footer-height: 266px;
 	}
 }
 
