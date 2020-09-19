@@ -163,6 +163,7 @@ class SearchResultsIframe extends Component{
 			const param = `${this.owner}/${this.filters2url()}`;
 			const search_results_url = `${window.location.protocol}//${window.location.host}/iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
+			this.props.history.push(`/iframe/${param}`);
 			this.props.setBackUrl(`/iframe/${param}`);
 		}
 
