@@ -17,6 +17,7 @@
 .admin-body .admin-wrapper {
 	margin-left: auto;
 	margin-right: auto;
+	min-height: 90vh;
 }
 
 .page-header-container {

@@ -164,7 +164,7 @@ a {
 
 .site-header .sign-in-link:hover,
 .site-header .home-link:hover {
-	color: #00e8fe;
+	color: #8900FE;
 	/*border-bottom: 1px solid #2e89fe;*/
 }
 
@@ -179,8 +179,8 @@ a {
 
 .site-header a {
 	line-height: 26px;
-	font-weight: 600;
-	color: #8900fe;
+	font-weight: 500;
+	color: #1B0033;
 	transition: all 0.4s ease-out;
 }
 
@@ -321,7 +321,7 @@ a {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #ddd9e1;
-	color: #8900fe;
+	color: #1B0033;
 	background-color: #fff;
 	font-family: Poppins, sans-serif;
 	font-size: 16px;
@@ -332,6 +332,7 @@ a {
 }
 
 .admin-menu .header-navlink:hover {
+	color: #8900FE;
 	background-color: #ddd9e1;
 }
 

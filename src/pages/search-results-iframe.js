@@ -597,12 +597,11 @@ class SearchResultsIframe extends Component{
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
 										<div className={"search-result-container-header w3-col m10"}>
-									<span style={{fontWeight: "bold"}}>
-										{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
-									</span>
-											&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
-											<span
-												style={{fontWeight: "bold"}}>
+											<span className={"emphasis"}>
+												{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
+											</span>
+											&nbsp;near&nbsp;
+											<span className={"emphasis"}>
 												{
 													isEmpty(this.props.criteria.address) ||
 													isEmpty(this.props.criteria.radius) ||
