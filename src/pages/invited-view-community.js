@@ -397,3 +397,4 @@ export default connect(
 	mapStateToProps,
 	{viewCommunity}
 )(InvitedViewCommunity);
+
