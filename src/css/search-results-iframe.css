@@ -178,7 +178,7 @@ body {
 	padding-right: 2px;
 }
 
-#content-body-iframe #search-results-header .sort-part{
+#content-body-iframe #search-results-header .sort-part {
 	margin-left: 12px;
 	height: 36px;
 	line-height: 24px;
@@ -216,10 +216,14 @@ body {
 }
 
 #content-body-iframe .search-result-container-header {
-	font-size: 18px;
-	font-weight: 600;
+	font-size: 16px;
+	font-weight: 400;
 	line-height: 18px;
 	color: #333;
+}
+
+#content-body-iframe .search-result-container-header .emphasis {
+	font-weight: 600;
 }
 
 #content-body-iframe .search-result-container-header-right {

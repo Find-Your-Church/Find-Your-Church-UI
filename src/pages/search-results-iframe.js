@@ -163,6 +163,7 @@ class SearchResultsIframe extends Component{
 			const param = `${this.owner}/${this.filters2url()}`;
 			const search_results_url = `${window.location.protocol}//${window.location.host}/iframe/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
+			this.props.history.push(`/iframe/${param}`);
 			this.props.setBackUrl(`/iframe/${param}`);
 		}
 
@@ -596,12 +597,11 @@ class SearchResultsIframe extends Component{
 								<div className="listing-grid dashboard">
 									<div className={"w3-row search-result-headline"}>
 										<div className={"search-result-container-header w3-col m10"}>
-									<span style={{fontWeight: "bold"}}>
-										{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
-									</span>
-											&nbsp;<span style={{fontWeight: "400"}}>near</span>&nbsp;
-											<span
-												style={{fontWeight: "bold"}}>
+											<span className={"emphasis"}>
+												{isEmpty(this.props.criteria.category) ? "Communities" : this.props.criteria.category}
+											</span>
+											&nbsp;near&nbsp;
+											<span className={"emphasis"}>
 												{
 													isEmpty(this.props.criteria.address) ||
 													isEmpty(this.props.criteria.radius) ||

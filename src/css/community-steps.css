@@ -1,10 +1,10 @@
 .steps-body {
-	--footer-height: 220px;
+	--footer-height: 310px;
 }
 
 @media screen and (max-width: 979px) {
 	.steps-body {
-		--footer-height: 220px;
+		--footer-height: 310px;
 	}
 
 	.steps-body .left-part {
@@ -230,6 +230,12 @@
 
 .left-part .basic-info {
 	padding: 20px;
+}
+
+@media screen and (max-width: 600px){
+	.left-part .basic-info {
+		padding: 10px;
+	}
 }
 
 .left-part .basic-info.view {
