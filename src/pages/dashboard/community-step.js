@@ -154,6 +154,7 @@ class CommunityStep extends Component{
 			.catch(error => console.error('Error', error));
 
 		this.setState({saving: false});
+		window.scrollTo(0, 0);
 	}
 
 	componentWillUnmount(){

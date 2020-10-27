@@ -282,7 +282,7 @@ class SearchBar extends Component{
 										const style = {
 											color: suggestion.active ? "#ffffff" : "#254184",
 											backgroundColor: suggestion.active ? "#41b6e6" : "#e6e6e6",
-											backgroundImage: "url('/img/icon/icon-address-fill.svg')",
+											backgroundImage: "url('/img/icon/icon-address-marker-hover.svg')",
 										};
 
 										return (

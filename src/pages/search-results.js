@@ -124,6 +124,7 @@ class SearchResults extends Component{
 
 			this.props.getOwners({keyword: ""});
 		}
+		window.scrollTo(0, 0);
 	}
 
 	filters2url = () => {
@@ -283,6 +284,7 @@ class SearchResults extends Component{
 	doSearchByFilter = (obj) => {
 		this.props.setSearchFilter(obj);
 		this.setState(obj);
+		console.log(obj)
 		this.props.doSearchCommunities({
 			...this.props.community.criteria,
 			filter: {
