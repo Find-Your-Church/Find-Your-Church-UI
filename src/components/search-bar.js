@@ -201,17 +201,13 @@ class SearchBar extends Component{
 											// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
 											// 	<option value={cat} key={"search-" + cat}>{cat}</option>
 											// ) : null;
-										this.props.community.categories ?
-										this.props.community.categories.map(cat => {
-											return  (
-												<option value={cat} key={"search-" + cat}>{cat}</option>
-											);
-										}) : null
-										// community_config.CATEGORIES.map(cat => {
+										// this.props.community.categories ?
+										// this.props.community.categories.map(cat => {
 										// 	return  (
 										// 		<option value={cat} key={"search-" + cat}>{cat}</option>
 										// 	);
-										// })
+										// }) : null
+										community_config.CATEGORIES.map(cat => (<option value={cat} key={"search-" + cat}>{cat}</option>))
 									}
 								</select>
 							)
