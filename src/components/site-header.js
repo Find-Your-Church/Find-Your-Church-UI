@@ -92,26 +92,26 @@ class SiteHeader extends Component{
 								: null}
 
 							{!this.props.auth.isAuthenticated ? (
-									<>
-										<Link to="/about"
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/about" ? "current" : "")}>
-											About
-										</Link>
-										<Link to="/sign-in"
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
-											Sign In
-										</Link>
-										<Link to="/create-an-account"
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
-											Create an account
+									<div>
+										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
+											Churches and ministries
 										</Link>
 										<Link to="/search-results"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
 											Search communities
 										</Link>
-										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
-											Churches and ministries
+										<Link to="/create-an-account"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
+											Create an account
+										</Link>
+										<Link to="/sign-in"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
+											Sign In
+										</Link>
+										<Link to="/about"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/about" ? "current" : "")}>
+											About
 										</Link>
 										{/*<Link to="/create-an-account" className="sign-up-link w3-bar-item w3-right">*/}
 										{/*<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>*/}
@@ -121,7 +121,7 @@ class SiteHeader extends Component{
 										{/*>*/}
 										{/*	Home*/}
 										{/*</Link>*/}
-									</>
+									</div>
 								)
 								: null}
 							</div>
