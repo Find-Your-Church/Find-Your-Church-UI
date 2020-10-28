@@ -187,7 +187,7 @@ class InvitedViewCommunity extends Component{
 																	className={"community-picture"}
 																	alt="Community" title={this.props.community.view_community.community_name}
 																	// src={(!this.props.community.view_community.pictures || isEmptyFile(this.props.community.view_community.pictures)) ? "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png" : this.props.community.view_community.pictures}/>
-																	src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
+																	src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"} />
 															))}
 														<div className="basic-info view">
 															<div className="listingrow view" style={{position: "relative"}}>
