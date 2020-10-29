@@ -8,6 +8,7 @@ import community_config from "../../conf/community-conf";
 import ListMembers from "../../components/list-members";
 import SiteHeader from "../../components/site-header";
 import app_config from "../../conf/config";
+import isEmptyFile from "../../utils/isEmptyFile";
 
 // import Popup from "reactjs-popup";
 
@@ -79,6 +80,10 @@ class ViewCommunity extends Component{
 
 		this.toggleMenu = this.toggleMenu.bind(this);
 		this.hideMenu = this.hideMenu.bind(this);
+	}
+
+	componentDidMount() {
+		window.scrollTo(0, 0);
 	}
 
 	static getDerivedStateFromProps(nextProps, prevState){
@@ -187,9 +192,13 @@ class ViewCommunity extends Component{
 															<div className="slide-container">
 																<Slide {...this.slide_options}>
 																	{this.state.pictures.map((pic, index) => {
+																		let url = "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png";
+																		const path = `${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-${index}.${pic}`;
+																		if (!isEmptyFile(path)) url = path;
+																		
 																		return (
 																			<div className="each-slide" key={index}>
-																				<div style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-${index}.${pic})`}}>
+																				<div style={{backgroundImage: `url(${url})`}}>
 																				</div>
 																			</div>
 																		);
@@ -201,7 +210,7 @@ class ViewCommunity extends Component{
 															<div className="slide-container">
 																<div className="each-slide">
 																	<div
-																		style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-0.${this.state.pictures[0]})`}}>
+																		style={{backgroundImage: isEmptyFile(`${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-0.${this.state.pictures[0]}`) ? `url('/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png')` : `url(${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-0.${this.state.pictures[0]})`}}>
 																	</div>
 																</div>
 															</div>
