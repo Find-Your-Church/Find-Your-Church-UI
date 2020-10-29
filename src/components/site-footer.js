@@ -95,6 +95,11 @@ class SiteFooter extends Component{
 							</div>
 						</div>
 						<div className={"footer-link"}>
+							<Link to="/about">
+								About
+							</Link>
+						</div>
+						<div className={"footer-link"}>
 							<Link to="/sign-in">
 								Sign in
 							</Link>
