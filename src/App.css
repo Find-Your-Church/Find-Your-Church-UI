@@ -412,7 +412,7 @@ a {
 	height: 70px;
 	display: flex;
 	align-items: flex-end;
-	background-color: #e8e5ea;
+	/* background-color: #e8e5ea; */
 }
 
 .footer-head svg {
