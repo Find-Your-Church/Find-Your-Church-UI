@@ -154,6 +154,7 @@ class CommunityStep extends Component{
 			.catch(error => console.error('Error', error));
 
 		this.setState({saving: false});
+		this.setFilters(this.state.category);
 		window.scrollTo(0, 0);
 	}
 
@@ -201,6 +202,38 @@ class CommunityStep extends Component{
 		this.setState({support_type: checks})
 	};
 
+	setFilters = (category) => {
+		switch(category) {
+			case 'Churches':
+				this.setState({
+					selectedChurch: true,
+					selectedEvent: false,
+					selectedSupportGroup: false,
+				});
+				break;
+			case 'Events':
+				this.setState({
+					selectedChurch: false,
+					selectedEvent: true,
+					selectedSupportGroup: false,
+				});
+				break;
+			case 'Support Groups':
+				this.setState({
+					selectedChurch: false,
+					selectedEvent: false,
+					selectedSupportGroup: true,
+				});
+				break;
+			default:
+				this.setState({
+					selectedChurch: false,
+					selectedEvent: false,
+					selectedSupportGroup: false,
+				});
+		}
+	}
+
 	onChange = e => {
 		if(e.target.id === 'community_name'){
 			this.setState({error_community_name: false})
@@ -217,35 +250,8 @@ class CommunityStep extends Component{
 				self.setState({showed_tooltip: true})
 			}, 10);
 
-			switch(e.target.value){
-				case 'Churches':
-					this.setState({
-						selectedChurch: true,
-						selectedEvent: false,
-						selectedSupportGroup: false,
-					});
-					break;
-				case 'Events':
-					this.setState({
-						selectedChurch: false,
-						selectedEvent: true,
-						selectedSupportGroup: false,
-					});
-					break;
-				case 'Support Groups':
-					this.setState({
-						selectedChurch: false,
-						selectedEvent: false,
-						selectedSupportGroup: true,
-					});
-					break;
-				default:
-					this.setState({
-						selectedChurch: false,
-						selectedEvent: false,
-						selectedSupportGroup: false,
-					});
-			}
+			this.setFilters(e.target.value);
+
 			this.setState({error_community_category: false})
 		}
 		this.setState({[e.target.id]: e.target.value});
