@@ -271,9 +271,7 @@ class SearchBar extends Component{
 											 })}
 											 required=""/>
 								<div className={"search-address-candidates"}>
-									{loading ?
-										<div
-											className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+									{loading ? <div className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
 									{suggestions.map((suggestion) => {
 										const style = {
 											color: suggestion.active ? "#ffffff" : "#254184",
@@ -282,9 +280,7 @@ class SearchBar extends Component{
 										};
 
 										return (
-											<div className={"address-item"}
-													 onClick={() => alert(suggestion.terms)}
-													 {...getSuggestionItemProps(suggestion, {style})}>
+											<div className={"address-item"} onClick={() => alert(suggestion.terms)} {...getSuggestionItemProps(suggestion, {style})}>
 												{suggestion.description}
 											</div>
 										);
