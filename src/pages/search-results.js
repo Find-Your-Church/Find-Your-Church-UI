@@ -418,20 +418,20 @@ class SearchResults extends Component{
 								{this.state.showed_filter ? "Hide Filters" : "Show Filters"}
 							</Link>
 							<span className={"sort-group"}>
-						<label className={"sort-part-label"}>Sort by:&nbsp;</label>
-						<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
-										style={{
-											backgroundImage: "url('/img/icon-down3-blue.svg')",
-											backgroundSize: "10px",
-										}}
-						>
-							<option value={sorters.SORT_NEWEST}>Newest</option>
-							<option value={sorters.SORT_NAME_ASC}>A - Z</option>
-							<option value={sorters.SORT_NAME_DESC}>Z - A</option>
-							<option value={sorters.SORT_DIST_ASC}>Closet</option>
-							<option value={sorters.SORT_DIST_DESC}>Farthest</option>
-						</select>
-					</span>
+								<label className={"sort-part-label"}>Sort by:&nbsp;</label>
+								<select id={"sorter"} className={"sort-part"} onChange={this.onChange}
+												style={{
+													backgroundImage: "url('/img/icon-down3-blue.svg')",
+													backgroundSize: "10px",
+												}}
+								>
+									<option value={sorters.SORT_NEWEST}>Newest</option>
+									<option value={sorters.SORT_NAME_ASC}>A - Z</option>
+									<option value={sorters.SORT_NAME_DESC}>Z - A</option>
+									<option value={sorters.SORT_DIST_ASC}>Closet</option>
+									<option value={sorters.SORT_DIST_DESC}>Farthest</option>
+								</select>
+							</span>
 						</div>
 						<CommunityMap isMarkerShown criteria={this.props.criteria}
 													googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${app_config.GOOGLEMAP_API_KEY}`}
