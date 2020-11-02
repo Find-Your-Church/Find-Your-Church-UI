@@ -201,13 +201,13 @@ class SearchBar extends Component{
 											// return this.props.buttonTitle !== "Update" || this.state.cats.includes(cat) ? (
 											// 	<option value={cat} key={"search-" + cat}>{cat}</option>
 											// ) : null;
-										// this.props.community.categories ?
-										// this.props.community.categories.map(cat => {
-										// 	return  (
-										// 		<option value={cat} key={"search-" + cat}>{cat}</option>
-										// 	);
-										// }) : null
-										community_config.CATEGORIES.map(cat => (<option value={cat} key={"search-" + cat}>{cat}</option>))
+										this.props.community.categories && this.props.community.categories.length ?
+											this.props.community.categories.map(cat => <option value={cat} key={"search-" + cat}>{cat}</option>) 
+										: this.props.community.criteria.category ?
+											<option value={this.props.community.criteria.category} key={"search-" + this.props.community.criteria.category}>{this.props.community.criteria.category}</option>
+										:
+											null
+										// community_config.CATEGORIES.map(cat => (<option value={cat} key={"search-" + cat}>{cat}</option>))
 									}
 								</select>
 							)
@@ -271,9 +271,7 @@ class SearchBar extends Component{
 											 })}
 											 required=""/>
 								<div className={"search-address-candidates"}>
-									{loading ?
-										<div
-											className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
+									{loading ? <div className={"w3-container w3-white we-text-grey w3-padding-large"}>...Loading</div> : null}
 									{suggestions.map((suggestion) => {
 										const style = {
 											color: suggestion.active ? "#ffffff" : "#254184",
@@ -282,9 +280,7 @@ class SearchBar extends Component{
 										};
 
 										return (
-											<div className={"address-item"}
-													 onClick={() => alert(suggestion.terms)}
-													 {...getSuggestionItemProps(suggestion, {style})}>
+											<div className={"address-item"} onClick={() => alert(suggestion.terms)} {...getSuggestionItemProps(suggestion, {style})}>
 												{suggestion.description}
 											</div>
 										);
