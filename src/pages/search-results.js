@@ -34,14 +34,13 @@ class SearchResults extends Component{
 
 		this.myref = [];
 
-		const {category, radius, lat, lng, filter, address} = props.match.params;
+		const {category, radius, lat, lng, filter} = props.match.params;
 		if(category === undefined || radius === undefined || lat === undefined || lng === undefined || filter === undefined){
 			this.category = props.community.criteria.category;
 			this.radius = props.community.criteria.radius === '' ? null : props.community.criteria.radius;
 			this.lat = props.community.criteria.lat;
 			this.lng = props.community.criteria.lng;
 			this.filter = {...props.community.criteria.filter};
-			this.address = props.community.criteria.address;
 		}
 		else{
 			this.category = category === 'undefined' ? '' : category;
@@ -49,7 +48,6 @@ class SearchResults extends Component{
 			this.lat = parseFloat(lat);
 			this.lng = parseFloat(lng);
 			this.filter = filter === 'undefined' ? {...INIT_FILTERS} : this.url2filters(filter);
-			this.address = address === 'undefined' ? '' : address;
 		}
 
 		this.criteria = {
@@ -58,7 +56,6 @@ class SearchResults extends Component{
 			lat: this.lat,
 			lng: this.lng,
 			filter: {...this.filter},
-			address: this.address,
 		};
 
 		props.setSearchCriteria(this.criteria);
@@ -127,7 +124,6 @@ class SearchResults extends Component{
 
 			this.props.getOwners({keyword: ""});
 		}
-		window.scrollTo(0, 0);
 	}
 
 	filters2url = () => {
@@ -181,8 +177,7 @@ class SearchResults extends Component{
 
 	componentDidUpdate(prevProps, prevState, snapshot){
 		if(this.props.community.criteria !== prevProps.community.criteria || this.state.showed_filter !== prevState.showed_filter){
-			const param = `${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + this.filters2url() + `/${!this.props.community.criteria.address ? 'undefined' : this.props.community.criteria.address}`;
-			console.log(param)
+			const param = `${this.props.community.criteria.category === '' ? 'undefined' : this.props.community.criteria.category.replace(/ /g, "-")}/${this.props.community.criteria.radius === null ? 'null' : this.props.community.criteria.radius}/${this.props.community.criteria.lat}/${this.props.community.criteria.lng}/` + this.filters2url();
 			const search_results_url = `${window.location.protocol}//${window.location.host}/search-results/${param}`;
 			window.history.pushState("object or string", "Title", search_results_url);
 			this.props.history.push(`/search-results/${param}`);
@@ -288,7 +283,6 @@ class SearchResults extends Component{
 	doSearchByFilter = (obj) => {
 		this.props.setSearchFilter(obj);
 		this.setState(obj);
-		console.log(obj)
 		this.props.doSearchCommunities({
 			...this.props.community.criteria,
 			filter: {
