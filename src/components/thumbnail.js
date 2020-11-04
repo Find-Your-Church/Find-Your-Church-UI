@@ -10,6 +10,7 @@ import {
 	pickCommunity
 } from "../actions/community-actions";
 import app_config from "../conf/config";
+import isEmptyFile from "../utils/isEmptyFile";
 
 class Thumbnail extends Component{
 	constructor(props){
@@ -134,7 +135,10 @@ class Thumbnail extends Component{
 							<div
 								className={"listingprofilepic-div"}
 								style={{
-									backgroundImage: `url('${this.props.value.pictures.length > 0 ? `${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}` : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
+									backgroundImage: `url('${this.props.value.pictures.length > 0 ? 
+										isEmptyFile(`${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}`) ? "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png" : `${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}`
+									: 
+										"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
 								}}>
 							</div>
 						</Link>
@@ -145,9 +149,12 @@ class Thumbnail extends Component{
 									<Link to="#" className="communityname" onClick={this.goView}>
 										{this.props.value.community_name}
 									</Link>
-									<div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
+									<div className="listingnav-button w-nav-button" onClick={this.goEdit}>
 										<i className={"fas fa-pen"} style={{fontSize: "12px", color: "rgba(14, 0, 25, 0.2)"}}/>
 									</div>
+									{/* <div className="listingnav-button w-nav-button" onClick={this.toggleMenu}>
+										<i className={"fas fa-pen"} style={{fontSize: "12px", color: "rgba(14, 0, 25, 0.2)"}}/>
+									</div> */}
 									<nav role="navigation" className={"w3-animate-opacity listing-navmenu w-nav-menu"}
 											 style={{display: this.state.is_show_menu ? "block" : "none"}}>
 										<Link to="#" className="listing-navlink w-nav-link" onClick={this.goEdit}>
