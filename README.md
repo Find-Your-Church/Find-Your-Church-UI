@@ -90,3 +90,4 @@ For social (Google and Facebook) authentications, see a file: `<project folde>/s
 }
 ```
 Before testing, got to write valid IDs here.
+
