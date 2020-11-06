@@ -55,20 +55,17 @@ class SearchFilterCheck extends Component{
 								const count = this.props.community.counts[this.props.filterName] ? this.props.community.counts[this.props.filterName][index] : 0;
 								const checked = this.props.community.criteria.filter[this.props.filterName].split("")[index] === "1";
 								return (
-									// <label className={"filter-option" + (count === 0 ? " disabled" : "")} key={this.props.filterName + index}>
-									<label className={"filter-option"} key={this.props.filterName + index}>
-										{item}
+									<label className={"filter-option" + (count === 0 ? " disabled" : "")} key={this.props.filterName + index}>{item}
 										<input type="checkbox" id={this.props.filterName + "[" + index + "]"}
 											   value={index} onClick={this.onCheck}
 											   defaultChecked={this.checks[index] === '1'}
-											  //  disabled={count === 0}
+											   disabled={count === 0}
 											   checked={checked}
 										/>
 										<span className={"filter-checkmark" + (count === 0 ? " disabled" : "")}
 											  key={this.props.filterName + "check" + index}> </span>
 										&nbsp;
-										{/* {count > 0 ? <>({count})</> : null} */}
-										({count})
+										{count > 0 ? <>({count})</> : null}
 									</label>
 								)
 							})

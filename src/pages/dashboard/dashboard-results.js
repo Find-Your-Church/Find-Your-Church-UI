@@ -15,6 +15,7 @@ import Tooltip from "rmc-tooltip/es";
 import PlacesAutocomplete, {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import SiteFooter from "../../components/site-footer";
 // import imgPoweredBy from "../../img/powered_by.png";
+// import SiteFooter from "../../components/site-footer";
 // import FaqItem from "../../components/faq-item";
 import app_config from "../../conf/config";
 
