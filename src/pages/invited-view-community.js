@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 import {viewCommunity} from "../actions/community-actions";
 import SiteHeader from "../components/site-header";
 import app_config from "../conf/config";
+import isEmptyFile from "../utils/isEmptyFile";
 
 class InvitedViewCommunity extends Component{
 	constructor(props){
@@ -49,6 +50,7 @@ class InvitedViewCommunity extends Component{
 
 	componentDidMount(){
 		this.props.viewCommunity({id: this.community_id});
+		window.scrollTo(0, 0);
 	}
 
 	toggleMenu = () => {
@@ -164,6 +166,7 @@ class InvitedViewCommunity extends Component{
 																		{this.props.community.view_community.pictures.map((pic, index) => {
 																			return (
 																				<div className="each-slide" key={index}>
+																					{/* revert <div style={{backgroundImage: isEmptyFile(`${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-${index}.${pic}`) ? `url('/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png')` : `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-${index}.${pic})`}}> */}
 																					<div style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-${index}.${pic})`}}>
 																					</div>
 																				</div>
@@ -176,6 +179,7 @@ class InvitedViewCommunity extends Component{
 																<div className="slide-container">
 																	<div className="each-slide">
 																		<div
+																			// revert style={{backgroundImage: isEmptyFile(`${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-0.${this.props.community.view_community.pictures[0]}`) ? `url('/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png')` : `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-0.${this.props.community.view_community.pictures[0]})`}}>
 																			style={{backgroundImage: `url(${app_config.FYC_API_URL}/static/pictures/${this.props.community.view_community._id}-0.${this.props.community.view_community.pictures[0]})`}}>
 																		</div>
 																	</div>
@@ -184,7 +188,8 @@ class InvitedViewCommunity extends Component{
 																<img
 																	className={"community-picture"}
 																	alt="Community" title={this.props.community.view_community.community_name}
-																	src={this.props.community.view_community.picture ? this.props.community.view_community.picture : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}/>
+																	// src={(!this.props.community.view_community.pictures || isEmptyFile(this.props.community.view_community.pictures)) ? "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png" : this.props.community.view_community.pictures}/>
+																	src={"/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"} />
 															))}
 														<div className="basic-info view">
 															<div className="listingrow view" style={{position: "relative"}}>
