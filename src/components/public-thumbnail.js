@@ -6,6 +6,7 @@ import "../css/communities.css"
 import "../css/community-steps.css"
 import SelectedFilters from "./selected-filters";
 import isEmpty from "../utils/isEmpty";
+import isEmptyFile from "../utils/isEmptyFile";
 import {getOwnerInfo} from "../actions/auth-actions";
 import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
 import app_config from "../conf/config";
@@ -86,6 +87,12 @@ class PublicThumbnail extends Component{
 	}
 
 	render(){
+		let url = "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png";
+		if (this.props.value.pictures.length > 0) {
+			const path = `${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}`;
+			// revert if (!isEmptyFile(path)) url = path;
+		}
+
 		return (
 			this.state.is_viewing ? (
 				<Redirect to={{pathname: `/view-community/${this.state.community_name_url}-${this.props.value._id}`, state: {obj: this.props.value, colorTheme: this.props.colorTheme}}}/>
@@ -95,7 +102,7 @@ class PublicThumbnail extends Component{
 						<div
 							className={"listingprofilepic-div"}
 							style={{
-								backgroundImage: `url('${this.props.value.pictures.length > 0 ? `${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}` : "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png"}')`
+								backgroundImage: `url('${url}')`
 							}}>
 						</div>
 					</div>

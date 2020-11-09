@@ -51,75 +51,81 @@ class SiteHeader extends Component{
 			<div id={"main-header"}>
 				{is_view ? null : (
 					<Helmet>
-						<title>Find your community.</title>
+						<title>everydaybelievers.com | Search hundres of communities in your area.</title>
 						<meta name={"description"}
-									content={"Whether it be one or one-million, every community creates a beacon of light for someone to find and navigate towards. We want to help them shine brighter."}/>
+									content={"Search communities of everyday believers in your area. Filter by the criteria that are important to you. And connect with the community th..."}/>
 					</Helmet>
 				)}
-				<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`}
-								style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
-					<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className={"header-logo"}>
-						<img className="site-logo" src={"/img/logo.png"} alt="site logo"/>
-					</Link>
-					{this.props.auth.isAuthenticated ? null : (
-						<Link to="#" onClick={this.toggleAdminMenu}
-									className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
-							{this.state.showedAdminMenu ? (
-								<i className="fas fa-times"/>
-							) : (
-								<i className="fas fa-bars"/>
+				<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`} style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
+					<div class="site-header-element">
+						<div class="site-header-sub-element">
+							<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className={"header-logo"}>
+								<img className="site-logo" src={"/img/logo.png"} alt="site logo"/>
+							</Link>
+							{this.props.auth.isAuthenticated ? null : (
+								<Link to="#" onClick={this.toggleAdminMenu}
+											className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
+									{this.state.showedAdminMenu ? (
+										<i className="fas fa-times"/>
+									) : (
+										<i className="fas fa-bars"/>
+									)}
+								</Link>
 							)}
-						</Link>
-					)}
-					{this.props.auth.isAuthenticated ? (<>
-							<Link to="#" onClick={this.toggleAdminMenu}
-										className={"header-3lines-menu w3-bar-item w3-right"}>
-								<img src={"/img/icon-down3-purple.svg"} style={{width: "10px"}} alt={"chevron for popup menu"}/>
-							</Link>
-							<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right">
-								<span className={"headerprofpic-welcome"}>
-									<span className={"name-on-header"}>{this.props.auth.user.fname}</span>
-								</span>
-								<div className="headerprofpic-div w3-right">
-									<img src={
-										isEmpty(this.props.auth.user.pic) ?
-											"/img/default-user.png"
-											: this.props.auth.user.pic}
-											 alt={this.props.auth.user.fname} className="image-4"/>
-								</div>
-							</Link>
-						</>)
-						: null}
+							{this.props.auth.isAuthenticated ? (<>
+									<Link to="#" onClick={this.toggleAdminMenu}	className={"header-3lines-menu w3-bar-item w3-right arrow-down"}>
+										<img src={"/img/icon-down3-purple.svg"} style={{width: "10px"}} alt={"chevron for popup menu"}/>
+									</Link>
+									<Link to="#" onClick={this.toggleAdminMenu} className="header-3lines-menu w3-bar-item w3-right toggle-button">
+										<span className={"headerprofpic-welcome"}>
+											<span className={"name-on-header"}>{this.props.auth.user.fname}</span>
+										</span>
+										<div className="headerprofpic-div w3-right">
+											<img src={
+												isEmpty(this.props.auth.user.pic) ?
+													"/img/default-user.png"
+													: this.props.auth.user.pic}
+													alt={this.props.auth.user.fname} className="image-4"/>
+										</div>
+									</Link>
+								</>)
+								: null}
 
-					{!this.props.auth.isAuthenticated ? (
-							<>
-								<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
-											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
-									Churches and ministries
-								</Link>
-								<Link to="/search-results"
-											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
-									Search communities
-								</Link>
-								{/*<Link to="/create-an-account" className="sign-up-link w3-bar-item w3-right">*/}
-								<Link to="/create-an-account"
-											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
-									Create an account
-								</Link>
-								<Link to="/sign-in"
-											className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
-									Sign In
-								</Link>
-								{/*<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>*/}
-								{/*<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}*/}
-								{/*			className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}*/}
-								{/*			style={{marginRight: "7px"}}*/}
-								{/*>*/}
-								{/*	Home*/}
-								{/*</Link>*/}
-							</>
-						)
-						: null}
+							{!this.props.auth.isAuthenticated ? (
+									<div>
+										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
+											Churches and ministries
+										</Link>
+										<Link to="/search-results"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
+											Search communities
+										</Link>
+										<Link to="/create-an-account"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
+											Create an account
+										</Link>
+										<Link to="/sign-in"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
+											Sign In
+										</Link>
+										<Link to="/about"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/about" ? "current" : "")}>
+											About
+										</Link>
+										{/*<Link to="/create-an-account" className="sign-up-link w3-bar-item w3-right">*/}
+										{/*<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>*/}
+										{/*<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}*/}
+										{/*			className={"home-link w3-bar-item w3-right " + (this.props.location.pathname === "/" ? "current" : "")}*/}
+										{/*			style={{marginRight: "7px"}}*/}
+										{/*>*/}
+										{/*	Home*/}
+										{/*</Link>*/}
+									</div>
+								)
+								: null}
+							</div>
+					</div>
 				</header>
 				<div className="admin-menu w3-animate-top" onClick={this.toggleAdminMenu} onMouseLeave={this.hideAdminMenu}
 						 style={{

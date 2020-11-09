@@ -79,8 +79,9 @@ a {
 	position: absolute;
 	top: 0;
 	max-width: 100vw;
+	text-align: center;
 	height: 70px;
-	padding: 0 20px;
+	/* padding: 0 20px; */
 	font-size: 16px;
 	background-color: transparent;
 	background-image: linear-gradient(180deg, #fff, #fff), linear-gradient(45deg, #8900fe, #2e89fe 50%, #00e8fe);
@@ -88,28 +89,87 @@ a {
 	z-index: 1000;
 }
 
-.site-header .header-logo {
-	position: absolute;
+.site-header-element {
+	position: relative;
+	/* max-width: 1140px; */
+	padding-left: 20px;
+	padding-right: 20px;
+	margin: auto;
+	display: block;
+}
+
+.site-header-sub-element {
 	display: flex;
-	width: 20vw;
+	justify-content: space-between;
+}
+
+.site-header .header-logo {
+	display: flex;
+	/* width: 22.193%; */
+	/* height: 70px; */
 	height: 70px;
+	width: auto;
 	align-items: center;
 }
 
-@media screen and (max-width: 992px){
-	.site-header .header-logo {
-		width: 35vw;
+@media screen and (max-width: 1024px){
+	.site-header-element {
+		/* max-width: 1025px; */
 	}
 }
 
-@media screen and (max-width: 768px){
+@media screen and (min-width: 1024px){
 	.site-header .header-logo {
-		width: 60vw;
+		/* width: 35vw; */
+	}
+}
+
+@media screen and (min-width: 768px){
+	.site-header .header-logo {
+		/* width: 22.193%; */
+	}
+}
+
+@media (max-width: 1024px) and (min-width: 768px){
+	.site-header-element {
+		/* width: 90%; */
+	}
+
+	.site-header .header-logo {
+		/* width: 50%; */
+	}
+	.site-header .header-logo img {
+		/* height: 33.52px; */
+		/* width: auto !important; */
+	}
+}
+
+@media (max-width: 768px){
+	.site-header {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	.site-header-element {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.site-header .w3-bar-item {
+		margin: auto !important;
+	}
+	.site-header-element {
+		/* width: 92%; */
+	}
+
+	.site-header .header-logo {
+		/* width: 70%; */
 	}
 }
 
 .site-header .header-logo img {
-	width: 100%;
+	height: 30px;
+	width: auto;
 	object-fit: contain;
 }
 
@@ -123,10 +183,6 @@ a {
 }
 
 @media screen and (max-width: 600px) {
-	.site-header {
-		padding-left: 10px;
-		padding-right: 10px;
-	}
 }
 
 .site-header .header-3lines-menu {
@@ -143,6 +199,10 @@ a {
 }
 
 @media screen and (max-width: 768px) {
+	.site-header-element {
+		/* max-width: 768px; */
+	}
+
 	.sign-up-link, .sign-in-link, .home-link, .header-link-sep {
 		display: none !important;
 	}
@@ -159,7 +219,7 @@ a {
 .site-header .w3-bar-item {
 	margin: 15px 10px;
 	padding: 7px 0;
-	font-size: 1.3vw;
+	font-size: 16px;
 }
 
 .site-header .sign-in-link:hover,
@@ -190,7 +250,8 @@ a {
 }
 
 .name-on-header {
-	color: #8900fe;
+	color: #1B0033;
+	font-size: 16px;
 }
 
 .header-3lines-menu i {
@@ -198,6 +259,15 @@ a {
 	font-size: 28px;
 	color: #8900fe;
 	transition: ease 0.3s;
+}
+
+.site-header .arrow-down {
+	position: absolute;
+	right: 20px;
+}
+
+.site-header .toggle-button {
+	margin-right: 24px !important;
 }
 
 .header-3lines-menu i.fa-angle-down {
@@ -267,6 +337,7 @@ a {
 .headerprofpic-welcome:before {
 	color: rgba(51, 51, 51, 0.5);
 	content: "Welcome, ";
+	font-size: 16px;
 }
 
 @media screen and (max-width: 768px) {
@@ -282,9 +353,6 @@ a {
 
 	.headerprofpic-welcome {
 		display: none;
-	}
-
-	.site-logo {
 	}
 }
 
@@ -325,7 +393,7 @@ a {
 	background-color: #fff;
 	font-family: Poppins, sans-serif;
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 500;
 	text-align: center;
 	line-height: 36px;
 	transition: ease 0.3s;
@@ -338,13 +406,15 @@ a {
 
 .footer-container {
 	margin-top: -10px;
+	padding-top: 70px;
 }
 
 .footer-head {
-	height: 70px;
+	margin-top: 70px;
+	height: 0px;
 	display: flex;
 	align-items: flex-end;
-	background-color: #e8e5ea;
+	/* background-color: #e8e5ea; */
 }
 
 .footer-head svg {
@@ -372,10 +442,10 @@ a {
 	-webkit-flex-wrap: nowrap;
 	-ms-flex-wrap: nowrap;
 	flex-wrap: nowrap;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	-ms-flex-align: center;
-	align-items: center;
+	/* -webkit-box-align: center; */
+	/* -webkit-align-items: center; */
+	/* -ms-flex-align: center; */
+	/* align-items: center; */
 	-webkit-align-self: stretch;
 	-ms-flex-item-align: stretch;
 	align-self: stretch;
@@ -417,17 +487,18 @@ a {
 
 .footer-div .footer-part-title .title {
 	display: inline-block;
-	font-size: 1.2vw;
-	font-weight: 600;
-	color: #DDD9E1;
-	border-bottom: 1px solid #DDD9E1;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 22px;
+	color:#8900FE;
+	border-bottom: 1px solid#8900FE;
 }
 
 .footer-link, .footer-logo {
 	display: block;
-	color: #2C8AFE;
-	font-size: 1.2vw;
-	line-height: 26px;
+	color:#8900FE;
+	font-size: 16px;
+	line-height: 22px;
 	text-align: left;
 	text-decoration: none;
 	transition: all 0.4s ease-out;
