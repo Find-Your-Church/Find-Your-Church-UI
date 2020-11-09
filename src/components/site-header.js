@@ -12,6 +12,7 @@ class SiteHeader extends Component{
 		super(props);
 		this.state = {
 			showedAdminMenu: false,
+
 		};
 
 		this.toggleAdminMenu = this.toggleAdminMenu.bind(this);
