@@ -150,6 +150,11 @@ a {
 		padding-right: 10px;
 	}
 
+	.site-header-element .arrow-down {
+		right: 0 !important;
+		top: 12px !important;
+	}
+
 	.site-header-element {
 		padding-left: 0;
 		padding-right: 0;
