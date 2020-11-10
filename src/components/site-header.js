@@ -109,10 +109,10 @@ class SiteHeader extends Component{
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
 											Sign In
 										</Link>
-										<Link to="/about"
+										{/* <Link to="/about"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/about" ? "current" : "")}>
 											About
-										</Link>
+										</Link> */}
 										{/*<Link to="/create-an-account" className="sign-up-link w3-bar-item w3-right">*/}
 										{/*<div className={"header-link-sep w3-bar-item w3-right"} style={{margin: "15px 0", fontSize: "16px"}}>&nbsp;</div>*/}
 										{/*<Link to={`/goto-url/${app_config.FYC_HOME_URL}`}*/}
