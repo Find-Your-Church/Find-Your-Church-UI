@@ -91,6 +91,7 @@ class PublicThumbnail extends Component{
 		if (this.props.value.pictures.length > 0) {
 			const path = `${app_config.FYC_API_URL}/static/pictures/${this.props.value._id}-0.${this.props.value.pictures[0]}`;
 			// revert if (!isEmptyFile(path)) url = path;
+			url = path;
 		}
 
 		return (
