@@ -94,11 +94,11 @@ class SiteFooter extends Component{
 								NAVIGATE
 							</div>
 						</div>
-						<div className={"footer-link"}>
+						{/* <div className={"footer-link"}>
 							<Link to="/about">
 								About
 							</Link>
-						</div>
+						</div> */}
 						<div className={"footer-link"}>
 							<Link to="/sign-in">
 								Sign in

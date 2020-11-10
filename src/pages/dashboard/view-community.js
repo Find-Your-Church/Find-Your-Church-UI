@@ -195,6 +195,7 @@ class ViewCommunity extends Component{
 																		let url = "/img/default-community/5e2672d254abf8af5a1ec82c_Community-p-500.png";
 																		const path = `${app_config.FYC_API_URL}/static/pictures/${this.state.community_obj.obj._id}-${index}.${pic}`;
 																		// revert if (!isEmptyFile(path)) url = path;
+																		url = path;
 																		
 																		return (
 																			<div className="each-slide" key={index}>
