@@ -152,7 +152,6 @@ a {
 
 	.site-header-element .arrow-down {
 		right: 0 !important;
-		top: 12px !important;
 	}
 
 	.site-header-element {
@@ -269,6 +268,8 @@ a {
 .site-header .arrow-down {
 	position: absolute;
 	right: 20px;
+	top: 22px;
+	padding: 0 2px 0 0 !important;
 }
 
 .site-header .toggle-button {
