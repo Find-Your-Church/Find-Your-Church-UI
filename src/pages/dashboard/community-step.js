@@ -132,7 +132,7 @@ class CommunityStep extends Component{
 					arr[i] = canvas.toDataURL();
 					this.setState({pictures: arr});
 				};
-				img.src = `${app_config.FYC_API_URL}/static/pictures/${id}-${i}.${names[i]}`;
+				img.src = `${names[i]}`;
 			}
 		}
 	};
