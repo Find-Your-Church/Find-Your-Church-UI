@@ -10,7 +10,7 @@ import {
 	pickCommunity
 } from "../actions/community-actions";
 import app_config from "../conf/config";
-import isEmptyFile from "../utils/isEmptyFile";
+// import isEmptyFile from "../utils/isEmptyFile";
 
 class Thumbnail extends Component{
 	constructor(props){

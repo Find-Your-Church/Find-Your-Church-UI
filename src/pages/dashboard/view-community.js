@@ -8,7 +8,7 @@ import community_config from "../../conf/community-conf";
 import ListMembers from "../../components/list-members";
 import SiteHeader from "../../components/site-header";
 import app_config from "../../conf/config";
-import isEmptyFile from "../../utils/isEmptyFile";
+// import isEmptyFile from "../../utils/isEmptyFile";
 
 // import Popup from "reactjs-popup";
 

@@ -6,7 +6,7 @@ import "../css/communities.css"
 import "../css/community-steps.css"
 import SelectedFilters from "./selected-filters";
 import isEmpty from "../utils/isEmpty";
-import isEmptyFile from "../utils/isEmptyFile";
+// import isEmptyFile from "../utils/isEmptyFile";
 import {getOwnerInfo} from "../actions/auth-actions";
 import {pickCommunity, shareCommunity, reportCommunity} from "../actions/community-actions";
 import app_config from "../conf/config";

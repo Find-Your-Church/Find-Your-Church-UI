@@ -12,7 +12,7 @@ import {connect} from "react-redux";
 import {viewCommunity} from "../actions/community-actions";
 import SiteHeader from "../components/site-header";
 import app_config from "../conf/config";
-import isEmptyFile from "../utils/isEmptyFile";
+// import isEmptyFile from "../utils/isEmptyFile";
 
 class InvitedViewCommunity extends Component{
 	constructor(props){
