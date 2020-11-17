@@ -144,7 +144,36 @@ a {
 	}
 }
 
-@media (max-width: 768px){
+@media (min-width: 600px) {
+	.site-header .toggle-button {
+		padding: 8px 20px !important;
+	}
+}
+
+@media (max-width: 600px) {
+	.site-header-element .arrow-down {
+		/* display: none; */
+	}
+
+	.site-header .header-logo img {
+		width: 75% !important;
+	}
+
+	.site-header .toggle-button {
+		margin-right: 20px !important;
+		padding: 0 !important;
+	}
+
+	.no-name-item {
+		padding: 0 !important;
+		display: flex !important;
+		justify-content: center;
+		align-items: center;
+		padding-left: 32px !important;
+	}
+}
+
+@media (max-width: 768px) {
 	.site-header {
 		padding-left: 10px;
 		padding-right: 10px;
@@ -152,7 +181,6 @@ a {
 
 	.site-header-element .arrow-down {
 		right: 0 !important;
-		top: 12px !important;
 	}
 
 	.site-header-element {
@@ -160,15 +188,11 @@ a {
 		padding-right: 0;
 	}
 
-	.site-header .w3-bar-item {
+	/* .site-header .w3-bar-item {
 		margin: auto !important;
-	}
+	} */
 	.site-header-element {
 		/* width: 92%; */
-	}
-
-	.site-header .header-logo {
-		/* width: 70%; */
 	}
 }
 
@@ -185,14 +209,6 @@ a {
 
 .site-header * {
 	font-family: Poppins, sans-serif !important;
-}
-
-@media screen and (max-width: 600px) {
-}
-
-.site-header .header-3lines-menu {
-	margin-right: 0 !important;
-	padding-right: 2px !important;
 }
 
 .header-3lines-menu.oos {
@@ -222,8 +238,8 @@ a {
 }
 
 .site-header .w3-bar-item {
-	margin: 15px 10px;
-	padding: 7px 0;
+	/* margin: 15px 10px; */
+	/* padding: 7px 0; */
 	font-size: 15px;
 }
 
@@ -237,6 +253,13 @@ a {
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 30px;
+}
+
+.site-header .menu-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .site-header .w3-bar-item:hover {
@@ -269,10 +292,16 @@ a {
 .site-header .arrow-down {
 	position: absolute;
 	right: 20px;
+	top: 22px;
+	padding: 0 2px 0 0 !important;
 }
 
 .site-header .toggle-button {
-	margin-right: 24px !important;
+	/* margin-right: 24px !important; */
+	/* padding: 8px 20px !important; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .header-3lines-menu i.fa-angle-down {
@@ -304,7 +333,8 @@ a {
 
 .headerprofpic-div {
 	overflow: hidden;
-	margin: -8px -4px 0 8px;
+	/* margin: -8px -4px 0 8px; */
+	margin-left: 8px;
 	width: 100%;
 	height: auto;
 	max-height: 40px;
