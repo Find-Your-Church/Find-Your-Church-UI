@@ -93,21 +93,21 @@ class SiteHeader extends Component{
 
 							{!this.props.auth.isAuthenticated ? (
 									<div class="menu-list">
-										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
-											Churches and ministries
-										</Link>
-										<Link to="/search-results"
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
-											Search communities
+										<Link to="/sign-in"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
+											Sign In
 										</Link>
 										<Link to="/create-an-account"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
 											Create an account
 										</Link>
-										<Link to="/sign-in"
-													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
-											Sign In
+										<Link to="/search-results"
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
+											Search communities
+										</Link>
+										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
+											Churches and ministries
 										</Link>
 										{/* <Link to="/about"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/about" ? "current" : "")}>
