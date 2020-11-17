@@ -152,7 +152,6 @@ a {
 
 	.site-header-element .arrow-down {
 		right: 0 !important;
-		top: 12px !important;
 	}
 
 	.site-header-element {
@@ -160,9 +159,9 @@ a {
 		padding-right: 0;
 	}
 
-	.site-header .w3-bar-item {
+	/* .site-header .w3-bar-item {
 		margin: auto !important;
-	}
+	} */
 	.site-header-element {
 		/* width: 92%; */
 	}
@@ -222,8 +221,8 @@ a {
 }
 
 .site-header .w3-bar-item {
-	margin: 15px 10px;
-	padding: 7px 0;
+	/* margin: 15px 10px; */
+	/* padding: 7px 0; */
 	font-size: 15px;
 }
 
@@ -269,10 +268,15 @@ a {
 .site-header .arrow-down {
 	position: absolute;
 	right: 20px;
+	top: 22px;
+	padding: 0 2px 0 0 !important;
 }
 
 .site-header .toggle-button {
 	margin-right: 24px !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .header-3lines-menu i.fa-angle-down {
@@ -304,7 +308,8 @@ a {
 
 .headerprofpic-div {
 	overflow: hidden;
-	margin: -8px -4px 0 8px;
+	/* margin: -8px -4px 0 8px; */
+	margin-left: 8px;
 	width: 100%;
 	height: auto;
 	max-height: 40px;
