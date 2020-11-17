@@ -64,7 +64,7 @@ class SiteHeader extends Component{
 							</Link>
 							{this.props.auth.isAuthenticated ? null : (
 								<Link to="#" onClick={this.toggleAdminMenu}
-											className={"header-3lines-menu w3-bar-item w3-right" + (this.props.auth.isAuthenticated ? "" : " oos")}>
+											className={"header-3lines-menu w3-bar-item w3-right no-name-item" + (this.props.auth.isAuthenticated ? "" : " oos")}>
 									{this.state.showedAdminMenu ? (
 										<i className="fas fa-times"/>
 									) : (
@@ -92,7 +92,7 @@ class SiteHeader extends Component{
 								: null}
 
 							{!this.props.auth.isAuthenticated ? (
-									<div>
+									<div class="menu-list">
 										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
 											Churches and ministries
