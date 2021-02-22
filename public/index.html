@@ -10,7 +10,8 @@
 	<link rel="apple-touch-icon" href="%PUBLIC_URL%/fyc-icon.png"/>
 	<link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
 
-	<script>
+	<script type="text/javascript">
+		console.log(%GOOGLEMAP_API_KEY%);
 		let googleapisrc = "https://maps.googleapis.com/maps/api/js?key=%GOOGLEMAP_API_KEY%"
 		document.write("<script src=" + googleapisrc + "><\/script>");
 	</script>
