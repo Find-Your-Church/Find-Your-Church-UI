@@ -136,7 +136,7 @@ class SiteHeader extends Component{
 						{/*	Home</Link>*/}
 						{this.props.auth.isAuthenticated ? (<>
 							<Link to="/dashboard" className="header-navlink w-nav-link w--nav-link-open">
-								Dashboard</Link>
+								Profile</Link>
 							<Link to="/dashboard/account"
 										className="header-navlink w-nav-link w--nav-link-open">
 								Account</Link>
@@ -147,15 +147,15 @@ class SiteHeader extends Component{
 								Sign In</Link>
 							<Link to="/create-an-account"
 										className="header-navlink w-nav-link w--nav-link-open">
-								Create an account</Link>
+								Create an Account</Link>
 						</>)}
-						<Link to="/search-results"
-									className="header-navlink w-nav-link w--nav-link-open">
-							Search communities</Link>
-						<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
-									className="header-navlink w-nav-link w--nav-link-open">
-							Churches and ministries</Link>
 						{this.props.auth.isAuthenticated ? (<>
+              <Link to="/developer-console"
+                    className="header-navlink w-nav-link w--nav-link-open">
+                Developer Console</Link>
+              <Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+                    className="header-navlink w-nav-link w--nav-link-open">
+                Help and Resources</Link>
 							<Link to="#" onClick={this.onLogoutClick}
 										className="header-navlink w-nav-link w--nav-link-open">
 								Sign Out</Link>
