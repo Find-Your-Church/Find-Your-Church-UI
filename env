@@ -1,0 +1,5 @@
+REACT_APP_API_URL=$FYC_API_URL //https://api-dev.everydaybelievers.com
+REACT_APP_HOME_URL=$FYC_HOME_URL //https://everydaybelievers.com
+REACT_APP_GOOGLEMAP_API_KEY=$GOOGLEMAP_API_KEY //AIzaSyCVTEYZEGxESwEraj1XLvW61Twd03iMqUc
+REACT_APP_STRIPE_PK=$STRIPE_PK //pk_test_6qf5BlgEkll3m5hyijnz2oiq
+REACT_APP_SUPPORT_TEAM_LINK=$SUPPORT_TEAM_LINK //support@everydaybelievers.com

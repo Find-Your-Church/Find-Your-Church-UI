@@ -34,6 +34,7 @@ class SiteFooter extends Component{
 	};
 
 	render(){
+    return (<></>);
 		return (
 			<div className={"footer-container"}>
 				{/* <div className={"footer-head"}> */}

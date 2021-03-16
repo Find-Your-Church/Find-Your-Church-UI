@@ -106,13 +106,13 @@ class Admin extends Component{
 										</div>
 										{/*
 										<div className="div-block-215">
-											<Link to="/dashboard-results" className="link-6">
+											<Link to="/developer-console" className="link-6">
 												<em className="italic-text-7 gray"><i className="fas fa-user-circle"/></em>
 											</Link>
 										</div>
 										*/}
 										<div className="div-block-215">
-											<Link to="/dashboard-results" className="link-6">
+											<Link to="/developer-console" className="link-6">
 												<em className="italic-text-7 gray"><i className="fas fa-code"/></em>
 											</Link>
 										</div>

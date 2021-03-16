@@ -57,8 +57,8 @@ class SiteHeader extends Component{
 					</Helmet>
 				)}
 				<header className={`site-header w3-bar ${this.props.for1st ? "shadow" : ""}`} style={{filter: this.props.overlayed ? "blur(4px)" : "none"}}>
-					<div class="site-header-element">
-						<div class="site-header-sub-element">
+					<div className="site-header-element">
+						<div className="site-header-sub-element">
 							<Link to={`/goto-url/${app_config.FYC_HOME_URL}`} className={"header-logo"}>
 								<img className="site-logo" src={"/img/logo.png"} alt="site logo"/>
 							</Link>
@@ -92,7 +92,7 @@ class SiteHeader extends Component{
 								: null}
 
 							{!this.props.auth.isAuthenticated ? (
-									<div class="menu-list">
+									<div className="menu-list">
 										<Link to="/sign-in"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/sign-in" ? "current" : "")}>
 											Sign In
@@ -101,14 +101,14 @@ class SiteHeader extends Component{
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/create-an-account" ? "current" : "")}>
 											Create an account
 										</Link>
-										<Link to="/search-results"
+										{/* <Link to="/search-results"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/search-results" ? "current" : "")}>
 											Search communities
 										</Link>
 										<Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/goto-url" ? "current" : "")}>
 											Churches and ministries
-										</Link>
+										</Link> */}
 										{/* <Link to="/about"
 													className={"sign-in-link w3-bar-item w3-right " + (this.props.location.pathname === "/about" ? "current" : "")}>
 											About
@@ -153,7 +153,7 @@ class SiteHeader extends Component{
               <Link to="/developer-console"
                     className="header-navlink w-nav-link w--nav-link-open">
                 Developer Console</Link>
-              <Link to={`/goto-url/${app_config.FYC_HOME_URL}/churches-and-ministries`}
+              <Link to={`/help-and-resources`}
                     className="header-navlink w-nav-link w--nav-link-open">
                 Help and Resources</Link>
 							<Link to="#" onClick={this.onLogoutClick}

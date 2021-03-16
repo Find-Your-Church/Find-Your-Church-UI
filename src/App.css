@@ -369,7 +369,7 @@ a {
 	box-shadow: 0 1px 3px 0 grey;
 }
 
-.headerprofpic-welcome:before {
+/* .headerprofpic-welcome:before {
 	color: rgba(51, 51, 51, 0.5);
 	content: "Welcome, ";
 	font-size: 15px;
@@ -379,12 +379,12 @@ a {
 	.headerprofpic-welcome:before {
 		content: "Hi, ";
 	}
-}
+} */
 
 @media screen and (max-width: 600px) {
-	.headerprofpic-welcome:before {
+	/* .headerprofpic-welcome:before {
 		content: "";
-	}
+	} */
 
 	.headerprofpic-welcome {
 		display: none;
