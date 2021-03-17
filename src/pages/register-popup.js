@@ -171,9 +171,9 @@ class RegisterPopup extends Component{
 							</div>
 						</div>
 						<div className="div-block-63" style={{filter: this.state.showedModal ? "blur(5px)" : "none"}}>
-							<div className="div-block-38">
-								<div className="header1-div gradient shadow">
-									<h3 className="header3 center">Create a free account.</h3>
+							<div className="div-registerform">
+								<div className="div-formheaderbackground">
+									<div className="div-formheader">Create a free account.</div>
 								</div>
 								<div>
 									<div className="form-div1">
@@ -181,8 +181,77 @@ class RegisterPopup extends Component{
 											<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 														name="wf-form-Registration"
 														data-name="Registration" className="form1">
-												<div className={"input-group"}>
+												<div className="div-registerinputs">
+													<div className={"forminput-div"}>
+														<label htmlFor={"fname"} className={"form-label"}>First name</label>
+														<input type="text"
+																	 className="form-input center  w-input-sign"
+																	 maxLength="256"
+																	 onChange={this.onChange}
+																	 value={this.state.fname}
+                                   placeholder="John"
+																	 id="fname"
+																	 style={{borderColor: this.props.errors.msg_reg_fname ? "#f00" : "auto"}}
+																	 required=""/>
+													</div>
+													<div className={"forminput-div"}>
+														<label htmlFor={"lname"} className={"form-label"}>Last name</label>
+														<input type="text"
+																	 className="form-input center  w-input-sign"
+																	 maxLength="256"
+																	 onChange={this.onChange}
+																	 value={this.state.lname}
+                                   placeholder="Smith"
+																	 id="lname"
+																	 style={{borderColor: this.props.errors.msg_reg_lname ? "#f00" : "auto"}}
+																	 required=""/>
+													</div>
 													<div className={"forminput-div span-2"}>
+														<label htmlFor={"email"} className={"form-label"}>Email</label>
+														<input type="email"
+																	 className="form-input center  w-input-sign"
+																	 maxLength="256"
+																	 onChange={this.onChange}
+																	 value={this.state.email}
+                                   placeholder="johnsmith@email.com"
+																	 id="email"
+																	 style={{borderColor: this.props.errors.msg_reg_email ? "#f00" : "auto"}}
+																	 required=""/>
+													</div>
+													<div className={"forminput-div"}>
+														<label htmlFor={"password"} className={"form-label"}>Password</label>
+														<input type="password"
+																	 className="form-input center  w-input-sign"
+																	 maxLength="256"
+																	 onChange={this.onChange}
+																	 value={this.state.password}
+                                   placeholder="********"
+																	 id="password"
+																	 style={{borderColor: this.props.errors.msg_reg_password ? "#f00" : "auto"}}
+																	 required=""/>
+													</div>
+													<div className={"forminput-div"}>
+														<label htmlFor={"password2"} className={"form-label"}>Confirm password</label>
+														<input type="password"
+																	 className="form-input center  w-input-sign"
+																	 maxLength="256"
+																	 onChange={this.onChange}
+																	 value={this.state.password2}
+                                   placeholder="********"
+																	 id="password2"
+																	 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "auto"}}
+																	 required=""/>
+													</div>
+													{/*
+													<div className={"forminput-div span-2"}>
+														<label className={"checkbox-organization"}>
+															<input type={"checkbox"} id={"is_organization"} onClick={this.onCheckOrganization}
+																		 checked={this.state.is_organization}/>
+															<span className={"checkbox-label-organization"}>I'm creating an account for an organization I'm authorized to represent</span>
+														</label>
+													</div>
+													*/}
+                          <div className={"forminput-div span-2"}>
 														<label htmlFor={"email"} className={"form-label"}>Which of the following best describes
 															you:</label>
 														<select id={"is_organization"} className="form-input center w-input-sign"
@@ -199,70 +268,6 @@ class RegisterPopup extends Component{
 															</option>
 														</select>
 													</div>
-													<div className={"forminput-div"}>
-														<label htmlFor={"fname"} className={"form-label"}>First name</label>
-														<input type="text"
-																	 className="form-input center  w-input-sign"
-																	 maxLength="256"
-																	 onChange={this.onChange}
-																	 value={this.state.fname}
-																	 id="fname"
-																	 style={{borderColor: this.props.errors.msg_reg_fname ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																	 required=""/>
-													</div>
-													<div className={"forminput-div"}>
-														<label htmlFor={"lname"} className={"form-label"}>Last name</label>
-														<input type="text"
-																	 className="form-input center  w-input-sign"
-																	 maxLength="256"
-																	 onChange={this.onChange}
-																	 value={this.state.lname}
-																	 id="lname"
-																	 style={{borderColor: this.props.errors.msg_reg_lname ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																	 required=""/>
-													</div>
-													<div className={"forminput-div span-2"}>
-														<label htmlFor={"email"} className={"form-label"}>Email</label>
-														<input type="email"
-																	 className="form-input center  w-input-sign"
-																	 maxLength="256"
-																	 onChange={this.onChange}
-																	 value={this.state.email}
-																	 id="email"
-																	 style={{borderColor: this.props.errors.msg_reg_email ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																	 required=""/>
-													</div>
-													<div className={"forminput-div"}>
-														<label htmlFor={"password"} className={"form-label"}>Password</label>
-														<input type="password"
-																	 className="form-input center  w-input-sign"
-																	 maxLength="256"
-																	 onChange={this.onChange}
-																	 value={this.state.password}
-																	 id="password"
-																	 style={{borderColor: this.props.errors.msg_reg_password ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																	 required=""/>
-													</div>
-													<div className={"forminput-div"}>
-														<label htmlFor={"password2"} className={"form-label"}>Confirm password</label>
-														<input type="password"
-																	 className="form-input center  w-input-sign"
-																	 maxLength="256"
-																	 onChange={this.onChange}
-																	 value={this.state.password2}
-																	 id="password2"
-																	 style={{borderColor: this.props.errors.msg_reg_password2 ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
-																	 required=""/>
-													</div>
-													{/*
-													<div className={"forminput-div span-2"}>
-														<label className={"checkbox-organization"}>
-															<input type={"checkbox"} id={"is_organization"} onClick={this.onCheckOrganization}
-																		 checked={this.state.is_organization}/>
-															<span className={"checkbox-label-organization"}>I'm creating an account for an organization I'm authorized to represent</span>
-														</label>
-													</div>
-													*/}
 													{this.state.is_organization ? (
 														<>
 															<div className={"forminput-div w3-animate-opacity"}>
@@ -272,8 +277,9 @@ class RegisterPopup extends Component{
 																			 maxLength="256"
 																			 onChange={this.onChange}
 																			 value={this.state.organization_name}
+                                       placeholder="Organization"
 																			 id="organization_name"
-																			 style={{borderColor: this.props.errors.msg_reg_organization_name ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																			 style={{borderColor: this.props.errors.msg_reg_organization_name ? "#f00" : "auto"}}
 																			 required="" autoFocus/>
 															</div>
 															<div className={"forminput-div w3-animate-opacity"} style={{position: "relative"}}>
@@ -293,11 +299,11 @@ class RegisterPopup extends Component{
 																			<input className="form-input center  w-input-sign"
 																						 title={this.state.my_lat === undefined ? '' : `Lat: ${this.state.my_lat}, Lng: ${this.state.my_lng}, ${this.state.zip_code}`}
 																						 {...getInputProps({
-																							 placeholder: "",
+																							 placeholder: "New York, US",
 																						 })}
 																						 onFocus={this.onFocusZipCode}
 																						 onBlur={this.onBlurZipCode}
-																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																						 style={{borderColor: this.props.errors.msg_reg_zip_code ? "#f00" : "auto"}}
 																						 required=""/>
 																			{/*</Tooltip>*/}
 																			<div className={"search-address-candidates"}
@@ -359,12 +365,12 @@ class RegisterPopup extends Component{
 										</div>
 									</div>
 									<div className="terms-conditions">
-										<span className="fineprint">By registering you are agreeing to our</span><br/>
+										<span className="fineprint">By registering you are agreeing to our </span>
 										<Link to="#" onClick={() => {
 											this.showModal(0)
 										}} className="fineprint link">
-											Content Policy
-										</Link> <span className="fineprint">and</span>
+											Privacy Policy
+										</Link> <span className="fineprint"> and </span>
 										<Link to="#" onClick={() => {
 											this.showModal(1)
 										}} className="fineprint link">
@@ -396,14 +402,15 @@ class RegisterPopup extends Component{
 										</div>
 									</div>
 									*/}
-								<div className="div-block-46">
-									<h1 className="heading-11">
-										<Link to="/sign-in" className="link-5">
-											Already have an account? <strong>Sign In</strong>
-										</Link>
-									</h1>
-								</div>
 							</div>
+              <div className="div-block-46">
+                <span className="heading-11">
+                  Already have an account?<br/>
+                  <Link to="/sign-in" className="link-5">
+                    Sign In
+                  </Link>
+                </span>
+              </div>
 						</div>
 					</div>
 					<SiteFooter/>
