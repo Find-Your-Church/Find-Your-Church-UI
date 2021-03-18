@@ -595,7 +595,7 @@ class CommunityStep extends Component{
 														</Tooltip>
 														<PlacesAutocomplete
 															value={this.state.address}
-															class={"w3-input"}
+															className={"w3-input"}
 															onChange={this.onChangeAddress}
 															onSelect={this.handleSelect}
 														>

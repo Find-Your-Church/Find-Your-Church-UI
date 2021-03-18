@@ -30,6 +30,7 @@ import PrivacyPolicy from "./pages/privacy-policy";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
+import EmailTemplate from "./pages/emaill-templates";
 import DashboardResults from "./pages/dashboard/dashboard-results";
 import AuthToDashboard from "./components/auth-to-dashboard";
 
@@ -96,6 +97,7 @@ class App extends Component{
 							<Route path="/reset-password/:id?" component={ResetPassword}/>
 							<Route path="/change-password/:id?" component={ChangePassword}/>
 							<Route path="/verify-email/:id?" component={VerifyEmail}/>
+							<Route exact path="/email-templates" component={EmailTemplate}/>
 
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
@@ -104,7 +106,7 @@ class App extends Component{
 							<PrivateRoute exact path="/edit" component={CommunityStep}/>
 
 							<PrivateRoute exact path="/dashboard" component={Admin}/>
-							<PrivateRoute exact path="/dashboard-results" component={DashboardResults}/>
+							<PrivateRoute exact path="/developer-console" component={DashboardResults}/>
 							<PrivateRoute exact path="/dashboard/admin" component={Admin}/>
 							<PrivateRoute exact path="/dashboard/account" component={AccountWrapper}/>
 							<Route exact path="/make-suggestion" component={MakeSuggestionPage}/>
@@ -112,7 +114,7 @@ class App extends Component{
 							<Route exact path="/privacy-policy" component={PrivacyPolicy}/>
 
 							<Route exact path="/goto-url/:url/:path?" render={(props) => {
-								window.location = `https://${props.match.params.url}/${props.match.params.path || ''}`;
+								window.location = `${process.env.HTTPS?'https':'http'}://${props.match.params.url}/${props.match.params.path || ''}`;
 								return (
 									<div id="spinning-modal" className="w3-modal" style={{display: 'block'}}>
 										<div className="w3-display-middle w3-text-white w3-jumbo">
@@ -122,7 +124,8 @@ class App extends Component{
 								);
 							}}/>
 							<Route exact path="/goto-url2/:url/:year/:month/:day/:path" render={(props) => {
-								window.location = `https://${props.match.params.url}/${props.match.params.year}/${props.match.params.month}/${props.match.params.day}/${props.match.params.path || ''}`;
+                
+								window.location = `${process.env.HTTPS?'https':'http'}://${props.match.params.url}/${props.match.params.year}/${props.match.params.month}/${props.match.params.day}/${props.match.params.path || ''}`;
 								return (
 									<div id="spinning-modal" className="w3-modal" style={{display: 'block'}}>
 										<div className="w3-display-middle w3-text-white w3-jumbo">

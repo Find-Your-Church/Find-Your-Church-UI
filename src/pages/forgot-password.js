@@ -32,6 +32,9 @@ class ForgotPassword extends Component{
 	};
 
 	render(){
+    let success = false;
+    if (this.props.errors.msg_change && this.props.errors.msg_change.startsWith("Success"))
+      success = true;
 		return (
 				<>
 					<SiteHeader/>
@@ -43,15 +46,12 @@ class ForgotPassword extends Component{
 						</div>
 						<div className="sign-body" style={{filter: this.props.is_sending ? "blur(5px)" : "none"}}>
 							<div className="div-block-63">
-								<div className="div-block-38">
-									<div className="w-form-done">
-										<div>This message is not displayed.</div>
-									</div>
-									<div className="welcome-message" style={{display: this.props.errors.msg_change ? "block" : "none"}}>
-										<b>{this.props.errors.msg_change}</b>
-									</div>
-									<div className="header1-div gradient shadow">
-										<h3 className="header3 center">We'll send you an email to reset your password.</h3>
+								<div className="div-registerform">
+									<div className="div-formheaderbackground">
+										<h3 className="div-formheader">
+                      Lost your password?
+                      <span>We'll send you a link to reset it.</span>
+                    </h3>
 									</div>
 									<div>
 										<div className="form-div1">
@@ -67,6 +67,7 @@ class ForgotPassword extends Component{
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.email}
+                                     placeholder="johnsmith@email.com"
 																		 id="email"
 																		 style={{borderBottomColor: "#e6e6e6"}}
 																		 required=""/>
@@ -81,18 +82,23 @@ class ForgotPassword extends Component{
 											</div>
 										</div>
 									</div>
-									<div style={{height: "20px"}}></div>
+									<div className="w-form-done" style={{display: success && this.props.errors.msg_change ? "block" : "none"}}>
+										{this.props.errors.msg_change}
+									</div>
+									<div className="w-form-fail" style={{display: !success && this.props.errors.msg_change ? "block" : "none"}}>
+										{this.props.errors.msg_change}
+									</div>
 									<div className="strikethrough-div">
 										<div className="or-div"></div>
 									</div>
-									<div className="div-block-46">
-										<h1 className="heading-11">
-											<Link to="/sign-in" className="link-5">
-												Back to Sign In
-											</Link>
-										</h1>
-									</div>
 								</div>
+                <div className="div-block-46">
+                  <span className="heading-11">
+                    <Link to="/sign-in" className="link-5">
+                      Return to sign in page
+                    </Link>
+                  </span>
+                </div>
 							</div>
 						</div>
 						<SiteFooter/>

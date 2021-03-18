@@ -69,14 +69,9 @@ class LoginPopup extends Component{
 					<main>
 						<div className="sign-body">
 							<div className="div-block-63">
-								<div className="div-block-38 login">
-									{this.props.auth.show_welcome ? (
-											<h3 className={"welcome-message"}>
-												Account created successfully.
-											</h3>
-									) : null}
-									<div className="header1-div gradient shadow">
-										<h3 className="header3 center">Sign in to your dashboard.</h3>
+								<div className="div-registerform login">
+									<div className="div-formheaderbackground">
+										<h3 className="div-formheader">Sign in</h3>
 									</div>
 									<div>
 										<div className="form-div1">
@@ -84,7 +79,7 @@ class LoginPopup extends Component{
 												<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 															name="wf-form-Registration"
 															data-name="Registration" className="form1 w3-row">
-													<div className={"input-group"}>
+													<div className={"div-registerinputs"}>
 														<div className={"forminput-div span-2"}>
 															<label htmlFor={"email"} className={"form-label"}>Email</label>
 															<input type="email"
@@ -92,8 +87,9 @@ class LoginPopup extends Component{
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.email}
+                                     placeholder="johnsmith@email.com"
 																		 id="email"
-																		 style={{borderColor: this.props.errors.msg_login_email ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																		 style={{borderColor: this.props.errors.msg_login_email ? "#f00" : "auto"}}
 																		 required=""/>
 														</div>
 														<div className={"forminput-div span-2"}>
@@ -102,7 +98,7 @@ class LoginPopup extends Component{
 																	Password
 																</label>
 																<Link to="/forgot-password" className={"lost-password"}>
-																	<span className="form-link termsofuse">Lost Password</span>
+																	<span className="form-link">Lost Password</span>
 																</Link>
 															</div>
 															<input type="password"
@@ -110,8 +106,9 @@ class LoginPopup extends Component{
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password}
+                                     placeholder="********"
 																		 id="password"
-																		 style={{borderColor: this.props.errors.msg_login_password ? "#f00" : "rgba(27, 0, 51, 0.15)"}}
+																		 style={{borderColor: this.props.errors.msg_login_password ? "#f00" : "auto"}}
 																		 required=""/>
 														</div>
 														<div className="submit-row forminput-div span-2">
@@ -124,8 +121,13 @@ class LoginPopup extends Component{
 													</div>
 												</form>
 												<div className="w-form-done">
-													<div>Thank you! Your submission has been received!</div>
+													Thank you! Your submission has been received!
 												</div>
+                        {this.props.auth.show_welcome ? (
+                            <h3 className={"welcome-message"}>
+                              Account created successfully.
+                            </h3>
+                        ) : null}
 												<div className="w-form-fail" style={{
 													display:
 															(!isEmpty(this.props.errors.msg_login_email) ||
@@ -137,7 +139,6 @@ class LoginPopup extends Component{
 											</div>
 										</div>
 									</div>
-									<div style={{height: "20px"}}></div>
 									<div className="strikethrough-div">
 										<div className="or-div"></div>
 									</div>
@@ -162,17 +163,15 @@ class LoginPopup extends Component{
 										</div>
 									</div>
 									*/}
-									<div className="div-block-46">
-										<h1 className="heading-11">
-											<Link to="/create-an-account" className="link-5">
-												<div style={{display: "inline-block", marginRight: "4px"}}>Don't have an account yet?</div>
-												<div style={{display: "inline-block", fontWeight: "600", color: "#2e89fe"}}>
-													Create one for free
-												</div>
-											</Link>
-										</h1>
-									</div>
 								</div>
+                <div className="div-block-46">
+                  <span className="heading-11">
+                    Don't have an account?<br/>
+                    <Link to="/create-an-account" className="link-5">
+                      Create one for free
+                    </Link>
+                  </span>
+                </div>
 							</div>
 						</div>
 						<SiteFooter/>

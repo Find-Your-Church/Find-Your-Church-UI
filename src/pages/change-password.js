@@ -49,39 +49,41 @@ class ChangePassword extends Component{
 						</div>
 						<div className="sign-body" style={{filter: this.props.is_sending ? "blur(4px)" : "none"}}>
 							<div className="div-block-63">
-								<div className="div-block-38">
-									<div className="header1-div gradient shadow">
-										<h3 className="header3 center">Create a new password for your account.</h3>
+								<div className="div-registerform">
+									<div className="div-formheaderbackground">
+										<h3 className="div-formheader">Create a new password for your account.</h3>
 									</div>
 									<div>
 										<div className="form-div1">
 											<div className="form-block1 w-form">
 												<form noValidate onSubmit={this.onSubmit} id="wf-form-Registration"
 															name="wf-form-Registration"
-															data-name="Registration" className="form1">
-													<div className={"input-group"}>
-														<div className={"forminput-div span-2"}>
-															<label htmlFor={"email"} className={"form-label"}>New password</label>
+															data-name="Registration" className="form1 w3-row">
+													<div className={"div-registerinputs"}>
+														<div className={"forminput-div"}>
+															<label htmlFor={"email"} className={"form-label"}>Password</label>
 															<input type="password"
 																		 className="form-input center w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password}
+                                     placeholder="********"
 																		 id="password"
 																		 required=""/>
 														</div>
-														<div className={"forminput-div span-2"}>
+														<div className={"forminput-div"}>
 															<label htmlFor={"email"} className={"form-label"}>Confirm password</label>
 															<input type="password"
 																		 className="form-input center w-input-sign"
 																		 maxLength="256"
 																		 onChange={this.onChange}
 																		 value={this.state.password2}
+                                     placeholder="********"
 																		 id="password2"
 																		 required=""/>
 														</div>
-														<div className={"forminput-div span-2"}>
-															<input type="submit" value="Set password"
+														<div className={"submit-row forminput-div span-2"}>
+															<input type="submit" value="Save"
 																		 data-wait="Please wait..."
 																		 className="form-submit round w-button-sign"
 																		 style={{marginTop: "0"}}
@@ -99,14 +101,14 @@ class ChangePassword extends Component{
 											</div>
 										</div>
 									</div>
-									<div className="div-block-46">
-										<h1 className="heading-11">
-											<Link to="/sign-in" className="link-5">
-												Back to <span style={{fontWeight: "600", color: "#2e89fe"}}>Sign In</span>
-											</Link>
-										</h1>
-									</div>
 								</div>
+                <div className="div-block-46">
+                  <h1 className="heading-11">
+                    <Link to="/sign-in" className="link-5">
+                      Sign in
+                    </Link>
+                  </h1>
+                </div>
 							</div>
 						</div>
 						<SiteFooter/>

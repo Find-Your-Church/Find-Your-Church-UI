@@ -317,7 +317,7 @@ class DashboardResults extends Component{
 											</Link>
 										</div>
 										<div className="div-block-215 underline">
-											<Link to="/dashboard-results" className="link-6">
+											<Link to="/developer-console" className="link-6">
 												<em className="italic-text-7 current">
 													<i className="fas fa-code"/>
 												</em>
