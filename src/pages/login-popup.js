@@ -70,11 +70,6 @@ class LoginPopup extends Component{
 						<div className="sign-body">
 							<div className="div-block-63">
 								<div className="div-registerform login">
-									{this.props.auth.show_welcome ? (
-											<h3 className={"welcome-message"}>
-												Account created successfully.
-											</h3>
-									) : null}
 									<div className="div-formheaderbackground">
 										<h3 className="div-formheader">Sign in</h3>
 									</div>
@@ -128,6 +123,11 @@ class LoginPopup extends Component{
 												<div className="w-form-done">
 													Thank you! Your submission has been received!
 												</div>
+                        {this.props.auth.show_welcome ? (
+                            <h3 className={"welcome-message"}>
+                              Account created successfully.
+                            </h3>
+                        ) : null}
 												<div className="w-form-fail" style={{
 													display:
 															(!isEmpty(this.props.errors.msg_login_email) ||

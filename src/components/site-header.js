@@ -136,10 +136,10 @@ class SiteHeader extends Component{
 						{/*	Home</Link>*/}
 						{this.props.auth.isAuthenticated ? (<>
 							<Link to="/dashboard" className="header-navlink w-nav-link w--nav-link-open">
-								Profile</Link>
+                <i className={"fas fa-user-circle"}> </i> Profile</Link>
 							<Link to="/dashboard/account"
 										className="header-navlink w-nav-link w--nav-link-open">
-								Account</Link>
+								<i className={"fas fa-user-cog"}> </i> Account</Link>
 						</>) : null}
 						{this.props.auth.isAuthenticated ? null : (<>
 							<Link to="/sign-in"
@@ -152,13 +152,13 @@ class SiteHeader extends Component{
 						{this.props.auth.isAuthenticated ? (<>
               <Link to="/developer-console"
                     className="header-navlink w-nav-link w--nav-link-open">
-                Developer Console</Link>
+                <i className={"fas fa-laptop-code"}> </i> Developer Console</Link>
               <Link to={`/help-and-resources`}
                     className="header-navlink w-nav-link w--nav-link-open">
-                Help and Resources</Link>
+                <i className={"fas fa-info-circle"}> </i> Help and Resources</Link>
 							<Link to="#" onClick={this.onLogoutClick}
 										className="header-navlink w-nav-link w--nav-link-open">
-								Sign Out</Link>
+								<i className={"fas fa-rocket"}> </i> Sign Out</Link>
 						</>) : null}
 					</nav>
 				</div>

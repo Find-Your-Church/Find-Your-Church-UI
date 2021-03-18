@@ -32,6 +32,9 @@ class ForgotPassword extends Component{
 	};
 
 	render(){
+    let success = false;
+    if (this.props.errors.msg_change && this.props.errors.msg_change.startsWith("Success"))
+      success = true;
 		return (
 				<>
 					<SiteHeader/>
@@ -79,11 +82,10 @@ class ForgotPassword extends Component{
 											</div>
 										</div>
 									</div>
-                  <div className="w-form-done"
-                        style={{display: this.props.errors.msg_change1 ? "block" : "none"}}>
-                    {this.props.errors.msg_change1}
-                  </div>
-									<div className="w-form-fail" style={{display: this.props.errors.msg_change ? "block" : "none"}}>
+									<div className="w-form-done" style={{display: success && this.props.errors.msg_change ? "block" : "none"}}>
+										{this.props.errors.msg_change}
+									</div>
+									<div className="w-form-fail" style={{display: !success && this.props.errors.msg_change ? "block" : "none"}}>
 										{this.props.errors.msg_change}
 									</div>
 									<div className="strikethrough-div">

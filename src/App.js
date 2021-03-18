@@ -30,6 +30,7 @@ import PrivacyPolicy from "./pages/privacy-policy";
 import InvitedViewCommunity from "./pages/invited-view-community";
 import PreviewSearchResults from "./pages/preview-search-results";
 import SearchResultsIframe from "./pages/search-results-iframe";
+import EmailTemplate from "./pages/emaill-templates";
 import DashboardResults from "./pages/dashboard/dashboard-results";
 import AuthToDashboard from "./components/auth-to-dashboard";
 
@@ -96,6 +97,7 @@ class App extends Component{
 							<Route path="/reset-password/:id?" component={ResetPassword}/>
 							<Route path="/change-password/:id?" component={ChangePassword}/>
 							<Route path="/verify-email/:id?" component={VerifyEmail}/>
+							<Route exact path="/email-templates" component={EmailTemplate}/>
 
 							<PrivateRoute exact path="/create-new-community" component={CommunityStep}/>
 
